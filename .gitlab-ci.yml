@@ -1,0 +1,10 @@
+image: texlive/texlive
+
+build:
+  tags:
+    - latex
+  script:
+    - make
+  artifacts:
+    paths:
+      - Abschlussarbeit-ohneR.pdf
