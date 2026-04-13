@@ -14,99 +14,115 @@
 
 \chapter{Einleitung und Motivation}
 
-Die zunehmende Komplexität industrieller Engineering-Prozesse geht mit einer stetig wachsenden Menge an technischen Daten, Modellen und digitalen Dokumenten einher. In der elektrotechnischen Konstruktion werden diese Informationen häufig in spezialisierten Computer‑Aided Engineering-Systemen (CAE) wie \emph{EPLAN Electric P8} verwaltet. Ein zentrales Element stellen dabei sogenannte EPLAN-Makros dar, die wiederverwendbare Elektrobauteile von Schaltplänen kapseln und als Vorlagen für die projektübergreifende Konstruktion dienen.
+Die zunehmende Komplexität industrieller Engineering-Prozesse geht mit einer stetig wachsenden Menge an technischen Daten, Modellen und digitalen Dokumenten einher. In der elektrotechnischen Konstruktion werden diese Informationen häufig in spezialisierten Computer-Aided Engineering-Systemen (CAE) verwaltet. Studien zeigen, dass der Einsatz digitaler Assistenzsysteme insbesondere in wissensintensiven Phasen des Engineering-Designs einen wesentlichen Beitrag zur Effizienzsteigerung leisten kann \cite{khanolkar_mapping_2023,mustafa_optimizing_2025}. Ein zentrales Element solcher Systeme stellen wiederverwendbare Engineering-Artefakte dar, die eine Standardisierung von Konstruktionsprozessen ermöglichen.
 
-In der industriellen Praxis entsteht jedoch ein wachsendes Problem: Mit zunehmender Anzahl an Makros wird deren gezielte Wiederverwendung immer aufwendiger. Insbesondere bei kundenspezifischen Projekten müssen Konstrukteure auf Basis technischer Bauteilspezifikationen und Datenblätter geeignete vorhandene Makros identifizieren, die als Ausgangspunkt für die weitere Konstruktion dienen können. Dieser Prozess erfolgt bislang manuell und erfordert sowohl detailliertes Domänenwissen als auch umfangreiche Erfahrung im Umgang mit der bestehenden Makrostruktur.
+In CAE-Systemen wie \emph{EPLAN Electric P8} kommen hierzu sogenannte EPLAN-Makros zum Einsatz, die wiederkehrende elektrotechnische Schaltungsteile kapseln und als Vorlagen für projektübergreifende Konstruktionen dienen. Durch ihre Wiederverwendbarkeit tragen Makros wesentlich zur Reduktion von Entwicklungszeit und Fehleranfälligkeit bei, sofern geeignete Vorlagen effizient identifiziert werden können.
 
-Die Suche nach passenden Makros gestaltet sich dabei als besonders schwierig, da EPLAN-Makros zwar eine strukturell konsistente XML-basierte Datenbasis besitzen, ihre semantische Bedeutung jedoch nur implizit über Labels, Funktionskennzeichnungen und Variantenbeschreibungen abgebildet wird. Eine direkte, inhaltliche Vergleichbarkeit von Makros auf Basis semantischer Ähnlichkeit ist mit klassischen Such- oder Filtermechanismen nicht möglich. Folglich sind Konstrukteure gezwungen, technische Dokumente zu analysieren und mehrere Makros manuell miteinander zu vergleichen, um geeignete Vorlagen zu identifizieren. Dieser Ansatz ist zeitintensiv, fehleranfällig und stark von individueller Erfahrung abhängig.
+In der industriellen Praxis entsteht jedoch ein wachsendes Problem: Mit zunehmender Anzahl verfügbarer Makros wird deren gezielte Wiederverwendung immer aufwendiger. Insbesondere bei kundenspezifischen Projekten müssen Konstrukteure auf Basis technischer Bauteilspezifikationen und Datenblätter geeignete bestehende Makros identifizieren, die als Ausgangspunkt für die weitere Konstruktion dienen können. Dieser Prozess erfolgt bislang überwiegend manuell und erfordert sowohl detailliertes Domänenwissen als auch umfangreiche Erfahrung im Umgang mit historisch gewachsenen Makroarchiven.
 
-Vor diesem Hintergrund gewinnt der Einsatz von Methoden aus dem Bereich der Künstlichen Intelligenz, insbesondere von Large Language Models (LLMs) und semantischen Embedding-Verfahren, zunehmend an Bedeutung. Durch ein domänenspezifisches Fine-Tuning solcher Modelle besteht die Möglichkeit, strukturell analysierte Makrodaten und technische Bauteilspezifikationen in einen gemeinsamen semantischen Vektorraum zu überführen. Auf dieser Basis kann eine Proximitätssuche realisiert werden, die Makros nicht nur syntaktisch, sondern insbesondere inhaltlich miteinander vergleicht.
+Die Suche nach passenden Makros gestaltet sich dabei als besonders schwierig, da EPLAN-Makros zwar eine strukturell konsistente XML-basierte Datenbasis besitzen, ihre semantische Bedeutung jedoch nur implizit über Labels, Funktionskennzeichnungen und Variantenbeschreibungen abgebildet wird. Reine struktur- oder schlüsselwortbasierte Suchmechanismen sind daher nicht geeignet, funktional ähnliche Makros zuverlässig zu identifizieren \cite{tekli_hybrid_2007,xmlComparingSchemata}. Konstrukteure sind folglich gezwungen, technische Dokumente zu analysieren und mehrere Makros manuell miteinander zu vergleichen, was zeitintensiv, fehleranfällig und stark erfahrungsabhängig ist.
 
-Die Motivation dieser Bachelorarbeit liegt daher in der Entwicklung eines KI-gestützten Ansatzes, der Konstrukteure bei der Identifikation geeigneter EPLAN-Makros unterstützt und den manuellen Such- und Vergleichsaufwand signifikant reduziert. Ziel ist es, auf Grundlage syntaktisch analysierter Makrostrukturen ein domänenspezifisch feinabgestimmtes Sprachmodell zu konzipieren, das in der Lage ist, semantische Ähnlichkeiten zwischen technischen Spezifikationen und bestehenden Makros zuverlässig zu erfassen. Der entstehende Ansatz soll als Proof-of-Concept für zukünftige intelligente Assistenzsysteme im Engineering dienen und einen Beitrag zur Standardisierung und Effizienzsteigerung konstruktiver Prozesse leisten.
+Vor diesem Hintergrund gewinnt der Einsatz von Methoden der Künstlichen Intelligenz zunehmend an Bedeutung. Insbesondere Large Language Models (LLMs) und semantische Embedding-Verfahren ermöglichen es, technische Texte und strukturierte Daten in einen gemeinsamen semantischen Vektorraum zu überführen \cite{tao_llms_2025}. Durch domänenspezifisches Fine-Tuning solcher Modelle können sowohl Makrodaten als auch technische Bauteilspezifikationen inhaltlich vergleichbar gemacht werden, sodass eine semantische Proximitätssuche realisierbar wird.
+
+Die Motivation dieser Bachelorarbeit liegt daher in der Entwicklung eines KI-gestützten Ansatzes, der Konstrukteure bei der Identifikation geeigneter EPLAN-Makros unterstützt und den manuellen Such- und Vergleichsaufwand signifikant reduziert. Ziel ist es, auf Grundlage syntaktisch analysierter Makrostrukturen ein domänenspezifisch feinabgestimmtes Embedding-Modell zu konzipieren, welches semantische Ähnlichkeiten zwischen technischen Spezifikationen und bestehenden Makros zuverlässig erfasst. Der entstehende Ansatz soll als Proof-of-Concept für intelligente Assistenzsysteme im Engineering dienen und einen Beitrag zur Standardisierung und Effizienzsteigerung konstruktiver Prozesse leisten.
 
 
 
-\chapter{Grundlagen}
+
+
+\chapter{Stand der Technik und theoretische Grundlagen}
 
 Dieses Kapitel stellt die theoretischen und technischen Grundlagen vor, die für das Verständnis des in dieser Arbeit entwickelten Ansatzes erforderlich sind. Zunächst werden CAE-Systeme und die Rolle von EPLAN-Makros im elektrotechnischen Engineering erläutert. Anschließend werden Large Language Models, semantische Embedding-Verfahren sowie Metriken zur Bewertung von Ähnlichkeit und Retrieval-Systemen eingeführt. Das Kapitel schließt mit einer Einordnung domänenspezifischer Fine-Tuning-Strategien.
 
 \section{CAE-Systeme und EPLAN-Makros}
 
-CAE-Systeme (\emph{Computer-Aided Engineering}) sind spezialisierte Softwarelösungen zur rechnergestützten Entwicklung, Analyse und Dokumentation technischer Systeme. Im elektrotechnischen Engineering dienen sie insbesondere der Erstellung von Stromlaufplänen, der Verwaltung von Betriebsmitteln sowie der Projektstrukturierung nach funktionalen und räumlichen Gesichtspunkten. Ein weit verbreitetes CAE-System in diesem Kontext ist \emph{EPLAN Electric P8}.
+CAE-Systeme (\emph{Computer-Aided Engineering}) sind spezialisierte Softwarelösungen zur rechnergestützten Entwicklung, Analyse und Dokumentation technischer Systeme. Sie unterstützen Ingenieure bei der modellbasierten Planung, der Konsistenzprüfung sowie der systematischen Wiederverwendung technischer Lösungen. Im elektrotechnischen Engineering dienen CAE-Systeme insbesondere der Erstellung von Stromlaufplänen, der Verwaltung von Betriebsmitteln sowie der Projektstrukturierung nach funktionalen und räumlichen Gesichtspunkten \cite{khanolkar_mapping_2023}. 
 
-Ein zentrales Element von EPLAN stellen sogenannte Makros dar. EPLAN-Makros kapseln wiederkehrende Schaltungsteile und enthalten sowohl grafische Darstellungen als auch logische Informationen wie Funktionszuordnungen, Betriebsmittelkennzeichen, Varianten oder Anschlussdefinitionen. Sie ermöglichen die Standardisierung und Wiederverwendung bewährter Schaltungsstrukturen und stellen damit einen wesentlichen Effizienzfaktor in der elektrotechnischen Konstruktion dar.
+Ein weit verbreitetes CAE-System in diesem Kontext ist \emph{EPLAN Electric P8}. Ein zentrales Element innerhalb von EPLAN stellen sogenannte Makros dar. EPLAN-Makros kapseln wiederkehrende Schaltungsteile und enthalten sowohl grafische Darstellungen als auch logische Informationen wie Funktionszuordnungen, Betriebsmittelkennzeichen, Varianten oder Anschlussdefinitionen. Sie ermöglichen die Standardisierung und Wiederverwendung bewährter Schaltungsstrukturen und stellen damit einen wesentlichen Effizienzfaktor in der elektrotechnischen Konstruktion dar \cite{mustafa_optimizing_2025}.
 
-Technisch liegen EPLAN-Makros als strukturierte, XML-basierte Dateien vor. Diese Struktur ist syntaktisch konsistent, jedoch semantisch heterogen geprägt, da die Bedeutung eines Makros nur indirekt über Labels, Funktionsnamen und Variantenbeschreibungen abgeleitet werden kann. Klassische Suchmechanismen innerhalb von CAE-Systemen berücksichtigen diese Semantik nicht, was die Identifikation geeigneter Makros für neue Projekte erheblich erschwert.
+Technisch liegen EPLAN-Makros als strukturierte XML-basierte Dateien vor. Die XML-Struktur ist dabei syntaktisch klar definiert, jedoch semantisch heterogen ausgeprägt, da die Bedeutung eines Makros nur indirekt über Labels, Funktionsnamen und Variantenbeschreibungen kodiert ist. Klassische Such- und Filtermechanismen in CAE-Systemen berücksichtigen diese implizite Semantik nicht ausreichend, was die Identifikation funktional geeigneter Makros erheblich erschwert \cite{tekli_hybrid_2007,xmlComparingSchemata}.
 
 \section{Large Language Models}
 
-Large Language Models (LLMs) sind neuronale Sprachmodelle, die auf großen Mengen unstrukturierter Textdaten trainiert werden und ein kontextsensitives Verständnis natürlicher Sprache ermöglichen. Moderne LLMs basieren überwiegend auf der Transformer-Architektur, die Selbstaufmerksamkeitsmechanismen verwendet, um semantische Abhängigkeiten zwischen Textelementen effizient zu modellieren.
+Large Language Models (LLMs) sind neuronale Sprachmodelle, die auf großen Mengen unstrukturierter Textdaten trainiert werden und ein kontextsensitives Verständnis natürlicher Sprache ermöglichen. Moderne LLMs basieren überwiegend auf der Transformer-Architektur, welche Selbstaufmerksamkeitsmechanismen nutzt, um semantische Abhängigkeiten zwischen Textelementen effizient zu modellieren \cite{parthasarathy_ultimate_2024}.
 
-Während LLMs häufig mit generativen Aufgaben wie Textproduktion oder Fragebeantwortung assoziiert werden, gewinnen sie zunehmend Bedeutung als leistungsfähige Encoder-Modelle für semantische Repräsentationen. Insbesondere im Kontext von Information Retrieval und Ähnlichkeitssuche werden LLMs genutzt, um Texte in hochdimensionale Vektorräume einzubetten, in denen inhaltliche Nähe explizit abgebildet wird.
+Während LLMs häufig mit generativen Aufgaben wie Textproduktion oder Fragebeantwortung assoziiert werden, gewinnen sie zunehmend Bedeutung als leistungsfähige Encoder-Modelle für semantische Repräsentationen. Insbesondere im Bereich des Information Retrieval werden LLMs eingesetzt, um Texte in hochdimensionale Vektorräume einzubetten, in denen inhaltliche Nähe explizit abgebildet wird \cite{tao_llms_2025}.
 
-Für domänenspezifische Anwendungen zeigt die Literatur, dass ein gezieltes Fine-Tuning vortrainierter Sprachmodelle die Modellleistung erheblich steigern kann. Dabei wird das allgemeine Sprachverständnis des Modells durch spezialisiertes Fachwissen ergänzt, ohne die grundlegenden semantischen Fähigkeiten zu verlieren.
+Für domänenspezifische Anwendungen zeigt die Literatur, dass ein gezieltes Fine-Tuning vortrainierter Sprachmodelle erforderlich ist, um fachliche Terminologie und kontextspezifische Bedeutungen korrekt abzubilden. Dabei wird das allgemeine Sprachverständnis des Modells durch spezialisiertes Domänenwissen ergänzt, ohne die grundlegenden semantischen Fähigkeiten vollständig zu verlieren \cite{bansal_refining_2025}.
 
 \section{Semantische Embedding-Verfahren}
 
-Semantische Embedding-Verfahren bezeichnen Methoden, bei denen Texte in kontinuierliche numerische Vektorrepräsentationen überführt werden, sodass semantische Ähnlichkeiten zwischen Texten durch geometrische Nähe im Vektorraum modelliert werden. Im Unterschied zu rein lexikalischen Verfahren erfassen semantische Embeddings den inhaltlichen Kontext eines Textes und sind robust gegenüber unterschiedlichen Formulierungen, Synonymen oder variierender Wortreihenfolge.
+Semantische Embedding-Verfahren bezeichnen Methoden, bei denen Texte in kontinuierliche numerische Vektorrepräsentationen überführt werden, sodass semantische Ähnlichkeiten durch geometrische Nähe im Vektorraum modelliert werden können. Im Gegensatz zu rein lexikalischen Verfahren erfassen Embeddings den inhaltlichen Kontext eines Textes und sind robust gegenüber unterschiedlichen Formulierungen, Synonymen oder variierender Wortreihenfolge \cite{tao_llms_2025}.
 
-Moderne Embedding-Verfahren basieren häufig auf sogenannten Sentence-Transformern, die vortrainierte Sprachmodelle um spezielle Trainingsziele für Ähnlichkeits- und Retrieval-Aufgaben erweitern. Dabei werden Sätze, Absätze oder Dokumente zu festen Vektoren verdichtet, die für Vergleichsoperationen genutzt werden können.
+Moderne Embedding-Verfahren basieren häufig auf Sentence-Transformer-Architekturen, die vortrainierte Sprachmodelle um spezielle Trainingsziele für Ähnlichkeits- und Retrieval-Aufgaben erweitern. Vergleichsstudien zeigen, dass solche Modelle für Dokumentähnlichkeitsaufgaben besonders geeignet sind \cite{khosla_comparative_2025}. 
 
-Ein zentrales Anwendungsfeld semantischer Embeddings ist die Proximitätssuche. Dabei werden Einbettungen von Suchanfragen und Dokumenten in einen gemeinsamen Vektorraum projiziert und anhand einer Ähnlichkeitsmetrik verglichen. Inhalte mit hoher semantischer Nähe werden entsprechend als relevante Treffer priorisiert.
+Ein zentrales Anwendungsfeld semantischer Embeddings ist die Proximitätssuche. Dabei werden Einbettungen von Suchanfragen und Dokumenten in einen gemeinsamen Vektorraum projiziert und anhand einer Distanz- oder Ähnlichkeitsmetrik verglichen. Inhalte mit hoher semantischer Nähe werden entsprechend priorisiert als relevante Treffer ausgegeben \cite{gower}.
 
 \section{Ähnlichkeitsmetriken und Retrieval-Bewertung}
 
-Zur Bewertung der Ähnlichkeit zwischen Embeddings wird häufig die Cosine Similarity verwendet. Sie misst den Winkel zwischen zwei normierten Vektoren und ist unabhängig von deren absoluter Länge. Dadurch eignet sie sich besonders für hochdimensionale Einbettungen, wie sie durch Sentence-Transformer-Modelle erzeugt werden.
+Zur Bewertung der Ähnlichkeit zwischen Embeddings wird häufig die Cosine Similarity verwendet. Sie misst den Winkel zwischen zwei normierten Vektoren und ist unabhängig von deren absoluter Länge. Dadurch eignet sie sich besonders für hochdimensionale Einbettungen, wie sie durch Sentence-Transformer-Modelle erzeugt werden \cite{mishra_similarity_2020}.
 
-Für die Bewertung von Retrieval-Systemen haben sich darüber hinaus Metriken wie Precision, Recall und der F1-Score etabliert. Während Precision den Anteil korrekter Treffer unter den vorgeschlagenen Ergebnissen beschreibt, misst Recall den Anteil der gefundenen relevanten Elemente bezogen auf alle tatsächlich relevanten Einträge. Ergänzend wird in praxisnahen Suchszenarien häufig die Top-\(k\)-Accuracy betrachtet, die angibt, ob ein relevantes Ergebnis unter den ersten \(k\) Treffern enthalten ist.
+Für die Bewertung von Retrieval-Systemen haben sich darüber hinaus klassische Metriken wie Precision, Recall und der F1-Score etabliert. Während Precision den Anteil korrekter Treffer unter den vorgeschlagenen Ergebnissen beschreibt, misst Recall den Anteil der gefundenen relevanten Elemente bezogen auf alle tatsächlich relevanten Einträge \cite{lp_llm_2026}. Ergänzend wird in praxisnahen Szenarien häufig die Top-\(k\)-Accuracy betrachtet, die angibt, ob sich mindestens ein relevantes Ergebnis unter den ersten \(k\) Treffern befindet.
 
-Insbesondere im Engineering-Kontext ist Top-\(k\)-Accuracy von hoher Relevanz, da mehrere Makros funktional geeignet sein können und eine kleine Auswahl geeigneter Vorschläge bereits einen großen praktischen Mehrwert darstellt. Für komplexere Relevanzabstufungen eignen sich zudem Rankingmetriken wie nDCG (\emph{normalized Discounted Cumulative Gain}), die sowohl Trefferposition als auch Relevanzgrade berücksichtigen.
+Gerade im Engineering-Kontext ist die Top-\(k\)-Accuracy von besonderer Relevanz, da mehrere Makros funktional geeignet sein können und bereits eine kleine Auswahl plausibler Vorschläge einen hohen praktischen Mehrwert bietet. Für differenziertere Relevanzbewertungen kommen zudem Rankingmetriken wie nDCG (normalized Discounted Cumulative Gain) zum Einsatz \cite{lp_llm_2026}.
 
 \section{Domänenspezifisches Fine-Tuning}
 
-Domänenspezifisches Fine-Tuning bezeichnet die gezielte Anpassung eines vortrainierten Sprach- oder Embedding-Modells an einen spezialisierten Anwendungsbereich. Im Gegensatz zu einem erneuten Training von Grund auf wird dabei das bestehende Modellwissen beibehalten und durch fachlich relevante Trainingsdaten ergänzt.
+Domänenspezifisches Fine-Tuning bezeichnet die gezielte Anpassung eines vortrainierten Sprach- oder Embedding-Modells an einen spezialisierten Anwendungsbereich. Im Gegensatz zu einem Training von Grund auf wird das im Modell enthaltene allgemeine Wissen beibehalten und durch fachlich relevante Trainingsdaten ergänzt \cite{parthasarathy_ultimate_2024}.
 
-Die Literatur zeigt, dass vollständiges Fine-Tuning mit einem konsistenten, domänenspezifischen Datensatz insbesondere für Ähnlichkeits- und Retrieval-Aufgaben vorteilhaft ist. Rein inkrementelle Trainingsansätze, bei denen ausschließlich neue Daten verwendet werden, bergen hingegen das Risiko des sogenannten \emph{Catastrophic Forgetting}, bei dem bereits gelernte Relationen verloren gehen.
+Untersuchungen zeigen, dass vollständiges Fine-Tuning mit einem konsistenten, domänenspezifischen Datensatz insbesondere für Ähnlichkeits- und Retrieval-Aufgaben vorteilhaft ist. Rein inkrementelle Trainingsansätze, bei denen ausschließlich neue Daten verwendet werden, bergen hingegen das Risiko des sogenannten \emph{Catastrophic Forgetting}, bei dem bereits gelernte semantische Relationen verloren gehen \cite{zhong_kaft_2025}.
 
-Aus diesem Grund wird in dieser Arbeit ein iteratives Fine-Tuning mit dem vollständigen jeweils aktuellen Makrodatensatz verfolgt. Dieser Ansatz stellt sicher, dass die Stabilität des semantischen Embedding-Raums erhalten bleibt und neue Makros konsistent in das bestehende Wissensmodell integriert werden.
+Aus diesem Grund wird in dieser Arbeit ein iteratives Fine-Tuning mit dem jeweils vollständigen aktuellen Makrodatensatz verfolgt. Dieser Ansatz stellt sicher, dass die Stabilität des semantischen Embedding-Raums erhalten bleibt und neue Makros konsistent in das bestehende Wissensmodell integriert werden.
+
+
+
+
 
 \chapter{Analyse der Makrostrukturen und Ableitung eines Trainingsformats}
 
-Die Leistungsfähigkeit eines domänenspezifisch feinabgestimmten Sprachmodells hängt maßgeblich von der Qualität, Konsistenz und Repräsentativität der zugrundeliegenden Trainingsdaten ab. Insbesondere für semantische Ähnlichkeits- und Retrieval-Aufgaben ist eine strukturierte und inhaltlich kohärente Datenaufbereitung essenziell. Dieses Kapitel beschreibt die Analyse der vorhandenen EPLAN-Makros, deren strukturelle Eigenschaften sowie die daraus abgeleitete Repräsentation für das Training eines Embedding-Modells.
+Die Leistungsfähigkeit eines domänenspezifisch feinabgestimmten Embedding- oder Sprachmodells hängt maßgeblich von der Qualität, Konsistenz und Repräsentativität der zugrundeliegenden Trainingsdaten ab. Insbesondere für semantische Ähnlichkeits- und Retrieval-Aufgaben ist eine strukturierte, inhaltlich kohärente und domänenspezifisch geeignete Datenaufbereitung entscheidend \cite{parthasarathy_ultimate_2024}. Dieses Kapitel beschreibt die Analyse der vorhandenen EPLAN-Makros, deren strukturelle Eigenschaften sowie die daraus abgeleitete Repräsentation für das Training eines semantischen Embedding-Modells.
 
 \section{Strukturelle Analyse von EPLAN-Makros}
 
-EPLAN-Makros liegen intern als XML-basierte Dateien vor, die sowohl grafische als auch logische Informationen enthalten. Die XML-Struktur ist dabei hierarchisch aufgebaut und folgt einer konsistenten Syntax, unabhängig von der jeweiligen inhaltlichen Ausprägung des Makros. Typische Bestandteile eines Makros sind unter anderem Funktionskennzeichnungen, Betriebsmittelangaben, Anschlussinformationen sowie beschreibende Labels.
+EPLAN-Makros liegen intern als XML-basierte Dateien vor, die sowohl grafische als auch logische Informationen enthalten. Die XML-Struktur ist hierarchisch aufgebaut und folgt einer konsistenten Syntax, unabhängig von der jeweiligen inhaltlichen Ausprägung des Makros. Typische Bestandteile eines Makros sind unter anderem Funktionskennzeichnungen, Betriebsmittelangaben, Anschlussinformationen sowie beschreibende Labels.
 
-Obwohl diese Strukturen syntaktisch klar definiert sind, stellt die semantische Interpretation der einzelnen Elemente eine Herausforderung dar. Die Bedeutung eines Makros ergibt sich nicht aus einzelnen XML-Tags, sondern aus der Kombination mehrerer Textattribute und deren Kontext innerhalb der Makrostruktur. Klassische XML-Ähnlichkeitsverfahren, die primär strukturelle Übereinstimmungen bewerten, sind daher nur eingeschränkt geeignet, um die funktionale Ähnlichkeit von Makros abzubilden.
+Obwohl diese Strukturen syntaktisch klar definiert sind, stellt die semantische Interpretation der einzelnen Elemente eine zentrale Herausforderung dar. Die Bedeutung eines Makros ergibt sich nicht aus einzelnen XML-Tags, sondern aus der Kombination mehrerer Textattribute und deren Kontext innerhalb der Makrostruktur. Untersuchungen zu XML-Ähnlichkeitsverfahren zeigen, dass rein strukturbasierte Ansätze die semantische Nähe funktional verwandter Dokumente nur unzureichend erfassen \cite{tekli_hybrid_2007,xmlComparingSchemata}.
+
+Ansätze zur approximativen Strukturanalyse, etwa über Baum-Einbettungen, können strukturelle Abweichungen teilweise berücksichtigen, bleiben jedoch stark vom jeweiligen Schema abhängig und sind für eine flexible inhaltliche Vergleichbarkeit nur eingeschränkt geeignet \cite{schlieder_approximate_2000}.
 
 \section{Syntaktische Extraktion relevanter Informationen}
 
-Zur Vorbereitung der Daten für das Training eines Sprachmodells werden die Makrodateien syntaktisch analysiert und relevante Textinformationen extrahiert. Ziel dieses Schrittes ist es, aus der komplexen XML-Struktur eine textuelle Repräsentation abzuleiten, die die inhaltliche Bedeutung des Makros kompakt, aber vollständig beschreibt.
+Zur Vorbereitung der Daten für das Training eines Embedding-Modells werden die Makrodateien syntaktisch analysiert und relevante Textinformationen gezielt extrahiert. Ziel dieses Verarbeitungsschritts ist es, aus der komplexen XML-Struktur eine kompakte textuelle Repräsentation abzuleiten, welche die inhaltliche Bedeutung des Makros vollständig, aber abstrahiert beschreibt.
 
-Hierzu werden insbesondere beschreibende Labels, Funktionsnamen und variantenspezifische Textfelder berücksichtigt. Nicht-semantische Informationen wie Koordinaten, interne IDs oder rein grafische Attribute werden bewusst ausgeschlossen, da sie keinen Mehrwert für die semantische Ähnlichkeitsbewertung besitzen. Das Ergebnis ist eine Menge textueller Fragmente pro Makro, die zusammen dessen funktionale Eigenschaften abbilden.
+Hierzu werden insbesondere beschreibende Labels, Funktionsnamen sowie variantenspezifische Textfelder berücksichtigt. Nicht-semantische Informationen wie Koordinaten, interne Identifikatoren oder rein grafische Attribute werden bewusst ausgeschlossen, da sie keinen Beitrag zur funktionalen oder semantischen Vergleichbarkeit leisten. Dieser selektive Extraktionsansatz folgt etablierten Erkenntnissen aus der textbasierten Ähnlichkeitssuche, wonach irrelevante Merkmale die Qualität von Embedding-Repräsentationen negativ beeinflussen können \cite{mishra_similarity_2020}.
+
+Das Ergebnis dieses Schrittes ist eine strukturierte Menge textueller Fragmente pro Makro, welche zusammen dessen funktionale Eigenschaften abbilden.
 
 \section{Aggregation auf Makro-Ebene}
 
-Da die spätere Proximitätssuche auf Makro-Ebene erfolgen soll, ist eine geeignete Aggregation der extrahierten Texte notwendig. In dieser Arbeit wird jedes Makro als eigenständiges Dokument betrachtet, dessen Inhalt aus der Konkatenation aller relevanten Labels besteht. Diese aggregierte Textrepräsentation bildet die Grundlage für die Erzeugung eines einzelnen Embeddings pro Makro.
+Da die spätere Proximitätssuche auf Makro-Ebene erfolgt, ist eine geeignete Aggregation der extrahierten Textinformationen notwendig. In dieser Arbeit wird jedes Makro als eigenständiges Dokument betrachtet, dessen Inhalt aus der Konkatenation aller semantisch relevanten Textfragmente besteht. Diese aggregierte Textrepräsentation bildet die Grundlage für die Erzeugung eines einzelnen Embeddings pro Makro.
 
-Durch diese Vorgehensweise wird sichergestellt, dass sowohl globale Eigenschaften als auch feine funktionale Details eines Makros in die Repräsentation einfließen. Gleichzeitig bleibt die Anzahl der zu vergleichenden Embeddings überschaubar, was die Effizienz der späteren Suchoperationen erhöht.
+Durch dieses Vorgehen wird sichergestellt, dass sowohl globale funktionale Eigenschaften als auch feingranulare Details eines Makros in die Repräsentation einfließen. Gleichzeitig bleibt die Anzahl der zu vergleichenden Embeddings überschaubar, was die Effizienz der späteren Such- und Ranking-Operationen erhöht. Vergleichbare Aggregationsstrategien haben sich auch in anderen dokumentbasierten Retrieval-Systemen als praktikabel erwiesen \cite{caspari_beyond_2024}.
 
 \section{Ableitung eines konsistenten Trainingsformats}
 
-Für das Fine-Tuning des Embedding-Modells wird ein paarbasiertes Trainingsformat verwendet. Dabei bestehen Trainingsbeispiele jeweils aus zwei Textrepräsentationen sowie einem zugehörigen Ähnlichkeitslabel. Paare mit positiver Kennzeichnung repräsentieren semantisch ähnliche Makros, während negativ gelabelte Paare Makros mit unterschiedlicher Funktion abbilden.
+Für das domänenspezifische Fine-Tuning des Embedding-Modells wird ein paarbasiertes Trainingsformat verwendet. Dabei bestehen Trainingsbeispiele aus jeweils zwei Textrepräsentationen sowie einem zugehörigen Ähnlichkeitslabel. Trainingspaare mit positiver Kennzeichnung repräsentieren funktional bzw. semantisch ähnliche Makros, während negativ gelabelte Paare Makros mit unterschiedlicher Funktion oder Struktur abbilden.
 
-Dieses kontrastive Trainingsformat ist insbesondere für metrisches Lernen geeignet, da es das Modell explizit dazu anregt, relevante Abstände im Vektorraum zu erlernen. Die erzeugten Paare werden in einem einheitlichen, JSON-basierten Format gespeichert, das sowohl reproduzierbar als auch leicht erweiterbar ist.
+Dieses kontrastive Trainingsformat ist insbesondere für metrisches Lernen geeignet, da das Modell explizit dazu angeregt wird, relevante Abstände im Vektorraum zu erlernen \cite{parthasarathy_ultimate_2024}. Die erzeugten Paare werden in einem JSON-basierten Format gespeichert, welches reproduzierbar, erweiterbar und unabhängig vom konkreten Trainingsframework nutzbar ist.
 
 \section{Begründung der Datenrepräsentation}
 
-Die Entscheidung für eine textuelle Aggregation der Makroinhalte anstelle einer direkten strukturellen XML-Auswertung folgt einer zentralen Überlegung: Während die XML-Struktur eine konsistente Syntax bietet, ist die semantische Bedeutung primär in den Textfeldern enkodiert. Durch die Abbildung dieser Texte in einem semantischen Embedding-Raum kann die funktionale Nähe zwischen Makros unabhängig von spezifischen Strukturvariationen zuverlässig erfasst werden.
+Die Entscheidung für eine textuelle Aggregation der Makroinhalte anstelle einer direkten strukturellen XML-Auswertung folgt einer grundlegenden methodischen Überlegung: Während die XML-Struktur eine syntaktisch konsistente Beschreibung bietet, ist die semantische Bedeutung primär in den enthaltenen Textfeldern kodiert. Durch die Überführung dieser Texte in einen semantischen Embedding-Raum kann die funktionale Nähe zwischen Makros unabhängig von spezifischen Strukturvariationen zuverlässig erfasst werden \cite{gower}.
 
-Dieser Ansatz ermöglicht zudem die direkte Vergleichbarkeit zwischen Makros und externen Textquellen, wie technischen Datenblättern oder Bauteilspezifikationen. Dadurch entsteht ein gemeinsamer semantischer Raum, der als Grundlage für die spätere Proximitätssuche dient.
+Dieser Ansatz ermöglicht zudem die direkte Vergleichbarkeit zwischen EPLAN-Makros und externen Textquellen, wie technischen Datenblättern oder Bauteilspezifikationen. Dadurch entsteht ein einheitlicher semantischer Raum, der als Grundlage für die im folgenden Kapitel beschriebene Proximitätssuche dient.
 
 \section{Zusammenfassung}
 
-In diesem Kapitel wurde gezeigt, wie die strukturellen Eigenschaften von EPLAN-Makros analysiert und in ein konsistentes Trainingsformat überführt werden können. Durch die syntaktische Extraktion relevanter Textinformationen, deren Aggregation auf Makro-Ebene sowie die Generierung kontrastiver Trainingspaare wird eine solide Grundlage für das domänenspezifische Fine-Tuning eines Embedding-Modells geschaffen. Dieses Datenmodell bildet die Basis für den im folgenden Kapitel beschriebenen LLM-basierten Ansatz zur semantischen Makro-Proximitätssuche.
+In diesem Kapitel wurde gezeigt, wie die strukturellen Eigenschaften von EPLAN-Makros analysiert und in ein konsistentes Trainingsformat überführt werden können. Durch die syntaktische Extraktion semantisch relevanter Textinformationen, deren Aggregation auf Makro-Ebene sowie die Ableitung eines kontrastiven Trainingsformats wird eine solide Grundlage für das domänenspezifische Fine-Tuning eines Embedding-Modells geschaffen. Dieses Datenmodell bildet die Basis für den im folgenden Kapitel beschriebenen LLM-basierten Ansatz zur semantischen Makro-Proximitätssuche.
+
+
+
+
 
 \chapter{Konzeption eines LLM-basierten Ansatzes zur Proximitätssuche}
 
@@ -114,210 +130,176 @@ Aufbauend auf der strukturellen Analyse der EPLAN-Makros und der Ableitung eines
 
 \section{Grundidee der semantischen Proximitätssuche}
 
-Die zentrale Idee des Ansatzes besteht darin, sowohl EPLAN-Makros als auch technische Bauteilspezifikationen als Textrepräsentationen zu behandeln und mithilfe eines domänenspezifisch feinabgestimmten Embedding-Modells in denselben Vektorraum zu projizieren. In diesem semantischen Raum spiegelt der geometrische Abstand zwischen zwei Vektoren deren inhaltliche Nähe wider.
+Die zentrale Idee des Ansatzes besteht darin, sowohl EPLAN-Makros als auch technische Bauteilspezifikationen als Textrepräsentationen zu behandeln und mithilfe eines domänenspezifisch feinabgestimmten Embedding-Modells in denselben Vektorraum zu projizieren. In diesem semantischen Raum spiegelt der geometrische Abstand zwischen zwei Vektoren deren semantische und funktionale Nähe wider. Damit folgt der Ansatz grundlegenden Konzepten der Dissimilaritäts- und Distanzmodellierung in der Mustererkennung \cite{gower,rogers}.
 
-Im Gegensatz zu klassischen Suchmechanismen, die auf exakten Begriffen oder festen Attributen basieren, ermöglicht dieser Ansatz eine flexible Bewertung funktionaler Ähnlichkeit. Dadurch können auch Makros identifiziert werden, deren Beschreibung sich syntaktisch unterscheidet, jedoch semantisch denselben Zweck erfüllt.
+Im Gegensatz zu klassischen Suchmechanismen, die auf exakten Begriffen oder fest definierten Attributen basieren, ermöglicht dieser Ansatz eine flexible Bewertung funktionaler Ähnlichkeit. Dadurch können auch Makros identifiziert werden, deren Beschreibungen sich syntaktisch unterscheiden, jedoch semantisch denselben technischen Zweck erfüllen. Entsprechende Vorteile semantischer Retrieval-Verfahren wurden bereits in verschiedenen Anwendungsdomänen gezeigt \cite{tao_llms_2025}.
 
 \section{Rolle des Embedding-Modells}
 
-Als Kernkomponente des Systems dient ein Sentence-Transformer-Modell, das auf der Transformer-Architektur basiert und speziell für semantische Ähnlichkeitsaufgaben optimiert ist. Solche Modelle erzeugen dichte Vektorrepräsentationen fester Länge, die sich effizient vergleichen lassen und sich insbesondere für Retrieval- und Ranking-Aufgaben bewährt haben.
+Als Kernkomponente des Systems dient ein Sentence-Transformer-Modell auf Basis der Transformer-Architektur, das speziell für semantische Ähnlichkeits- und Retrieval-Aufgaben optimiert ist. Solche Modelle erzeugen dichte Vektorrepräsentationen fester Länge, die sich effizient vergleichen lassen und sich insbesondere für Ranking-Aufgaben bewährt haben \cite{khosla_comparative_2025}.
 
-Die Wahl eines vergleichsweise kompakten Modells (z.\,B.\ MiniLM-basierte Architekturen) stellt einen bewussten Kompromiss zwischen semantischer Qualität und Rechenaufwand dar. Für den betrachteten Anwendungsfall der Makrosuche ist eine schnelle Inferenz bei gleichzeitig ausreichender semantischer Trennschärfe entscheidend, da das System interaktiv genutzt werden soll.
+Die Wahl eines vergleichsweise kompakten Modells, beispielsweise auf MiniLM-Basis, stellt einen bewussten Kompromiss zwischen semantischer Qualität und Rechenaufwand dar. Vergleichsstudien zeigen, dass solche Modelle bei deutlich geringerem Ressourcenbedarf eine nahezu vergleichbare Performance zu größeren Architekturen erreichen können \cite{red_compare_2024}. Für den betrachteten Anwendungsfall der interaktiven Makrosuche ist eine schnelle Inferenz bei gleichzeitig ausreichender semantischer Trennschärfe entscheidend.
 
 \section{Domänenspezifisches Fine-Tuning mittels kontrastivem Lernen}
 
-Um das Embedding-Modell an die Struktur und Terminologie der EPLAN-Makros anzupassen, wird ein domänenspezifisches Fine-Tuning durchgeführt. Dabei kommt ein kontrastives Trainingsverfahren zum Einsatz, bei dem das Modell lernt, semantisch ähnliche Texte im Vektorraum näher zueinander zu positionieren als unähnliche Texte.
+Um das Embedding-Modell an die Struktur, Terminologie und Besonderheiten der EPLAN-Makros anzupassen, wird ein domänenspezifisches Fine-Tuning durchgeführt. Dabei kommt ein kontrastives Trainingsverfahren zum Einsatz, bei dem das Modell lernt, semantisch ähnliche Texte im Vektorraum näher zueinander zu positionieren als unähnliche Texte \cite{parthasarathy_ultimate_2024}.
 
-Die Trainingsdaten bestehen aus paarbasierten Beispielen, die jeweils zwei Makro-Dokumente und ein Ähnlichkeitslabel enthalten. Positive Paare repräsentieren funktional ähnliche Makros, während negative Paare unterschiedliche Makrotypen abbilden. Als Optimierungsziel wird eine CosineEmbeddingLoss-Funktion verwendet, die explizit auf die Minimierung bzw. Maximierung der Cosine Similarity zwischen den jeweiligen Embeddings abzielt.
-
-Dieses Verfahren gehört zum Bereich des metrischen Lernens und ist besonders geeignet für Retrieval-Aufgaben, da es den Embedding-Raum direkt hinsichtlich der späteren Vergleichsoperationen optimiert.
+Die Trainingsdaten bestehen aus paarbasierten Beispielen, die jeweils zwei Makro-Dokumente und ein Ähnlichkeitslabel enthalten. Positive Paare repräsentieren funktional ähnliche Makros, während negative Paare unterschiedliche Makrotypen abbilden. Als Optimierungsziel wird eine Cosine-Embedding-Loss-Funktion eingesetzt, die direkt auf die Maximierung beziehungsweise Minimierung der Cosine Similarity zwischen den jeweiligen Embeddings abzielt. Dieser Ansatz ist dem Bereich des metrischen Lernens zuzuordnen und eignet sich besonders für Retrieval-Aufgaben \cite{parthasarathy_ultimate_2024}.
 
 \section{Vermeidung inkrementeller Vergessenseffekte}
 
-Ein wesentliches konzeptionelles Designziel besteht in der Stabilität des semantischen Embedding-Raums. Aus diesem Grund wird bei der Erweiterung des Datensatzes jeweils ein vollständiges Fine-Tuning mit dem gesamten aktuellen Makrobestand durchgeführt. Ein rein inkrementelles Weitertraining auf Basis neu hinzugekommener Makros wird bewusst vermieden, da dies zu sogenannten Catastrophic-Forgetting-Effekten führen kann.
+Ein wesentliches konzeptionelles Designziel besteht in der Stabilität des semantischen Embedding-Raums. Bei inkrementellen Trainingsstrategien besteht die Gefahr des sogenannten \emph{Catastrophic Forgetting}, bei dem bereits gelernte semantische Relationen durch neues Training überschrieben werden \cite{zhong_kaft_2025}.
 
-Durch das iterativ vollständige Fine-Tuning bleibt die relative Position bereits gelernter Makros im Vektorraum erhalten, während neue Makros konsistent integriert werden. Zudem ermöglicht dieser Ansatz eine reproduzierbare Trainingspipeline und eine klare Versionierung der resultierenden Modelle.
+Aus diesem Grund wird bei der Erweiterung des Makrobestands jeweils ein vollständiges Fine-Tuning mit dem gesamten aktuellen Datensatz durchgeführt. Durch dieses iterative vollständige Training bleibt die relative Position bereits gelernter Makros im Vektorraum erhalten, während neue Makros konsistent integriert werden. Gleichzeitig ermöglicht dieser Ansatz eine reproduzierbare Trainingspipeline und eine klare Versionierung der resultierenden Modelle \cite{bansal_refining_2025}.
 
 \section{Inferenz und Ähnlichkeitsbewertung}
 
 Für die eigentliche Makrosuche wird die Suchanfrage – entweder in Form eines Freitextes oder einer extrahierten technischen Spezifikation aus einem PDF-Dokument – zunächst ebenfalls in ein semantisches Embedding überführt. Anschließend wird dieses Query-Embedding mit den gespeicherten Makro-Embeddings verglichen.
 
-Als Ähnlichkeitsmaß wird die Cosine Similarity verwendet. Die Makros werden basierend auf diesem Wert absteigend sortiert, sodass die semantisch ähnlichsten Makros die höchsten Rangpositionen einnehmen. Das Ergebnis der Suche ist somit eine priorisierte Liste potenziell geeigneter Makros, die dem Konstrukteur als Vorschläge präsentiert wird.
+Als Ähnlichkeitsmaß wird die Cosine Similarity verwendet, da sie sich für hochdimensionale Embedding-Räume als robust und effizient erwiesen hat \cite{mishra_similarity_2020}. Die Makros werden basierend auf diesem Wert absteigend sortiert, sodass semantisch ähnliche Makros die höchsten Rangpositionen einnehmen und dem Konstrukteur priorisiert vorgeschlagen werden.
 
 \section{Systemgrenzen und Abgrenzung zu generativen Ansätzen}
 
 Obwohl der Begriff „Large Language Model“ verwendet wird, handelt es sich bei dem entwickelten System nicht um ein generatives Assistenzsystem, sondern um ein retrieval-orientiertes Verfahren. Das Modell erzeugt keine neuen Texte oder Schaltungen, sondern dient ausschließlich der Bewertung semantischer Ähnlichkeit bestehender Makros.
 
-Diese bewusste Abgrenzung reduziert das Risiko von Halluzinationen, erhöht die Nachvollziehbarkeit der Ergebnisse und entspricht den Anforderungen sicherheitskritischer industrieller Engineering-Prozesse. Gleichzeitig bleibt der Ansatz offen für zukünftige Erweiterungen, etwa durch Retrieval-Augmented-Generation-Methoden.
+Diese bewusste Abgrenzung reduziert das Risiko von Halluzinationen, erhöht die Nachvollziehbarkeit der Ergebnisse und entspricht den Anforderungen sicherheitskritischer industrieller Engineering-Prozesse. Gleichzeitig bleibt der Ansatz offen für zukünftige Erweiterungen, etwa durch Retrieval-Augmented-Generation-Methoden \cite{tao_llms_2025}.
 
 \section{Zusammenfassung}
 
 In diesem Kapitel wurde der konzeptionelle Aufbau des LLM-basierten Ansatzes zur Makro-Proximitätssuche beschrieben. Durch die Kombination aus domänenspezifischem Fine-Tuning, kontrastivem Lernen und einer vektorbasierten Ähnlichkeitsbewertung entsteht ein leistungsfähiges Retrieval-System, das technische Bauteilspezifikationen und EPLAN-Makros semantisch vergleichbar macht. Das folgende Kapitel widmet sich der prototypischen Umsetzung dieses Konzepts.
 
-\chapter{Prototypische Umsetzung}
 
-In diesem Kapitel wird die prototypische Umsetzung des in Kapitel~4 beschriebenen Konzepts vorgestellt. Ziel des Prototyps ist es, die prinzipielle Umsetzbarkeit eines LLM-basierten Ansatzes zur semantischen Makro-Proximitätssuche zu demonstrieren und dessen Einsatz im Engineering-Kontext praktisch zu erproben. Der Schwerpunkt liegt dabei nicht auf einer vollständigen Produktlösung, sondern auf der Integration der zentralen Komponenten in eine konsistente, funktionale Pipeline.
 
-\section{Überblick über die Systemarchitektur}
-
-Der entwickelte Prototyp besteht aus mehreren logisch getrennten Komponenten, die gemeinsam eine durchgängige Verarbeitungskette von den Rohdaten bis zur Benutzerschnittstelle bilden. Die Architektur lässt sich in vier Hauptbereiche gliedern:
-\begin{itemize}
-    \item Datenaufbereitung und Makroanalyse,
-    \item Trainings- und Retraining-Pipeline,
-    \item semantische Suchkomponente,
-    \item grafische Benutzeroberfläche.
-\end{itemize}
-
-Diese modulare Struktur ermöglicht eine klare Trennung von Verantwortlichkeiten und erleichtert sowohl das Debugging als auch zukünftige Erweiterungen des Systems.
-
-\section{Datenaufbereitung und Makroanalyse}
-
-Die Datenaufbereitung bildet die Grundlage des Prototyps. Ausgangspunkt sind die originalen EPLAN-Makrodateien im XML-Format. Diese werden mithilfe eines Python-basierten Analyse-Skripts syntaktisch ausgewertet. Dabei werden ausschließlich inhaltlich relevante Textinformationen extrahiert, insbesondere Makro-Labels, Funktionsnamen und variantenspezifische Beschreibungen.
-
-Die extrahierten Informationen werden zu einer JSON-basierten Repräsentation überführt, wobei jedes Makro durch einen eindeutigen Namen und eine Liste semantisch relevanter Textlabels beschrieben wird. Diese strukturierte Zwischenrepräsentation dient sowohl der Trainingspipeline als auch der späteren Suchkomponente und stellt sicher, dass alle Makros in einem einheitlichen Format vorliegen.
-
-\section{Trainings- und Retraining-Pipeline}
-
-Auf Basis der vorbereiteten Makrodaten wird eine paarbasierte Trainingsrepräsentation erzeugt. Dazu werden aus dem Makrobestand sowohl positive als auch negative Paare gebildet, die die funktionale Ähnlichkeit bzw. Unähnlichkeit zwischen Makros abbilden. Diese Paare werden in einem JSONL-Format gespeichert und bilden den Trainingsdatensatz für das Fine-Tuning des Embedding-Modells.
-
-Das Training selbst erfolgt mithilfe eines Sentence-Transformer-Modells, das auf einem vortrainierten Transformer basiert. Durch kontrastives Lernen mit einer CosineEmbeddingLoss-Funktion wird das Modell auf die domänenspezifischen Makrostrukturen angepasst. Um Dateisperren und Konsistenzprobleme zu vermeiden, wird jedes Trainingsergebnis in einem versionierten Modellverzeichnis gespeichert.
-
-Ein wesentliches Merkmal des Prototyps ist die Unterstützung von Retraining. Neue Makros können zur Laufzeit in das System integriert werden, woraufhin die vollständige Trainingspipeline erneut ausgeführt wird. Dabei wird stets der gesamte aktuelle Datensatz verwendet, um inkrementelle Vergessenseffekte zu vermeiden und die Stabilität des semantischen Embedding-Raums sicherzustellen.
-
-\section{Semantische Suchkomponente}
-
-Die semantische Suchkomponente bildet das Herzstück der Laufzeitverarbeitung. Beim Start des Systems wird automatisch die zuletzt trainierte Modellversion geladen. Parallel dazu werden sämtliche Makro-Embeddings berechnet und im Speicher vorgehalten, um schnelle Suchanfragen zu ermöglichen.
-
-Suchanfragen können entweder als Freitext eingegeben oder aus technischen PDF-Datenblättern extrahiert werden. Die Anfrage wird in ein semantisches Embedding überführt und mittels Cosine Similarity mit den gespeicherten Makro-Embeddings verglichen. Das Ergebnis ist ein Ranking der Makros nach inhaltlicher Nähe, wobei die semantisch ähnlichsten Makros priorisiert angezeigt werden.
-
-\section{Grafische Benutzeroberfläche}
-
-Zur praktischen Erprobung des Systems wurde eine grafische Benutzeroberfläche entwickelt. Diese dient als Schnittstelle zwischen Konstrukteur und Suchsystem und ermöglicht eine intuitive Interaktion mit dem Prototyp. Die GUI unterstützt sowohl textbasierte Suchanfragen als auch die Auswahl von PDF-Datenblättern aus dem lokalen Dateisystem.
-
-Die Suchergebnisse werden in Form einer priorisierten Makroliste dargestellt, ergänzt um einen Ähnlichkeitswert und die Anzahl der enthaltenen Labels. Der Benutzer kann ein Makro auswählen und dessen Originaldatei direkt im Dateiexplorer öffnen. Dadurch ist ein nativer Drag-and-Drop-Workflow möglich, bei dem das Makro in ein externes CAE-System wie EPLAN übernommen werden kann.
-
-Darüber hinaus erlaubt die Benutzeroberfläche die explizite Bewertung der Suchergebnisse durch den Anwender. Dieses manuelle Feedback wird protokolliert und kann zur zukünftigen Qualitätsverbesserung des Trainingsdatensatzes verwendet werden. Damit bildet die GUI die Grundlage für einen Human-in-the-Loop-Ansatz, ohne die Entscheidungsfreiheit des Konstrukteurs einzuschränken.
-
-\section{Zusammenfassung der prototypischen Umsetzung}
-
-Der entwickelte Prototyp zeigt, dass der konzipierte LLM-basierte Ansatz zur Makro-Proximitätssuche technisch realisierbar ist und sich sinnvoll in bestehende Engineering-Workflows integrieren lässt. Durch die Kombination aus strukturierter Datenaufbereitung, domänenspezifischem Fine-Tuning, effizienten Embedding-Vergleichen und einer benutzerfreundlichen Oberfläche entsteht ein funktionales Demonstrationssystem. Die prototypische Umsetzung bildet damit die Grundlage für eine nachfolgende Evaluierung, die im nächsten Kapitel beschrieben wird.
 
 
 \chapter{Evaluierungskonzept und Ergebnisse}
 
-Die Bewertung der Leistungsfähigkeit eines semantischen Retrieval-Systems erfordert ein differenziertes Evaluierungskonzept, das sowohl quantitative Metriken als auch qualitative Aspekte berücksichtigt. Insbesondere im Engineering-Kontext ist der praktische Mehrwert eines Systems nicht ausschließlich anhand abstrakter Kennzahlen messbar, sondern muss im Zusammenspiel mit realen Nutzungsszenarien bewertet werden. Dieses Kapitel stellt das konzipierte Evaluierungskonzept vor und ordnet die im Rahmen des Prototyps gewonnenen Ergebnisse ein.
+Die Bewertung der Leistungsfähigkeit eines semantischen Retrieval-Systems erfordert ein differenziertes Evaluierungskonzept, das sowohl quantitative Metriken als auch qualitative Aspekte berücksichtigt. Insbesondere im Engineering-Kontext ist der praktische Mehrwert eines Systems nicht ausschließlich anhand abstrakter Kennzahlen messbar, sondern muss im Zusammenspiel mit realen Nutzungsszenarien beurteilt werden \cite{khanolkar_mapping_2023}. Dieses Kapitel stellt das konzipierte Evaluierungskonzept vor und ordnet die im Rahmen des entwickelten Prototyps gewonnenen Ergebnisse ein.
 
 \section{Zielsetzung der Evaluierung}
 
-Ziel der Evaluierung ist es, die Qualität der LLM-basierten Makro-Proximitätssuche systematisch zu bewerten und deren Eignung für den praktischen Einsatz im elektrotechnischen Engineering zu untersuchen. Dabei stehen insbesondere folgende Fragestellungen im Fokus:
+Ziel der Evaluierung ist es, die Qualität der LLM-basierten Makro-Proximitätssuche systematisch zu bewerten und deren grundsätzliche Eignung für den Einsatz im elektrotechnischen Engineering zu untersuchen. Dabei stehen insbesondere folgende Fragestellungen im Fokus:
 \begin{itemize}
-    \item Wie zuverlässig identifiziert das System semantisch geeignete Makros?
-    \item Inwieweit befinden sich relevante Makros unter den höchsten Rangpositionen?
-    \item Welchen qualitativen Mehrwert bietet der Ansatz im Vergleich zur manuellen Makrosuche?
+  \item Wie zuverlässig identifiziert das System semantisch geeignete Makros?
+  \item Inwieweit befinden sich relevante Makros unter den höchsten Rangpositionen der Suchergebnisse?
+  \item Welchen qualitativen Mehrwert bietet der Ansatz im Vergleich zur manuellen Makrosuche?
 \end{itemize}
 
-Die Evaluierung orientiert sich dabei an etablierten Metriken aus dem Bereich Information Retrieval sowie an domänenspezifischen Kriterien, die den realen Entscheidungsprozess eines Konstrukteurs widerspiegeln.
+Die Evaluierung orientiert sich an etablierten Metriken aus dem Bereich des Information Retrieval sowie an domänenspezifischen Kriterien, die den realen Entscheidungsprozess eines Konstrukteurs widerspiegeln \cite{lp_llm_2026}.
 
 \section{Quantitative Evaluierungsmetriken}
 
-Zur quantitativen Bewertung der Suchqualität eignen sich insbesondere klassische Information-Retrieval-Metriken. Die Auswahl der Metriken erfolgt vor dem Hintergrund, dass die Makrosuche primär als Ranking-Problem zu verstehen ist.
+Zur quantitativen Bewertung der Suchqualität werden klassische Information-Retrieval-Metriken herangezogen. Die Auswahl dieser Kennzahlen erfolgt vor dem Hintergrund, dass die Makrosuche primär als Ranking-Problem zu verstehen ist und nicht als exakte Klassifikationsaufgabe.
 
 \subsection{Precision, Recall und F1-Score}
 
-Precision beschreibt den Anteil der als relevant vorgeschlagenen Makros, die tatsächlich geeignet sind, während Recall den Anteil aller relevanten Makros angibt, die vom System gefunden wurden. Der F1-Score stellt das harmonische Mittel beider Kennzahlen dar und dient als robuste Gesamtmetrik.
+Precision beschreibt den Anteil der als relevant vorgeschlagenen Makros, die tatsächlich als geeignet bewertet werden, während Recall den Anteil der gefundenen relevanten Makros bezogen auf alle tatsächlich relevanten Einträge angibt. Der F1-Score stellt das harmonische Mittel beider Kennzahlen dar und dient als zusammenfassende Bewertungsmetrik.
 
-Diese Metriken sind insbesondere sinnvoll, wenn eine binäre Relevanzentscheidung (relevant / nicht relevant) vorliegt. In der Praxis ist eine solche strikte Trennung jedoch nicht immer eindeutig, da mehrere Makros funktional geeignet sein können.
+Diese Kennzahlen sind insbesondere sinnvoll, wenn eine binäre Relevanzentscheidung (relevant / nicht relevant) angenommen werden kann. In der praktischen Anwendung ist eine solche strikte Trennung jedoch häufig nicht eindeutig, da mehrere Makros funktional geeignet sein können und lediglich Unterschiede im Anpassungsaufwand bestehen \cite{lp_llm_2026}.
 
 \subsection{Top-\textit{k}-Accuracy}
 
-Für den praktischen Einsatz im Engineering ist die Top-\textit{k}-Accuracy eine besonders relevante Kennzahl. Sie gibt an, ob sich mindestens ein geeignetes Makro unter den ersten \textit{k} Suchergebnissen befindet.
+Für praxisnahe Suchszenarien im Engineering ist die Top-\textit{k}-Accuracy eine besonders relevante Kennzahl. Sie beschreibt, ob sich mindestens ein funktional geeignetes Makro unter den ersten \textit{k} Suchergebnissen befindet.
 
-Insbesondere die Top-1- und Top-3-Accuracy sind aussagekräftig, da Konstrukteure typischerweise nur eine kleine Anzahl vorgeschlagener Makros prüfen. Ein System gilt als praxistauglich, wenn relevante Makros regelmäßig unter den obersten Treffern erscheinen.
+Insbesondere die Top-1- und Top-3-Accuracy sind aussagekräftig, da Konstrukteure in der Regel nur eine begrenzte Anzahl vorgeschlagener Makros prüfen. Ein System kann daher als praxistauglich gelten, wenn relevante Makros regelmäßig unter den obersten Treffern erscheinen \cite{lp_llm_2026}.
 
 \subsection{Ranking-Metriken: nDCG}
 
-Zur Berücksichtigung unterschiedlicher Relevanzgrade eignet sich die Metrik \emph{normalized Discounted Cumulative Gain} (nDCG). Diese bewertet nicht nur das Vorhandensein relevanter Treffer, sondern auch deren Position innerhalb des Rankings. Höher platzierte relevante Makros tragen dabei stärker zur Gesamtbewertung bei als später platzierte Ergebnisse.
+Zur Berücksichtigung unterschiedlicher Relevanzgrade eignet sich die Metrik \emph{normalized Discounted Cumulative Gain} (nDCG). Diese Metrik bewertet nicht nur das Vorhandensein relevanter Treffer, sondern auch deren Position innerhalb des Rankings, wobei höher platzierte relevante Ergebnisse stärker gewichtet werden.
+
+Gerade bei Retrieval-Aufgaben mit mehreren potenziell geeigneten Ergebnissen erlaubt nDCG eine differenzierte Bewertung der Suchqualität \cite{lp_llm_2026}.
 
 \section{Semantische Ähnlichkeit als Bewertungskriterium}
 
-Da der entwickelte Ansatz auf semantischen Embeddings basiert, stellt auch die Cosine Similarity selbst ein relevantes Bewertungsmaß dar. Hohe Ähnlichkeitswerte zwischen Suchanfrage und vorgeschlagenem Makro deuten auf eine starke inhaltliche Übereinstimmung hin.
+Da der entwickelte Ansatz auf semantischen Embedding-Repräsentationen basiert, stellt auch die Cosine Similarity selbst ein zentrales Bewertungskriterium dar. Hohe Cosine-Similarity-Werte zwischen Suchanfrage und vorgeschlagenem Makro deuten auf eine starke inhaltliche Übereinstimmung hin \cite{mishra_similarity_2020}.
 
-Im Rahmen des Prototyps dient die Cosine Similarity primär zur internen Rangbildung. Ihre absolute Höhe kann jedoch zusätzlich als Indikator für die Modellkonfidenz interpretiert werden und eignet sich zur Identifikation besonders klarer Treffer.
+Im Prototyp dient die Cosine Similarity primär der internen Rangbildung der Makros. Ihre absolute Höhe kann jedoch zusätzlich als Indikator für die Modellkonfidenz interpretiert werden und ermöglicht die Identifikation besonders eindeutiger Treffer.
 
 \section{Qualitative Evaluation und Expertenfeedback}
 
-Neben quantitativen Metriken kommt der qualitativen Bewertung eine zentrale Bedeutung zu. Konstrukteure beurteilen Makros nicht ausschließlich anhand formaler Kriterien, sondern berücksichtigen auch Aspekte wie Wiederverwendbarkeit, Anpassungsaufwand und Verständlichkeit.
+Neben quantitativen Metriken kommt der qualitativen Bewertung eine zentrale Bedeutung zu. Konstrukteure beurteilen Makros nicht ausschließlich anhand formaler Übereinstimmung, sondern berücksichtigen Aspekte wie Wiederverwendbarkeit, Verständlichkeit sowie den erforderlichen Anpassungsaufwand.
 
-Im Prototyp wurde daher ein Feedbackmechanismus implementiert, der es Anwendern erlaubt, Suchergebnisse explizit als passend oder nicht passend zu markieren. Dieses Expertenfeedback dient einerseits der explorativen Bewertung des Systems und andererseits als potenzielle Grundlage für zukünftige Trainings- oder Kalibrierungsschritte.
+Aus diesem Grund wurde im Prototyp ein Feedbackmechanismus implementiert, der es Anwendern erlaubt, Suchergebnisse explizit als passend oder nicht passend zu markieren. Solche Human-in-the-Loop-Ansätze gelten als wichtiger Bestandteil bei der Bewertung und Weiterentwicklung domänenspezifischer KI-Systeme \cite{stavarache_enhancing_2025}.
+
+Das gesammelte Feedback dient einerseits der explorativen Bewertung des Systems und andererseits als potenzielle Grundlage für zukünftige Anpassungen des Trainingsdatensatzes.
 
 \section{Ergebnisse der prototypischen Evaluation}
 
-Im Rahmen der Bachelorarbeit wurde der Ansatz primär qualitativ und explorativ evaluiert. Die Ergebnisse zeigen, dass semantisch geeignete Makros in der Regel unter den ersten Treffern der Suchergebnisse erscheinen, insbesondere bei klar formulierten technischen Spezifikationen. Die Suche auf Basis von PDF-Datenblättern erwies sich als besonders praxisnah, da sie den realen Arbeitsprozess von Konstrukteuren gut abbildet.
+Im Rahmen dieser Bachelorarbeit wurde der entwickelte Ansatz primär qualitativ und explorativ evaluiert. Die Ergebnisse zeigen, dass semantisch geeignete Makros bei geeigneten Suchanfragen in der Regel unter den obersten Treffern erscheinen, insbesondere wenn technische Spezifikationen klar formuliert sind.
 
-Quantitative Aussagen im Sinne umfassender Benchmarkwerte wurden im Rahmen dieser Arbeit bewusst nicht erhoben, da eine belastbare Ground-Truth-Annotierung für alle Makros einen erheblichen zusätzlichen Aufwand erfordern würde. Stattdessen liegt der Fokus auf dem Nachweis der grundsätzlichen Funktionsfähigkeit und des praktischen Mehrwerts des Ansatzes.
+Die Suche auf Basis von PDF-Datenblättern erwies sich als besonders praxisnah, da sie den realen Arbeitsprozess von Konstrukteuren gut abbildet. Quantitative Aussagen im Sinne umfassender Benchmarkwerte wurden bewusst nicht erhoben, da eine belastbare Ground-Truth-Annotierung aller vorhandenen Makros einen erheblichen zusätzlichen Aufwand erfordern würde.
+
+Stattdessen liegt der Fokus auf dem Nachweis der grundsätzlichen Funktionsfähigkeit des Ansatzes sowie auf der Demonstration seines praktischen Mehrwerts im Engineering-Kontext.
 
 \section{Diskussion der Evaluierung}
 
-Die Evaluierung verdeutlicht, dass der entwickelte Ansatz für die Makrosuche grundsätzlich geeignet ist und einen klaren Mehrwert gegenüber manuellen Rechercheprozessen bietet. Gleichzeitig zeigt sich, dass die Qualität der Suchergebnisse stark von der Konsistenz der Makro-Beschreibungen sowie der Abdeckung des Trainingsdatensatzes abhängt.
+Die prototypische Evaluation verdeutlicht, dass der entwickelte Ansatz für die semantische Makrosuche grundsätzlich geeignet ist und einen klaren Mehrwert gegenüber manuellen Rechercheprozessen bietet. Gleichzeitig zeigt sich, dass die Qualität der Suchergebnisse maßgeblich von der Konsistenz der Makro-Beschreibungen sowie von der Abdeckung des Trainingsdatensatzes abhängt.
 
-Eine weiterführende Evaluierung mit systematischen Relevanzannotationen, größeren Testkorpora und statistisch belastbaren Kennzahlen stellt einen sinnvollen Gegenstand zukünftiger Arbeiten dar.
+Eine weiterführende Evaluierung mit systematischen Relevanzannotationen, größeren Datensätzen und statistisch belastbaren Kennzahlen stellt daher einen sinnvollen Gegenstand zukünftiger Arbeiten dar.
 
 \section{Zusammenfassung}
 
-Das vorgestellte Evaluierungskonzept kombiniert etablierte Retrieval-Metriken mit qualitativen, domänenspezifischen Bewertungsansätzen. Die prototypischen Ergebnisse zeigen, dass der LLM-basierte Ansatz zur Makro-Proximitätssuche funktional ist und den Suchprozess im Engineering-Kontext sinnvoll unterstützt. Die Evaluation bildet damit die Grundlage für die abschließende Diskussion des Nutzens und der Grenzen des Ansatzes im folgenden Kapitel.
+Das vorgestellte Evaluierungskonzept kombiniert etablierte Retrieval-Metriken mit qualitativen, domänenspezifischen Bewertungsansätzen. Die prototypischen Ergebnisse zeigen, dass der LLM-basierte Ansatz zur Makro-Proximitätssuche funktional ist und den Suchprozess im elektrotechnischen Engineering sinnvoll unterstützen kann. Die Evaluation bildet damit die Grundlage für die abschließende Diskussion der Grenzen und des zukünftigen Potenzials des Ansatzes im folgenden Kapitel.
+
+
+
 
 \chapter{Diskussion, Grenzen und Ausblick}
 
-In diesem Kapitel werden die Ergebnisse der prototypischen Umsetzung und Evaluierung kritisch diskutiert. Ziel ist es, die erzielten Erkenntnisse in einen größeren fachlichen Kontext einzuordnen, bestehende Limitationen des Ansatzes transparent darzustellen und Perspektiven für zukünftige Weiterentwicklungen aufzuzeigen.
+In diesem Kapitel werden die Ergebnisse der prototypischen Umsetzung und der durchgeführten Evaluation kritisch diskutiert. Ziel ist es, die gewonnenen Erkenntnisse in den fachlichen Kontext bestehender Forschungs- und Anwendungsergebnisse einzuordnen, die Grenzen des entwickelten Ansatzes transparent darzustellen und Perspektiven für zukünftige Weiterentwicklungen aufzuzeigen.
 
 \section{Einordnung der Ergebnisse}
 
-Die prototypische Umsetzung zeigt, dass ein LLM-basierter Ansatz zur semantischen Proximitätssuche von EPLAN-Makros technisch realisierbar ist und einen erkennbaren Mehrwert gegenüber manuellen Suchprozessen bietet. Insbesondere die Fähigkeit, technische Bauteilspezifikationen in natürlicher Sprache oder in Form von PDF-Dokumenten semantisch mit bestehenden Makros zu vergleichen, stellt einen wichtigen Fortschritt dar.
+Die prototypische Umsetzung zeigt, dass ein LLM-basierter Ansatz zur semantischen Proximitätssuche von EPLAN-Makros technisch realisierbar ist und einen erkennbaren Mehrwert gegenüber manuellen Suchprozessen bietet. Insbesondere die Möglichkeit, technische Bauteilspezifikationen in natürlicher Sprache oder in Form strukturierter PDF-Datenblätter semantisch mit bestehenden Makros zu vergleichen, stellt einen praxisrelevanten Fortschritt dar. Damit bestätigen die Ergebnisse grundlegende Annahmen zum Nutzen KI-gestützter Methoden in wissensintensiven Engineering-Prozessen \cite{khanolkar_mapping_2023}.
 
-Die Ergebnisse der explorativen Evaluation deuten darauf hin, dass relevante Makros häufig unter den obersten Treffern erscheinen. Dies bestätigt die zentrale Annahme dieser Arbeit, dass semantische Embedding-Verfahren geeignet sind, die funktionale Nähe komplexer technischer Artefakte abzubilden. Besonders im Engineering-Kontext, in dem mehrere Makros funktional äquivalent sein können, erweist sich dieser Ansatz als praxisnah.
+Die Resultate der explorativen Evaluation deuten darauf hin, dass funktional geeignete Makros häufig unter den obersten Treffern der Suchergebnisse erscheinen. Dies stützt die zentrale Hypothese dieser Arbeit, dass semantische Embedding-Verfahren in der Lage sind, die funktionale Nähe komplexer technischer Artefakte zuverlässig abzubilden. Gerade im Engineering-Kontext, in dem mehrere Makros funktional äquivalent sein können und sich lediglich im Detailgrad oder Anpassungsaufwand unterscheiden, erweist sich dieser Ansatz als besonders praxisnah \cite{mustafa_optimizing_2025}.
 
 \section{Vergleich mit klassischen Such- und Analyseverfahren}
 
-Traditionelle Makrosuchmechanismen basieren in der Regel auf festen Attributen, exakten Begriffen oder hierarchischen Kategorien. Diese Verfahren stoßen schnell an ihre Grenzen, sobald unterschiedliche Benennungen oder variantenspezifische Beschreibungen verwendet werden. Der vorgestellte LLM-basierte Ansatz löst dieses Problem, indem er die Bedeutung der Texte unabhängig von ihrer konkreten Formulierung erfasst.
+Traditionelle Makrosuchmechanismen basieren in der Regel auf festen Attributen, exakten Begriffen oder hierarchischen Klassifikationen. Solche Verfahren sind nur begrenzt robust gegenüber variierenden Benennungen, uneinheitlicher Dokumentation oder unterschiedlich granularen Beschreibungen. Diese Einschränkungen wurden bereits in früheren Arbeiten zu strukturbasierten Dokumentvergleichen aufgezeigt \cite{tekli_hybrid_2007}.
 
-Im Vergleich zu rein strukturellen XML-Ähnlichkeitsmethoden bietet der vorgestellte Ansatz zudem den Vorteil, dass externe Textquellen direkt integriert werden können. Damit wird ein durchgängiger semantischer Vergleich zwischen Datenblättern und Makros ermöglicht, was mit klassischen Methoden nur eingeschränkt oder gar nicht realisierbar ist.
+Der in dieser Arbeit vorgestellte LLM-basierte Ansatz überwindet diese Limitationen, indem er die Bedeutung technischer Texte unabhängig von ihrer konkreten Formulierung erfasst. Im Vergleich zu rein strukturellen XML-Ähnlichkeitsverfahren besteht zudem der Vorteil, dass externe Textquellen wie Datenblätter oder Spezifikationen direkt in den Suchprozess integriert werden können. Dadurch wird eine durchgängige semantische Vergleichbarkeit zwischen externen Dokumenten und internen Makroarchiven ermöglicht, was mit klassischen Methoden nur eingeschränkt realisierbar ist \cite{xmlComparingSchemata,schlieder_approximate_2000}.
 
 \section{Grenzen des Ansatzes}
 
-Trotz der positiven Ergebnisse weist der entwickelte Ansatz auch mehrere Einschränkungen auf. Eine zentrale Abhängigkeit besteht von der Qualität und Konsistenz der Makro-Beschreibungen. Unvollständige oder uneindeutige Labels können zu fehlerhaften semantischen Repräsentationen führen und die Suchqualität beeinträchtigen.
+Trotz der positiven Ergebnisse weist der entwickelte Ansatz auch mehrere Einschränkungen auf. Eine zentrale Abhängigkeit besteht von der Qualität und Konsistenz der Makro-Beschreibungen. Unvollständige, uneinheitliche oder mehrdeutige Labels können zu fehlerhaften semantischen Repräsentationen führen und die Qualität der Suchergebnisse beeinträchtigen. Diese Problematik ist typisch für textbasierte Retrieval-Systeme und wird in der Literatur ausführlich diskutiert \cite{mishra_similarity_2020}.
 
-Darüber hinaus ist der Trainingsaufwand nicht zu vernachlässigen. Da in dieser Arbeit bewusst auf ein vollständiges Fine-Tuning mit dem gesamten Datensatz gesetzt wird, steigen die Trainingszeiten mit wachsendem Makrobestand. Für sehr große Makroarchive kann dies zu praktischen Einschränkungen führen, insbesondere wenn häufige Modellaktualisierungen erforderlich sind.
+Darüber hinaus ist der Trainingsaufwand des Modells nicht zu vernachlässigen. Da in dieser Arbeit bewusst auf ein vollständiges Fine-Tuning mit dem gesamten jeweils aktuellen Datensatz gesetzt wird, steigen Trainingszeiten und Ressourcenverbrauch mit wachsendem Makrobestand. Für sehr große Makroarchive kann dies eine praktische Einschränkung darstellen, insbesondere wenn regelmäßige Modellaktualisierungen erforderlich sind \cite{bansal_refining_2025}.
 
-Ein weiterer limitierender Faktor ist die derzeit fehlende quantitative Ground-Truth-Evaluierung. Die prototypische Bewertung basiert überwiegend auf qualitativen Einschätzungen und exemplarischen Testszenarien. Eine statistisch belastbare Evaluierung würde eine umfangreiche manuelle Annotation der Makros voraussetzen, was den Rahmen dieser Arbeit überschreitet.
+Ein weiterer limitierender Faktor ist die fehlende quantitative Ground-Truth-Evaluierung. Die prototypische Bewertung basiert überwiegend auf qualitativen Einschätzungen und exemplarischen Testszenarien. Eine statistisch belastbare Evaluierung würde eine umfangreiche manuelle Annotation der Makros voraussetzen, was den zeitlichen und organisatorischen Rahmen dieser Arbeit überschreiten würde.
 
 \section{Abgrenzung zu generativen KI-Systemen}
 
-Der entwickelte Ansatz ist bewusst als Retrieval-System konzipiert und grenzt sich klar von generativen KI-Anwendungen ab. Das System erzeugt keine neuen Schaltungen oder Makros, sondern unterstützt den Konstrukteur bei der Auswahl geeigneter bestehender Vorlagen. Diese Entscheidung erhöht die Nachvollziehbarkeit der Ergebnisse und reduziert Risiken, die mit generativen Modellen, wie Halluzinationen oder fehlerhafte Vorschläge, verbunden sein können.
+Der entwickelte Ansatz ist bewusst als Retrieval-orientiertes System konzipiert und grenzt sich klar von generativen KI-Anwendungen ab. Das System erzeugt keine neuen Schaltungen oder Makros, sondern unterstützt den Konstrukteur bei der Auswahl geeigneter bestehender Vorlagen. Diese Entscheidung erhöht die Nachvollziehbarkeit und Reproduzierbarkeit der Ergebnisse und reduziert Risiken, die mit generativen Modellen wie Halluzinationen oder nicht nachvollziehbaren Vorschlägen verbunden sind \cite{tao_llms_2025}.
 
-Gleichzeitig schränkt diese Abgrenzung den Funktionsumfang des Systems ein. Kreative oder vollständig neue Lösungsansätze können nicht generiert werden, sondern müssen weiterhin durch den Anwender selbst entwickelt werden.
+Gleichzeitig schränkt diese bewusste Abgrenzung den Funktionsumfang des Systems ein. Kreative oder vollständig neue Lösungsansätze können nicht automatisiert erzeugt werden, sondern verbleiben weiterhin im Verantwortungsbereich des menschlichen Entwicklers.
 
 \section{Ausblick auf zukünftige Erweiterungen}
 
-Die Ergebnisse dieser Arbeit eröffnen mehrere Ansatzpunkte für weiterführende Forschung und Entwicklung. Eine naheliegende Erweiterung wäre die Durchführung einer systematischen quantitativen Evaluation auf Basis annotierter Testdatensätze, um die Suchqualität statistisch abzusichern und verschiedene Modellvarianten miteinander zu vergleichen.
+Die Ergebnisse dieser Arbeit eröffnen mehrere Ansatzpunkte für weiterführende Forschung und Entwicklung. Eine naheliegende Erweiterung stellt die Durchführung einer systematischen quantitativen Evaluation auf Basis annotierter Testdatensätze dar, um die Suchqualität statistisch abzusichern und unterschiedliche Modellvarianten objektiv vergleichen zu können \cite{lp_llm_2026}.
 
-Darüber hinaus könnten parameter-effiziente Fine-Tuning-Strategien in Betracht gezogen werden, um Trainingszeiten und Ressourcenverbrauch zu reduzieren. Auch hybride Ansätze, die strukturierte XML-Informationen expliziter in die semantische Repräsentation einbeziehen, bieten Potenzial für eine weitere Qualitätssteigerung.
+Darüber hinaus bieten parameter-effiziente Fine-Tuning-Strategien vielversprechendes Potenzial, um Trainingszeiten und Ressourcenverbrauch zu reduzieren und gleichzeitig die semantische Qualität der Embeddings zu erhalten \cite{prottasha_parameter_efficient_2024}. Auch hybride Ansätze, die strukturierte XML-Informationen expliziter in die semantische Repräsentation einbeziehen, könnten die Ergebnisqualität weiter verbessern.
 
-Langfristig wäre zudem eine engere Integration in bestehende CAE-Systeme denkbar, beispielsweise durch die Bereitstellung der Suchfunktion als Plug-in oder Service. In Kombination mit Human-in-the-Loop-Mechanismen könnte das System schrittweise adaptiert und an spezifische Unternehmensanforderungen angepasst werden.
+Langfristig wäre zudem eine engere Integration des Systems in bestehende CAE-Landschaften denkbar, beispielsweise durch die Bereitstellung der Suchfunktion als Plug-in oder als Service-Schnittstelle. In Kombination mit Human-in-the-Loop-Mechanismen könnte das System schrittweise adaptiert und optimal an spezifische Unternehmensanforderungen angepasst werden \cite{stavarache_enhancing_2025}.
 
 \section{Zusammenfassende Bewertung}
 
-Zusammenfassend lässt sich festhalten, dass der in dieser Arbeit entwickelte LLM-basierte Ansatz einen vielversprechenden Beitrag zur intelligenten Unterstützung von Engineering-Prozessen leistet. Trotz bestehender Grenzen zeigt der Prototyp, dass semantische Embedding-Verfahren eine geeignete Grundlage für die Makrosuche darstellen und klassische Methoden sinnvoll ergänzen können. Der Ansatz bietet damit eine solide Basis für zukünftige, produktionsnahe Systeme im Bereich des CAE-unterstützten Engineerings.
+Zusammenfassend lässt sich festhalten, dass der in dieser Arbeit entwickelte LLM-basierte Ansatz einen fundierten und vielversprechenden Beitrag zur intelligenten Unterstützung von Engineering-Prozessen leistet. Trotz der identifizierten Grenzen zeigt der Prototyp, dass semantische Embedding-Verfahren eine geeignete Grundlage für die Makrosuche darstellen und klassische Such- und Filtermechanismen sinnvoll ergänzen können. Der Ansatz bietet damit eine belastbare Basis für zukünftige, produktionsnahe Systeme im Bereich des CAE-unterstützten Engineerings.
+
+
+
+
 
 \chapter{Zusammenfassung und Fazit}
 
-Ziel dieser Bachelorarbeit war die Konzeption und prototypische Umsetzung eines KI-basierten Ansatzes zur semantischen Proximitätssuche geeigneter EPLAN-Makros auf Basis syntaktisch analysierter Bauteilspezifikationen. Motivation hierfür war der hohe manuelle Aufwand, den Konstrukteure derzeit bei der Suche nach wiederverwendbaren Makrovorlagen aufbringen müssen, sowie die fehlende semantische Vergleichbarkeit bestehender Makrostrukturen in klassischen CAE-Systemen.
+Ziel dieser Bachelorarbeit war die Konzeption und prototypische Umsetzung eines KI-basierten Ansatzes zur semantischen Proximitätssuche geeigneter EPLAN-Makros auf Basis syntaktisch analysierter Bauteilspezifikationen. Ausgangspunkt war der in der industriellen Praxis hohe manuelle Aufwand bei der Identifikation wiederverwendbarer Makrovorlagen sowie die fehlende semantische Vergleichbarkeit bestehender Makrostrukturen in klassischen CAE-Systemen, wie sie auch in der Literatur zu wissensintensiven Engineering-Prozessen beschrieben wird \cite{khanolkar_mapping_2023}.
 
-Zu Beginn der Arbeit wurden die strukturellen Eigenschaften von EPLAN-Makros analysiert und ein konsistentes Datenmodell zur textuellen Repräsentation abgeleitet. Auf dieser Grundlage wurde ein domänenspezifischer Trainingsdatensatz erstellt, der eine Aggregation semantisch relevanter Makroinformationen und ein paarbasiertes Trainingsformat umfasst. Dieses Datenmodell bildete die Basis für das Fine-Tuning eines Sentence-Transformer-Modells im Rahmen eines metrischen Lernansatzes.
+Zu Beginn der Arbeit wurden die strukturellen Eigenschaften von EPLAN-Makros analysiert und ein konsistentes Datenmodell zur textuellen Repräsentation abgeleitet. Auf dieser Grundlage wurde ein domänenspezifischer Trainingsdatensatz erstellt, der eine Aggregation semantisch relevanter Makroinformationen sowie ein paarbasiertes Trainingsformat umfasst. Dieses Datenmodell bildete die Basis für das Fine-Tuning eines Sentence-Transformer-Modells im Rahmen eines metrischen Lernansatzes.
 
-Darauf aufbauend wurde ein LLM-basierter Ansatz zur Makro-Proximitätssuche konzipiert, der technische Bauteilspezifikationen und Makros in einem gemeinsamen semantischen Vektorraum abbildet. Durch den Einsatz kontrastiven Lernens und einer Cosine-Similarity-basierten Rangbildung konnten funktional ähnliche Makros identifiziert und priorisiert vorgeschlagen werden. Ein bewusst vollständiges Fine-Tuning mit dem jeweils aktuellen Datensatz stellte dabei die Stabilität des Embedding-Raums sicher und verhinderte inkrementelle Vergessenseffekte.
+Darauf aufbauend wurde ein LLM-basierter Ansatz zur Makro-Proximitätssuche konzipiert, der technische Bauteilspezifikationen und bestehende Makros in einem gemeinsamen semantischen Vektorraum abbildet. Durch den Einsatz kontrastiven Lernens und einer Cosine-Similarity-basierten Rangbildung konnten funktional ähnliche Makros identifiziert und priorisiert vorgeschlagen werden. Die Entscheidung für ein vollständiges Fine-Tuning mit dem jeweils aktuellen Datensatz stellte dabei die Stabilität des Embedding-Raums sicher und verhinderte inkrementelle Vergessenseffekte, wie sie bei domänenspezifischen Modellen bekannt sind \cite{bansal_refining_2025,zhong_kaft_2025}.
 
-Die prototypische Umsetzung demonstrierte die praktische Anwendbarkeit des Ansatzes. Eine modulare Pipeline zur Datenaufbereitung, ein versionierter Trainings- und Retraining-Workflow sowie eine grafische Benutzeroberfläche ermöglichten die interaktive Nutzung des Systems. Besonders hervorzuheben ist die Integration realer Arbeitsabläufe, etwa durch die Unterstützung von PDF-Datenblättern und einen nativen Drag-and-Drop-Workflow für den Import ausgewählter Makros in externe CAE-Systeme.
+Die prototypische Umsetzung demonstrierte die grundsätzliche praktische Anwendbarkeit des Ansatzes. Eine modulare Pipeline zur Datenaufbereitung, ein versionierter Trainings- und Retraining-Workflow sowie eine grafische Benutzeroberfläche ermöglichten eine interaktive Nutzung des Systems. Besonders hervorzuheben ist die Integration realitätsnaher Arbeitsabläufe, etwa durch die Unterstützung von PDF-Datenblättern und einen nativen Drag-and-Drop-Workflow zur Übernahme ausgewählter Makros in externe CAE-Systeme.
 
-Die durchgeführte Evaluierung zeigte, dass der entwickelte Ansatz geeignete Makros zuverlässig unter den obersten Suchergebnissen priorisiert und somit einen klaren Mehrwert gegenüber manuellen Rechercheprozessen bietet. Auch wenn im Rahmen dieser Arbeit keine umfassende quantitative Ground-Truth-Evaluierung durchgeführt wurde, bestätigt die qualitative Bewertung die grundsätzliche Eignung des Systems für den praktischen Einsatz.
+Die durchgeführte Evaluierung zeigte, dass der entwickelte Ansatz geeignete Makros zuverlässig unter den obersten Suchergebnissen priorisiert und damit einen klaren Mehrwert gegenüber manuellen Rechercheprozessen bieten kann. Auch wenn im Rahmen dieser Arbeit bewusst auf eine umfassende quantitative Ground-Truth-Evaluierung verzichtet wurde, bestätigt die qualitative Bewertung die grundsätzliche Eignung des Systems für den praktischen Einsatz im elektrotechnischen Engineering.
 
-Zusammenfassend lässt sich festhalten, dass semantische Embedding-Verfahren in Verbindung mit domänenspezifischem Fine-Tuning eine leistungsfähige Grundlage für KI-gestützte Unterstützungssysteme im elektrotechnischen Engineering darstellen. Der entwickelte Prototyp zeigt exemplarisch, wie vorhandenes Engineering-Wissen effizienter nutzbar gemacht werden kann, ohne bestehende CAE-Systeme zu ersetzen. Die Arbeit leistet damit einen Beitrag zur Weiterentwicklung intelligenter Assistenzsysteme und zeigt zugleich vielversprechende Perspektiven für zukünftige Forschung und industrielle Anwendungen auf.
+Zusammenfassend lässt sich festhalten, dass semantische Embedding-Verfahren in Verbindung mit domänenspezifischem Fine-Tuning eine leistungsfähige Grundlage für KI-gestützte Assistenzsysteme im Engineering darstellen. Der entwickelte Prototyp zeigt exemplarisch, wie vorhandenes Engineering-Wissen effizienter nutzbar gemacht werden kann, ohne bestehende CAE-Systeme zu ersetzen. Die Arbeit leistet damit einen fundierten Beitrag zur Weiterentwicklung intelligenter Unterstützungssysteme und zeigt zugleich relevante Perspektiven für zukünftige Forschung und industrielle Anwendungen auf.
