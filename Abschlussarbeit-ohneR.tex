@@ -102,23 +102,6 @@
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
-\chapter{Hier beginnt das erste Kapitel}
-
-% -----------------------------------------------------
-\section{Wie verweist man auf Quellen?}
-
-Hier wird \citet{Neumann:1977} zitiert. Zitate sollten in den Text eingebunden werden, zum Beispiel eine Quelle aus einem Tagungsband, hier von \citet{Bauer} oder ein Artikel aus einer Fachzeitschrift (auf den dann in einer Klammer beispielsweise bei \cite{Fox:2002} verwiesen wird). 
-
-Noch ein Absatz mit einem Zitat aus einem Buch, nämlich von \citet{R:Chambers:1998}. Webseiten, zum Beispiel das Dokument von \citet{xmlComparingSchemata} sollten nur äußerst sparsam referenziert werden. 
-
-Hier wird ein Buch zitiert, nämlich das von \citet{darwin}. Die Arbeit von \citet{meulman} ist in einer wissenschaftlichen Fachzeitschrift veröffentlicht worden. Ein Beispiel für einen Aufsatz in einem Tagungsband liefert \citet{banzhaf96effect}. In Ausnahmefällen zu zitieren ist eine unveröffentlichte Abschlussarbeit, zum Beispiel eine Diplom-, Bachelor-, oder Masterthesis, wie die von \citet{holzheuer}. Ganz selten ist man gezwungen Manuale oder Referenzen zu referenzieren, die nur im Internet zugänglich sind und zudem keinen ausgewiesenen Autor haben wie zum Beispiel die Anleitung vom \citet{hornik} oder der Aufsatz von \citet{xmlComparingSchemata}.
-
-% -----------------------------------------------------
-\section{Einbinden von Grafiken}
-
-Es folgt die Abbildung~\ref{fig:Gauss} auf Seite \pageref{fig:Gauss}, die dynamisch (gleitend) eingebunden wird. Das ist typischerweise eine gute Idee und man sollte Grafiken, wenn es nicht unbedingt anders gemacht werden soll von LaTeX automatisch positionieren lassen.
-
-\blindtext 
 
 \begin{figure}
 \centering
@@ -126,41 +109,12 @@ Es folgt die Abbildung~\ref{fig:Gauss} auf Seite \pageref{fig:Gauss}, die dynami
 \caption{\index{Grafik}\index{jpg}Ein jpeg-Bild, hier mit Gauß darauf\label{fig:Gauss}}\par
 \end{figure}
 
-\blindtext \blindtext 
-
-\blindtext
-
 
 
 % -----------------------------------------------------
 \section{Einträge im Stichwortverzeichnis}
 
 Einträge im Stichwortverzeichnis können über den \lstI{index}-Befehl generiert werden. Zum Beispiel soll der Begriff \emph{Bachelorarbeit}\index{Bachelorarbeit} hier referenziert werden. Außerdem sollen noch die Begriffe Apfel\index{Apfel}, Birne\index{Birne} und Zebra\index{Zebra} ins Verzeichnis. Damit unter dem Buchstaben mehr als ein Eintrag steht, nehmen wir noch \emph{Buch}\index{Buch} und Brille\index{Brille} auf. 
-
-\section{Dynamische Tabellen aus beliebigen Quellen}
-
-In dieser Version kein Support für R-Code. 
-
-\blindtext 
-
-\blindtext \blindtext
-
-\blindtext
-
-\blindtext
-
-\section{Grafiken aus R}
-
-In dieser Version kein Support für R-Code. Die Grafiken können
-natürlich durch das Makefile passend generiert werden, und dann
-auch eingebunden werden.
-
-\blindtext
-
-\blindtext
-
-\blindtext \blindtext \blindtext
-
 
 \include{Beispielinhalt}
 
