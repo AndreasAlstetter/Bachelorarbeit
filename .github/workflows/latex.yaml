@@ -2,8 +2,7 @@ name: Build LaTeX Thesis
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -19,11 +18,9 @@ jobs:
         with:
           root_file: Abschlussarbeit-ohneR.tex
           latexmk_shell_escape: true
-          extra_system_packages: "makeindex"
-          latexmk_use_xelatex: false
 
       - name: PDF als Artefakt speichern
         uses: actions/upload-artifact@v4
         with:
           name: Abschlussarbeit-PDF
-          path: Abschlussarbeit-ohneR.pdf
+          path: "*.pdf"
