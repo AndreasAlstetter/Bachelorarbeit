@@ -1,0 +1,61 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{Bundesregierung2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=bc293eebf68dd97f71076e11d6afcd21}{%
+           family={{Bundesministerium f\"{u}r Wirtschaft und Energie}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Bundesministerium f\"{u}r Wirtschaft und Energie}%
+      }
+      \strng{namehash}{bc293eebf68dd97f71076e11d6afcd21}
+      \strng{fullhash}{bc293eebf68dd97f71076e11d6afcd21}
+      \strng{fullhashraw}{bc293eebf68dd97f71076e11d6afcd21}
+      \strng{bibnamehash}{bc293eebf68dd97f71076e11d6afcd21}
+      \strng{authorbibnamehash}{bc293eebf68dd97f71076e11d6afcd21}
+      \strng{authornamehash}{bc293eebf68dd97f71076e11d6afcd21}
+      \strng{authorfullhash}{bc293eebf68dd97f71076e11d6afcd21}
+      \strng{authorfullhashraw}{bc293eebf68dd97f71076e11d6afcd21}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Wirtschaft und Forschung richten Plattform Industrie 4.0 auf industrielle KI aus}
+      \field{urlday}{31}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Pressemitteilungen/2026/07/20260703-pi4-industrielle-ki.html
+      \endverb
+      \verb{url}
+      \verb https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Pressemitteilungen/2026/07/20260703-pi4-industrielle-ki.html
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
