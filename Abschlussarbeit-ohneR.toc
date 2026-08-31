@@ -1,7 +1,14 @@
 \babel@toc {ngerman}{}\relax 
 \babel@toc {ngerman}{}\relax 
-\contentsline {section}{\numberline {0.1}Einträge im Stichwortverzeichnis}{1}{section.0.1}%
-\contentsline {chapter}{\numberline {1}Motivation}{2}{chapter.1}%
+\contentsline {section}{\numberline {0.1}Einträge im Stichwortverzeichnis}{2}{section.0.1}%
+\contentsline {chapter}{\numberline {1}Motivation}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Stand der Technik}{5}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Zielsetzung und Vorgehensweise}{6}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Analyse der Makrostrukturen und Ableitung eines Trainingsformats}{7}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Prototypische Umsetzung}{8}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Evaluierungskonzept und Ergebnisse}{9}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Diskussion, Grenzen und Ausblick}{10}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Zusammenfassung und Fazit}{11}{chapter.8}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{6}{chapter*.5}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{15}{chapter*.5}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

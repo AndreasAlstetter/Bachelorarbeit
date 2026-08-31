@@ -2376,6 +2376,13 @@
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1" intorder="1">Bundesregierung2026</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">Pfenning2022</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">Joshi2024</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">EPLANArtikelverwaltung</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">EPLAN2025</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">EPLANArtikelverwaltung</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">EPLAN2025</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">Nayak2025</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">
