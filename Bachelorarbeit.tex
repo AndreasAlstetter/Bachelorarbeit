@@ -1,0 +1,90 @@
+%%% ---------------------------------------------------------------------------------
+%%% Bachelorarbeit (LaTeX)
+%%% Haupteinstiegspunkt: Kapitel und Ressourcen sind nummeriert abgelegt.
+%%% ---------------------------------------------------------------------------------
+\documentclass[12pt,a4paper%
+              ,oneside
+              ,titlepage
+              ,DIV=13
+              ,headinclude
+              ,footinclude=false%
+              ,cleardoublepage=empty%
+              ,parskip=half,
+              BCOR=0mm,
+              ]{scrreprt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[authorName={Andreas Alstetter}
+           ,authorEnrolmentNo={2147455}
+           ,authorStreet={Pfarrer-Kempter Str.~4}
+           ,authorZip={89358}
+           ,authorCity={Kammeltal/Behlingen}
+           ,authorEMail={andreas.alstetter@tha.de}
+           ,authorPhone= {+49\,3141-5926}
+           ,authorSignaturePlace={Augsburg}
+           ,studyProgram={Mathematik}
+%           ,thesisType={Bachelorarbeit}
+           ,thesisTitle={Proximitätssuche von EPLAN-Makros auf Basis des LambdaRank-Algorithmus}
+           ,studyDegree={{Bachelor of Engineering}}
+           ,faculty={{Fakultät für \\ Informatik}}
+%           ,topicAssignment={\today}
+%           ,submissionDate={\today}
+%           ,defenseDate={\today}
+%           ,nonDisclosure={false}
+           ,supervisor={Prof.~Dr.~Thomas Kirchmeier}
+           ,supervisorDeputy={Prof.~Dr.~Jürgen Grinninger}
+%           ,language={en}
+           ]{05_konfiguration/01_tha-abschlussarbeit}
+
+\hypersetup{
+  colorlinks=true,
+  allcolors=THAi-Blue,
+  linktocpage
+}
+
+\bibliography{02_literatur/01_quellen}
+\graphicspath{{03_abbildungen/}}
+
+\usepackage{caption}
+\usepackage{float}
+\DeclareCaptionLabelFormat{something}{#2.#1.}
+\captionsetup[lstlisting]{labelformat=something}
+
+\begin{document}
+
+\selectlanguage{\thesisLanguage}
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\THAtitlepage
+\tableofcontents
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\input{01_kapitel/01_motivation}
+\input{01_kapitel/02_stand_der_technik}
+\input{01_kapitel/03_verwandte_industrielle_systeme}
+\input{01_kapitel/04_zielsetzung_und_vorgehensweise}
+\input{01_kapitel/05_analyse_der_makrostrukturen}
+\input{01_kapitel/06_prototypische_umsetzung}
+\input{01_kapitel/07_evaluierungskonzept_und_ergebnisse}
+\input{01_kapitel/08_diskussion_grenzen_und_ausblick}
+\input{01_kapitel/09_zusammenfassung_und_fazit}
+
+\appendix
+\AuthorDeclaration
+
+\listoffigures
+\listoftables
+
+\renewcommand{\bibfont}{\footnotesize}
+\printbibliography[title={Literaturverzeichnis}, heading=bibintoc]
+
+{\setkomafont{section}{\Huge}
+\printindex
+}
+
+\end{document}

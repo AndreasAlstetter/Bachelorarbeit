@@ -65,15 +65,15 @@ knitr::knit_hooks$set(chunk = function(x, options) {
            ,supervisor={Prof.~Dr.~Frank N. Stein}
 %           ,supervisorDeputy={Prof.~Dr.~Mario Huana}
 %           ,language={en}
-           ]{THA-Abschlussarbeit}
+           ]{05_konfiguration/01_tha-abschlussarbeit}
 
 % Ohne diese Zeile: Mit klickbaren links
 \hypersetup{draft}
 
 % Literaturdatenbank (.bib-Datei) aus Citavi o.ä.
-\bibliography{Literatur_Abschlussarbeit}
+\bibliography{02_literatur/01_quellen}
 
-\graphicspath{{Bilder/}}
+\graphicspath{{03_abbildungen/}}
 
 \usepackage{caption}
 \DeclareCaptionLabelFormat{something}{#2.#1.}
@@ -120,7 +120,7 @@ Es folgt die Abbildung~\ref{fig:Gauss} auf Seite \pageref{fig:Gauss}, die dynami
 
 \begin{figure}
 \centering
-\includegraphics[ angle=0, width=.3\textwidth]{karl_friedrich_gauss}
+\includegraphics[ angle=0, width=.3\textwidth]{02_beispiel_gauss}
 \caption{\index{Grafik}\index{jpg}Ein jpeg-Bild, hier mit Gauß darauf\label{fig:Gauss}}\par
 \end{figure}
 

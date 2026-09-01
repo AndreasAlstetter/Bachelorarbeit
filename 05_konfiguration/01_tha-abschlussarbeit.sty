@@ -77,8 +77,8 @@ colorlinks=true
 
 %###
 \ifthenelse{\equal{\thesis@language}{en}}
-{\input{i18n/en} \newcommand{\thesisLanguage}{english}}
-{\input{i18n/de} \newcommand{\thesisLanguage}{ngerman}}
+{\input{05_konfiguration/02_sprachen/en} \newcommand{\thesisLanguage}{english}}
+{\input{05_konfiguration/02_sprachen/de} \newcommand{\thesisLanguage}{ngerman}}
 %###
 
 \setkomafont{sectioning}{\sffamily}
@@ -111,9 +111,6 @@ colorlinks=true
 %%% --------------------------------------------------
 \usepackage[english,ngerman]{babel} % main language is the second one
 
-\renewcommand{\[}{\begin{equation}}
-\renewcommand{\]}{\end{equation}}
-
 %% --------------------------------------------------
 %% Literatur: biblatex mit biber
 %% --------------------------------------------------
@@ -138,7 +135,7 @@ colorlinks=true
     backrefstyle=three
 ]{biblatex}
 \DeclareBibliographyCategory{Buch} 
-\addbibresource{Literatur_Abschlussarbeit.bib}
+\addbibresource{02_literatur/01_quellen.bib}
 \renewcommand{\bibfont}{\small}
 \renewcommand*{\nameyeardelim}{\addspace} 
 \setlength{\bibhang}{0em}
@@ -308,7 +305,7 @@ colorlinks=true
 \begin{titlepage}
 \THAfont
 \begin{minipage}[t]{125mm}
-\hspace{-0.2cm} \includegraphics[width=60mm]{img/Logo}
+\hspace{-0.2cm} \includegraphics[width=60mm]{03_abbildungen/01_tha/Logo}
 \end{minipage}
 \qquad
 \begin{minipage}[t]{40mm}
@@ -376,7 +373,7 @@ colorlinks=true
 
 \ifthenelse{\boolean{thesis@showDiesel}}{
   \vspace{3.0cm}
-  \hspace{-0.2cm} \includegraphics[width=3cm]{img/Diesel}
+  \hspace{-0.2cm} \includegraphics[width=3cm]{03_abbildungen/01_tha/Diesel}
 }{}
 \end{minipage}
 \end{titlepage}

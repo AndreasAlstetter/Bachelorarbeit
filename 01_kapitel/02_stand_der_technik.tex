@@ -1,0 +1,305 @@
+\chapter{Stand der Technik}\label{chap:stand_der_technik}
+
+\section{Einordnung des Systems}
+
+Die automatische Zuordnung technischer EPLAN-Artikel \cite{EPLANArtikelverwaltung} zu EPLAN-Fenstermakros \cite{EPLAN2025} ist eine komplexe Problemstellung, 
+welche durch die Kombination von Information-Retrieval (IR), maschinellen Lernens und Learning-to-Rank-Methoden (LTR) behandelt werden kann.
+Das Ziel besteht darin, nach einer Systemanfrage mittels Datenblatt aus einer großen Menge an potentiellen EPLAN-Artikeln \cite{EPLANArtikelverwaltung} diejenigen zu identifizieren, 
+die auf Basis ihrer technischen Eigenschaften ein EPLAN-Fenstermakro \cite{EPLAN2025} am besten repräsentieren.
+Hierbei muss dann eine Rangfolge erstellt werden, welche die EPLAN-Fenstermakros \cite{EPLAN2025} die die höchste Relevanz für ein Suchanfrage besitzen an die Spitze der Ergebnisliste setzt.
+
+Solche Rankingporblem treten in einer Vielzahl von Anwendungsfällen auf, wie zum Beispiel in Suchmaschinen, Produktempfehlungen oder Enterprise-Search-Systemen.
+Die Bewertung durch ein komplexes Rankingmodell wird dabei schnell unübersichtlich und bietet weniger Raum für Analysen und Interpretationen.
+Stattdessen haben sich mehrstufige Architekturen etabliert, die zu Beginn eine schnelle Kandidatenselektion durchführen und im Anschluss ein Rankingmodell auf die selektierten Kandidaten anwenden.
+Dieses Konzept wird in der Literatur als \emph{Candidate Generation} und \emph{Learning-to-Rank} bezeichnet \cite{robertson2009prf,liu2009learning,burges2010lambdamart}.
+Teile davon werden für diese Arbeit übernommen und in abgeändeter Form für die Trainingsvorbereitung sowie das eigentliche Rankingmodell verwendet.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{02_architektur.png}
+\caption{Architektur der System-Pipeline}
+\label{fig:architektur}
+\end{figure}
+
+Im E-Comerce Bereich werden mehrstufige Architekturen bereits seit Jahren erfolgreich eingesetzt, um die Relevanz von Suchergebnissen und Empfehlungen zu verbessern.
+Aktuelle Untersuchungen in diesem Bereich zeigen, dass Produktsuchen großer Plattformen wie Amazon, eBay oder Alibaba weiterhin stark auf mehrstufige Retrievalpipelines, strukturierte Merkmale, und Learning-to-Rank-Verfahren setzen.
+\cite{kabir2024ecommerce}.
+
+\section{Kandidatenretrieval mittels BM25}
+
+\subsection{BM25 als Relevanzsignal}
+
+Ein Bestandteil des vorgestellten Systems ist die Nutzung lexikalischer Retrievalsignale zur Beschreibung der Ähnlichkeit zwischen einer Anfrage und einem potentiellen EPLAN-Artikel \cite{EPLANArtikelverwaltung}.
+Hier für wird unter anderem der BM25-Algorithmus verwendet, welcher ein etabliertes Verfahren im Bereich des Information Retrieval darstellt \cite{robertson2009prf}.
+Anders als in klassischen Suchmaschinen, wird BM25 hier nicht als weitere Rankingstufe verwendet, sondern als eines von mehreren Signalen, die dem Learning-to-Rank-Modell als Eingabe dienen.
+Die Aufgabe von diesem Algorithmus besteht deswegen darin, der Trainings-Kandidatenmenge ein erstes Relevanzsignal zu geben, um dadurch dem späteren Rankingmodell einen bewussten Bias in Richtung möglicher Query-Anfragen zu geben.
+
+\subsection{Grundidee von BM25}
+
+BM25 basiert auf dem Probabilistic Relevance Framework von Robertson und Zaragoza.
+Dabei wird für jedes Anfrage-Dokument-Paar einen Relevanzwert bestimmt \cite{robertson2009prf}.
+
+Die Grundannahme besteht darin, dass ein Dokument umso relevanter ist, 
+
+\begin{itemize} 
+    \item je häufiger relevante Suchbegriffe darin vorkommen, 
+    \item je seltener diese Begriffe innerhalb der Gesamtdokumentensammlung auftreten,
+    \item und je besser die Dokumentlänge berücksichtigt wird. 
+\end{itemize}
+
+Dadurch erlangen seltene und spezifische Begriffe eine höhere Gewichtung, während häufige Begriffe wie "und", "oder" oder "der" weniger Einfluss auf die Relevanzbewertung haben.
+Bei technischen Produktdaten ist dies besonders relevant, Artikelnummern, Typenbezeichnungen oder normierte Fachbegriffe häufig eine hohe Differenzierungskraft besitzen.
+
+
+
+\begin{align}
+Score(D,Q) = \sum_{i=1}^{n} IDF(q_i) \cdot \frac{ f(q_i,D)(k_1+1) } { f(q_i,D)+k_1 \left( 1-b+b\frac{|D|}{avgdl} \right) }
+\end{align}
+
+Die einzelnen Parameter besitzen folgende Bedeutung: 
+
+\begin{description} 
+    \item[$q_i$] Suchbegriff der Anfrage 
+    \item[$f(q_i,D)$] Häufigkeit des Begriffs $q_i$ im Dokument 
+    \item[$|D|$] Dokumentlänge 
+    \item[$avgdl$] durchschnittliche Dokumentlänge aller Dokumente 
+    \item[$k_1$] Parameter zur Steuerung der Termfrequenzsättigung 
+    \item[$b$] Parameter zur Dokumentlängennormalisierung 
+    \item[$IDF(q_i)$] inverse Dokumenthäufigkeit 
+\end{description}
+
+Die inverse Dokumenthäufigkeit wird durch
+
+\begin{align}
+  IDF(q_i) = \log \frac{ N-n(q_i)+0.5 } { n(q_i)+0.5 }
+\end{align}
+
+mit 
+
+\begin{description} 
+    \item[$N$] Gesamtzahl aller Dokumente 
+    \item[$n(q_i)$] Anzahl der Dokumente, welche den Begriff $q_i$ enthalten 
+\end{description}
+
+berechnet.
+
+Die resultierende Kennzahl stellt somit einen Relevanzscore dar, die die lexikalische Ähnlichkeit zwischen einer Anfrage und einem Kandidaten beschreibt.
+
+
+\subsection{Bedeutung in modernen Rankingarchitekturen}
+
+Trotz der zunehmenden Verbreitung von Deep-Learning-basierten Ansätzen im Information Retrieval, bleibt BM25 ein weit verbreitetes und effektives Verfahren.
+Aktuelle Studien zeigen, dass BM25 insbesondere bei Domänenspezifischen Datensätzen und als Basis für Learning-to-Rank-Modelle weiterhin eine hohe Relevanz besitzt \cite{thakur2021beir}.
+
+
+
+
+
+\section{Rank Fusion mittels Reciprocal Rank Fusion}
+
+Mehrere Retrievalverfahren erzeugen typischerweise unterschiedliche Ranglisten.
+Zur Zusammenführung dieser Ergebnisse wird Reciprocal Rank Fusion (RRF) verwendet \cite{cormack2009rrf}.
+RRF bewertet ein Dokument anhand seiner Position in mehreren Ranglisten:
+
+\begin{align}
+  RRF(d) = \sum_{r \in R} \frac{1} {k+r(d)}
+\end{align}
+
+mit
+
+\begin{description}
+  \item[$R$] Menge aller Ranglisten
+  \item[$r(d)$] Rangposition des Dokuments
+  \item[$k$] Glättungskonstante (typischerweise $k=60$)
+\end{description}
+
+Im Gegensatz zu scorebasierten Fusionsverfahren sind die ursprünglichen Retrievalscores nicht erforderlich.
+Ausschließlich die Rangposition wird berücksichtigt. Dies ermöglicht die Fusion heterogener Retrievalmethoden und führt nachweislich zu robusteren Suchergebnissen als die isolierte Nutzung einzelner Verfahren \cite{cormack2009rrf}.
+Rank-Fusion-Verfahren finden Anwendung in:
+
+\begin{itemize}
+  \item Suchmaschinen
+  \item Meta-Suchsystemen
+  \item Enterprise Search
+  \item Produktsuchen
+\end{itemize}
+
+\section{Feature Engineering}
+
+Nach der Kandidatengenerierung werden strukturierte Merkmale für Anfrage-Kandidaten-Paare erzeugt.
+Typische Merkmale sind:
+
+\begin{itemize}
+  \item Dimensionsdifferenzen
+  \item technische Eigenschaftsabweichungen
+  \item numerische Distanzmaße
+  \item binäre Matching-Merkmale
+  \item Kategorien- und Familienübereinstimmungen
+\end{itemize}
+
+Feature Engineering stellt seit den LETOR-Datensätzen die dominante Vorgehensweise für Learning-to-Rank-Systeme auf strukturierten Daten dar \cite{liu2009learning}.
+Insbesondere in technischen Produktkatalogen und E-Commerce-Systemen besitzen explizit modellierte Merkmale häufig eine höhere Aussagekraft als rein semantische Repräsentationen \cite{liu2009learning}.
+
+\section{Learning-to-Rank mit LambdaMART}
+
+\subsection{Learning-to-Rank}
+
+Learning-to-Rank bezeichnet Verfahren, die die Reihenfolge einer Ergebnisliste optimieren.
+Hierbei wird nicht lediglich eine Klassifikation durchgeführt, sondern die Anordnung einer gesamten Dokumentmenge bewertet \cite{liu2009learning}.
+
+\subsection{Von RankNet zu LambdaMART}
+
+Burges beschreibt die Entwicklung von RankNet über LambdaRank bis LambdaMART als zentrale Evolution moderner Rankingverfahren \cite{burges2010lambdamart}.
+Für zwei Dokumente $i$ und $j$ wird zunächst eine Paarwahrscheinlichkeit definiert:
+
+\begin{align}
+  P_{ij} = \frac{1} {1+e^{-\sigma(s_i-s_j)}}
+\end{align}
+
+mit
+
+\begin{description}
+  \item[$s_i$] Score von Dokument $i$
+  \item[$s_j$] Score von Dokument $j$
+  \item[$\sigma$] Steigungsparameter
+\end{description}
+
+Der Paarverlust ergibt sich zu
+
+\begin{align}
+  L_{ij} = -\log(P_{ij})
+\end{align}
+
+LambdaRank erweitert diesen Ansatz um Gradienten, die proportional zur Veränderung einer Rankingmetrik wie nDCG gewichtet werden.
+LambdaMART kombiniert diese Idee mit Gradient Boosted Decision Trees und zählt bis heute zu den leistungsfähigsten Verfahren für tabellarische Rankingdaten \cite{burges2010lambdamart,lyzhin2023ltr}.
+
+\subsection{Gradient Boosted Decision Trees}
+
+Das Gesamtmodell ergibt sich aus der Summe einzelner Entscheidungsbäume:
+
+\begin{align}
+  F(x) = \sum_{m=1}^{M} \gamma_m h_m(x)
+\end{align}
+
+mit
+
+\begin{description}
+  \item[$h_m(x)$] Entscheidungsbaum
+  \item[$\gamma_m$] Gewichtung des Baumes
+  \item[$M$] Anzahl der Bäume
+\end{description}
+
+\section{Mehrstufiges Ranking und Re-Ranking}
+
+Moderne Informationssysteme verwenden typischerweise mehrere Rankingstufen \cite{zhang2021muppets}.
+Die erste Stufe maximiert den Recall und erzeugt einen breiten Kandidatenpool.
+Die zweite Stufe verwendet aufwendigere Merkmale und Modelle zur Verbesserung der Präzision.
+Ein typischer Ablauf lautet:
+
+\begin{enumerate}
+  \item Retrieval (BM25)
+  \item Candidate Set
+  \item Learning-to-Rank
+  \item Re-Ranking
+\end{enumerate}
+
+Derartige Architekturen werden unter anderem in:
+
+\begin{itemize}
+  \item Websuchmaschinen
+  \item Produktsuchen
+  \item Enterprise Search
+  \item Empfehlungssystemen
+\end{itemize}
+
+eingesetzt \cite{zhang2021muppets}.
+
+\section{Makroaggregation und Rank Aggregation}
+
+Mehrere Artikel können Evidenz für dieselbe Makroklasse liefern.
+Daher werden Rankingergebnisse aggregiert.
+Rank Aggregation beschäftigt sich mit der Zusammenführung mehrerer Ranglisten zu einer Gesamtliste \cite{dwork2001rankaggregation}.
+
+Anwendungen umfassen:
+
+\begin{itemize}
+  \item Suchmaschinen
+  \item Abstimmungssysteme
+  \item Empfehlungssysteme
+  \item Produktrankings
+\end{itemize}
+
+Typische Strategien sind:
+
+\begin{itemize}
+  \item Best-Item-Prinzip
+  \item Mehrheitsentscheidungen
+  \item gewichtetes Voting
+  \item Evidenzaggregation
+\end{itemize}
+
+\section{Evaluierung von Retrieval- und Ranking-Systemen}
+
+\subsection{Recall@K}
+
+Recall gehört zu den grundlegenden Metriken des Information Retrieval \cite{manning2008ir}.
+
+\begin{align}
+  Recall@K = \frac{ \# \text{ relevante Treffer in Top-K} } { \# \text{ relevante Treffer} }
+\end{align}
+
+Im vorliegenden System werden insbesondere
+
+\begin{itemize}
+  \item target\_recall@1
+  \item target\_recall@3
+  \item target\_recall@5
+  \item target\_recall@10
+\end{itemize}
+
+sowie Family-Recall-Metriken verwendet.
+
+\subsection{Discounted Cumulative Gain}
+
+Järvelin und Kekäläinen führten DCG und nDCG zur Bewertung gewichteter Ranglisten ein \cite{jarvelin2002dcg}.
+
+\begin{align}
+  DCG@K = \sum_{i=1}^{K} \frac{2^{rel_i}-1} {\log_2(i+1)}
+\end{align}
+
+mit
+
+\begin{description}
+  \item[$rel_i$] Relevanz am Rangplatz $i$
+\end{description}
+
+\subsection{Normalized Discounted Cumulative Gain}
+
+Die Normalisierung erfolgt mittels
+
+\begin{align}
+  nDCG@K = \frac{DCG@K}{IDCG@K}
+\end{align}
+
+Der Wertebereich liegt zwischen 0 und 1.
+
+\subsection{Hierarchical nDCG}
+
+Für technische Katalogsysteme besitzen Fehler unterschiedliche Schweregrade.
+Daher wird eine hierarchische Relevanzfunktion verwendet:
+
+\begin{align}
+  rel= \begin{cases} 3 & \text{exaktes Ziel}\\ 2 & \text{gleiche Familie}\\ 0 & \text{sonst} \end{cases}
+\end{align}
+
+Diese Erweiterung erlaubt die differenzierte Bewertung von Variantenfehlern innerhalb derselben Produktfamilie.
+
+\subsection{Candidate Coverage}
+
+Die Candidate Coverage bewertet die maximale Leistungsfähigkeit des Retrievalsystems vor dem eigentlichen Ranking.
+Hierbei wird gemessen, ob sich das korrekte Ziel überhaupt im Kandidatenpool befindet.
+
+\subsection{Data Leakage Detection}
+
+Kaufman et al. definieren Data Leakage als unbeabsichtigte Nutzung von Informationen, die zum Zeitpunkt der Vorhersage nicht verfügbar sein dürfen \cite{kaufman2012leakage}.
+Die Verhinderung von Leakage stellt eine zentrale Voraussetzung für valide Evaluierungen und reproduzierbare Modellqualität dar.

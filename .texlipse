@@ -2,7 +2,7 @@
 #Mon Jan 08 13:59:37 CET 2024
 outputDir=
 markDer=true
-mainTexFile=Abschlussarbeit-ohneR.tex
+mainTexFile=Bachelorarbeit.tex
 bibrefDir=
 builderNum=2
 outputFile=Abschlussarbeit.pdf

@@ -2371,8 +2371,8 @@
   <!-- CITATION DATA -->
   <!-- SECTION 0 -->
   <bcf:bibdata section="0">
-    <bcf:datasource type="file" datatype="bibtex" glob="false">Literatur_Abschlussarbeit.bib</bcf:datasource>
-    <bcf:datasource type="file" datatype="bibtex" glob="false">Literatur_Abschlussarbeit.bib</bcf:datasource>
+    <bcf:datasource type="file" datatype="bibtex" glob="false">02_literatur/01_quellen.bib</bcf:datasource>
+    <bcf:datasource type="file" datatype="bibtex" glob="false">02_literatur/01_quellen.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1" intorder="1">Bundesregierung2026</bcf:citekey>
@@ -2383,6 +2383,36 @@
     <bcf:citekey order="6" intorder="1">EPLANArtikelverwaltung</bcf:citekey>
     <bcf:citekey order="7" intorder="1">EPLAN2025</bcf:citekey>
     <bcf:citekey order="8" intorder="1">Nayak2025</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">EPLANArtikelverwaltung</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">EPLAN2025</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">EPLANArtikelverwaltung</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">EPLAN2025</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">EPLAN2025</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">robertson2009prf</bcf:citekey>
+    <bcf:citekey order="14" intorder="2">liu2009learning</bcf:citekey>
+    <bcf:citekey order="14" intorder="3">burges2010lambdamart</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">kabir2024ecommerce</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">EPLANArtikelverwaltung</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">robertson2009prf</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">robertson2009prf</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">thakur2021beir</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">cormack2009rrf</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">cormack2009rrf</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">liu2009learning</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">liu2009learning</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">liu2009learning</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">burges2010lambdamart</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">burges2010lambdamart</bcf:citekey>
+    <bcf:citekey order="26" intorder="2">lyzhin2023ltr</bcf:citekey>
+    <bcf:citekey order="27" intorder="1">zhang2021muppets</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">zhang2021muppets</bcf:citekey>
+    <bcf:citekey order="29" intorder="1">dwork2001rankaggregation</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">manning2008ir</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">jarvelin2002dcg</bcf:citekey>
+    <bcf:citekey order="32" intorder="1">kaufman2012leakage</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">burges2010lambdamart</bcf:citekey>
+    <bcf:citekey order="34" intorder="1">cormack2009rrf</bcf:citekey>
+    <bcf:citekey order="35" intorder="1">liu2009learning</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

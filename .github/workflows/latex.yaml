@@ -16,11 +16,11 @@ jobs:
       - name: LaTeX kompilieren
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: Abschlussarbeit-ohneR.tex
+          root_file: Bachelorarbeit.tex
           latexmk_shell_escape: true
 
       - name: PDF als Artefakt speichern
         uses: actions/upload-artifact@v4
         with:
-          name: Abschlussarbeit-PDF
-          path: "*.pdf"
+          name: Bachelorarbeit-PDF
+          path: Bachelorarbeit.pdf

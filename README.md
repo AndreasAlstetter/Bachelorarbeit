@@ -27,6 +27,23 @@ also bei der Titelseite, der Erklärung, der Literatur etc. jeweils mit
 Ihrem Erstbetreuer klären, was die formalen Vorgaben sind, und dann selber
 sicherstellen, dass Sie diese einhalten.
 
+## Projektstruktur
+
+Der Einstiegspunkt der Arbeit ist `Bachelorarbeit.tex`. Die Inhalte und
+Ressourcen folgen einer aufsteigenden, fachlichen Reihenfolge:
+
+```text
+Bachelorarbeit.tex             Hauptdatei der Arbeit
+Bachelorarbeit.Rnw             Variante mit R/knitr-Unterstützung
+01_kapitel/                    Kapitel in Reihenfolge der Arbeit
+02_literatur/                  Literaturdatenbank
+03_abbildungen/                Abbildungen und THA-Logos
+04_daten/                      Eingabedaten für Auswertungen
+05_konfiguration/              LaTeX-Stil, Sprachen und Indexstil
+06_praesentation/              Präsentation zur Bachelorarbeit
+01_build.bat                   LaTeX-Watch-Build für Windows
+```
+
 ## Nutzung
 
 Unter Linux kann die PDF mit
@@ -39,6 +56,10 @@ Mithilfe von
 make clean
 ```
 können alle temporären Dateien gelöscht werden.
+
+Unter Windows startet `01_build.bat` den fortlaufenden `latexmk`-Build. Dafür
+muss neben MiKTeX eine Perl-Laufzeitumgebung installiert und in `PATH` verfügbar
+sein.
 
 ## HSA gitlab runner
 

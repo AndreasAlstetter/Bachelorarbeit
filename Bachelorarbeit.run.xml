@@ -41,13 +41,13 @@
   >
 ]>
 <requests version="1.0">
-  <internal package="biblatex" priority="9" active="1">
+  <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>Abschlussarbeit-ohneR.bcf</file>
+      <file>Bachelorarbeit.bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>Abschlussarbeit-ohneR.bbl</file>
+      <file>Bachelorarbeit.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
@@ -64,26 +64,26 @@
       <file>english.lbx</file>
     </requires>
   </internal>
-  <external package="biblatex" priority="5" active="1">
+  <external package="biblatex" priority="5" active="0">
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>Abschlussarbeit-ohneR</infile>
+      <infile>Bachelorarbeit</infile>
     </cmdline>
     <input>
-      <file>Abschlussarbeit-ohneR.bcf</file>
+      <file>Bachelorarbeit.bcf</file>
     </input>
     <output>
-      <file>Abschlussarbeit-ohneR.bbl</file>
+      <file>Bachelorarbeit.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>Abschlussarbeit-ohneR.bbl</file>
+      <file>Bachelorarbeit.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>Abschlussarbeit-ohneR.bcf</file>
+      <file>Bachelorarbeit.bcf</file>
     </requires>
     <requires type="editable">
-      <file>Literatur_Abschlussarbeit.bib</file>
+      <file>02_literatur/01_quellen.bib</file>
     </requires>
   </external>
 </requests>
