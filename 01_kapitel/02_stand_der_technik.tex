@@ -25,9 +25,7 @@ Im E-Comerce Bereich werden mehrstufige Architekturen bereits seit Jahren erfolg
 Aktuelle Untersuchungen in diesem Bereich zeigen, dass Produktsuchen großer Plattformen wie Amazon, eBay oder Alibaba weiterhin stark auf mehrstufige Retrievalpipelines, strukturierte Merkmale, und Learning-to-Rank-Verfahren setzen.
 \cite{kabir2024ecommerce}.
 
-\section{Kandidatenretrieval mittels BM25}
-
-\subsection{BM25 als Relevanzsignal}
+\section{BM25 als Relevanzsignal}
 
 Ein Bestandteil des vorgestellten Systems ist die Nutzung lexikalischer Retrievalsignale zur Beschreibung der Ähnlichkeit zwischen einer Anfrage und einem potentiellen EPLAN-Artikel \cite{EPLANArtikelverwaltung}.
 Hier für wird unter anderem der BM25-Algorithmus verwendet, welcher ein etabliertes Verfahren im Bereich des Information Retrieval darstellt \cite{robertson2009prf}.
@@ -49,7 +47,6 @@ Die Grundannahme besteht darin, dass ein Dokument umso relevanter ist,
 
 Dadurch erlangen seltene und spezifische Begriffe eine höhere Gewichtung, während häufige Begriffe wie "und", "oder" oder "der" weniger Einfluss auf die Relevanzbewertung haben.
 Bei technischen Produktdaten ist dies besonders relevant, Artikelnummern, Typenbezeichnungen oder normierte Fachbegriffe häufig eine hohe Differenzierungskraft besitzen.
-
 
 
 \begin{align}
@@ -92,37 +89,137 @@ Trotz der zunehmenden Verbreitung von Deep-Learning-basierten Ansätzen im Infor
 Aktuelle Studien zeigen, dass BM25 insbesondere bei Domänenspezifischen Datensätzen und als Basis für Learning-to-Rank-Modelle weiterhin eine hohe Relevanz besitzt \cite{thakur2021beir}.
 
 
+\section{Exact-Match als Relevanzsignal}
 
+Neben BM25 wird auch ein Exact-Match-Algorithmus als Relevanzsignal verwendet. Dieser prüft die exakten Übereinstimmungen technischer Merkmale zwischen einer Datenblatt-Anfrage und den EPLAN-Artikeln \cite{EPLANArtikelverwaltung}.
+Die Grundidee besteht darin, dass Artikel, die exakt die gleichen technischen Eigenschaften wie die Anfrage besitzen, eine höhere Relevanz aufweisen.
 
+\subsection{Grundprinzip des Exact Matching}
 
-\section{Rank Fusion mittels Reciprocal Rank Fusion}
+Exact-Match-Verfahren sind Teil der klassischen Konzepte des Information Retrieval und basieren auf dem Boolean-Retrieval-Modell \cite{manning2008ir,baeza2011modern}.
+Klassische Boolean-Syteme unterscheiden lediglich zwischen Treffer und Kein Treffer. Das Vorliegende System erweitert dieses Konzept um eine gewichtete Bewertung technischer Eigenschaften.
+Hierdurch wird eine differenzierte Relevanzbewertung ermöglicht, die die Anzahl und Bedeutung der übereinstimmenden Merkmale berücksichtigt.
 
-Mehrere Retrievalverfahren erzeugen typischerweise unterschiedliche Ranglisten.
-Zur Zusammenführung dieser Ergebnisse wird Reciprocal Rank Fusion (RRF) verwendet \cite{cormack2009rrf}.
-RRF bewertet ein Dokument anhand seiner Position in mehreren Ranglisten:
-
-\begin{align}
-  RRF(d) = \sum_{r \in R} \frac{1} {k+r(d)}
-\end{align}
-
-mit
-
-\begin{description}
-  \item[$R$] Menge aller Ranglisten
-  \item[$r(d)$] Rangposition des Dokuments
-  \item[$k$] Glättungskonstante (typischerweise $k=60$)
-\end{description}
-
-Im Gegensatz zu scorebasierten Fusionsverfahren sind die ursprünglichen Retrievalscores nicht erforderlich.
-Ausschließlich die Rangposition wird berücksichtigt. Dies ermöglicht die Fusion heterogener Retrievalmethoden und führt nachweislich zu robusteren Suchergebnissen als die isolierte Nutzung einzelner Verfahren \cite{cormack2009rrf}.
-Rank-Fusion-Verfahren finden Anwendung in:
+Der Schwerpunkt liegt hierbei auf strukturierten technischen Merkmalen wie:
 
 \begin{itemize}
-  \item Suchmaschinen
-  \item Meta-Suchsystemen
-  \item Enterprise Search
-  \item Produktsuchen
+  \item Herstellerkennungen
+  \item Produktfamilien
+  \item Produktcodes
+  \item Makrostrukturen
+  \item Kanalzahlen
+  \item I/O-Schemata
+  \item Positionsmerkmale
+  \item Schutzarten
+  \item Connector-Informationen
 \end{itemize}
+
+Die Bewertung erfolgt für jede Dimension separat und wird anschließend zu einem Gesamtscore aggregiert.
+
+Der resultierende Exact-Match-Score wird durch 
+
+\begin{align} 
+    ExactScore = \frac { \sum Gewicht_{Match} } { \sum Gewicht_{Query} } 
+\end{align} 
+
+berechnet. 
+
+Dabei bezeichnet 
+
+\begin{description} 
+    \item[$\sum Gewicht_{Match}$] die Summe der Gewichte aller übereinstimmenden technischen Dimensionen
+    \item[$\sum Gewicht_{Query}$] die Summe der Gewichte aller in der Anfrage belegten technischen Dimensionen
+\end{description}
+
+Der resultierende Wert liegt im Intervall 
+\begin{align} 0 \le ExactScore \le 1 \end{align} 
+
+Ein Wert von 1 bedeutet, dass sämtliche relevanten technischen Eigenschaften übereinstimmen. Ein Wert von 0 signalisiert das Fehlen jeglicher fachlich relevanter Übereinstimmung.
+
+\subsection{Bedeutung von Exact-Match im modernen Information Retrieval}
+
+Eine aktuelle Wissenschaftliche Arbeit zeigt mit dem COIL-Ansatz, dass exakte lexikalische Übereinstimmungen im Zeitalter neuronaler Suchverfahren weiterhin eine hohe Relevanz besitzen.
+Die Autoren kombinieren klassische Exact-Match-Mechanismen mit modernen Sprachmodellrepräsentationen und zeigen, dass exakte Trefferinformationen weiterhin hochrelevante Signale für Retrieval- und Rankingverfahren darstellen \cite{gao2021coil}.
+
+
+\section{Fusion von Retrievalsignalen mittels Reciprocal Rank Fusion}
+
+Nach der Berechnung von BM25 und Exact-Match liegen für jeden Trainingskandidaten (EPLAN-Artikel \cite{EPLANArtikelverwaltung}) zwei Relevanzsignale vor. 
+BM25 bewertet die lexikalische Änlichkeit der Textuellen Repräsentationen. Exact-Match bewertet die spezifische Übereinstimmung technischer Merkmale.
+Diese beiden Signale werden anschließend mittels Reciprocal Rank Fusion (RRF) zu einem gemeinsamen Retrievalsignal zusamengeführt \cite{cormack2009rrf}.
+
+
+\subsection{Grundidee von Reciprocal Rank Fusion}
+
+Reciprocal Rank Fusion (RRF) ist ein Verfahren zur Aggregation von Ranglisten, das die Rangpositionen der Dokumente in den einzelnen Listen berücksichtigt.
+Dabei lautet die Zentrale Annahme, dass ein Kandidat ein hohe Relevanz besitzt, wenn er in mehreren Ranglisten einen hohen Rang besitzt.
+Wenn ein Kandidat nur von einer Rangliste hoch bewertet wird, erhält er dadurch eine geringere Gewichtung.
+Dies führt zu einer robusteren Gesamtrangliste, die die Stärken der einzelnen Retrievalverfahren kombiniert.
+Ein wesentlicher Vorteil von RRF besteht darin, dass unterschiedliche Scales und Bewertungsmetriken problemlos kombiniert werden können.
+Hierfür ist keine Normalisierung der Scores auf einen Wertebereich erforderlich, da ausschließlich die Rangpositionen berücksichtigt werden.\cite{cormack2009rrf}.
+
+
+\subsection{Klassische RRF-Formulierung} 
+
+Die ursprüngliche Formel von Cormack et al. lautet: 
+
+\begin{align} 
+    RRF(d) = \sum_{r \in R} \frac{1} {k+r(d)} 
+\end{align} 
+
+mit 
+
+\begin{description} 
+    \item[$R$] Menge aller Ranglisten 
+    \item[$r(d)$] Rangposition des Dokuments $d$ in der jeweiligen Rangliste 
+    \item[$k$] Glättungskonstante 
+\end{description} 
+
+Die Konstante $k$ wird typischerweise auf den Wert 60 gesetzt und reduziert den Einfluss sehr hoher Einzelplatzierungen \cite{cormack2009rrf}. 
+
+\subsection{Gewichtete RRF-Fusion im vorliegenden System} 
+
+Im Gegensatz zur ursprünglichen Form verwendet die entwickelte Architektur eine gewichtete Variante von RRF. 
+Der Grund dafür liegt in der unterschiedlichen Aussagekraft der beiden verwendeten Retrievalsignale. 
+Während BM25 wertvolle Informationen über textuelle Ähnlichkeiten liefert, besitzen exakte technische Übereinstimmungen für die vorliegende Aufgabenstellung eine höhere fachliche Relevanz. 
+Deswegen wird der Exact-Match-Zweig bewusst mit einer stärkeren Gewichtung als der BM25-Zweig versehen.
+
+Die verwendete Fusionsfunktion lautet: 
+
+\begin{align} 
+    RRF(d) = 0.30 \cdot \frac{1} {30 + rank_{BM25}(d)} + 0.70 \cdot \frac{1} {30 + rank_{Exact}(d)} 
+\end{align} 
+
+mit 
+
+\begin{description} 
+    \item[$rank_{BM25}(d)$] Rangposition des Kandidaten in der BM25-Liste 
+    \item[$rank_{Exact}(d)$] Rangposition des Kandidaten in der Exact-Match-Liste 
+\end{description} 
+
+Die Gewichtung von 0,70 für das Exact-Match-Signal und 0,30 für das BM25-Signal spiegelt die Priorisierung der technischen Übereinstimmungen wieder.
+Dabei sollen Kandidaten mit identischen Produktcodes, Makrostrukturen oder technischen Eigenschaften stärker bevorzugt werden.
+Kandidaten mit einer hohen textuellen Ähnlichkeit sollen entsprechend niedriger gewichtet werden.
+
+Wichtig hierbei ist, dass RRF-Fusion nicht als eingenständige Rankingstufe verwendet wird, sondern lediglich als Aggregation der beiden Retrievalsignale BM25 und Exact-Match dient.
+Dadurch entsteht ein weiteres Relevanzsignal, das dem Learning-to-Rank-Modell als Eingabe dient und die Stärken beider Verfahren kombiniert.
+
+\subsection{Aktuelle Bedeutung von Rank-Fusion-Verfahren}
+
+In der aktuellen Forschung zu mehrstufigen Retrieval- und Rankingarchitekturen wird die Zusammenführung von Retrievalsignalen als wichtiger Bestandteil betrachtet, um die Leistungsfähigkeit von Rankingmodellen zu verbessern.
+Zhang et al. zeigen im Rahmen einer Multi-Stage-Ranking-Pipeline, dass unterschiedliche Kombinationen von Relevanzsignalen eine hohe Retrievalqualität ermöglichen \cite{zhang2021muppets}.
+Darüber hinaus beschreiben Zheng et al. im Rahmen des Full-Stage-Learning-to-Rank-Ansatz moderne Rankingarchitekturen, bei denen unterschiedliche Retrievalsignale in einem System optimiert werden und zur finalen Entscheidungsfindung beitragen \cite{zheng2024fullstage}.
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Feature Engineering}
 

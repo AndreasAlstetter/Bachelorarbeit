@@ -19,6 +19,42 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global/global}
+    \entry{baeza2011modern}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=14e9e2c7e918f62ba13b9e040fb7f468}{%
+           family={Baeza-Yates},
+           familyi={B\bibinithyphendelim Y\bibinitperiod},
+           given={Ricardo},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f25e271e4c06cb466719bf923801707f}{%
+           family={Ribeiro-Neto},
+           familyi={R\bibinithyphendelim N\bibinitperiod},
+           given={Berthier},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley}%
+      }
+      \strng{namehash}{1f00528ee1ee87a4195a7a9296c94914}
+      \strng{fullhash}{1f00528ee1ee87a4195a7a9296c94914}
+      \strng{fullhashraw}{1f00528ee1ee87a4195a7a9296c94914}
+      \strng{bibnamehash}{1f00528ee1ee87a4195a7a9296c94914}
+      \strng{authorbibnamehash}{1f00528ee1ee87a4195a7a9296c94914}
+      \strng{authornamehash}{1f00528ee1ee87a4195a7a9296c94914}
+      \strng{authorfullhash}{1f00528ee1ee87a4195a7a9296c94914}
+      \strng{authorfullhashraw}{1f00528ee1ee87a4195a7a9296c94914}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{Modern Information Retrieval: The Concepts and Technology behind Search}
+      \field{year}{2011}
+    \endentry
     \entry{Bundesregierung2026}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=bc293eebf68dd97f71076e11d6afcd21}{%
@@ -244,6 +280,50 @@
       \endverb
       \verb{url}
       \verb https://www.eplan.help/de-de/Infoportal/Content/Plattform/2.9/EPLAN_Help.htm#htm/partsmanagementgui_k_start.htm
+      \endverb
+    \endentry
+    \entry{gao2021coil}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=7ef8e07d2bd57499ac7dd40d1123fb5d}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Luyu},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d2448757aae98465fe067babd0604f8d}{%
+           family={Dai},
+           familyi={D\bibinitperiod},
+           given={Zhuyun},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=032fc1d6032783d20182bca491b35d2f}{%
+           family={Callan},
+           familyi={C\bibinitperiod},
+           given={Jamie},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{33afec8508fadcedb9fb8ffe8cfd4bfa}
+      \strng{fullhash}{0a362a97c05c5ba0dc42db17b706186f}
+      \strng{fullhashraw}{0a362a97c05c5ba0dc42db17b706186f}
+      \strng{bibnamehash}{0a362a97c05c5ba0dc42db17b706186f}
+      \strng{authorbibnamehash}{0a362a97c05c5ba0dc42db17b706186f}
+      \strng{authornamehash}{33afec8508fadcedb9fb8ffe8cfd4bfa}
+      \strng{authorfullhash}{0a362a97c05c5ba0dc42db17b706186f}
+      \strng{authorfullhashraw}{0a362a97c05c5ba0dc42db17b706186f}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of NAACL-HLT 2021}
+      \field{title}{COIL: Revisit Exact Lexical Match in Information Retrieval with Contextualized Inverted List}
+      \field{year}{2021}
+      \field{pages}{3030\bibrangedash 3042}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.18653/v1/2021.naacl-main.241
       \endverb
     \endentry
     \entry{jarvelin2002dcg}{inproceedings}{}{}
@@ -775,6 +855,81 @@
       \field{booktitle}{SustaiNLP 2021}
       \field{title}{Learning to Rank in the Age of Muppets: Effectiveness-Efficiency Tradeoffs in Multi-Stage Ranking}
       \field{year}{2021}
+    \endentry
+    \entry{zheng2024fullstage}{inproceedings}{}{}
+      \name{author}{9}{}{%
+        {{un=0,uniquepart=base,hash=344f5b0e0d962edf27e0a4af939d760a}{%
+           family={Zheng},
+           familyi={Z\bibinitperiod},
+           given={Kai},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8041dd514cf9fe2b07236380819077a6}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Haijun},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6914f2dac03de61fee76eecb36c759d1}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Rui},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=15d66fc637a18a25c1df0fb5e2abfe60}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Beichuan},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=70352381d0bb35656aad45120545e586}{%
+           family={Mou},
+           familyi={M\bibinitperiod},
+           given={Na},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=cdf72161ddafb04c361ee8a6059c45ed}{%
+           family={Niu},
+           familyi={N\bibinitperiod},
+           given={Yanan},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7dacbb5a6e92ab16944d46ba03705563}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=efb0c8e0f9339f80b201a80bde788ea7}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Hongning},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7756595eb7178ce96e0f5a991d4ba09a}{%
+           family={Gai},
+           familyi={G\bibinitperiod},
+           given={Kun},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9e61d81bd9ee4cd8a7d240fff1a533a0}
+      \strng{fullhash}{4c857c6c272d972f9b57aa8715ae06b8}
+      \strng{fullhashraw}{4c857c6c272d972f9b57aa8715ae06b8}
+      \strng{bibnamehash}{4c857c6c272d972f9b57aa8715ae06b8}
+      \strng{authorbibnamehash}{4c857c6c272d972f9b57aa8715ae06b8}
+      \strng{authornamehash}{9e61d81bd9ee4cd8a7d240fff1a533a0}
+      \strng{authorfullhash}{4c857c6c272d972f9b57aa8715ae06b8}
+      \strng{authorfullhashraw}{4c857c6c272d972f9b57aa8715ae06b8}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{WWW 2024}
+      \field{title}{Full Stage Learning to Rank: A Unified Framework for Multi-Stage Systems}
+      \field{year}{2024}
     \endentry
   \enddatalist
 \endrefsection
