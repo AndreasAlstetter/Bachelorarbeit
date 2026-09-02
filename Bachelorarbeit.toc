@@ -1,0 +1,50 @@
+\babel@toc {ngerman}{}\relax 
+\babel@toc {ngerman}{}\relax 
+\contentsline {chapter}{\numberline {1}Motivation}{2}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Stand der Technik}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Architektur- und Rankingansatz}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}BM25}{4}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Grundidee von BM25}{4}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Bedeutung in modernen Rankingarchitekturen}{5}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Exact-Match}{6}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Grundprinzip des Exact Matching}{6}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Bedeutung von Exact-Match im modernen Information Retrieval}{7}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Fusion von Retrievalsignalen mittels Reciprocal Rank Fusion}{7}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Grundidee von Reciprocal Rank Fusion}{7}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Klassische RRF-Formulierung}{7}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Aktuelle Bedeutung von Rank-Fusion-Verfahren}{8}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Learning-to-Rank mit LambdaRank}{8}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Grundprinzip von Learning-to-Rank}{8}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}LambdaRank}{8}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}LambdaMART und LightGBM}{9}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}Aktuelle Bedeutung von LambdaMART}{10}{subsection.2.5.4}%
+\contentsline {chapter}{\numberline {3}Zielsetzung und Vorgehensweise}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Zielsetzung}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Methodisches Vorgehen}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Iterativer Entwicklungsprozess}{12}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Analyse der Datenstrukturen und Ableitung eines Trainingsformats}{14}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Analyse der Ausgangsdaten}{14}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Analyse der Makrostrukturen}{14}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Aufbereitung der Artikeldaten}{15}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Erstellung von Makrokandidatenprofilen}{16}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Transformation in ein Rankingproblem}{16}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Berechnung der Pairwise-Merkmale}{17}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Erzeugung der Relevanzlabels}{18}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Erstellung des Trainingsformats}{19}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Vermeidung von Zielinformations-Leakage}{19}{section.4.9}%
+\contentsline {chapter}{\numberline {5}Prototypische Umsetzung}{20}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Verwendung BM25 und Exact-Match Signale}{22}{chapter.6}%
+\contentsline {subsection}{\numberline {6.0.1}Gewichtete RRF-Fusion im vorliegenden System}{23}{subsection.6.0.1}%
+\contentsline {chapter}{\numberline {7}Evaluierungskonzept und Ergebnisse}{24}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Evaluierung von Retrieval- und Ranking-Systemen}{24}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Recall@K}{24}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Discounted Cumulative Gain}{24}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Normalized Discounted Cumulative Gain}{25}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}Hierarchical nDCG}{25}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}Candidate Coverage}{25}{subsection.7.1.5}%
+\contentsline {subsection}{\numberline {7.1.6}Data Leakage Detection}{25}{subsection.7.1.6}%
+\contentsline {chapter}{\numberline {8}Diskussion, Grenzen und Ausblick}{26}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Zusammenfassung und Fazit}{27}{chapter.9}%
+\def \@chapapp {\appendixname }
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{31}{chapter*.10}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

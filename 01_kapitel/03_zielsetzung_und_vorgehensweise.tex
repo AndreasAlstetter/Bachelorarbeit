@@ -2,13 +2,13 @@
 
 \section{Zielsetzung}
 
-Das Projektziel ist die Entwicklung eines Systems, welches automatisiert EPLAN-Artikel \cite{EPLANArtikelverwaltung} zu EPLAN-Fenstermakros \cite{EPLAN2025} zuordnet.
-Für einen vorhanden technischen EPLAN-Artikel \cite{EPLANArtikelverwaltung} soll anhand einer technischen Anfrage (zum Beispiel in Form eines Datenblatts) das fachlich passendste EPLAN-Fenstermakro \cite{EPLAN2025} identifiziert werden.
+Das Projektziel ist die Entwicklung eines Systems, welches automatisiert EPLAN-Artikel \cite{EPLANArtikelverwaltung} zu EPLAN-Fenstermakros \cite{EPLAN-Makros} zuordnet.
+Für einen vorhanden technischen EPLAN-Artikel \cite{EPLANArtikelverwaltung} soll anhand einer technischen Anfrage (zum Beispiel in Form eines Datenblatts) das fachlich passendste EPLAN-Fenstermakro \cite{EPLAN-Makros} identifiziert werden.
 
 
-Diese Problemstellung kann als Rankingaufgabe formuliert werden, bei der für jede Anfrage eine Menge bekannter EPLAN-Fenstermakros \cite{EPLAN2025} vorliegt. Dabei sind alle Kandidaten dieser Menge potenzielle Ergebnisse für den 1. Rang.
-Das System soll alle vorhandenen EPLAN-Artikel \cite{EPLANArtikelverwaltung} analysieren, bewerten und anschließend das ähnlichste Zugrundeliegende EPLAN-Fenstermakro \cite{EPLAN2025} auswählen.
-Ziel dabei ist es, dass das passendste EPLAN-Fenstermakro \cite{EPLAN2025} möglichst auf Rang 1 erscheint. Die weniger ähnlichen Kandidaten sollen entsprechend der Bewertung hierachisch auf den nachfolgenden Rängen einsortiert werden.
+Diese Problemstellung kann als Rankingaufgabe formuliert werden, bei der für jede Anfrage eine Menge bekannter EPLAN-Fenstermakros \cite{EPLAN-Makros} vorliegt. Dabei sind alle Kandidaten dieser Menge potenzielle Ergebnisse für den 1. Rang.
+Das System soll alle vorhandenen EPLAN-Artikel \cite{EPLANArtikelverwaltung} analysieren, bewerten und anschließend das ähnlichste Zugrundeliegende EPLAN-Fenstermakro \cite{EPLAN-Makros} auswählen.
+Ziel dabei ist es, dass das passendste EPLAN-Fenstermakro \cite{EPLAN-Makros} möglichst auf Rang 1 erscheint. Die weniger ähnlichen Kandidaten sollen entsprechend der Bewertung hierachisch auf den nachfolgenden Rängen einsortiert werden.
 
 
 Im Gegensatz zu Klassifikationsaufgaben liegt der Fokus dieses Systems nicht direkt auf der Bestimmung einer einzelnen Klasse oder Produktfamilie. Vielmehr geht es darum eine möglichst präzise Variantenauflösung zu erreichen.
@@ -19,7 +19,7 @@ Die Herausforderung besteht darin, dass sich viele Produkte lediglich in einzeln
 Das System muss daher in der Lage sein allgemeine technischen Zusammenhänge als auch merkmalspezifische Unterschiede zwischen ähnlichen Varianten zu erkennen.
 
 
-Zur Lösung dieses Problems wird ein Learning-to-Rank-System entwickelt, welches unterschiedliche Retrivalsignale, strukturierte technische Merkmale sowie unstrukturierte Textinformationen aus technischen Anfragen kombiniert, um die Relevanz der EPLAN-Fenstermakros \cite{EPLAN2025} zu bewerten.
+Zur Lösung dieses Problems wird ein Learning-to-Rank-System entwickelt, welches unterschiedliche Retrivalsignale, strukturierte technische Merkmale sowie unstrukturierte Textinformationen aus technischen Anfragen kombiniert, um die Relevanz der EPLAN-Fenstermakros \cite{EPLAN-Makros} zu bewerten.
 
 
 \section{Methodisches Vorgehen} Das methodische Vorgehen orientiert sich an der \textit{Design Science Research Methodology} (DSRM) nach Peffers et al. \cite{peffers2007dsrm}. 

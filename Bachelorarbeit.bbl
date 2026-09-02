@@ -19,6 +19,122 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global/global}
+    \entry{src_pipeline}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=696af597b47fbc9d6218a97d8879bd63}{%
+           family={Alstetter},
+           familyi={A\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{bibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorbibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authornamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \field{extraname}{1}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Interner Projektquellcode}
+      \field{title}{Makro-Empfehlungssystem: Trainings- und Rankingpipeline}
+      \field{year}{2026}
+    \endentry
+    \entry{src_ret640}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=696af597b47fbc9d6218a97d8879bd63}{%
+           family={Alstetter},
+           familyi={A\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{bibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorbibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authornamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \field{extraname}{2}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Interner Projektquellcode}
+      \field{title}{ret\_640\_macro\_candidate\_retrieval.py}
+      \field{year}{2026}
+    \endentry
+    \entry{src_step911}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=696af597b47fbc9d6218a97d8879bd63}{%
+           family={Alstetter},
+           familyi={A\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{bibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorbibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authornamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \field{extraname}{3}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradate}{3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Interner Projektquellcode}
+      \field{title}{step\_911\_prepare\_raw\_data.py}
+      \field{year}{2026}
+    \endentry
+    \entry{src_step931}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=696af597b47fbc9d6218a97d8879bd63}{%
+           family={Alstetter},
+           familyi={A\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{bibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorbibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authornamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \field{extraname}{4}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradate}{4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Interner Projektquellcode}
+      \field{title}{step\_931\_train\_macro\_ltr\_ranker.py}
+      \field{year}{2026}
+    \endentry
     \entry{baeza2011modern}{book}{}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=14e9e2c7e918f62ba13b9e040fb7f468}{%
@@ -162,7 +278,7 @@
       \verb 10.1145/1571941.1572114
       \endverb
     \endentry
-    \entry{EPLAN2025}{misc}{}{}
+    \entry{EPLAN-Makros}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=2d35a1714a0ec7130c424fb4e8e52d8c}{%
            family={{EPLAN GmbH \& Co. KG}},
@@ -199,6 +315,33 @@
       \verb https://www.eplan.help/de-de/Infoportal/Content/Plattform/2025/Content/htm/macrosgui_k_start.htm
       \endverb
     \endentry
+    \entry{eplan2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=2d35a1714a0ec7130c424fb4e8e52d8c}{%
+           family={{EPLAN GmbH \& Co. KG}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{fullhash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{fullhashraw}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{bibnamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authorbibnamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authornamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authorfullhash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authorfullhashraw}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \field{extraname}{2}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.eplan.com/de-de/}}
+      \field{note}{Zugegriffen am 02.09.2026}
+      \field{title}{Eplan, Software und Services f\"{u}r die Elektrokonstruktion}
+      \field{year}{2026}
+    \endentry
     \entry{EPLANArtikelverwaltung}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=2d35a1714a0ec7130c424fb4e8e52d8c}{%
@@ -216,9 +359,10 @@
       \strng{authornamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
       \strng{authorfullhash}{2d35a1714a0ec7130c424fb4e8e52d8c}
       \strng{authorfullhashraw}{2d35a1714a0ec7130c424fb4e8e52d8c}
-      \field{extraname}{2}
+      \field{extraname}{3}
       \field{sortinit}{E}
       \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradate}{2}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{url}
       \field{labelnamesource}{author}
