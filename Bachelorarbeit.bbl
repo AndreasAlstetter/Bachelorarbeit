@@ -162,53 +162,6 @@
       \verb 10.1145/1571941.1572114
       \endverb
     \endentry
-    \entry{dwork2001rankaggregation}{inproceedings}{}{}
-      \name{author}{4}{}{%
-        {{un=0,uniquepart=base,hash=c6d8866083f4c03af5e37e032df87089}{%
-           family={Dwork},
-           familyi={D\bibinitperiod},
-           given={Cynthia},
-           giveni={C\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=8b41fe0754fd3864ac9f18e92f6daf24}{%
-           family={Kumar},
-           familyi={K\bibinitperiod},
-           given={Ravi},
-           giveni={R\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=c6af39e79e88306281e6e0b0ccea956c}{%
-           family={Naor},
-           familyi={N\bibinitperiod},
-           given={Moni},
-           giveni={M\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=4a7934b177a20a56e34f5d2a3c3e6184}{%
-           family={Sivakumar},
-           familyi={S\bibinitperiod},
-           given={D.},
-           giveni={D\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{f676b30234623eef69e5ed6be9df75b0}
-      \strng{fullhash}{499a8a7ed463e0010132e2086009478d}
-      \strng{fullhashraw}{499a8a7ed463e0010132e2086009478d}
-      \strng{bibnamehash}{499a8a7ed463e0010132e2086009478d}
-      \strng{authorbibnamehash}{499a8a7ed463e0010132e2086009478d}
-      \strng{authornamehash}{f676b30234623eef69e5ed6be9df75b0}
-      \strng{authorfullhash}{499a8a7ed463e0010132e2086009478d}
-      \strng{authorfullhashraw}{499a8a7ed463e0010132e2086009478d}
-      \field{sortinit}{D}
-      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{WWW 2001}
-      \field{title}{Rank Aggregation Methods for the Web}
-      \field{year}{2001}
-      \field{pages}{613\bibrangedash 622}
-      \range{pages}{10}
-    \endentry
     \entry{EPLAN2025}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=2d35a1714a0ec7130c424fb4e8e52d8c}{%
@@ -678,6 +631,58 @@
       \verb 10.30574/wjarr.2025.28.3.4033
       \endverb
     \endentry
+    \entry{peffers2007dsrm}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=3127efe8cdd4557b7228a8724f568529}{%
+           family={Peffers},
+           familyi={P\bibinitperiod},
+           given={Ken},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8b17b21a3e4c61d1302f46cba38c6e50}{%
+           family={Tuunanen},
+           familyi={T\bibinitperiod},
+           given={Tuure},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=33ad207ea3031c6d744a31f5bc43c547}{%
+           family={Rothenberger},
+           familyi={R\bibinitperiod},
+           given={Marcus\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=edf3e165ce4429b30d49e353a7d1417a}{%
+           family={Chatterjee},
+           familyi={C\bibinitperiod},
+           given={Samir},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{4ccaed1d47a4875e5f027cdf2d20bbca}
+      \strng{fullhash}{0d82c455b50c2b184d97697dac2e8660}
+      \strng{fullhashraw}{0d82c455b50c2b184d97697dac2e8660}
+      \strng{bibnamehash}{0d82c455b50c2b184d97697dac2e8660}
+      \strng{authorbibnamehash}{0d82c455b50c2b184d97697dac2e8660}
+      \strng{authornamehash}{4ccaed1d47a4875e5f027cdf2d20bbca}
+      \strng{authorfullhash}{0d82c455b50c2b184d97697dac2e8660}
+      \strng{authorfullhashraw}{0d82c455b50c2b184d97697dac2e8660}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Management Information Systems}
+      \field{number}{3}
+      \field{title}{A Design Science Research Methodology for Information Systems Research}
+      \field{volume}{24}
+      \field{year}{2007}
+      \field{pages}{45\bibrangedash 77}
+      \range{pages}{33}
+      \verb{doi}
+      \verb 10.2753/MIS0742-1222240302
+      \endverb
+    \endentry
     \entry{Pfenning2022}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=698f19203192ddc198372625ea6069b0}{%
@@ -752,6 +757,64 @@
       \range{pages}{57}
       \verb{doi}
       \verb 10.1561/1500000019
+      \endverb
+    \endentry
+    \entry{sein2011adr}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=34bf2dcab0d6d63e82f19bd2b98ba750}{%
+           family={Sein},
+           familyi={S\bibinitperiod},
+           given={Maung\bibnamedelima K.},
+           giveni={M\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7e75377b05d5d70bf875340f2da582af}{%
+           family={Henfridsson},
+           familyi={H\bibinitperiod},
+           given={Ola},
+           giveni={O\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b3b1fce90efea94644b2189df6155319}{%
+           family={Purao},
+           familyi={P\bibinitperiod},
+           given={Sandeep},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=17ba57d6ffcdf7c38bb96e0b62e0425d}{%
+           family={Rossi},
+           familyi={R\bibinitperiod},
+           given={Matti},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=74364df827ec3cd1bee14be02e7d25d7}{%
+           family={Lindgren},
+           familyi={L\bibinitperiod},
+           given={Rikard},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{059cc3a5e67145cfe4769fbec287b2d4}
+      \strng{fullhash}{417ac5c94c408741a78d3eb1a993f429}
+      \strng{fullhashraw}{417ac5c94c408741a78d3eb1a993f429}
+      \strng{bibnamehash}{417ac5c94c408741a78d3eb1a993f429}
+      \strng{authorbibnamehash}{417ac5c94c408741a78d3eb1a993f429}
+      \strng{authornamehash}{059cc3a5e67145cfe4769fbec287b2d4}
+      \strng{authorfullhash}{417ac5c94c408741a78d3eb1a993f429}
+      \strng{authorfullhashraw}{417ac5c94c408741a78d3eb1a993f429}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{MIS Quarterly}
+      \field{number}{1}
+      \field{title}{Action Design Research}
+      \field{volume}{35}
+      \field{year}{2011}
+      \field{pages}{37\bibrangedash 56}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.2307/23043488
       \endverb
     \endentry
     \entry{thakur2021beir}{article}{}{}

@@ -1,0 +1,68 @@
+\chapter{Evaluierungskonzept und Ergebnisse}
+
+
+\section{Evaluierung von Retrieval- und Ranking-Systemen}
+
+\subsection{Recall@K}
+
+Recall gehört zu den grundlegenden Metriken des Information Retrieval \cite{manning2008ir}.
+
+\begin{align}
+  Recall@K = \frac{ \# \text{ relevante Treffer in Top-K} } { \# \text{ relevante Treffer} }
+\end{align}
+
+Im vorliegenden System werden insbesondere
+
+\begin{itemize}
+  \item target\_recall@1
+  \item target\_recall@3
+  \item target\_recall@5
+  \item target\_recall@10
+\end{itemize}
+
+sowie Family-Recall-Metriken verwendet.
+
+\subsection{Discounted Cumulative Gain}
+
+Järvelin und Kekäläinen führten DCG und nDCG zur Bewertung gewichteter Ranglisten ein \cite{jarvelin2002dcg}.
+
+\begin{align}
+  DCG@K = \sum_{i=1}^{K} \frac{2^{rel_i}-1} {\log_2(i+1)}
+\end{align}
+
+mit
+
+\begin{description}
+  \item[$rel_i$] Relevanz am Rangplatz $i$
+\end{description}
+
+\subsection{Normalized Discounted Cumulative Gain}
+
+Die Normalisierung erfolgt mittels
+
+\begin{align}
+  nDCG@K = \frac{DCG@K}{IDCG@K}
+\end{align}
+
+Der Wertebereich liegt zwischen 0 und 1.
+
+\subsection{Hierarchical nDCG}
+
+Für technische Katalogsysteme besitzen Fehler unterschiedliche Schweregrade.
+Daher wird eine hierarchische Relevanzfunktion verwendet:
+
+\begin{align}
+  rel= \begin{cases} 3 & \text{exaktes Ziel}\\ 2 & \text{gleiche Familie}\\ 0 & \text{sonst} \end{cases}
+\end{align}
+
+Diese Erweiterung erlaubt die differenzierte Bewertung von Variantenfehlern innerhalb derselben Produktfamilie.
+
+\subsection{Candidate Coverage}
+
+Die Candidate Coverage bewertet die maximale Leistungsfähigkeit des Retrievalsystems vor dem eigentlichen Ranking.
+Hierbei wird gemessen, ob sich das korrekte Ziel überhaupt im Kandidatenpool befindet.
+
+\subsection{Data Leakage Detection}
+
+Kaufman et al. definieren Data Leakage als unbeabsichtigte Nutzung von Informationen, die zum Zeitpunkt der Vorhersage nicht verfügbar sein dürfen \cite{kaufman2012leakage}.
+Die Verhinderung von Leakage stellt eine zentrale Voraussetzung für valide Evaluierungen und reproduzierbare Modellqualität dar.

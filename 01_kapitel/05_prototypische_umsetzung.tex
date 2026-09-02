@@ -1,0 +1,73 @@
+\chapter{Prototypische Umsetzung}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{02_architektur.png}
+\caption{Architektur der System-Pipeline}
+\label{fig:architektur}
+\end{figure}
+
+\chapter{Verwendung BM25 und Exact-Match Signale}
+
+Ein Bestandteil des vorgestellten Systems ist die Nutzung lexikalischer Retrievalsignale zur Beschreibung der Ähnlichkeit zwischen einer Anfrage und einem potentiellen EPLAN-Artikel \cite{EPLANArtikelverwaltung}.
+Hier für wird unter anderem der BM25-Algorithmus verwendet, welcher ein etabliertes Verfahren im Bereich des Information Retrieval darstellt \cite{robertson2009prf}.
+Anders als in klassischen Suchmaschinen, wird BM25 hier nicht als weitere Rankingstufe verwendet, sondern als eines von mehreren Signalen, die dem Learning-to-Rank-Modell als Eingabe dienen.
+Die Aufgabe von diesem Algorithmus besteht deswegen darin, der Trainings-Kandidatenmenge ein erstes Relevanzsignal zu geben, um dadurch dem späteren Rankingmodell einen bewussten Bias in Richtung möglicher Query-Anfragen zu geben.
+
+
+Neben BM25 wird auch ein Exact-Match-Algorithmus als Relevanzsignal verwendet. Dieser prüft die exakten Übereinstimmungen technischer Merkmale zwischen einer Datenblatt-Anfrage und den EPLAN-Artikeln \cite{EPLANArtikelverwaltung}.
+Die Grundidee besteht darin, dass Artikel, die exakt die gleichen technischen Eigenschaften wie die Anfrage besitzen, eine höhere Relevanz aufweisen.
+
+Das Vorliegende System erweitert dieses Konzept um eine gewichtete Bewertung technischer Eigenschaften.
+Hierdurch wird eine differenzierte Relevanzbewertung ermöglicht, die die Anzahl und Bedeutung der übereinstimmenden Merkmale berücksichtigt.
+
+Der Schwerpunkt liegt hierbei auf strukturierten technischen Merkmalen wie:
+
+\begin{itemize}
+  \item Herstellerkennungen
+  \item Produktfamilien
+  \item Produktcodes
+  \item Makrostrukturen
+  \item Kanalzahlen
+  \item I/O-Schemata
+  \item Positionsmerkmale
+  \item Schutzarten
+  \item Connector-Informationen
+\end{itemize}
+
+
+
+Nach der Berechnung von BM25 und Exact-Match liegen für jeden Trainingskandidaten (EPLAN-Artikel \cite{EPLANArtikelverwaltung}) zwei Relevanzsignale vor. 
+BM25 bewertet die lexikalische Änlichkeit der Textuellen Repräsentationen. Exact-Match bewertet die spezifische Übereinstimmung technischer Merkmale.
+Diese beiden Signale werden anschließend mittels Reciprocal Rank Fusion (RRF) zu einem gemeinsamen Retrievalsignal zusamengeführt \cite{cormack2009rrf}.
+
+
+
+
+\subsection{Gewichtete RRF-Fusion im vorliegenden System} 
+
+Im Gegensatz zur ursprünglichen Form verwendet die entwickelte Architektur eine gewichtete Variante von RRF. 
+Der Grund dafür liegt in der unterschiedlichen Aussagekraft der beiden verwendeten Retrievalsignale. 
+Während BM25 wertvolle Informationen über textuelle Ähnlichkeiten liefert, besitzen exakte technische Übereinstimmungen für die vorliegende Aufgabenstellung eine höhere fachliche Relevanz. 
+Deswegen wird der Exact-Match-Zweig bewusst mit einer stärkeren Gewichtung als der BM25-Zweig versehen.
+
+Die verwendete Fusionsfunktion lautet: 
+
+\begin{align} 
+    RRF(d) = 0.30 \cdot \frac{1} {30 + rank_{BM25}(d)} + 0.70 \cdot \frac{1} {30 + rank_{Exact}(d)} 
+\end{align} 
+
+mit 
+
+\begin{description} 
+    \item[$rank_{BM25}(d)$] Rangposition des Kandidaten in der BM25-Liste 
+    \item[$rank_{Exact}(d)$] Rangposition des Kandidaten in der Exact-Match-Liste 
+\end{description} 
+
+Die Gewichtung von 0,70 für das Exact-Match-Signal und 0,30 für das BM25-Signal spiegelt die Priorisierung der technischen Übereinstimmungen wieder.
+Dabei sollen Kandidaten mit identischen Produktcodes, Makrostrukturen oder technischen Eigenschaften stärker bevorzugt werden.
+Kandidaten mit einer hohen textuellen Ähnlichkeit sollen entsprechend niedriger gewichtet werden.
+
+Wichtig hierbei ist, dass RRF-Fusion nicht als eingenständige Rankingstufe verwendet wird, sondern lediglich als Aggregation der beiden Retrievalsignale BM25 und Exact-Match dient.
+Dadurch entsteht ein weiteres Relevanzsignal, das dem Learning-to-Rank-Modell als Eingabe dient und die Stärken beider Verfahren kombiniert.

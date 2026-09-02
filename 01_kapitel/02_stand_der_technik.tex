@@ -1,36 +1,21 @@
 \chapter{Stand der Technik}\label{chap:stand_der_technik}
 
-\section{Einordnung des Systems}
+\section{Architektur- und Rankingansatz}
 
-Die automatische Zuordnung technischer EPLAN-Artikel \cite{EPLANArtikelverwaltung} zu EPLAN-Fenstermakros \cite{EPLAN2025} ist eine komplexe Problemstellung, 
-welche durch die Kombination von Information-Retrieval (IR), maschinellen Lernens und Learning-to-Rank-Methoden (LTR) behandelt werden kann.
-Das Ziel besteht darin, nach einer Systemanfrage mittels Datenblatt aus einer großen Menge an potentiellen EPLAN-Artikeln \cite{EPLANArtikelverwaltung} diejenigen zu identifizieren, 
-die auf Basis ihrer technischen Eigenschaften ein EPLAN-Fenstermakro \cite{EPLAN2025} am besten repräsentieren.
-Hierbei muss dann eine Rangfolge erstellt werden, welche die EPLAN-Fenstermakros \cite{EPLAN2025} die die höchste Relevanz für ein Suchanfrage besitzen an die Spitze der Ergebnisliste setzt.
-
-Solche Rankingporblem treten in einer Vielzahl von Anwendungsfällen auf, wie zum Beispiel in Suchmaschinen, Produktempfehlungen oder Enterprise-Search-Systemen.
+Rankingprobleme treten in einer Vielzahl von Anwendungsfällen auf, wie zum Beispiel in Suchmaschinen, Produktempfehlungen oder Enterprise-Search-Systemen.
 Die Bewertung durch ein komplexes Rankingmodell wird dabei schnell unübersichtlich und bietet weniger Raum für Analysen und Interpretationen.
 Stattdessen haben sich mehrstufige Architekturen etabliert, die zu Beginn eine schnelle Kandidatenselektion durchführen und im Anschluss ein Rankingmodell auf die selektierten Kandidaten anwenden.
 Dieses Konzept wird in der Literatur als \emph{Candidate Generation} und \emph{Learning-to-Rank} bezeichnet \cite{robertson2009prf,liu2009learning,burges2010lambdamart}.
 Teile davon werden für diese Arbeit übernommen und in abgeändeter Form für die Trainingsvorbereitung sowie das eigentliche Rankingmodell verwendet.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{02_architektur.png}
-\caption{Architektur der System-Pipeline}
-\label{fig:architektur}
-\end{figure}
-
 Im E-Comerce Bereich werden mehrstufige Architekturen bereits seit Jahren erfolgreich eingesetzt, um die Relevanz von Suchergebnissen und Empfehlungen zu verbessern.
 Aktuelle Untersuchungen in diesem Bereich zeigen, dass Produktsuchen großer Plattformen wie Amazon, eBay oder Alibaba weiterhin stark auf mehrstufige Retrievalpipelines, strukturierte Merkmale, und Learning-to-Rank-Verfahren setzen.
 \cite{kabir2024ecommerce}.
 
-\section{BM25 als Relevanzsignal}
+In diesem Kapitel werden die Verwendeten technischen Grundlagen für die Entwicklung des Systems erläutert.
+Die genaue Architektur sowie die Verwendung der einzelnen Komponenten wird im Kapitel \ref{chap:05_prototypische_umsetzung} beschrieben.
 
-Ein Bestandteil des vorgestellten Systems ist die Nutzung lexikalischer Retrievalsignale zur Beschreibung der Ähnlichkeit zwischen einer Anfrage und einem potentiellen EPLAN-Artikel \cite{EPLANArtikelverwaltung}.
-Hier für wird unter anderem der BM25-Algorithmus verwendet, welcher ein etabliertes Verfahren im Bereich des Information Retrieval darstellt \cite{robertson2009prf}.
-Anders als in klassischen Suchmaschinen, wird BM25 hier nicht als weitere Rankingstufe verwendet, sondern als eines von mehreren Signalen, die dem Learning-to-Rank-Modell als Eingabe dienen.
-Die Aufgabe von diesem Algorithmus besteht deswegen darin, der Trainings-Kandidatenmenge ein erstes Relevanzsignal zu geben, um dadurch dem späteren Rankingmodell einen bewussten Bias in Richtung möglicher Query-Anfragen zu geben.
+\section{BM25}
 
 \subsection{Grundidee von BM25}
 
@@ -89,50 +74,38 @@ Trotz der zunehmenden Verbreitung von Deep-Learning-basierten Ansätzen im Infor
 Aktuelle Studien zeigen, dass BM25 insbesondere bei Domänenspezifischen Datensätzen und als Basis für Learning-to-Rank-Modelle weiterhin eine hohe Relevanz besitzt \cite{thakur2021beir}.
 
 
-\section{Exact-Match als Relevanzsignal}
-
-Neben BM25 wird auch ein Exact-Match-Algorithmus als Relevanzsignal verwendet. Dieser prüft die exakten Übereinstimmungen technischer Merkmale zwischen einer Datenblatt-Anfrage und den EPLAN-Artikeln \cite{EPLANArtikelverwaltung}.
-Die Grundidee besteht darin, dass Artikel, die exakt die gleichen technischen Eigenschaften wie die Anfrage besitzen, eine höhere Relevanz aufweisen.
+\section{Exact-Match}
 
 \subsection{Grundprinzip des Exact Matching}
 
-Exact-Match-Verfahren sind Teil der klassischen Konzepte des Information Retrieval und basieren auf dem Boolean-Retrieval-Modell \cite{manning2008ir,baeza2011modern}.
-Klassische Boolean-Syteme unterscheiden lediglich zwischen Treffer und Kein Treffer. Das Vorliegende System erweitert dieses Konzept um eine gewichtete Bewertung technischer Eigenschaften.
-Hierdurch wird eine differenzierte Relevanzbewertung ermöglicht, die die Anzahl und Bedeutung der übereinstimmenden Merkmale berücksichtigt.
+Exact-Match-Verfahren sind Teil der klassischen Konzepte des Information Retrieval und basieren auf dem Prinzip der exakten Übereinstimmung von Merkmalen zwischen einer Anfrage und einem Dokument \cite{manning2008ir,baeza2011modern}.
+Klassische Boolean-Syteme unterscheiden zwischen Treffer und Kein Treffer. Ein Dokument erfüllt nur dann die Anfrage, wenn alle geforderten Merkmale exakt übereinstimmen.
+Um quantiative Übereinstimmungen zu berücksichten, kann die Anzahl bzw. das Gewicht der übereinstimmenden Merkmale berücksichtigt werden.
 
-Der Schwerpunkt liegt hierbei auf strukturierten technischen Merkmalen wie:
-
-\begin{itemize}
-  \item Herstellerkennungen
-  \item Produktfamilien
-  \item Produktcodes
-  \item Makrostrukturen
-  \item Kanalzahlen
-  \item I/O-Schemata
-  \item Positionsmerkmale
-  \item Schutzarten
-  \item Connector-Informationen
-\end{itemize}
-
-Die Bewertung erfolgt für jede Dimension separat und wird anschließend zu einem Gesamtscore aggregiert.
-
-Der resultierende Exact-Match-Score wird durch 
+Der Exact-Match-Score berechnet sich aus dem Verhältnis der Gewichte aller übereinstimmenden Merkmale zu den Gewichten aller in der Anfrage spezifizierten Merkmale: 
 
 \begin{align} 
-    ExactScore = \frac { \sum Gewicht_{Match} } { \sum Gewicht_{Query} } 
+  ExactScore = \frac{\sum_{i=1}^{n} w_i \cdot m_i} {\sum_{i=1}^{n} w_i} 
 \end{align} 
 
-berechnet. 
-
-Dabei bezeichnet 
+mit 
 
 \begin{description} 
-    \item[$\sum Gewicht_{Match}$] die Summe der Gewichte aller übereinstimmenden technischen Dimensionen
-    \item[$\sum Gewicht_{Query}$] die Summe der Gewichte aller in der Anfrage belegten technischen Dimensionen
-\end{description}
+  \item[$w_i$] Gewicht des Merkmals $i$ 
+  \item[$m_i$] Match-Indikator des Merkmals $i$ 
+\end{description} 
 
-Der resultierende Wert liegt im Intervall 
-\begin{align} 0 \le ExactScore \le 1 \end{align} 
+Der Match-Indikator wird definiert als 
+
+\begin{align} 
+  m_i = \begin{cases} 1, & \text{wenn der Merkmalswert exakt übereinstimmt}\\ 0, & \text{sonst} \end{cases} 
+\end{align} 
+
+Der resultierende Score liegt im Intervall 
+
+\begin{align}
+   0 \le ExactScore \le 1. 
+\end{align}
 
 Ein Wert von 1 bedeutet, dass sämtliche relevanten technischen Eigenschaften übereinstimmen. Ein Wert von 0 signalisiert das Fehlen jeglicher fachlich relevanter Übereinstimmung.
 
@@ -143,10 +116,6 @@ Die Autoren kombinieren klassische Exact-Match-Mechanismen mit modernen Sprachmo
 
 
 \section{Fusion von Retrievalsignalen mittels Reciprocal Rank Fusion}
-
-Nach der Berechnung von BM25 und Exact-Match liegen für jeden Trainingskandidaten (EPLAN-Artikel \cite{EPLANArtikelverwaltung}) zwei Relevanzsignale vor. 
-BM25 bewertet die lexikalische Änlichkeit der Textuellen Repräsentationen. Exact-Match bewertet die spezifische Übereinstimmung technischer Merkmale.
-Diese beiden Signale werden anschließend mittels Reciprocal Rank Fusion (RRF) zu einem gemeinsamen Retrievalsignal zusamengeführt \cite{cormack2009rrf}.
 
 
 \subsection{Grundidee von Reciprocal Rank Fusion}
@@ -177,33 +146,6 @@ mit
 
 Die Konstante $k$ wird typischerweise auf den Wert 60 gesetzt und reduziert den Einfluss sehr hoher Einzelplatzierungen \cite{cormack2009rrf}. 
 
-\subsection{Gewichtete RRF-Fusion im vorliegenden System} 
-
-Im Gegensatz zur ursprünglichen Form verwendet die entwickelte Architektur eine gewichtete Variante von RRF. 
-Der Grund dafür liegt in der unterschiedlichen Aussagekraft der beiden verwendeten Retrievalsignale. 
-Während BM25 wertvolle Informationen über textuelle Ähnlichkeiten liefert, besitzen exakte technische Übereinstimmungen für die vorliegende Aufgabenstellung eine höhere fachliche Relevanz. 
-Deswegen wird der Exact-Match-Zweig bewusst mit einer stärkeren Gewichtung als der BM25-Zweig versehen.
-
-Die verwendete Fusionsfunktion lautet: 
-
-\begin{align} 
-    RRF(d) = 0.30 \cdot \frac{1} {30 + rank_{BM25}(d)} + 0.70 \cdot \frac{1} {30 + rank_{Exact}(d)} 
-\end{align} 
-
-mit 
-
-\begin{description} 
-    \item[$rank_{BM25}(d)$] Rangposition des Kandidaten in der BM25-Liste 
-    \item[$rank_{Exact}(d)$] Rangposition des Kandidaten in der Exact-Match-Liste 
-\end{description} 
-
-Die Gewichtung von 0,70 für das Exact-Match-Signal und 0,30 für das BM25-Signal spiegelt die Priorisierung der technischen Übereinstimmungen wieder.
-Dabei sollen Kandidaten mit identischen Produktcodes, Makrostrukturen oder technischen Eigenschaften stärker bevorzugt werden.
-Kandidaten mit einer hohen textuellen Ähnlichkeit sollen entsprechend niedriger gewichtet werden.
-
-Wichtig hierbei ist, dass RRF-Fusion nicht als eingenständige Rankingstufe verwendet wird, sondern lediglich als Aggregation der beiden Retrievalsignale BM25 und Exact-Match dient.
-Dadurch entsteht ein weiteres Relevanzsignal, das dem Learning-to-Rank-Modell als Eingabe dient und die Stärken beider Verfahren kombiniert.
-
 \subsection{Aktuelle Bedeutung von Rank-Fusion-Verfahren}
 
 In der aktuellen Forschung zu mehrstufigen Retrieval- und Rankingarchitekturen wird die Zusammenführung von Retrievalsignalen als wichtiger Bestandteil betrachtet, um die Leistungsfähigkeit von Rankingmodellen zu verbessern.
@@ -211,192 +153,93 @@ Zhang et al. zeigen im Rahmen einer Multi-Stage-Ranking-Pipeline, dass unterschi
 Darüber hinaus beschreiben Zheng et al. im Rahmen des Full-Stage-Learning-to-Rank-Ansatz moderne Rankingarchitekturen, bei denen unterschiedliche Retrievalsignale in einem System optimiert werden und zur finalen Entscheidungsfindung beitragen \cite{zheng2024fullstage}.
 
 
+\section{Learning-to-Rank mit LambdaRank}
 
+\subsection{Grundprinzip von Learning-to-Rank}
 
+Learning-to-Rank (LTR) bezeichnet eine Klasse an maschinellen Lernverfahren, die das Ziel besitzen die Reihenfolge in einer Ergebnisliste zu optimieren \cite{liu2009learning}.
+Im Gegensatz zu klassischen Klassifikations- oder Regressionsansätzen, bewertet Learning-to-Rank keine einzelnen Objekte isoliert, sondern die relative Relevanz dieser Objekte in einer Kandiatenmenge.
+Die Aufgabe eines Rankingmodells besteht darin, dass für eine Anfrage die relevanten Dokumente anhand ihrer Merkmale bewertet werden und anschließend in eine Rangliste überführt werden.
 
+\subsection{LambdaRank}
 
+LambdaRank ist eines der bekanntesten Verfahren im Bereich des Learning-to-Rank. \cite{burges2010lambdamart}
 
+Die Grundidee von LambdaRank ist der paarweise Vergleich von Kandidaten. 
+Dabei wird für zwei Kandidaten $i$ und $j$ mit den vorhergesagten Ergebnissen $s_i$ und $s_j$ die Wahrscheinlichkeit berechnet, 
+dass Kandidat $i$ vor Kandidat $j$ eingeordnet werden sollte: 
 
+\begin{align} 
+  P_{ij} = \frac{1} {1+e^{-\sigma(s_i-s_j)}} 
+\end{align} 
 
+mit 
 
-
-
-\section{Feature Engineering}
-
-Nach der Kandidatengenerierung werden strukturierte Merkmale für Anfrage-Kandidaten-Paare erzeugt.
-Typische Merkmale sind:
-
-\begin{itemize}
-  \item Dimensionsdifferenzen
-  \item technische Eigenschaftsabweichungen
-  \item numerische Distanzmaße
-  \item binäre Matching-Merkmale
-  \item Kategorien- und Familienübereinstimmungen
-\end{itemize}
-
-Feature Engineering stellt seit den LETOR-Datensätzen die dominante Vorgehensweise für Learning-to-Rank-Systeme auf strukturierten Daten dar \cite{liu2009learning}.
-Insbesondere in technischen Produktkatalogen und E-Commerce-Systemen besitzen explizit modellierte Merkmale häufig eine höhere Aussagekraft als rein semantische Repräsentationen \cite{liu2009learning}.
-
-\section{Learning-to-Rank mit LambdaMART}
-
-\subsection{Learning-to-Rank}
-
-Learning-to-Rank bezeichnet Verfahren, die die Reihenfolge einer Ergebnisliste optimieren.
-Hierbei wird nicht lediglich eine Klassifikation durchgeführt, sondern die Anordnung einer gesamten Dokumentmenge bewertet \cite{liu2009learning}.
-
-\subsection{Von RankNet zu LambdaMART}
-
-Burges beschreibt die Entwicklung von RankNet über LambdaRank bis LambdaMART als zentrale Evolution moderner Rankingverfahren \cite{burges2010lambdamart}.
-Für zwei Dokumente $i$ und $j$ wird zunächst eine Paarwahrscheinlichkeit definiert:
-
-\begin{align}
-  P_{ij} = \frac{1} {1+e^{-\sigma(s_i-s_j)}}
-\end{align}
-
-mit
-
-\begin{description}
-  \item[$s_i$] Score von Dokument $i$
-  \item[$s_j$] Score von Dokument $j$
-  \item[$\sigma$] Steigungsparameter
+\begin{description} 
+  \item[$P_{ij}$] Wahrscheinlichkeit, dass Kandidat $i$ vor Kandidat $j$ gerankt wird 
+  \item[$s_i$] vorhergesagter Score von Kandidat $i$ 
+  \item[$s_j$] vorhergesagter Score von Kandidat $j$ 
+  \item[$\sigma$] Skalierungsparameter der Sigmoidfunktion 
 \end{description}
 
-Der Paarverlust ergibt sich zu
+Die Optimierung erfolgt anschließend durch die Änderung einer Rankingmetrik. Typischerweise wird dabei die Normalized Discounted Cumulative Gain (nDCG)-Funktion verwendet.
+Dabei werden die Gradienten anhand ihres Einflusses auf die Qualität der Rangliste gewichtet.
 
-\begin{align}
-  L_{ij} = -\log(P_{ij})
-\end{align}
 
-LambdaRank erweitert diesen Ansatz um Gradienten, die proportional zur Veränderung einer Rankingmetrik wie nDCG gewichtet werden.
-LambdaMART kombiniert diese Idee mit Gradient Boosted Decision Trees und zählt bis heute zu den leistungsfähigsten Verfahren für tabellarische Rankingdaten \cite{burges2010lambdamart,lyzhin2023ltr}.
+Der sogenannte Lambda-Gradient berechnet sich vereinfacht zu: 
 
-\subsection{Gradient Boosted Decision Trees}
+\begin{align} 
+  \lambda_{ij} = \frac{\partial L_{ij}}{\partial s_i} \cdot |\Delta nDCG| 
+\end{align} 
 
-Das Gesamtmodell ergibt sich aus der Summe einzelner Entscheidungsbäume:
+mit 
 
-\begin{align}
-  F(x) = \sum_{m=1}^{M} \gamma_m h_m(x)
-\end{align}
-
-mit
-
-\begin{description}
-  \item[$h_m(x)$] Entscheidungsbaum
-  \item[$\gamma_m$] Gewichtung des Baumes
-  \item[$M$] Anzahl der Bäume
+\begin{description} 
+  \item[$\lambda_{ij}$] gewichteter Gradient des Kandidatenpaares 
+  \item[$\frac{\partial L_{ij}}{\partial s_i}$] Ableitung der Verlustfunktion 
+  \item[$|\Delta nDCG|$] Änderung der Rankingqualität bei Vertauschung der Kandidaten 
 \end{description}
 
-\section{Mehrstufiges Ranking und Re-Ranking}
+Kandidatenpaare, deren Reihnefolge einen größen Einfluss auf die Ranglisten-Qualität besitzen, erhalten einen höhrern Einfluss auf den Lernprozess.
+Dadurch wird das Modell auf die Qualität der Ergebnisliste optimiert und nicht auf die Vorhersage korrekter Einzelentscheidungen.\cite{burges2010lambdamart}.
 
-Moderne Informationssysteme verwenden typischerweise mehrere Rankingstufen \cite{zhang2021muppets}.
-Die erste Stufe maximiert den Recall und erzeugt einen breiten Kandidatenpool.
-Die zweite Stufe verwendet aufwendigere Merkmale und Modelle zur Verbesserung der Präzision.
-Ein typischer Ablauf lautet:
+\subsection{LambdaMART und LightGBM}
 
-\begin{enumerate}
-  \item Retrieval (BM25)
-  \item Candidate Set
-  \item Learning-to-Rank
-  \item Re-Ranking
-\end{enumerate}
+LambdaRank wird in modernen Rankinganwendungen häufig mit Gradient Boosted Decision Trees kombiniert, was als LambdaMART bezeichnet wird. 
+Diese zählt zu den erfolgreichsten Verfahren im Bereich der strukturierten Rankingdaten \cite{burges2010lambdamart}.
 
-Derartige Architekturen werden unter anderem in:
+Die zugrunde liegende Logik ist eine additive Zusammensetzung von Entscheidungsbäumen:
 
-\begin{itemize}
-  \item Websuchmaschinen
-  \item Produktsuchen
-  \item Enterprise Search
-  \item Empfehlungssystemen
-\end{itemize}
+\begin{align} 
+  F(x) = \sum_{m=1}^{M} \gamma_m h_m(x) 
+\end{align} 
 
-eingesetzt \cite{zhang2021muppets}.
+mit 
 
-\section{Makroaggregation und Rank Aggregation}
-
-Mehrere Artikel können Evidenz für dieselbe Makroklasse liefern.
-Daher werden Rankingergebnisse aggregiert.
-Rank Aggregation beschäftigt sich mit der Zusammenführung mehrerer Ranglisten zu einer Gesamtliste \cite{dwork2001rankaggregation}.
-
-Anwendungen umfassen:
-
-\begin{itemize}
-  \item Suchmaschinen
-  \item Abstimmungssysteme
-  \item Empfehlungssysteme
-  \item Produktrankings
-\end{itemize}
-
-Typische Strategien sind:
-
-\begin{itemize}
-  \item Best-Item-Prinzip
-  \item Mehrheitsentscheidungen
-  \item gewichtetes Voting
-  \item Evidenzaggregation
-\end{itemize}
-
-\section{Evaluierung von Retrieval- und Ranking-Systemen}
-
-\subsection{Recall@K}
-
-Recall gehört zu den grundlegenden Metriken des Information Retrieval \cite{manning2008ir}.
-
-\begin{align}
-  Recall@K = \frac{ \# \text{ relevante Treffer in Top-K} } { \# \text{ relevante Treffer} }
-\end{align}
-
-Im vorliegenden System werden insbesondere
-
-\begin{itemize}
-  \item target\_recall@1
-  \item target\_recall@3
-  \item target\_recall@5
-  \item target\_recall@10
-\end{itemize}
-
-sowie Family-Recall-Metriken verwendet.
-
-\subsection{Discounted Cumulative Gain}
-
-Järvelin und Kekäläinen führten DCG und nDCG zur Bewertung gewichteter Ranglisten ein \cite{jarvelin2002dcg}.
-
-\begin{align}
-  DCG@K = \sum_{i=1}^{K} \frac{2^{rel_i}-1} {\log_2(i+1)}
-\end{align}
-
-mit
-
-\begin{description}
-  \item[$rel_i$] Relevanz am Rangplatz $i$
+\begin{description} 
+  \item[$F(x)$] vorhergesagter Gesamtscore 
+  \item[$h_m(x)$] Entscheidungsbaum $m$ 
+  \item[$\gamma_m$] Gewichtung des Baumes 
+  \item[$M$] Anzahl aller Entscheidungsbäume 
 \end{description}
 
-\subsection{Normalized Discounted Cumulative Gain}
+Dabei versucht jeder neu hinzugefügte Entscheidungsbaum, die Fehler des bisherigen Modells zu korrigieren.
 
-Die Normalisierung erfolgt mittels
+Eine weit verbreitete Implementierung in der Industrie ist der \texttt{LGBMRanker} der LightGBM-Bibliothek.
+Dabei wird das Modell gruppenbasiert trainiert und alle Kandidaten einer Anfrage bilden eine Rankinggruppe, mit dem Ziel, die Reihenfolge der Kandiaten innerhalb einer Gruppe zu optimieren.
 
-\begin{align}
-  nDCG@K = \frac{DCG@K}{IDCG@K}
-\end{align}
+\subsection{Aktuelle Bedeutung von LambdaMART}
 
-Der Wertebereich liegt zwischen 0 und 1.
+Trotz der zunehmenden Forschung im Bereich neuronaler Rankingverfahren, gehören LambdaMART-Basierte Modelle weiterhin zu den leistungsfähigsten Verfahren im Bereich der strukturierten tabellarischen Daten.
+Ein aktuelle Vergleichsstudie zeigt, dass Gradient-Boosted-Decision-Tree-Verfahren vorallem bei heterogenen Datensätzen noch immer State of the Art sind \cite{lyzhin2023ltr}.
 
-\subsection{Hierarchical nDCG}
+Lyzhin et al. vergleiche in Ihrer Studie mehrer moderne Learning-to-Rank-Verfahren miteinander und kommen zu dem Ergebnis, dass LambdaMART-basierte Modelle immer noch äußerst konkurrenzfähig sind.
+Neue Optimierungsverfahren wie YetiRank and StochasticRank liefern dabei nur begrenzte Verbesserungen gegenüber LambdaMART-Modellen \cite{lyzhin2023ltr}.
 
-Für technische Katalogsysteme besitzen Fehler unterschiedliche Schweregrade.
-Daher wird eine hierarchische Relevanzfunktion verwendet:
+Aktuelle Untersuchungen im Bereich der Rankingarchitekturen im E-Commerce zeigen, dass Learning-to-Rank-Modelle mit Gradient-Boosted-Decision-Trees weiterhin eine führende Rolle spielen.
+Dabei ist die Kombination aus strukturierten Merkmalen, Retrivalsignalen und LambdaMART-Optimierung insbesondere für strukturierte Domänen wie Produktkataloge und technische Informationssysteme von besonderer Bedeutung.
+\cite{kabir2024ecommerce}.
 
-\begin{align}
-  rel= \begin{cases} 3 & \text{exaktes Ziel}\\ 2 & \text{gleiche Familie}\\ 0 & \text{sonst} \end{cases}
-\end{align}
 
-Diese Erweiterung erlaubt die differenzierte Bewertung von Variantenfehlern innerhalb derselben Produktfamilie.
 
-\subsection{Candidate Coverage}
 
-Die Candidate Coverage bewertet die maximale Leistungsfähigkeit des Retrievalsystems vor dem eigentlichen Ranking.
-Hierbei wird gemessen, ob sich das korrekte Ziel überhaupt im Kandidatenpool befindet.
-
-\subsection{Data Leakage Detection}
-
-Kaufman et al. definieren Data Leakage als unbeabsichtigte Nutzung von Informationen, die zum Zeitpunkt der Vorhersage nicht verfügbar sein dürfen \cite{kaufman2012leakage}.
-Die Verhinderung von Leakage stellt eine zentrale Voraussetzung für valide Evaluierungen und reproduzierbare Modellqualität dar.
