@@ -13,6 +13,8 @@
 \contentsline {table}{\numberline {6.2}{\ignorespaces Verwendete Retrievalsignale}}{25}{table.caption.10}%
 \contentsline {table}{\numberline {6.3}{\ignorespaces Verwendete Hyperparameterkombinationen}}{27}{table.caption.11}%
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces Aufbau der Evaluations-Suite}}{30}{table.caption.13}%
+\contentsline {table}{\numberline {7.2}{\ignorespaces Bedeutung der verwendeten Rankingmetriken}}{33}{table.caption.14}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \def \@chapapp {\appendixname }

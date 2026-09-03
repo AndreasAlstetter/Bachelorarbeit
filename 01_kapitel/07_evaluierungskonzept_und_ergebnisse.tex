@@ -1,68 +1,197 @@
 \chapter{Evaluierungskonzept und Ergebnisse}
+\label{chap:evaluierungskonzept_und_ergebnisse}
 
+\section{Evaluationsdatensätze}
 
-\section{Evaluierung von Retrieval- und Ranking-Systemen}
+Die Bewertung der Modelleistung erfolgt getrennt auf Trainings-, Validierungs- und Testdatensätzen.
+Diese Aufteilung wird im Rahmen des zuvor beschriebenen Kapitels \ref{chap:datensplit_und_training} vorgenommen.
 
-\subsection{Recall@K}
+Der Testdatensatz wird erst nach der finalen Modellauswahl für die abschließenden Evaluierungen verwendet.
+Dadurch wird verhindert, dass Informationen aus dem Testdatensatz in die Optimierung des Modells einfließen und die Bewertung verfälschen.
 
-Recall gehört zu den grundlegenden Metriken des Information Retrieval \cite{manning2008ir}.
+Ein wichtiger Aspekt dabei ist die Behandlung von fachlich Zusammenhängenden Daten. Artikel die denselben Fingerprint besitzen, dürfen nur gemeinsam in einem Teil des Splits vorkommen.
+Ein Fingerprint repräsentiert die Struktur und die wesentlichen Merkmale eines Artikels, sodass Artikel mit demselben Fingerprint als fachlich zusammenhängend betrachtet werden.
 
-\begin{align}
-  Recall@K = \frac{ \# \text{ relevante Treffer in Top-K} } { \# \text{ relevante Treffer} }
-\end{align}
+Dadurch wird verhindert, dass nahezu ähnliche Beispiele gleichzeitig im Trainings- und Testdatensatz vorkommen.
 
-Im vorliegenden System werden insbesondere
+\section{Aufbau der Evaluations-Suite}
+
+Die Evaluation des Learning-To-Rank-Modells erfolgt automatisiert mithilfe der implementierten Evaluations-Suite \cite{src_evalsuite}.
+
+Die Evaluationspipeline besteh dabei aus vier Schirtten:
+
+\begin{table}[htbp] 
+  \centering 
+  \caption{Aufbau der Evaluations-Suite} 
+  \begin{tabular}{p{1cm}p{5cm}p{8cm}} 
+    \toprule Nr. & Skript & Zielsetzung \\ 
+    \midrule 
+    1 & step\_941\_validate\_leakage\_safety.py & Prüfung auf Zielinformations-Leakage \\ 
+    2 & step\_942\_validate\_retrieval\_index.py & Bewertung des Retrieval-Index \\ 
+    3 & step\_943\_analyze\_candidate\_coverage.py & Analyse der Kandidatenabdeckung \\ 
+    4 & step\_944\_analyze\_ltr\_run.py & Analyse des Learning-to-Rank-Modells \\ 
+    \bottomrule 
+  \end{tabular} 
+\end{table}
+
+Die Ergebnisse dieser Pipeline werden strukturiert in den folgenden Verzeichnissen abgelegt:
 
 \begin{itemize}
-  \item target\_recall@1
-  \item target\_recall@3
-  \item target\_recall@5
-  \item target\_recall@10
+  \item \texttt{evaluation/step_941_leakage_safety} für die Prüfung auf Zielinformations-Leakage
+  \item \texttt{evaluation/step_942_retrieval_validation} für die Bewertung des Retrieval-Index
+  \item \texttt{evaluation/step_943_candidate_coverage} für die Analyse der Kandidatenabdeckung
+  \item \texttt{evaluation/step_944_ltr_run_analysis} für die Analyse des Learning-to-Rank-Modells
 \end{itemize}
 
-sowie Family-Recall-Metriken verwendet.
+\section{Verwendete Rankingmetriken}
+ 
+Bei einem Learning-To-Rank-Modell steht die Qualität der gesamten Rangliste im Vordergrund. 
+Für vorliegende Aufgabe ein EPLAN-Fenstermakro\cite{EPLAN-Makros} anhand eines oder mehrer EPLAN-Artikel \cite{EPLANArtikelverwaltung} zu finden,
+wurde mehrere komplementäre Rankingmetriken verwendet. 
+Hierdurch lassen sich unterschiedliche Aspekte der Modellqualität wie Position des Ziel-Makros \cite{EPLAN-Makros} , Erkennung fachlich verwandter Makros \cite{EPLAN-Makros}, sowie die allgemeine Qualität der Rangfolge beurteilen.
 
-\subsection{Discounted Cumulative Gain}
+Die Berechnung erfolgt innerhalb des Traingingmoduls und der Evaluationspipeline. \cite{srcStep931,srcStep944}.
 
-Järvelin und Kekäläinen führten DCG und nDCG zur Bewertung gewichteter Ranglisten ein \cite{jarvelin2002dcg}.
+\subsection{Target Recall@k} 
 
-\begin{align}
-  DCG@K = \sum_{i=1}^{K} \frac{2^{rel_i}-1} {\log_2(i+1)}
-\end{align}
+Durch den Target Recall@k wird gemessen, ob sich das korrekte Ziel-Makro \cite{EPLAN-Makros} innerhalb der ersten $k$ Elemente einer Rangliste befindet. 
 
-mit
+Dieser berechnet sich wie folgt: 
 
-\begin{description}
-  \item[$rel_i$] Relevanz am Rangplatz $i$
+\begin{align} Recall@k = \frac{ \# \text{Anfragen mit korrektem Ziel in Top-}k } { \# \text{Anfragen} } 
+\end{align} 
+
+Der Wertebereich liegt zwischen 0 und 1. Ein Wert von \begin{align} Recall@1 = 0.80 \end{align} bedeutet zum Beispiel, dass bei 80\,\% der Anfragen das korrekte EPLAN-Fenstermakro \cite{EPLAN-Makros} direkt auf Rang 1 liegt. 
+
+Folgenden Varianten werden im Projek verwendet: 
+
+\begin{itemize} 
+  \item target\_recall@1 
+  \item target\_recall@3 
+  \item target\_recall@5 
+  \item target\_recall@10 
+\end{itemize} 
+
+Diese Metriken sind die wichtigsten Kennzahlen für die Beurteilung der Makrozuordnung.
+
+\subsection{Family Recall@k}
+
+Neben der Erkennung des exakten Ziel-Makros \cite{EPLAN-Makros} wird auch die Erkennung der korrekten Makro-Familie bewertet.
+Die Berechnung erfolgt analog zum Target Recall@k, mit dem Unteschied, dass jedes EPLAN-Fenstermakro \cite{EPLAN-Makros} als treffer zählt, dass in der gleichen Makro-Familie wie das Ziel-Makro \cite{EPLAN-Makros} liegt.
+Dadurch kann erkannt werden, ob das System die richtige Makro-Familie erkennt, auch wenn das exakte Ziel-Makro \cite{EPLAN-Makros}  nicht in den Top-k-Ergebnissen enthalten ist.
+
+Hierfür werden folgenden Ausprägungen verwendet:
+
+\begin{itemize} 
+  \item family\_recall@1 
+  \item family\_recall@3 
+  \item family\_recall@5 
+  \item family\_recall@10 
+\end{itemize}
+
+Die Differenz zwischen dem Family Recall@k und dem Target Recall@k liefert einen Hinweis über die Variantenfehler innerhalb einer Makro-Familie.
+
+\subsection{Mean Reciprocal Rank}
+
+Durch den Mean Reciprocal Rank (MRR) wird die durchschnittliche Position des ersten korrekten Terffers innerhalb der Rangliste bewertet. 
+
+Dieser berechnet sich wie folgt:
+
+\begin{align} 
+  MRR = \frac{1}{N} \sum_{i=1}^{N} \frac{1}{rank_i} 
+\end{align} 
+
+mit 
+
+\begin{description} 
+  \item[$N$] Anzahl der Anfragen 
+  \item[$rank_i$] Rangposition des korrekten Zielmakros für Anfrage $i$ 
 \end{description}
 
-\subsection{Normalized Discounted Cumulative Gain}
+Diese Metrik bevorzugt Platzierungen auf den ersten Rängen der Rangliste. Ein EPLAN-Fenstermakro \cite{EPLAN-Makros} auf Rang 1 trägt somit stärker zur MRR bei als ein EPLAN-Fenstermakro \cite{EPLAN-Makros} auf Rang 5.
 
-Die Normalisierung erfolgt mittels
-
-\begin{align}
-  nDCG@K = \frac{DCG@K}{IDCG@K}
-\end{align}
-
-Der Wertebereich liegt zwischen 0 und 1.
+Dadurch lässt sich die praktische Nutzbarkeit des Ranking-Systens besser bewerten.
 
 \subsection{Hierarchical nDCG}
 
-Für technische Katalogsysteme besitzen Fehler unterschiedliche Schweregrade.
-Daher wird eine hierarchische Relevanzfunktion verwendet:
+Für das vorliegende Projekt sind nicht alle Fehler gleich kritisch. Wenn zwei nahezu identische Makros verwechselt werden ist dies weniger schwerwiegend, 
+als die Verwechslung von EPLAN-Fenstermakros \cite{EPLAN-Makros} aus unterschiedlichen Familien. Deswegen wird zur Bewertung eine hierachische Bewertungsmetrik verwendet.
 
-\begin{align}
-  rel= \begin{cases} 3 & \text{exaktes Ziel}\\ 2 & \text{gleiche Familie}\\ 0 & \text{sonst} \end{cases}
-\end{align}
+Die Berechnung ergibt sich wie folgt: 
 
-Diese Erweiterung erlaubt die differenzierte Bewertung von Variantenfehlern innerhalb derselben Produktfamilie.
+\begin{align} 
+  DCG@k = \sum_{i=1}^{k} \frac{2^{rel_i}-1} {\log_2(i+1)} 
+\end{align} 
 
-\subsection{Candidate Coverage}
+Die Normalisierung erfolgt anschließend durch:
 
-Die Candidate Coverage bewertet die maximale Leistungsfähigkeit des Retrievalsystems vor dem eigentlichen Ranking.
-Hierbei wird gemessen, ob sich das korrekte Ziel überhaupt im Kandidatenpool befindet.
+\begin{align} 
+  nDCG@k = \frac{DCG@k} {IDCG@k} 
+\end{align} 
 
-\subsection{Data Leakage Detection}
+wobei $IDCG@k$ die ideale Rangliste beschreibt. Diese Metrik wird auch von dem verwendeten Lambda-Rank-Algorithmus genutzt. (siehe Kapitel \ref{chap:datensplit_und_training})
 
-Kaufman et al. definieren Data Leakage als unbeabsichtigte Nutzung von Informationen, die zum Zeitpunkt der Vorhersage nicht verfügbar sein dürfen \cite{kaufman2012leakage}.
-Die Verhinderung von Leakage stellt eine zentrale Voraussetzung für valide Evaluierungen und reproduzierbare Modellqualität dar.
+Für die vorliegende Anwendung wird die hierachische Relevanz verwendet: 
+
+\begin{align} 
+  rel = \begin{cases} 
+    3, & \text{exaktes Zielmakro}\\ 
+    2, & \text{Makro derselben Familie}\\ 
+    0, & \text{sonst} 
+  \end{cases} 
+\end{align} 
+
+Dadurch wird ein Ranking vorzugsweise verwendet, welches fachlich näher Alternativen auf den vorderen Positionen platziert.
+
+In diesem Projekt werden die folgenen Metriken verwendet:
+
+\begin{itemize} 
+\item hierarchical\_ndcg@1 
+\item hierarchical\_ndcg@3 
+\item hierarchical\_ndcg@5 
+\item hierarchical\_ndcg@10 
+\end{itemize}
+
+\subsection{Bedeutung der Metriken innerhalb der Evaluation} 
+
+Die Bewertungsmetriken bilden gemeinsam verschiedene Aspekte der Rankingqualität ab. 
+
+\begin{table}[htbp] 
+  \centering 
+  \caption{Bedeutung der verwendeten Rankingmetriken} 
+  \begin{tabular}{p{4cm}p{9cm}} 
+    \toprule Metrik & Bewerteter Qualitätsaspekt \\ \midrule Target Recall@k & Position des exakten Ziel-Makros \cite{EPLAN-Makros} \\ Family Recall@k & Erkennung der korrekten Makrofamilie \\ MRR & Durchschnittlicher Zielrang \\ Hierarchical nDCG & Qualität der gesamten Rangfolge \\ 
+    \bottomrule 
+  \end{tabular} 
+\end{table}
+
+
+\section{Evaluation der Retrievalphase}
+
+Bevor die Qualtität des Learning-to-Rank-Modells bewertet wird, muss untersucht werden, ob das korrekte Ziel-Makro \cite{EPLAN-Makros} überhaupt durch Retrievalkomponenten gefunden wird.
+Ein Rankingmodell kann ein Ziel-Makro \cite{EPLAN-Makros} nur dann korrekt platzieren, wenn es in der Kandidatenmenge vorhanden ist.
+
+Deswegen erfolgt die Evaluation dieser Retrievalphase in einem getrennten Abschnitt.
+
+Diese Analysen werden durch die  Module \texttt{step\_942\_validate\_retrieval\_index.py} und \texttt{step\_943\_analyze\_candidate\_coverage.py} durchgeführt \cite{srcStep942,srcStep943}.
+
+\subsection{Bewertung des Retrieval-Index}
+
+Die Qualität des Retrivalindexes wird durch die erste Evaluationsstufe untersucht. Hierzu werden die Kandidatenlisten die durch das Retrieval erzeugt werden dierkt ausgewertet. 
+Dies erfolgt durch \texttt{step\_942\_validate\_retrieval\_index.py} \cite{srcStep942}.
+
+Dabei werden folgende Kennzahlen berechnet:
+
+\begin{itemize} 
+\item Target Recall@1 
+\item Target Recall@10 
+\item Target Recall@100 
+\item Family Recall@1 
+\item Family Recall@10 
+\item Family Recall@100 
+\item durchschnittlicher Zielrang 
+\item Rangperzentile 
+\item Anzahl nicht gefundener Zielmakros 
+\end{itemize}
+
+Dadurch kann die grundsätzliche Leistungsfähigkeit der Retrievalkomponenten bewertet werden, um die Eignung der Kandidatenmenge für die nachfolgende Rankingphase zu beurteilen.

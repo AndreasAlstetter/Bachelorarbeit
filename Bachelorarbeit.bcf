@@ -2486,9 +2486,22 @@
     <bcf:citekey order="105" intorder="1">srcStep936</bcf:citekey>
     <bcf:citekey order="106" intorder="1">srcStep936</bcf:citekey>
     <bcf:citekey order="106" intorder="2">srcPipeline</bcf:citekey>
-    <bcf:citekey order="107" intorder="1">manning2008ir</bcf:citekey>
-    <bcf:citekey order="108" intorder="1">jarvelin2002dcg</bcf:citekey>
-    <bcf:citekey order="109" intorder="1">kaufman2012leakage</bcf:citekey>
+    <bcf:citekey order="107" intorder="1">src_evalsuite</bcf:citekey>
+    <bcf:citekey order="108" intorder="1">EPLAN-Makros</bcf:citekey>
+    <bcf:citekey order="109" intorder="1">EPLANArtikelverwaltung</bcf:citekey>
+    <bcf:citekey order="110" intorder="1">EPLAN-Makros</bcf:citekey>
+    <bcf:citekey order="111" intorder="1">EPLAN-Makros</bcf:citekey>
+    <bcf:citekey order="112" intorder="1">srcStep931</bcf:citekey>
+    <bcf:citekey order="112" intorder="2">srcStep944</bcf:citekey>
+    <bcf:citekey order="113" intorder="1">EPLAN-Makros</bcf:citekey>
+    <bcf:citekey order="114" intorder="1">EPLAN-Makros</bcf:citekey>
+    <bcf:citekey order="115" intorder="1">EPLAN-Makros</bcf:citekey>
+    <bcf:citekey order="116" intorder="1">EPLAN-Makros</bcf:citekey>
+    <bcf:citekey order="117" intorder="1">EPLAN-Makros</bcf:citekey>
+    <bcf:citekey order="118" intorder="1">EPLAN-Makros</bcf:citekey>
+    <bcf:citekey order="119" intorder="1">EPLAN-Makros</bcf:citekey>
+    <bcf:citekey order="120" intorder="1">EPLAN-Makros</bcf:citekey>
+    <bcf:citekey order="121" intorder="1">EPLAN-Makros</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

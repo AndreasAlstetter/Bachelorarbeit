@@ -43,15 +43,16 @@
 \contentsline {section}{\numberline {6.6}Modellartefakte und Reproduzierbarkeit}{28}{section.6.6}%
 \contentsline {section}{\numberline {6.7}Pipeline-Orchestrierung}{28}{section.6.7}%
 \contentsline {chapter}{\numberline {7}Evaluierungskonzept und Ergebnisse}{29}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Evaluierung von Retrieval- und Ranking-Systemen}{29}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Recall@K}{29}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Discounted Cumulative Gain}{29}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Normalized Discounted Cumulative Gain}{30}{subsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.1.4}Hierarchical nDCG}{30}{subsection.7.1.4}%
-\contentsline {subsection}{\numberline {7.1.5}Candidate Coverage}{30}{subsection.7.1.5}%
-\contentsline {subsection}{\numberline {7.1.6}Data Leakage Detection}{30}{subsection.7.1.6}%
-\contentsline {chapter}{\numberline {8}Diskussion, Grenzen und Ausblick}{31}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Zusammenfassung und Fazit}{32}{chapter.9}%
+\contentsline {section}{\numberline {7.1}Evaluationsdatensätze}{29}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Aufbau der Evaluations-Suite}{29}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Verwendete Rankingmetriken}{30}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Target Recall@k}{30}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Family Recall@k}{31}{subsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.3.3}Mean Reciprocal Rank}{31}{subsection.7.3.3}%
+\contentsline {subsection}{\numberline {7.3.4}Hierarchical nDCG}{32}{subsection.7.3.4}%
+\contentsline {subsection}{\numberline {7.3.5}Bedeutung der Metriken innerhalb der Evaluation}{33}{subsection.7.3.5}%
+\contentsline {chapter}{\numberline {8}Diskussion, Grenzen und Ausblick}{34}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Zusammenfassung und Fazit}{35}{chapter.9}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{36}{chapter*.15}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{39}{chapter*.17}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
