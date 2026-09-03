@@ -19,122 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global/global}
-    \entry{src_pipeline}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=696af597b47fbc9d6218a97d8879bd63}{%
-           family={Alstetter},
-           familyi={A\bibinitperiod},
-           given={Andreas},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{fullhash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{fullhashraw}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{bibnamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorbibnamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authornamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorfullhash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorfullhashraw}{696af597b47fbc9d6218a97d8879bd63}
-      \field{extraname}{1}
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{extradate}{1}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Interner Projektquellcode}
-      \field{title}{Makro-Empfehlungssystem: Trainings- und Rankingpipeline}
-      \field{year}{2026}
-    \endentry
-    \entry{src_ret640}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=696af597b47fbc9d6218a97d8879bd63}{%
-           family={Alstetter},
-           familyi={A\bibinitperiod},
-           given={Andreas},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{fullhash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{fullhashraw}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{bibnamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorbibnamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authornamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorfullhash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorfullhashraw}{696af597b47fbc9d6218a97d8879bd63}
-      \field{extraname}{2}
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{extradate}{2}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Interner Projektquellcode}
-      \field{title}{ret\_640\_macro\_candidate\_retrieval.py}
-      \field{year}{2026}
-    \endentry
-    \entry{src_step911}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=696af597b47fbc9d6218a97d8879bd63}{%
-           family={Alstetter},
-           familyi={A\bibinitperiod},
-           given={Andreas},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{fullhash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{fullhashraw}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{bibnamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorbibnamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authornamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorfullhash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorfullhashraw}{696af597b47fbc9d6218a97d8879bd63}
-      \field{extraname}{3}
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{extradate}{3}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Interner Projektquellcode}
-      \field{title}{step\_911\_prepare\_raw\_data.py}
-      \field{year}{2026}
-    \endentry
-    \entry{src_step931}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=696af597b47fbc9d6218a97d8879bd63}{%
-           family={Alstetter},
-           familyi={A\bibinitperiod},
-           given={Andreas},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{fullhash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{fullhashraw}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{bibnamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorbibnamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authornamehash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorfullhash}{696af597b47fbc9d6218a97d8879bd63}
-      \strng{authorfullhashraw}{696af597b47fbc9d6218a97d8879bd63}
-      \field{extraname}{4}
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{extradate}{4}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Interner Projektquellcode}
-      \field{title}{step\_931\_train\_macro\_ltr\_ranker.py}
-      \field{year}{2026}
-    \endentry
     \entry{baeza2011modern}{book}{}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=14e9e2c7e918f62ba13b9e040fb7f468}{%
@@ -862,6 +746,110 @@
       \verb{url}
       \verb https://industrieanzeiger.industrie.de/allgemein/variantenvielfalt-beherrschen-mit-systems-engineering/
       \endverb
+    \endentry
+    \entry{srcRet640}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c4af24e8b75e67e5bfe18718baad925b}{%
+           family={{Project: KI-Makrotraining}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{fullhash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{fullhashraw}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{bibnamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorbibnamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authornamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorfullhash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorfullhashraw}{c4af24e8b75e67e5bfe18718baad925b}
+      \field{extraname}{1}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Source code, \url{src/pkg_600_retrieval/ret_640_macro_candidate_retrieval.py}}
+      \field{title}{Macro candidate retrieval}
+      \field{year}{2026}
+    \endentry
+    \entry{srcStep911}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c4af24e8b75e67e5bfe18718baad925b}{%
+           family={{Project: KI-Makrotraining}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{fullhash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{fullhashraw}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{bibnamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorbibnamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authornamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorfullhash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorfullhashraw}{c4af24e8b75e67e5bfe18718baad925b}
+      \field{extraname}{2}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Source code, \url{src/pkg_900_pipeline/stage_910_data_preparation/step_911_prepare_raw_data.py}}
+      \field{title}{Pipeline step 911: Raw EPLAN article XML parsing and data preparation}
+      \field{year}{2026}
+    \endentry
+    \entry{srcStep931}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c4af24e8b75e67e5bfe18718baad925b}{%
+           family={{Project: KI-Makrotraining}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{fullhash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{fullhashraw}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{bibnamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorbibnamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authornamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorfullhash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorfullhashraw}{c4af24e8b75e67e5bfe18718baad925b}
+      \field{extraname}{3}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradate}{3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Source code, \url{src/pkg_900_pipeline/stage_930_model_training/step_931_train_macro_ltr_ranker.py}}
+      \field{title}{Pipeline step 931: Learning-to-Rank macro ranker training}
+      \field{year}{2026}
+    \endentry
+    \entry{srcPipeline}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c4af24e8b75e67e5bfe18718baad925b}{%
+           family={{Project: KI-Makrotraining}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{fullhash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{fullhashraw}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{bibnamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorbibnamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authornamehash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorfullhash}{c4af24e8b75e67e5bfe18718baad925b}
+      \strng{authorfullhashraw}{c4af24e8b75e67e5bfe18718baad925b}
+      \field{extraname}{4}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradate}{4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Project source code and documentation, README.md and docs/PROJECT\_DOCUMENTATION.md}
+      \field{title}{Training and ranking pipeline for EPLAN macros}
+      \field{year}{2026}
     \endentry
     \entry{robertson2009prf}{article}{}{}
       \name{author}{2}{}{%

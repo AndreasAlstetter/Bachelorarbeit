@@ -256,30 +256,65 @@
 
 %----Code---%
 
-@misc{src_pipeline,
-  author = {Alstetter, Andreas},
-  title = {Makro-Empfehlungssystem: Trainings- und Rankingpipeline},
-  year = {2026},
-  note = {Interner Projektquellcode}
+@misc{srcPipeline,
+  author       = {{KI-Makrotraining Project}},
+  title        = {Training and ranking pipeline for EPLAN macros},
+  year         = {2026},
+  howpublished = {Project source code and documentation, README.md and docs/PROJECT_DOCUMENTATION.md}
 }
 
-@misc{src_step911,
-  author = {Alstetter, Andreas},
-  title = {step\_911\_prepare\_raw\_data.py},
-  year = {2026},
-  note = {Interner Projektquellcode}
+@misc{srcStep911,
+  author       = {{KI-Makrotraining Project}},
+  title        = {Pipeline step 911: Raw EPLAN article XML parsing and data preparation},
+  year         = {2026},
+  howpublished = {Source code, src/pkg_900_pipeline/stage_910_data_preparation/step_911_prepare_raw_data.py}
 }
 
-@misc{src_step931,
-  author = {Alstetter, Andreas},
-  title = {step\_931\_train\_macro\_ltr\_ranker.py},
-  year = {2026},
-  note = {Interner Projektquellcode}
+@misc{srcIdealDataset,
+  author       = {{KI-Makrotraining Project}},
+  title        = {Ideal dataset selection from cleaned Current articles},
+  year         = {2026},
+  howpublished = {Source code, src/pkg_900_pipeline/stage_910_data_preparation/ideal_dataset.py}
 }
 
-@misc{src_ret640,
-  author = {Alstetter, Andreas},
-  title = {ret\_640\_macro\_candidate\_retrieval.py},
-  year = {2026},
-  note = {Interner Projektquellcode}
+@misc{srcStep913,
+  author       = {{KI-Makrotraining Project}},
+  title        = {Pipeline step 913: Training data quality filtering and quarantine},
+  year         = {2026},
+  howpublished = {Source code, src/pkg_900_pipeline/stage_910_data_preparation/step_913_filter_training_data.py}
+}
+
+@misc{srcStep921,
+  author       = {{KI-Makrotraining Project}},
+  title        = {Pipeline step 921: Fingerprint-grouped train, validation, and test split},
+  year         = {2026},
+  howpublished = {Source code, src/pkg_900_pipeline/stage_920_data_splitting/step_921_build_datasplit.py}
+}
+
+@misc{srcLeakageGuard,
+  author       = {{KI-Makrotraining Project}},
+  title        = {Retrieval leakage guard for label-clean query and candidate data},
+  year         = {2026},
+  howpublished = {Source code, src/pkg_600_retrieval/ret_630_leakage_guard.py}
+}
+
+@misc{srcStep931,
+  author       = {{KI-Makrotraining Project}},
+  title        = {Pipeline step 931: Learning-to-Rank macro ranker training},
+  year         = {2026},
+  howpublished = {Source code, src/pkg_900_pipeline/stage_930_model_training/step_931_train_macro_ltr_ranker.py}
+}
+
+@misc{srcRet640,
+  author       = {{KI-Makrotraining Project}},
+  title        = {Macro candidate retrieval},
+  year         = {2026},
+  howpublished = {Source code, src/pkg_600_retrieval/ret_640_macro_candidate_retrieval.py}
+}
+
+@misc{srcStep936,
+  author       = {{KI-Makrotraining Project}},
+  title        = {Pipeline step 936: Full macro-LTR training-run orchestration},
+  year         = {2026},
+  howpublished = {Source code, src/pkg_900_pipeline/stage_930_model_training/step_936_run_full_training_pipeline.py}
 }
