@@ -17,8 +17,8 @@ Als bewährter Ansatz hierfür eignen sich Empfehlungssysteme, die den Anwender 
 Die ursprüngliche Verwendung solcher Systeme aus dem E-Commerce-Bereich wird zunehmend auch im industriellen Kontext angewendet, wie zum Beispiel bei der Auswahl von Produkten, Konfigurationen oder der erneuten Verwendung von Systemen \parencite{Joshi2024}.
 
 Eine bekannte Software in diesem Kontext ist EPLAN, welche für die Planung und Dokumentation elektrotechnischer Systeme eingesetzt wird. 
-Diese unterstützt Ingenieure bei der Erstellung von Schaltplänen, Stücklisten und weiteren technischen Dokumentationen. 
-Des Weiteren ermöglicht EPLAN die Verwaltung von EPLAN-Artikeln \parencite{EPLANArtikelverwaltung} und die Integration von EPLAN-Fenstermakros \parencite{EPLAN-Makros}, wodurch die Effizienz und Konsistenz in der Planung und Dokumentation elektrotechnischer Systeme erhöht wird \parencite{eplan2026}.
+Diese unterstützt Ingenieure bei der Erstellung von Schaltplänen, Stücklisten sowie bei der Erstellung wiederverwendbarer Schaltplan-Templates. Diese werden von EPLAN selbst als \textit{Fenstermakros} bezeichnet \parencite{EPLAN-Makros}.
+Ein weiterer Bestandteil der EPLAN-Software ist die Verwaltung von EPLAN-Artikeln \parencite{EPLANArtikelverwaltung}. Diese dienen als Repräsentation eines physischen elektrotechnischen oder mechanischen Bauteils.
 
 Auf Basis dieser Recherche ergibt sich ein erhebliches Potential für ein KI-basiertes Empfehlungssystem zur automatisierten Zuordnung von EPLAN-Artikeln \parencite{EPLANArtikelverwaltung} zu EPLAN-Fenstermakros \parencite{EPLAN-Makros}.
 Hierfür notwendige Informationen sind bereits in den vorhandenen EPLAN-Artikeln \parencite{EPLANArtikelverwaltung} enthalten, werden aber für die automatisierte Verarbeitung bislang nur unzureichend genutzt.
@@ -27,7 +27,7 @@ Hierdurch wird der manuelle Aufwand entscheidend reduziert, sowie das vorhandene
 Das Projekt leistet somit einen Beitrag zur praktischen Umsetzung von datengetriebenen und KI-unterstützten Entscheidungen im Industrie-4.0-Umfeld \parencite{Nayak2025}.
 Abbildung \ref{fig:motivation_konzept} veranschaulicht die zugrunde liegende Idee dieser automatisierten Zuordnung.
 
-\begin{figure}[tbp]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[
         >=stealth,

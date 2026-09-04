@@ -37,32 +37,32 @@
 \contentsline {chapter}{\numberline {6}Datensplit und Training}{24}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Anforderungen an die Datenbasis}{24}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Datensplit und Trainingsbasis}{24}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Aufbau der Retrievalsignale}{25}{section.6.3}%
+\contentsline {section}{\numberline {6.3}Aufbau der Retrievalsignale}{26}{section.6.3}%
 \contentsline {section}{\numberline {6.4}Training des Learning-to-Rank-Modells}{27}{section.6.4}%
 \contentsline {section}{\numberline {6.5}Hyperparameteroptimierung}{28}{section.6.5}%
 \contentsline {section}{\numberline {6.6}Modellartefakte und Reproduzierbarkeit}{29}{section.6.6}%
 \contentsline {section}{\numberline {6.7}Pipeline-Orchestrierung}{29}{section.6.7}%
-\contentsline {chapter}{\numberline {7}Evaluierungskonzept und Ergebnisse}{31}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Evaluationsdatensätze}{31}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Aufbau der Evaluations-Suite}{31}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Verwendete Rankingmetriken}{32}{section.7.3}%
-\contentsline {subsection}{\numberline {7.3.1}Target Recall@k}{32}{subsection.7.3.1}%
-\contentsline {subsection}{\numberline {7.3.2}Family Recall@k}{33}{subsection.7.3.2}%
-\contentsline {subsection}{\numberline {7.3.3}Mean Reciprocal Rank}{34}{subsection.7.3.3}%
-\contentsline {subsection}{\numberline {7.3.4}Hierarchical nDCG}{34}{subsection.7.3.4}%
-\contentsline {subsection}{\numberline {7.3.5}Bedeutung der Metriken innerhalb der Evaluation}{35}{subsection.7.3.5}%
-\contentsline {section}{\numberline {7.4}Evaluation der Retrievalphase}{36}{section.7.4}%
-\contentsline {subsection}{\numberline {7.4.1}Bewertung des Retrieval-Index}{36}{subsection.7.4.1}%
-\contentsline {subsection}{\numberline {7.4.2}Candidate Coverage}{37}{subsection.7.4.2}%
-\contentsline {subsection}{\numberline {7.4.3}Interpretation der Retrievalergebnisse}{37}{subsection.7.4.3}%
-\contentsline {section}{\numberline {7.5}Leakage-Sicherheitsprüfung}{38}{section.7.5}%
-\contentsline {subsection}{\numberline {7.5.1}Ziele der Leakage-Prüfung}{38}{subsection.7.5.1}%
-\contentsline {subsection}{\numberline {7.5.2}Prüfung der Query-Daten}{39}{subsection.7.5.2}%
-\contentsline {subsection}{\numberline {7.5.3}Prüfung der Datensplits}{39}{subsection.7.5.3}%
-\contentsline {subsection}{\numberline {7.5.4}Prüfung der Kandidatenprofile}{39}{subsection.7.5.4}%
-\contentsline {subsection}{\numberline {7.5.5}Evaluierungsergebnis}{40}{subsection.7.5.5}%
-\contentsline {chapter}{\numberline {8}Diskussion, Grenzen und Ausblick}{41}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Zusammenfassung und Fazit}{42}{chapter.9}%
+\contentsline {chapter}{\numberline {7}Evaluierungskonzept und Ergebnisse}{30}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Evaluationsdatensätze}{30}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Aufbau der Evaluations-Suite}{30}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Verwendete Rankingmetriken}{31}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Target Recall@k}{31}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Family Recall@k}{32}{subsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.3.3}Mean Reciprocal Rank}{33}{subsection.7.3.3}%
+\contentsline {subsection}{\numberline {7.3.4}Hierarchical nDCG}{33}{subsection.7.3.4}%
+\contentsline {subsection}{\numberline {7.3.5}Bedeutung der Metriken innerhalb der Evaluation}{34}{subsection.7.3.5}%
+\contentsline {section}{\numberline {7.4}Evaluation der Retrievalphase}{35}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Bewertung des Retrieval-Index}{35}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Candidate Coverage}{36}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Interpretation der Retrievalergebnisse}{36}{subsection.7.4.3}%
+\contentsline {section}{\numberline {7.5}Leakage-Sicherheitsprüfung}{37}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Ziele der Leakage-Prüfung}{37}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}Prüfung der Query-Daten}{38}{subsection.7.5.2}%
+\contentsline {subsection}{\numberline {7.5.3}Prüfung der Datensplits}{38}{subsection.7.5.3}%
+\contentsline {subsection}{\numberline {7.5.4}Prüfung der Kandidatenprofile}{38}{subsection.7.5.4}%
+\contentsline {subsection}{\numberline {7.5.5}Evaluierungsergebnis}{39}{subsection.7.5.5}%
+\contentsline {chapter}{\numberline {8}Diskussion, Grenzen und Ausblick}{40}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Zusammenfassung und Fazit}{41}{chapter.9}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{46}{chapter*.21}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{45}{chapter*.21}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
