@@ -5,7 +5,7 @@
 
 Um eine konsistente, validierte und reproduzierbare Datenbasis zu haben, wurde ein idealer Datensatz erstellt.
 Der ideale Datensatz setzt sich aus besten geeigneten Artikel und Makrokandidaten nach der Datenbereiningung zusammen \cite{srcIdealDataset,srcStep913}.
-Dabei wurden folgende Anforderrungen wurden an den idealen Datensatz gestellt:
+Dabei wurden die Anforderungen an den idealen Datensatz in Tabelle \ref{tab:anforderungen_datenbasis} zusammengefasst.
 
 \begin{table}[htbp]
     \centering
@@ -30,6 +30,7 @@ Dabei wurden folgende Anforderrungen wurden an den idealen Datensatz gestellt:
         \bottomrule
     \end{tabularx}
 \end{table}
+
 \caption{Anforderungen an den idealen Datensatz \cite{srcIdealDataset,srcStep913,srcStep921}}
 
 \section{Datensplit und Trainingsbasis}
@@ -41,14 +42,14 @@ Ziel ist es eine klare Trennung zwischen Modelltraining, Hyperparameteroptimieru
     \text{Train} = 70\,\%, \qquad \text{Validation} = 10\,\%, \qquad \text{Test} = 20\,\%
 \end{align}
 
-Um reproduzierbare Ergebnisse mit einem erstellten Datensplitt zu gewährleisten, wird ein fester Zufallseed erstellt, der sicherstellt, dass die Aufteilung in Trainings-, Validierungs- und Testdaten bei jeder Ausführung identisch bleibt \cite{srcStep921}.
+Um reproduzierbare Ergebnisse mit einem erstellten Datensplitt zu gewährleisten, wird ein fester Zufallseed aus erstellt, der sicherstellt, dass die Aufteilung in Trainings-, Validierungs- und Testdaten bei jeder Ausführung identisch bleibt \cite{srcStep921}.
 
 \begin{align}
-    \text{RANDOM\_SEED} = 42
+    \text{RANDOM\_SEED} = 42,43,44,45 oder 46
 \end{align}
 
 Dabei wird keine reine Zufallsaufteilung vorgenommen, sondern fachliche Zusammenhänge der Daten berücksichtigt, um eine konsistente Vertreilung über die Anfragegruppen sicherzustellen. 
-Dies verhindert, dass eng verwandte Beispiele in unterschiedlichen Datensplits landen und somit die Glaubwürdigkeit der Modellbewertung negativ beeinflussen \cite{srcStep921}.
+Dies verhindert, dass eng verwandte Beispiele in unterschiedlichen Datensplits landen und somit die Glaubwürdigkeit der Modellbewertung negativ beeinflussen. Durch die unterschiedelichen Seed-Werte lässt sich dann auch ein Mittelwert über mehrere Splits ableiten.\cite{srcStep921}.
 
 \begin{figure}[htbp]
     \centering

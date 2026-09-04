@@ -51,8 +51,18 @@
 \contentsline {subsection}{\numberline {7.3.3}Mean Reciprocal Rank}{31}{subsection.7.3.3}%
 \contentsline {subsection}{\numberline {7.3.4}Hierarchical nDCG}{32}{subsection.7.3.4}%
 \contentsline {subsection}{\numberline {7.3.5}Bedeutung der Metriken innerhalb der Evaluation}{33}{subsection.7.3.5}%
-\contentsline {chapter}{\numberline {8}Diskussion, Grenzen und Ausblick}{34}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Zusammenfassung und Fazit}{35}{chapter.9}%
+\contentsline {section}{\numberline {7.4}Evaluation der Retrievalphase}{33}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Bewertung des Retrieval-Index}{34}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Candidate Coverage}{34}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Interpretation der Retrievalergebnisse}{35}{subsection.7.4.3}%
+\contentsline {section}{\numberline {7.5}Leakage-Sicherheitsprüfung}{36}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Ziele der Leakage-Prüfung}{36}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}Prüfung der Query-Daten}{36}{subsection.7.5.2}%
+\contentsline {subsection}{\numberline {7.5.3}Prüfung der Datensplits}{37}{subsection.7.5.3}%
+\contentsline {subsection}{\numberline {7.5.4}Prüfung der Kandidatenprofile}{37}{subsection.7.5.4}%
+\contentsline {subsection}{\numberline {7.5.5}Evaluierungsergebnis}{37}{subsection.7.5.5}%
+\contentsline {chapter}{\numberline {8}Diskussion, Grenzen und Ausblick}{38}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Zusammenfassung und Fazit}{39}{chapter.9}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{39}{chapter*.17}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{43}{chapter*.17}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
