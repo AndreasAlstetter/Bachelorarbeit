@@ -2,27 +2,29 @@
 
 \section{Zielsetzung}
 
-Das Projektziel ist die Entwicklung eines Systems, welches automatisiert EPLAN-Artikel \cite{EPLANArtikelverwaltung} zu EPLAN-Fenstermakros \cite{EPLAN-Makros} zuordnet.
-Für einen vorhanden technischen EPLAN-Artikel \cite{EPLANArtikelverwaltung} soll anhand einer technischen Anfrage (zum Beispiel in Form eines Datenblatts) das fachlich passendste EPLAN-Fenstermakro \cite{EPLAN-Makros} identifiziert werden.
+Das Projektziel ist die Entwicklung eines Systems, welches automatisiert EPLAN-Artikel \parencite{EPLANArtikelverwaltung} zu EPLAN-Fenstermakros \parencite{EPLAN-Makros} zuordnet.
+Für einen vorhanden technischen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} soll anhand einer technischen Anfrage (zum Beispiel in Form eines Datenblatts) das fachlich passendste EPLAN-Fenstermakro \parencite{EPLAN-Makros} identifiziert werden.
 
 
-Diese Problemstellung kann als Rankingaufgabe formuliert werden, bei der für jede Anfrage eine Menge bekannter EPLAN-Fenstermakros \cite{EPLAN-Makros} vorliegt. Dabei sind alle Kandidaten dieser Menge potenzielle Ergebnisse für den 1. Rang.
-Das System soll alle vorhandenen EPLAN-Artikel \cite{EPLANArtikelverwaltung} analysieren, bewerten und anschließend das ähnlichste Zugrundeliegende EPLAN-Fenstermakro \cite{EPLAN-Makros} auswählen.
-Ziel dabei ist es, dass das passendste EPLAN-Fenstermakro \cite{EPLAN-Makros} möglichst auf Rang 1 erscheint. Die weniger ähnlichen Kandidaten sollen entsprechend der Bewertung hierachisch auf den nachfolgenden Rängen einsortiert werden.
+Diese Problemstellung kann als Rankingaufgabe formuliert werden, bei der für jede Anfrage eine Menge bekannter EPLAN-Fenstermakros \parencite{EPLAN-Makros} vorliegt. Dabei sind alle Kandidaten dieser Menge potenzielle Ergebnisse für den 1. Rang.
+Das System soll alle vorhandenen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} analysieren, bewerten und anschließend das ähnlichste zugrundeliegende EPLAN-Fenstermakro \parencite{EPLAN-Makros} auswählen.
+Ziel dabei ist es, dass das passendste EPLAN-Fenstermakro \parencite{EPLAN-Makros} möglichst auf Rang 1 erscheint. Die weniger ähnlichen Kandidaten sollen entsprechend der Bewertung hierarchisch auf den nachfolgenden Rängen einsortiert werden.
 
 
 Im Gegensatz zu Klassifikationsaufgaben liegt der Fokus dieses Systems nicht direkt auf der Bestimmung einer einzelnen Klasse oder Produktfamilie. Vielmehr geht es darum eine möglichst präzise Variantenauflösung zu erreichen.
-Dafür sollen die technischen Eigenschaften und Merkmale aus einer Anfrage systematisch erfasst und mit den Eigenschaften der EPLAN-Artikel \cite{EPLANArtikelverwaltung} abgeglichen werden.
+Dafür sollen die technischen Eigenschaften und Merkmale aus einer Anfrage systematisch erfasst und mit den Eigenschaften der EPLAN-Artikel \parencite{EPLANArtikelverwaltung} abgeglichen werden.
 
 
 Die Herausforderung besteht darin, dass sich viele Produkte lediglich in einzelnen technischen Eigenschaften und Konfigurationsmerkmalen unterscheiden. Geringe Abweichungen können deshalb zu unterschiedlichen Makrozuordnungen führen.
 Das System muss daher in der Lage sein allgemeine technischen Zusammenhänge als auch merkmalspezifische Unterschiede zwischen ähnlichen Varianten zu erkennen.
 
 
-Zur Lösung dieses Problems wird ein Learning-to-Rank-System entwickelt, welches unterschiedliche Retrivalsignale, strukturierte technische Merkmale sowie unstrukturierte Textinformationen aus technischen Anfragen kombiniert, um die Relevanz der EPLAN-Fenstermakros \cite{EPLAN-Makros} zu bewerten.
+Zur Lösung dieses Problems wird ein Learning-to-Rank-System entwickelt, welches unterschiedliche Retrievalsignale, strukturierte technische Merkmale sowie unstrukturierte Textinformationen aus technischen Anfragen kombiniert, um die Relevanz der EPLAN-Fenstermakros \parencite{EPLAN-Makros} zu bewerten.
 
 
-\section{Methodisches Vorgehen} Das methodische Vorgehen orientiert sich an der \textit{Design Science Research Methodology} (DSRM) nach Peffers et al. \cite{peffers2007dsrm}. 
+\section{Methodisches Vorgehen}
+
+Das methodische Vorgehen orientiert sich an der \textit{Design Science Research Methodology} (DSRM) nach Peffers et al. \citeyearpar{peffers2007dsrm}. 
 Die DSRM beschreibt einen strukturierten Forschungsprozess zur Entwicklung und Evaluation technischer Artefakte und eignet sich insbesondere für die Entwicklung von IT-Systemen.
 Das Ziel der Methodik besteht darin, eine konkrete Problemstellung systematisch zu analysieren, ein geeignetes Artefakt zu entwickeln und den Nutzen durch eine Evaluation nachzuweisen. 
 
@@ -41,7 +43,7 @@ In dieser Arbeit bildet die DSRM den übergeordneten Rahmen. Die iterative Entwi
 
 \section{Iterativer Entwicklungsprozess} 
 
-Zur Entwicklung des Artefakts wird die Design-Science-Methodik durch die Prinzipien des \textit{Action Design Research} (ADR) nach Sein et al. verwendet \cite{sein2011adr}. 
+Zur Entwicklung des Artefakts wird die Design-Science-Methodik durch die Prinzipien des \textit{Action Design Research} (ADR) nach Sein et al. verwendet \citeyearpar{sein2011adr}. 
 ADR verbindet dabei die Entwicklung eines Artefakts mit der fortlaufenden Anwendung, Evaluation und Verbesserung. 
 Während die DSRM den strukturellen Prozess beschreibt, liefert ADR den Entwicklungszyklus zur kontinuierlichen Verbesserung des Systems. 
 
@@ -60,12 +62,13 @@ Der iterative Entwicklungsprozess besteht dabei aus den folgenden Schritten:
 
 Die Ergebnisse einer Iteration bilden jeweils die Grundlage für die nachfolgenden Iterationen. Auf diese Weise entsteht ein kontinuierlicher Verbesserungsprozess, in dem Forschung, Entwicklung, Evaluation und Optimierung miteinander verzahnt sind. 
 Die Kombination aus DSRM und ADR ermöglicht somit auf der einen Seite einen strukturierten Forschungsprozess und auf der anderen Seite eine iterative Verbesserung des entwickelten Ranking-Systems. 
+Abbildung \ref{fig:dsrm_adr_verzahnung} veranschaulicht diese Verzahnung der beiden Methodiken.
 
-Die verwendeten Qualitätsmetriken sowie deren mathematische Definitionen werden in Kapitel \textit{06\_evaluierungskonzept\_und\_ergebnisse} vorgestellt. 
+Die verwendeten Qualitätsmetriken sowie deren mathematische Definitionen werden in Kapitel \ref{chap:evaluierungskonzept_und_ergebnisse} vorgestellt. 
 Eine Darstellung der finalen Systemarchitektur und der vollständigen Pipeline befindet sich ebenfalls in diesem Kapitel.
 
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \resizebox{\textwidth}{!}{%
     \begin{tikzpicture}[

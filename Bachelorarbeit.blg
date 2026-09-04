@@ -1,20 +1,16 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'Bachelorarbeit.blg'
-[119] biber-MSWIN64:342> INFO - === 
-[172] Biber.pm:421> INFO - Reading 'Bachelorarbeit.bcf'
-[301] Biber.pm:1002> INFO - Found 27 citekeys in bib section 0
-[314] Biber.pm:4487> INFO - Processing section 0
-[325] Biber.pm:4678> INFO - Looking for bibtex file '02_literatur/01_quellen.bib' for section 0
-[421] bibtex.pm:1713> INFO - LaTeX decoding ...
-[480] bibtex.pm:1519> INFO - Found BibTeX data source '02_literatur/01_quellen.bib'
-[677] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[677] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[677] Biber.pm:4307> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'de_DE'
-[677] Biber.pm:4313> INFO - No sort tailoring available for locale 'de_DE'
-[713] bbl.pm:676> INFO - Writing 'Bachelorarbeit.bbl' with encoding 'ascii'
-[713] bbl.pm:677> INFO - Converting UTF-8 to TeX macros on output to .bbl
-[749] bbl.pm:779> INFO - Output to Bachelorarbeit.bbl
-[750] Biber.pm:132> WARN - Duplicate entry key: 'burges2010lambdamart' in file '02_literatur/01_quellen.bib', skipping ...
-[750] Biber.pm:132> WARN - Duplicate entry key: 'lyzhin2023ltr' in file '02_literatur/01_quellen.bib', skipping ...
-[750] Biber.pm:132> WARN - Duplicate entry key: 'zhang2021muppets' in file '02_literatur/01_quellen.bib', skipping ...
-[750] Biber.pm:134> INFO - WARNINGS: 3
+[126] biber-MSWIN64:342> INFO - === 
+[177] Biber.pm:421> INFO - Reading 'Bachelorarbeit.bcf'
+[399] Biber.pm:1002> INFO - Found 39 citekeys in bib section 0
+[414] Biber.pm:4487> INFO - Processing section 0
+[428] Biber.pm:4678> INFO - Looking for bibtex file '02_literatur/01_quellen.bib' for section 0
+[541] bibtex.pm:1713> INFO - LaTeX decoding ...
+[597] bibtex.pm:1519> INFO - Found BibTeX data source '02_literatur/01_quellen.bib'
+[847] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[847] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[848] Biber.pm:4307> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'de_DE'
+[848] Biber.pm:4313> INFO - No sort tailoring available for locale 'de_DE'
+[899] bbl.pm:676> INFO - Writing 'Bachelorarbeit.bbl' with encoding 'ascii'
+[899] bbl.pm:677> INFO - Converting UTF-8 to TeX macros on output to .bbl
+[947] bbl.pm:779> INFO - Output to Bachelorarbeit.bbl

@@ -1,4 +1,4 @@
-\chapter{Evaluierungskonzept und Ergebnisse}
+?\chapter{Evaluierungskonzept und Ergebnisse}
 \label{chap:evaluierungskonzept_und_ergebnisse}
 
 \section{Evaluationsdatensätze}
@@ -16,54 +16,85 @@ Dadurch wird verhindert, dass nahezu ähnliche Beispiele gleichzeitig im Trainin
 
 \section{Aufbau der Evaluations-Suite}
 
-Die Evaluation des Learning-To-Rank-Modells erfolgt automatisiert mithilfe der implementierten Evaluations-Suite \cite{src_evalsuite}.
+Die Evaluation des Learning-To-Rank-Modells erfolgt automatisiert mithilfe der implementierten Evaluations-Suite \parencite{srcEvalSuite}.
 
-Die Evaluationspipeline besteh dabei aus vier Schirtten:
+Die Evaluationspipeline besteht dabei aus den in Tabelle \ref{tab:evaluations_suite} dargestellten vier Schritten. Abbildung \ref{fig:evaluations_suite_ablauf} zeigt den zugehörigen sequentiellen Ablauf:
 
-\begin{table}[htbp] 
-  \centering 
-  \caption{Aufbau der Evaluations-Suite} 
-  \begin{tabular}{p{1cm}p{5cm}p{8cm}} 
-    \toprule Nr. & Skript & Zielsetzung \\ 
-    \midrule 
-    1 & step\_941\_validate\_leakage\_safety.py & Prüfung auf Zielinformations-Leakage \\ 
-    2 & step\_942\_validate\_retrieval\_index.py & Bewertung des Retrieval-Index \\ 
-    3 & step\_943\_analyze\_candidate\_coverage.py & Analyse der Kandidatenabdeckung \\ 
-    4 & step\_944\_analyze\_ltr\_run.py & Analyse des Learning-to-Rank-Modells \\ 
-    \bottomrule 
-  \end{tabular} 
+\begin{figure}[tbp]
+    \centering
+    \begin{tikzpicture}[
+        font=\small,
+        stepbox/.style={draw=blue!60!black, thick, rounded corners, fill=blue!8, text width=3.0cm, minimum height=1.4cm, align=center, inner sep=4pt},
+        flow/.style={->, thick, blue!70!black}
+    ]
+        \node[stepbox] (s1) at (0,0) {\textbf{1}\\Leakage-\\Sicherheit};
+        \node[stepbox] (s2) at (3.8,0) {\textbf{2}\\Retrieval-\\Index};
+        \node[stepbox] (s3) at (7.6,0) {\textbf{3}\\Candidate\\Coverage};
+        \node[stepbox] (s4) at (11.4,0) {\textbf{4}\\LTR-Run-\\Analyse};
+        \draw[flow] (s1) -- (s2);
+        \draw[flow] (s2) -- (s3);
+        \draw[flow] (s3) -- (s4);
+    \end{tikzpicture}
+    \caption{Sequentieller Ablauf der vierstufigen Evaluations-Suite.}
+    \label{fig:evaluations_suite_ablauf}
+\end{figure}
+
+\begin{table}[tbp]
+  \centering
+  \setlength{\tabcolsep}{6pt}
+  \renewcommand{\arraystretch}{1.1}
+  \caption{Aufbau der Evaluations-Suite}
+  \label{tab:evaluations_suite}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1cm} >{\raggedright\arraybackslash}p{5cm} >{\raggedright\arraybackslash}X}
+    \toprule
+    \textbf{Nr.} & \textbf{Skript} & \textbf{Zielsetzung} \\
+    \midrule
+    1 & \texttt{step\_941\_\allowbreak validate\_leakage\_\allowbreak safety.py} & Prüfung auf Zielinformations-Leakage \\
+    2 & \texttt{step\_942\_\allowbreak validate\_retrieval\_\allowbreak index.py} & Bewertung des Retrieval-Index \\
+    3 & \texttt{step\_943\_\allowbreak analyze\_candidate\_\allowbreak coverage.py} & Analyse der Kandidatenabdeckung \\
+    4 & \texttt{step\_944\_\allowbreak analyze\_ltr\_run.py} & Analyse des Learning-to-Rank-Modells \\
+    \bottomrule
+  \end{tabularx}
 \end{table}
 
 Die Ergebnisse dieser Pipeline werden strukturiert in den folgenden Verzeichnissen abgelegt:
 
 \begin{itemize}
-  \item \texttt{evaluation/step_941_leakage_safety} für die Prüfung auf Zielinformations-Leakage
-  \item \texttt{evaluation/step_942_retrieval_validation} für die Bewertung des Retrieval-Index
-  \item \texttt{evaluation/step_943_candidate_coverage} für die Analyse der Kandidatenabdeckung
-  \item \texttt{evaluation/step_944_ltr_run_analysis} für die Analyse des Learning-to-Rank-Modells
+  \item \texttt{evaluation/step\_941\_leakage\_safety} für die Prüfung auf Zielinformations-Leakage
+  \item \texttt{evaluation/step\_942\_retrieval\_validation} für die Bewertung des Retrieval-Index
+  \item \texttt{evaluation/step\_943\_candidate\_coverage} für die Analyse der Kandidatenabdeckung
+  \item \texttt{evaluation/step\_944\_ltr\_run\_analysis} für die Analyse des Learning-to-Rank-Modells
 \end{itemize}
 
 \section{Verwendete Rankingmetriken}
  
 Bei einem Learning-To-Rank-Modell steht die Qualität der gesamten Rangliste im Vordergrund. 
-Für vorliegende Aufgabe ein EPLAN-Fenstermakro\cite{EPLAN-Makros} anhand eines oder mehrer EPLAN-Artikel \cite{EPLANArtikelverwaltung} zu finden,
+Für vorliegende Aufgabe, ein EPLAN-Fenstermakro \parencite{EPLAN-Makros} anhand eines oder mehrerer EPLAN-Artikel \parencite{EPLANArtikelverwaltung} zu finden,
 wurde mehrere komplementäre Rankingmetriken verwendet. 
-Hierdurch lassen sich unterschiedliche Aspekte der Modellqualität wie Position des Ziel-Makros \cite{EPLAN-Makros} , Erkennung fachlich verwandter Makros \cite{EPLAN-Makros}, sowie die allgemeine Qualität der Rangfolge beurteilen.
+Hierdurch lassen sich unterschiedliche Aspekte der Modellqualität wie Position des Ziel-Makros \parencite{EPLAN-Makros}, Erkennung fachlich verwandter Makros \parencite{EPLAN-Makros} sowie die allgemeine Qualität der Rangfolge beurteilen.
 
-Die Berechnung erfolgt innerhalb des Traingingmoduls und der Evaluationspipeline. \cite{srcStep931,srcStep944}.
+Die Berechnung erfolgt innerhalb des Trainingsmoduls und der Evaluationspipeline \parencite{srcStep931,srcStep944}.
 
 \subsection{Target Recall@k} 
 
-Durch den Target Recall@k wird gemessen, ob sich das korrekte Ziel-Makro \cite{EPLAN-Makros} innerhalb der ersten $k$ Elemente einer Rangliste befindet \cite{manning2008ir}.
+Durch den Target Recall@k wird gemessen, ob sich das korrekte Ziel-Makro \parencite{EPLAN-Makros} innerhalb der ersten $k$ Elemente einer Rangliste befindet \parencite{manning2008ir}.
 
 Dieser berechnet sich wie folgt: 
 
 \begin{align} Recall@k = \frac{ \# \text{Anfragen mit korrektem Ziel in Top-}k } { \# \text{Anfragen} } 
 \end{align} 
 
-Die Kennzahl gehört zu den grundlegenden Bewertungsmetriken des Information Retrievals \cite{manning2008ir}.
+mit 
 
-Der Wertebereich liegt zwischen 0 und 1. Ein Wert von \begin{align} Recall@1 = 0.80 \end{align} bedeutet zum Beispiel, dass bei 80\,\% der Anfragen das korrekte EPLAN-Fenstermakro \cite{EPLAN-Makros} direkt auf Rang 1 liegt. 
+\begin{description} 
+  \item[$k$] Anzahl der betrachteten Top-Ränge der Rangliste 
+  \item[$\# \text{Anfragen mit korrektem Ziel in Top-}k$] Anzahl der Anfragen, bei denen das korrekte Ziel-Makro innerhalb der ersten $k$ Ränge liegt 
+  \item[$\# \text{Anfragen}$] Gesamtzahl aller ausgewerteten Anfragen 
+\end{description}
+
+Die Kennzahl gehört zu den grundlegenden Bewertungsmetriken des Information Retrievals \parencite{manning2008ir}.
+
+Der Wertebereich liegt zwischen 0 und 1. Ein Wert von $Recall@1 = 0.80$ bedeutet zum Beispiel, dass bei 80\,\% der Anfragen das korrekte EPLAN-Fenstermakro \parencite{EPLAN-Makros} direkt auf Rang 1 liegt. 
 
 Folgenden Varianten werden im Projek verwendet: 
 
@@ -78,9 +109,9 @@ Diese Metriken sind die wichtigsten Kennzahlen für die Beurteilung der Makrozuo
 
 \subsection{Family Recall@k}
 
-Neben der Erkennung des exakten Ziel-Makros \cite{EPLAN-Makros} wird auch die Erkennung der korrekten Makro-Familie bewertet.
-Die Berechnung erfolgt analog zum Target Recall@k und basiert damit auf dem klassischen Recall-Konzept des Information Retrieval \cite{manning2008ir}. Der Unterschied liegt darin, dass jedes EPLAN-Fenstermakro \cite{EPLAN-Makros} als Treffer zählt, das in der gleichen Makro-Familie wie das Ziel-Makro \cite{EPLAN-Makros} vorkommt.
-Dadurch kann erkannt werden, ob das System die richtige Makro-Familie erkennt, auch wenn das exakte Ziel-Makro \cite{EPLAN-Makros}  nicht in den Top-k-Ergebnissen enthalten ist.
+Neben der Erkennung des exakten Ziel-Makros \parencite{EPLAN-Makros} wird auch die Erkennung der korrekten Makro-Familie bewertet.
+Die Berechnung erfolgt analog zum Target Recall@k und basiert damit auf dem klassischen Recall-Konzept des Information Retrieval \parencite{manning2008ir}. Der Unterschied liegt darin, dass jedes EPLAN-Fenstermakro \parencite{EPLAN-Makros} als Treffer zählt, das in der gleichen Makro-Familie wie das Ziel-Makro \parencite{EPLAN-Makros} vorkommt.
+Dadurch kann erkannt werden, ob das System die richtige Makro-Familie erkennt, auch wenn das exakte Ziel-Makro \parencite{EPLAN-Makros} nicht in den Top-k-Ergebnissen enthalten ist.
 
 Hierfür werden folgenden Ausprägungen verwendet:
 
@@ -95,7 +126,7 @@ Die Differenz zwischen dem Family Recall@k und dem Target Recall@k liefert einen
 
 \subsection{Mean Reciprocal Rank}
 
-Der Mean Reciprocal Rank (MRR) zählt zu den etablierten Bewertungsmetriken des Information Retrievals und wird bis heute sowohl in klassischen Suchsystemen als auch in modernen Retrieval- und Rankingverfahren eingesetzt \cite{voorhees1999mrr,zhu2024llmirsurvey}.
+Der Mean Reciprocal Rank (MRR) zählt zu den etablierten Bewertungsmetriken des Information Retrievals und wird bis heute sowohl in klassischen Suchsystemen als auch in modernen Retrieval- und Rankingverfahren eingesetzt \parencite{voorhees1999mrr,zhu2024llmirsurvey}.
 
 Dieser berechnet sich wie folgt:
 
@@ -110,15 +141,15 @@ mit
   \item[$rank_i$] Rangposition des korrekten Zielmakros für Anfrage $i$ 
 \end{description}
 
-Diese Metrik bevorzugt Platzierungen auf den ersten Rängen der Rangliste. Ein EPLAN-Fenstermakro \cite{EPLAN-Makros} auf Rang 1 trägt somit stärker zur MRR bei als ein EPLAN-Fenstermakro \cite{EPLAN-Makros} auf Rang 5.
+Diese Metrik bevorzugt Platzierungen auf den ersten Rängen der Rangliste. Ein EPLAN-Fenstermakro \parencite{EPLAN-Makros} auf Rang 1 trägt somit stärker zur MRR bei als ein EPLAN-Fenstermakro \parencite{EPLAN-Makros} auf Rang 5.
 
 Dadurch lässt sich die praktische Nutzbarkeit des Ranking-Systens besser bewerten.
 
 \subsection{Hierarchical nDCG}
 
 Für das vorliegende Projekt sind nicht alle Fehler gleich kritisch. Wenn zwei nahezu identische Makros verwechselt werden ist dies weniger schwerwiegend, 
-als die Verwechslung von EPLAN-Fenstermakros \cite{EPLAN-Makros} aus unterschiedlichen Familien. Deswegen wird zur Bewertung eine hierachische Bewertungsmetrik verwendet.
-Grundlage der Berechnung bildet die von Järvelin und Kekäläinen eingeführte Kennzahl Discounted Cumulative Gain (DCG) \cite{jarvelin2002dcg}.
+als die Verwechslung von EPLAN-Fenstermakros \parencite{EPLAN-Makros} aus unterschiedlichen Familien. Deswegen wird zur Bewertung eine hierarchische Bewertungsmetrik verwendet.
+Grundlage der Berechnung bildet die von Järvelin und Kekäläinen eingeführte Kennzahl Discounted Cumulative Gain (DCG) \citeyearpar{jarvelin2002dcg}.
 
 Die Berechnung ergibt sich wie folgt: 
 
@@ -126,17 +157,32 @@ Die Berechnung ergibt sich wie folgt:
   DCG@k = \sum_{i=1}^{k} \frac{2^{rel_i}-1} {\log_2(i+1)} 
 \end{align} 
 
+mit 
+
+\begin{description} 
+  \item[$k$] Anzahl der betrachteten Top-Ränge der Rangliste 
+  \item[$i$] Rangposition innerhalb der Top-$k$-Ergebnisse 
+  \item[$rel_i$] hierarchische Relevanz des Kandidaten auf Rangposition $i$ 
+\end{description}
+
 nDCG@k (normalized Discounted Cumulative Gain) ist die Erweiterung des DCG, die die Bewertung der Rangliste auf einen normierten Bereich [0,1] skaliert.
-nDCG zählt heute zu den wichtigsten Bewertungsmetriken für Ranking- und Suchsysteme \cite{jarvelin2002dcg} und wird wie folgt berechnet:
+nDCG zählt heute zu den wichtigsten Bewertungsmetriken für Ranking- und Suchsysteme \parencite{jarvelin2002dcg} und wird wie folgt berechnet:
 
 \begin{align} 
   nDCG@k = \frac{DCG@k} {IDCG@k} 
 \end{align} 
 
-wobei $IDCG@k$ die ideale Rangliste beschreibt. Diese Metrik wird auch von dem verwendeten Lambda-Rank-Algorithmus genutzt. (siehe Kapitel \ref{chap:datensplit_und_training})
+mit 
+
+\begin{description} 
+  \item[$DCG@k$] unnormierter Discounted-Cumulative-Gain-Wert der erzielten Rangliste 
+  \item[$IDCG@k$] Discounted-Cumulative-Gain-Wert der ideal sortierten Rangliste 
+\end{description}
+
+Diese Metrik wird auch von dem verwendeten Lambda-Rank-Algorithmus genutzt (siehe Kapitel \ref{chap:datensplit_und_training}).
 
 
-Für die vorliegende Anwendung wird die hierachische Relevanz verwendet: 
+Für die vorliegende Anwendung wird die hierarchische Relevanz verwendet: 
 
 \begin{align} 
   rel = \begin{cases} 
@@ -159,31 +205,40 @@ In diesem Projekt werden die folgenen Metriken verwendet:
 
 \subsection{Bedeutung der Metriken innerhalb der Evaluation} 
 
-Die Bewertungsmetriken bilden gemeinsam verschiedene Aspekte der Rankingqualität ab. 
+Die Bewertungsmetriken bilden gemeinsam verschiedene Aspekte der Rankingqualität ab, wie in Tabelle \ref{tab:rankingmetriken_bedeutung} zusammengefasst.
 
-\begin{table}[htbp] 
-  \centering 
-  \caption{Bedeutung der verwendeten Rankingmetriken} 
-  \begin{tabular}{p{4cm}p{9cm}} 
-    \toprule Metrik & Bewerteter Qualitätsaspekt \\ \midrule Target Recall@k & Position des exakten Ziel-Makros \cite{EPLAN-Makros} \\ Family Recall@k & Erkennung der korrekten Makrofamilie \\ MRR & Durchschnittlicher Zielrang \\ Hierarchical nDCG & Qualität der gesamten Rangfolge \\ 
-    \bottomrule 
-  \end{tabular} 
+\begin{table}[tbp]
+  \centering
+  \setlength{\tabcolsep}{6pt}
+  \renewcommand{\arraystretch}{1.1}
+  \caption{Bedeutung der verwendeten Rankingmetriken}
+  \label{tab:rankingmetriken_bedeutung}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{4cm} >{\raggedright\arraybackslash}X}
+    \toprule
+    \textbf{Metrik} & \textbf{Bewerteter Qualitätsaspekt} \\
+    \midrule
+    Target Recall@k & Position des exakten Ziel-Makros \parencite{EPLAN-Makros} \\
+    Family Recall@k & Erkennung der korrekten Makrofamilie \\
+    MRR & Durchschnittlicher Zielrang \\
+    Hierarchical nDCG & Qualität der gesamten Rangfolge \\
+    \bottomrule
+  \end{tabularx}
 \end{table}
 
 
 \section{Evaluation der Retrievalphase}
 
-Bevor die Qualtität des Learning-to-Rank-Modells bewertet wird, muss untersucht werden, ob das korrekte Ziel-Makro \cite{EPLAN-Makros} überhaupt durch Retrievalkomponenten gefunden wird.
-Ein Rankingmodell kann ein Ziel-Makro \cite{EPLAN-Makros} nur dann korrekt platzieren, wenn es in der Kandidatenmenge vorhanden ist.
+Bevor die Qualität des Learning-to-Rank-Modells bewertet wird, muss untersucht werden, ob das korrekte Ziel-Makro \parencite{EPLAN-Makros} überhaupt durch Retrievalkomponenten gefunden wird.
+Ein Rankingmodell kann ein Ziel-Makro \parencite{EPLAN-Makros} nur dann korrekt platzieren, wenn es in der Kandidatenmenge vorhanden ist.
 
 Deswegen erfolgt die Evaluation dieser Retrievalphase in einem getrennten Abschnitt.
 
-Diese Analysen werden durch die  Module \texttt{step\_942\_validate\_retrieval\_index.py} und \texttt{step\_943\_analyze\_candidate\_coverage.py} durchgeführt \cite{srcStep942,srcStep943}.
+Diese Analysen werden durch die Module \texttt{step\_942\_\allowbreak validate\_retrieval\_\allowbreak index.py} und \texttt{step\_943\_\allowbreak analyze\_candidate\_\allowbreak coverage.py} durchgeführt \parencite{srcStep942,srcStep943}.
 
 \subsection{Bewertung des Retrieval-Index}
 
-Die Qualität des Retrivalindexes wird durch die erste Evaluationsstufe untersucht. Hierzu werden die Kandidatenlisten die durch das Retrieval erzeugt werden dierkt ausgewertet. 
-Dies erfolgt durch \texttt{step\_942\_validate\_retrieval\_index.py} \cite{srcStep942}.
+Die Qualität des Retrievalindexes wird durch die erste Evaluationsstufe untersucht. Hierzu werden die Kandidatenlisten, die durch das Retrieval erzeugt werden, direkt ausgewertet. 
+Dies erfolgt durch \texttt{step\_942\_\allowbreak validate\_retrieval\_\allowbreak index.py} \parencite{srcStep942}.
 
 Dabei werden folgende Kennzahlen berechnet:
 
@@ -201,16 +256,16 @@ Dabei werden folgende Kennzahlen berechnet:
 
 Dadurch kann die grundsätzliche Leistungsfähigkeit der Retrievalkomponenten bewertet werden, um die Eignung der Kandidatenmenge für die nachfolgende Rankingphase zu beurteilen.
 
-Target Recall@100 besitzt hier eine hohe Bedeutung. Wenn ein Ziel-Makro \cite{EPLAN-Makros} nicht unter den Top-100-Kandidaten gefunden wird, kann es durch das spätere Learning-to-Rank-Modell nicht korrekt platziert werden.
+Target Recall@100 besitzt hier eine hohe Bedeutung. Wenn ein Ziel-Makro \parencite{EPLAN-Makros} nicht unter den Top-100-Kandidaten gefunden wird, kann es durch das spätere Learning-to-Rank-Modell nicht korrekt platziert werden.
 Hierdurch wird dann die theoretische maximale Leistung des Learning-to-Rank-Modells festgelegt.
 
 \subsection{Candidate Coverage}
 
-Die Abdeckung der Kandidaten ist neben der Retrievalqualität eine weiter wichtiger Faktor.
+Die Abdeckung der Kandidaten ist neben der Retrievalqualität ein weiterer wichtiger Faktor.
 
-Die  Analyse erfolgt dabei über \texttt{step\_943\_analyze\_candidate\_coverage.py} \cite{srcStep943}.
+Die Analyse erfolgt dabei über \texttt{step\_943\_\allowbreak analyze\_candidate\_\allowbreak coverage.py} \parencite{srcStep943}.
 
-Dabei werden unterschiedliche Retrievalsignale darauf bewertet, wie gut das korrekte Ziel-Makro \cite{EPLAN-Makros} in der Kandidatenmenge aufgenommen wird.
+Dabei werden unterschiedliche Retrievalsignale darauf bewertet, wie gut das korrekte Ziel-Makro \parencite{EPLAN-Makros} in der Kandidatenmenge aufgenommen wird.
 
 Hierzu werden die einezelen Retrievalsignale getrennt voneinander analysiert:
 
@@ -221,49 +276,55 @@ Hierzu werden die einezelen Retrievalsignale getrennt voneinander analysiert:
   \item kombinierte Retrievalvarianten 
 \end{itemize}
 
-Für jede Variante wird dabei bewertet, wie oft das korrekte Ziel-Makro \cite{EPLAN-Makros} in den verschiedenen Kandidatenmengen enthalten ist.
+Für jede Variante wird dabei bewertet, wie oft das korrekte Ziel-Makro \parencite{EPLAN-Makros} in den verschiedenen Kandidatenmengen enthalten ist.
 
-Die Analyse erfolgt dabei für: 
+Die Analyse erfolgt dabei für $Top_{10}$, $Top_{50}$ und $Top_{100}$ der Kandidaten.
 
-\begin{align} 
-  Top_{10} 
-\end{align} 
-
-\begin{align} 
-  Top_{50} 
-\end{align} 
-
-\begin{align} 
-  Top_{100} 
-\end{align} 
-
-der Kandidaten.
-
-Dadurch kann der Beitrag der einzelnen Retievalkomponenten auf die Kandidatenmenge und der Einfluss der einzelnen Retrievalsignale auf die spätere Rankingqualität bewertet werden.
+Dadurch kann der Beitrag der einzelnen Retrievalkomponenten auf die Kandidatenmenge und der Einfluss der einzelnen Retrievalsignale auf die spätere Rankingqualität bewertet werden.
 
 \subsection{Interpretation der Retrievalergebnisse}
 
-Dies getrennte Evaluation ermöglicht es, Fehlkassifikationen in zwei Kategorien zu unterteilen:
+Dies getrennte Evaluation ermöglicht es, Fehlklassifikationen in zwei Kategorien zu unterteilen:
 
 \begin{enumerate} 
-  \item Das korrekte Ziel-Makro \cite{EPLAN-Makros} ist nicht Bestandteil der Kandidatenmenge. 
-  \item Das korrekte Ziel-Makro \cite{EPLAN-Makros} ist vorhanden, wird jedoch durch das Rankingmodell falsch eingeordnet. 
+  \item Das korrekte Ziel-Makro \parencite{EPLAN-Makros} ist nicht Bestandteil der Kandidatenmenge. 
+  \item Das korrekte Ziel-Makro \parencite{EPLAN-Makros} ist vorhanden, wird jedoch durch das Rankingmodell falsch eingeordnet. 
 \end{enumerate}
 
-Im ersten Fall liegt das Problem im Retrievalprozess. Das Rankingmodell kann somit das korrekte Ziel-Makro \cite{EPLAN-Makros} nicht finden.
-Im zweiten Fall liegt das Problem im Rankingprozess. Das korrekte Ziel-Makro \cite{EPLAN-Makros} ist zwar in der Kandidatenmenge enthalten, wird jedoch vom Learning-to-Rank-Modell nicht auf die vorderen Ränge eingeordnet.
+Im ersten Fall liegt das Problem im Retrievalprozess. Das Rankingmodell kann somit das korrekte Ziel-Makro \parencite{EPLAN-Makros} nicht finden.
+Im zweiten Fall liegt das Problem im Rankingprozess. Das korrekte Ziel-Makro \parencite{EPLAN-Makros} ist zwar in der Kandidatenmenge enthalten, wird jedoch vom Learning-to-Rank-Modell nicht auf die vorderen Ränge eingeordnet.
+
+Abbildung \ref{fig:fehleranalyse_kategorien} veranschaulicht diese Unterscheidung der Fehlerquellen.
+
+\begin{figure}[tbp]
+    \centering
+    \begin{tikzpicture}[
+        font=\small,
+        rootbox/.style={draw=blue!60!black, thick, rounded corners, fill=blue!8, text width=5.4cm, minimum height=1.1cm, align=center, inner sep=4pt},
+        errbox/.style={draw=red!50!black, thick, rounded corners, fill=red!8, text width=5.4cm, minimum height=1.5cm, align=center, inner sep=4pt},
+        flow/.style={->, thick, black!70}
+    ]
+        \node[rootbox] (root) at (0,0) {Ziel-Makro nicht\\korrekt auf Rang 1 platziert};
+        \node[errbox] (retrieval) at (-3.4,-2.3) {\textbf{Retrieval-Fehler}\\[2pt]\footnotesize Ziel-Makro nicht in\\Kandidatenmenge enthalten};
+        \node[errbox] (ranking) at (3.4,-2.3) {\textbf{Ranking-Fehler}\\[2pt]\footnotesize Ziel-Makro enthalten,\\aber falsch platziert};
+        \draw[flow] (root) -- (retrieval);
+        \draw[flow] (root) -- (ranking);
+    \end{tikzpicture}
+    \caption{Unterscheidung der Fehlerquellen in Retrieval- und Rankingprozess.}
+    \label{fig:fehleranalyse_kategorien}
+\end{figure}
 
 Dadurch lassen sich die Fehlerquellen im Retrieval- und Rankingprozess voneinander unterscheiden und gezielt verbessern.
 
 \section{Leakage-Sicherheitsprüfung}
 
 Ein zentraler Bestandteil in der Evaluation ist eine Leakage-Sicherheitsprüfung auf Zielinformationen. 
-Unter Leakage wird die unbeabsichtigte Nutzung von Informationen verstanden, die zum Zeitpunkt einer realen Vorhersage nicht verfügbar sein dürften und dadurch zu unrealistisch guten Modellergebnissen führen würden \cite{kaufman2012leakage}.
-Da dieses System auf Artikel \cite{EPLANArtikelverwaltung} - Makro \cite{EPLAN-Makros} -Zuordnungen trainiert wird, besteht das Risiko, 
-das Informationen über das tatsächliche Ziel-Makro \cite{EPLAN-Makros} in die Trainings- und Evaluierungsdaten gelangen können und somit die Aussagekraft der verwendeten Evaluationsmetriken verfälscht wird.
+Unter Leakage wird die unbeabsichtigte Nutzung von Informationen verstanden, die zum Zeitpunkt einer realen Vorhersage nicht verfügbar sein dürften und dadurch zu unrealistisch guten Modellergebnissen führen würden \parencite{kaufman2012leakage}.
+Da dieses System auf Artikel \parencite{EPLANArtikelverwaltung} - Makro \parencite{EPLAN-Makros} -Zuordnungen trainiert wird, besteht das Risiko, 
+das Informationen über das tatsächliche Ziel-Makro \parencite{EPLAN-Makros} in die Trainings- und Evaluierungsdaten gelangen können und somit die Aussagekraft der verwendeten Evaluationsmetriken verfälscht wird.
 
-Un dies zu vermeiden, enthält die Pipeline eine Leakage-Prüfung, die vor der eigentlichen Modellbewertung ausgeführt wird .
-Die Implementierung erfolgt in \texttt{step\_941\_validate\_leakage\_safety.py} \cite{srcStep941}.
+Um dies zu vermeiden, enthält die Pipeline eine Leakage-Prüfung, die vor der eigentlichen Modellbewertung ausgeführt wird.
+Die Implementierung erfolgt in \texttt{step\_941\_\allowbreak validate\_leakage\_\allowbreak safety.py} \parencite{srcStep941}.
 
 \subsection{Ziele der Leakage-Prüfung}
 
@@ -271,7 +332,7 @@ Die Ziele der Leakage-Prüfung sind:
 
 \begin{itemize} 
 \item Identifikation verbotener Zielinformationen innerhalb der Query-Daten 
-\item Erkennung direkter Ziel-Makro \cite{EPLAN-Makros} -Referenzen 
+\item Erkennung direkter Ziel-Makro \parencite{EPLAN-Makros} -Referenzen 
 \item Prüfung auf Familien- und Zielinformationen innerhalb von Eingangsmerkmalen 
 \item Kontrolle der Kandidatenprofile 
 \item Überprüfung der Datensplits auf Überschneidungen 
@@ -282,9 +343,9 @@ Somit wird sichergestellt, dass das Modelltraining nur mit den Informationen erf
 
 \subsection{Prüfung der Query-Daten}
 
-Die verwendete Querry-Darstellung repräsentiert einen eingehenden Artikel \cite{EPLANArtikelverwaltung} beziehungsweise die Informationen aus einem Datenblatt, die für eine Suchanfrage an das trainiert Modell wichtig sind.
+Die verwendete Query-Darstellung repräsentiert einen eingehenden Artikel \parencite{EPLANArtikelverwaltung} beziehungsweise die Informationen aus einem Datenblatt, die für eine Suchanfrage an das trainierte Modell wichtig sind.
 
-Wichtig hierbei ist es, dass keine direkten Hinweise auf das Ziel-Makro \cite{EPLAN-Makros} in den Query-Daten enthalten sind, welche unnmittelbar auf dieses verweisen können.
+Wichtig hierbei ist es, dass keine direkten Hinweise auf das Ziel-Makro \parencite{EPLAN-Makros} in den Query-Daten enthalten sind, welche unmittelbar auf dieses verweisen können.
 
 Deswegen untersucht die Leakage-Prüfung folgenden Punkte:
 
@@ -300,13 +361,13 @@ Sobald solche Informationen gefunden werden, wird der Lauf als Ungültig markier
 
 \subsection{Prüfung der Datensplits}
 
-Neben der Querry-Prüfung, erfolgt auch eine Prüfung des erzeugten Datensplits. Dabei wird überprüft, ob unerlaubte Überschneidungen zwischen Training, Validierung und Test vorhanden sind.
+Neben der Query-Prüfung erfolgt auch eine Prüfung des erzeugten Datensplits. Dabei wird überprüft, ob unerlaubte Überschneidungen zwischen Training, Validierung und Test vorhanden sind.
 
 Dabei werden folgende Aspekte überprüft:
 
 \begin{itemize} 
   \item Fingerprint-Gruppen 
-  \item Fenstermakrozuordnungen \cite{EPLAN-Makros} 
+  \item Fenstermakrozuordnungen \parencite{EPLAN-Makros} 
   \item Kandidatenprofile 
   \item technische Zusammenhangskomponenten 
   \item gruppierte Artikelstrukturen 
@@ -317,10 +378,10 @@ die die Generalisierungsfähigkeit des Modells beeinträchtigen würde.
 
 \subsection{Prüfung der Kandidatenprofile}
 
-Ein weiter Bereich der Prüfung betrifft die Makro \cite{EPLAN-Makros} - kandidatenprofile.
-Da diese Profile aus den Traingsdaten entstehen, muss sichergestellt werden, dass keine Informationen aus den Validierungs- oder Testdaten in die Kandidatenprofile einfließen.
+Ein weiterer Bereich der Prüfung betrifft die Makro-Kandidatenprofile \parencite{EPLAN-Makros}.
+Da diese Profile aus den Trainingsdaten entstehen, muss sichergestellt werden, dass keine Informationen aus den Validierungs- oder Testdaten in die Kandidatenprofile einfließen.
 
-Deswegen werden sämtliche Profilinformationen auf ihre Herkunft geprüft, um sicherzustellen, dass ausschließlich Daten des Trainingssplits zur Erstellung der Kandidatenprofile verwendet werden \cite{srcLeakageGuard}.
+Deswegen werden sämtliche Profilinformationen auf ihre Herkunft geprüft, um sicherzustellen, dass ausschließlich Daten des Trainingssplits zur Erstellung der Kandidatenprofile verwendet werden \parencite{srcLeakageGuard}.
 
 \subsection{Evaluierungsergebnis}
 

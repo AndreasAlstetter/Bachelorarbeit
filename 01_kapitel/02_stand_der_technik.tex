@@ -5,22 +5,38 @@
 Rankingprobleme treten in einer Vielzahl von Anwendungsfällen auf, wie zum Beispiel in Suchmaschinen, Produktempfehlungen oder Enterprise-Search-Systemen.
 Die Bewertung durch ein komplexes Rankingmodell wird dabei schnell unübersichtlich und bietet weniger Raum für Analysen und Interpretationen.
 Stattdessen haben sich mehrstufige Architekturen etabliert, die zu Beginn eine schnelle Kandidatenselektion durchführen und im Anschluss ein Rankingmodell auf die selektierten Kandidaten anwenden.
-Dieses Konzept wird in der Literatur als \emph{Candidate Generation} und \emph{Learning-to-Rank} bezeichnet \cite{robertson2009prf,liu2009learning,burges2010lambdamart}.
+Dieses Konzept wird in der Literatur als \emph{Candidate Generation} und \emph{Learning-to-Rank} bezeichnet \parencite{robertson2009prf,liu2009learning,burges2010lambdamart}.
 Teile davon werden für diese Arbeit übernommen und in abgeändeter Form für die Trainingsvorbereitung sowie das eigentliche Rankingmodell verwendet.
+Abbildung \ref{fig:zweistufiger_rankingansatz} zeigt diesen zweistufigen Rankingansatz schematisch.
 
-Im E-Comerce Bereich werden mehrstufige Architekturen bereits seit Jahren erfolgreich eingesetzt, um die Relevanz von Suchergebnissen und Empfehlungen zu verbessern.
+\begin{figure}[tbp]
+    \centering
+    \begin{tikzpicture}[
+        font=\small,
+        stage/.style={draw=blue!60!black, thick, rounded corners=4pt, fill=blue!8, text width=7.4cm, minimum height=1.5cm, align=center, inner sep=6pt},
+        flow/.style={->, thick, blue!70!black}
+    ]
+        \node[stage] (cg) at (0,0) {\textbf{Candidate Generation}\\[2pt] \footnotesize BM25, Exact-Match, Reciprocal Rank Fusion};
+        \node[stage, fill=orange!10, draw=orange!60!black] (ltr) at (0,-2.2) {\textbf{Learning-to-Rank}\\[2pt] \footnotesize LambdaRank / LambdaMART};
+        \draw[flow] (cg) -- (ltr);
+    \end{tikzpicture}
+    \caption{Zweistufiger Rankingansatz aus Candidate Generation und Learning-to-Rank.}
+    \label{fig:zweistufiger_rankingansatz}
+\end{figure}
+
+Im E-Commerce-Bereich werden mehrstufige Architekturen bereits seit Jahren erfolgreich eingesetzt, um die Relevanz von Suchergebnissen und Empfehlungen zu verbessern.
 Aktuelle Untersuchungen in diesem Bereich zeigen, dass Produktsuchen großer Plattformen wie Amazon, eBay oder Alibaba weiterhin stark auf mehrstufige Retrievalpipelines, strukturierte Merkmale, und Learning-to-Rank-Verfahren setzen.
-\cite{kabir2024ecommerce}.
+\parencite{kabir2024ecommerce}.
 
-In diesem Kapitel werden die Verwendeten technischen Grundlagen für die Entwicklung des Systems erläutert.
-Die genaue Architektur sowie die Verwendung der einzelnen Komponenten wird im Kapitel \ref{chap:05_prototypische_umsetzung} beschrieben.
+In diesem Kapitel werden die verwendeten technischen Grundlagen für die Entwicklung des Systems erläutert.
+Die genaue Architektur sowie die Verwendung der einzelnen Komponenten wird im Kapitel \ref{chap:architektur} beschrieben.
 
 \section{BM25}
 
 \subsection{Grundidee von BM25}
 
 BM25 basiert auf dem Probabilistic Relevance Framework von Robertson und Zaragoza.
-Dabei wird für jedes Anfrage-Dokument-Paar einen Relevanzwert bestimmt \cite{robertson2009prf}.
+Dabei wird für jedes Anfrage-Dokument-Paar einen Relevanzwert bestimmt \parencite{robertson2009prf}.
 
 Die Grundannahme besteht darin, dass ein Dokument umso relevanter ist, 
 
@@ -31,7 +47,7 @@ Die Grundannahme besteht darin, dass ein Dokument umso relevanter ist,
 \end{itemize}
 
 Dadurch erlangen seltene und spezifische Begriffe eine höhere Gewichtung, während häufige Begriffe wie "und", "oder" oder "der" weniger Einfluss auf die Relevanzbewertung haben.
-Bei technischen Produktdaten ist dies besonders relevant, Artikelnummern, Typenbezeichnungen oder normierte Fachbegriffe häufig eine hohe Differenzierungskraft besitzen.
+Bei technischen Produktdaten ist dies besonders relevant, da Artikelnummern, Typenbezeichnungen oder normierte Fachbegriffe häufig eine hohe Differenzierungskraft besitzen.
 
 
 \begin{align}
@@ -71,16 +87,16 @@ Die resultierende Kennzahl stellt somit einen Relevanzscore dar, die die lexikal
 \subsection{Bedeutung in modernen Rankingarchitekturen}
 
 Trotz der zunehmenden Verbreitung von Deep-Learning-basierten Ansätzen im Information Retrieval, bleibt BM25 ein weit verbreitetes und effektives Verfahren.
-Aktuelle Studien zeigen, dass BM25 insbesondere bei Domänenspezifischen Datensätzen und als Basis für Learning-to-Rank-Modelle weiterhin eine hohe Relevanz besitzt \cite{thakur2021beir}.
+Aktuelle Studien zeigen, dass BM25 insbesondere bei domänenspezifischen Datensätzen und als Basis für Learning-to-Rank-Modelle weiterhin eine hohe Relevanz besitzt \parencite{thakur2021beir}.
 
 
 \section{Exact-Match}
 
 \subsection{Grundprinzip des Exact Matching}
 
-Exact-Match-Verfahren sind Teil der klassischen Konzepte des Information Retrieval und basieren auf dem Prinzip der exakten Übereinstimmung von Merkmalen zwischen einer Anfrage und einem Dokument \cite{manning2008ir,baeza2011modern}.
-Klassische Boolean-Syteme unterscheiden zwischen Treffer und Kein Treffer. Ein Dokument erfüllt nur dann die Anfrage, wenn alle geforderten Merkmale exakt übereinstimmen.
-Um quantiative Übereinstimmungen zu berücksichten, kann die Anzahl bzw. das Gewicht der übereinstimmenden Merkmale berücksichtigt werden.
+Exact-Match-Verfahren sind Teil der klassischen Konzepte des Information Retrieval und basieren auf dem Prinzip der exakten Übereinstimmung von Merkmalen zwischen einer Anfrage und einem Dokument \parencite{manning2008ir,baeza2011modern}.
+Klassische Boolean-Systeme unterscheiden zwischen Treffer und kein Treffer. Ein Dokument erfüllt nur dann die Anfrage, wenn alle geforderten Merkmale exakt übereinstimmen.
+Um quantitative Übereinstimmungen zu berücksichtigen, kann die Anzahl bzw. das Gewicht der übereinstimmenden Merkmale berücksichtigt werden.
 
 Der Exact-Match-Score berechnet sich aus dem Verhältnis der Gewichte aller übereinstimmenden Merkmale zu den Gewichten aller in der Anfrage spezifizierten Merkmale: 
 
@@ -111,8 +127,8 @@ Ein Wert von 1 bedeutet, dass sämtliche relevanten technischen Eigenschaften ü
 
 \subsection{Bedeutung von Exact-Match im modernen Information Retrieval}
 
-Eine aktuelle Wissenschaftliche Arbeit zeigt mit dem COIL-Ansatz, dass exakte lexikalische Übereinstimmungen im Zeitalter neuronaler Suchverfahren weiterhin eine hohe Relevanz besitzen.
-Die Autoren kombinieren klassische Exact-Match-Mechanismen mit modernen Sprachmodellrepräsentationen und zeigen, dass exakte Trefferinformationen weiterhin hochrelevante Signale für Retrieval- und Rankingverfahren darstellen \cite{gao2021coil}.
+Eine aktuelle wissenschaftliche Arbeit zeigt mit dem COIL-Ansatz, dass exakte lexikalische Übereinstimmungen im Zeitalter neuronaler Suchverfahren weiterhin eine hohe Relevanz besitzen.
+Die Autoren kombinieren klassische Exact-Match-Mechanismen mit modernen Sprachmodellrepräsentationen und zeigen, dass exakte Trefferinformationen weiterhin hochrelevante Signale für Retrieval- und Rankingverfahren darstellen \parencite{gao2021coil}.
 
 
 \section{Fusion von Retrievalsignalen mittels Reciprocal Rank Fusion}
@@ -121,11 +137,11 @@ Die Autoren kombinieren klassische Exact-Match-Mechanismen mit modernen Sprachmo
 \subsection{Grundidee von Reciprocal Rank Fusion}
 
 Reciprocal Rank Fusion (RRF) ist ein Verfahren zur Aggregation von Ranglisten, das die Rangpositionen der Dokumente in den einzelnen Listen berücksichtigt.
-Dabei lautet die Zentrale Annahme, dass ein Kandidat ein hohe Relevanz besitzt, wenn er in mehreren Ranglisten einen hohen Rang besitzt.
+Dabei lautet die zentrale Annahme, dass ein Kandidat eine hohe Relevanz besitzt, wenn er in mehreren Ranglisten einen hohen Rang besitzt.
 Wenn ein Kandidat nur von einer Rangliste hoch bewertet wird, erhält er dadurch eine geringere Gewichtung.
 Dies führt zu einer robusteren Gesamtrangliste, die die Stärken der einzelnen Retrievalverfahren kombiniert.
 Ein wesentlicher Vorteil von RRF besteht darin, dass unterschiedliche Scales und Bewertungsmetriken problemlos kombiniert werden können.
-Hierfür ist keine Normalisierung der Scores auf einen Wertebereich erforderlich, da ausschließlich die Rangpositionen berücksichtigt werden.\cite{cormack2009rrf}.
+Hierfür ist keine Normalisierung der Scores auf einen Wertebereich erforderlich, da ausschließlich die Rangpositionen berücksichtigt werden \parencite{cormack2009rrf}.
 
 
 \subsection{Klassische RRF-Formulierung} 
@@ -144,26 +160,26 @@ mit
     \item[$k$] Glättungskonstante 
 \end{description} 
 
-Die Konstante $k$ wird typischerweise auf den Wert 60 gesetzt und reduziert den Einfluss sehr hoher Einzelplatzierungen \cite{cormack2009rrf}. 
+Die Konstante $k$ wird typischerweise auf den Wert 60 gesetzt und reduziert den Einfluss sehr hoher Einzelplatzierungen \parencite{cormack2009rrf}. 
 
 \subsection{Aktuelle Bedeutung von Rank-Fusion-Verfahren}
 
 In der aktuellen Forschung zu mehrstufigen Retrieval- und Rankingarchitekturen wird die Zusammenführung von Retrievalsignalen als wichtiger Bestandteil betrachtet, um die Leistungsfähigkeit von Rankingmodellen zu verbessern.
-Zhang et al. zeigen im Rahmen einer Multi-Stage-Ranking-Pipeline, dass unterschiedliche Kombinationen von Relevanzsignalen eine hohe Retrievalqualität ermöglichen \cite{zhang2021muppets}.
-Darüber hinaus beschreiben Zheng et al. im Rahmen des Full-Stage-Learning-to-Rank-Ansatz moderne Rankingarchitekturen, bei denen unterschiedliche Retrievalsignale in einem System optimiert werden und zur finalen Entscheidungsfindung beitragen \cite{zheng2024fullstage}.
+Zhang et al. zeigen im Rahmen einer Multi-Stage-Ranking-Pipeline, dass unterschiedliche Kombinationen von Relevanzsignalen eine hohe Retrievalqualität ermöglichen \citeyearpar{zhang2021muppets}.
+Darüber hinaus beschreiben Zheng et al. im Rahmen des Full-Stage-Learning-to-Rank-Ansatz moderne Rankingarchitekturen, bei denen unterschiedliche Retrievalsignale in einem System optimiert werden und zur finalen Entscheidungsfindung beitragen \citeyearpar{zheng2024fullstage}.
 
 
 \section{Learning-to-Rank mit LambdaRank}
 
 \subsection{Grundprinzip von Learning-to-Rank}
 
-Learning-to-Rank (LTR) bezeichnet eine Klasse an maschinellen Lernverfahren, die das Ziel besitzen die Reihenfolge in einer Ergebnisliste zu optimieren \cite{liu2009learning}.
-Im Gegensatz zu klassischen Klassifikations- oder Regressionsansätzen, bewertet Learning-to-Rank keine einzelnen Objekte isoliert, sondern die relative Relevanz dieser Objekte in einer Kandiatenmenge.
+Learning-to-Rank (LTR) bezeichnet eine Klasse an maschinellen Lernverfahren, die das Ziel besitzen die Reihenfolge in einer Ergebnisliste zu optimieren \parencite{liu2009learning}.
+Im Gegensatz zu klassischen Klassifikations- oder Regressionsansätzen, bewertet Learning-to-Rank keine einzelnen Objekte isoliert, sondern die relative Relevanz dieser Objekte in einer Kandidatenmenge.
 Die Aufgabe eines Rankingmodells besteht darin, dass für eine Anfrage die relevanten Dokumente anhand ihrer Merkmale bewertet werden und anschließend in eine Rangliste überführt werden.
 
 \subsection{LambdaRank}
 
-LambdaRank ist eines der bekanntesten Verfahren im Bereich des Learning-to-Rank. \cite{burges2010lambdamart}
+LambdaRank ist eines der bekanntesten Verfahren im Bereich des Learning-to-Rank. \parencite{burges2010lambdamart}
 
 Die Grundidee von LambdaRank ist der paarweise Vergleich von Kandidaten. 
 Dabei wird für zwei Kandidaten $i$ und $j$ mit den vorhergesagten Ergebnissen $s_i$ und $s_j$ die Wahrscheinlichkeit berechnet, 
@@ -200,13 +216,13 @@ mit
   \item[$|\Delta nDCG|$] Änderung der Rankingqualität bei Vertauschung der Kandidaten 
 \end{description}
 
-Kandidatenpaare, deren Reihnefolge einen größen Einfluss auf die Ranglisten-Qualität besitzen, erhalten einen höhrern Einfluss auf den Lernprozess.
-Dadurch wird das Modell auf die Qualität der Ergebnisliste optimiert und nicht auf die Vorhersage korrekter Einzelentscheidungen.\cite{burges2010lambdamart}.
+Kandidatenpaare, deren Reihenfolge einen größeren Einfluss auf die Ranglisten-Qualität besitzen, erhalten einen höheren Einfluss auf den Lernprozess.
+Dadurch wird das Modell auf die Qualität der Ergebnisliste optimiert und nicht auf die Vorhersage korrekter Einzelentscheidungen \parencite{burges2010lambdamart}.
 
 \subsection{LambdaMART und LightGBM}
 
 LambdaRank wird in modernen Rankinganwendungen häufig mit Gradient Boosted Decision Trees kombiniert, was als LambdaMART bezeichnet wird. 
-Diese zählt zu den erfolgreichsten Verfahren im Bereich der strukturierten Rankingdaten \cite{burges2010lambdamart}.
+Diese zählt zu den erfolgreichsten Verfahren im Bereich der strukturierten Rankingdaten \parencite{burges2010lambdamart}.
 
 Die zugrunde liegende Logik ist eine additive Zusammensetzung von Entscheidungsbäumen:
 
@@ -226,19 +242,19 @@ mit
 Dabei versucht jeder neu hinzugefügte Entscheidungsbaum, die Fehler des bisherigen Modells zu korrigieren.
 
 Eine weit verbreitete Implementierung in der Industrie ist der \texttt{LGBMRanker} der LightGBM-Bibliothek.
-Dabei wird das Modell gruppenbasiert trainiert und alle Kandidaten einer Anfrage bilden eine Rankinggruppe, mit dem Ziel, die Reihenfolge der Kandiaten innerhalb einer Gruppe zu optimieren.
+Dabei wird das Modell gruppenbasiert trainiert und alle Kandidaten einer Anfrage bilden eine Rankinggruppe, mit dem Ziel, die Reihenfolge der Kandidaten innerhalb einer Gruppe zu optimieren.
 
 \subsection{Aktuelle Bedeutung von LambdaMART}
 
-Trotz der zunehmenden Forschung im Bereich neuronaler Rankingverfahren, gehören LambdaMART-Basierte Modelle weiterhin zu den leistungsfähigsten Verfahren im Bereich der strukturierten tabellarischen Daten.
-Ein aktuelle Vergleichsstudie zeigt, dass Gradient-Boosted-Decision-Tree-Verfahren vorallem bei heterogenen Datensätzen noch immer State of the Art sind \cite{lyzhin2023ltr}.
+Trotz der zunehmenden Forschung im Bereich neuronaler Rankingverfahren, gehören LambdaMART-basierte Modelle weiterhin zu den leistungsfähigsten Verfahren im Bereich der strukturierten tabellarischen Daten.
+Eine aktuelle Vergleichsstudie zeigt, dass Gradient-Boosted-Decision-Tree-Verfahren vor allem bei heterogenen Datensätzen noch immer State of the Art sind \parencite{lyzhin2023ltr}.
 
-Lyzhin et al. vergleiche in Ihrer Studie mehrer moderne Learning-to-Rank-Verfahren miteinander und kommen zu dem Ergebnis, dass LambdaMART-basierte Modelle immer noch äußerst konkurrenzfähig sind.
-Neue Optimierungsverfahren wie YetiRank and StochasticRank liefern dabei nur begrenzte Verbesserungen gegenüber LambdaMART-Modellen \cite{lyzhin2023ltr}.
+Lyzhin et al. vergleichen in ihrer Studie mehrere moderne Learning-to-Rank-Verfahren miteinander und kommen zu dem Ergebnis, dass LambdaMART-basierte Modelle immer noch äußerst konkurrenzfähig sind.
+Neue Optimierungsverfahren wie YetiRank und StochasticRank liefern dabei nur begrenzte Verbesserungen gegenüber LambdaMART-Modellen \parencite{lyzhin2023ltr}.
 
 Aktuelle Untersuchungen im Bereich der Rankingarchitekturen im E-Commerce zeigen, dass Learning-to-Rank-Modelle mit Gradient-Boosted-Decision-Trees weiterhin eine führende Rolle spielen.
-Dabei ist die Kombination aus strukturierten Merkmalen, Retrivalsignalen und LambdaMART-Optimierung insbesondere für strukturierte Domänen wie Produktkataloge und technische Informationssysteme von besonderer Bedeutung.
-\cite{kabir2024ecommerce}.
+Dabei ist die Kombination aus strukturierten Merkmalen, Retrievalsignalen und LambdaMART-Optimierung insbesondere für strukturierte Domänen wie Produktkataloge und technische Informationssysteme von besonderer Bedeutung
+\parencite{kabir2024ecommerce}.
 
 
 
