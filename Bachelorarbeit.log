@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  5 SEP 2026 12:19
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  5 SEP 2026 14:27
  restricted system commands enabled.
  file:line:error style messages enabled.
 **"c:/Users/alstetter/OneDrive - GROBGroup/Documents/Sys_Engineering/Bachelorar
@@ -2577,13 +2577,45 @@ Package biblatex Info: Reference segment=6 on input line 1.
 Package biblatex Info: Setting label 'refsegment:06' on input line 1.
 [16
 
-] [17] [18] [19] [20]
+] [17] [18] [19]
+Overfull \hbox (2.76907pt too wide) in paragraph at lines 144--146
+\TU/TeXGyreTermesX(0)/m/n/12 Pairwise-Merkmale er-folgt in-ner-halb der ent-wi-c
+kel-ten Trai-nings-pipe-line ([][]Pipe-line step 931 [][]2026[][]). 
+ []
+
+
+Underfull \hbox (badness 7379) in paragraph at lines 164--164
+[]|\TU/TeXGyreTermesX(0)/m/n/12 Hash- und Iden-ti-täts-
+ []
+
+
+Underfull \hbox (badness 1558) in paragraph at lines 164--164
+[]|\TU/TeXGyreTermesX(0)/m/n/12 Support- und Pro-film-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 164--164
+[]|\TU/TeXGyreTermesX(0)/m/n/12 Varianten- und Bau-
+ []
+
+[20] [21]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `newtxtt' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [21]) (./01_kapitel/06_datensplit_und_training.tex
-[22]
+
+./01_kapitel/05_analyse_der_datenstrukturen.tex:246: Misplaced alignment tab cha
+racter &.
+l.246 ...at (0, -1.9) {\textbf{8} Leakage-Schutz &
+                                                   Split-Prüfung};
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+) (./01_kapitel/06_datensplit_und_training.tex [22]
 chapter 6.
 Package biblatex Info: Reference segment=7 on input line 1.
 Package biblatex Info: Setting label 'refsegment:07' on input line 1.
@@ -2742,6 +2774,9 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                Bachelorarbeit
 (biblatex)                and rerun LaTeX afterwards.
@@ -2752,14 +2787,14 @@ Package logreq Info: Writing requests to 'Bachelorarbeit.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 51190 strings out of 476081
- 125005,2373549 words of node,token memory allocated
- 23216 words of node memory still in use:
-   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 3628 kern, 1 penalty, 3 glyph,
- 1437 attribute, 101 glue_spec, 720 attribute_list, 2 write, 2 pdf_action nodes
-   avail lists: 1:8,2:2702,3:1279,4:361,5:759,6:264,7:9354,8:35,9:850,10:31,11:1
+ 51188 strings out of 476081
+ 125009,2373549 words of node,token memory allocated
+ 24068 words of node memory still in use:
+   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 3784 kern, 1 penalty, 3 glyph,
+ 1461 attribute, 101 glue_spec, 732 attribute_list, 2 write, 2 pdf_action nodes
+   avail lists: 1:6,2:2669,3:1281,4:359,5:759,6:260,7:9326,8:35,9:850,10:31,11:1
 025,12:1
- 72054 multiletter control sequences out of 65536+600000
+ 72050 multiletter control sequences out of 65536+600000
  232 fonts using 20716279 bytes
  108i,20n,115p,11307b,3628s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/opentype/public/newtx/Te
@@ -2782,9 +2817,9 @@ pData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/alstett
 er/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/a
 lstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb><C:/Us
 ers/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/ztmr.pfb>
-Output written on Bachelorarbeit.pdf (48 pages, 446876 bytes).
+Output written on Bachelorarbeit.pdf (48 pages, 447402 bytes).
 
-PDF statistics: 1084 PDF objects out of 1200 (max. 8388607)
- 219 named destinations out of 1000 (max. 1048576)
- 496 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1078 PDF objects out of 1200 (max. 8388607)
+ 221 named destinations out of 1000 (max. 1048576)
+ 504 words of extra memory for PDF output out of 10000 (max. 100000000)
 

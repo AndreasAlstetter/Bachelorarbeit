@@ -9,13 +9,13 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces End-to-End-Architektur der retrievalfreien Learning-to-Rank-Pipeline.}}{15}{figure.caption.5}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Verarbeitungsschritte von den Ausgangsdaten bis zum Trainingsformat.}}{22}{figure.caption.9}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Verarbeitungsschritte von den Ausgangsdaten bis zum Trainingsformat.}}{22}{figure.caption.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Schematische Aufteilung der Trainings-, Validierungs- und Testdatenbasis.}}{24}{figure.caption.11}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Strukturierte Ablage der Modellartefakte im Laufverzeichnis.}}{28}{figure.caption.14}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Schematische Aufteilung der Trainings-, Validierungs- und Testdatenbasis.}}{24}{figure.caption.12}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Strukturierte Ablage der Modellartefakte im Laufverzeichnis.}}{28}{figure.caption.15}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Sequentieller Ablauf der vierstufigen Evaluations-Suite.}}{29}{figure.caption.15}%
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Unterscheidung der Fehlerquellen in Retrieval- und Rankingprozess.}}{36}{figure.caption.18}%
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Sequentieller Ablauf der vierstufigen Evaluations-Suite.}}{29}{figure.caption.16}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Unterscheidung der Fehlerquellen in Retrieval- und Rankingprozess.}}{36}{figure.caption.19}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \def \@chapapp {\appendixname }
