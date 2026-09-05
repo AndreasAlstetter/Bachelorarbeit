@@ -5,16 +5,16 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Analysierte Merkmalsgruppen der EPLAN-Fenstermakros}}{18}{table.caption.6}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Aufbereitete Merkmalsgruppen der EPLAN-Artikeldaten}}{19}{table.caption.7}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Gruppen der Pairwise-Merkmale}}{21}{table.caption.8}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Analysierte Merkmalsgruppen der EPLAN-Fenstermakros}}{17}{table.caption.6}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Aufbereitete Merkmalsgruppen der EPLAN-Artikeldaten}}{18}{table.caption.7}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Gruppen der Pairwise-Merkmale}}{20}{table.caption.8}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Anforderungen an den idealen Datensatz \blx@tocontentsinit {0}\parencite {srcIdealDataset,srcStep913,srcStep921}}}{25}{table.caption.10}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Verwendete Retrievalsignale}}{26}{table.caption.12}%
-\contentsline {table}{\numberline {6.3}{\ignorespaces Verwendete Hyperparameterkombinationen \blx@tocontentsinit {0}\parencite {srcStep931}}}{28}{table.caption.13}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces Anforderungen an den idealen Datensatz \blx@tocontentsinit {0}\parencite {srcIdealDataset,srcStep913,srcStep921}}}{24}{table.caption.10}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Verwendete Retrievalsignale}}{25}{table.caption.12}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces Verwendete Hyperparameterkombinationen \blx@tocontentsinit {0}\parencite {srcStep931}}}{27}{table.caption.13}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {7.1}{\ignorespaces Aufbau der Evaluations-Suite}}{31}{table.caption.16}%
-\contentsline {table}{\numberline {7.2}{\ignorespaces Bedeutung der verwendeten Rankingmetriken}}{35}{table.caption.17}%
+\contentsline {table}{\numberline {7.1}{\ignorespaces Aufbau der Evaluations-Suite}}{30}{table.caption.16}%
+\contentsline {table}{\numberline {7.2}{\ignorespaces Bedeutung der verwendeten Rankingmetriken}}{34}{table.caption.17}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \def \@chapapp {\appendixname }

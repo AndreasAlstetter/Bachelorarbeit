@@ -7,7 +7,7 @@ Für einen vorhanden technischen EPLAN-Artikel \parencite{EPLANArtikelverwaltung
 
 
 Diese Problemstellung kann als Rankingaufgabe formuliert werden, bei der für jede Anfrage eine Menge bekannter EPLAN-Fenstermakros \parencite{EPLAN-Makros} vorliegt. Dabei sind alle Kandidaten dieser Menge potenzielle Ergebnisse für den 1. Rang.
-Das System soll alle vorhandenen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} analysieren, bewerten und anschließend das ähnlichste zugrundeliegende EPLAN-Fenstermakro \parencite{EPLAN-Makros} auswählen.
+Das System soll die Eigenschaften eines gegebenen EPLAN-Artikels \parencite{EPLANArtikelverwaltung} analysieren und diese mit allen verfügbaren Makro-Kandidatenprofilen vergleichen. Anschließend sollen die Kandidaten entsprechend ihrer Relevanz geordnet werden.
 Ziel dabei ist es, dass das passendste EPLAN-Fenstermakro \parencite{EPLAN-Makros} möglichst auf Rang 1 erscheint. Die weniger ähnlichen Kandidaten sollen entsprechend der Bewertung hierarchisch auf den nachfolgenden Rängen einsortiert werden.
 
 
@@ -19,8 +19,8 @@ Die Herausforderung besteht darin, dass sich viele Produkte lediglich in einzeln
 Das System muss daher in der Lage sein allgemeine technischen Zusammenhänge als auch merkmalspezifische Unterschiede zwischen ähnlichen Varianten zu erkennen.
 
 
-Zur Lösung dieses Problems wird ein Learning-to-Rank-System entwickelt, welches unterschiedliche Retrievalsignale, strukturierte technische Merkmale sowie unstrukturierte Textinformationen aus technischen Anfragen kombiniert, um die Relevanz der EPLAN-Fenstermakros \parencite{EPLAN-Makros} zu bewerten.
-
+Zur Lösung dieses Problems wird ein Learning-to-Rank-System entwickelt, welches strukturierte technische sowie lexikalische Merkmale aus Artikeldaten kombiniert, um die Relevanz von potenziellen EPLAN-Fenstermakros \parencite{EPLAN-Makros} zu bewerten. 
+Das Modell erzeugt für jeden verfügbaren Makrokandidaten eine Relevanzbewertung und erstellt daraus eine Rangliste möglicher Empfehlungen. Ziel ist es, das korrekte Zielmakro möglichst auf den vorderen Rangpositionen, idealerweise auf Rang 1, zu platzieren.
 
 \section{Methodisches Vorgehen}
 
@@ -64,7 +64,8 @@ Die Ergebnisse einer Iteration bilden jeweils die Grundlage für die nachfolgend
 Die Kombination aus DSRM und ADR ermöglicht somit auf der einen Seite einen strukturierten Forschungsprozess und auf der anderen Seite eine iterative Verbesserung des entwickelten Ranking-Systems. 
 Abbildung \ref{fig:dsrm_adr_verzahnung} veranschaulicht diese Verzahnung der beiden Methodiken.
 
-Die verwendeten Qualitätsmetriken sowie deren mathematische Definitionen werden in Kapitel \ref{chap:evaluierungskonzept_und_ergebnisse} vorgestellt. 
+Die theoretischen Grundlagen der verwendeten Bewertungsmetriken wurden bereits in Kapitel \ref{chap:stand_der_technik} vorgestellt. 
+Die Anwendung dieser Metriken zur Bewertung des entwickelten Systems erfolgt in Kapitel \ref{chap:evaluierungskonzept_und_ergebnisse}.
 Eine Darstellung der finalen Systemarchitektur und der vollständigen Pipeline befindet sich ebenfalls in diesem Kapitel.
 
 

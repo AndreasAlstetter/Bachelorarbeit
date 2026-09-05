@@ -1,173 +1,141 @@
 \chapter{Stand der Technik}\label{chap:stand_der_technik}
 
-\section{Architektur- und Rankingansatz}
+\section{Learning-to-Rank in industriellen Empfehlungssystemen} 
 
-Rankingprobleme treten in einer Vielzahl von Anwendungsfällen auf, wie zum Beispiel in Suchmaschinen, Produktempfehlungen oder Enterprise-Search-Systemen.
-Die Bewertung durch ein komplexes Rankingmodell wird dabei schnell unübersichtlich und bietet weniger Raum für Analysen und Interpretationen.
-Stattdessen haben sich mehrstufige Architekturen etabliert, die zu Beginn eine schnelle Kandidatenselektion durchführen und im Anschluss ein Rankingmodell auf die selektierten Kandidaten anwenden.
-Dieses Konzept wird in der Literatur als \emph{Candidate Generation} und \emph{Learning-to-Rank} bezeichnet \parencite{robertson2009prf,liu2009learning,burges2010lambdamart}.
-Teile davon werden für diese Arbeit übernommen und in abgeändeter Form für die Trainingsvorbereitung sowie das eigentliche Rankingmodell verwendet.
-Abbildung \ref{fig:zweistufiger_rankingansatz} zeigt diesen zweistufigen Rankingansatz schematisch.
+Rankingprobleme treten in einer Vielzahl von Anwendungsgebieten auf, beispielsweise in Suchmaschinen, Produktempfehlungssystemen oder technischen Informationssystemen. 
+Ziel ist es, für eine gegebene Anfrage die verfügbaren Kandidaten im Bezug auf ihre Relevanz zu bewerten und anschließend in eine Rangfolge zu bringen \parencite{liu2009learning}. 
 
-\begin{figure}[tbp]
-    \centering
-    \begin{tikzpicture}[
-        font=\small,
-        stage/.style={draw=blue!60!black, thick, rounded corners=4pt, fill=blue!8, text width=7.4cm, minimum height=1.5cm, align=center, inner sep=6pt},
-        flow/.style={->, thick, blue!70!black}
-    ]
-        \node[stage] (cg) at (0,0) {\textbf{Candidate Generation}\\[2pt] \footnotesize BM25, Exact-Match, Reciprocal Rank Fusion};
-        \node[stage, fill=orange!10, draw=orange!60!black] (ltr) at (0,-2.2) {\textbf{Learning-to-Rank}\\[2pt] \footnotesize LambdaRank / LambdaMART};
-        \draw[flow] (cg) -- (ltr);
-    \end{tikzpicture}
-    \caption{Zweistufiger Rankingansatz aus Candidate Generation und Learning-to-Rank.}
-    \label{fig:zweistufiger_rankingansatz}
+Im industriellen Umfeld gewinnen Rankingverfahren zunehmend an Bedeutung, da häufig eine große Anzahl technischer Komponenten, Dokumente oder wiederverwendbarer Engineering-Artefakte zur Verfügung steht. 
+Anstelle einer Entscheidung zwischen passend und nicht passend ermöglichen Rankingmodelle eine Priorisierung von möglichen Lösungen und unterstützen Anwender somit bei der Auswahl der geeignetsten Alternative. 
+Für die Umsetzung solcher Aufgaben haben sich Learning-to-Rank-Verfahren etabliert. Diese nutzen strukturierte und beschriebene Anfrage-Kandidat-Paare. 
+Damit werden aus historischen Zuordnungen eine Relevanzfunktion gelernt, die neue Kandidaten automatisch bewerten kann. 
+
+Im Gegensatz zu klassischen Klassifikationsverfahren wird dabei nicht die Vorhersage einer Klasse optimiert, sondern die Qualität der einer resultierenden Rangliste \parencite{liu2009learning,burges2010lambdamart}. 
+Die vorliegende Arbeit folgt diesem Ansatz. Aus den Merkmalen eines EPLAN-Artikels  \parencite{EPLANArtikelverwaltung} sowie den Eigenschaften potenzieller EPLAN-Fenstermakros \parencite{EPLAN-Makros} werden Anfrage-Kandidat-Paare erzeugt.
+Ein Learning-to-Rank-Modell bewertet diese Kandidaten im Anschluss hinsichtlich ihrer Eignung und erstellt eine Rangliste möglicher Makroempfehlungen. Abbildung \ref{fig:ltr_grundprinzip} zeigt schematisch das grundlegende Vorgehen.
+
+\begin{figure}[tbp] 
+  \centering 
+  \begin{tikzpicture}[ font=\small, stage/.style={ draw=blue!60!black, thick, rounded corners=4pt, fill=blue!8, text width=4.2cm, minimum height=1.4cm, align=center }, flow/.style={->, thick, blue!70!black} ] 
+    \node[stage] (query) at (0,0) {\textbf{EPLAN-Artikel}\\Anfrage}; 
+    \node[stage, fill=orange!10, draw=orange!60!black] (features) at (5.2,0) {\textbf{Featurebildung}\\Anfrage-Kandidat-Paare}; 
+    \node[stage, fill=green!10, draw=green!50!black] (ltr) at (10.4,0) {\textbf{Learning-to-Rank}\\LambdaRank / LambdaMART}; 
+    \draw[flow] (query) -- (features); 
+    \draw[flow] (features) -- (ltr); 
+  \end{tikzpicture} 
+  \caption{Grundprinzip eines Learning-to-Rank-Systems zur Makroempfehlung.} 
+  \label{fig:ltr_grundprinzip} 
 \end{figure}
 
-Im E-Commerce-Bereich werden mehrstufige Architekturen bereits seit Jahren erfolgreich eingesetzt, um die Relevanz von Suchergebnissen und Empfehlungen zu verbessern.
-Aktuelle Untersuchungen in diesem Bereich zeigen, dass Produktsuchen großer Plattformen wie Amazon, eBay oder Alibaba weiterhin stark auf mehrstufige Retrievalpipelines, strukturierte Merkmale, und Learning-to-Rank-Verfahren setzen.
-\parencite{kabir2024ecommerce}.
+\subsection{Aktuelle Anwendungsbeispiele} 
 
-In diesem Kapitel werden die verwendeten technischen Grundlagen für die Entwicklung des Systems erläutert.
-Die genaue Architektur sowie die Verwendung der einzelnen Komponenten wird im Kapitel \ref{chap:architektur} beschrieben.
+Learning-to-Rank-Verfahren werden heute in zahlreichen industriellen Anwendungen eingesetzt. 
+Bekannte Einsatzgebiete umfassen Produktempfehlungen im E-Commerce, die Priorisierung von Suchergebnissen in Unternehmensdatenbanken sowie technische Assistenzsysteme für Engineering- und Serviceprozesse. 
+Im E-Commerce nutzen Unternehmen wie Amazon, Alibaba oder eBay Learning-to-Rank-Verfahren zur Sortierung von Produktsuchergebnissen und Produktempfehlungen. 
+Dabei werden strukturierte Produktmerkmale, Nutzerinteraktionen und historische Kaufdaten kombiniert, um die Relevanz einzelner Produkte innerhalb einer Ergebnisliste zu bestimmen \parencite{kabir2024ecommerce}. 
 
-\section{BM25}
+\section{Bewertungsmetriken für Rankingverfahren} 
 
-\subsection{Grundidee von BM25}
+Die Bewertung von Rankingverfahren unterscheidet sich bis auf Recall@k von der Bewertung klassischer Klassifikations- oder Regressionsverfahren. 
+Während bei einer Klassifikation die korrekte Zuordnung einzelner Objekte im Vordergrund steht, wird bei Rankingproblemen die Qualität der gesamten Ergebnisreihenfolge bewertet. 
+Hierfür haben sich spezielle Rankingmetriken etabliert, welche unterschiedliche Aspekte einer Rangliste erfassen \parencite{liu2009learning}. 
+Für Learning-to-Rank-Systeme werden insbesondere Recall@k, Mean Reciprocal Rank (MRR) sowie Normalized Discounted Cumulative Gain (nDCG) eingesetzt. 
+Diese Metriken ermöglichen die Bewertung der Position relevanter Ergebnisse sowie der Gesamtqualität einer Rangliste.
 
-BM25 basiert auf dem Probabilistic Relevance Framework von Robertson und Zaragoza.
-Dabei wird für jedes Anfrage-Dokument-Paar einen Relevanzwert bestimmt \parencite{robertson2009prf}.
+\subsection{Recall@k} 
 
-Die Grundannahme besteht darin, dass ein Dokument umso relevanter ist, 
-
-\begin{itemize} 
-    \item je häufiger relevante Suchbegriffe darin vorkommen, 
-    \item je seltener diese Begriffe innerhalb der Gesamtdokumentensammlung auftreten,
-    \item und je besser die Dokumentlänge berücksichtigt wird. 
-\end{itemize}
-
-Dadurch erlangen seltene und spezifische Begriffe eine höhere Gewichtung, während häufige Begriffe wie "und", "oder" oder "der" weniger Einfluss auf die Relevanzbewertung haben.
-Bei technischen Produktdaten ist dies besonders relevant, da Artikelnummern, Typenbezeichnungen oder normierte Fachbegriffe häufig eine hohe Differenzierungskraft besitzen.
-
-
-\begin{align}
-Score(D,Q) = \sum_{i=1}^{n} IDF(q_i) \cdot \frac{ f(q_i,D)(k_1+1) } { f(q_i,D)+k_1 \left( 1-b+b\frac{|D|}{avgdl} \right) }
-\end{align}
-
-Die einzelnen Parameter besitzen folgende Bedeutung: 
-
-\begin{description} 
-    \item[$q_i$] Suchbegriff der Anfrage 
-    \item[$f(q_i,D)$] Häufigkeit des Begriffs $q_i$ im Dokument 
-    \item[$|D|$] Dokumentlänge 
-    \item[$avgdl$] durchschnittliche Dokumentlänge aller Dokumente 
-    \item[$k_1$] Parameter zur Steuerung der Termfrequenzsättigung 
-    \item[$b$] Parameter zur Dokumentlängennormalisierung 
-    \item[$IDF(q_i)$] inverse Dokumenthäufigkeit 
-\end{description}
-
-Die inverse Dokumenthäufigkeit wird durch
-
-\begin{align}
-  IDF(q_i) = \log \frac{ N-n(q_i)+0.5 } { n(q_i)+0.5 }
-\end{align}
-
-mit 
-
-\begin{description} 
-    \item[$N$] Gesamtzahl aller Dokumente 
-    \item[$n(q_i)$] Anzahl der Dokumente, welche den Begriff $q_i$ enthalten 
-\end{description}
-
-berechnet.
-
-Die resultierende Kennzahl stellt somit einen Relevanzscore dar, die die lexikalische Ähnlichkeit zwischen einer Anfrage und einem Kandidaten beschreibt.
-
-
-\subsection{Bedeutung in modernen Rankingarchitekturen}
-
-Trotz der zunehmenden Verbreitung von Deep-Learning-basierten Ansätzen im Information Retrieval, bleibt BM25 ein weit verbreitetes und effektives Verfahren.
-Aktuelle Studien zeigen, dass BM25 insbesondere bei domänenspezifischen Datensätzen und als Basis für Learning-to-Rank-Modelle weiterhin eine hohe Relevanz besitzt \parencite{thakur2021beir}.
-
-
-\section{Exact-Match}
-
-\subsection{Grundprinzip des Exact Matching}
-
-Exact-Match-Verfahren sind Teil der klassischen Konzepte des Information Retrieval und basieren auf dem Prinzip der exakten Übereinstimmung von Merkmalen zwischen einer Anfrage und einem Dokument \parencite{manning2008ir,baeza2011modern}.
-Klassische Boolean-Systeme unterscheiden zwischen Treffer und kein Treffer. Ein Dokument erfüllt nur dann die Anfrage, wenn alle geforderten Merkmale exakt übereinstimmen.
-Um quantitative Übereinstimmungen zu berücksichtigen, kann die Anzahl bzw. das Gewicht der übereinstimmenden Merkmale berücksichtigt werden.
-
-Der Exact-Match-Score berechnet sich aus dem Verhältnis der Gewichte aller übereinstimmenden Merkmale zu den Gewichten aller in der Anfrage spezifizierten Merkmale: 
+Recall@k gehört zu den grundlegenden Bewertungsmetriken des Information Retrievals und beschreibt den Anteil der Anfragen, bei denen mindestens ein relevantes Ergebnis innerhalb der ersten $k$ Rangpositionen gefunden wird \parencite{manning2008ir}. 
+Diese Metrik berechnet sich wie folgt: 
 
 \begin{align} 
-  ExactScore = \frac{\sum_{i=1}^{n} w_i \cdot m_i} {\sum_{i=1}^{n} w_i} 
+  Recall@k = \frac{ \# \text{Anfragen mit relevantem Ergebnis in Top-}k }{ \# \text{Anfragen} } 
 \end{align} 
 
 mit 
 
 \begin{description} 
-  \item[$w_i$] Gewicht des Merkmals $i$ 
-  \item[$m_i$] Match-Indikator des Merkmals $i$ 
+    \item[$k$] Anzahl der betrachteten Rangpositionen 
+    \item[$\#\text{Anfragen mit relevantem Ergebnis in Top-}k$] Anzahl erfolgreicher Anfragen 
+    \item[$\#\text{Anfragen}$] Gesamtzahl aller Anfragen 
 \end{description} 
 
-Der Match-Indikator wird definiert als 
+Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 bedeutet, dass sich für jede Anfrage mindestens ein relevantes Ergebnis innerhalb der Top-$k$ Positionen der Rangliste befindet. 
+In Ranking- und Empfehlungssystemen wird Recall@k häufig verwendet, um die praktische Verwendung eines Systems zu beurteilen zu können.
+Der Anwender betrachtet dabei in der Regel nur die ersten Ergebnisse einer Rangliste \parencite{manning2008ir}.
+
+
+\subsection{Mean Reciprocal Rank} 
+
+Der Mean Reciprocal Rank (MRR) zählt neben Recall@k zu etablierten Bewertungsmetriken des Information Retrievals und wird sowohl in klassischen Suchsystemen als auch in modernen Rankingverfahren eingesetzt \parencite{voorhees1999mrr,zhu2024llmirsurvey}. 
+Mit dieser Kennzahl wird die Position des ersten relevanten Ergebnisses innerhalb einer Rangliste bewertet.
+
+Die Berechnung ergibt sich wie folgt:  
 
 \begin{align} 
-  m_i = \begin{cases} 1, & \text{wenn der Merkmalswert exakt übereinstimmt}\\ 0, & \text{sonst} \end{cases} 
-\end{align} 
-
-Der resultierende Score liegt im Intervall 
-
-\begin{align}
-   0 \le ExactScore \le 1. 
-\end{align}
-
-Ein Wert von 1 bedeutet, dass sämtliche relevanten technischen Eigenschaften übereinstimmen. Ein Wert von 0 signalisiert das Fehlen jeglicher fachlich relevanter Übereinstimmung.
-
-\subsection{Bedeutung von Exact-Match im modernen Information Retrieval}
-
-Eine aktuelle wissenschaftliche Arbeit zeigt mit dem COIL-Ansatz, dass exakte lexikalische Übereinstimmungen im Zeitalter neuronaler Suchverfahren weiterhin eine hohe Relevanz besitzen.
-Die Autoren kombinieren klassische Exact-Match-Mechanismen mit modernen Sprachmodellrepräsentationen und zeigen, dass exakte Trefferinformationen weiterhin hochrelevante Signale für Retrieval- und Rankingverfahren darstellen \parencite{gao2021coil}.
-
-
-\section{Fusion von Retrievalsignalen mittels Reciprocal Rank Fusion}
-
-
-\subsection{Grundidee von Reciprocal Rank Fusion}
-
-Reciprocal Rank Fusion (RRF) ist ein Verfahren zur Aggregation von Ranglisten, das die Rangpositionen der Dokumente in den einzelnen Listen berücksichtigt.
-Dabei lautet die zentrale Annahme, dass ein Kandidat eine hohe Relevanz besitzt, wenn er in mehreren Ranglisten einen hohen Rang besitzt.
-Wenn ein Kandidat nur von einer Rangliste hoch bewertet wird, erhält er dadurch eine geringere Gewichtung.
-Dies führt zu einer robusteren Gesamtrangliste, die die Stärken der einzelnen Retrievalverfahren kombiniert.
-Ein wesentlicher Vorteil von RRF besteht darin, dass unterschiedliche Scales und Bewertungsmetriken problemlos kombiniert werden können.
-Hierfür ist keine Normalisierung der Scores auf einen Wertebereich erforderlich, da ausschließlich die Rangpositionen berücksichtigt werden \parencite{cormack2009rrf}.
-
-
-\subsection{Klassische RRF-Formulierung} 
-
-Die ursprüngliche Formel von Cormack et al. lautet: 
-
-\begin{align} 
-    RRF(d) = \sum_{r \in R} \frac{1} {k+r(d)} 
+  MRR= \frac{1}{N} \sum_{i=1}^{N} \frac{1}{rank_i} 
 \end{align} 
 
 mit 
 
 \begin{description} 
-    \item[$R$] Menge aller Ranglisten 
-    \item[$r(d)$] Rangposition des Dokuments $d$ in der jeweiligen Rangliste 
-    \item[$k$] Glättungskonstante 
+    \item[$N$] Anzahl der ausgewerteten Anfragen 
+    \item[$rank_i$] Rangposition des ersten relevanten Ergebnisses für Anfrage $i$ 
 \end{description} 
 
-Die Konstante $k$ wird typischerweise auf den Wert 60 gesetzt und reduziert den Einfluss sehr hoher Einzelplatzierungen \parencite{cormack2009rrf}. 
+Der Wertebereich liegt zwischen 0 und 1. Ein hoher Wert zeigt an, dass ein relevantes Ergebnis bereits an einer der vorderen Positionen einer Rangliste erscheint. 
+Da frühe Treffer stärker gewichtet werden als spätere Treffer, eignet sich die Kennzahl besonders zur Bewertung der schnellen Auffindbarkeit relevanter Ergebnisse.
 
-\subsection{Aktuelle Bedeutung von Rank-Fusion-Verfahren}
 
-In der aktuellen Forschung zu mehrstufigen Retrieval- und Rankingarchitekturen wird die Zusammenführung von Retrievalsignalen als wichtiger Bestandteil betrachtet, um die Leistungsfähigkeit von Rankingmodellen zu verbessern.
-Zhang et al. zeigen im Rahmen einer Multi-Stage-Ranking-Pipeline, dass unterschiedliche Kombinationen von Relevanzsignalen eine hohe Retrievalqualität ermöglichen \citeyearpar{zhang2021muppets}.
-Darüber hinaus beschreiben Zheng et al. im Rahmen des Full-Stage-Learning-to-Rank-Ansatz moderne Rankingarchitekturen, bei denen unterschiedliche Retrievalsignale in einem System optimiert werden und zur finalen Entscheidungsfindung beitragen \citeyearpar{zheng2024fullstage}.
+\subsection{Normalized Discounted Cumulative Gain} 
 
+Der Discounted Cumulative Gain (DCG) wurde von Järvelin und Kekäläinen zur Bewertung verschiedener Relevanzstufen von Suchergebnissen eingeführt und zählt zu den wichtigsten Bewertungsmetriken für Ranking- und Suchsysteme \parencite{jarvelin2002dcg}. 
+Die Kennzahl berücksichtigt sowohl die Relevanz eines Ergebnisses als auch die Position innerhalb der Rangliste. Relevanter Ergebnisse auf frühen Rangpositionen leisten dadurch einen höheren Beitrag zur Gesamtbewertung. 
+
+Die Berechnung des DCG erfolgt über 
+
+\begin{align} 
+  DCG@k = \sum_{i=1}^{k} \frac{2^{rel_i}-1} {\log_2(i+1)} 
+\end{align} 
+
+mit 
+
+\begin{description} 
+  \item[$k$] Anzahl der betrachteten Rangpositionen 
+  \item[$i$] Rangposition innerhalb der Rangliste 
+  \item[$rel_i$] Relevanzwert des Ergebnisses auf Rangposition $i$ 
+\end{description} 
+
+Um eine bessere Vergleichbarkeit zu schaffen, findet eine Normierung auf die ideale Rangliste statt. Hieraus ergibt sich der Normalized Discounted Cumulative Gain (nDCG): 
+
+\begin{align} 
+nDCG@k= \frac{DCG@k} {IDCG@k} 
+\end{align} 
+mit 
+\begin{description} 
+  \item[$DCG@k$] DCG-Wert der betrachteten Rangliste 
+  \item[$IDCG@k$] DCG-Wert der idealen Rangliste 
+\end{description} 
+
+Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 entspricht der optimal möglichen Rangfolge.
+
+
+\subsection{Hierarchische Bewertungsmetriken} 
+
+Nicht jede fachliche Fehlentscheidung hat in technischen Empfehlungssystemen dieselbe Bedeutung.
+Ein Ergebnis kann beispielsweise ein Teil einer technisch verwandten Produkt- oder Makrofamilie angehören, aber trotz fehlender exakter Übereinstimmung für den Anwender weiterhin von Interesse sein. 
+Zur Berücksichtigung solcher Beziehungen werden hierarchische Bewertungsmetriken eingesetzt. 
+
+Diese basieren typischerweise auf dem Discounted Cumulative Gain \parencite{jarvelin2002dcg} und verwenden unterschiedliche Relevanzen in abgestufter Reihenfolge. 
+
+Eine mögliche Relevanzfunktion lautet: 
+
+begin{align} 
+rel = 
+\begin{cases} 3,& \text{exakte Übereinstimmung}\\ 2,& \text{gleiche Familie}\\ 0,& \text{keine fachliche Beziehung} 
+\end{cases} \end{align} 
+
+Dadurch wird eine Rangliste bevorzugt, welche fachlich ähnliche Kandidaten auf höheren Positionen platziert. 
+Hierarchische Bewertungsmetriken eignen sich insbesondere für industrielle Empfehlungssysteme, bei denen zwischen exakter Übereinstimmung und fachlicher Nähe unterschieden werden muss.
 
 \section{Learning-to-Rank mit LambdaRank}
 
@@ -251,11 +219,6 @@ Eine aktuelle Vergleichsstudie zeigt, dass Gradient-Boosted-Decision-Tree-Verfah
 
 Lyzhin et al. vergleichen in ihrer Studie mehrere moderne Learning-to-Rank-Verfahren miteinander und kommen zu dem Ergebnis, dass LambdaMART-basierte Modelle immer noch äußerst konkurrenzfähig sind.
 Neue Optimierungsverfahren wie YetiRank und StochasticRank liefern dabei nur begrenzte Verbesserungen gegenüber LambdaMART-Modellen \parencite{lyzhin2023ltr}.
-
-Aktuelle Untersuchungen im Bereich der Rankingarchitekturen im E-Commerce zeigen, dass Learning-to-Rank-Modelle mit Gradient-Boosted-Decision-Trees weiterhin eine führende Rolle spielen.
-Dabei ist die Kombination aus strukturierten Merkmalen, Retrievalsignalen und LambdaMART-Optimierung insbesondere für strukturierte Domänen wie Produktkataloge und technische Informationssysteme von besonderer Bedeutung
-\parencite{kabir2024ecommerce}.
-
 
 
 
