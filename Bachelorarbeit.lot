@@ -5,17 +5,20 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Statistische Kennzahlen des verwendeten Datensatzes}}{17}{table.caption.6}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Statistische Kennzahlen des verwendeten Datensatzes}}{16}{table.caption.6}%
 \contentsline {table}{\numberline {5.2}{\ignorespaces Analysierte Merkmalsgruppen der EPLAN-Fenstermakros}}{17}{table.caption.7}%
 \contentsline {table}{\numberline {5.3}{\ignorespaces Aufbereitete Merkmalsgruppen der EPLAN-Artikeldaten}}{18}{table.caption.8}%
 \contentsline {table}{\numberline {5.4}{\ignorespaces Gruppen der Pairwise-Merkmale}}{20}{table.caption.9}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Anforderungen an den idealen Datensatz \blx@tocontentsinit {0}\parencite {srcIdealDataset,srcStep913,srcStep921}}}{24}{table.caption.11}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Verwendete Retrievalsignale}}{25}{table.caption.13}%
-\contentsline {table}{\numberline {6.3}{\ignorespaces Verwendete Hyperparameterkombinationen \blx@tocontentsinit {0}\parencite {srcStep931}}}{27}{table.caption.14}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces Variierte Hyperparameter der Grid-Search \blx@tocontentsinit {0}\parencite {srcStep931}}}{26}{table.caption.12}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {7.1}{\ignorespaces Aufbau der Evaluations-Suite}}{30}{table.caption.17}%
-\contentsline {table}{\numberline {7.2}{\ignorespaces Bedeutung der verwendeten Rankingmetriken}}{34}{table.caption.18}%
+\contentsline {table}{\numberline {7.1}{\ignorespaces Aktuelle Evaluations-Suite}}{28}{table.caption.14}%
+\contentsline {table}{\numberline {7.2}{\ignorespaces Bedeutung der verwendeten Rankingmetriken}}{29}{table.caption.15}%
+\contentsline {table}{\numberline {7.3}{\ignorespaces Ergebnisse des Referenzlaufs A07 auf dem Validierungssplit}}{32}{table.caption.16}%
+\contentsline {table}{\numberline {7.4}{\ignorespaces Ergebnisse des Referenzlaufs A07 auf dem Testsplit}}{33}{table.caption.17}%
+\contentsline {table}{\numberline {7.5}{\ignorespaces Top-1-Analyse der Vorhersagen auf dem Testdatensatz}}{33}{table.caption.18}%
+\contentsline {table}{\numberline {7.6}{\ignorespaces Rangstatistische Kennzahlen des Testsplits}}{34}{table.caption.19}%
+\contentsline {table}{\numberline {7.7}{\ignorespaces Vergleich von regulärer Trainingsbewertung, Leave-One-Out-Analyse, Validation und Test}}{35}{table.caption.20}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \def \@chapapp {\appendixname }

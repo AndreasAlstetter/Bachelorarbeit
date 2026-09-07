@@ -1,4 +1,4 @@
-?\chapter{Evaluierungskonzept und Ergebnisse}
+﻿?\chapter{Evaluierungskonzept und Ergebnisse}
 \label{chap:evaluierungskonzept_und_ergebnisse}
 
 \section{Evaluationsdatensätze}
@@ -14,47 +14,20 @@ Ein Fingerprint repräsentiert die Struktur und die wesentlichen Merkmale eines 
 
 Dadurch wird verhindert, dass nahezu ähnliche Beispiele gleichzeitig im Trainings- und Testdatensatz vorkommen.
 
-\section{Aufbau der Evaluations-Suite}
+\section{Aufbau der Evaluations-Suite} 
 
-Die Evaluation des Learning-To-Rank-Modells erfolgt automatisiert mithilfe der implementierten Evaluations-Suite \parencite{srcEvalSuite}.
+Die Evaluation des Learning-to-Rank-Modells erfolgt automatisiert mithilfe einer Evaluations-Suite \parencite{srcEvalSuite}, welche in dem Modul \texttt{step\_944\_analyze\_ltr\_run.py} verankert ist.
+Damit wertet das Modul die Vorhersagen des trainierten Modells auf dem Validierungs- und Testdatensatz aus und berechnet die definierten Rankingmetriken sowie zusätzliche Fehleranalysen.
 
-Die Evaluationspipeline besteht dabei aus den in Tabelle \ref{tab:evaluations_suite} dargestellten vier Schritten. Abbildung \ref{fig:evaluations_suite_ablauf} zeigt den zugehörigen sequentiellen Ablauf:
-
-\begin{figure}[tbp]
-    \centering
-    \begin{tikzpicture}[
-        font=\small,
-        stepbox/.style={draw=blue!60!black, thick, rounded corners, fill=blue!8, text width=3.0cm, minimum height=1.4cm, align=center, inner sep=4pt},
-        flow/.style={->, thick, blue!70!black}
-    ]
-        \node[stepbox] (s1) at (0,0) {\textbf{1}\\Leakage-\\Sicherheit};
-        \node[stepbox] (s2) at (3.8,0) {\textbf{2}\\Retrieval-\\Index};
-        \node[stepbox] (s3) at (7.6,0) {\textbf{3}\\Candidate\\Coverage};
-        \node[stepbox] (s4) at (11.4,0) {\textbf{4}\\LTR-Run-\\Analyse};
-        \draw[flow] (s1) -- (s2);
-        \draw[flow] (s2) -- (s3);
-        \draw[flow] (s3) -- (s4);
-    \end{tikzpicture}
-    \caption{Sequentieller Ablauf der vierstufigen Evaluations-Suite.}
-    \label{fig:evaluations_suite_ablauf}
-\end{figure}
-
-\begin{table}[tbp]
-  \centering
-  \setlength{\tabcolsep}{6pt}
-  \renewcommand{\arraystretch}{1.1}
-  \caption{Aufbau der Evaluations-Suite}
-  \label{tab:evaluations_suite}
-  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1cm} >{\raggedright\arraybackslash}p{5cm} >{\raggedright\arraybackslash}X}
-    \toprule
-    \textbf{Nr.} & \textbf{Skript} & \textbf{Zielsetzung} \\
-    \midrule
-    1 & \texttt{step\_941\_\allowbreak validate\_leakage\_\allowbreak safety.py} & Prüfung auf Zielinformations-Leakage \\
-    2 & \texttt{step\_942\_\allowbreak validate\_retrieval\_\allowbreak index.py} & Bewertung des Retrieval-Index \\
-    3 & \texttt{step\_943\_\allowbreak analyze\_candidate\_\allowbreak coverage.py} & Analyse der Kandidatenabdeckung \\
-    4 & \texttt{step\_944\_\allowbreak analyze\_ltr\_run.py} & Analyse des Learning-to-Rank-Modells \\
-    \bottomrule
-  \end{tabularx}
+\begin{table}[tbp] 
+  \centering 
+  \caption{Aktuelle Evaluations-Suite} 
+  \label{tab:evaluations_suite} \begin{tabularx}{\textwidth}{p{1cm}p{5cm}X} 
+    \toprule 
+    \textbf{Nr.} & \textbf{Skript} & \textbf{Zielsetzung} \\ 
+    \midrule 1 & \texttt{step\_944\_analyze\_ltr\_run.py} & Berechnung der Rankingmetriken, Fehleranalyse und Evaluationsstatistiken \\ 
+    \bottomrule 
+  \end{tabularx} 
 \end{table}
 
 Die Ergebnisse dieser Pipeline werden strukturiert in den folgenden Verzeichnissen abgelegt:
@@ -66,142 +39,20 @@ Die Ergebnisse dieser Pipeline werden strukturiert in den folgenden Verzeichniss
   \item \texttt{evaluation/step\_944\_ltr\_run\_analysis} für die Analyse des Learning-to-Rank-Modells
 \end{itemize}
 
-\section{Verwendete Rankingmetriken}
- 
-Bei einem Learning-To-Rank-Modell steht die Qualität der gesamten Rangliste im Vordergrund. 
-Für vorliegende Aufgabe, ein EPLAN-Fenstermakro \parencite{EPLAN-Makros} anhand eines oder mehrerer EPLAN-Artikel \parencite{EPLANArtikelverwaltung} zu finden,
-wurde mehrere komplementäre Rankingmetriken verwendet. 
-Hierdurch lassen sich unterschiedliche Aspekte der Modellqualität wie Position des Ziel-Makros \parencite{EPLAN-Makros}, Erkennung fachlich verwandter Makros \parencite{EPLAN-Makros} sowie die allgemeine Qualität der Rangfolge beurteilen.
+\section{Verwendete Rankingmetriken} 
 
-Die Berechnung erfolgt innerhalb des Trainingsmoduls und der Evaluationspipeline \parencite{srcStep931,srcStep944}.
-
-\subsection{Target Recall@k} 
-
-Durch den Target Recall@k wird gemessen, ob sich das korrekte Ziel-Makro \parencite{EPLAN-Makros} innerhalb der ersten $k$ Elemente einer Rangliste befindet \parencite{manning2008ir}.
-
-Dieser berechnet sich wie folgt: 
-
-\begin{align} Recall@k = \frac{ \# \text{Anfragen mit korrektem Ziel in Top-}k } { \# \text{Anfragen} } 
-\end{align} 
-
-mit 
-
-\begin{description} 
-  \item[$k$] Anzahl der betrachteten Top-Ränge der Rangliste 
-  \item[$\# \text{Anfragen mit korrektem Ziel in Top-}k$] Anzahl der Anfragen, bei denen das korrekte Ziel-Makro innerhalb der ersten $k$ Ränge liegt 
-  \item[$\# \text{Anfragen}$] Gesamtzahl aller ausgewerteten Anfragen 
-\end{description}
-
-Die Kennzahl gehört zu den grundlegenden Bewertungsmetriken des Information Retrievals \parencite{manning2008ir}.
-
-Der Wertebereich liegt zwischen 0 und 1. Ein Wert von $Recall@1 = 0.80$ bedeutet zum Beispiel, dass bei 80\,\% der Anfragen das korrekte EPLAN-Fenstermakro \parencite{EPLAN-Makros} direkt auf Rang 1 liegt. 
-
-Folgenden Varianten werden im Projek verwendet: 
+Die theoretischen Grundlagen der verwendeten Rankingmetriken wurden bereits in Kapitel \ref{chap:stand_der_technik} behandelt. 
+Für die Bewertung des Systems aus dieser Arbeit werden die folgenden Kennzahlen verwendet: 
 
 \begin{itemize} 
-  \item target\_recall@1 
-  \item target\_recall@3 
-  \item target\_recall@5 
-  \item target\_recall@10 
+  \item Target Recall@1, @3, @5 und @10 
+  \item Family Recall@1, @3, @5 und @10 
+  \item Mean Reciprocal Rank (MRR) 
+  \item Hierarchical nDCG@1, @3, @5 und @10 
+  \item Rangstatistiken der Ziel-Makros \parencite{EPLAN-Makros} 
 \end{itemize} 
 
-Diese Metriken sind die wichtigsten Kennzahlen für die Beurteilung der Makrozuordnung.
-
-\subsection{Family Recall@k}
-
-Neben der Erkennung des exakten Ziel-Makros \parencite{EPLAN-Makros} wird auch die Erkennung der korrekten Makro-Familie bewertet.
-Die Berechnung erfolgt analog zum Target Recall@k und basiert damit auf dem klassischen Recall-Konzept des Information Retrieval \parencite{manning2008ir}. Der Unterschied liegt darin, dass jedes EPLAN-Fenstermakro \parencite{EPLAN-Makros} als Treffer zählt, das in der gleichen Makro-Familie wie das Ziel-Makro \parencite{EPLAN-Makros} vorkommt.
-Dadurch kann erkannt werden, ob das System die richtige Makro-Familie erkennt, auch wenn das exakte Ziel-Makro \parencite{EPLAN-Makros} nicht in den Top-k-Ergebnissen enthalten ist.
-
-Hierfür werden folgenden Ausprägungen verwendet:
-
-\begin{itemize} 
-  \item family\_recall@1 
-  \item family\_recall@3 
-  \item family\_recall@5 
-  \item family\_recall@10 
-\end{itemize}
-
-Die Differenz zwischen dem Family Recall@k und dem Target Recall@k liefert einen Hinweis über die Variantenfehler innerhalb einer Makro-Familie.
-
-\subsection{Mean Reciprocal Rank}
-
-Der Mean Reciprocal Rank (MRR) zählt zu den etablierten Bewertungsmetriken des Information Retrievals und wird bis heute sowohl in klassischen Suchsystemen als auch in modernen Retrieval- und Rankingverfahren eingesetzt \parencite{voorhees1999mrr,zhu2024llmirsurvey}.
-
-Dieser berechnet sich wie folgt:
-
-\begin{align} 
-  MRR = \frac{1}{N} \sum_{i=1}^{N} \frac{1}{rank_i} 
-\end{align} 
-
-mit 
-
-\begin{description} 
-  \item[$N$] Anzahl der Anfragen 
-  \item[$rank_i$] Rangposition des korrekten Zielmakros für Anfrage $i$ 
-\end{description}
-
-Diese Metrik bevorzugt Platzierungen auf den ersten Rängen der Rangliste. Ein EPLAN-Fenstermakro \parencite{EPLAN-Makros} auf Rang 1 trägt somit stärker zur MRR bei als ein EPLAN-Fenstermakro \parencite{EPLAN-Makros} auf Rang 5.
-
-Dadurch lässt sich die praktische Nutzbarkeit des Ranking-Systens besser bewerten.
-
-\subsection{Hierarchical nDCG}
-
-Für das vorliegende Projekt sind nicht alle Fehler gleich kritisch. Wenn zwei nahezu identische Makros verwechselt werden ist dies weniger schwerwiegend, 
-als die Verwechslung von EPLAN-Fenstermakros \parencite{EPLAN-Makros} aus unterschiedlichen Familien. Deswegen wird zur Bewertung eine hierarchische Bewertungsmetrik verwendet.
-Grundlage der Berechnung bildet die von Järvelin und Kekäläinen eingeführte Kennzahl Discounted Cumulative Gain (DCG) \citeyearpar{jarvelin2002dcg}.
-
-Die Berechnung ergibt sich wie folgt: 
-
-\begin{align} 
-  DCG@k = \sum_{i=1}^{k} \frac{2^{rel_i}-1} {\log_2(i+1)} 
-\end{align} 
-
-mit 
-
-\begin{description} 
-  \item[$k$] Anzahl der betrachteten Top-Ränge der Rangliste 
-  \item[$i$] Rangposition innerhalb der Top-$k$-Ergebnisse 
-  \item[$rel_i$] hierarchische Relevanz des Kandidaten auf Rangposition $i$ 
-\end{description}
-
-nDCG@k (normalized Discounted Cumulative Gain) ist die Erweiterung des DCG, die die Bewertung der Rangliste auf einen normierten Bereich [0,1] skaliert.
-nDCG zählt heute zu den wichtigsten Bewertungsmetriken für Ranking- und Suchsysteme \parencite{jarvelin2002dcg} und wird wie folgt berechnet:
-
-\begin{align} 
-  nDCG@k = \frac{DCG@k} {IDCG@k} 
-\end{align} 
-
-mit 
-
-\begin{description} 
-  \item[$DCG@k$] unnormierter Discounted-Cumulative-Gain-Wert der erzielten Rangliste 
-  \item[$IDCG@k$] Discounted-Cumulative-Gain-Wert der ideal sortierten Rangliste 
-\end{description}
-
-Diese Metrik wird auch von dem verwendeten Lambda-Rank-Algorithmus genutzt (siehe Kapitel \ref{chap:datensplit_und_training}).
-
-
-Für die vorliegende Anwendung wird die hierarchische Relevanz verwendet: 
-
-\begin{align} 
-  rel = \begin{cases} 
-    3, & \text{exaktes Zielmakro}\\ 
-    2, & \text{Makro derselben Familie}\\ 
-    0, & \text{sonst} 
-  \end{cases} 
-\end{align} 
-
-Dadurch wird ein Ranking vorzugsweise verwendet, welches fachlich näher Alternativen auf den vorderen Positionen platziert.
-
-In diesem Projekt werden die folgenen Metriken verwendet:
-
-\begin{itemize} 
-\item hierarchical\_ndcg@1 
-\item hierarchical\_ndcg@3 
-\item hierarchical\_ndcg@5 
-\item hierarchical\_ndcg@10 
-\end{itemize}
+Durch diese Metriken können die Zielmakroerkennung, der Familienerkennung sowie die allgemeinen Rankingqualität bewertet werden.
 
 \subsection{Bedeutung der Metriken innerhalb der Evaluation} 
 
@@ -225,96 +76,6 @@ Die Bewertungsmetriken bilden gemeinsam verschiedene Aspekte der Rankingqualitä
   \end{tabularx}
 \end{table}
 
-
-\section{Evaluation der Retrievalphase}
-
-Bevor die Qualität des Learning-to-Rank-Modells bewertet wird, muss untersucht werden, ob das korrekte Ziel-Makro \parencite{EPLAN-Makros} überhaupt durch Retrievalkomponenten gefunden wird.
-Ein Rankingmodell kann ein Ziel-Makro \parencite{EPLAN-Makros} nur dann korrekt platzieren, wenn es in der Kandidatenmenge vorhanden ist.
-
-Deswegen erfolgt die Evaluation dieser Retrievalphase in einem getrennten Abschnitt.
-
-Diese Analysen werden durch die Module \texttt{step\_942\_\allowbreak validate\_retrieval\_\allowbreak index.py} und \texttt{step\_943\_\allowbreak analyze\_candidate\_\allowbreak coverage.py} durchgeführt \parencite{srcStep942,srcStep943}.
-
-\subsection{Bewertung des Retrieval-Index}
-
-Die Qualität des Retrievalindexes wird durch die erste Evaluationsstufe untersucht. Hierzu werden die Kandidatenlisten, die durch das Retrieval erzeugt werden, direkt ausgewertet. 
-Dies erfolgt durch \texttt{step\_942\_\allowbreak validate\_retrieval\_\allowbreak index.py} \parencite{srcStep942}.
-
-Dabei werden folgende Kennzahlen berechnet:
-
-\begin{itemize} 
-\item Target Recall@1 
-\item Target Recall@10 
-\item Target Recall@100 
-\item Family Recall@1 
-\item Family Recall@10 
-\item Family Recall@100 
-\item durchschnittlicher Zielrang 
-\item Rangperzentile 
-\item Anzahl nicht gefundener Zielmakros 
-\end{itemize}
-
-Dadurch kann die grundsätzliche Leistungsfähigkeit der Retrievalkomponenten bewertet werden, um die Eignung der Kandidatenmenge für die nachfolgende Rankingphase zu beurteilen.
-
-Target Recall@100 besitzt hier eine hohe Bedeutung. Wenn ein Ziel-Makro \parencite{EPLAN-Makros} nicht unter den Top-100-Kandidaten gefunden wird, kann es durch das spätere Learning-to-Rank-Modell nicht korrekt platziert werden.
-Hierdurch wird dann die theoretische maximale Leistung des Learning-to-Rank-Modells festgelegt.
-
-\subsection{Candidate Coverage}
-
-Die Abdeckung der Kandidaten ist neben der Retrievalqualität ein weiterer wichtiger Faktor.
-
-Die Analyse erfolgt dabei über \texttt{step\_943\_\allowbreak analyze\_candidate\_\allowbreak coverage.py} \parencite{srcStep943}.
-
-Dabei werden unterschiedliche Retrievalsignale darauf bewertet, wie gut das korrekte Ziel-Makro \parencite{EPLAN-Makros} in der Kandidatenmenge aufgenommen wird.
-
-Hierzu werden die einezelen Retrievalsignale getrennt voneinander analysiert:
-
-\begin{itemize} 
-  \item BM25 
-  \item Exact Match 
-  \item Reciprocal Rank Fusion 
-  \item kombinierte Retrievalvarianten 
-\end{itemize}
-
-Für jede Variante wird dabei bewertet, wie oft das korrekte Ziel-Makro \parencite{EPLAN-Makros} in den verschiedenen Kandidatenmengen enthalten ist.
-
-Die Analyse erfolgt dabei für $Top_{10}$, $Top_{50}$ und $Top_{100}$ der Kandidaten.
-
-Dadurch kann der Beitrag der einzelnen Retrievalkomponenten auf die Kandidatenmenge und der Einfluss der einzelnen Retrievalsignale auf die spätere Rankingqualität bewertet werden.
-
-\subsection{Interpretation der Retrievalergebnisse}
-
-Dies getrennte Evaluation ermöglicht es, Fehlklassifikationen in zwei Kategorien zu unterteilen:
-
-\begin{enumerate} 
-  \item Das korrekte Ziel-Makro \parencite{EPLAN-Makros} ist nicht Bestandteil der Kandidatenmenge. 
-  \item Das korrekte Ziel-Makro \parencite{EPLAN-Makros} ist vorhanden, wird jedoch durch das Rankingmodell falsch eingeordnet. 
-\end{enumerate}
-
-Im ersten Fall liegt das Problem im Retrievalprozess. Das Rankingmodell kann somit das korrekte Ziel-Makro \parencite{EPLAN-Makros} nicht finden.
-Im zweiten Fall liegt das Problem im Rankingprozess. Das korrekte Ziel-Makro \parencite{EPLAN-Makros} ist zwar in der Kandidatenmenge enthalten, wird jedoch vom Learning-to-Rank-Modell nicht auf die vorderen Ränge eingeordnet.
-
-Abbildung \ref{fig:fehleranalyse_kategorien} veranschaulicht diese Unterscheidung der Fehlerquellen.
-
-\begin{figure}[tbp]
-    \centering
-    \begin{tikzpicture}[
-        font=\small,
-        rootbox/.style={draw=blue!60!black, thick, rounded corners, fill=blue!8, text width=5.4cm, minimum height=1.1cm, align=center, inner sep=4pt},
-        errbox/.style={draw=red!50!black, thick, rounded corners, fill=red!8, text width=5.4cm, minimum height=1.5cm, align=center, inner sep=4pt},
-        flow/.style={->, thick, black!70}
-    ]
-        \node[rootbox] (root) at (0,0) {Ziel-Makro nicht\\korrekt auf Rang 1 platziert};
-        \node[errbox] (retrieval) at (-3.4,-2.3) {\textbf{Retrieval-Fehler}\\[2pt]\footnotesize Ziel-Makro nicht in\\Kandidatenmenge enthalten};
-        \node[errbox] (ranking) at (3.4,-2.3) {\textbf{Ranking-Fehler}\\[2pt]\footnotesize Ziel-Makro enthalten,\\aber falsch platziert};
-        \draw[flow] (root) -- (retrieval);
-        \draw[flow] (root) -- (ranking);
-    \end{tikzpicture}
-    \caption{Unterscheidung der Fehlerquellen in Retrieval- und Rankingprozess.}
-    \label{fig:fehleranalyse_kategorien}
-\end{figure}
-
-Dadurch lassen sich die Fehlerquellen im Retrieval- und Rankingprozess voneinander unterscheiden und gezielt verbessern.
 
 \section{Leakage-Sicherheitsprüfung}
 
@@ -350,9 +111,9 @@ Wichtig hierbei ist es, dass keine direkten Hinweise auf das Ziel-Makro \parenci
 Deswegen untersucht die Leakage-Prüfung folgenden Punkte:
 
 \begin{itemize} 
-  \item Zielmakrokennungen 
+  \item Ziel-Makro \parencite{EPLAN-Makros} -Kennungen 
   \item Zielfamilieninformationen 
-  \item direkten Zielmakro-Tokens 
+  \item direkten Ziel-Makro \parencite{EPLAN-Makros} -Tokens 
   \item verbotenen Metadatenfeldern 
   \item impliziten Zielhinweisen in den Featurevektoren 
 \end{itemize}
@@ -387,3 +148,175 @@ Deswegen werden sämtliche Profilinformationen auf ihre Herkunft geprüft, um si
 
 Nach der Leakage-Prüfung wird ein struktruierter Sicherheitsbericht erstellt. Der Evaluationslauf gilt nur dann als bestanden, wenn keine Verstöße gegen die definierten Leakage-Regeln festgestellt wurden.
 Diese Basis bildet die Voraussetzung für die Interpretierbarkeit der nachfolgenden Rankingmetriken.
+
+Für den verwendeten Datensatz wurden keine Fingerprint-Konflikte noch Fingerprint-Leaks festgestellt. 
+Es sind auch keine Ziel-Makros \parencite{EPLAN-Makros} oder Makrofamilien in Validierungs- beziehungsweise Testdaten vorhanden, ohne zuvor im Trainingssplit vertreten zu sein. 
+
+\section{Ergebnisse des Validierungssplits}
+
+Die Ergebnisse des Validierungssplits werden im späteren Verlauf für die Auswahl der besten Modellkonfiguration verwendet.
+
+Tabelle \ref{tab:validation_ergebnisse} fasst die wichtigsten Rankingmetriken des Referenzlaufs A07 auf dem Validierungssplit zusammen. 
+
+\begin{table}[tbp] 
+  \centering 
+  \caption{Ergebnisse des Referenzlaufs A07 auf dem Validierungssplit} 
+  \label{tab:validation_ergebnisse} 
+  \begin{tabular}{lr} \toprule \textbf{Metrik} & \textbf{Wert} \\ 
+    \midrule 
+    Target Recall@1 & 0,3012 \\ 
+    Target Recall@3 & 0,4255 \\ 
+    Target Recall@5 & 0,5186 \\ 
+    Target Recall@10 & 0,6180 \\ 
+    Family Recall@1 & 0,8043 \\ 
+    Family Recall@10 & 0,8944 \\ 
+    MRR & 0,4028 \\ 
+    Hierarchical nDCG@10 & 0,6711 \\ 
+    \bottomrule 
+  \end{tabular} 
+\end{table}
+
+Die Ergebnisse zeigen, dass das Modell bereits nach dem Test durch den Validierungssplit die korrekte Makrofamilie besser identifiziert als die exakte Ziel-Makro \parencite{EPLAN-Makros}.
+Während das korrekte Ziel-Makro \parencite{EPLAN-Makros} in 30,12\,\% der Anfragen auf Platz 1 steht, wird die korrekte Makrofamilie in 80,43\,\% der Anfragen auf die erste Position gesetzt.
+
+Durch den Target Recall@10 lässt sich erkennen, dass das Modell in 61,80\,\% der Anfragen das korrekte Ziel-Makro \parencite{EPLAN-Makros} innerhalb der Top-10-Vorschläge platziert.
+Intessant ist der Abstand zwischen Family Recall@10 (89,44\,\%) und Target Recall@10 (61,80\,\%). Dies deutet darauf hin, dass viele Fehlkategorisierungen innerhalb derselben Makrofamilie stattfinden.
+
+Die erzielten Ergebnisse bei MRR von 0,4028\,\% sowie ein hierarchisches nDCG@10 von 0,6711\,\%  zeigen zusätzlich, dass beim Validierungssplit das Modell in der Lage ist eine sinnvolle Reihenfolge zu erzeugen, 
+es jedoch weiterhin Schwierigkeiten bei der korrekten Auflösung technischer Varianten besitzt.
+
+\section{Ergebnisse des Testsplits}
+
+Nach dem die Modellauswahl abgeschlossen wurde, erfolgt die finale Evaluation des ausgewählten Modells auf dem unberührten Testsplit.
+
+Tabelle \ref{tab:test_ergebnisse} zeigt die erzielten Ergebnisse des Referenzlaufs A07 des Testsplits. 
+
+\begin{table}[tbp] 
+  \centering 
+  \caption{Ergebnisse des Referenzlaufs A07 auf dem Testsplit} 
+  \label{tab:test_ergebnisse} 
+  \begin{tabular}{lr} \toprule \textbf{Metrik} & \textbf{Wert} \\ \midrule 
+    Target Recall@1 & 0,3241 \\ 
+    Target Recall@3 & 0,4862 \\ 
+    Target Recall@5 & 0,5652 \\ 
+    Target Recall@10 & 0,6719 \\ 
+    Family Recall@1 & 0,8577 \\ 
+    Family Recall@10 & 0,9407 \\ 
+    MRR & 0,4439 \\ 
+    Hierarchical nDCG@10 & 0,7355 \\ 
+    \bottomrule 
+  \end{tabular} 
+\end{table}
+
+Beim Testsplit zeigt sich ein ähnliches Bild wie beim Validierungssplit. Das Modell sagt bei 32,41\,\% der Anfragen das korrekte Ziel-Makro \parencite{EPLAN-Makros} auf Platz 1 voraus, während die korrekte Makrofamilie in 85,77\,\% der Anfragen auf die erste Position gesetzt wird.
+
+Wie beim Validierungsplit ist auch hier der deutliche Abstand zwischen Family Recall@10 (94,07\,\%) und Target Recall@10 (67,19\,\%) zu erkennen. 
+
+Der erreichte MRR- Wert von 0,4439\,\% sowie die hierarchische nDCG@10 von 0,7355\,\% bestätigen zusätzlich die Erkenntnisse aus dem Validierungssplit.
+
+\section{Fehleranalyse}
+
+Um die Modelleistung detailliert erfassen zu können, werden die Top-1-Ergebnisse des Testsplits analysiert. Dabei werden die fachlichen Beziehungen zum tatsächlichen Zielmakro untersucht.
+
+Tabelle \ref{tab:fehleranalyse_top1} zeigt die Verteilung der einzelnen Fehlerkategorien. 
+
+\begin{table}[tbp] 
+  \centering 
+  \caption{Top-1-Analyse der Vorhersagen auf dem Testdatensatz} 
+  \label{tab:fehleranalyse_top1} 
+  \begin{tabular}{lrr} 
+    \toprule 
+    \textbf{Kategorie} & \textbf{Anzahl} & \textbf{Anteil} \\ 
+    \midrule 
+    Exaktes Ziel-Makro \parencite{EPLAN-Makros} & 82 & 32,41\,\% \\ 
+    Gleiche Familie, falsches Target & 135 & 53,36\,\% \\ 
+    Gleicher Familienpräfix & 14 & 5,53\,\% \\ 
+    Unverbundene Familie & 22 & 8,70\,\% \\ 
+    \bottomrule 
+  \end{tabular} 
+\end{table}
+
+Die Fehleranlyse bestätigt die Beobachtungen aus den Metriken. Von insgesamt 253 Testanfragen werden 135 Fälle einer gleichen Familie, aber einer falschen Variante zugeordnet, was 53,36\,\% entspricht.
+In 8,70\,\% der Fälle wird eine unverbundene Familie vorhergesagt. Das zeigt, dass das Modell die grundlegenden technischen Zusammenhänge zwischen Artikeln und Makrofamilien zuverlässig erlernt hat.
+Die Analyse zeigt, dass die zentrale Herausforderung die Identifikation des korrekten Ziel-Makros \parencite{EPLAN-Makros} innerhalb der richtigen Makrofamilie ist. Dafür muss die Variantenauflösung innerhalb der Makrofamilie weiter verbessert werden.
+Die große Differenz zwischen dem Target Recall@1 und dem Family Recall@1 unterstreicht diese Herausforderung zusätzlich.
+Dies wird im Kapitel \ref{chap:diskussion_grenzen_und_ausblick} genauer analysiert.
+
+
+\section{Rangstatistische Analyse}
+
+Eine weitere wichtige Analyse ist die statistische Auswertung der erzeugten Ranglisten.
+
+
+Die wichtigsten Rangstatistiken des Testdatensatzes werden in Tabelle \ref{tab:rangstatistik} dargestellt.
+
+\begin{table}[tbp] 
+  \centering 
+  \caption{Rangstatistische Kennzahlen des Testsplits} 
+  \label{tab:rangstatistik} 
+  \begin{tabular}{lr} 
+    \toprule 
+    \textbf{Kennzahl} & \textbf{Wert} \\ 
+    \midrule 
+    Erwarteter Zielrang (Mean Rank) & 19,72 \\ 
+    Median Rank & 4 \\ 
+    90\,\%-Perzentil Rank & 35 \\ 
+    Maximaler Rang & 369 \\ 
+    \bottomrule 
+  \end{tabular} 
+\end{table}
+
+Der Median Rank von 4 zeigt, dass das korrekte Makro \parencite{EPLAN-Makros} in der Hälfte der Testanfragen unter den ersten vier Positionen der Rangliste erscheint.
+Der mittlere Rang (Mean Rank) von 19,72 zeigt gleichzeitig, dass es einzelen schwierige Anfrage gibt, die deutliche schlechter eingeordnet werden.
+Diese Annahme wird durch das 90\,\%-Perzentil von 35 bestätigt. Dabei sitzt das Makro \parencite{EPLAN-Makros} in 90\,\% der Testanfragen unter den ersten 35 Positionen der Rangliste.
+
+Auch die Rangstatistiken zeigen, dass das Modell in der Lage ist, die korrekte Makro-Familie in den meisten Fällen weit oben in der Rangliste zu platzieren.
+
+\section{Analyse der Generalisierungsfähigkeit}
+
+Zur Beurteilung der Generalisierungsfähigkeit des Modells wurde eine zusätzliche Leave-One-Out Kontrollanalyse durchgeführt. 
+Um eine Verfälschung der Ergebnisse der Trainigsanalyse zu verhindern, werden bei einer Anfrage genau dieser Artikel aus der Anfragemenge ausgeschlossen.
+
+
+Tabelle \ref{tab:loo_vergleich} stellt die Ergebnisse der Leave-One-Out-Analyse sowie der Validierungs- und Testergebnisse gegenüber.
+
+\begin{table}[tbp] 
+  \centering 
+  \caption{Vergleich von regulärer Trainingsbewertung, Leave-One-Out-Analyse, Validation und Test} 
+  \label{tab:loo_vergleich} 
+  \begin{tabular}{lrrrr} 
+    \toprule 
+    \textbf{Metrik} & \textbf{Train (LOO)} & \textbf{Validation} & \textbf{Test} \\ 
+    \midrule 
+    Recall@1 &  0,2104 & 0,3012 & 0,3241 \\ 
+    Recall@3 & 0,3242 & 0,4255 & 0,4862 \\ 
+    Recall@10 & 0,4756 & 0,6180 & 0,6719 \\ 
+    MRR & 0,3026 & 0,4028 & 0,4439 \\ 
+    Family Recall@1 & 0,7134 & 0,8043 & 0,8577 \\ 
+    Hierarchical nDCG@10 & 0,5957 & 0,6711 & 0,7355 \\ 
+    Mean Rank & 34,87 & 30,84 & 19,72 \\ 
+    Median Rank & 12,0 & 5,0 & 4,0 \\ 
+    90\,\%-Perzentil & 101,1 & 58,9 & 35,0 \\ 
+    \bottomrule 
+    \end{tabular} 
+    \end{table}
+
+Es zeigt sich, dass die Leave-One-Out-Bewertung eine strengere Evaluationsmethode als die Bewertung durch den Validierungs- und Testdatensatz darstellt.
+Die Ursache dafür liegt im Support der Kandidatenprofile. Von den vorhanden 375 Kandidatenprofilen basieren insgesamt 302 Profile ausschließlich auf einem Traingsartikel.
+Wenn dieser Artikel aus der Anfragemenge ausgeschlossen wird, enthält das entsprechende Kandidatenprofil keine unterstützenden Trainingsdaten mehr und kann dadruch keinen Beitrag zur korrekten Vorhersage leisten.
+
+Bei den Validierungs- und Testdaten tritt dieser Effekt nicht auf, da durch die im Datensplitt erzwungene Trainigsabdeckung jedes Ziel-Makro \parencite{EPLAN-Makros} mindestens einen Artikel in jedem Split enthält, welcher nicht identisch zu den andern beiden ist.
+
+
+\section{Vergleich der Konfigurationsvarianten}
+
+Um verschiedene Modellkonfigurationen zu vergleichen, wurde die aktuell Versuchsserie A01 bis A09 durchgeführt. 
+Tabelle \ref{tab:konfigurationsvergleich} zeigt die getesteten Modellkonfigurationen und deren Leistung im Vergleich.
+
+
+
+
+Die Ergebnisse zeigen, dass keine der Konfigurationen bei allen Kennzahlen gleichzeitig die besten Werte erzielt.
+
+A08 erreicht mit einem Target Recall@1 von (34,78\,\%) den höchsten Top-1-Wert. Auch der höchste MRR-Wert von (45,34\,\%) wird von dieser Konfiguration erzielt.
+

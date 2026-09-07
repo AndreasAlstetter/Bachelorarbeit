@@ -22,8 +22,8 @@
 \contentsline {section}{\numberline {4.1}Gesamtarchitektur}{14}{section.4.1}%
 \contentsline {chapter}{\numberline {5}Analyse der Datenstrukturen und Ableitung eines Trainingsformats}{16}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Analyse der Ausgangsdaten}{16}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Datensatzstatistik}{16}{subsection.5.1.1}%
-\contentsline {section}{\numberline {5.2}Analyse der Makrostrukturen}{16}{section.5.2}%
+\contentsline {subsection}{\numberline {5.1.1}Datensatzstatistik}{17}{subsection.5.1.1}%
+\contentsline {section}{\numberline {5.2}Analyse der Makrostrukturen}{17}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Aufbereitung der Artikeldaten}{18}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Erstellung von Makrokandidatenprofilen}{18}{section.5.4}%
 \contentsline {section}{\numberline {5.5}Transformation in ein Rankingproblem}{19}{section.5.5}%
@@ -32,34 +32,31 @@
 \contentsline {section}{\numberline {5.8}Erstellung des Trainingsformats}{21}{section.5.8}%
 \contentsline {section}{\numberline {5.9}Vermeidung von Zielinformations-Leakage}{22}{section.5.9}%
 \contentsline {chapter}{\numberline {6}Datensplit und Training}{23}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Anforderungen an die Datenbasis}{23}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Datensplit und Trainingsbasis}{23}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Aufbau der Retrievalsignale}{25}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Training des Learning-to-Rank-Modells}{26}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Hyperparameteroptimierung}{27}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Modellartefakte und Reproduzierbarkeit}{28}{section.6.6}%
-\contentsline {section}{\numberline {6.7}Pipeline-Orchestrierung}{28}{section.6.7}%
-\contentsline {chapter}{\numberline {7}Evaluierungskonzept und Ergebnisse}{29}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Evaluationsdatensätze}{29}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Aufbau der Evaluations-Suite}{29}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Verwendete Rankingmetriken}{30}{section.7.3}%
-\contentsline {subsection}{\numberline {7.3.1}Target Recall@k}{30}{subsection.7.3.1}%
-\contentsline {subsection}{\numberline {7.3.2}Family Recall@k}{31}{subsection.7.3.2}%
-\contentsline {subsection}{\numberline {7.3.3}Mean Reciprocal Rank}{32}{subsection.7.3.3}%
-\contentsline {subsection}{\numberline {7.3.4}Hierarchical nDCG}{32}{subsection.7.3.4}%
-\contentsline {subsection}{\numberline {7.3.5}Bedeutung der Metriken innerhalb der Evaluation}{33}{subsection.7.3.5}%
-\contentsline {section}{\numberline {7.4}Evaluation der Retrievalphase}{34}{section.7.4}%
-\contentsline {subsection}{\numberline {7.4.1}Bewertung des Retrieval-Index}{34}{subsection.7.4.1}%
-\contentsline {subsection}{\numberline {7.4.2}Candidate Coverage}{35}{subsection.7.4.2}%
-\contentsline {subsection}{\numberline {7.4.3}Interpretation der Retrievalergebnisse}{35}{subsection.7.4.3}%
-\contentsline {section}{\numberline {7.5}Leakage-Sicherheitsprüfung}{36}{section.7.5}%
-\contentsline {subsection}{\numberline {7.5.1}Ziele der Leakage-Prüfung}{36}{subsection.7.5.1}%
-\contentsline {subsection}{\numberline {7.5.2}Prüfung der Query-Daten}{37}{subsection.7.5.2}%
-\contentsline {subsection}{\numberline {7.5.3}Prüfung der Datensplits}{37}{subsection.7.5.3}%
-\contentsline {subsection}{\numberline {7.5.4}Prüfung der Kandidatenprofile}{37}{subsection.7.5.4}%
-\contentsline {subsection}{\numberline {7.5.5}Evaluierungsergebnis}{38}{subsection.7.5.5}%
-\contentsline {chapter}{\numberline {8}Diskussion, Grenzen und Ausblick}{39}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Zusammenfassung und Fazit}{40}{chapter.9}%
+\contentsline {section}{\numberline {6.1}Datensplit und Trainingsbasis}{23}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Aufbau der Trainingsmatrix}{24}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Training des Learning-to-Rank-Modells}{24}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Hyperparameteroptimierung}{25}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Modellartefakte und Reproduzierbarkeit}{26}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Pipeline-Orchestrierung}{27}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Evaluierungskonzept und Ergebnisse}{28}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Evaluationsdatensätze}{28}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Aufbau der Evaluations-Suite}{28}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Verwendete Rankingmetriken}{29}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Bedeutung der Metriken innerhalb der Evaluation}{29}{subsection.7.3.1}%
+\contentsline {section}{\numberline {7.4}Leakage-Sicherheitsprüfung}{29}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Ziele der Leakage-Prüfung}{30}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Prüfung der Query-Daten}{30}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Prüfung der Datensplits}{31}{subsection.7.4.3}%
+\contentsline {subsection}{\numberline {7.4.4}Prüfung der Kandidatenprofile}{31}{subsection.7.4.4}%
+\contentsline {subsection}{\numberline {7.4.5}Evaluierungsergebnis}{31}{subsection.7.4.5}%
+\contentsline {section}{\numberline {7.5}Ergebnisse des Validierungssplits}{32}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Ergebnisse des Testsplits}{32}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Fehleranalyse}{33}{section.7.7}%
+\contentsline {section}{\numberline {7.8}Rangstatistische Analyse}{34}{section.7.8}%
+\contentsline {section}{\numberline {7.9}Analyse der Generalisierungsfähigkeit}{34}{section.7.9}%
+\contentsline {section}{\numberline {7.10}Vergleich der Konfigurationsvarianten}{35}{section.7.10}%
+\contentsline {chapter}{\numberline {8}Diskussion, Grenzen und Ausblick}{36}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Zusammenfassung und Fazit}{37}{chapter.9}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{44}{chapter*.22}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{41}{chapter*.23}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

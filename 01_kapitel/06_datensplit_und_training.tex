@@ -1,36 +1,6 @@
 ﻿\chapter{Datensplit und Training} 
 \label{chap:datensplit_und_training}
 
-\section{Anforderungen an die Datenbasis}
-
-Um eine konsistente, validierte und reproduzierbare Datenbasis zu haben, wurde ein idealer Datensatz erstellt.
-Der ideale Datensatz setzt sich aus den bestgeeigneten Artikeln und Makrokandidaten nach der Datenbereinigung zusammen \parencite{srcIdealDataset,srcStep913}.
-Dabei wurden die Anforderungen an den idealen Datensatz in Tabelle \ref{tab:anforderungen_datenbasis} zusammengefasst.
-
-\begin{table}[tbp]
-    \centering
-    \setlength{\tabcolsep}{6pt}
-    \renewcommand{\arraystretch}{1.08}
-    \caption{Anforderungen an den idealen Datensatz \parencite{srcIdealDataset,srcStep913,srcStep921}}
-    \label{tab:anforderungen_datenbasis}
-    \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{4.2cm} >{\raggedright\arraybackslash}X}
-        \toprule
-        \textbf{Anforderung} & \textbf{Beschreibung und Zielsetzung} \\
-        \midrule
-        Reale Datenbasis & Der Datensatz enthält ausschließlich tatsächlich vorhandene EPLAN-Artikel aus der gesamten Datenbasis. \\
-        Eindeutiges Zielmakro & Jeder Artikel muss eindeutig einem Zielmakro (\texttt{target\_macro}) zugeordnet sein. \\
-        Vorhandene Ground Truth & Für jedes Zielmakro muss eine passende reale \texttt{.ema}-Makrodatei existieren. \\
-        Vollständige technische Merkmale & Die Feature-Vektoren müssen vorhanden und mit technischen Informationen gefüllt sein. \\
-        Vollständige Grunddaten & Jeder Datensatz benötigt eine ID, ein Zielmakro, eine Makrofamilie und einen Fingerprint. \\
-        Keine Duplikate & Artikel-IDs dürfen nicht mehrfach vorkommen, damit kein Artikel versehentlich doppelt trainiert wird. \\
-        Keine widersprüchlichen Fingerprints & Ein Fingerprint darf nicht zu mehreren unterschiedlichen Zielmakros gehören. Andernfalls wäre die Zuordnung technisch nicht eindeutig. \\
-        Ausgeglichener Target-Support & Jedes Zielmakro sollte ungefähr gleich häufig vertreten sein. Dadurch lernt das Modell nicht überwiegend die am häufigsten vorkommenden Makros. \\
-        Vergleichbare Makrofamilien & Der Datensatz sollte mehrere Zielmakros derselben Familie enthalten. So kann geprüft werden, ob das Modell auch zwischen ähnlichen Makros unterscheiden kann. \\
-        Leakage-freie und reproduzierbare Aufteilung & Die Daten werden mit einem festen Zufallswert (\texttt{RANDOM\_SEED} = 42) in 70\,\% Training, 10\,\% Validierung und 20\,\% Test aufgeteilt. Artikel mit zusammengehörigem Fingerprint bleiben dabei im selben Teil des Datensatzes \parencite{srcStep921}.\\
-        \bottomrule
-    \end{tabularx}
-\end{table}
-
 \section{Datensplit und Trainingsbasis}
 
 Nach der Datenaufbereitung, der Qualitätsprüfung der Daten sowie der Erstellung des idealen Datensatzes erfolgt die Aufteilung in Trainings-, Validierungs- und Testdaten \parencite{srcStep911,srcStep913,srcIdealDataset,srcStep921}.
@@ -40,14 +10,18 @@ Ziel ist es eine klare Trennung zwischen Modelltraining, Hyperparameteroptimieru
     \text{Train} = 70\,\%, \qquad \text{Validation} = 10\,\%, \qquad \text{Test} = 20\,\%
 \end{align}
 
-Um reproduzierbare Ergebnisse mit einem erstellten Datensplit zu gewährleisten, wird ein fester Zufallsseed verwendet, der sicherstellt, dass die Aufteilung in Trainings-, Validierungs- und Testdaten bei jeder Ausführung identisch bleibt \parencite{srcStep921}.
+Um reproduzierbare Ergebnisse mit einem erstellten Datensplit zu gewährleisten, wird ein fester Zufallsseed verwendet  \parencite{srcStep921}.
 
 \begin{align}
     \text{RANDOM\_SEED} = 42
 \end{align}
 
 Dabei wird keine reine Zufallsaufteilung vorgenommen, sondern fachliche Zusammenhänge der Daten berücksichtigt, um eine konsistente Verteilung über die Anfragegruppen sicherzustellen. 
-Dies verhindert, dass eng verwandte Beispiele in unterschiedlichen Datensplits landen und somit die Glaubwürdigkeit der Modellbewertung negativ beeinflussen. Durch die unterschiedlichen Seed-Werte lässt sich dann auch ein Mittelwert über mehrere Splits ableiten \parencite{srcStep921}. Abbildung \ref{fig:datensplit_schema} fasst diese Aufteilung schematisch zusammen.
+Darüber hinaus wird sichergestellt, dass jedes Zielmakro, welches im Validierungs- oder Testsplit vorkommt, mindestens einmal als Beispiel im Trainingssplit repräsentiert wird.
+Zielmakros, die im Gesamtdatensatz nur einmal auftreten, werden vollständig dem Trainingssplit zugeordnet.
+Dies verhindert, dass eng verwandte Beispiele in unterschiedlichen Datensplits landen und somit die Glaubwürdigkeit der Modellbewertung negativ beeinflussen. 
+
+Abbildung \ref{fig:datensplit_schema} fasst diese Aufteilung schematisch zusammen.
 
 \begin{figure}[tbp]
     \centering
@@ -66,59 +40,29 @@ Dies verhindert, dass eng verwandte Beispiele in unterschiedlichen Datensplits l
     \label{fig:datensplit_schema}
 \end{figure}
 
-\section{Aufbau der Retrievalsignale}
+Für den in dieser Arbeit verwendeten Referenzlauf ergibt sich folgende Aufteilung: 
 
-Vor dem Modelltraining werden für jede Anfrage unterschiedliche Retrievalsignale berechnet (siehe Kapitel \ref{chap:analyse_der_datenstrukturen}) \parencite{srcStep640}.
-Diese dienen als erste Ähnlichkeitsabschätzung zwischen Anfrage und Kandidat.
+\begin{itemize} 
+\item Training: 984 Artikel 
+\item Validation: 322 Artikel 
+\item Test: 253 Artikel 
+\end{itemize}
 
-Die theoretischen Grundlagen der verwendeten Verfahren wurden bereits im Kapitel \ref{chap:stand_der_technik} beschrieben.
-Die Retrievalsignale dienen innerhalb der in Abbildung \ref{fig:architektur} dargestellten Pipeline-Architektur nicht als eigenständige Rankingstufen, sondern als zusätzliche Merkmale für das Learning-to-Rank-Modell \parencite{srcStep640,srcStep931}.
+\section{Aufbau der Trainingsmatrix} 
 
-Die folgende Tabelle \ref{tab:retrieval_signale} zeigt die verwendeten Retrievalsignale sowie deren Funktion.
+Nach der Erstellung der Kandidatenprofile werden für jede Anfrage die verfügbarenMakrokandidaten bewertet. 
+Für jede Anfrage werden Anfrage-Kandidat-Paare erzeugt und anhand der Pairwise-Merkmale aus Kapitel \ref{chap:analyse_der_datenstrukturen} beschrieben. 
+Die Referenzkonfiguration A07 verwendet insgesamt 375 Kandidatenprofile und 2.381 Merkmale. 
+Für jede Anfrage werden alle 375 Kandidatenprofile vollständig bewertet. 
 
-\begin{table}[tbp]
-    \centering
-    \setlength{\tabcolsep}{6pt}
-    \renewcommand{\arraystretch}{1.1}
-    \caption{Verwendete Retrievalsignale} 
-    \label{tab:retrieval_signale} 
-    \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}X}
-        \toprule
-        \textbf{Signal} & \textbf{Funktion} \\
-        \midrule
-        BM25 & Lexikalische Ähnlichkeit zwischen Anfrage und Makrokandidatenprofil \\
-        Exact Match & Exakte technische Übereinstimmungen strukturierter Merkmale \\
-        RRF & Fusion der Retrievalrankings zu einem kombinierten Retrievalsignal \\
-        \bottomrule 
-    \end{tabularx}
-\end{table}
+Dadurch entstehen folgenden Matrizen: 
+\begin{itemize} 
+    \item Trainingsmatrix: 369.000 $\times$ 2.381 
+    \item Validierungsmatrix: 120.750 $\times$ 2.381 
+    \item Testmatrix: 94.875 $\times$ 2.381 
+\end{itemize} 
 
-
-Die verwendeten Parameter der Retrievalkomponenten wurden wie folgt festgelegt \parencite{srcStep640}:
-
-\begin{align}
-    \text{BM25}_{k1} &= 1.2 \\
-    \text{BM25}_{b}  &= 0.50 \\
-    \text{RRF}_{k}   &= 30
-\end{align}
-
-Dabei steuert $k_1$ wie stark wiederholte Treffer eines Begriffes berücksichtigt werden. Hier wurden 1,2 gewählt, da sich wiederholende lexikalische Begriffe zwar relevant sein können,
-aber nicht automatisch bedeuten, das ein EPLAN-Artikel \parencite{EPLANArtikelverwaltung} für ein EPLAN-Fenstermakro \parencite{EPLAN-Makros} relevanter ist.
-
-Der Parameter $b$ steuert die Normalisierung der Dokumentenlänge. Dieser liegt zwischen 0 und 1 und wurde hier auf 0,50 gesetzt. Dadurch wird berücksichtigt, dass längere Kandidatenprofile mehr Treffer enthalten können,
-diese aber nicht aufgrund der Länge einen übermäßigen Vorteil erhalten \parencite{srcStep640}.
-
-$\text{RRF}_k$ steuert den Einfluss der Spitzenpositionen. Bei kleinem $k$ dominiert Rang 1 stark, während bei größerem $k$ auch niedrigere Ränge stärker berücksichtigt werden.
-60 ist die übliche Wahl. Hier wurde 30 verwendet, um die Spitzenpositionen nicht zu stark zu reduzieren und damit dem Ranking auf Top 1 mehr Abstand zu verleihen \parencite{srcStep640}.
-
-Die Fusion der Retrievalsignale erfolgt über die Gewichtung der Reciprocal Rank Fusion (RRF) \parencite{srcStep640}:
-
-\begin{align}
-    w_{\text{BM25}} = 0.30 \qquad \text{und} \qquad w_{\text{Exact}} = 0.70
-\end{align}
-
-Die höhere Gewichtung von Exact Match gegenüber BM25 spiegelt die Priorität technischer Merkmale innerhalb der Maschinen- und Anlagenbau-Domäne wider. 
-
+Die Merkmalsmatrizen werden als Sparse-Matrizen gespeichert und mit numerischen Werten des Typs \texttt{float32} verarbeitet.
 
 \section{Training des Learning-to-Rank-Modells}
 
@@ -133,6 +77,17 @@ Das Modell wird mit den Parametern
 
 trainiert \parencite{srcStep931}.
 
+Die für die spätere Referenzkonfiguration A07 ausgewählten Modellparameter lauten: 
+
+\begin{align} 
+    n\_estimators &= 500 \\ 
+    learning\_rate &= 0.04 \\ 
+    num\_leaves &= 31 \\ 
+    min\_child\_samples &= 50 \\ 
+    lambdarank\_truncation\_level &= 10 
+\end{align}
+
+Zusätzlich wird eine Kandidatenprofilbreite von acht Artikeln pro Makro verwendet. 
 
 Wie in Kapitel \ref{chap:analyse_der_datenstrukturen} beschrieben, werden Kandidaten einer Anfrage als gemeinsame Rankinggruppe betrachtet.
 Wiederholend entsteht für jede Anfrage eine Gruppe:
@@ -151,8 +106,18 @@ Das Training erfolgt dabei ausschließlich auf den Trainingsdaten, während die 
 
 \section{Hyperparameteroptimierung}
 
-Die Leistungsfähigkeit eines Learning-to-Rank-Modells hängt von der Wahl der Hyperparameter ab. Deswegen erfolgt die Modellkonfiguration nicht manuell, sondern durch eine systematische Hyperparameteroptimierung.
-Dafür wird hier eine Grid-Search-basierte Strategie verwendet. Bei dieser werden verschiedene Kombinationen von Hyperparametern getestet und anhand der Ergebnisse der Validierung verglichen \parencite{srcStep931}.
+Für die Hyperparameteroptimierung wird eine Grid-Search mit insgesamt 15 definierten Parameterkonfigurationen verwendet. 
+Variiert werden dabei folgende Parameter: 
+
+\begin{itemize} 
+    \item \texttt{n\_estimators}, 
+    \item \texttt{learning\_rate}, 
+    \item \texttt{num\_leaves}, 
+    \item \texttt{min\_child\_samples}, 
+    \item \texttt{lambdarank\_truncation\_level}. 
+\end{itemize} 
+
+Die Bewertung dieser Parameterkonfigurationen erfolgt ausschließlich auf dem Validierungssplit. Der Testsplit wird erst nach Abschluss der Modellauswahl für die finale Evaluation verwendet.
 
 Die folgende Tabelle \ref{tab:hyperparameter} zeigt die untersuchten Hyperparameterkombinationen:
 
@@ -160,17 +125,17 @@ Die folgende Tabelle \ref{tab:hyperparameter} zeigt die untersuchten Hyperparame
     \centering 
     \setlength{\tabcolsep}{8pt}
     \renewcommand{\arraystretch}{1.1}
-    \caption{Verwendete Hyperparameterkombinationen \parencite{srcStep931}}
+    \caption{Variierte Hyperparameter der Grid-Search \parencite{srcStep931}}
     \label{tab:hyperparameter} 
     \begin{tabularx}{0.85\textwidth}{>{\raggedright\arraybackslash}p{5.5cm} >{\raggedright\arraybackslash}X} 
         \toprule 
         \textbf{Parameter} & \textbf{Wertebereich} \\ 
         \midrule 
-        \texttt{n\_estimators} & 300, 500, 700 \\ 
-        \texttt{learning\_rate} & 0.05, 0.04, 0.035 \\ 
-        \texttt{num\_leaves} & 31, 63 \\ 
-        \texttt{min\_child\_samples} & 10, 20, 50 \\ 
-        \texttt{lambdarank\_\allowbreak truncation\_level} & 10, 20 \\ 
+        \texttt{n\_estimators} & 300 bis 900 \\ 
+        \texttt{learning\_rate} & 0.025 bis 0.05 \\ 
+        \texttt{num\_leaves} & 15 bis 127 \\ 
+        \texttt{min\_child\_samples} & 5 bis 80 \\ 
+        \texttt{lambdarank\_truncation\_level} & 5 bis 20 \\
         \bottomrule 
     \end{tabularx} 
 \end{table}
@@ -220,7 +185,10 @@ Ein wichtiges Ziel dieser Trainingspipeline besteht darin, die Trainingsabläufe
                 \item die erzielten Validierungsmetriken,
                 \item die verwendeten Featuredefinitionen,
                 \item die Makrokandidatenprofile,
-                \item Konfigurations- und Laufmetadaten.
+                \item die Ergebnisse der Hyperparameteroptimierung, 
+                \item die ausgewählten Bestparameter, 
+                \item die Validierungsmetriken der Grid-Search, 
+                \item das Run-Manifest.
             \end{itemize}
         };
     \end{tikzpicture}
@@ -228,7 +196,7 @@ Ein wichtiges Ziel dieser Trainingspipeline besteht darin, die Trainingsabläufe
     \label{fig:artefakte_struktur}
 \end{figure}
 
-Dadurch lässt sich sicherstellen, dass jeder Trainingsablauf zu einem späteren Zeitpunkt vollständig nachvollzogen und reproduziert werden kann \parencite{srcStep931}.
+Dadurch lässt sich sicherstellen, dass jeder Trainingsablauf zu einem späteren Zeitpunkt nachvollzogen und reproduziert werden kann \parencite{srcStep931}.
 
 
 \section{Pipeline-Orchestrierung}
@@ -240,13 +208,12 @@ Die folgende Reihenfolge der Schritte stellt den Ablauf der Pipeline dar. Diese 
 
 \begin{enumerate} 
     \item Datenaufbereitung 
-    \item Qualitätsprüfung und Datenvalidierung 
-    \item Datensplit   
-    \item Berechnung der Retrievalsignale 
-    \item Erstellung der Pairwise-Features 
-    \item Training des Rankingmodells 
-    \item Speicherung der Modellartefakte 
-    \item Evaluation des trainierten Modells 
+    \item Qualitätsfilterung und Bereinigung 
+    \item Datensplit-Erstellung 
+    \item Kandidatenprofilgenerierung und Featurebildung 
+    \item LightGBM-Learning-to-Rank-Training 
+    \item Konsolidierung der Laufartefakte 
+    \item Evaluation 
 \end{enumerate}
 
 Jeder Verarbeitungsschritt verwendet dabei die Artefakte des vorherigen Schrittes als Eingabe und erzeugt selbst Artefakte für den nächsten Schritt als Ausgabe. 

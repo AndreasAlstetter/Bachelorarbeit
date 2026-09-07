@@ -23,9 +23,6 @@ Zum Zeitpunkt der Durchführung dieser Arbeit umfasst der Datensatz insgesamt 1.
         Artikel & 1.559 \\ 
         Makro-Targets & 375 \\ 
         Makrofamilien & 55 \\ 
-        Train & 984 \\ 
-        Validation & 322 \\ 
-        Test & 253 \\ 
         Singleton-Targets & 213 \\ 
         Targets mit Support < 3 & 279 \\ 
         \bottomrule 
@@ -164,16 +161,8 @@ Die Berechnung der Pairwise-Merkmale erfolgt innerhalb der entwickelten Training
     \end{tabularx} 
 \end{table}
 
-Die aktuelle Featurematrix umfasst für die Referenzkonfiguration von A07 insgesamt 2.381 Merkmale. Diese setzen sich aus den in den vorherigen Tabellen beschriebenen Gruppen zusammen. Dabei werden für jede Anfrage alle 375 Kandidatenprofile bewertet. 
-Dadurch entstehen: 
-
-\begin{itemize} 
-    \item 369.000 Anfrage-Kandidat-Paare im Trainingssplit,
-    \item 120.750 Anfrage-Kandidat-Paare im Validierungssplit,
-    \item 94.875 Anfrage-Kandidat-Paare im Testsplit.
-\end{itemize} 
-
-Die Merkmalsmatrix wird als Sparse-Matrix gespeichert und mit Gleitkommazahlen vom Typ float32 verarbeitet.
+Die aktuelle Featurematrix umfasst für die Referenzkonfiguration A07 insgesamt 2.381 Merkmale. Dabei werden für jede Anfrage sämtliche 375 Kandidatenprofile bewertet. 
+Die konkreten Größen der Trainings-, Validierungs- und Testmatrizen ergeben sich erst nach der Datensplit-Erzeugung und werden in Kapitel \ref{chap:datensplit_und_training} beschrieben.
 
 \section{Erzeugung der Relevanzlabels}
 
