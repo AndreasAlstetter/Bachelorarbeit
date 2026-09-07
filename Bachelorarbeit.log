@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  7 SEP 2026 11:39
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  7 SEP 2026 15:45
  restricted system commands enabled.
  file:line:error style messages enabled.
 **"c:/Users/alstetter/OneDrive - GROBGroup/Documents/Sys_Engineering/Bachelorar
@@ -2342,66 +2342,64 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 Package tocbasic Info: character protrusion at toc deactivated on input line 62
 .
- (./Bachelorarbeit.toc
-Package cleveref Info: loaded `ngerman' language definitions on input line 1.
-Package cleveref Info: loaded `ngerman' language definitions on input line 2.
-LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 12.0pt on input line 5.
-LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 8.8pt on input line 5.
-LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 6.6pt on input line 5.
-LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 12.0pt on input line 5.
-LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 8.8pt on input line 5.
-LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 6.6pt on input line 5.
-LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 12.0pt on input line 5.
-LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 8.8pt on input line 5.
-LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 6.6pt on input line 5.
-LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 12.0pt on input line 5.
-LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 8.8pt on input line 5.
-LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 6.6pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 12.0pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 8.8pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 6.6pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 12.0pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 8.8pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 6.6pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 12.0pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 8.8pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 6.6pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 12.0pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 8.8pt on input line 5.
-LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 6.6pt on input line 5.
- [2
-
-
-])
+ (./Bachelorarbeit.toc)
 \tf@toc=\write8
 
 \openout8 = Bachelorarbeit.toc
 
-(./01_kapitel/01_motivation.tex [1]
+(./01_kapitel/01_motivation.tex
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 12.0pt on input line 1.
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 8.8pt on input line 1.
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 6.6pt on input line 1.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 12.0pt on input line 1.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 8.8pt on input line 1.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 6.6pt on input line 1.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 12.0pt on input line 1.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 8.8pt on input line 1.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 6.6pt on input line 1.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 12.0pt on input line 1.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 8.8pt on input line 1.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 6.6pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 12.0pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 8.8pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 6.6pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 12.0pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 8.8pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 6.6pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 12.0pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 8.8pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 6.6pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 12.0pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 8.8pt on input line 1.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 6.6pt on input line 1.
+ [1
+
+
+]
 chapter 1.
 Package biblatex Info: Reference segment=2 on input line 1.
 Package biblatex Info: Setting label 'refsegment:02' on input line 1.
@@ -2426,107 +2424,7 @@ LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
 (Font)              scaled to size 8.8pt on input line 58.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
 (Font)              scaled to size 6.6pt on input line 58.
- [5] [6]
-./01_kapitel/02_stand_der_technik.tex:134: Missing $ inserted.
-<inserted text> 
-                $
-l.134 \begin{cases}
-                    3,& \text{exakte Übereinstimmung}\\ 2,& \text{gleiche F...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/02_stand_der_technik.tex:135: Missing $ inserted.
-<inserted text> 
-                $
-l.135 \end{cases}
-                  \end{align}
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-./01_kapitel/02_stand_der_technik.tex:135: Misplaced \cr.
-\math@cr@@@ ->\cr 
-                  
-l.135 \end{cases} \end{align}
-                             
-I can't figure out why you would want to use a tab mark
-or \cr or \span just now. If something like a right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-./01_kapitel/02_stand_der_technik.tex:135: Misplaced \noalign.
-\math@cr@@ ... \iffalse }\fi \math@cr@@@ \noalign 
-                                                  {\vskip #1\relax }
-l.135 \end{cases} \end{align}
-                             
-I expect to see \noalign only after the \cr of
-an alignment. Proceed, and I'll ignore this case.
-
-./01_kapitel/02_stand_der_technik.tex:135: Misplaced \noalign.
-\black@ #1->\noalign 
-                     {\ifdim #1>\displaywidth \dimen@ \prevdepth \nointerlin...
-l.135 \end{cases} \end{align}
-                             
-I expect to see \noalign only after the \cr of
-an alignment. Proceed, and I'll ignore this case.
-
-
-Overfull \hbox (119.55043pt too wide) detected at line 135
-[]
- []
-
-./01_kapitel/02_stand_der_technik.tex:135: Too many }'s.
-\endalign ->\math@cr \black@ \totwidth@ \egroup 
-                                                \ifingather@ \restorealignst...
-l.135 \end{cases} \end{align}
-                             
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-
-./01_kapitel/02_stand_der_technik.tex:135: LaTeX Error: \begin{document} ended 
-by \end{align}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.135 \end{cases} \end{align}
-                             
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-./01_kapitel/02_stand_der_technik.tex:135: Missing $ inserted.
-<inserted text> 
-                $
-l.135 \end{cases} \end{align}
-                             
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-./01_kapitel/02_stand_der_technik.tex:135: Display math should end with $$.
-<to be read again> 
-                   \endgroup 
-l.135 \end{cases} \end{align}
-                             
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-./01_kapitel/02_stand_der_technik.tex:135: Extra \endgroup.
-<recently read> \endgroup 
-                          
-l.135 \end{cases} \end{align}
-                             
-Things are pretty mixed up, but I think the worst is over.
-
-[7] [8]
+ [5] [6] [7] [8]
 LaTeX Font Info:    Trying to load font information for TU+newtxtt on input lin
 e 212.
 LaTeX Font Info:    No file TUnewtxtt.fd. on input line 212.
@@ -2549,7 +2447,12 @@ Package biblatex Info: Setting label 'refsegment:04' on input line 1.
 
 ] [12]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 133.
+(Font)              scaled to size 12.0pt on input line 68.
+
+
+LaTeX Warning: Reference `chap:evaluierungskonzept_und_ergebnisse' on page 13 u
+ndefined on input line 68.
+
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 (Font)              scaled to size 8.0pt on input line 133.
 ) (./01_kapitel/04_architektur.tex [13]
@@ -2598,11 +2501,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 161--161
 []|\TU/TeXGyreTermesX(0)/m/n/12 Varianten- und Bau-
  []
 
+
+LaTeX Warning: Reference `chap:datensplit_und_training' on page 20 undefined on
+ input line 165.
+
 [20] [21]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `newtxtt' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
+
+
+LaTeX Warning: Reference `chap:evaluierungskonzept_und_ergebnisse' on page 22 u
+ndefined on input line 212.
+
+
+LaTeX Warning: Reference `fig:trainingsformat_pipeline' on page 22 undefined on
+ input line 215.
 
 ./01_kapitel/05_analyse_der_datenstrukturen.tex:235: Misplaced alignment tab cha
 racter &.
@@ -2619,6 +2534,10 @@ might try typing `S' now just to see what is salvageable.
 chapter 6.
 Package biblatex Info: Reference segment=7 on input line 1.
 Package biblatex Info: Setting label 'refsegment:07' on input line 1.
+
+LaTeX Warning: Reference `fig:datensplit_schema' on page 23 undefined on input 
+line 24.
+
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 (Font)              scaled to size 10.0pt on input line 33.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
@@ -2673,15 +2592,32 @@ LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 (Font)              scaled to size 5.5pt on input line 37.
 [23
 
-] [24] [25]
+] [24]
+
+LaTeX Warning: Reference `tab:hyperparameter' on page 25 undefined on input lin
+e 122.
+
+[25]
 
 LaTeX Font Warning: Font shape `TU/newtxtt/b/n' undefined
 (Font)              using `TU/newtxtt/m/n' instead on input line 146.
 
-[26]) (./01_kapitel/07_evaluierungskonzept_und_ergebnisse.tex [27]
+
+LaTeX Warning: Reference `chap:evaluierungskonzept_und_ergebnisse' on page 26 u
+ndefined on input line 156.
+
+
+LaTeX Warning: Reference `fig:artefakte_struktur' on page 26 undefined on input
+ line 160.
+
+[26]) (./01_kapitel/07_evaluierungskonzept.tex [27]
 chapter 7.
 Package biblatex Info: Reference segment=8 on input line 1.
 Package biblatex Info: Setting label 'refsegment:08' on input line 1.
+
+LaTeX Warning: Reference `chap:datensplit_und_training' on page 28 undefined on
+ input line 7.
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 30--30
 []|\TU/newtxtt/b/n/12 step_944_ana-ly-
@@ -2689,32 +2625,84 @@ Underfull \hbox (badness 10000) in paragraph at lines 30--30
 
 [28
 
-] [29] [30] [31] [32]
+]
 
-LaTeX Warning: Reference `chap:diskussion_grenzen_und_ausblick' on page 33 unde
-fined on input line 243.
+LaTeX Warning: Reference `tab:rankingmetriken_bedeutung' on page 29 undefined o
+n input line 59.
 
-[33] [34]
-
-LaTeX Warning: Reference `tab:konfigurationsvergleich' on page 35 undefined on 
-input line 314.
-
-) (./01_kapitel/08_grenzen_und_ausblick.tex [35]
+[29] [30]) (./01_kapitel/08_ergebnisse_und_diskussion.tex [31]
 chapter 8.
 Package biblatex Info: Reference segment=9 on input line 1.
 Package biblatex Info: Setting label 'refsegment:09' on input line 1.
-) (./01_kapitel/09_zusammenfassung_und_fazit.tex [36
+
+LaTeX Warning: Reference `tab:validation_ergebnisse' on page 32 undefined on in
+put line 8.
+
+[32
 
 ]
+
+LaTeX Warning: Reference `tab:test_ergebnisse' on page 33 undefined on input li
+ne 41.
+
+
+LaTeX Warning: Reference `tab:fehleranalyse_top1' on page 33 undefined on input
+ line 70.
+
+
+LaTeX Warning: Reference `chap:diskussion_grenzen_und_ausblick' on page 33 unde
+fined on input line 92.
+
+[33]
+
+LaTeX Warning: Reference `tab:rangstatistik' on page 34 undefined on input line
+ 100.
+
+[34]
+
+LaTeX Warning: Reference `tab:loo_vergleich' on page 35 undefined on input line
+ 130.
+
+
+LaTeX Warning: Reference `tab:konfigurationsparameter' on page 35 undefined on 
+input line 168.
+
+[35]
+
+LaTeX Warning: Reference `tab:konfigurationsabweichungen' on page 36 undefined 
+on input line 218.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 233--234
+[]|\TU/TeXGyreTermesX(0)/m/n/12 L1-Regularisierung auf 0,1 und L2-
+ []
+
+[36]
+
+LaTeX Warning: Reference `tab:konfigurationsvergleich' on page 37 undefined on 
+input line 243.
+
+[37] [38]
+
+LaTeX Warning: Reference `tab:a08_best' on page 39 undefined on input line 304.
+
+
+) (./01_kapitel/08_grenzen_und_ausblick.tex [39]
 chapter 9.
 Package biblatex Info: Reference segment=10 on input line 1.
 Package biblatex Info: Setting label 'refsegment:010' on input line 1.
-) [37
+) (./01_kapitel/09_zusammenfassung_und_fazit.tex [40
 
-] [38]
-Package biblatex Info: Reference segment=11 on input line 80.
-Package biblatex Info: Setting label 'refsegment:011' on input line 80.
-Package tocbasic Info: character protrusion at lof deactivated on input line 80
+]
+chapter 10.
+Package biblatex Info: Reference segment=11 on input line 1.
+Package biblatex Info: Setting label 'refsegment:011' on input line 1.
+) [41
+
+] [42]
+Package biblatex Info: Reference segment=12 on input line 81.
+Package biblatex Info: Setting label 'refsegment:012' on input line 81.
+Package tocbasic Info: character protrusion at lof deactivated on input line 81
 .
  (./Bachelorarbeit.lof
 Package cleveref Info: loaded `ngerman' language definitions on input line 1.
@@ -2723,12 +2711,12 @@ Package cleveref Info: loaded `ngerman' language definitions on input line 2.
 \tf@lof=\write9
 
 \openout9 = Bachelorarbeit.lof
- [39
+ [43
 
 ]
-Package biblatex Info: Reference segment=12 on input line 81.
-Package biblatex Info: Setting label 'refsegment:012' on input line 81.
-Package tocbasic Info: character protrusion at lot deactivated on input line 81
+Package biblatex Info: Reference segment=13 on input line 82.
+Package biblatex Info: Setting label 'refsegment:013' on input line 82.
+Package tocbasic Info: character protrusion at lot deactivated on input line 82
 .
  (./Bachelorarbeit.lot
 Package cleveref Info: loaded `ngerman' language definitions on input line 1.
@@ -2737,22 +2725,22 @@ Package cleveref Info: loaded `ngerman' language definitions on input line 2.
 \tf@lot=\write10
 
 \openout10 = Bachelorarbeit.lot
- [40
+ [44
 
 ]
 chapter without number
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 10.0pt on input line 84.
+(Font)              scaled to size 10.0pt on input line 85.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 84.
-[41
+(Font)              scaled to size 10.0pt on input line 85.
+[45
 
-] [42] (./Bachelorarbeit.ind)
+] (./Bachelorarbeit.ind)
 
 Package caption Warning: Unused \captionsetup[lstlisting] on input line 53.
 See the caption package documentation for explanation.
 
-[43] (./Bachelorarbeit.aux
+[46] (./Bachelorarbeit.aux
 Package cleveref Info: loaded `ngerman' language definitions on input line 11.
 Package cleveref Info: loaded `ngerman' language definitions on input line 12.
 )
@@ -2768,9 +2756,11 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                Bachelorarbeit
-(biblatex)                and rerun LaTeX afterwards.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package biblatex Warning: Please rerun LaTeX.
+(biblatex)                Page breaks have changed.
 
 Package logreq Info: Writing requests to 'Bachelorarbeit.run.xml'.
 
@@ -2778,14 +2768,14 @@ Package logreq Info: Writing requests to 'Bachelorarbeit.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 51070 strings out of 476081
- 125005,2373549 words of node,token memory allocated
- 21281 words of node memory still in use:
-   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 3373 kern, 1 penalty, 3 glyph,
- 1217 attribute, 101 glue_spec, 610 attribute_list, 2 write, 2 pdf_action nodes
-   avail lists: 1:4,2:2504,3:1287,4:311,5:759,6:238,7:9148,8:36,9:824,10:31,11:1
+ 51034 strings out of 476081
+ 125002,2373549 words of node,token memory allocated
+ 23563 words of node memory still in use:
+   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 3764 kern, 1 penalty, 3 glyph,
+ 1331 attribute, 98 glue_spec, 667 attribute_list, 2 write, 2 pdf_action nodes
+   avail lists: 1:7,2:2480,3:1275,4:297,5:704,6:191,7:8653,8:36,9:824,10:31,11:1
 025,12:1
- 71944 multiletter control sequences out of 65536+600000
+ 71885 multiletter control sequences out of 65536+600000
  232 fonts using 20716279 bytes
  108i,20n,115p,11307b,3550s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/opentype/public/newtx/Te
@@ -2808,9 +2798,9 @@ pData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/alstett
 er/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/a
 lstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb><C:/Us
 ers/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/ztmr.pfb>
-Output written on Bachelorarbeit.pdf (45 pages, 421840 bytes).
+Output written on Bachelorarbeit.pdf (47 pages, 419752 bytes).
 
-PDF statistics: 974 PDF objects out of 1000 (max. 8388607)
- 209 named destinations out of 1000 (max. 1048576)
- 480 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 943 PDF objects out of 1000 (max. 8388607)
+ 226 named destinations out of 1000 (max. 1048576)
+ 552 words of extra memory for PDF output out of 10000 (max. 100000000)
 

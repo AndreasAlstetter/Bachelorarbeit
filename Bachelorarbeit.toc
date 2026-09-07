@@ -38,7 +38,7 @@
 \contentsline {section}{\numberline {6.4}Hyperparameteroptimierung}{25}{section.6.4}%
 \contentsline {section}{\numberline {6.5}Modellartefakte und Reproduzierbarkeit}{26}{section.6.5}%
 \contentsline {section}{\numberline {6.6}Pipeline-Orchestrierung}{27}{section.6.6}%
-\contentsline {chapter}{\numberline {7}Evaluierungskonzept und Ergebnisse}{28}{chapter.7}%
+\contentsline {chapter}{\numberline {7}Evaluierungskonzept}{28}{chapter.7}%
 \contentsline {section}{\numberline {7.1}Evaluationsdatensätze}{28}{section.7.1}%
 \contentsline {section}{\numberline {7.2}Aufbau der Evaluations-Suite}{28}{section.7.2}%
 \contentsline {section}{\numberline {7.3}Verwendete Rankingmetriken}{29}{section.7.3}%
@@ -49,14 +49,23 @@
 \contentsline {subsection}{\numberline {7.4.3}Prüfung der Datensplits}{31}{subsection.7.4.3}%
 \contentsline {subsection}{\numberline {7.4.4}Prüfung der Kandidatenprofile}{31}{subsection.7.4.4}%
 \contentsline {subsection}{\numberline {7.4.5}Evaluierungsergebnis}{31}{subsection.7.4.5}%
-\contentsline {section}{\numberline {7.5}Ergebnisse des Validierungssplits}{32}{section.7.5}%
-\contentsline {section}{\numberline {7.6}Ergebnisse des Testsplits}{32}{section.7.6}%
-\contentsline {section}{\numberline {7.7}Fehleranalyse}{33}{section.7.7}%
-\contentsline {section}{\numberline {7.8}Rangstatistische Analyse}{34}{section.7.8}%
-\contentsline {section}{\numberline {7.9}Analyse der Generalisierungsfähigkeit}{34}{section.7.9}%
-\contentsline {section}{\numberline {7.10}Vergleich der Konfigurationsvarianten}{35}{section.7.10}%
-\contentsline {chapter}{\numberline {8}Diskussion, Grenzen und Ausblick}{36}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Zusammenfassung und Fazit}{37}{chapter.9}%
+\contentsline {chapter}{\numberline {8}Ergebnisse und Diskussion}{32}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Ergebnisse des Validierungssplits}{32}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Ergebnisse des Testsplits}{33}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Fehleranalyse}{33}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Rangstatistische Analyse}{34}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Analyse der Generalisierungsfähigkeit}{35}{section.8.5}%
+\contentsline {section}{\numberline {8.6}Vergleich der Konfigurationsvarianten}{35}{section.8.6}%
+\contentsline {subsection}{\numberline {8.6.1}Untersuchte Konfigurationsparameter}{36}{subsection.8.6.1}%
+\contentsline {subsection}{\numberline {8.6.2}Referenzkonfiguration A01}{36}{subsection.8.6.2}%
+\contentsline {subsection}{\numberline {8.6.3}Ergebnisse der Vergleichskonfigurationen}{37}{subsection.8.6.3}%
+\contentsline {subsection}{\numberline {8.6.4}Einfluss des Same-Family-Gewichts}{37}{subsection.8.6.4}%
+\contentsline {subsection}{\numberline {8.6.5}Einfluss der hierarchischen Labeldefinition}{38}{subsection.8.6.5}%
+\contentsline {subsection}{\numberline {8.6.6}Einfluss der Profilbreite}{38}{subsection.8.6.6}%
+\contentsline {subsection}{\numberline {8.6.7}Einfluss der Regularisierung}{38}{subsection.8.6.7}%
+\contentsline {subsection}{\numberline {8.6.8}Beste Konfiguration der Studie}{39}{subsection.8.6.8}%
+\contentsline {chapter}{\numberline {9}Diskussion, Grenzen und Ausblick}{40}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Zusammenfassung und Fazit}{41}{chapter.10}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{41}{chapter*.23}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{45}{chapter*.28}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

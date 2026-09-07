@@ -98,7 +98,7 @@ Die Berechnung dieser Kandidatenprofile erfolgt innerhalb der Trainingspipeline 
 
 Im aktuellen Datensatz entstehen dadurch 375 Makro-Kandidatenprofile. Die Erstellung der Profile erfolgt ausschließlich auf der Grundlage des Trainingssplits. 
 Informationen aus den Validierungs- oder Testdaten werden nicht zur Profilerstellung verwendet. Für jedes Profil werden unter anderem das Zielmakro, Makrofamilie, Supportinformationen, technische Vektorrepräsentationen, lexikalische Merkmale, Strukturmerkmale sowie statistische Eigenschaften gespeichert. 
-Die Profilbreite ist abhängig von der untersuchten Konfiguration. Für den später als Referenz verwendeten A07-Modellstand beträgt die Profilbreite acht Artikel pro Kandidatenprofil.
+Die Profilbreite ist abhängig von der untersuchten Konfiguration. Für den später als Referenz verwendeten A08-Modellstand beträgt die Profilbreite 16 Artikel pro Kandidatenprofil.
 
 \section{Transformation in ein Rankingproblem}
 
@@ -161,7 +161,7 @@ Die Berechnung der Pairwise-Merkmale erfolgt innerhalb der entwickelten Training
     \end{tabularx} 
 \end{table}
 
-Die aktuelle Featurematrix umfasst für die Referenzkonfiguration A07 insgesamt 2.381 Merkmale. Dabei werden für jede Anfrage sämtliche 375 Kandidatenprofile bewertet. 
+Die aktuelle Featurematrix umfasst für die Referenzkonfiguration A08 insgesamt 2.381 Merkmale. Dabei werden für jede Anfrage sämtliche 375 Kandidatenprofile bewertet. 
 Die konkreten Größen der Trainings-, Validierungs- und Testmatrizen ergeben sich erst nach der Datensplit-Erzeugung und werden in Kapitel \ref{chap:datensplit_und_training} beschrieben.
 
 \section{Erzeugung der Relevanzlabels}
@@ -177,7 +177,7 @@ Dabei bezeichnet $y(q,c)$ das Relevanzlabel, $q$ die Anfrage und $c$ den Makroka
 Die negativen Kandidaten sind dazu da, das Modell darauf zu trainieren, irrelevante Makros korrekt zu erkennen und von relevanten zu unterscheiden. 
 Dadurch werden nicht einzelne Objekte klassifiziert, sondern die korrekte Sortierung der Menge an Kandidaten \parencite{srcStep931}.
 
-Die Referenzkonfiguration A07 verwendet diese binäre Labeldefinition. Zusätzlich wurde im Rahmen von Konfigurationsexperimenten eine hierarchische Labeldefinition untersucht. 
+Die Referenzkonfiguration A08 verwendet diese binäre Labeldefinition. Zusätzlich wurde im Rahmen von Konfigurationsexperimenten eine hierarchische Labeldefinition untersucht. 
 Dabei werden Makros derselben Familie sowie Makros mit identischem Familienpräfix durch eine abgestufte Relevanz berücksichtigt. 
 Diese Variante wird in der späteren Gegenüberstellung der Konfigurationsexperimenten als separate Konfiguration betrachtet.
 
@@ -198,7 +198,7 @@ Dabei bezeichnet $q$ die Anfrage, $c_i$ den Makrokandidaten und $x_1,\dots,x_n$ 
 Dabei beschreibt $G_q$ die Menge aller Anfrage-Kandidat-Paare für die Anfrage $q$. Die Informationen aus den Gruppen werden zusammen mit den Featurevektoren an den LambdaRANK-Algorithmus übergeben \parencite{srcStep931}. 
 Dadurch können die Kandidaten innerhalb derselben Anfrage gegeneinander bewertet werden und somit die optimale Rangfolge erlernt werden.
 
-Für die Referenzkonfiguration A07 entsteht dafür eine Trainingsmatrix mit einer Dimension von 369.000 × 2.381. 
+Für die Referenzkonfiguration A08 entsteht dafür eine Trainingsmatrix mit einer Dimension von 369.000 × 2.381. 
 Die Validierungsmatrix besitzt eine Dimension von 120.750 × 2.381 und die Testmatrix eine Dimension von 94.875 × 2.381. 
 Die Anzahl der Zeilen ergibt sich aus der vollständigen Bewertung aller 375 Kandidatenprofile für jede Anfrage.
 

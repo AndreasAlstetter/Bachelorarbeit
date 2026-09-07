@@ -14,11 +14,17 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {7.1}{\ignorespaces Aktuelle Evaluations-Suite}}{28}{table.caption.14}%
 \contentsline {table}{\numberline {7.2}{\ignorespaces Bedeutung der verwendeten Rankingmetriken}}{29}{table.caption.15}%
-\contentsline {table}{\numberline {7.3}{\ignorespaces Ergebnisse des Referenzlaufs A07 auf dem Validierungssplit}}{32}{table.caption.16}%
-\contentsline {table}{\numberline {7.4}{\ignorespaces Ergebnisse des Referenzlaufs A07 auf dem Testsplit}}{33}{table.caption.17}%
-\contentsline {table}{\numberline {7.5}{\ignorespaces Top-1-Analyse der Vorhersagen auf dem Testdatensatz}}{33}{table.caption.18}%
-\contentsline {table}{\numberline {7.6}{\ignorespaces Rangstatistische Kennzahlen des Testsplits}}{34}{table.caption.19}%
-\contentsline {table}{\numberline {7.7}{\ignorespaces Vergleich von regulärer Trainingsbewertung, Leave-One-Out-Analyse, Validation und Test}}{35}{table.caption.20}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {8.1}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Validierungssplit}}{32}{table.caption.16}%
+\contentsline {table}{\numberline {8.2}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Testsplit}}{33}{table.caption.17}%
+\contentsline {table}{\numberline {8.3}{\ignorespaces Top-1-Analyse der Vorhersagen auf dem Testdatensatz}}{34}{table.caption.18}%
+\contentsline {table}{\numberline {8.4}{\ignorespaces Rangstatistische Kennzahlen des Testsplits}}{34}{table.caption.19}%
+\contentsline {table}{\numberline {8.5}{\ignorespaces Vergleich von regulärer Trainingsbewertung, Leave-One-Out-Analyse, Validation und Test}}{35}{table.caption.20}%
+\contentsline {table}{\numberline {8.6}{\ignorespaces Untersuchte Konfigurationsparameter}}{36}{table.caption.21}%
+\contentsline {table}{\numberline {8.7}{\ignorespaces Referenzkonfiguration A01}}{37}{table.caption.22}%
+\contentsline {table}{\numberline {8.8}{\ignorespaces Abweichungen der Konfigurationen gegenüber der Referenz A01}}{37}{table.caption.23}%
+\contentsline {table}{\numberline {8.9}{\ignorespaces Ergebnisse der A01--A09-Konfigurationen auf dem Testdatensatz}}{38}{table.caption.24}%
+\contentsline {table}{\numberline {8.10}{\ignorespaces Ergebnisse der besten Konfiguration A08}}{39}{table.caption.25}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \def \@chapapp {\appendixname }

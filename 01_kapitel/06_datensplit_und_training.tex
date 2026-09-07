@@ -7,7 +7,7 @@ Nach der Datenaufbereitung, der Qualitätsprüfung der Daten sowie der Erstellun
 Ziel ist es eine klare Trennung zwischen Modelltraining, Hyperparameteroptimierung und Modellbewertung zu schaffen. 
 
 \begin{align}
-    \text{Train} = 70\,\%, \qquad \text{Validation} = 10\,\%, \qquad \text{Test} = 20\,\%
+    \text{Train} = 60\,\%, \qquad \text{Validation} = 20\,\%, \qquad \text{Test} = 20\,\%
 \end{align}
 
 Um reproduzierbare Ergebnisse mit einem erstellten Datensplit zu gewährleisten, wird ein fester Zufallsseed verwendet  \parencite{srcStep921}.
@@ -52,7 +52,7 @@ Für den in dieser Arbeit verwendeten Referenzlauf ergibt sich folgende Aufteilu
 
 Nach der Erstellung der Kandidatenprofile werden für jede Anfrage die verfügbarenMakrokandidaten bewertet. 
 Für jede Anfrage werden Anfrage-Kandidat-Paare erzeugt und anhand der Pairwise-Merkmale aus Kapitel \ref{chap:analyse_der_datenstrukturen} beschrieben. 
-Die Referenzkonfiguration A07 verwendet insgesamt 375 Kandidatenprofile und 2.381 Merkmale. 
+Die Referenzkonfiguration A08 verwendet insgesamt 375 Kandidatenprofile und 2.381 Merkmale. 
 Für jede Anfrage werden alle 375 Kandidatenprofile vollständig bewertet. 
 
 Dadurch entstehen folgenden Matrizen: 
@@ -77,14 +77,14 @@ Das Modell wird mit den Parametern
 
 trainiert \parencite{srcStep931}.
 
-Die für die spätere Referenzkonfiguration A07 ausgewählten Modellparameter lauten: 
+Die für die spätere Referenzkonfiguration A08 ausgewählten Modellparameter lauten: 
 
 \begin{align} 
-    n\_estimators &= 500 \\ 
-    learning\_rate &= 0.04 \\ 
-    num\_leaves &= 31 \\ 
+    n\_estimators &= 900 \\ 
+    learning\_rate &= 0.025 \\ 
+    num\_leaves &= 15 \\ 
     min\_child\_samples &= 50 \\ 
-    lambdarank\_truncation\_level &= 10 
+    lambdarank\_truncation\_level &= 5 
 \end{align}
 
 Zusätzlich wird eine Kandidatenprofilbreite von acht Artikeln pro Makro verwendet. 
@@ -174,7 +174,8 @@ Ein wichtiges Ziel dieser Trainingspipeline besteht darin, die Trainingsabläufe
             $\text{\textbar}$-- training/\\
             $\text{\textbar}$-- evaluation/\\
             $\text{\textbar}$-- summary/\\
-            $\text{\textbackslash}$-- error\_analysis/
+            $\text{\textbar}$-- error\_analysis/\\
+            $\text{\textbackslash}$-- consolidated/
         };
         \node[artbox, right=0.5cm of dir] (art) {
             \textbf{Gespeicherte Modellartefakte:}\\[4pt]
