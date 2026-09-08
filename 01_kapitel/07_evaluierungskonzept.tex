@@ -3,7 +3,7 @@
 
 \section{Evaluationsdatensätze}
 
-Die Bewertung der Modelleistung erfolgt getrennt auf Trainings-, Validierungs- und Testdatensätzen.
+Die Bewertung der Modellleistung erfolgt getrennt auf Trainings-, Validierungs- und Testdatensätzen.
 Diese Aufteilung wird im Rahmen des zuvor beschriebenen Kapitels \ref{chap:datensplit_und_training} vorgenommen.
 
 Der Testdatensatz wird erst nach der finalen Modellauswahl für die abschließenden Evaluierungen verwendet.
@@ -30,14 +30,22 @@ Damit wertet das Modul die Vorhersagen des trainierten Modells auf dem Validieru
   \end{tabularx} 
 \end{table}
 
-Die Ergebnisse dieser Pipeline werden strukturiert in den folgenden Verzeichnissen abgelegt:
+Die Ergebnisse werden unter
 
-\begin{itemize}
-  \item \texttt{evaluation/step\_941\_leakage\_safety} für die Prüfung auf Zielinformations-Leakage
-  \item \texttt{evaluation/step\_942\_retrieval\_validation} für die Bewertung des Retrieval-Index
-  \item \texttt{evaluation/step\_943\_candidate\_coverage} für die Analyse der Kandidatenabdeckung
-  \item \texttt{evaluation/step\_944\_ltr\_run\_analysis} für die Analyse des Learning-to-Rank-Modells
-\end{itemize}
+\begin{verbatim}
+evaluation/
+|-- val_metrics.json
+|-- test_metrics.json
+|-- train_metrics.json
+|-- train_leave_one_out_metrics.json
+|-- step_944_ltr_run_analysis/
+    |-- step_944_analysis_summary.json
+    |-- step_944_same_family_error_report.json
+    |-- step_944_support_bias_report.json
+    |-- step_944_ranking_slice_report.json
+\end{verbatim}
+
+gespeichert.
 
 \section{Verwendete Rankingmetriken} 
 
@@ -85,7 +93,7 @@ Da dieses System auf Artikel \parencite{EPLANArtikelverwaltung} - Makro \parenci
 das Informationen über das tatsächliche Ziel-Makro \parencite{EPLAN-Makros} in die Trainings- und Evaluierungsdaten gelangen können und somit die Aussagekraft der verwendeten Evaluationsmetriken verfälscht wird.
 
 Um dies zu vermeiden, enthält die Pipeline eine Leakage-Prüfung, die vor der eigentlichen Modellbewertung ausgeführt wird.
-Die Implementierung erfolgt in \texttt{step\_941\_\allowbreak validate\_leakage\_\allowbreak safety.py} \parencite{srcStep941}.
+Die Implementierung erfolgt in \texttt{step\_944\_analyze\_ltr\_run.py} \parencite{srcStep944}.
 
 \subsection{Ziele der Leakage-Prüfung}
 

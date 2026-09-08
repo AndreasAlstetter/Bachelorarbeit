@@ -29,7 +29,7 @@ Die Ergebnisse zeigen, dass das Modell bereits nach dem Test durch den Validieru
 Während das korrekte Ziel-Makro \parencite{EPLAN-Makros} in 31,37\,\% der Anfragen auf Platz 1 steht, wird die korrekte Makrofamilie in 81,99\,\% der Anfragen auf die erste Position gesetzt.
 
 Durch den Target Recall@10 lässt sich erkennen, dass das Modell in 62,11\,\% der Anfragen das korrekte Ziel-Makro \parencite{EPLAN-Makros} innerhalb der Top-10-Vorschläge platziert.
-Intessant ist der Abstand zwischen Family Recall@10 (89,13\,\%) und Target Recall@10 (62,11\,\%). Dies deutet darauf hin, dass viele Fehlkategorisierungen innerhalb derselben Makrofamilie stattfinden.
+Interessant ist der Abstand zwischen Family Recall@10 (89,13\,\%) und Target Recall@10 (62,11\,\%). Dies deutet darauf hin, dass viele Fehlkategorisierungen innerhalb derselben Makrofamilie stattfinden.
 
 Die erzielten Ergebnisse bei MRR von 0,4121\,\% sowie ein hierarchisches nDCG@10 von 0,6766\,\%  zeigen zusätzlich, dass beim Validierungssplit das Modell in der Lage ist eine sinnvolle Reihenfolge zu erzeugen, 
 es jedoch weiterhin Schwierigkeiten bei der korrekten Auflösung technischer Varianten besitzt.\parencite{LTR_Configuration_Test_Series}
@@ -65,7 +65,7 @@ Der erreichte MRR- Wert von 45,34\,\% sowie die hierarchische nDCG@10 von 74,49\
 
 \section{Fehleranalyse}
 
-Um die Modelleistung detailliert erfassen zu können, werden die Top-1-Ergebnisse des Testsplits analysiert. Dabei werden die fachlichen Beziehungen zum tatsächlichen Zielmakro untersucht.
+Um die Modellleistung detailliert erfassen zu können, werden die Top-1-Ergebnisse des Testsplits analysiert. Dabei werden die fachlichen Beziehungen zum tatsächlichen Zielmakro untersucht.
 
 Tabelle \ref{tab:fehleranalyse_top1} zeigt die Verteilung der einzelnen Fehlerkategorien. 
 
@@ -85,11 +85,11 @@ Tabelle \ref{tab:fehleranalyse_top1} zeigt die Verteilung der einzelnen Fehlerka
   \end{tabular} 
 \end{table}
 
-Die Fehleranlyse bestätigt die Beobachtungen aus den Metriken. Von insgesamt 253 Testanfragen werden 133 Fälle einer gleichen Familie, aber einer falschen Variante zugeordnet, was 52,57\,\% entspricht.
+Die Fehleranalyse bestätigt die Beobachtungen aus den Metriken. Von insgesamt 253 Testanfragen werden 133 Fälle einer gleichen Familie, aber einer falschen Variante zugeordnet, was 52,57\,\% entspricht.
 In 7,91\,\% der Fälle wird eine andere Familie vorhergesagt. Das zeigt, dass das Modell die grundlegenden technischen Zusammenhänge zwischen Artikeln und Makrofamilien zuverlässig erlernt hat.
 Die Analyse zeigt, dass die zentrale Herausforderung die Identifikation des korrekten Ziel-Makros \parencite{EPLAN-Makros} innerhalb der richtigen Makrofamilie ist. Dafür muss die Variantenauflösung innerhalb der Makrofamilie weiter verbessert werden.
 Die große Differenz zwischen dem Target Recall@1 und dem Family Recall@1 unterstreicht diese Herausforderung zusätzlich.
-Dies wird im Kapitel \ref{chap:diskussion_grenzen_und_ausblick} genauer analysiert.\parencite{LTR_Configuration_Test_Series}
+Dies wird im Kapitel \ref{chap:grenzen_und_ausblick} genauer analysiert.\parencite{LTR_Configuration_Test_Series}
 
 
 \section{Rangstatistische Analyse}
@@ -116,7 +116,7 @@ Die wichtigsten Rangstatistiken des Testdatensatzes werden in Tabelle \ref{tab:r
 \end{table}
 
 Der Median Rank von 4 zeigt, dass das korrekte Makro \parencite{EPLAN-Makros} in der Hälfte der Testanfragen unter den ersten vier Positionen der Rangliste erscheint.
-Der mittlere Rang (Mean Rank) von 23,96 zeigt gleichzeitig, dass es einzelen schwierige Anfrage gibt, die deutliche schlechter eingeordnet werden.
+Der mittlere Rang (Mean Rank) von 23,96 zeigt gleichzeitig, dass es einzelne schwierige Anfrage gibt, die deutliche schlechter eingeordnet werden.
 Diese Annahme wird durch das 90\,\%-Perzentil von 61,6 bestätigt. Dabei sitzt das Makro \parencite{EPLAN-Makros} in 90\,\% der Testanfragen unter den ersten 61,6 Positionen der Rangliste.
 
 Auch die Rangstatistiken zeigen, dass das Modell in der Lage ist, die korrekte Makro-Familie in den meisten Fällen weit oben in der Rangliste zu platzieren.\parencite{LTR_Configuration_Test_Series}
@@ -124,7 +124,7 @@ Auch die Rangstatistiken zeigen, dass das Modell in der Lage ist, die korrekte M
 \section{Analyse der Generalisierungsfähigkeit}
 
 Zur Beurteilung der Generalisierungsfähigkeit des Modells wurde eine zusätzliche Leave-One-Out Kontrollanalyse durchgeführt. 
-Um eine Verfälschung der Ergebnisse der Trainigsanalyse zu verhindern, werden bei einer Anfrage genau dieser Artikel aus der Anfragemenge ausgeschlossen.
+Um eine Verfälschung der Ergebnisse der Trainingsanalyse zu verhindern, werden bei einer Anfrage genau dieser Artikel aus der Anfragemenge ausgeschlossen.
 
 
 Tabelle \ref{tab:loo_vergleich} stellt die Ergebnisse der Leave-One-Out-Analyse (LOO) sowie der Validierungs- und Testergebnisse gegenüber.
@@ -151,16 +151,16 @@ Tabelle \ref{tab:loo_vergleich} stellt die Ergebnisse der Leave-One-Out-Analyse 
     \end{table}
 
 Es zeigt sich, dass die Leave-One-Out-Bewertung eine strengere Evaluationsmethode als die Bewertung durch den Validierungs- und Testdatensatz darstellt.
-Die Ursache dafür liegt im Support der Kandidatenprofile. Von den vorhanden 375 Kandidatenprofilen basieren insgesamt 302 Profile ausschließlich auf einem Traingsartikel.
-Wenn dieser Artikel aus der Anfragemenge ausgeschlossen wird, enthält das entsprechende Kandidatenprofil keine unterstützenden Trainingsdaten mehr und kann dadruch keinen Beitrag zur korrekten Vorhersage leisten.
+Die Ursache dafür liegt im Support der Kandidatenprofile. Von den vorhanden 375 Kandidatenprofilen basieren insgesamt 302 Profile ausschließlich auf einem Trainingsartikel.
+Wenn dieser Artikel aus der Anfragemenge ausgeschlossen wird, enthält das entsprechende Kandidatenprofil keine unterstützenden Trainingsdaten mehr und kann dadurch keinen Beitrag zur korrekten Vorhersage leisten.
 
-Bei den Validierungs- und Testdaten tritt dieser Effekt nicht auf, da durch die im Datensplitt erzwungene Trainigsabdeckung jedes Ziel-Makro \parencite{EPLAN-Makros} mindestens einen Artikel in jedem Split enthält, welcher nicht identisch zu den andern beiden ist.
+Bei den Validierungs- und Testdaten tritt dieser Effekt nicht auf, da durch die im Datensplit erzwungene Trainingsabdeckung jedes Ziel-Makro \parencite{EPLAN-Makros} mindestens einen Artikel in jedem Split enthält, welcher nicht identisch zu den andern beiden ist.
 
 
 \section{Vergleich der Konfigurationsvarianten}
 
 Um verschiedene Modellkonfigurationen zu vergleichen, wurde die aktuell Versuchsserie A01 bis A09 durchgeführt. 
-Dabei wurden unterschiedliche Strategien, Profielbreiten und Regularisierungsparameter getestet. Ziel davon ist es, die Einflüsse einzelner Parameter auf die Modellleistung zu analysieren.\parencite{LTR_Configuration_Test_Series}
+Dabei wurden unterschiedliche Strategien, Profilbreiten und Regularisierungsparameter getestet. Ziel davon ist es, die Einflüsse einzelner Parameter auf die Modellleistung zu analysieren.\parencite{LTR_Configuration_Test_Series}
 
 \subsection{Untersuchte Konfigurationsparameter}
 
@@ -215,7 +215,7 @@ Die Referenzparameter lauten:
 
 Ausgehen von dieser Basis werden die folgenden Varianten der Konfigurationen A02 bis A09 verändert.
 
-Tabelle \ref{tab:konfigurationsabweichungen} zeigt die gegenüber A01 vorgenommenen Veränderrungen. 
+Tabelle \ref{tab:konfigurationsabweichungen} zeigt die gegenüber A01 vorgenommenen Veränderungen. 
 \begin{table}[tbp] 
     \centering 
     \caption{Abweichungen der Konfigurationen gegenüber der Referenz A01} 
@@ -236,7 +236,7 @@ Tabelle \ref{tab:konfigurationsabweichungen} zeigt die gegenüber A01 vorgenomme
     \end{tabular} 
 \end{table}
 
-Dadurch lässt sich der Einfluss der jeweiligen Parameteränderung der entsprechenden Kofiguration zuordnen.\parencite{LTR_Configuration_Test_Series}
+Dadurch lässt sich der Einfluss der jeweiligen Parameteränderung der entsprechenden Konfiguration zuordnen.\parencite{LTR_Configuration_Test_Series}
 
 \subsection{Ergebnisse der Vergleichskonfigurationen}
 
@@ -277,21 +277,21 @@ Daraus lässt sich schließen, dass ein zu hohes Same-Family-Gewicht die Lernsta
 
 A05 untersucht die hierarchische Relevanzdefinition. Makros \parencite{EPLAN-Makros} derselben Familie und desselben Präfixes werden dabei hierarchisch relevant betrachtet.
 Es zeigt sich jedoch keine Verbesserung gegen dem exakten Targettraining. Der Recall@1 sinkt von 32,41 \,\% auf 31,62 \,\% und die MRR von 44,18 \,\% auf 43,28 \,\%.
-Die dadurch entstandene reichaltigere Zieldefinintion hat somit keinen positiven Einfluss auf die Modellleistung.\parencite{LTR_Configuration_Test_Series}
+Die dadurch entstandene reichhaltigere Zieldefinition hat somit keinen positiven Einfluss auf die Modellleistung.\parencite{LTR_Configuration_Test_Series}
 
 \subsection{Einfluss der Profilbreite}
 
 In den Konfigurationen A06 und A07 werden unterschiedliche Profilbreiten untersucht. Bei A06 beträgt diese zwölf bei A07 acht.
 Die Erhöhung der Profilbreite führt zu einer Verschlechterung des Recall@1 von 32,41 \,\% auf 31,62 \,\% und der MRR von 44,18 \,\% auf 43,74 \,\%.
 Eine Verringerung der Profilbreite führt zu keiner nennenswerten Veränderung der Modellleistung. 
-Die Ergebnisse zeigen, dass sich eine verringerte Profilbreite die Modelleistung nicht signifikant verbessert.\parencite{LTR_Configuration_Test_Series}
+Die Ergebnisse zeigen, dass sich eine verringerte Profilbreite die Modellleistung nicht signifikant verbessert.\parencite{LTR_Configuration_Test_Series}
 
 \subsection{Einfluss der Regularisierung}
 
 Die deutlichsten Verbesserungen werden durch die Veränderung der Regularisierung erzielt.
 A08 verwendet eine mittlere L1- und L2-Regularisierung (\(\alpha = 0{,}1\), \(\lambda = 0{,}5\)). 
 Dadurch wird mit einem Recall@1 von 0,3478 der höchste Top-1-Wert aller untersuchten Konfigurationen erreicht. Auch der höchste MRR Wert von 0,4534 wird durch A08 erreicht.
-Mit A09 wird die Regularisierung nochmals deutlich erhöt (\(\alpha = 0{,}5\), \(\lambda = 1{,}0\)). Zusätzlich wird ein positiver Wert für \texttt{min\_split\_gain} gesetzt, um die Stabilität der Baumaufteilung zu erhöhen. 
+Mit A09 wird die Regularisierung nochmals deutlich erhöht (\(\alpha = 0{,}5\), \(\lambda = 1{,}0\)). Zusätzlich wird ein positiver Wert für \texttt{min\_split\_gain} gesetzt, um die Stabilität der Baumaufteilung zu erhöhen. 
 Diese Konfiguration erreicht den höchsten Recall@10 von 0,6917 und die zweithöchste MRR von 0,4505.
 
 Die L1/L2-Regularisierung wirkt sich bei LightGBM direkt auf die Blattgewichte aus.
@@ -323,7 +323,7 @@ Die wichtigsten Kennzahlen dieser Variante sind in Tabelle \ref{tab:a08_best} da
     \end{tabular} 
 \end{table}
 
-Die Fehleranlyse dieser Konfiguration zeigt, dass 7,9\,\% aller Anfragen einer fachlich falschen Makro-Familie zugeordnet wurden.
+Die Fehleranalyse dieser Konfiguration zeigt, dass 7,9\,\% aller Anfragen einer fachlich falschen Makro-Familie zugeordnet wurden.
 52,6\,\% der Fehlklassifikationen erfolgen innerhalb der korrekten Makrofamilie. 
 Die größte Herausforderung liegt damit weiterhin in der Variantenauflösung technisch ähnlicher Makrofamilien.\parencite{LTR_Configuration_Test_Series}
 

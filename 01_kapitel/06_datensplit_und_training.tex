@@ -30,8 +30,8 @@ Abbildung \ref{fig:datensplit_schema} fasst diese Aufteilung schematisch zusamme
         bar/.style={draw=blue!60!black, thick, rounded corners=4pt, align=center, minimum height=2.2cm, inner sep=5pt},
         seed/.style={draw=gray!50!black, rounded corners=4pt, fill=gray!8, align=center, minimum height=1.1cm, inner sep=5pt}
     ]
-        \node[bar, fill=blue!15, text width=5.6cm] (train) at (0,0) {\textbf{Trainings-Split (70\,\%)}\\[1pt]\footnotesize Modelltraining \& Feature-Extraktion};
-        \node[bar, fill=orange!20, text width=3.6cm, right=3pt of train] (val) {\textbf{Validierungs-Split (10\,\%)}\\[1pt]\footnotesize Hyperparameter-\\optimierung};
+        \node[bar, fill=blue!15, text width=5.6cm] (train) at (0,0) {\textbf{Trainings-Split (60\,\%)}\\[1pt]\footnotesize Modelltraining \& Feature-Extraktion};
+        \node[bar, fill=orange!20, text width=3.6cm, right=3pt of train] (val) {\textbf{Validierungs-Split (20\,\%)}\\[1pt]\footnotesize Hyperparameter-\\optimierung};
         \node[bar, fill=green!18, text width=3.2cm, right=3pt of val] (test) {\textbf{Test-Split (20\,\%)}\\[1pt]\footnotesize Evaluation};
 
         \node[seed, below=0.3cm of train.south west, anchor=north west, text width=13.3cm] (seedbox) {\footnotesize \textbf{Reproduzierbarkeit:} \texttt{RANDOM\_SEED = 42} $\mid$ Fingerprint-gruppierter Split (Leakage-Schutz)};
@@ -87,7 +87,7 @@ Die für die spätere Referenzkonfiguration A08 ausgewählten Modellparameter la
     lambdarank\_truncation\_level &= 5 
 \end{align}
 
-Zusätzlich wird eine Kandidatenprofilbreite von acht Artikeln pro Makro verwendet. 
+Zusätzlich wird eine Kandidatenprofilbreite von 16 Artikeln pro Makro verwendet. 
 
 Wie in Kapitel \ref{chap:analyse_der_datenstrukturen} beschrieben, werden Kandidaten einer Anfrage als gemeinsame Rankinggruppe betrachtet.
 Wiederholend entsteht für jede Anfrage eine Gruppe:

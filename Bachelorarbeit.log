@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  8 SEP 2026 12:06
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  8 SEP 2026 13:01
  restricted system commands enabled.
  file:line:error style messages enabled.
 **"c:/Users/alstetter/OneDrive - GROBGroup/Documents/Sys_Engineering/Bachelorar
@@ -2454,12 +2454,7 @@ Package biblatex Info: Setting label 'refsegment:04' on input line 1.
 
 ] [12]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 68.
-
-
-LaTeX Warning: Reference `chap:evaluierungskonzept_und_ergebnisse' on page 13 u
-ndefined on input line 68.
-
+(Font)              scaled to size 12.0pt on input line 133.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 (Font)              scaled to size 8.0pt on input line 133.
 ) (./01_kapitel/04_architektur.tex [13]
@@ -2513,10 +2508,6 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `newtxtt' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-
-
-LaTeX Warning: Reference `chap:evaluierungskonzept_und_ergebnisse' on page 22 u
-ndefined on input line 212.
 
 ./01_kapitel/05_analyse_der_datenstrukturen.tex:235: Misplaced alignment tab cha
 racter &.
@@ -2607,42 +2598,38 @@ Underfull \hbox (badness 10000) in paragraph at lines 30--30
 
 [28
 
-] [29] [30]) (./01_kapitel/08_ergebnisse_und_diskussion.tex [31]
+] [29] [30] [31]) (./01_kapitel/08_ergebnisse_und_diskussion.tex [32]
 chapter 8.
 Package biblatex Info: Reference segment=9 on input line 1.
 Package biblatex Info: Setting label 'refsegment:09' on input line 1.
 
-LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 32 undefined on
+LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 33 undefined on
  input line 35.
 
-[32
+[33
 
 ]
 
-LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 33 undefined on
+LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 34 undefined on
  input line 64.
 
 
-LaTeX Warning: Reference `chap:diskussion_grenzen_und_ausblick' on page 33 unde
-fined on input line 92.
-
-
-LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 33 undefined on
- input line 92.
-
-[33]
-
 LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 34 undefined on
- input line 122.
+ input line 92.
 
 [34]
 
 LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 35 undefined on
- input line 163.
+ input line 122.
 
 [35]
 
 LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 36 undefined on
+ input line 163.
+
+[36]
+
+LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 37 undefined on
  input line 188.
 
 
@@ -2650,44 +2637,44 @@ Underfull \hbox (badness 10000) in paragraph at lines 233--234
 []|\TU/TeXGyreTermesX(0)/m/n/12 L1-Regularisierung auf 0,1 und L2-
  []
 
-[36]
-
-LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 37 undefined on
- input line 239.
-
 [37]
 
 LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 38 undefined on
- input line 280.
-
-
-Overfull \hbox (23.8598pt too wide) in paragraph at lines 278--281
-\TU/TeXGyreTermesX(0)/m/n/12 in-ti-on hat so-mit kei-nen po-si-ti-ven Ein-fluss auf die Mo-dell-leis-tung.([]) 
- []
-
-
-LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 38 undefined on
- input line 287.
+ input line 239.
 
 [38]
 
 LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 39 undefined on
+ input line 280.
+
+
+Overfull \hbox (23.8598pt too wide) in paragraph at lines 278--281
+\TU/TeXGyreTermesX(0)/m/n/12 ni-ti-on hat so-mit kei-nen po-si-ti-ven Ein-fluss auf die Mo-dell-leis-tung.([]) 
+ []
+
+
+LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 39 undefined on
+ input line 287.
+
+[39]
+
+LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 40 undefined on
  input line 299.
 
 
-LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 39 undefined on
+LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 40 undefined on
  input line 303.
 
 
-LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 39 undefined on
+LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 40 undefined on
  input line 328.
 
-) (./01_kapitel/09_grenzen_und_ausblick.tex [39]
+) (./01_kapitel/09_grenzen_und_ausblick.tex [40]
 chapter 9.
 Package biblatex Info: Reference segment=10 on input line 1.
 Package biblatex Info: Setting label 'refsegment:010' on input line 1.
 
-LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 40 undefined on
+LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 41 undefined on
  input line 7.
 
 
@@ -2697,22 +2684,22 @@ sis zu-rück-füh-ren.([])
  []
 
 
-LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 40 undefined on
+LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 41 undefined on
  input line 23.
 
 
-LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 40 undefined on
+LaTeX Warning: Citation 'LTR_Configuration_Test_Series' on page 41 undefined on
  input line 28.
 
-[40
+[41
 
-]) (./01_kapitel/10_zusammenfassung_und_fazit.tex [41]
+]) (./01_kapitel/10_zusammenfassung_und_fazit.tex [42]
 chapter 10.
 Package biblatex Info: Reference segment=11 on input line 1.
 Package biblatex Info: Setting label 'refsegment:011' on input line 1.
-[42
+[43
 
-]) [43] [44]
+]) [44] [45]
 Package biblatex Info: Reference segment=12 on input line 81.
 Package biblatex Info: Setting label 'refsegment:012' on input line 81.
 Package tocbasic Info: character protrusion at lof deactivated on input line 81
@@ -2724,7 +2711,7 @@ Package cleveref Info: loaded `ngerman' language definitions on input line 2.
 \tf@lof=\write9
 
 \openout9 = Bachelorarbeit.lof
- [45
+ [46
 
 ]
 Package biblatex Info: Reference segment=13 on input line 82.
@@ -2738,7 +2725,7 @@ Package cleveref Info: loaded `ngerman' language definitions on input line 2.
 \tf@lot=\write10
 
 \openout10 = Bachelorarbeit.lot
- [46
+ [47
 
 ]
 chapter without number
@@ -2746,9 +2733,9 @@ LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
 (Font)              scaled to size 10.0pt on input line 85.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sc' will be
 (Font)              scaled to size 10.0pt on input line 85.
-[47
+[48
 
-] [48] (./Bachelorarbeit.ind)
+] (./Bachelorarbeit.ind)
 
 Package caption Warning: Unused \captionsetup[lstlisting] on input line 53.
 See the caption package documentation for explanation.
@@ -2769,9 +2756,6 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                Bachelorarbeit
 (biblatex)                and rerun LaTeX afterwards.
@@ -2782,14 +2766,14 @@ Package logreq Info: Writing requests to 'Bachelorarbeit.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 51159 strings out of 476081
+ 51160 strings out of 476081
  156263,2373549 words of node,token memory allocated
- 25728 words of node memory still in use:
-   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 4158 kern, 1 penalty, 3 glyph,
- 1391 attribute, 101 glue_spec, 697 attribute_list, 2 write, 2 pdf_action nodes
-   avail lists: 1:9,2:2504,3:1279,4:338,5:759,6:266,7:9148,8:36,9:924,10:31,11:1
+ 25630 words of node memory still in use:
+   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 4142 kern, 1 penalty, 3 glyph,
+ 1385 attribute, 101 glue_spec, 694 attribute_list, 2 write, 2 pdf_action nodes
+   avail lists: 1:8,2:2506,3:1285,4:341,5:760,6:267,7:9447,8:36,9:924,10:31,11:1
 025,12:1
- 72000 multiletter control sequences out of 65536+600000
+ 72001 multiletter control sequences out of 65536+600000
  232 fonts using 20716279 bytes
  108i,20n,115p,11307b,3550s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/opentype/public/newtx/Te
@@ -2812,9 +2796,9 @@ pData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/alstett
 er/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/a
 lstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb><C:/Us
 ers/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/ztmr.pfb>
-Output written on Bachelorarbeit.pdf (52 pages, 465094 bytes).
+Output written on Bachelorarbeit.pdf (52 pages, 465818 bytes).
 
-PDF statistics: 1119 PDF objects out of 1200 (max. 8388607)
+PDF statistics: 1123 PDF objects out of 1200 (max. 8388607)
  236 named destinations out of 1000 (max. 1048576)
  592 words of extra memory for PDF output out of 10000 (max. 100000000)
 
