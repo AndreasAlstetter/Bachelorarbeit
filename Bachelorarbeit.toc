@@ -64,8 +64,13 @@
 \contentsline {subsection}{\numberline {8.6.6}Einfluss der Profilbreite}{38}{subsection.8.6.6}%
 \contentsline {subsection}{\numberline {8.6.7}Einfluss der Regularisierung}{38}{subsection.8.6.7}%
 \contentsline {subsection}{\numberline {8.6.8}Beste Konfiguration der Studie}{39}{subsection.8.6.8}%
-\contentsline {chapter}{\numberline {9}Diskussion, Grenzen und Ausblick}{40}{chapter.9}%
-\contentsline {chapter}{\numberline {10}Zusammenfassung und Fazit}{41}{chapter.10}%
+\contentsline {chapter}{\numberline {9}Grenzen und Ausblick}{40}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Grenzen des aktuellen Systems}{40}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}Geringer Support vieler Zielmakros}{40}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {9.1.2}Schwierige Variantenauflösung innerhalb einer Makrofamilie}{40}{subsection.9.1.2}%
+\contentsline {subsection}{\numberline {9.1.3}Support-Bias zugunsten häufiger Zielmakros}{41}{subsection.9.1.3}%
+\contentsline {section}{\numberline {9.2}Ausblick}{41}{section.9.2}%
+\contentsline {chapter}{\numberline {10}Zusammenfassung und Fazit}{42}{chapter.10}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{45}{chapter*.28}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{47}{chapter*.28}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
