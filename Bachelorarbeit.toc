@@ -1,54 +1,52 @@
 \babel@toc {ngerman}{}\relax 
 \babel@toc {ngerman}{}\relax 
-\contentsline {chapter}{\numberline {1}Motivation}{2}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Stand der Technik}{4}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Learning-to-Rank in industriellen Empfehlungssystemen}{4}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Aktuelle Anwendungsbeispiele}{4}{subsection.2.1.1}%
-\contentsline {section}{\numberline {2.2}Bewertungsmetriken für Rankingverfahren}{5}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Recall@k}{5}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Mean Reciprocal Rank}{6}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Normalized Discounted Cumulative Gain}{6}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}Hierarchische Bewertungsmetriken}{7}{subsection.2.2.4}%
-\contentsline {section}{\numberline {2.3}Learning-to-Rank mit LambdaRank}{8}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Grundprinzip von Learning-to-Rank}{8}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}LambdaRank}{8}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}LambdaMART und LightGBM}{9}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Aktuelle Bedeutung von LambdaMART}{9}{subsection.2.3.4}%
-\contentsline {chapter}{\numberline {3}Zielsetzung und Vorgehensweise}{11}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Zielsetzung}{11}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Methodisches Vorgehen}{12}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Iterativer Entwicklungsprozess}{12}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Architekturübersicht}{14}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Gesamtarchitektur}{14}{section.4.1}%
-\contentsline {chapter}{\numberline {5}Analyse der Datenstrukturen und Ableitung eines Trainingsformats}{16}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Analyse der Ausgangsdaten}{16}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Datensatzstatistik}{17}{subsection.5.1.1}%
-\contentsline {section}{\numberline {5.2}Analyse der Makrostrukturen}{17}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Aufbereitung der Artikeldaten}{18}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Erstellung von Makrokandidatenprofilen}{18}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Transformation in ein Rankingproblem}{19}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Berechnung der Pairwise-Merkmale}{19}{section.5.6}%
-\contentsline {section}{\numberline {5.7}Erzeugung der Relevanzlabels}{21}{section.5.7}%
-\contentsline {section}{\numberline {5.8}Erstellung des Trainingsformats}{21}{section.5.8}%
-\contentsline {section}{\numberline {5.9}Vermeidung von Zielinformations-Leakage}{22}{section.5.9}%
-\contentsline {chapter}{\numberline {6}Datensplit und Training}{23}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Datensplit und Trainingsbasis}{23}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Aufbau der Trainingsmatrix}{24}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Training des Learning-to-Rank-Modells}{24}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Hyperparameteroptimierung}{25}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Modellartefakte und Reproduzierbarkeit}{26}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Pipeline-Orchestrierung}{27}{section.6.6}%
-\contentsline {chapter}{\numberline {7}Evaluierungskonzept}{28}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Evaluationsdatensätze}{28}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Aufbau der Evaluations-Suite}{28}{section.7.2}%
+\contentsline {chapter}{\numberline {1}Motivation}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Stand der Technik}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Learning-to-Rank in industriellen Empfehlungssystemen}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Aktuelle Anwendungsbeispiele}{5}{subsection.2.1.1}%
+\contentsline {section}{\numberline {2.2}Learning-to-Rank mit LambdaRank}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Grundprinzip von Learning-to-Rank}{6}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}LambdaRank}{6}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}LambdaMART und LightGBM}{7}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Aktuelle Bedeutung von LambdaMART}{8}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}Bewertungsmetriken für Rankingverfahren}{8}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Recall@k}{8}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Mean Reciprocal Rank}{9}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Normalized Discounted Cumulative Gain}{10}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Hierarchische Bewertungsmetriken}{10}{subsection.2.3.4}%
+\contentsline {chapter}{\numberline {3}Zielsetzung und Vorgehensweise}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Zielsetzung}{12}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Methodisches Vorgehen}{13}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Iterativer Entwicklungsprozess}{13}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Architekturübersicht}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Gesamtarchitektur}{15}{section.4.1}%
+\contentsline {chapter}{\numberline {5}Analyse der Datenstrukturen und Ableitung eines Trainingsformats}{17}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Analyse der Ausgangsdaten}{17}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Analyse der Makrostrukturen}{18}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Aufbereitung der Artikeldaten}{19}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Erstellung von Makrokandidatenprofilen}{19}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Transformation in ein Rankingproblem}{20}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Berechnung der Pairwise-Merkmale}{20}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Erzeugung der Relevanzlabels}{22}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Erstellung des Trainingsformats}{22}{section.5.8}%
+\contentsline {section}{\numberline {5.9}Vermeidung von Zielinformations-Leakage}{23}{section.5.9}%
+\contentsline {chapter}{\numberline {6}Datensplit und Training}{24}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Datensplit und Trainingsbasis}{24}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Aufbau der Trainingsmatrix}{25}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Training des Learning-to-Rank-Modells}{25}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Hyperparameteroptimierung}{26}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Modellartefakte und Reproduzierbarkeit}{27}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Pipeline-Orchestrierung}{28}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Evaluierungskonzept}{29}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Evaluationsdatensätze}{29}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Aufbau der Evaluations-Suite}{29}{section.7.2}%
 \contentsline {section}{\numberline {7.3}Verwendete Rankingmetriken}{29}{section.7.3}%
-\contentsline {subsection}{\numberline {7.3.1}Bedeutung der Metriken innerhalb der Evaluation}{29}{subsection.7.3.1}%
-\contentsline {section}{\numberline {7.4}Leakage-Sicherheitsprüfung}{29}{section.7.4}%
-\contentsline {subsection}{\numberline {7.4.1}Ziele der Leakage-Prüfung}{30}{subsection.7.4.1}%
-\contentsline {subsection}{\numberline {7.4.2}Prüfung der Query-Daten}{30}{subsection.7.4.2}%
-\contentsline {subsection}{\numberline {7.4.3}Prüfung der Datensplits}{31}{subsection.7.4.3}%
-\contentsline {subsection}{\numberline {7.4.4}Prüfung der Kandidatenprofile}{31}{subsection.7.4.4}%
-\contentsline {subsection}{\numberline {7.4.5}Evaluierungsergebnis}{31}{subsection.7.4.5}%
+\contentsline {subsection}{\numberline {7.3.1}Bedeutung der Metriken innerhalb der Evaluation}{30}{subsection.7.3.1}%
+\contentsline {section}{\numberline {7.4}Leakage-Sicherheitsprüfung}{30}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Prüfung der Query-Daten}{31}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Prüfung der Datensplits}{32}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Prüfung der Kandidatenprofile}{32}{subsection.7.4.3}%
+\contentsline {subsection}{\numberline {7.4.4}Evaluierungsergebnis}{32}{subsection.7.4.4}%
 \contentsline {chapter}{\numberline {8}Ergebnisse und Diskussion}{33}{chapter.8}%
 \contentsline {section}{\numberline {8.1}Ergebnisse des Validierungssplits}{33}{section.8.1}%
 \contentsline {section}{\numberline {8.2}Ergebnisse des Testsplits}{34}{section.8.2}%
@@ -59,18 +57,18 @@
 \contentsline {subsection}{\numberline {8.6.1}Untersuchte Konfigurationsparameter}{37}{subsection.8.6.1}%
 \contentsline {subsection}{\numberline {8.6.2}Referenzkonfiguration A01}{37}{subsection.8.6.2}%
 \contentsline {subsection}{\numberline {8.6.3}Ergebnisse der Vergleichskonfigurationen}{38}{subsection.8.6.3}%
-\contentsline {subsection}{\numberline {8.6.4}Einfluss des Same-Family-Gewichts}{38}{subsection.8.6.4}%
+\contentsline {subsection}{\numberline {8.6.4}Einfluss des Same-Family-Gewichts}{39}{subsection.8.6.4}%
 \contentsline {subsection}{\numberline {8.6.5}Einfluss der hierarchischen Labeldefinition}{39}{subsection.8.6.5}%
 \contentsline {subsection}{\numberline {8.6.6}Einfluss der Profilbreite}{39}{subsection.8.6.6}%
-\contentsline {subsection}{\numberline {8.6.7}Einfluss der Regularisierung}{39}{subsection.8.6.7}%
+\contentsline {subsection}{\numberline {8.6.7}Einfluss der Regularisierung}{40}{subsection.8.6.7}%
 \contentsline {subsection}{\numberline {8.6.8}Beste Konfiguration der Studie}{40}{subsection.8.6.8}%
 \contentsline {chapter}{\numberline {9}Grenzen und Ausblick}{41}{chapter.9}%
 \contentsline {section}{\numberline {9.1}Grenzen des aktuellen Systems}{41}{section.9.1}%
 \contentsline {subsection}{\numberline {9.1.1}Geringer Support vieler Zielmakros}{41}{subsection.9.1.1}%
-\contentsline {subsection}{\numberline {9.1.2}Schwierige Variantenauflösung innerhalb einer Makrofamilie}{41}{subsection.9.1.2}%
+\contentsline {subsection}{\numberline {9.1.2}Schwierige Variantenauflösung innerhalb einer Makrofamilie}{42}{subsection.9.1.2}%
 \contentsline {subsection}{\numberline {9.1.3}Support-Bias zugunsten häufiger Zielmakros}{42}{subsection.9.1.3}%
 \contentsline {section}{\numberline {9.2}Ausblick}{42}{section.9.2}%
-\contentsline {chapter}{\numberline {10}Zusammenfassung und Fazit}{43}{chapter.10}%
+\contentsline {chapter}{\numberline {10}Zusammenfassung und Fazit}{44}{chapter.10}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{48}{chapter*.28}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{48}{chapter*.29}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

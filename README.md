@@ -2,13 +2,13 @@
 
 ## Informationen für Studierende
 
-Das Projekt stellt eine Vorlage für Ihre Abschlussarbeit dar. Bitte clonen
+Das Projekt stellt eine Vorlage für Ihre Abschlussarbeit dar. Bitte klonen
 Sie das Projekt. Anschließend entfernen Sie am besten den Remote Host aus
 dem Repository, und nutzen die Vorlage, um Ihre Arbeit zu schreiben.
 
-Sollten Sie Änderungen an der Vorlage vornehmen, von denen Sie denken, sie
-sind auch für andere Studierende interessant, zögern Sie bitte nicht, die
-Änderungen an die Dozenten weiterzugeben oder besser noch diese in Gitlab 
+Sollten Sie Änderungen an der Vorlage vornehmen, von denen Sie denken, dass sie
+auch für andere Studierende interessant sind, zögern Sie bitte nicht, die
+Änderungen an die Dozenten weiterzugeben oder besser noch, diese in GitLab 
 unter [Issues](https://gitlab.informatik.hs-augsburg.de/tha-latex-templates/abschlussarbeit/-/issues) 
 als **Improvement** oder **Feature** einzustellen. Wir werden die Anpassung, 
 falls dies Sinn macht, dann in die Vorlage integrieren.
@@ -17,7 +17,7 @@ falls dies Sinn macht, dann in die Vorlage integrieren.
 
 Fehler können in der Vorlage immer vorhanden sein. Sollten Sie einen solchen
 entdecken, melden Sie dies gerne auch unter [Issues](https://gitlab.informatik.hs-augsburg.de/tha-latex-templates/abschlussarbeit/-/issues) 
-und wählen sie **Error** aus. Wir werden dann versuchen, den Fehler zu korrigieren.
+und wählen Sie **Error** aus. Wir werden dann versuchen, den Fehler zu korrigieren.
 
 ### Wichtiger Hinweis
 
@@ -61,9 +61,9 @@ Unter Windows startet `01_build.bat` den fortlaufenden `latexmk`-Build. Dafür
 muss neben MiKTeX eine Perl-Laufzeitumgebung installiert und in `PATH` verfügbar
 sein.
 
-## HSA gitlab runner
+## HSA GitLab Runner
 
-Der Gitlab Runner ist zur Zeit so konfiguriert, dass mithilfe einer
-Docker Installation für das Image "texlive/texlive" das makefile
-genutzt wird, um die PDF Datei zu bauen. Die PDFs sind jeweils als
-Build-Artefakte im Gitlab vorhanden. 
+Der GitLab Runner ist zurzeit so konfiguriert, dass mithilfe einer
+Docker-Installation für das Image "texlive/texlive" das Makefile
+genutzt wird, um die PDF-Datei zu bauen. Die PDFs sind jeweils als
+Build-Artefakte in GitLab vorhanden. 

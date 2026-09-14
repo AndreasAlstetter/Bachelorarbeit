@@ -9,7 +9,7 @@ Diese Aufteilung wird im Rahmen des zuvor beschriebenen Kapitels \ref{chap:daten
 Der Testdatensatz wird erst nach der finalen Modellauswahl für die abschließenden Evaluierungen verwendet.
 Dadurch wird verhindert, dass Informationen aus dem Testdatensatz in die Optimierung des Modells einfließen und die Bewertung verfälschen.
 
-Ein wichtiger Aspekt dabei ist die Behandlung von fachlich Zusammenhängenden Daten. Artikel die denselben Fingerprint besitzen, dürfen nur gemeinsam in einem Teil des Splits vorkommen.
+Ein wichtiger Aspekt dabei ist die Behandlung von fachlich zusammenhängenden Daten. Artikel, die denselben Fingerprint besitzen, dürfen nur gemeinsam in einem Teil des Splits vorkommen.
 Ein Fingerprint repräsentiert die Struktur und die wesentlichen Merkmale eines Artikels, sodass Artikel mit demselben Fingerprint als fachlich zusammenhängend betrachtet werden.
 
 Dadurch wird verhindert, dass nahezu ähnliche Beispiele gleichzeitig im Trainings- und Testdatensatz vorkommen.
@@ -19,33 +19,6 @@ Dadurch wird verhindert, dass nahezu ähnliche Beispiele gleichzeitig im Trainin
 Die Evaluation des Learning-to-Rank-Modells erfolgt automatisiert mithilfe einer Evaluations-Suite \parencite{srcEvalSuite}, welche in dem Modul \texttt{step\_944\_analyze\_ltr\_run.py} verankert ist.
 Damit wertet das Modul die Vorhersagen des trainierten Modells auf dem Validierungs- und Testdatensatz aus und berechnet die definierten Rankingmetriken sowie zusätzliche Fehleranalysen.
 
-\begin{table}[tbp] 
-  \centering 
-  \caption{Aktuelle Evaluations-Suite} 
-  \label{tab:evaluations_suite} \begin{tabularx}{\textwidth}{p{1cm}p{5cm}X} 
-    \toprule 
-    \textbf{Nr.} & \textbf{Skript} & \textbf{Zielsetzung} \\ 
-    \midrule 1 & \texttt{step\_944\_analyze\_ltr\_run.py} & Berechnung der Rankingmetriken, Fehleranalyse und Evaluationsstatistiken \\ 
-    \bottomrule 
-  \end{tabularx} 
-\end{table}
-
-Die Ergebnisse werden unter
-
-\begin{verbatim}
-evaluation/
-|-- val_metrics.json
-|-- test_metrics.json
-|-- train_metrics.json
-|-- train_leave_one_out_metrics.json
-|-- step_944_ltr_run_analysis/
-    |-- step_944_analysis_summary.json
-    |-- step_944_same_family_error_report.json
-    |-- step_944_support_bias_report.json
-    |-- step_944_ranking_slice_report.json
-\end{verbatim}
-
-gespeichert.
 
 \section{Verwendete Rankingmetriken} 
 
@@ -60,13 +33,13 @@ Für die Bewertung des Systems aus dieser Arbeit werden die folgenden Kennzahlen
   \item Rangstatistiken der Ziel-Makros \parencite{EPLAN-Makros} 
 \end{itemize} 
 
-Durch diese Metriken können die Zielmakroerkennung, der Familienerkennung sowie die allgemeinen Rankingqualität bewertet werden.
+Durch diese Metriken können die Zielmakroerkennung, die Familienerkennung sowie die allgemeine Rankingqualität bewertet werden.
 
 \subsection{Bedeutung der Metriken innerhalb der Evaluation} 
 
 Die Bewertungsmetriken bilden gemeinsam verschiedene Aspekte der Rankingqualität ab, wie in Tabelle \ref{tab:rankingmetriken_bedeutung} zusammengefasst.
 
-\begin{table}[tbp]
+\begin{table}[H]
   \centering
   \setlength{\tabcolsep}{6pt}
   \renewcommand{\arraystretch}{1.1}
@@ -89,44 +62,49 @@ Die Bewertungsmetriken bilden gemeinsam verschiedene Aspekte der Rankingqualitä
 
 Ein zentraler Bestandteil in der Evaluation ist eine Leakage-Sicherheitsprüfung auf Zielinformationen. 
 Unter Leakage wird die unbeabsichtigte Nutzung von Informationen verstanden, die zum Zeitpunkt einer realen Vorhersage nicht verfügbar sein dürften und dadurch zu unrealistisch guten Modellergebnissen führen würden \parencite{kaufman2012leakage}.
-Da dieses System auf Artikel \parencite{EPLANArtikelverwaltung} - Makro \parencite{EPLAN-Makros} -Zuordnungen trainiert wird, besteht das Risiko, 
-das Informationen über das tatsächliche Ziel-Makro \parencite{EPLAN-Makros} in die Trainings- und Evaluierungsdaten gelangen können und somit die Aussagekraft der verwendeten Evaluationsmetriken verfälscht wird.
+Da dieses System auf Artikel-Makro-Zuordnungen \parencite{EPLANArtikelverwaltung}, \parencite{EPLAN-Makros} trainiert wird, besteht das Risiko, 
+dass Informationen über das tatsächliche Ziel-Makro \parencite{EPLAN-Makros} in die Trainings- und Evaluierungsdaten gelangen können und somit die Aussagekraft der verwendeten Evaluationsmetriken verfälscht wird.
 
 Um dies zu vermeiden, enthält die Pipeline eine Leakage-Prüfung, die vor der eigentlichen Modellbewertung ausgeführt wird.
 Die Implementierung erfolgt in \texttt{step\_944\_analyze\_ltr\_run.py} \parencite{srcStep944}.
 
-\subsection{Ziele der Leakage-Prüfung}
+Tabelle \ref{tab:leakage_pruefmatrix} fasst die Prüfbereiche der Leakage-Sicherheitsprüfung zusammen.
 
-Die Ziele der Leakage-Prüfung sind:
-
-\begin{itemize} 
-\item Identifikation verbotener Zielinformationen innerhalb der Query-Daten 
-\item Erkennung direkter Ziel-Makro \parencite{EPLAN-Makros} -Referenzen 
-\item Prüfung auf Familien- und Zielinformationen innerhalb von Eingangsmerkmalen 
-\item Kontrolle der Kandidatenprofile 
-\item Überprüfung der Datensplits auf Überschneidungen 
-\item Sicherstellung der Trennung von Training, Validierung und Test 
-\end{itemize}
-
-Somit wird sichergestellt, dass das Modelltraining nur mit den Informationen erfolgt, die später auch im Produktivbetrieb verfügbar sind.
+\begin{table}[H]
+  \centering
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.1}
+  \caption{Prüfmatrix der Leakage-Sicherheitsprüfung}
+  \label{tab:leakage_pruefmatrix}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.1cm} >{\raggedright\arraybackslash}p{4.0cm} >{\raggedright\arraybackslash}X}
+    \toprule
+    \textbf{Prüfbereich} & \textbf{Risiko} & \textbf{Erwartetes Ergebnis} \\
+    \midrule
+    Query-Daten & Ziel-Makro- oder Familienhinweise in der Anfrage & Keine direkten oder impliziten Zielinformationen in den Eingangsmerkmalen \\
+    Datensplits & Überschneidungen zwischen Training, Validierung und Test & Getrennte Fingerprint-Gruppen und keine fachlich identischen Beispiele in mehreren Splits \\
+    Kandidatenprofile & Nutzung von Validierungs- oder Testdaten beim Profilaufbau & Kandidatenprofile werden ausschließlich aus Trainingsdaten erstellt \\
+    Evaluationslauf & Verfälschte Rankingmetriken durch Zielinformations-Leakage & Bewertung wird nur bei bestandenem Sicherheitsbericht interpretiert \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
 \subsection{Prüfung der Query-Daten}
 
-Die verwendete Query-Darstellung repräsentiert einen eingehenden Artikel \parencite{EPLANArtikelverwaltung} beziehungsweise die Informationen aus einem Datenblatt, die für eine Suchanfrage an das trainierte Modell wichtig sind.
+Die verwendete Query-Darstellung repräsentiert einen eingehenden Artikel \parencite{EPLANArtikelverwaltung} und damit die Informationen aus einem Datenblatt, die für eine Suchanfrage an das trainierte Modell wichtig sind.
 
 Wichtig hierbei ist es, dass keine direkten Hinweise auf das Ziel-Makro \parencite{EPLAN-Makros} in den Query-Daten enthalten sind, welche unmittelbar auf dieses verweisen können.
 
-Deswegen untersucht die Leakage-Prüfung folgenden Punkte:
+Deswegen untersucht die Leakage-Prüfung folgende Punkte:
 
 \begin{itemize} 
-  \item Ziel-Makro \parencite{EPLAN-Makros} -Kennungen 
+  \item Ziel-Makro-Kennungen \parencite{EPLAN-Makros} 
   \item Zielfamilieninformationen 
-  \item direkten Ziel-Makro \parencite{EPLAN-Makros} -Tokens 
-  \item verbotenen Metadatenfeldern 
-  \item impliziten Zielhinweisen in den Featurevektoren 
+  \item direkte Ziel-Makro-Tokens \parencite{EPLAN-Makros} 
+  \item verbotene Metadatenfelder 
+  \item implizite Zielhinweise in den Featurevektoren 
 \end{itemize}
 
-Sobald solche Informationen gefunden werden, wird der Lauf als Ungültig markiert.
+Sobald solche Informationen gefunden werden, wird der Lauf als ungültig markiert.
 
 \subsection{Prüfung der Datensplits}
 
@@ -142,7 +120,7 @@ Dabei werden folgende Aspekte überprüft:
   \item gruppierte Artikelstrukturen 
 \end{itemize}
 
-Das Ziel dieser Prüfung ist es, sicherzustellen, dass keine fachlich identischen Beispiele gleichzeitig in mehreren Datensplits vorhanden sind. Dadurch wird ein künstliche Modell-Verbesserung verhindert,
+Das Ziel dieser Prüfung ist es, sicherzustellen, dass keine fachlich identischen Beispiele gleichzeitig in mehreren Datensplits vorhanden sind. Dadurch wird eine künstliche Modell-Verbesserung verhindert,
 die die Generalisierungsfähigkeit des Modells beeinträchtigen würde.
 
 \subsection{Prüfung der Kandidatenprofile}
@@ -154,9 +132,8 @@ Deswegen werden sämtliche Profilinformationen auf ihre Herkunft geprüft, um si
 
 \subsection{Evaluierungsergebnis}
 
-Nach der Leakage-Prüfung wird ein struktruierter Sicherheitsbericht erstellt. Der Evaluationslauf gilt nur dann als bestanden, wenn keine Verstöße gegen die definierten Leakage-Regeln festgestellt wurden.
+Nach der Leakage-Prüfung wird ein strukturierter Sicherheitsbericht erstellt. Der Evaluationslauf gilt nur dann als bestanden, wenn keine Verstöße gegen die definierten Leakage-Regeln festgestellt wurden.
 Diese Basis bildet die Voraussetzung für die Interpretierbarkeit der nachfolgenden Rankingmetriken.
 
-Für den verwendeten Datensatz wurden keine Fingerprint-Konflikte noch Fingerprint-Leaks festgestellt. 
+Für den verwendeten Datensatz wurden weder Fingerprint-Konflikte noch Fingerprint-Leaks festgestellt. 
 Es sind auch keine Ziel-Makros \parencite{EPLAN-Makros} oder Makrofamilien in Validierungs- beziehungsweise Testdaten vorhanden, ohne zuvor im Trainingssplit vertreten zu sein. 
-

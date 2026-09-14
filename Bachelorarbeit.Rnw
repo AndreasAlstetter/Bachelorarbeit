@@ -7,7 +7,7 @@
 %%% V3   01/2024, Internationalisierung
 %%% ----------------------------------------------------------
 \documentclass[12pt,a4paper%
-              ,twoside     % Fuer Veröffentlichung
+              ,twoside     % Für Veröffentlichung
               ,titlepage
               ,DIV=13
               ,headinclude
@@ -45,10 +45,10 @@ knitr::knit_hooks$set(chunk = function(x, options) {
            ,thesisTitle={Disquisitiones generales circa superficies curvas}
            ,studyDegree=%
 %                        {{Bachelor of Arts}}
-%                        {{Bachelor of Engeneering}}
+%                        {{Bachelor of Engineering}}
                         {{Bachelor of Science (B.\,Sc.)}}
 %                        {{Master of Arts}}
-%                        {{Master of Engeneering}}
+%                        {{Master of Engineering}}
 %                        {{Master of Science (M.\,Sc.)}}
            ,faculty=% 
                      {{Fakultät für \\ Angewandte \\ Geistes-  und  \\ Naturwissenschaften}}
@@ -67,7 +67,7 @@ knitr::knit_hooks$set(chunk = function(x, options) {
 %           ,language={en}
            ]{05_konfiguration/01_tha-abschlussarbeit}
 
-% Ohne diese Zeile: Mit klickbaren links
+% Ohne diese Zeile: Mit klickbaren Links
 \hypersetup{draft}
 
 % Literaturdatenbank (.bib-Datei) aus Citavi o.ä.
@@ -109,12 +109,12 @@ Hier wird \citet{Neumann:1977} zitiert. Zitate sollten in den Text eingebunden w
 
 Noch ein Absatz mit einem Zitat aus einem Buch, nämlich von \citet{R:Chambers:1998}. Webseiten, zum Beispiel das Dokument von \citet{xmlComparingSchemata} sollten nur äußerst sparsam referenziert werden. 
 
-Hier wird ein Buch zitiert, nämlich das von \citet{darwin}. Die Arbeit von \citet{meulman} ist in einer wissenschaftlichen Fachzeitschrift veröffentlicht worden. Ein Beispiel für einen Aufsatz in einem Tagungsband liefert \citet{banzhaf96effect}. In Ausnahmefällen zu zitieren ist eine unveröffentlichte Abschlussarbeit, zum Beispiel eine Diplom-, Bachelor-, oder Masterthesis, wie die von \citet{holzheuer}. Ganz selten ist man gezwungen Manuale oder Referenzen zu referenzieren, die nur im Internet zugänglich sind und zudem keinen ausgewiesenen Autor haben wie zum Beispiel die Anleitung vom \citet{hornik} oder der Aufsatz von \citet{xmlComparingSchemata}.
+Hier wird ein Buch zitiert, nämlich das von \citet{darwin}. Die Arbeit von \citet{meulman} ist in einer wissenschaftlichen Fachzeitschrift veröffentlicht worden. Ein Beispiel für einen Aufsatz in einem Tagungsband liefert \citet{banzhaf96effect}. In Ausnahmefällen zu zitieren ist eine unveröffentlichte Abschlussarbeit, zum Beispiel eine Diplom-, Bachelor- oder Masterthesis, wie die von \citet{holzheuer}. Ganz selten ist man gezwungen Manuale oder Referenzen zu referenzieren, die nur im Internet zugänglich sind und zudem keinen ausgewiesenen Autor haben wie zum Beispiel die Anleitung vom \citet{hornik} oder der Aufsatz von \citet{xmlComparingSchemata}.
 
 % -----------------------------------------------------
 \section{Einbinden von Grafiken}
 
-Es folgt die Abbildung~\ref{fig:Gauss} auf Seite \pageref{fig:Gauss}, die dynamisch (gleitend) eingebunden wird. Das ist typischerweise eine gute Idee und man sollte Grafiken, wenn es nicht unbedingt anders gemacht werden soll von LaTeX automatisch positionieren lassen.
+Es folgt die Abbildung~\ref{fig:Gauss} auf Seite \pageref{fig:Gauss}, die dynamisch (gleitend) eingebunden wird. Das ist typischerweise eine gute Idee und man sollte Grafiken, wenn es nicht unbedingt anders gemacht werden soll, von LaTeX automatisch positionieren lassen.
 
 \blindtext 
 

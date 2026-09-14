@@ -6,9 +6,28 @@
 Die Ergebnisse der Evaluierung zeigen, dass die größte Einschränkung des aktuellen Systems in der Variantenauflösung technisch ähnlicher Makrofamilien liegt.
 Dies lässt sich auf die Struktur sowie die Eigenschaften der verfügbaren Datenbasis zurückführen.\parencite{LTR_Configuration_Test_Series}
 
+Tabelle \ref{tab:grenzen_uebersicht} fasst die zentralen Grenzen des Systems und die daraus abgeleiteten Ansatzpunkte zusammen.
+
+\begin{table}[H]
+	\centering
+	\setlength{\tabcolsep}{4pt}
+	\renewcommand{\arraystretch}{1.1}
+	\caption{Übersicht der zentralen Grenzen und Ansatzpunkte}
+	\label{tab:grenzen_uebersicht}
+	\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{4.0cm} >{\raggedright\arraybackslash}X}
+		\toprule
+		\textbf{Grenze} & \textbf{Beobachteter Befund} & \textbf{Ansatzpunkt} \\
+		\midrule
+		Geringer Support & 302 Kandidatenprofile basieren nur auf einem Trainingsartikel & Erweiterung der Datenbasis für seltene Ziel-Makros \\
+		Variantenauflösung & Family Recall@1 liegt deutlich über Target Recall@1 & Spezialisierte Modellierung innerhalb der Makrofamilien \\
+		Support-Bias & Häufige Ziel-Makros besitzen stabilere Kandidatenprofile & Ausgleich seltener Profile durch zusätzliche Beispiele und Profilpflege \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
 \subsection{Geringer Support vieler Zielmakros}
 
-Eine zentrale Einschränkung ergibt sich aus der Support-Verteilung der Kandidatenprofile. Von Insgesamt 375 vorhandenen Kandidatenprofilen basieren 302 Profile auf nur einem Trainingsartikel.
+Eine zentrale Einschränkung ergibt sich aus der Support-Verteilung der Kandidatenprofile. Von insgesamt 375 vorhandenen Kandidatenprofilen basieren 302 Profile auf nur einem Trainingsartikel.
 Der Median-Support liegt bei 1 und der Mittelwert der Artikel pro Ziel-Makro \parencite{EPLAN-Makros} beträgt 2,62.
 
 Ein einzelner Artikel ist dabei nicht in der Lage, einen ausreichenden Support für technische Vielfalt innerhalb einer Makrofamilie zu bieten.
@@ -16,31 +35,31 @@ Die daraus entstandenen Kandidatenprofile sind somit stark von einzelnen Beobach
 
 \subsection{Schwierige Variantenauflösung innerhalb einer Makrofamilie}
 
-Die Resultate der Evaluierung zeigen, dass das Modell die korrekte Makrofamilie deutlich zuverlässiger erkennt, als das exakte Ziel-Makro \parencite{EPLAN-Makros}.
-A08 als beste Konfiguration erziehlt dabei einen Family Recall@1 von 87,35\,\%, wohingegen der Target Recall@1 lediglich 34,78\,\% beträgt.
+Die Resultate der Evaluierung zeigen, dass das Modell die korrekte Makrofamilie deutlich zuverlässiger erkennt als das exakte Ziel-Makro \parencite{EPLAN-Makros}.
+A08 als beste Konfiguration erzielt dabei einen Family Recall@1 von 87,35\,\%, wohingegen der Target Recall@1 lediglich 34,78\,\% beträgt.
 
-Zudem zeigt die Fehleranalyse, dass 133 Testfälle die korrekte Makrofamilie erkennen, jedoch nicht das exakte Ziel-Makro \parencite{EPLAN-Makros} identifizieren.
-Die größte Herausforderung liegt somit in der fehlerfreien Unterscheidung zwischen sehr ähnlichen Varianten innerhalb derselben Makrofamilie\parencite{LTR_Configuration_Test_Series}
+Zudem zeigt die Fehleranalyse, dass in 133 Testfällen die korrekte Makrofamilie erkannt wird, jedoch nicht das exakte Ziel-Makro \parencite{EPLAN-Makros}.
+Die größte Herausforderung liegt somit in der fehlerfreien Unterscheidung zwischen sehr ähnlichen Varianten innerhalb derselben Makrofamilie \parencite{LTR_Configuration_Test_Series}.
 
 \subsection{Support-Bias zugunsten häufiger Zielmakros}
 
-Die durchgeführten Fehlernanalysen zeigen einen deutlichen Support-Bias. In 55,6\,\% der Fälle besitzt das fälschlich ausgewählte Ziel-Makro \parencite{EPLAN-Makros} einen höheren Support als das korrekte Ziel-Makro \parencite{EPLAN-Makros}.
-Im Durchschnitt verfügt das falsch gewählte Ziel-Makro dabei etwa 10,6 Artikel mehr als das korrekte Ziel-Makro \parencite{LTR_Configuration_Test_Series}.
+Die durchgeführten Fehleranalysen zeigen einen deutlichen Support-Bias. In 55,6\,\% der Fälle besitzt das fälschlich ausgewählte Ziel-Makro \parencite{EPLAN-Makros} einen höheren Support als das korrekte Ziel-Makro \parencite{EPLAN-Makros}.
+Im Durchschnitt verfügt das falsch gewählte Ziel-Makro dabei über etwa 10,6 Artikel mehr als das korrekte Ziel-Makro \parencite{LTR_Configuration_Test_Series}.
 
-Häufige Ziel-Makros \parencite{EPLAN-Makros} erzeugen dadurch stabielere Kandidatenprofile und bekommen somit einen strukturellen Vorteil gegenüber selteneren Varianten.
+Häufige Ziel-Makros \parencite{EPLAN-Makros} erzeugen dadurch stabilere Kandidatenprofile und bekommen somit einen strukturellen Vorteil gegenüber selteneren Varianten.
 
 
 \section{Ausblick}
 
 Die Ergebnisse dieser Arbeit zeigen mehrere Ansatzpunkte für künftige Weiterentwicklungen auf.
 
-Die größte erwartbare Leistungssteigerung liegt in der Erweiterung der vorhanden Datenbasis. Besonders für seltene Ziel-Makros \parencite{EPLAN-Makros} sollte eine größere Basis an Traingsbeispielen geschaffen werden.
+Die größte erwartbare Leistungssteigerung liegt in der Erweiterung der vorhandenen Datenbasis. Besonders für seltene Ziel-Makros \parencite{EPLAN-Makros} sollte eine größere Basis an Trainingsbeispielen geschaffen werden.
 Dadurch lässt sich die heutige Dominanz von Singleton-Profilen reduzieren und der Raum der Kandidaten-Profile würde eine stabilere Struktur aufweisen.
 Dies würde dazu führen, dass die breitere Datenbasis dem Modell mehr Informationen für eine bessere Generalisierung zur Verfügung stellt.
 
 
 Ein weiterer Optimierungspunkt liegt in der Verbesserung der Variantenauflösung innerhalb einer Makrofamilie. 
-Hierfür sind detailliertere Artikelmerkmale erforderlich, die es ermöglichen die einzelnen Artikel präziser voneinander abzugrenzen.
+Hierfür sind detailliertere Artikelmerkmale erforderlich, die es ermöglichen, die einzelnen Artikel präziser voneinander abzugrenzen.
 Des Weiteren wäre der Ansatz einer mehrstufigen Architektur mit einem globalen Modell zur Familienerkennung und einem weiteren separaten Modell zur Variantenauflösung innerhalb der Makrofamilie denkbar.
 Dadurch könnten dann auch eventuelle Fehlerfälle zwischen der Familienerkennung und der Variantenauflösung systematischer analysiert und kompensiert werden.
 
@@ -49,5 +68,5 @@ Weiterführend stellt die Extraktion von Merkmalen auch einen interessanten Ansa
 Dadurch würde die Modellkomplexität verringert und die Generalisierungsfähigkeit des Modells verbessert werden.
 
 
-Eine weitergreifende Idee für die Zukunft wäre die Integration von zusätzlichem Domänenwissen von Experten oder externen Wissensquellen, welche zusätzliche technische Merkmale, aber auch semantische Zusammenhänge zwischen den Artikeln bereitstellen könnten.
+Eine weitergehende Idee für die Zukunft wäre die Integration von zusätzlichem Domänenwissen von Experten oder externen Wissensquellen, welche zusätzliche technische Merkmale, aber auch semantische Zusammenhänge zwischen den Artikeln bereitstellen könnten.
 Diese Kombination aus Daten und Metadaten könnte einen vielversprechenden Ansatz für die Modellierung von spezifischeren Variantenunterscheidungen darstellen.

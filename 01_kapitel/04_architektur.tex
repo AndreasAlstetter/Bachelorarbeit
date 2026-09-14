@@ -8,14 +8,12 @@ Die entwickelte Lösung basiert auf einer Learning-to-Rank-Architektur zur autom
 Ausgangspunkt der Pipeline sind strukturierte Artikeldaten, technische Merkmale sowie Informationen aus den zugehörigen Makros. 
 Nach der Datenaufbereitung werden die verfügbaren Artikel in Trainings-, Validierungs- und Testdaten aufgeteilt. 
 Anschließend werden die Makro-Kandidatenprofile ausschließlich aus dem Trainingssplit erzeugt. Für jede Anfrage werden im Anschluss Anfrage-Kandidat-Paare gebildet.
-Dabei wird jeder Kandidat durch ein Makroprofil repräsentiert und mit der Anfrage verglichen. Aus diesen Paaren werden strukturierte und lexikalische Merkmale berechnet, welche als Eingabe in das spätere Learning-to-Rank-Modells dienen. 
+Dabei wird jeder Kandidat durch ein Makroprofil repräsentiert und mit der Anfrage verglichen. Aus diesen Paaren werden strukturierte und lexikalische Merkmale berechnet, welche als Eingabe in das spätere Learning-to-Rank-Modell dienen. 
 Das Rankingmodell basiert auf LightGBM LambdaRank und bewertet sämtliche verfügbaren Kandidatenprofile. Aus den Relevanzwerten der Kandidaten wird anschließend eine Rangliste möglicher Makroempfehlungen gebildet. 
 Die Pipeline umfasst neben dem eigentlichen Training auch die automatische Evaluation sowie die Erzeugung von Modellartefakten zur wiederverwendbaren Nutzung eines Modells. 
 Abbildung \ref{fig:architektur} zeigt die implementierte End-to-End-Architektur des Systems.
 
-\usetikzlibrary{positioning, arrows.meta}
-
-\begin{figure}[tbp] 
+\begin{figure}[H] 
     \centering 
     \resizebox{!}{0.72\textheight}{
     \begin{tikzpicture}[ 
@@ -67,7 +65,7 @@ Abbildung \ref{fig:architektur} zeigt die implementierte End-to-End-Architektur 
                         \node[evalbox, below=0.6cm of ranker] (evaluation) { \textbf{5. Evaluation und Artefakte}\\[2pt] Recall@k, MRR, hierarchisches nDCG\\ Modell-, Profil- und Metadatenartefakte }; 
                         \draw[flow] (prep) -- (profiles); \draw[flow] (profiles) -- (features); \draw[flow] (features) -- (ranker); \draw[flow] (ranker) -- (evaluation); 
                     \end{tikzpicture} } 
-                    \caption{End-to-End-Architektur der retrievalfreien Learning-to-Rank-Pipeline.} 
+                    \caption{End-to-End-Architektur der Learning-to-Rank-Pipeline.} 
                     \label{fig:architektur} 
                 \end{figure}
 

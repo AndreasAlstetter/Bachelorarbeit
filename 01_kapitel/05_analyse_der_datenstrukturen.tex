@@ -9,10 +9,9 @@ Um diese Daten für ein Learning-to-Rank-System nutzbar zu machen, müssen diese
 Das Ziel der Datenaufbereitung besteht darin, alle technisch wichtigen Informationen der EPLAN-Artikel \parencite{EPLANArtikelverwaltung} sowie die strukturellen Merkmale der EPLAN-Fenstermakros \parencite{EPLAN-Makros} zu extrahieren. Auf dieser Grundlage kann die Eignung eines EPLAN-Artikels \parencite{EPLANArtikelverwaltung} für ein EPLAN-Fenstermakro \parencite{EPLAN-Makros} bewertet werden. 
 Die Umsetzung dieser Datenaufbereitung erfolgt innerhalb der entwickelten Trainings- und Rankingpipeline \parencite{srcStep911,srcPipeline}.
 
-Zum Zeitpunkt der Durchführung dieser Arbeit umfasst der Datensatz insgesamt 1.559 EPLAN-Artikel und 375 Zielmakros, die zu 55 Makrofamilien gehören. 
+Zum Zeitpunkt der Durchführung dieser Arbeit umfasst der Datensatz insgesamt 1.559 EPLAN-Artikel \parencite{EPLANArtikelverwaltung} und 375 Ziel-Makros (Targets) \parencite{EPLAN-Makros}, die zu 55 Makrofamilien gehören, darunter 213 Singleton-Targets und 279 Targets mit weniger als drei Trainingsbeispielen, wie in Tabelle \ref{tab:datensatzstatistik} dargestellt.
 
-\subsection{Datensatzstatistik}
-\begin{table}[tbp] 
+\begin{table}[H] 
     \centering 
     \caption{Statistische Kennzahlen des verwendeten Datensatzes} 
     \label{tab:datensatzstatistik} 
@@ -29,12 +28,13 @@ Zum Zeitpunkt der Durchführung dieser Arbeit umfasst der Datensatz insgesamt 1.
     \end{tabular} 
 \end{table}
 
+
 \section{Analyse der Makrostrukturen}
 
 Die Analyse der Makrostrukturen der EPLAN-Fenstermakros \parencite{EPLAN-Makros} konzentriert sich auf die enthaltenen Funktions- und Strukturmerkmale, welche die Grundstruktur und Funktionalität der Makros bestimmen \parencite{srcStep911}.
 Tabelle \ref{tab:makrostrukturmerkmale} fasst die analysierten Merkmalsgruppen, die jeweils extrahierten Informationen und deren Bedeutung zusammen.
 
-\begin{table}[tbp]
+\begin{table}[H]
     \centering
     \setlength{\tabcolsep}{4pt}
     \renewcommand{\arraystretch}{1.08}
@@ -64,13 +64,15 @@ Tabelle \ref{tab:makrostrukturmerkmale} fasst die analysierten Merkmalsgruppen, 
 \end{table}
 
 Die Makrostrukturmerkmale werden beim Aufbau der Makrokandidatenprofile gespeichert. In der regulären Query-Kandidat-Feature-Berechnung werden diese jedoch nicht direkt mit einer unbekannten Artikelanfrage verglichen, da deren Zielmakrostruktur zur Anfragezeit nicht verfügbar ist.
+Diese Informationen werden für das Grundverständnis der Makrostruktur und für zukünftige Optimierungen des Abgleichsprozesses gespeichert.
+
 
 \section{Aufbereitung der Artikeldaten}
 
 Neben den vorhandenen EPLAN-Fenstermakros \parencite{EPLAN-Makros} werden auch die EPLAN-Artikeldaten \parencite{EPLANArtikelverwaltung} aufbereitet und analysiert \parencite{srcStep911}.
 Die verwendeten Merkmalsgruppen sind in Tabelle \ref{tab:artikelmerkmale} zusammengefasst.
 
-\begin{table}[tbp]
+\begin{table}[H]
     \centering
     \setlength{\tabcolsep}{4pt}
     \renewcommand{\arraystretch}{1.08}
@@ -94,10 +96,10 @@ Dabei werden Texte, Schreibvarianten sowie technische Einheiten per Regular Expr
 \section{Erstellung von Makrokandidatenprofilen}
 
 Im nächsten Schritt wird für jedes bekannte EPLAN-Fenstermakro \parencite{EPLAN-Makros} ein Makrokandidatenprofil erstellt. Ein Makrokandidatenprofil fasst dabei die technischen Eigenschaften des jeweiligen Makros zusammen. Für Merkmals-Kategorien werden die häufigsten Ausprägungen gespeichert. Für numerische Merkmale werden statistische Werte wie Mittelwert, Median, Minimum, Maximum und Häufigkeiten berechnet. 
-Die Berechnung dieser Kandidatenprofile erfolgt innerhalb der Trainingspipeline \parencite{srcStep931}
+Die Berechnung dieser Kandidatenprofile erfolgt innerhalb der Trainingspipeline \parencite{srcStep931}.
 
 Im aktuellen Datensatz entstehen dadurch 375 Makro-Kandidatenprofile. Die Erstellung der Profile erfolgt ausschließlich auf der Grundlage des Trainingssplits. 
-Informationen aus den Validierungs- oder Testdaten werden nicht zur Profilerstellung verwendet. Für jedes Profil werden unter anderem das Zielmakro, Makrofamilie, Supportinformationen, technische Vektorrepräsentationen, lexikalische Merkmale, Strukturmerkmale sowie statistische Eigenschaften gespeichert. 
+Informationen aus den Validierungs- oder Testdaten werden nicht zur Profilerstellung verwendet. Für jedes Profil werden unter anderem das Zielmakro, die Makrofamilie, Supportinformationen, technische Vektorrepräsentationen, lexikalische Merkmale, Strukturmerkmale sowie statistische Eigenschaften gespeichert. 
 Die Profilbreite ist abhängig von der untersuchten Konfiguration. Für den später als Referenz verwendeten A08-Modellstand beträgt die Profilbreite 16 Artikel pro Kandidatenprofil.
 
 \section{Transformation in ein Rankingproblem}
@@ -141,7 +143,7 @@ Dabei bezeichnen $x$ den Eigenschaftswert der Anfrage, $y$ den Eigenschaftswert 
 Die weiteren Pairwise-Merkmale sind in Tabelle \ref{tab:pairwise_merkmale} zusammengefasst. 
 Die Berechnung der Pairwise-Merkmale erfolgt innerhalb der entwickelten Trainingspipeline \parencite{srcStep931}.
 
-\begin{table}[tbp] 
+\begin{table}[H] 
     \centering 
     \caption{Gruppen der Pairwise-Merkmale} 
     \label{tab:pairwise_merkmale} 
@@ -179,7 +181,7 @@ Dadurch werden nicht einzelne Objekte klassifiziert, sondern die korrekte Sortie
 
 Die Referenzkonfiguration A08 verwendet diese binäre Labeldefinition. Zusätzlich wurde im Rahmen von Konfigurationsexperimenten eine hierarchische Labeldefinition untersucht. 
 Dabei werden Makros derselben Familie sowie Makros mit identischem Familienpräfix durch eine abgestufte Relevanz berücksichtigt. 
-Diese Variante wird in der späteren Gegenüberstellung der Konfigurationsexperimenten als separate Konfiguration betrachtet.
+Diese Variante wird in der späteren Gegenüberstellung der Konfigurationsexperimente als separate Konfiguration betrachtet.
 
 \section{Erstellung des Trainingsformats}
 
@@ -198,10 +200,6 @@ Dabei bezeichnet $q$ die Anfrage, $c_i$ den Makrokandidaten und $x_1,\dots,x_n$ 
 Dabei beschreibt $G_q$ die Menge aller Anfrage-Kandidat-Paare für die Anfrage $q$. Die Informationen aus den Gruppen werden zusammen mit den Featurevektoren an den LambdaRANK-Algorithmus übergeben \parencite{srcStep931}. 
 Dadurch können die Kandidaten innerhalb derselben Anfrage gegeneinander bewertet werden und somit die optimale Rangfolge erlernt werden.
 
-Für die Referenzkonfiguration A08 entsteht dafür eine Trainingsmatrix mit einer Dimension von 369.000 × 2.381. 
-Die Validierungsmatrix besitzt eine Dimension von 120.750 × 2.381 und die Testmatrix eine Dimension von 94.875 × 2.381. 
-Die Anzahl der Zeilen ergibt sich aus der vollständigen Bewertung aller 375 Kandidatenprofile für jede Anfrage.
-
 \section{Vermeidung von Zielinformations-Leakage} 
 
 Beim Aufbau der Trainingsdaten muss sichergestellt werden, dass nur solche Informationen verwendet werden, die auch während einer realen Anfrage verfügbar wären. 
@@ -209,12 +207,12 @@ Die Query-Darstellung wird deshalb auf Merkmale beschränkt, die aus einem einge
 Direkte Zielinformationen wie \texttt{target\_macro}, \texttt{target\_family} sowie weitere makrobezogene Zielfelder werden ausgeschlossen. 
 Makrostrukturinformationen werden ausschließlich innerhalb der Kandidatenprofile gespeichert. Zusätzlich werden Kandidatenprofile ausschließlich aus Artikeln des Trainingssplits erstellt.  
 Validierungs- und Testdaten fließen nicht in die Profilerstellung ein. Diese Maßnahmen bilden die Grundlage für die Leakage-Sicherheit der Trainingsdaten. 
-Dieser Schutzmechanismuen werden im Rahmen der Evaluationssuite in Kapitel \ref{chap:evaluierungskonzept} beschrieben.
+Diese Schutzmechanismen werden im Rahmen der Evaluationssuite in Kapitel \ref{chap:evaluierungskonzept} beschrieben.
 
 
 Für eine bessere Veranschaulichung des Datenflusses der Datenaufbereitung wird in Abbildung \ref{fig:trainingsformat_pipeline} eine schematische Darstellung gezeigt.
 
-\begin{figure}[tbp]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[
         label distance=0.2cm,
@@ -232,7 +230,7 @@ Für eine bessere Veranschaulichung des Datenflusses der Datenaufbereitung wird 
         \node[pipelinebox] (features) at (12.0, -1.9) {\textbf{5} Pairwise-\\Merkmale};
         \node[pipelinebox] (labels) at (8.0, -1.9) {\textbf{6} Relevanzlabels};
         \node[pipelinebox] (format) at (4.0, -1.9) {\textbf{7} Trainingsformat};
-        \node[check] (leakage) at (0, -1.9) {\textbf{8} Leakage-Schutz & Split-Prüfung};
+        \node[check] (leakage) at (0, -1.9) {\textbf{8} Leakage-Schutz \& Split-Prüfung};
 
         \draw[flow] (raw) -- (norm);
         \draw[flow] (norm) -- (profiles);

@@ -19,41 +19,33 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global/global}
-    \entry{baeza2011modern}{book}{}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=14e9e2c7e918f62ba13b9e040fb7f468}{%
-           family={Baeza-Yates},
-           familyi={B\bibinithyphendelim Y\bibinitperiod},
-           given={Ricardo},
-           giveni={R\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=f25e271e4c06cb466719bf923801707f}{%
-           family={Ribeiro-Neto},
-           familyi={R\bibinithyphendelim N\bibinitperiod},
-           given={Berthier},
-           giveni={B\bibinitperiod},
+    \entry{LTR_Configuration_Test_Series}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=696af597b47fbc9d6218a97d8879bd63}{%
+           family={Alstetter},
+           familyi={A\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod},
            givenun=0}}%
       }
-      \list{publisher}{1}{%
-        {Addison-Wesley}%
-      }
-      \strng{namehash}{1f00528ee1ee87a4195a7a9296c94914}
-      \strng{fullhash}{1f00528ee1ee87a4195a7a9296c94914}
-      \strng{fullhashraw}{1f00528ee1ee87a4195a7a9296c94914}
-      \strng{bibnamehash}{1f00528ee1ee87a4195a7a9296c94914}
-      \strng{authorbibnamehash}{1f00528ee1ee87a4195a7a9296c94914}
-      \strng{authornamehash}{1f00528ee1ee87a4195a7a9296c94914}
-      \strng{authorfullhash}{1f00528ee1ee87a4195a7a9296c94914}
-      \strng{authorfullhashraw}{1f00528ee1ee87a4195a7a9296c94914}
-      \field{sortinit}{B}
-      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \strng{namehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{bibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorbibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authornamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{edition}{2}
-      \field{title}{Modern Information Retrieval: The Concepts and Technology behind Search}
-      \field{year}{2011}
+      \field{howpublished}{Eigene Untersuchung}
+      \field{note}{Interne Konfigurationsanalyse der LTR-Modelle}
+      \field{title}{LTR Configuration Test Series}
+      \field{year}{2026}
     \endentry
     \entry{Bundesregierung2026}{misc}{}{}
       \name{author}{1}{}{%
@@ -117,50 +109,6 @@
       \field{journaltitle}{Microsoft Research Technical Report}
       \field{title}{From RankNet to LambdaRank to LambdaMART: An Overview}
       \field{year}{2010}
-    \endentry
-    \entry{cormack2009rrf}{inproceedings}{}{}
-      \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=8d007d505d39a8bbd47859edd9f4e9b6}{%
-           family={Cormack},
-           familyi={C\bibinitperiod},
-           given={Gordon\bibnamedelima V.},
-           giveni={G\bibinitperiod\bibinitdelim V\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=627d44a3dfae51306bbd69387cb26ecf}{%
-           family={Clarke},
-           familyi={C\bibinitperiod},
-           given={Charles\bibnamedelimb L.\bibnamedelimi A.},
-           giveni={C\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim A\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=1f8762648613c1ddea5e08d22bce66bf}{%
-           family={B\"{u}ttcher},
-           familyi={B\bibinitperiod},
-           given={Stefan},
-           giveni={S\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{6bb6f63c17e0aba9e6b11b99e39a4c5e}
-      \strng{fullhash}{d73c10636cb0de0ad5d8c187d36e41d9}
-      \strng{fullhashraw}{d73c10636cb0de0ad5d8c187d36e41d9}
-      \strng{bibnamehash}{d73c10636cb0de0ad5d8c187d36e41d9}
-      \strng{authorbibnamehash}{d73c10636cb0de0ad5d8c187d36e41d9}
-      \strng{authornamehash}{6bb6f63c17e0aba9e6b11b99e39a4c5e}
-      \strng{authorfullhash}{d73c10636cb0de0ad5d8c187d36e41d9}
-      \strng{authorfullhashraw}{d73c10636cb0de0ad5d8c187d36e41d9}
-      \field{sortinit}{C}
-      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{SIGIR 2009}
-      \field{title}{Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods}
-      \field{year}{2009}
-      \field{pages}{758\bibrangedash 759}
-      \range{pages}{2}
-      \verb{doi}
-      \verb 10.1145/1571941.1572114
-      \endverb
     \endentry
     \entry{EPLAN-Makros}{misc}{}{}
       \name{author}{1}{}{%
@@ -286,50 +234,6 @@
       \field{note}{Interner Projektquellcode}
       \field{title}{Evaluation suite for Learning-to-Rank macro ranking}
       \field{year}{2026}
-    \endentry
-    \entry{gao2021coil}{inproceedings}{}{}
-      \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=7ef8e07d2bd57499ac7dd40d1123fb5d}{%
-           family={Gao},
-           familyi={G\bibinitperiod},
-           given={Luyu},
-           giveni={L\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=d2448757aae98465fe067babd0604f8d}{%
-           family={Dai},
-           familyi={D\bibinitperiod},
-           given={Zhuyun},
-           giveni={Z\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=032fc1d6032783d20182bca491b35d2f}{%
-           family={Callan},
-           familyi={C\bibinitperiod},
-           given={Jamie},
-           giveni={J\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{33afec8508fadcedb9fb8ffe8cfd4bfa}
-      \strng{fullhash}{0a362a97c05c5ba0dc42db17b706186f}
-      \strng{fullhashraw}{0a362a97c05c5ba0dc42db17b706186f}
-      \strng{bibnamehash}{0a362a97c05c5ba0dc42db17b706186f}
-      \strng{authorbibnamehash}{0a362a97c05c5ba0dc42db17b706186f}
-      \strng{authornamehash}{33afec8508fadcedb9fb8ffe8cfd4bfa}
-      \strng{authorfullhash}{0a362a97c05c5ba0dc42db17b706186f}
-      \strng{authorfullhashraw}{0a362a97c05c5ba0dc42db17b706186f}
-      \field{sortinit}{G}
-      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Proceedings of NAACL-HLT 2021}
-      \field{title}{COIL: Revisit Exact Lexical Match in Information Retrieval with Contextualized Inverted List}
-      \field{year}{2021}
-      \field{pages}{3030\bibrangedash 3042}
-      \range{pages}{13}
-      \verb{doi}
-      \verb 10.18653/v1/2021.naacl-main.241
-      \endverb
     \endentry
     \entry{srcIdealDataset}{misc}{}{}
       \name{author}{1}{}{%
@@ -673,6 +577,42 @@
       \field{title}{Introduction to Information Retrieval}
       \field{year}{2008}
     \endentry
+    \entry{LightGBM}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b9a8b868588ad4bc6b36c29936e26423}{%
+           family={{Microsoft Corporation}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Microsoft Corporation}%
+      }
+      \strng{namehash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{fullhash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{fullhashraw}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{bibnamehash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{authorbibnamehash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{authornamehash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{authorfullhash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{authorfullhashraw}{b9a8b868588ad4bc6b36c29936e26423}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{LightGBM}
+      \field{urlday}{31}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://lightgbm.readthedocs.io/
+      \endverb
+      \verb{url}
+      \verb https://lightgbm.readthedocs.io/
+      \endverb
+    \endentry
     \entry{Nayak2025}{article}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=00bc879bd33e66a8dd792dc6b0f50aad}{%
@@ -795,30 +735,6 @@
       \verb https://industrieanzeiger.industrie.de/allgemein/variantenvielfalt-beherrschen-mit-systems-engineering/
       \endverb
     \endentry
-    \entry{srcStep640}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=8dbb0e7d7a8c99ac7fadbf48e260dbcc}{%
-           family={{Pipeline step 640}},
-           familyi={P\bibinitperiod}}}%
-      }
-      \strng{namehash}{8dbb0e7d7a8c99ac7fadbf48e260dbcc}
-      \strng{fullhash}{8dbb0e7d7a8c99ac7fadbf48e260dbcc}
-      \strng{fullhashraw}{8dbb0e7d7a8c99ac7fadbf48e260dbcc}
-      \strng{bibnamehash}{8dbb0e7d7a8c99ac7fadbf48e260dbcc}
-      \strng{authorbibnamehash}{8dbb0e7d7a8c99ac7fadbf48e260dbcc}
-      \strng{authornamehash}{8dbb0e7d7a8c99ac7fadbf48e260dbcc}
-      \strng{authorfullhash}{8dbb0e7d7a8c99ac7fadbf48e260dbcc}
-      \strng{authorfullhashraw}{8dbb0e7d7a8c99ac7fadbf48e260dbcc}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Interner Projektquellcode}
-      \field{title}{Pipeline step 640: Macro candidate retrieval}
-      \field{year}{2026}
-    \endentry
     \entry{srcStep911}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=f72beff455fec37a751f26302b3f1fd1}{%
@@ -939,78 +855,6 @@
       \field{title}{Pipeline step 936: Full macro-LTR training-run orchestration}
       \field{year}{2026}
     \endentry
-    \entry{srcStep941}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=980e9e9414c2bef73763a14e7037ea62}{%
-           family={{Pipeline step 941}},
-           familyi={P\bibinitperiod}}}%
-      }
-      \strng{namehash}{980e9e9414c2bef73763a14e7037ea62}
-      \strng{fullhash}{980e9e9414c2bef73763a14e7037ea62}
-      \strng{fullhashraw}{980e9e9414c2bef73763a14e7037ea62}
-      \strng{bibnamehash}{980e9e9414c2bef73763a14e7037ea62}
-      \strng{authorbibnamehash}{980e9e9414c2bef73763a14e7037ea62}
-      \strng{authornamehash}{980e9e9414c2bef73763a14e7037ea62}
-      \strng{authorfullhash}{980e9e9414c2bef73763a14e7037ea62}
-      \strng{authorfullhashraw}{980e9e9414c2bef73763a14e7037ea62}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Interner Projektquellcode}
-      \field{title}{Pipeline step 941: Leakage safety validation for evaluation runs}
-      \field{year}{2026}
-    \endentry
-    \entry{srcStep942}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=821ea5368cc505726fce43cb4e34d339}{%
-           family={{Pipeline step 942}},
-           familyi={P\bibinitperiod}}}%
-      }
-      \strng{namehash}{821ea5368cc505726fce43cb4e34d339}
-      \strng{fullhash}{821ea5368cc505726fce43cb4e34d339}
-      \strng{fullhashraw}{821ea5368cc505726fce43cb4e34d339}
-      \strng{bibnamehash}{821ea5368cc505726fce43cb4e34d339}
-      \strng{authorbibnamehash}{821ea5368cc505726fce43cb4e34d339}
-      \strng{authornamehash}{821ea5368cc505726fce43cb4e34d339}
-      \strng{authorfullhash}{821ea5368cc505726fce43cb4e34d339}
-      \strng{authorfullhashraw}{821ea5368cc505726fce43cb4e34d339}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Interner Projektquellcode}
-      \field{title}{Pipeline step 942: Retrieval index validation}
-      \field{year}{2026}
-    \endentry
-    \entry{srcStep943}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=6d3b00e5a2f0fe60eece2d250dd437e7}{%
-           family={{Pipeline step 943}},
-           familyi={P\bibinitperiod}}}%
-      }
-      \strng{namehash}{6d3b00e5a2f0fe60eece2d250dd437e7}
-      \strng{fullhash}{6d3b00e5a2f0fe60eece2d250dd437e7}
-      \strng{fullhashraw}{6d3b00e5a2f0fe60eece2d250dd437e7}
-      \strng{bibnamehash}{6d3b00e5a2f0fe60eece2d250dd437e7}
-      \strng{authorbibnamehash}{6d3b00e5a2f0fe60eece2d250dd437e7}
-      \strng{authornamehash}{6d3b00e5a2f0fe60eece2d250dd437e7}
-      \strng{authorfullhash}{6d3b00e5a2f0fe60eece2d250dd437e7}
-      \strng{authorfullhashraw}{6d3b00e5a2f0fe60eece2d250dd437e7}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Interner Projektquellcode}
-      \field{title}{Pipeline step 943: Candidate coverage analysis}
-      \field{year}{2026}
-    \endentry
     \entry{srcStep944}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=4fcefa30c204036c482b0c362d7f80bd}{%
@@ -1058,46 +902,6 @@
       \field{note}{Interner Projektquellcode}
       \field{title}{Retrieval leakage guard for label-clean query and candidate data}
       \field{year}{2026}
-    \endentry
-    \entry{robertson2009prf}{article}{}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=c7dab237c14cbb4e5def052a91d7ec99}{%
-           family={Robertson},
-           familyi={R\bibinitperiod},
-           given={Stephen},
-           giveni={S\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=cc9cdb3b111faeedc87e7f6c561d2ff8}{%
-           family={Zaragoza},
-           familyi={Z\bibinitperiod},
-           given={Hugo},
-           giveni={H\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
-      \strng{fullhash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
-      \strng{fullhashraw}{f0a2bfb8afb93f12dec6aaefe2c3199a}
-      \strng{bibnamehash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
-      \strng{authorbibnamehash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
-      \strng{authornamehash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
-      \strng{authorfullhash}{f0a2bfb8afb93f12dec6aaefe2c3199a}
-      \strng{authorfullhashraw}{f0a2bfb8afb93f12dec6aaefe2c3199a}
-      \field{sortinit}{R}
-      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Foundations and Trends in Information Retrieval}
-      \field{number}{4}
-      \field{title}{The Probabilistic Relevance Framework: BM25 and Beyond}
-      \field{volume}{3}
-      \field{year}{2009}
-      \field{pages}{333\bibrangedash 389}
-      \range{pages}{57}
-      \verb{doi}
-      \verb 10.1561/1500000019
-      \endverb
     \endentry
     \entry{sein2011adr}{article}{}{}
       \name{author}{5}{}{%
@@ -1156,57 +960,6 @@
       \verb{doi}
       \verb 10.2307/23043488
       \endverb
-    \endentry
-    \entry{thakur2021beir}{article}{}{}
-      \name{author}{5}{}{%
-        {{un=0,uniquepart=base,hash=ba53a70550b85cb71c2a7baabdccac95}{%
-           family={Thakur},
-           familyi={T\bibinitperiod},
-           given={Nandan},
-           giveni={N\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=da9947b27b0d1c4c912e2b391426d443}{%
-           family={Reimers},
-           familyi={R\bibinitperiod},
-           given={Nils},
-           giveni={N\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=488e2f1d5b0a1b8ba791ca6d14c87683}{%
-           family={R\"{u}ckl\'{e}},
-           familyi={R\bibinitperiod},
-           given={Andreas},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=a373838b71c448b788641b22ccac9066}{%
-           family={Srivastava},
-           familyi={S\bibinitperiod},
-           given={Abhishek},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=ea70b44be1920f6e8c379706bc7d047a}{%
-           family={Gurevych},
-           familyi={G\bibinitperiod},
-           given={Iryna},
-           giveni={I\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{1dde86d82eb2b34b82e0139e6166e5d0}
-      \strng{fullhash}{e5cbf80fbf1dc444658445a2fc68eacb}
-      \strng{fullhashraw}{e5cbf80fbf1dc444658445a2fc68eacb}
-      \strng{bibnamehash}{e5cbf80fbf1dc444658445a2fc68eacb}
-      \strng{authorbibnamehash}{e5cbf80fbf1dc444658445a2fc68eacb}
-      \strng{authornamehash}{1dde86d82eb2b34b82e0139e6166e5d0}
-      \strng{authorfullhash}{e5cbf80fbf1dc444658445a2fc68eacb}
-      \strng{authorfullhashraw}{e5cbf80fbf1dc444658445a2fc68eacb}
-      \field{sortinit}{T}
-      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{NeurIPS Datasets and Benchmarks}
-      \field{title}{BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models}
-      \field{year}{2021}
     \endentry
     \entry{srcPipeline}{misc}{}{}
       \name{author}{1}{}{%
@@ -1267,132 +1020,6 @@
       \verb{doi}
       \verb 10.6028/NIST.SP.500-246.qa-overview
       \endverb
-    \endentry
-    \entry{zhang2021muppets}{inproceedings}{}{}
-      \name{author}{5}{}{%
-        {{un=0,uniquepart=base,hash=b8238061b3c805be2a30dd55bb11fb21}{%
-           family={Zhang},
-           familyi={Z\bibinitperiod},
-           given={Yue},
-           giveni={Y\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=f1e74ff2eec6860938e0089d3f28581e}{%
-           family={Hu},
-           familyi={H\bibinitperiod},
-           given={Chengcheng},
-           giveni={C\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=322f7a82ce78acf9a7cd630d5b7bc680}{%
-           family={Liu},
-           familyi={L\bibinitperiod},
-           given={Yuqi},
-           giveni={Y\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=3c48da23df6ee220857f7e0b31a26b42}{%
-           family={Fang},
-           familyi={F\bibinitperiod},
-           given={Hui},
-           giveni={H\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=d68fb461fc3e26ff36f49c7b52ef0c3f}{%
-           family={Lin},
-           familyi={L\bibinitperiod},
-           given={Jimmy},
-           giveni={J\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{f255e0a20f7125703df66a2712ec4d02}
-      \strng{fullhash}{bf4bbd697c6b023e8615e25b183babfa}
-      \strng{fullhashraw}{bf4bbd697c6b023e8615e25b183babfa}
-      \strng{bibnamehash}{bf4bbd697c6b023e8615e25b183babfa}
-      \strng{authorbibnamehash}{bf4bbd697c6b023e8615e25b183babfa}
-      \strng{authornamehash}{f255e0a20f7125703df66a2712ec4d02}
-      \strng{authorfullhash}{bf4bbd697c6b023e8615e25b183babfa}
-      \strng{authorfullhashraw}{bf4bbd697c6b023e8615e25b183babfa}
-      \field{sortinit}{Z}
-      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{SustaiNLP 2021}
-      \field{title}{Learning to Rank in the Age of Muppets: Effectiveness-Efficiency Tradeoffs in Multi-Stage Ranking}
-      \field{year}{2021}
-    \endentry
-    \entry{zheng2024fullstage}{inproceedings}{}{}
-      \name{author}{9}{}{%
-        {{un=0,uniquepart=base,hash=344f5b0e0d962edf27e0a4af939d760a}{%
-           family={Zheng},
-           familyi={Z\bibinitperiod},
-           given={Kai},
-           giveni={K\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=8041dd514cf9fe2b07236380819077a6}{%
-           family={Zhao},
-           familyi={Z\bibinitperiod},
-           given={Haijun},
-           giveni={H\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=6914f2dac03de61fee76eecb36c759d1}{%
-           family={Huang},
-           familyi={H\bibinitperiod},
-           given={Rui},
-           giveni={R\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=15d66fc637a18a25c1df0fb5e2abfe60}{%
-           family={Zhang},
-           familyi={Z\bibinitperiod},
-           given={Beichuan},
-           giveni={B\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=70352381d0bb35656aad45120545e586}{%
-           family={Mou},
-           familyi={M\bibinitperiod},
-           given={Na},
-           giveni={N\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=cdf72161ddafb04c361ee8a6059c45ed}{%
-           family={Niu},
-           familyi={N\bibinitperiod},
-           given={Yanan},
-           giveni={Y\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=7dacbb5a6e92ab16944d46ba03705563}{%
-           family={Song},
-           familyi={S\bibinitperiod},
-           given={Yang},
-           giveni={Y\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=efb0c8e0f9339f80b201a80bde788ea7}{%
-           family={Wang},
-           familyi={W\bibinitperiod},
-           given={Hongning},
-           giveni={H\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=7756595eb7178ce96e0f5a991d4ba09a}{%
-           family={Gai},
-           familyi={G\bibinitperiod},
-           given={Kun},
-           giveni={K\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{9e61d81bd9ee4cd8a7d240fff1a533a0}
-      \strng{fullhash}{4c857c6c272d972f9b57aa8715ae06b8}
-      \strng{fullhashraw}{4c857c6c272d972f9b57aa8715ae06b8}
-      \strng{bibnamehash}{4c857c6c272d972f9b57aa8715ae06b8}
-      \strng{authorbibnamehash}{4c857c6c272d972f9b57aa8715ae06b8}
-      \strng{authornamehash}{9e61d81bd9ee4cd8a7d240fff1a533a0}
-      \strng{authorfullhash}{4c857c6c272d972f9b57aa8715ae06b8}
-      \strng{authorfullhashraw}{4c857c6c272d972f9b57aa8715ae06b8}
-      \field{sortinit}{Z}
-      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{WWW 2024}
-      \field{title}{Full Stage Learning to Rank: A Unified Framework for Multi-Stage Systems}
-      \field{year}{2024}
     \endentry
     \entry{zhu2024llmirsurvey}{article}{}{}
       \name{author}{10}{}{%

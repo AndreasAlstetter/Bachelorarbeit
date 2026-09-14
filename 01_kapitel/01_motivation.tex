@@ -1,9 +1,9 @@
 \chapter{Motivation} 
 
 Die zunehmende Digitalisierung industrieller Prozesse führt zu einer stetig wachsenden Menge an Prozess-, Produkt- und Engineeringdaten. 
-Diese Informationen liegen sowohl in strukturierter Form, beispielsweise als technische Merkmale und Artikeldaten, als auch in unstrukturierter Form wie Datenblätter, Produktbeschreibungen oder Spezifikationen vor. 
+Diese Informationen liegen sowohl in strukturierter Form, beispielsweise als technische Merkmale und Artikeldaten, als auch in unstrukturierter Form wie Datenblättern, Produktbeschreibungen oder Spezifikationen vor. 
 Gleichzeitig steigt die Bedeutung datengetriebener Methoden für die Innovations- und Wettbewerbsfähigkeit industrieller Unternehmen. 
-Methoden der Künstlichen Intelligenz bieten hierbei die Möglichkeit, vorhandene Datenbestände systematisch auszuwerten und für die Unterstützung technischer Entscheidungsprozesse nutzbar zu machen \parencite{Bundesregierung2026}. 
+Dabei bieten Methoden der Künstlichen Intelligenz die Möglichkeit, vorhandene Datenbestände systematisch auszuwerten und für die Unterstützung technischer Entscheidungsprozesse nutzbar zu machen \parencite{Bundesregierung2026}. 
 
 Insbesondere im Anlagen- und Maschinenbau stellt die hohe Variantenvielfalt technischer Komponenten eine besondere Herausforderung dar. 
 Unternehmen verwalten häufig umfangreiche Artikelbestände mit einer Vielzahl technischer Merkmale, während gleichzeitig große Mengen an Dokumentationen und Datenblättern verfügbar sind. 
@@ -15,9 +15,9 @@ Ein zentraler Aspekt besteht dabei in der Verarbeitung heterogener Datenquellen 
 Für solche Aufgaben haben sich Empfehlungssysteme als geeigneter Ansatz etabliert. Sie unterstützen Anwender dabei, aus einer Vielzahl möglicher Alternativen die für einen konkreten Anwendungsfall am besten geeignete Option auszuwählen. 
 Ursprünglich vor allem im E-Commerce eingesetzt, finden Empfehlungssysteme zunehmend Anwendung in industriellen Domänen, beispielsweise bei der Produktauswahl, Wiederverwendung bestehender Lösungen oder bei Konfigurationsaufgaben \parencite{Joshi2024}. 
 
-Eine im industriellen Engineering weit verbreitete Softwareplattform ist EPLAN. Sie unterstützt Ingenieure bei der Planung, Dokumentation und Standardisierung elektrotechnischer Systeme. 
-Neben Schaltplänen und Stücklisten ermöglicht EPLAN die Nutzung wiederverwendbarer Schaltplanfragmente, die als \textit{Fenstermakros} bezeichnet werden \parencite{EPLAN-Makros}. 
-Darüber hinaus stellt die EPLAN-Artikelverwaltung strukturierte Informationen zu elektrotechnischen und mechanischen Komponenten bereit \parencite{EPLANArtikelverwaltung}. 
+Eine im industriellen Engineering weit verbreitete Softwareplattform ist EPLAN \parencite{eplan2026}. Sie unterstützt Ingenieure bei der Planung, Dokumentation und Standardisierung elektrotechnischer Systeme. 
+Neben Schaltplänen und Stücklisten ermöglicht EPLAN die Nutzung wiederverwendbarer Schaltplanfragmente, die als \textit{Fenstermakros} \parencite{EPLAN-Makros} bezeichnet werden. 
+Darüber hinaus stellt die EPLAN-Artikelverwaltung \parencite{EPLANArtikelverwaltung} strukturierte Informationen zu elektrotechnischen und mechanischen Komponenten bereit. 
 Die dort hinterlegten Merkmale bilden eine wertvolle Informationsquelle für wissensbasierte und datengetriebene Anwendungen. 
 
 Aus dieser Ausgangssituation ergibt sich das Potenzial für ein KI-basiertes Empfehlungssystem zur automatisierten Zuordnung von EPLAN-Artikeln \parencite{EPLANArtikelverwaltung} zu EPLAN-Fenstermakros \parencite{EPLAN-Makros}. 
@@ -28,23 +28,3 @@ Im Rahmen dieser Arbeit wird hierfür ein datengetriebenes Learning-to-Rank-Syst
 Ziel ist es, die Wahrscheinlichkeit zu maximieren, das korrekte Makro innerhalb der obersten Rangpositionen bereitzustellen. 
 Dadurch kann der manuelle Such- und Zuordnungsaufwand reduziert, vorhandenes Unternehmenswissen systematisch nutzbar gemacht und die Konsistenz technischer Entscheidungen verbessert werden. 
 Das Projekt leistet somit einen Beitrag zur praktischen Umsetzung datengetriebener und KI-gestützter Entscheidungsunterstützung im Industrie-4.0-Umfeld \parencite{Nayak2025}. 
-
-Abbildung \ref{fig:motivation_konzept} veranschaulicht die grundlegende Idee der automatisierten Zuordnung von EPLAN-Artikeln zu EPLAN-Fenstermakros.
-
-\begin{figure}[H]
-    \centering
-    \begin{tikzpicture}[
-        >=stealth,
-        font=\small,
-        box/.style={draw=blue!60!black, thick, rounded corners=4pt, fill=blue!8, text width=3.6cm, minimum height=1.3cm, align=center, inner sep=6pt},
-        flow/.style={->, thick, blue!70!black}
-    ]
-        \node[box] (input) at (0,0) {EPLAN-Artikel /\\ Datenblatt};
-        \node[box, fill=violet!10, draw=violet!50!black] (system) at (4.8,0) {KI-basiertes\\ Empfehlungssystem};
-        \node[box, fill=green!10, draw=green!50!black] (output) at (9.6,0) {Empfohlenes\\ EPLAN-Fenstermakro};
-        \draw[flow] (input) -- (system);
-        \draw[flow] (system) -- (output);
-    \end{tikzpicture}
-    \caption{Grundidee der automatisierten Zuordnung von EPLAN-Artikeln zu EPLAN-Fenstermakros.}
-    \label{fig:motivation_konzept}
-\end{figure}

@@ -3,13 +3,8 @@
 
 \section{Datensplit und Trainingsbasis}
 
-Nach der Datenaufbereitung, der Qualitätsprüfung der Daten sowie der Erstellung des idealen Datensatzes erfolgt die Aufteilung in Trainings-, Validierungs- und Testdaten \parencite{srcStep911,srcStep913,srcIdealDataset,srcStep921}.
-Ziel ist es eine klare Trennung zwischen Modelltraining, Hyperparameteroptimierung und Modellbewertung zu schaffen. 
-
-\begin{align}
-    \text{Train} = 60\,\%, \qquad \text{Validation} = 20\,\%, \qquad \text{Test} = 20\,\%
-\end{align}
-
+Nach der Datenaufbereitung sowie der Qualitätsprüfung der Daten erfolgt die Aufteilung in Trainings-, Validierungs- und Testdaten \parencite{srcStep911,srcStep913,srcIdealDataset,srcStep921}.
+Ziel ist es, eine klare Trennung zwischen Modelltraining, Hyperparameteroptimierung und Modellbewertung zu schaffen. 
 Um reproduzierbare Ergebnisse mit einem erstellten Datensplit zu gewährleisten, wird ein fester Zufallsseed verwendet  \parencite{srcStep921}.
 
 \begin{align}
@@ -23,7 +18,7 @@ Dies verhindert, dass eng verwandte Beispiele in unterschiedlichen Datensplits l
 
 Abbildung \ref{fig:datensplit_schema} fasst diese Aufteilung schematisch zusammen.
 
-\begin{figure}[tbp]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[
         font=\small,
@@ -50,23 +45,35 @@ Für den in dieser Arbeit verwendeten Referenzlauf ergibt sich folgende Aufteilu
 
 \section{Aufbau der Trainingsmatrix} 
 
-Nach der Erstellung der Kandidatenprofile werden für jede Anfrage die verfügbarenMakrokandidaten bewertet. 
+Nach der Erstellung der Kandidatenprofile werden für jede Anfrage die verfügbaren Makrokandidaten bewertet. 
 Für jede Anfrage werden Anfrage-Kandidat-Paare erzeugt und anhand der Pairwise-Merkmale aus Kapitel \ref{chap:analyse_der_datenstrukturen} beschrieben. 
 Die Referenzkonfiguration A08 verwendet insgesamt 375 Kandidatenprofile und 2.381 Merkmale. 
 Für jede Anfrage werden alle 375 Kandidatenprofile vollständig bewertet. 
 
-Dadurch entstehen folgenden Matrizen: 
-\begin{itemize} 
-    \item Trainingsmatrix: 369.000 $\times$ 2.381 
-    \item Validierungsmatrix: 120.750 $\times$ 2.381 
-    \item Testmatrix: 94.875 $\times$ 2.381 
-\end{itemize} 
+Tabelle \ref{tab:matrixdimensionen} fasst die Größenordnung der erzeugten Rankingmatrizen zusammen.
+
+\begin{table}[H]
+    \centering
+    \setlength{\tabcolsep}{5pt}
+    \renewcommand{\arraystretch}{1.08}
+    \caption{Dimensionen der erzeugten Rankingmatrizen}
+    \label{tab:matrixdimensionen}
+    \begin{tabular}{lrrrr}
+        \toprule
+        \textbf{Split} & \textbf{Anfragen} & \textbf{Kandidaten je Anfrage} & \textbf{Matrixzeilen} & \textbf{Merkmale} \\
+        \midrule
+        Training & 984 & 375 & 369.000 & 2.381 \\
+        Validation & 322 & 375 & 120.750 & 2.381 \\
+        Test & 253 & 375 & 94.875 & 2.381 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 Die Merkmalsmatrizen werden als Sparse-Matrizen gespeichert und mit numerischen Werten des Typs \texttt{float32} verarbeitet.
 
 \section{Training des Learning-to-Rank-Modells}
 
-Das zentrale Element der Architektur ist das Learning-to-Rank-Modell. Hierfür wird der \texttt{LGBMRanker} der LightGBM-Bibliothek verwendet \parencite{srcStep931}.
+Das zentrale Element der Architektur ist das Learning-to-Rank-Modell. Hierfür wird der \texttt{LGBMRanker} der LightGBM-Bibliothek \parencite{LightGBM} verwendet \parencite{srcStep931}.
 Dieser basiert auf dem in Kapitel \ref{chap:stand_der_technik} beschriebenen LambdaRank-/LambdaMART-Prinzip.
 
 Das Modell wird mit den Parametern 
@@ -90,7 +97,7 @@ Die für die spätere Referenzkonfiguration A08 ausgewählten Modellparameter la
 Zusätzlich wird eine Kandidatenprofilbreite von 16 Artikeln pro Makro verwendet. 
 
 Wie in Kapitel \ref{chap:analyse_der_datenstrukturen} beschrieben, werden Kandidaten einer Anfrage als gemeinsame Rankinggruppe betrachtet.
-Wiederholend entsteht für jede Anfrage eine Gruppe:
+Entsprechend entsteht für jede Anfrage eine Gruppe:
 
 \begin{align} 
     G_q = \{(q,c_1),(q,c_2),\dots,(q,c_n)\} 
@@ -117,11 +124,10 @@ Variiert werden dabei folgende Parameter:
     \item \texttt{lambdarank\_truncation\_level}. 
 \end{itemize} 
 
-Die Bewertung dieser Parameterkonfigurationen erfolgt ausschließlich auf dem Validierungssplit. Der Testsplit wird erst nach Abschluss der Modellauswahl für die finale Evaluation verwendet.
 
-Die folgende Tabelle \ref{tab:hyperparameter} zeigt die untersuchten Hyperparameterkombinationen:
+Die Tabelle \ref{tab:hyperparameter} zeigt die untersuchten Hyperparameterkombinationen.
 
-\begin{table}[tbp] 
+\begin{table}[H] 
     \centering 
     \setlength{\tabcolsep}{8pt}
     \renewcommand{\arraystretch}{1.1}
@@ -144,22 +150,22 @@ Dabei sind die Hyperparameter wie folgt zu verstehen:
 
 \begin{itemize}
     \item \textbf{\texttt{n\_estimators}:} Anzahl der aufgebauten Entscheidungsbäume im Modell. Mehr Bäume = komplexere Zusammenhänge, aber mehr Rechenaufwand.
-    \item \textbf{\texttt{learning\_rate}:} Lernrate pro Trainingsschritt. Kleinere Werte führen zu vorsichtigerem, aber stabileren Lernen.
+    \item \textbf{\texttt{learning\_rate}:} Lernrate pro Trainingsschritt. Kleinere Werte führen zu vorsichtigerem, aber stabilerem Lernen.
     \item \textbf{\texttt{num\_leaves}:} Maximale Anzahl der Blätter pro Baum. Mehr Blätter = komplexere Bäume, aber höheres Risiko für Overfitting.
     \item \textbf{\texttt{min\_child\_samples}:} Minimale Anzahl an Trainingsbeispielen in einem Blatt. Kleinere Werte = mehr Detailtreue pro Blatt, größere Werte = bessere Regularisierung (verhindert Overfitting).
     \item \textbf{\texttt{lambdarank\_\allowbreak truncation\_level}:} Begrenzung des Ranglistenbereichs, der durch LambdaRank optimiert werden soll (Top 10, Top 20).
 \end{itemize}
 
-Für jede Parameterkombination wird ein vollständiger Trainingsdurchlauf durchgeführt. Die Bewertung erfolgt anschließend auf dem Validierungsdatensatz.
+Für jede Parameterkombination wird ein vollständiger Trainingsdurchlauf durchgeführt.
 Das finale Modell wird auf Basis der Rankingqualität anhand der Validierungsdaten bestimmt \parencite{srcStep931}.
 
-Die verwendeten Bewertungsmetriken werden später in Kapitel \ref{chap:evaluierungskonzept_und_ergebnisse} ausführlich beschrieben.
+Die verwendeten Bewertungsmetriken werden später in Kapitel \ref{chap:evaluierungskonzept} ausführlich beschrieben.
 
 \section{Modellartefakte und Reproduzierbarkeit}
 
 Ein wichtiges Ziel dieser Trainingspipeline besteht darin, die Trainingsabläufe reproduzierbar zu gestalten. Deswegen werden nach jedem Trainingslauf alle relevanten Artefakte gespeichert und dokumentiert \parencite{srcStep931}. Abbildung \ref{fig:artefakte_struktur} zeigt die zugehörige Ablagestruktur.
 
-\begin{figure}[tbp]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[
         font=\small,

@@ -1,7 +1,7 @@
 \chapter{Zusammenfassung und Fazit}
 
-Das Ziel dieser Arbeit war die Entwicklung sowie Evaluierung eines dategetriebenen Systems zur automatisierten Zuordnung von EPLAN-Artikeln \parencite{EPLANArtikelverwaltung} zu EPLAN-Makros \parencite{EPLAN-Makros}.
-Die zugrunde liegenden Problemstellung wurde als eine Learning-to-Rank-Aufgabe formuliert, bei der das Modell lernen soll, die relevantesten Ziel-Makros \parencite{EPLAN-Makros} für einen gegebenen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} zu priorisieren.
+Das Ziel dieser Arbeit war die Entwicklung sowie Evaluierung eines datengetriebenen Systems zur automatisierten Zuordnung von EPLAN-Artikeln \parencite{EPLANArtikelverwaltung} zu EPLAN-Makros \parencite{EPLAN-Makros}.
+Die zugrunde liegende Problemstellung wurde als eine Learning-to-Rank-Aufgabe formuliert, bei der das Modell lernen soll, die relevantesten Ziel-Makros \parencite{EPLAN-Makros} für einen gegebenen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} zu priorisieren.
 Dabei soll eine Rangliste möglicher Zielmakros erzeugt werden.
 
 
@@ -12,28 +12,28 @@ Die Evaluierung der entwickelten Lösung erfolgte anhand eines realen Datensatze
 
 Die Datenbasis umfasst 1.559 EPLAN-Artikel \parencite{EPLANArtikelverwaltung}, 375 Ziel-Makros \parencite{EPLAN-Makros} und 55 Makrofamilien.
 Aus diesen Daten wurden anschließend 375 Kandidatenprofile erzeugt und durch 2.381 technische, lexikalische und strukturierte Merkmale beschrieben. 
-Die Trainingsmatrix umfasst 369.000 Anfragen-Kandidat-Paare und bildet damit die Grundlage für das Training des LightGBM-LambdaRank-Modells.
+Die Trainingsmatrix umfasst 369.000 Anfrage-Kandidat-Paare und bildet damit die Grundlage für das Training des LightGBM-LambdaRank-Modells.
 
 
 Es wurden neun unterschiedliche Modellvarianten im Rahmen einer systematischen Konfigurationsstudie untersucht. 
 Dabei wurden verschiedene Familiengewichtungen, Labeldefinitionen, Profilbreiten und Regularisierungsstufen bewertet.
-Die beste Leistung wurde dabei durch die Konfiguration A08 erzielt, welche einen Target Recall@1 von 34,78\,\%, einen Family Recall@1 von 87,35\,\%, einen Target Recall@10 von 67,98\,\% sowie eine Mean Reciprocal Rank von 45,34\,\% aufweist.
+Die beste Leistung wurde dabei durch die Konfiguration A08 erzielt, welche einen Target Recall@1 von 34,78\,\%, einen Family Recall@1 von 87,35\,\%, einen Target Recall@10 von 67,98\,\% sowie einen Mean Reciprocal Rank von 45,34\,\% aufweist.
 
 
-Die Ergebnisse zeigen, dass das entwickelte System in der Lage ist die korrekte Makrofamilie in 8-9 von 10 Fällen korrekt zu erkennen.
-Die Analyse der vorhanden Fehler zeigte gleichzeitig, dass die größere Herausforderung in der präzisen Erkennung der Variantenunterscheidung innerhalb derselben Makrofamilie liegt.
+Die Ergebnisse zeigen, dass das entwickelte System in der Lage ist, die korrekte Makrofamilie in 8-9 von 10 Fällen korrekt zu erkennen.
+Die Analyse der vorhandenen Fehler zeigte gleichzeitig, dass die größere Herausforderung in der präzisen Erkennung der Variantenunterscheidung innerhalb derselben Makrofamilie liegt.
 Mehr als die Hälfte aller Fehlklassifikationen entstehen dabei innerhalb der korrekten Familie, während fachlich unverbundene Familien nur einen geringen Anteil der Fehler verursachen.
 
 
-Die durchgeführten Analysen zeigen außerdem, dass die Leistungsgrenzen des entwickelten Systems primär durch die Long-Tail-Verteilung mit 213 Singelton-Targets und 279 Ziel-Makros \parencite{EPLAN-Makros} mit weniger als drei Trainingsbeispielen ergeben.
-Diese Erschweren den Aufbau robuster Kandidatenprofile. Die zusätzliche Leave-One-Out-Analyse zeigt darüber hinaus, dass die ursprünglich vermutete Generalisierungslücke durch die Konstruktion der Kandidatenprofile verursacht wurde.
-Demgegenüber verhält sich die Generalisierungs zwischen Validierungs- und Testdaten stabil und liefert keine Hinweise auf ein kritisches Overfitting des verwendeten LightGBM-LambdaRank-Modells.
+Die durchgeführten Analysen zeigen außerdem, dass sich die Leistungsgrenzen des entwickelten Systems primär durch die Long-Tail-Verteilung mit 213 Singleton-Targets und 279 Ziel-Makros \parencite{EPLAN-Makros} mit weniger als drei Trainingsbeispielen ergeben.
+Diese erschweren den Aufbau robuster Kandidatenprofile. Die zusätzliche Leave-One-Out-Analyse zeigt darüber hinaus, dass die ursprünglich vermutete Generalisierungslücke durch die Konstruktion der Kandidatenprofile verursacht wurde.
+Demgegenüber verhält sich die Generalisierung zwischen Validierungs- und Testdaten stabil und liefert keine Hinweise auf ein kritisches Overfitting des verwendeten LightGBM-LambdaRank-Modells.
 
 
 Zusammenfassend konnte nachgewiesen werden, dass der entwickelte Learning-to-Rank-Ansatz eine geeignete Grundlage für die automatisierte Zuordnung von EPLAN-Artikeln \parencite{EPLANArtikelverwaltung} zu EPLAN-Makros \parencite{EPLAN-Makros} darstellt.
 
-Die künftigen Leistungssteigerungen sind vielmehr durch eine verbesserte Datenbasis, als durch zusätzliche Hyperparameter-Optimierungen zu erwarten. 
+Die künftigen Leistungssteigerungen sind vielmehr durch eine verbesserte Datenbasis als durch zusätzliche Hyperparameter-Optimierungen zu erwarten. 
 Zusätzliche Variantenbeispiele sowie spezialisierte Verfahren zur Variantenauflösung innerhalb der Makrofamilien können die zukünftige Leistungsfähigkeit des Systems weiter verbessern.
 
-Die Forschungsfrage kann trotz der identifizierten Limitationen und Herausforderungen des Systems als positiv beantwortet werden, da nachgewiesen werden konnte,
-dass der limitierende Faktor nicht die Modellarchitektur, sondern die Datenbasis darstellt. Diese ist durch eine ausführlichere und detailierte Pflege der Daten nachhaltig zu verbessern.
+Somit kann die Forschungsfrage trotz der identifizierten Limitationen und Herausforderungen des Systems als positiv beantwortet werden, da nachgewiesen werden konnte,
+dass der limitierende Faktor nicht die Modellarchitektur, sondern die Datenbasis darstellt.

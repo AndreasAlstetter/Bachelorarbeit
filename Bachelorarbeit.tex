@@ -22,9 +22,9 @@
            ,authorZip={89358}
            ,authorCity={Kammeltal/Behlingen}
            ,authorEMail={andreas.alstetter@tha.de}
-           ,authorPhone= {+49\,3141-5926}
+           ,authorPhone= {+4915201472197}
            ,authorSignaturePlace={Augsburg}
-           ,studyProgram={Mathematik}
+           ,studyProgram={Informatik}
 %           ,thesisType={Bachelorarbeit}
            ,thesisTitle={Proximitätssuche von EPLAN-Makros auf Basis des LambdaRank-Algorithmus}
            ,studyDegree={{Bachelor of Engineering}}
@@ -49,6 +49,13 @@
 
 \usepackage{caption}
 \usepackage{float}
+\usepackage[section]{placeins}
+\usetikzlibrary{positioning, arrows.meta}
+\captionsetup{font=small, labelfont=bf, skip=4pt}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlist{itemsep=2pt, topsep=3pt, parsep=0pt, partopsep=0pt}
 \DeclareCaptionLabelFormat{something}{#2.#1.}
 \captionsetup[lstlisting]{labelformat=something}
 
@@ -76,7 +83,7 @@
 \input{01_kapitel/10_zusammenfassung_und_fazit}
 
 \appendix
-\AuthorDeclaration
+%\AuthorDeclaration
 
 \listoffigures
 \listoftables
