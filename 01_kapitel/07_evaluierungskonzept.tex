@@ -35,7 +35,7 @@ Für die Bewertung des Systems aus dieser Arbeit werden die folgenden Kennzahlen
 
 Durch diese Metriken können die Zielmakroerkennung, die Familienerkennung sowie die allgemeine Rankingqualität bewertet werden.
 
-\subsection{Bedeutung der Metriken innerhalb der Evaluation} 
+\subsection{Bedeutung der Metriken} 
 
 Die Bewertungsmetriken bilden gemeinsam verschiedene Aspekte der Rankingqualität ab, wie in Tabelle \ref{tab:rankingmetriken_bedeutung} zusammengefasst.
 
@@ -88,7 +88,7 @@ Tabelle \ref{tab:leakage_pruefmatrix} fasst die Prüfbereiche der Leakage-Sicher
   \end{tabularx}
 \end{table}
 
-\subsection{Prüfung der Query-Daten}
+\subsection{Query-Daten}
 
 Die verwendete Query-Darstellung repräsentiert einen eingehenden Artikel \parencite{EPLANArtikelverwaltung} und damit die Informationen aus einem Datenblatt, die für eine Suchanfrage an das trainierte Modell wichtig sind.
 
@@ -106,7 +106,7 @@ Deswegen untersucht die Leakage-Prüfung folgende Punkte:
 
 Sobald solche Informationen gefunden werden, wird der Lauf als ungültig markiert.
 
-\subsection{Prüfung der Datensplits}
+\subsection{Datensplits}
 
 Neben der Query-Prüfung erfolgt auch eine Prüfung des erzeugten Datensplits. Dabei wird überprüft, ob unerlaubte Überschneidungen zwischen Training, Validierung und Test vorhanden sind.
 
@@ -123,14 +123,14 @@ Dabei werden folgende Aspekte überprüft:
 Das Ziel dieser Prüfung ist es, sicherzustellen, dass keine fachlich identischen Beispiele gleichzeitig in mehreren Datensplits vorhanden sind. Dadurch wird eine künstliche Modell-Verbesserung verhindert,
 die die Generalisierungsfähigkeit des Modells beeinträchtigen würde.
 
-\subsection{Prüfung der Kandidatenprofile}
+\subsection{Kandidatenprofile}
 
 Ein weiterer Bereich der Prüfung betrifft die Makro-Kandidatenprofile \parencite{EPLAN-Makros}.
 Da diese Profile aus den Trainingsdaten entstehen, muss sichergestellt werden, dass keine Informationen aus den Validierungs- oder Testdaten in die Kandidatenprofile einfließen.
 
 Deswegen werden sämtliche Profilinformationen auf ihre Herkunft geprüft, um sicherzustellen, dass ausschließlich Daten des Trainingssplits zur Erstellung der Kandidatenprofile verwendet werden \parencite{srcLeakageGuard}.
 
-\subsection{Evaluierungsergebnis}
+\subsection{Ergebnis}
 
 Nach der Leakage-Prüfung wird ein strukturierter Sicherheitsbericht erstellt. Der Evaluationslauf gilt nur dann als bestanden, wenn keine Verstöße gegen die definierten Leakage-Regeln festgestellt wurden.
 Diese Basis bildet die Voraussetzung für die Interpretierbarkeit der nachfolgenden Rankingmetriken.

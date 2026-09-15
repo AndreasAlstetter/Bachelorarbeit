@@ -25,7 +25,7 @@ Tabelle \ref{tab:grenzen_uebersicht} fasst die zentralen Grenzen des Systems und
 	\end{tabularx}
 \end{table}
 
-\subsection{Geringer Support vieler Zielmakros}
+\subsection{Geringer Support von Zielmakros}
 
 Eine zentrale Einschränkung ergibt sich aus der Support-Verteilung der Kandidatenprofile. Von insgesamt 375 vorhandenen Kandidatenprofilen basieren 302 Profile auf nur einem Trainingsartikel.
 Der Median-Support liegt bei 1 und der Mittelwert der Artikel pro Ziel-Makro \parencite{EPLAN-Makros} beträgt 2,62.
@@ -33,7 +33,7 @@ Der Median-Support liegt bei 1 und der Mittelwert der Artikel pro Ziel-Makro \pa
 Ein einzelner Artikel ist dabei nicht in der Lage, einen ausreichenden Support für technische Vielfalt innerhalb einer Makrofamilie zu bieten.
 Die daraus entstandenen Kandidatenprofile sind somit stark von einzelnen Beobachtungen abhängig.
 
-\subsection{Schwierige Variantenauflösung innerhalb einer Makrofamilie}
+\subsection{Variantenauflösung innerhalb einer Makrofamilie}
 
 Die Resultate der Evaluierung zeigen, dass das Modell die korrekte Makrofamilie deutlich zuverlässiger erkennt als das exakte Ziel-Makro \parencite{EPLAN-Makros}.
 A08 als beste Konfiguration erzielt dabei einen Family Recall@1 von 87,35\,\%, wohingegen der Target Recall@1 lediglich 34,78\,\% beträgt.
@@ -41,7 +41,7 @@ A08 als beste Konfiguration erzielt dabei einen Family Recall@1 von 87,35\,\%, w
 Zudem zeigt die Fehleranalyse, dass in 133 Testfällen die korrekte Makrofamilie erkannt wird, jedoch nicht das exakte Ziel-Makro \parencite{EPLAN-Makros}.
 Die größte Herausforderung liegt somit in der fehlerfreien Unterscheidung zwischen sehr ähnlichen Varianten innerhalb derselben Makrofamilie \parencite{LTR_Configuration_Test_Series}.
 
-\subsection{Support-Bias zugunsten häufiger Zielmakros}
+\subsection{Support-Bias häufiger Zielmakros}
 
 Die durchgeführten Fehleranalysen zeigen einen deutlichen Support-Bias. In 55,6\,\% der Fälle besitzt das fälschlich ausgewählte Ziel-Makro \parencite{EPLAN-Makros} einen höheren Support als das korrekte Ziel-Makro \parencite{EPLAN-Makros}.
 Im Durchschnitt verfügt das falsch gewählte Ziel-Makro dabei über etwa 10,6 Artikel mehr als das korrekte Ziel-Makro \parencite{LTR_Configuration_Test_Series}.

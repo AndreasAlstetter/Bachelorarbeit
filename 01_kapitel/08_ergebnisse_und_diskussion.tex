@@ -121,7 +121,7 @@ Diese Annahme wird durch das 90\,\%-Perzentil von 61,6 bestätigt. Dabei sitzt d
 
 Auch die Rangstatistiken zeigen, dass das Modell in der Lage ist, die korrekte Makro-Familie in den meisten Fällen weit oben in der Rangliste zu platzieren.\parencite{LTR_Configuration_Test_Series}
 
-\section{Analyse der Generalisierungsfähigkeit}
+\section{Generalisierungsfähigkeit}
 
 Zur Beurteilung der Generalisierungsfähigkeit des Modells wurde eine zusätzliche Leave-One-Out-Kontrollanalyse durchgeführt. 
 Um eine Verfälschung der Ergebnisse der Trainingsanalyse zu verhindern, wird bei einer Anfrage genau dieser Artikel aus der Anfragemenge ausgeschlossen.
@@ -238,7 +238,7 @@ Tabelle \ref{tab:konfigurationsabweichungen} zeigt die gegenüber A01 vorgenomme
 
 Dadurch lässt sich der Einfluss der jeweiligen Parameteränderung der entsprechenden Konfiguration zuordnen.\parencite{LTR_Configuration_Test_Series}
 
-\subsection{Ergebnisse der Vergleichskonfigurationen}
+\subsection{Ergebnisse}
 
 Tabelle \ref{tab:konfigurationsvergleich} zeigt die getesteten Modellkonfigurationen und deren Leistung im Vergleich.
 
@@ -265,7 +265,7 @@ Tabelle \ref{tab:konfigurationsvergleich} zeigt die getesteten Modellkonfigurati
 \end{table}
 
 
-\subsection{Einfluss des Same-Family-Gewichts}
+\subsection{Same-Family-Gewicht}
 
 Mit den Konfigurationen A02 bis A04 wird der Einfluss des Same-Family-Gewichts untersucht. 
 Die Ergebnisse zeigen, dass eine Verringerung des Gewichts auf 2 den Recall@1 auf 31,62\,\% senkt, während eine Erhöhung auf 8 keine Auswirkung zeigt.
@@ -273,20 +273,20 @@ Die Gewichtung auf 12 führt zu einer deutlichen Verschlechterung des Recall@1 a
 
 Daraus lässt sich schließen, dass ein zu hohes Same-Family-Gewicht die Lernstabilität negativ beeinflusst.
 
-\subsection{Einfluss der hierarchischen Labeldefinition}
+\subsection{Hierarchische Labeldefinition}
 
 A05 untersucht die hierarchische Relevanzdefinition. Makros \parencite{EPLAN-Makros} derselben Familie und desselben Präfixes werden dabei hierarchisch relevant betrachtet.
 Es zeigt sich jedoch keine Verbesserung gegenüber dem exakten Targettraining. Der Recall@1 sinkt von 32,41 \,\% auf 31,62 \,\% und die MRR von 44,18 \,\% auf 43,28 \,\%.
 Die dadurch entstandene reichhaltigere Zieldefinition hat somit keinen positiven Einfluss auf die Modellleistung.\parencite{LTR_Configuration_Test_Series}
 
-\subsection{Einfluss der Profilbreite}
+\subsection{Profilbreite}
 
 In den Konfigurationen A06 und A07 werden unterschiedliche Profilbreiten untersucht. Bei A06 beträgt diese zwölf, bei A07 acht.
 Die Erhöhung der Profilbreite führt zu einer Verschlechterung des Recall@1 von 32,41 \,\% auf 31,62 \,\% und der MRR von 44,18 \,\% auf 43,74 \,\%.
 Eine Verringerung der Profilbreite führt zu keiner nennenswerten Veränderung der Modellleistung. 
 Die Ergebnisse zeigen, dass eine verringerte Profilbreite die Modellleistung nicht signifikant verbessert.\parencite{LTR_Configuration_Test_Series}
 
-\subsection{Einfluss der Regularisierung}
+\subsection{Regularisierung}
 
 Die deutlichsten Verbesserungen werden durch die Veränderung der Regularisierung erzielt.
 A08 verwendet eine mittlere L1- und L2-Regularisierung (\(\alpha = 0{,}1\), \(\lambda = 0{,}5\)). 
@@ -298,7 +298,7 @@ Die L1/L2-Regularisierung wirkt sich bei LightGBM direkt auf die Blattgewichte a
 Sie dämpft diese bei geringer Aussagekraft auf null und unterdrückt dadurch das Rauschen der 2.381 Merkmale bei nur 984 Trainingsbeispielen, ohne das schwache Unterscheidungssignal zwischen Makrofamilien-Varianten zu verlieren.
 Bei A09 wird durch die stärkere Dämpfung auch dieses Signal mit reduziert, was die Top-1-Präzision verringert, dabei aber die Gesamtrangfolge robuster macht.\parencite{LTR_Configuration_Test_Series}
 
-\subsection{Beste Konfiguration der Studie}
+\subsection{Top-Konfiguration}
 
 Die beste Konfiguration der Studie ist A08, da sie sowohl den höchsten Recall@1 als auch den höchsten MRR erreicht.\parencite{LTR_Configuration_Test_Series}
 

@@ -1,4 +1,4 @@
-﻿\chapter{Analyse der Datenstrukturen und Ableitung eines Trainingsformats}
+﻿\chapter{Datenstruktur und Trainingsformat}
 \label{chap:analyse_der_datenstrukturen}
 
 \section{Analyse der Ausgangsdaten}
@@ -29,7 +29,7 @@ Zum Zeitpunkt der Durchführung dieser Arbeit umfasst der Datensatz insgesamt 1.
 \end{table}
 
 
-\section{Analyse der Makrostrukturen}
+\section{Makrostrukturanalyse}
 
 Die Analyse der Makrostrukturen der EPLAN-Fenstermakros \parencite{EPLAN-Makros} konzentriert sich auf die enthaltenen Funktions- und Strukturmerkmale, welche die Grundstruktur und Funktionalität der Makros bestimmen \parencite{srcStep911}.
 Tabelle \ref{tab:makrostrukturmerkmale} fasst die analysierten Merkmalsgruppen, die jeweils extrahierten Informationen und deren Bedeutung zusammen.
@@ -93,7 +93,7 @@ Die verwendeten Merkmalsgruppen sind in Tabelle \ref{tab:artikelmerkmale} zusamm
 Vor der Extraktion der Merkmale werden die Ursprungsdaten normalisiert und in ein einheitliches Format überführt. 
 Dabei werden Texte, Schreibvarianten sowie technische Einheiten per Regular Expressions (RegEx) aufbereitet \parencite{srcStep911}.
 
-\section{Erstellung von Makrokandidatenprofilen}
+\section{Generierung von Makrokandidatenprofilen}
 
 Im nächsten Schritt wird für jedes bekannte EPLAN-Fenstermakro \parencite{EPLAN-Makros} ein Makrokandidatenprofil erstellt. Ein Makrokandidatenprofil fasst dabei die technischen Eigenschaften des jeweiligen Makros zusammen. Für Merkmals-Kategorien werden die häufigsten Ausprägungen gespeichert. Für numerische Merkmale werden statistische Werte wie Mittelwert, Median, Minimum, Maximum und Häufigkeiten berechnet. 
 Die Berechnung dieser Kandidatenprofile erfolgt innerhalb der Trainingspipeline \parencite{srcStep931}.
@@ -104,7 +104,7 @@ Die Profilbreite ist abhängig von der untersuchten Konfiguration. Für den spä
 
 \section{Transformation in ein Rankingproblem}
 
-Die Zuordnung der EPLAN-Fenstermakros \parencite{EPLAN-Makros} wird nicht als Klassifikationsproblem, sondern als Ranking-Aufgabe betrachtet. Für jede Anfrage werden alle EPLAN-Fenstermakro-Kandidaten \parencite{EPLAN-Makros} betrachtet, deren Profile ausschließlich aus dem Trainingssplit abgeleitet wurden. 
+Die Zuordnung der EPLAN-Fenstermakros \parencite{EPLAN-Makros} wird als Ranking-Aufgabe betrachtet. Für jede Anfrage werden alle EPLAN-Fenstermakro-Kandidaten \parencite{EPLAN-Makros} betrachtet, deren Profile ausschließlich aus dem Trainingssplit abgeleitet wurden. 
 Eine vorgeschaltete Reduktion auf eine Top-$N$-Kandidatenmenge findet im aktuellen System nicht statt, sodass alle Trainingsartikel für die Paar-Bildung verwendet werden.
 
 \begin{align}
@@ -157,7 +157,7 @@ Die Berechnung der Pairwise-Merkmale erfolgt innerhalb der entwickelten Training
         Hash- und Identitätsmerkmale & Struktur-, Sequenz- und Rollenhashes zur Identifikation technischer Zusammenhänge \\ 
         Lexikalische Merkmale & Lexical-Vector-Merkmale und technische Tokens aus Produktbezeichnungen und Eigenschaftsbeschreibungen \\ 
         Support- und Profilmerkmale & Supportwerte, Singleton-Kennzeichen, Profilbreiten und statistische Eigenschaften der Kandidatenprofile \\ 
-        Varianten- und Baugruppenmerkmale & Variantenkennungen, Baugruppeninformationen und EMA-bezogene Strukturmerkmale \\ 
+        Varianten- und Baugruppenmerkmale & Variantenkennungen, Baugruppeninformationen und EMA-Dateibezogene Strukturmerkmale \\ 
         Technische Artikelmerkmale & Spannungs-, Strom-, Leistungs-, Kommunikations- und Anschlussmerkmale \\ 
         \bottomrule 
     \end{tabularx} 
@@ -200,7 +200,7 @@ Dabei bezeichnet $q$ die Anfrage, $c_i$ den Makrokandidaten und $x_1,\dots,x_n$ 
 Dabei beschreibt $G_q$ die Menge aller Anfrage-Kandidat-Paare für die Anfrage $q$. Die Informationen aus den Gruppen werden zusammen mit den Featurevektoren an den LambdaRANK-Algorithmus übergeben \parencite{srcStep931}. 
 Dadurch können die Kandidaten innerhalb derselben Anfrage gegeneinander bewertet werden und somit die optimale Rangfolge erlernt werden.
 
-\section{Vermeidung von Zielinformations-Leakage} 
+\section{Zielinformations-Leakage} 
 
 Beim Aufbau der Trainingsdaten muss sichergestellt werden, dass nur solche Informationen verwendet werden, die auch während einer realen Anfrage verfügbar wären. 
 Die Query-Darstellung wird deshalb auf Merkmale beschränkt, die aus einem eingehenden EPLAN-Artikel oder einem technischen Datenblatt abgeleitet werden können. 

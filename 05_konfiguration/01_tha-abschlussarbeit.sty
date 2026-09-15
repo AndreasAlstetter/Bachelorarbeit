@@ -171,7 +171,7 @@ colorlinks=true
 %%% defining the header
 %%% --------------------
 \pagestyle{scrheadings}
-\ohead{\pagemark}
+\ohead{}
 \rehead{\rightmark}
 \lohead{\leftmark}
 \ihead{\headmark}
@@ -180,7 +180,7 @@ colorlinks=true
 \setkomafont{pagenumber}{\normalfont\sffamily}
 % leere fusszeile:
 \lefoot{}\rofoot{}
-\ofoot{}\cfoot{} % Fusszeile bei einseitigem Druck
+\ofoot{}\cfoot[\pagemark]{\pagemark} % Fusszeile bei einseitigem Druck
 
 \newcommand{\Ridx}[1]{\cd{#1}\index{R Kommandos@\R Kommandos!#1@\cd{#1}}}
 \newcommand{\idx}[1]{\index{#1}}
