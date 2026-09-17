@@ -30,8 +30,8 @@ Tabelle \ref{tab:grenzen_uebersicht} fasst die zentralen Grenzen des Systems und
 Eine zentrale Einschränkung ergibt sich aus der Support-Verteilung der Kandidatenprofile. Von insgesamt 375 vorhandenen Kandidatenprofilen basieren 302 Profile auf nur einem Trainingsartikel.
 Der Median-Support liegt bei 1 und der Mittelwert der Artikel pro Ziel-Makro \parencite{EPLAN-Makros} beträgt 2,62.
 
-Ein einzelner Artikel ist dabei nicht in der Lage, einen ausreichenden Support für technische Vielfalt innerhalb einer Makrofamilie zu bieten.
-Die daraus entstandenen Kandidatenprofile sind somit stark von einzelnen Beobachtungen abhängig.
+Ein einzelner Artikel ist dabei nicht in der Lage, einen ausreichenden Support für die technische Vielfalt innerhalb einer Makrofamilie zu bieten.
+Die daraus entstandenen Kandidatenprofile sind somit von nur einem Artikel abhängig.
 
 \subsection{Variantenauflösung innerhalb einer Makrofamilie}
 
@@ -42,6 +42,8 @@ Zudem zeigt die Fehleranalyse, dass in 133 Testfällen die korrekte Makrofamilie
 Die größte Herausforderung liegt somit in der fehlerfreien Unterscheidung zwischen sehr ähnlichen Varianten innerhalb derselben Makrofamilie \parencite{LTR_Configuration_Test_Series}.
 
 \subsection{Support-Bias häufiger Zielmakros}
+
+Der Support-Bias bezeichnet einen Rankingvorteil von Ziel-Makros mit hohem Kandidaten-Support. Da die Kandidatenprofile dieser Ziel-Makros auf mehreren Trainingsartikeln beruhen, können dadurch breitere technische Merkmale abgedeckt werden und dadurch häufiger durch das Modell gefunden werden.
 
 Die durchgeführten Fehleranalysen zeigen einen deutlichen Support-Bias. In 55,6\,\% der Fälle besitzt das fälschlich ausgewählte Ziel-Makro \parencite{EPLAN-Makros} einen höheren Support als das korrekte Ziel-Makro \parencite{EPLAN-Makros}.
 Im Durchschnitt verfügt das falsch gewählte Ziel-Makro dabei über etwa 10,6 Artikel mehr als das korrekte Ziel-Makro \parencite{LTR_Configuration_Test_Series}.

@@ -5,7 +5,7 @@
 Rankingprobleme treten in einer Vielzahl von Anwendungsgebieten auf, beispielsweise in Suchmaschinen, Produktempfehlungssystemen oder technischen Informationssystemen. 
 Ziel ist es, für eine gegebene Anfrage die verfügbaren Kandidaten in Bezug auf ihre Relevanz zu bewerten und anschließend in eine Rangfolge zu bringen \parencite{liu2009learning}. 
 
-Im industriellen Umfeld gewinnen Rankingverfahren zunehmend an Bedeutung, da häufig eine große Anzahl technischer Komponenten, Dokumente oder wiederverwendbarer Engineering-Artefakte zur Verfügung steht. 
+Im industriellen Umfeld gewinnen Rankingverfahren zunehmend an Bedeutung, da häufig eine große Anzahl technischer Komponenten, Dokumente oder wiederverwendbarer Engineering-Artefakte zur Verfügung steht. Engineering-Artefakte sind dabei gezielt entwickelte technische Lösungsobjekte, beispielsweise Softwarekomponenten, Modelle oder durchgängige Verarbeitungssysteme.
 Anstelle einer Entscheidung zwischen passend und nicht passend ermöglichen Rankingmodelle eine Priorisierung von möglichen Lösungen und unterstützen Anwender somit bei der Auswahl der geeignetsten Alternative. 
 Für die Umsetzung solcher Aufgaben haben sich Learning-to-Rank-Verfahren etabliert. Diese nutzen strukturierte und beschriebene Anfrage-Kandidat-Paare. 
 Damit wird aus historischen Zuordnungen eine Relevanzfunktion gelernt, die neue Kandidaten automatisch bewerten kann. 
@@ -65,6 +65,8 @@ mit
 
 Die Optimierung erfolgt anschließend durch die Änderung einer Rankingmetrik. Typischerweise wird dabei die Normalized Discounted Cumulative Gain (nDCG)-Funktion verwendet.
 Dabei werden die Gradienten anhand ihres Einflusses auf die Qualität der Rangliste gewichtet.
+
+Die Sigmoidfunktion bildet die Score-Differenz zweier Kandidaten auf eine Wahrscheinlichkeit ab. Die Verlustfunktion $L_{ij}$ beschreibt die Abweichung der vorhergesagten Reihenfolge von der gewünschten Reihenfolge. Der Gradient gibt an, in welche Richtung und mit welcher Stärke die Modellparameter verändert werden müssen, um diesen Fehler zu reduzieren. Beim LambdaRank-Verfahren wird dieser Gradient zusätzlich danach gewichtet, wie stark eine Vertauschung der beiden Kandidaten die Rankingqualität verändert.
 
 
 Der sogenannte Lambda-Gradient berechnet sich vereinfacht zu: 
@@ -196,7 +198,7 @@ nDCG@k= \frac{DCG@k} {IDCG@k}
 mit 
 \begin{description} 
   \item[$DCG@k$] DCG-Wert der betrachteten Rangliste 
-  \item[$IDCG@k$] DCG-Wert der idealen Rangliste 
+  \item[$IDCG@k$] \textit{Ideal Discounted Cumulative Gain}, also der höchstmögliche DCG-Wert, der bei einer idealen Sortierung der Kandidaten nach absteigender Relevanz erreicht würde 
 \end{description} 
 
 Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 entspricht der optimal möglichen Rangfolge.

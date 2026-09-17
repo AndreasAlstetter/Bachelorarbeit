@@ -5,29 +5,29 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Statistische Kennzahlen des verwendeten Datensatzes}}{15}{table.caption.5}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Analysierte Merkmalsgruppen der EPLAN-Fenstermakros}}{16}{table.caption.6}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Aufbereitete Merkmalsgruppen der EPLAN-Artikeldaten}}{17}{table.caption.7}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Gruppen der Pairwise-Merkmale}}{19}{table.caption.8}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Statistische Kennzahlen des verwendeten Datensatzes}}{17}{table.caption.5}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Analysierte Merkmalsgruppen der EPLAN-Fenstermakros}}{18}{table.caption.6}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Aufbereitete Merkmalsgruppen der EPLAN-Artikeldaten}}{19}{table.caption.7}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Gruppen der Pairwise-Merkmale}}{22}{table.caption.8}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Dimensionen der erzeugten Rankingmatrizen}}{23}{table.caption.11}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Variierte Hyperparameter der Grid-Search \blx@tocontentsinit {0}\parencite {srcStep931}}}{25}{table.caption.12}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces Dimensionen der erzeugten Rankingmatrizen}}{26}{table.caption.11}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Variierte Hyperparameter der Grid-Search \blx@tocontentsinit {0}\parencite {srcStep931}}}{28}{table.caption.12}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {7.1}{\ignorespaces Bedeutung der verwendeten Rankingmetriken}}{28}{table.caption.14}%
-\contentsline {table}{\numberline {7.2}{\ignorespaces Prüfmatrix der Leakage-Sicherheitsprüfung}}{29}{table.caption.15}%
+\contentsline {table}{\numberline {7.1}{\ignorespaces Bedeutung der verwendeten Rankingmetriken}}{32}{table.caption.14}%
+\contentsline {table}{\numberline {7.2}{\ignorespaces Prüfmatrix der Leakage-Sicherheitsprüfung}}{33}{table.caption.15}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {8.1}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Validierungssplit}}{31}{table.caption.16}%
-\contentsline {table}{\numberline {8.2}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Testsplit}}{32}{table.caption.17}%
-\contentsline {table}{\numberline {8.3}{\ignorespaces Top-1-Analyse der Vorhersagen auf dem Testdatensatz}}{33}{table.caption.18}%
-\contentsline {table}{\numberline {8.4}{\ignorespaces Rangstatistische Kennzahlen des Testsplits}}{33}{table.caption.19}%
-\contentsline {table}{\numberline {8.5}{\ignorespaces Vergleich von regulärer Trainingsbewertung, Leave-One-Out-Analyse, Validation und Test}}{34}{table.caption.20}%
-\contentsline {table}{\numberline {8.6}{\ignorespaces Untersuchte Konfigurationsparameter}}{35}{table.caption.21}%
-\contentsline {table}{\numberline {8.7}{\ignorespaces Referenzkonfiguration A01}}{36}{table.caption.22}%
-\contentsline {table}{\numberline {8.8}{\ignorespaces Abweichungen der Konfigurationen gegenüber der Referenz A01}}{36}{table.caption.23}%
-\contentsline {table}{\numberline {8.9}{\ignorespaces Ergebnisse der A01--A09-Konfigurationen auf dem Testdatensatz}}{37}{table.caption.24}%
-\contentsline {table}{\numberline {8.10}{\ignorespaces Ergebnisse der besten Konfiguration A08}}{38}{table.caption.25}%
+\contentsline {table}{\numberline {8.1}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Validierungssplit}}{36}{table.caption.16}%
+\contentsline {table}{\numberline {8.2}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Testsplit}}{37}{table.caption.17}%
+\contentsline {table}{\numberline {8.3}{\ignorespaces Top-1-Analyse der Vorhersagen auf dem Testdatensatz}}{38}{table.caption.18}%
+\contentsline {table}{\numberline {8.4}{\ignorespaces Rangstatistische Kennzahlen des Testsplits}}{38}{table.caption.19}%
+\contentsline {table}{\numberline {8.5}{\ignorespaces Vergleich von regulärer Trainingsbewertung, Leave-One-Out-Analyse, Validation und Test}}{39}{table.caption.20}%
+\contentsline {table}{\numberline {8.6}{\ignorespaces Untersuchte Konfigurationsparameter}}{40}{table.caption.21}%
+\contentsline {table}{\numberline {8.7}{\ignorespaces Referenzkonfiguration A01}}{41}{table.caption.22}%
+\contentsline {table}{\numberline {8.8}{\ignorespaces Abweichungen der Konfigurationen gegenüber der Referenz A01}}{42}{table.caption.23}%
+\contentsline {table}{\numberline {8.9}{\ignorespaces Ergebnisse der A01--A09-Konfigurationen auf dem Testdatensatz}}{42}{table.caption.24}%
+\contentsline {table}{\numberline {8.10}{\ignorespaces Ergebnisse der besten Konfiguration A08}}{44}{table.caption.25}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {9.1}{\ignorespaces Übersicht der zentralen Grenzen und Ansatzpunkte}}{39}{table.caption.26}%
+\contentsline {table}{\numberline {9.1}{\ignorespaces Übersicht der zentralen Grenzen und Ansatzpunkte}}{45}{table.caption.26}%
 \addvspace {10\p@ }
 \def \@chapapp {\appendixname }
 \addvspace {10\p@ }

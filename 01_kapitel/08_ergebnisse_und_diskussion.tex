@@ -99,6 +99,8 @@ Eine weitere wichtige Analyse ist die statistische Auswertung der erzeugten Rang
 
 Die wichtigsten Rangstatistiken des Testdatensatzes werden in Tabelle \ref{tab:rangstatistik} dargestellt.
 
+Der Mean Rank ist der arithmetische Mittelwert der Rangpositionen des korrekten Ziel-Makros. Der Median Rank bezeichnet die Rangposition, unter beziehungsweise über der jeweils 50\,\% der Fälle liegen. Das $p$-Perzentil bezeichnet den Rang, den $p$ Prozent der Fälle nicht überschreiten.
+
 \begin{table}[H] 
   \centering 
   \caption{Rangstatistische Kennzahlen des Testsplits} 
@@ -123,8 +125,8 @@ Auch die Rangstatistiken zeigen, dass das Modell in der Lage ist, die korrekte M
 
 \section{Generalisierungsfähigkeit}
 
-Zur Beurteilung der Generalisierungsfähigkeit des Modells wurde eine zusätzliche Leave-One-Out-Kontrollanalyse durchgeführt. 
-Um eine Verfälschung der Ergebnisse der Trainingsanalyse zu verhindern, wird bei einer Anfrage genau dieser Artikel aus der Anfragemenge ausgeschlossen.
+Die Generalisierungsfähigkeit bedeutet, dass das Modell in der Lage ist, zuverlässige Rankings für nicht im Training verwendete EPLAN-Artikel zu erzeugen.
+Zur Beurteilung der Generalisierungsfähigkeit des Modells wurde eine zusätzliche Leave-One-Out-Kontrollanalyse durchgeführt. Bei diesem Verfahren wird jeweils ein Beispiel zurückgehalten und anhand der verbleibenden Beispiele bewertet. Projektspezifisch wird für jeden Trainingsartikel das Kandidatenprofil seines eigenen Ziel-Makros ohne diesen Artikel neu gebildet und anschließend bewertet. Das trainierte Modell bleibt dabei unverändert; die Analyse dient ausschließlich diagnostischen Zwecken. Um eine Verfälschung der Ergebnisse der Trainingsanalyse zu verhindern, wird bei einer Anfrage genau dieser Artikel aus der Anfragemenge ausgeschlossen.
 
 
 Tabelle \ref{tab:loo_vergleich} stellt die Ergebnisse der Leave-One-Out-Analyse (LOO) sowie der Validierungs- und Testergebnisse gegenüber.
@@ -181,6 +183,19 @@ Die untersuchten Konfigurationsparameter werden in Tabelle \ref{tab:konfiguratio
         \bottomrule 
     \end{tabularx} 
 \end{table} 
+
+Bei der L1-Regularisierung wird die Summe der Absolutwerte der Modellgewichte bestraft:
+\begin{align}
+  \lambda_1 \sum_j |w_j|.
+\end{align}
+
+Dadurch werden einzelne Gewichte auf null gesetzt. 
+Die L2-Regularisierung bestraft dagegen die Summe der quadrierten Gewichte:
+\begin{align}
+  \lambda_2 \sum_j w_j^2.
+\end{align}
+
+Dadurch werden besonders große Gewichte begrenzt. Bei LightGBM beziehen sich diese Regularisierungsstrafen hauptsächlich auf die Ausgabewerte der Baumblätter.
 
 A02 bis A07 wurden so gewählt, dass immer nur ein Parameter gezielt verändert wurde. Dadurch lassen sich die Auswirkungen der einzelnen Konfigurationsparameter isoliert untersuchen.
 Bei A08 und A09 werden mehrere Parameter (L1 und L2) gleichzeitig verändert, da diese bei LightGBM konzeptionell denselben Hebel darstellen (Bestrafung der Blattgewichte). 

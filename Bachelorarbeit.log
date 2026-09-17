@@ -1,7 +1,11 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  15 SEP 2026 11:34
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  17 SEP 2026 09:24
  restricted system commands enabled.
-**Bachelorarbeit.tex
-(./Bachelorarbeit.tex
+ file:line:error style messages enabled.
+**"c:/Users/alstetter/OneDrive - GROBGroup/Documents/Sys_Engineering/Bachelorar
+beit/docs/thesis/Bachelorarbeit"
+
+("c:/Users/alstetter/OneDrive - GROBGroup/Documents/Sys_Engineering/Bachelorarb
+eit/docs/thesis/Bachelorarbeit.tex"
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
 Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
@@ -2431,86 +2435,85 @@ LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
 (Font)              scaled to size 10.95pt on input line 20.
 [3
 
-] [4]
+] [4] [5]
 LaTeX Font Info:    Trying to load font information for TU+newtxtt on input lin
-e 109.
-LaTeX Font Info:    No file TUnewtxtt.fd. on input line 109.
+e 111.
+LaTeX Font Info:    No file TUnewtxtt.fd. on input line 111.
 
 
 LaTeX Font Warning: Font shape `TU/newtxtt/m/n' undefined
-(Font)              using `TU/lmr/m/n' instead on input line 109.
+(Font)              using `TU/lmr/m/n' instead on input line 111.
 
-[5]
-Overfull \hbox (7.49747pt too wide) in paragraph at lines 114--116
+
+Overfull \hbox (7.49747pt too wide) in paragraph at lines 116--118
 \TU/TeXGyreTermesX(0)/m/n/12 Trotz der zu-neh-men-den For-schung im Be-reich neu
 -ro-na-ler Ran-king-ver-fah-ren ge-hö-ren LambdaMART-
  []
 
-LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 8.8pt on input line 135.
-LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 6.6pt on input line 135.
 [6]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 8.8pt on input line 137.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 6.6pt on input line 137.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 8.8pt on input line 141.
+(Font)              scaled to size 8.8pt on input line 143.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 6.6pt on input line 141.
+(Font)              scaled to size 6.6pt on input line 143.
  [7] [8]) (./01_kapitel/03_zielsetzung_und_vorgehensweise.tex [9]
 chapter 3.
 Package biblatex Info: Reference segment=4 on input line 1.
 Package biblatex Info: Setting label 'refsegment:04' on input line 1.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `newtxtt' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
 [10
 
 ] [11]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 128.
+(Font)              scaled to size 12.0pt on input line 132.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 128.
-) (./01_kapitel/04_architektur.tex [12]
+(Font)              scaled to size 8.0pt on input line 132.
+ [12]) (./01_kapitel/04_architektur.tex [13]
 chapter 4.
 Package biblatex Info: Reference segment=5 on input line 2.
 Package biblatex Info: Setting label 'refsegment:05' on input line 2.
-[13
+[14
 
-]) (./01_kapitel/05_analyse_der_datenstrukturen.tex [14]
+]) (./01_kapitel/05_analyse_der_datenstrukturen.tex [15]
 chapter 5.
 Package biblatex Info: Reference segment=6 on input line 1.
 Package biblatex Info: Setting label 'refsegment:06' on input line 1.
-[15
+[16
 
-] [16] [17] [18]
-Overfull \hbox (2.76907pt too wide) in paragraph at lines 143--145
+] [17] [18] [19] [20]
+Overfull \hbox (2.76907pt too wide) in paragraph at lines 149--151
 \TU/TeXGyreTermesX(0)/m/n/12 Pairwise-Merkmale er-folgt in-ner-halb der ent-wi-c
 kel-ten Trai-nings-pipe-line ([][]Pipe-line step 931 [][]2026[][]). 
  []
 
 
-Underfull \hbox (badness 7379) in paragraph at lines 163--163
+Underfull \hbox (badness 7379) in paragraph at lines 169--169
 []|\TU/TeXGyreTermesX(0)/m/n/12 Hash- und Iden-ti-täts-
  []
 
 
-Underfull \hbox (badness 1558) in paragraph at lines 163--163
+Underfull \hbox (badness 1558) in paragraph at lines 169--169
 []|\TU/TeXGyreTermesX(0)/m/n/12 Support- und Pro-film-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 163--163
+Underfull \hbox (badness 10000) in paragraph at lines 169--169
 []|\TU/TeXGyreTermesX(0)/m/n/12 Varianten- und Bau-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 163--163
+Underfull \hbox (badness 10000) in paragraph at lines 169--169
 []|\TU/TeXGyreTermesX(0)/m/n/12 Va-ri-an-ten-ken-nun-gen, Bau-grup-pen-in-for-ma
 -tio-nen und EMA-
  []
 
-[19] [20]
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `newtxtt' (encoding: TU).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-) (./01_kapitel/06_datensplit_und_training.tex [21]
+[21] [22] [23]) (./01_kapitel/06_datensplit_und_training.tex [24]
 chapter 6.
 Package biblatex Info: Reference segment=7 on input line 1.
 Package biblatex Info: Setting label 'refsegment:07' on input line 1.
@@ -2566,43 +2569,57 @@ LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 (Font)              scaled to size 7.3pt on input line 32.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 (Font)              scaled to size 5.5pt on input line 32.
-[22
+[25
 
-] [23] [24]
+] [26] [27]
 
 LaTeX Font Warning: Font shape `TU/newtxtt/b/n' undefined
-(Font)              using `TU/newtxtt/m/n' instead on input line 152.
+(Font)              using `TU/newtxtt/m/n' instead on input line 154.
 
-[25]) (./01_kapitel/07_evaluierungskonzept.tex [26]
+[28]) (./01_kapitel/07_evaluierungskonzept.tex [29] [30]
 chapter 7.
 Package biblatex Info: Reference segment=8 on input line 1.
 Package biblatex Info: Setting label 'refsegment:08' on input line 1.
-[27
+[31
 
-] [28] [29]) (./01_kapitel/08_ergebnisse_und_diskussion.tex [30]
+]
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 12.0pt on input line 46.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 8.8pt on input line 46.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 6.6pt on input line 46.
+ [32] [33] [34]) (./01_kapitel/08_ergebnisse_und_diskussion.tex [35]
 chapter 8.
 Package biblatex Info: Reference segment=9 on input line 1.
 Package biblatex Info: Setting label 'refsegment:09' on input line 1.
-[31
+[36
 
-] [32] [33] [34] [35]
-Underfull \hbox (badness 10000) in paragraph at lines 233--234
+] [37] [38] [39] [40]
+Underfull \hbox (badness 10000) in paragraph at lines 248--249
 []|\TU/TeXGyreTermesX(0)/m/n/12 L1-Regularisierung auf 0,1 und L2-
  []
 
-[36] [37]) (./01_kapitel/09_grenzen_und_ausblick.tex [38]
+[41]
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 10.95pt on input line 265.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 8.0pt on input line 265.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 6.1pt on input line 265.
+ [42] [43]) (./01_kapitel/09_grenzen_und_ausblick.tex [44]
 chapter 9.
 Package biblatex Info: Reference segment=10 on input line 1.
 Package biblatex Info: Setting label 'refsegment:010' on input line 1.
-[39
+[45
 
-] [40]) (./01_kapitel/10_zusammenfassung_und_fazit.tex [41]
+] [46]) (./01_kapitel/10_zusammenfassung_und_fazit.tex [47]
 chapter 10.
 Package biblatex Info: Reference segment=11 on input line 1.
 Package biblatex Info: Setting label 'refsegment:011' on input line 1.
-[42
+[48
 
-]) [43]
+]) [49]
 Package biblatex Info: Reference segment=12 on input line 88.
 Package biblatex Info: Setting label 'refsegment:012' on input line 88.
 Package tocbasic Info: character protrusion at lof deactivated on input line 88
@@ -2614,7 +2631,7 @@ Package cleveref Info: loaded `ngerman' language definitions on input line 2.
 \tf@lof=\write9
 
 \openout9 = Bachelorarbeit.lof
- [44
+ [50
 
 ]
 Package biblatex Info: Reference segment=13 on input line 89.
@@ -2628,22 +2645,28 @@ Package cleveref Info: loaded `ngerman' language definitions on input line 2.
 \tf@lot=\write10
 
 \openout10 = Bachelorarbeit.lot
- [45
+ [51
 
 ]
 chapter without number
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
 (Font)              scaled to size 10.0pt on input line 92.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 10.0pt on input line 92.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 7.3pt on input line 92.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 5.5pt on input line 92.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sc' will be
 (Font)              scaled to size 10.0pt on input line 92.
-[46
+[52
 
 ] (./Bachelorarbeit.ind)
 
 Package caption Warning: Unused \captionsetup[lstlisting] on input line 60.
 See the caption package documentation for explanation.
 
-[47] (./Bachelorarbeit.aux
+[53] (./Bachelorarbeit.aux
 Package cleveref Info: loaded `ngerman' language definitions on input line 11.
 Package cleveref Info: loaded `ngerman' language definitions on input line 12.
 )
@@ -2661,16 +2684,16 @@ Package logreq Info: Writing requests to 'Bachelorarbeit.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 51156 strings out of 476081
- 125005,2373549 words of node,token memory allocated
- 25673 words of node memory still in use:
-   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 4140 kern, 1 penalty, 3 glyph,
- 1403 attribute, 102 glue_spec, 703 attribute_list, 2 write, 1 pdf_action nodes
-   avail lists: 1:6,2:2619,3:1282,4:367,5:607,6:278,7:7973,8:36,9:919,10:31,11:1
-049,12:1
- 72004 multiletter control sequences out of 65536+600000
- 232 fonts using 20716279 bytes
- 108i,20n,115p,11216b,3555s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 51217 strings out of 476081
+ 125003,2373549 words of node,token memory allocated
+ 28037 words of node memory still in use:
+   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 4566 kern, 1 penalty, 3 glyph,
+ 1481 attribute, 102 glue_spec, 742 attribute_list, 2 write, 1 pdf_action nodes
+   avail lists: 1:20,2:2607,3:1259,4:365,5:607,6:279,7:8552,8:36,9:919,10:33,11:
+1167,12:1
+ 72029 multiletter control sequences out of 65536+600000
+ 259 fonts using 22489111 bytes
+ 108i,20n,115p,11307b,3555s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/opentype/public/newtx/Te
 XGyreTermesX-Regular.otf>{C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts
 /enc/dvips/newtx/ntx-ot1-tlf.enc}<C:/Users/alstetter/AppData/Local/Programs/MiKT
@@ -2690,10 +2713,12 @@ cal/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI7.pfb><C:/Users/alstetter/Ap
 pData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/alstett
 er/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/a
 lstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb><C:/Us
-ers/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/ztmr.pfb>
-Output written on Bachelorarbeit.pdf (51 pages, 460894 bytes).
+ers/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/ztmb.pfb><C
+:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/ztmr.pf
+b>
+Output written on Bachelorarbeit.pdf (57 pages, 508084 bytes).
 
-PDF statistics: 1127 PDF objects out of 1200 (max. 8388607)
- 224 named destinations out of 1000 (max. 1048576)
+PDF statistics: 1175 PDF objects out of 1200 (max. 8388607)
+ 233 named destinations out of 1000 (max. 1048576)
  576 words of extra memory for PDF output out of 10000 (max. 100000000)
 

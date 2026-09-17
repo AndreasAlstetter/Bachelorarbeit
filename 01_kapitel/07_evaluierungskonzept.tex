@@ -39,6 +39,14 @@ Durch diese Metriken können die Zielmakroerkennung, die Familienerkennung sowie
 
 Die Bewertungsmetriken bilden gemeinsam verschiedene Aspekte der Rankingqualität ab, wie in Tabelle \ref{tab:rankingmetriken_bedeutung} zusammengefasst.
 
+Der Target Recall@$k$ bezeichnet den Anteil der Eingangsartikel, bei denen das exakt erwartete Ziel-Makro unter den ersten $k$ Ergebnissen vorkommt:
+
+\begin{align}
+  \mathrm{TargetRecall@}k = \frac{1}{N} \sum_{i=1}^{N} \mathbf{1}(t_i \in \mathrm{TopK}_i).
+\end{align}
+
+Der Family Recall@$k$ bezeichnet den Anteil der Eingangsartikel, bei denen mindestens ein Kandidat mit exakt derselben \texttt{target\_family} unter den ersten $k$ Ergebnissen vorkommt. 
+
 \begin{table}[H]
   \centering
   \setlength{\tabcolsep}{6pt}
@@ -56,6 +64,8 @@ Die Bewertungsmetriken bilden gemeinsam verschiedene Aspekte der Rankingqualitä
     \bottomrule
   \end{tabularx}
 \end{table}
+
+Beim Hierarchical nDCG wird neben der Position eines Kandidaten auch seine fachliche Relevanz berücksichtigt. In der Implementierung erhält ein exakt passendes Ziel-Makro den Relevanzwert $r=3$, ein Makro derselben Makro-Familie den Wert $r=2$, ein Makro mit übereinstimmendem Familienpräfix den Wert $r=1$ und ein unverwandtes Makro den Wert $r=0$. Der erreichte DCG-Wert wird durch den maximal zu erreichenden Wert der ideal sortierten Rangliste (IDCG) normiert.
 
 
 \section{Leakage-Sicherheitsprüfung}

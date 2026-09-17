@@ -4,6 +4,7 @@
 
 Das Projektziel ist die Entwicklung eines Systems, welches automatisiert EPLAN-Artikel \parencite{EPLANArtikelverwaltung} zu EPLAN-Fenstermakros \parencite{EPLAN-Makros} zuordnet.
 Für einen vorhandenen technischen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} soll anhand einer technischen Anfrage (zum Beispiel in Form eines Datenblatts) das fachlich passendste EPLAN-Fenstermakro \parencite{EPLAN-Makros} identifiziert werden.
+Die Artikel-Makro-Zuordnung bezeichnet dabei die in den Ausgangsdaten vorhandene Beziehung zwischen einem EPLAN-Artikel \parencite{EPLANArtikelverwaltung} und dem ihm zugeordneten EPLAN-Makro \parencite{EPLAN-Makros}. Diese Beziehung wird im Datensatz durch das Feld \texttt{target\_macro} und ergänzend durch das Feld \texttt{target\_family} repräsentiert. 
 
 
 Diese Problemstellung kann als Rankingaufgabe formuliert werden, bei der für jede Anfrage eine Menge bekannter EPLAN-Fenstermakros \parencite{EPLAN-Makros} vorliegt. Dabei sind alle Kandidaten dieser Menge potenzielle Ergebnisse für den 1. Rang.
@@ -13,6 +14,8 @@ Ziel dabei ist es, dass das passendste EPLAN-Fenstermakro \parencite{EPLAN-Makro
 
 Im Gegensatz zu Klassifikationsaufgaben liegt der Fokus dieses Systems nicht direkt auf der Bestimmung einer einzelnen Klasse oder Produktfamilie. Vielmehr geht es darum, eine möglichst präzise Variantenauflösung zu erreichen.
 Dafür sollen die technischen Eigenschaften und Merkmale aus einer Anfrage systematisch erfasst und mit den Eigenschaften der EPLAN-Artikel \parencite{EPLANArtikelverwaltung} abgeglichen werden.
+Eine Makro-Familie bezeichnet im Projekt eine Gruppe von EPLAN-Makros \parencite{EPLAN-Makros}, deren Dateinamen sich nur durch einen Variantenbezeichner am Ende unterscheiden. Zum Beispiel gehören die Makros \texttt{KF\_E26-1\_01} und \texttt{KF\_E26-1\_03} zur Familie \texttt{KF\_E26-1}.
+Aus den Makro-Familien lassen sich dann wiederrum die einzelnen Varianten (\texttt{KF\_E26-1\_01}, \texttt{KF\_E26-1\_03}) ableiten. Die Variantenauflösung bezeichnet somit die Aufgabe, innerhalb einer erkannten Makro-Familie das exakt zugeordnete EPLAN-Makro \parencite{EPLAN-Makros} zu bestimmen.
 
 
 Die Herausforderung besteht darin, dass sich viele Produkte lediglich in einzelnen technischen Eigenschaften und Konfigurationsmerkmalen unterscheiden. Geringe Abweichungen können deshalb zu unterschiedlichen Makrozuordnungen führen.
@@ -27,6 +30,7 @@ Das Modell erzeugt für jeden verfügbaren Makrokandidaten eine Relevanzbewertun
 Das methodische Vorgehen orientiert sich an der \textit{Design Science Research Methodology} (DSRM) nach Peffers et al. \citeyearpar{peffers2007dsrm}. 
 Die DSRM beschreibt einen strukturierten Forschungsprozess zur Entwicklung und Evaluation technischer Artefakte und eignet sich insbesondere für die Entwicklung von IT-Systemen.
 Das Ziel der Methodik besteht darin, eine konkrete Problemstellung systematisch zu analysieren, ein geeignetes Artefakt zu entwickeln und den Nutzen durch eine Evaluation nachzuweisen. 
+
 
 Der von Peffers et al. beschriebene Forschungsprozess umfasst die folgenden Schritte: 
 

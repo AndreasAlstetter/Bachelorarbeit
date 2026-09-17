@@ -69,11 +69,11 @@ Tabelle \ref{tab:matrixdimensionen} fasst die Größenordnung der erzeugten Rank
     \end{tabular}
 \end{table}
 
-Die Merkmalsmatrizen werden als Sparse-Matrizen gespeichert und mit numerischen Werten des Typs \texttt{float32} verarbeitet.
+Der erzeugte Artikel-Kandidat-Merkmalsraum ist sehr groß und viele Merkmalswerte besitzen den Wert null. Aus diesem Grund werden Sparse-Matrizen verwendet. Bei einer Sparse-Matrix werden nicht belegte Werte nicht vollständig gespeichert, wodurch der Speicherbedarf reduziert wird. Die numerischen Werte werden im 32-Bit-Gleitkommaformat \texttt{float32} verarbeitet. 
 
 \section{Training des Learning-to-Rank-Modells}
 
-Das zentrale Element der Architektur ist das Learning-to-Rank-Modell. Hierfür wird der \texttt{LGBMRanker} der LightGBM-Bibliothek \parencite{LightGBM} verwendet \parencite{srcStep931}.
+Das zentrale Element dieser Architektur basiert auf LightGBM. LightGBM ist eine Bibliothek für Gradient Boosting mithilfe von Entscheidungsbäumen. Dabei werden sequentiell Entscheidungsbäume erzeugt, welche die Fehler des bisherigen Modells schrittweise korrigieren. Für Rankingaufgaben ist der \texttt{LGBMRanker} besonders geeignet. Dieser ist auf Rankinggruppen sowie relative Ergebnisreihenfolgen spezialisiert und verwendet in diesem Projekt das LambdaRank-Verfahren \parencite{LightGBM}.
 Dieser basiert auf dem in Kapitel \ref{chap:stand_der_technik} beschriebenen LambdaRank-/LambdaMART-Prinzip.
 
 Das Modell wird mit den Parametern 
@@ -83,6 +83,8 @@ Das Modell wird mit den Parametern
 \end{align} 
 
 trainiert \parencite{srcStep931}.
+
+Der Parameter \texttt{objective} legt das Optimierungsziel des Modells fest. Mit \texttt{lambdarank} wird die Optimierung der Kandidatenreihenfolge durch LambdaRank aktiviert. Der Parameter \texttt{metric} bestimmt die verwendete Rankingmetrik der Bewertung; \texttt{ndcg} steht für Normalized Discounted Cumulative Gain und wird im Kapitel \ref{chap:stand_der_technik} näher erläutert.
 
 Die für die spätere Referenzkonfiguration A08 ausgewählten Modellparameter lauten: 
 
@@ -113,7 +115,7 @@ Das Training erfolgt dabei ausschließlich auf den Trainingsdaten, während die 
 
 \section{Hyperparameteroptimierung}
 
-Für die Hyperparameteroptimierung wird eine Grid-Search mit insgesamt 15 definierten Parameterkonfigurationen verwendet. 
+Für die Hyperparameteroptimierung wird eine Grid-Search mit insgesamt 15 definierten Parameterkonfigurationen verwendet. Ein Grid-Search ist die systematische Erprobung von zuvor festgelegten Kombinationen an Modellparametern. Jede Kombination wird dabei trainiert und anhand des Validierungsbestands bewertet; anschließend wird anhand definierter Rankingmetriken die beste Konfiguration ausgewählt. 
 Variiert werden dabei folgende Parameter: 
 
 \begin{itemize} 
@@ -151,7 +153,7 @@ Dabei sind die Hyperparameter wie folgt zu verstehen:
 \begin{itemize}
     \item \textbf{\texttt{n\_estimators}:} Anzahl der aufgebauten Entscheidungsbäume im Modell. Mehr Bäume = komplexere Zusammenhänge, aber mehr Rechenaufwand.
     \item \textbf{\texttt{learning\_rate}:} Lernrate pro Trainingsschritt. Kleinere Werte führen zu vorsichtigerem, aber stabilerem Lernen.
-    \item \textbf{\texttt{num\_leaves}:} Maximale Anzahl der Blätter pro Baum. Mehr Blätter = komplexere Bäume, aber höheres Risiko für Overfitting.
+    \item \textbf{\texttt{num\_leaves}:} Maximale Anzahl der Blätter pro Baum. Mehr Blätter führen zu komplexeren Bäumen und erhöhen dadurch das Risiko von Overfitting. 
     \item \textbf{\texttt{min\_child\_samples}:} Minimale Anzahl an Trainingsbeispielen in einem Blatt. Kleinere Werte = mehr Detailtreue pro Blatt, größere Werte = bessere Regularisierung (verhindert Overfitting).
     \item \textbf{\texttt{lambdarank\_\allowbreak truncation\_level}:} Begrenzung des Ranglistenbereichs, der durch LambdaRank optimiert werden soll (Top 10, Top 20).
 \end{itemize}

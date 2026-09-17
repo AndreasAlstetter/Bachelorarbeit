@@ -25,7 +25,8 @@ Die Analyse der vorhandenen Fehler zeigte gleichzeitig, dass die größere Herau
 Mehr als die Hälfte aller Fehlklassifikationen entstehen dabei innerhalb der korrekten Familie, während fachlich unverbundene Familien nur einen geringen Anteil der Fehler verursachen.
 
 
-Die durchgeführten Analysen zeigen außerdem, dass sich die Leistungsgrenzen des entwickelten Systems primär durch die Long-Tail-Verteilung mit 213 Singleton-Targets und 279 Ziel-Makros \parencite{EPLAN-Makros} mit weniger als drei Trainingsbeispielen ergeben.
+Die Häufigkeiten der Ziel-Makros folgen dabei einer sogenannten Long-Tail-Verteilung. Darunter wird eine stark ungleichmäßige Verteilung verstanden. Dabei kommen wenige Ziel-Makros sehr häufig vor, während viele weitere Ziel-Makros nur selten oder einmalig vorkommen. 
+Die durchgeführten Analysen zeigen außerdem, dass sich die Leistungsgrenzen des entwickelten Systems primär durch diese Long-Tail-Verteilung mit 213 Singleton-Targets und 279 Ziel-Makros \parencite{EPLAN-Makros} mit weniger als drei Trainingsbeispielen ergeben.
 Diese erschweren den Aufbau robuster Kandidatenprofile. Die zusätzliche Leave-One-Out-Analyse zeigt darüber hinaus, dass die ursprünglich vermutete Generalisierungslücke durch die Konstruktion der Kandidatenprofile verursacht wurde.
 Demgegenüber verhält sich die Generalisierung zwischen Validierungs- und Testdaten stabil und liefert keine Hinweise auf ein kritisches Overfitting des verwendeten LightGBM-LambdaRank-Modells.
 

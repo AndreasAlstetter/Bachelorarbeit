@@ -11,7 +11,7 @@ Anschließend werden die Makro-Kandidatenprofile ausschließlich aus dem Trainin
 Dabei wird jeder Kandidat durch ein Makroprofil repräsentiert und mit der Anfrage verglichen. Aus diesen Paaren werden strukturierte und lexikalische Merkmale berechnet, welche als Eingabe in das spätere Learning-to-Rank-Modell dienen. 
 Das Rankingmodell basiert auf LightGBM LambdaRank und bewertet sämtliche verfügbaren Kandidatenprofile. Aus den Relevanzwerten der Kandidaten wird anschließend eine Rangliste möglicher Makroempfehlungen gebildet. 
 Die Pipeline umfasst neben dem eigentlichen Training auch die automatische Evaluation sowie die Erzeugung von Modellartefakten zur wiederverwendbaren Nutzung eines Modells. 
-Abbildung \ref{fig:architektur} zeigt die implementierte End-to-End-Architektur des Systems.
+Die Bezeichnung End-to-End-Pipeline beschreibt dabei die durchgängige Verarbeitungskette von der Einlesung und Bereinigung der EPLAN-Daten über Datensplit, Kandidatenprofile, Merkmalsmatrix und Modelltraining bis zur Evaluation der erzeugten Rankings. Abbildung \ref{fig:architektur} zeigt die implementierte End-to-End-Architektur des Systems.
 
 \begin{figure}[H] 
     \centering 
