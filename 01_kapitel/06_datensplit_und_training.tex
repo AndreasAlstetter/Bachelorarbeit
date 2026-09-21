@@ -12,8 +12,8 @@ Um reproduzierbare Ergebnisse mit einem erstellten Datensplit zu gewährleisten,
 \end{align}
 
 Dabei wird keine reine Zufallsaufteilung vorgenommen, sondern fachliche Zusammenhänge der Daten berücksichtigt, um eine konsistente Verteilung über die Anfragegruppen sicherzustellen. 
-Darüber hinaus wird sichergestellt, dass jedes Zielmakro, welches im Validierungs- oder Testsplit vorkommt, mindestens einmal als Beispiel im Trainingssplit repräsentiert wird.
-Zielmakros, die im Gesamtdatensatz nur einmal auftreten, werden vollständig dem Trainingssplit zugeordnet.
+Darüber hinaus wird sichergestellt, dass jedes Ziel-Makro, welches im Validierungs- oder Testsplit vorkommt, mindestens einmal als Beispiel im Trainingssplit repräsentiert wird.
+Ziel-Makros, die im Gesamtdatensatz nur einmal auftreten, werden vollständig dem Trainingssplit zugeordnet.
 Dies verhindert, dass eng verwandte Beispiele in unterschiedlichen Datensplits landen und somit die Glaubwürdigkeit der Modellbewertung negativ beeinflussen. 
 
 Abbildung \ref{fig:datensplit_schema} fasst diese Aufteilung schematisch zusammen.

@@ -2,11 +2,11 @@
 
 Das Ziel dieser Arbeit war die Entwicklung sowie Evaluierung eines datengetriebenen Systems zur automatisierten Zuordnung von EPLAN-Artikeln \parencite{EPLANArtikelverwaltung} zu EPLAN-Makros \parencite{EPLAN-Makros}.
 Die zugrunde liegende Problemstellung wurde als eine Learning-to-Rank-Aufgabe formuliert, bei der das Modell lernen soll, die relevantesten Ziel-Makros \parencite{EPLAN-Makros} für einen gegebenen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} zu priorisieren.
-Dabei soll eine Rangliste möglicher Zielmakros erzeugt werden.
+Dabei soll eine Rangliste möglicher Ziel-Makros erzeugt werden.
 
 
 Hierzu wurde eine End-to-End-Pipeline entwickelt, welche die Datenaufbereitung, die Erzeugung von Kandidatenprofilen, die Berechnung strukturierter Anfrage-Kandidat-Merkmale, 
-das Training eines LightGBM-LambdaRank-Modells sowie die automatische Evaluation umfasst.
+das Training eines LightGBM LambdaRank-Modells sowie die automatische Evaluation umfasst.
 Die Evaluierung der entwickelten Lösung erfolgte anhand eines realen Datensatzes von EPLAN-Artikeln \parencite{EPLANArtikelverwaltung} und den zugehörigen EPLAN-Makros \parencite{EPLAN-Makros}. 
 
 
@@ -20,9 +20,9 @@ Dabei wurden verschiedene Familiengewichtungen, Labeldefinitionen, Profilbreiten
 Die beste Leistung wurde dabei durch die Konfiguration A08 erzielt, welche einen Target Recall@1 von 34,78\,\%, einen Family Recall@1 von 87,35\,\%, einen Target Recall@10 von 67,98\,\% sowie einen Mean Reciprocal Rank von 45,34\,\% aufweist.
 
 
-Die Ergebnisse zeigen, dass das entwickelte System in der Lage ist, die korrekte Makrofamilie in 8-9 von 10 Fällen korrekt zu erkennen.
+Die Ergebnisse zeigen, dass das entwickelte System in der Lage ist, die korrekte Makrofamilie in 8 bis 9 von 10 Fällen korrekt zu erkennen.
 Die Analyse der vorhandenen Fehler zeigte gleichzeitig, dass die größere Herausforderung in der präzisen Erkennung der Variantenunterscheidung innerhalb derselben Makrofamilie liegt.
-Mehr als die Hälfte aller Fehlklassifikationen entstehen dabei innerhalb der korrekten Familie, während fachlich unverbundene Familien nur einen geringen Anteil der Fehler verursachen.
+Mehr als die Hälfte aller Fehlklassifikationen entsteht dabei innerhalb der korrekten Familie, während fachlich unverbundene Familien nur einen geringen Anteil der Fehler verursachen.
 
 
 Die Häufigkeiten der Ziel-Makros folgen dabei einer sogenannten Long-Tail-Verteilung. Darunter wird eine stark ungleichmäßige Verteilung verstanden. Dabei kommen wenige Ziel-Makros sehr häufig vor, während viele weitere Ziel-Makros nur selten oder einmalig vorkommen. 

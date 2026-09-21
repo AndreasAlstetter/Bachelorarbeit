@@ -8,14 +8,14 @@ Die Artikel-Makro-Zuordnung bezeichnet dabei die in den Ausgangsdaten vorhandene
 
 
 Diese Problemstellung kann als Rankingaufgabe formuliert werden, bei der für jede Anfrage eine Menge bekannter EPLAN-Fenstermakros \parencite{EPLAN-Makros} vorliegt. Dabei sind alle Kandidaten dieser Menge potenzielle Ergebnisse für den 1. Rang.
-Das System soll die Eigenschaften eines gegebenen EPLAN-Artikels \parencite{EPLANArtikelverwaltung} analysieren und diese mit allen verfügbaren Makro-Kandidatenprofilen vergleichen. Anschließend sollen die Kandidaten entsprechend ihrer Relevanz geordnet werden.
+Das System soll die Eigenschaften eines gegebenen EPLAN-Artikels \parencite{EPLANArtikelverwaltung} analysieren und diese mit allen verfügbaren Makrokandidatenprofilen vergleichen. Anschließend sollen die Kandidaten entsprechend ihrer Relevanz geordnet werden.
 Ziel dabei ist es, dass das passendste EPLAN-Fenstermakro \parencite{EPLAN-Makros} möglichst auf Rang 1 erscheint. Die weniger ähnlichen Kandidaten sollen entsprechend der Bewertung hierarchisch auf den nachfolgenden Rängen einsortiert werden.
 
 
-Im Gegensatz zu Klassifikationsaufgaben liegt der Fokus dieses Systems nicht direkt auf der Bestimmung einer einzelnen Klasse oder Produktfamilie. Vielmehr geht es darum, eine möglichst präzise Variantenauflösung zu erreichen.
+Im Gegensatz zu Klassifikationsaufgaben liegt der Fokus dieses Systems nicht direkt auf der Bestimmung einer einzelnen Klasse oder Produktfamilie. Vielmehr geht es darum, eine möglichst präzise Variantenauflösung innerhalb der Makrofamilien zu erreichen.
 Dafür sollen die technischen Eigenschaften und Merkmale aus einer Anfrage systematisch erfasst und mit den Eigenschaften der EPLAN-Artikel \parencite{EPLANArtikelverwaltung} abgeglichen werden.
-Eine Makro-Familie bezeichnet im Projekt eine Gruppe von EPLAN-Makros \parencite{EPLAN-Makros}, deren Dateinamen sich nur durch einen Variantenbezeichner am Ende unterscheiden. Zum Beispiel gehören die Makros \texttt{KF\_E26-1\_01} und \texttt{KF\_E26-1\_03} zur Familie \texttt{KF\_E26-1}.
-Aus den Makro-Familien lassen sich dann wiederrum die einzelnen Varianten (\texttt{KF\_E26-1\_01}, \texttt{KF\_E26-1\_03}) ableiten. Die Variantenauflösung bezeichnet somit die Aufgabe, innerhalb einer erkannten Makro-Familie das exakt zugeordnete EPLAN-Makro \parencite{EPLAN-Makros} zu bestimmen.
+Eine Makrofamilie bezeichnet im Projekt eine Gruppe von EPLAN-Makros \parencite{EPLAN-Makros}, deren Dateinamen sich nur durch einen Variantenbezeichner am Ende unterscheiden. Zum Beispiel gehören die Makros \texttt{KF\_E26-1\_01} und \texttt{KF\_E26-1\_03} zur Familie \texttt{KF\_E26-1}.
+Aus den Makrofamilien lassen sich dann wiederrum die einzelnen Varianten (\texttt{KF\_E26-1\_01}, \texttt{KF\_E26-1\_03}) ableiten. Die Variantenauflösung bezeichnet somit die Aufgabe, innerhalb einer erkannten Makrofamilie das exakt zugeordnete EPLAN-Makro \parencite{EPLAN-Makros} zu bestimmen.
 
 
 Die Herausforderung besteht darin, dass sich viele Produkte lediglich in einzelnen technischen Eigenschaften und Konfigurationsmerkmalen unterscheiden. Geringe Abweichungen können deshalb zu unterschiedlichen Makrozuordnungen führen.
@@ -23,7 +23,7 @@ Das System muss daher in der Lage sein, sowohl allgemeine technische Zusammenhä
 
 
 Zur Lösung dieses Problems wird ein Learning-to-Rank-System entwickelt, welches strukturierte technische sowie lexikalische Merkmale aus Artikeldaten kombiniert, um die Relevanz von potenziellen EPLAN-Fenstermakros \parencite{EPLAN-Makros} zu bewerten. 
-Das Modell erzeugt für jeden verfügbaren Makrokandidaten eine Relevanzbewertung und erstellt daraus eine Rangliste möglicher Empfehlungen. Ziel ist es, das korrekte Zielmakro möglichst auf den vorderen Rangpositionen, idealerweise auf Rang 1, zu platzieren.
+Das Modell erzeugt für jeden verfügbaren Makrokandidaten eine Relevanzbewertung und erstellt daraus eine Rangliste möglicher Empfehlungen. Ziel ist es, das korrekte Ziel-Makro möglichst auf den vorderen Rangpositionen, idealerweise auf Rang 1, zu platzieren.
 
 \section{Methodisches Vorgehen}
 
@@ -47,7 +47,7 @@ In dieser Arbeit bildet die DSRM den übergeordneten Rahmen. Die iterative Entwi
 
 \section{Iterativer Entwicklungsprozess} 
 
-Zur Entwicklung des Artefakts wird die Design-Science-Methodik durch die Prinzipien des \textit{Action Design Research} (ADR) nach Sein et al. verwendet \citeyearpar{sein2011adr}. 
+Zur Entwicklung des Artefakts wird die Design-Science-Methodik durch die Prinzipien des \textit{Action Design Research} (ADR) nach Sein et al. \citeyearpar{sein2011adr} verwendet.
 ADR verbindet dabei die Entwicklung eines Artefakts mit der fortlaufenden Anwendung, Evaluation und Verbesserung. 
 Während die DSRM den strukturellen Prozess beschreibt, liefert ADR den Entwicklungszyklus zur kontinuierlichen Verbesserung des Systems. 
 

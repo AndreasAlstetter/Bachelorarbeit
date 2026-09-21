@@ -7,7 +7,7 @@
 Die entwickelte Lösung basiert auf einer Learning-to-Rank-Architektur zur automatisierten Zuordnung von EPLAN-Artikeln \parencite{EPLANArtikelverwaltung} zu EPLAN-Fenstermakros \parencite{EPLAN-Makros}. 
 Ausgangspunkt der Pipeline sind strukturierte Artikeldaten, technische Merkmale sowie Informationen aus den zugehörigen Makros. 
 Nach der Datenaufbereitung werden die verfügbaren Artikel in Trainings-, Validierungs- und Testdaten aufgeteilt. 
-Anschließend werden die Makro-Kandidatenprofile ausschließlich aus dem Trainingssplit erzeugt. Für jede Anfrage werden im Anschluss Anfrage-Kandidat-Paare gebildet.
+Anschließend werden die Makrokandidatenprofile ausschließlich aus dem Trainingssplit erzeugt. Für jede Anfrage werden im Anschluss Anfrage-Kandidat-Paare gebildet.
 Dabei wird jeder Kandidat durch ein Makroprofil repräsentiert und mit der Anfrage verglichen. Aus diesen Paaren werden strukturierte und lexikalische Merkmale berechnet, welche als Eingabe in das spätere Learning-to-Rank-Modell dienen. 
 Das Rankingmodell basiert auf LightGBM LambdaRank und bewertet sämtliche verfügbaren Kandidatenprofile. Aus den Relevanzwerten der Kandidaten wird anschließend eine Rangliste möglicher Makroempfehlungen gebildet. 
 Die Pipeline umfasst neben dem eigentlichen Training auch die automatische Evaluation sowie die Erzeugung von Modellartefakten zur wiederverwendbaren Nutzung eines Modells. 
@@ -59,7 +59,7 @@ Die Bezeichnung End-to-End-Pipeline beschreibt dabei die durchgängige Verarbeit
                         blue!70!black } 
                         ] 
                         \node[databox] (prep) { \textbf{1. Datenaufbereitung}\\[2pt] EPLAN-Artikel (XML) und Makrodaten (.ema)\\ Bereinigung, Validierung und Split-Erzeugung }; 
-                        \node[databox, below=0.6cm of prep] (profiles) { \textbf{2. Kandidatenprofile}\\[2pt] Erstellung von 375 Makro-Kandidatenprofilen\\ ausschließlich aus dem Trainingssplit }; 
+                        \node[databox, below=0.6cm of prep] (profiles) { \textbf{2. Kandidatenprofile}\\[2pt] Erstellung von 375 Makrokandidatenprofilen\\ ausschließlich aus dem Trainingssplit }; 
                         \node[featurebox, below=0.6cm of profiles] (features) { \textbf{3. Pairwise-Featuregenerierung}\\[2pt] Anfrage-Kandidat-Paare\\ strukturierte und lexikalische Merkmale }; 
                         \node[modelbox, below=0.6cm of features] (ranker) { \textbf{4. Learning-to-Rank}\\[2pt] LightGBM LambdaRank\\ Bewertung aller Kandidatenprofile }; 
                         \node[evalbox, below=0.6cm of ranker] (evaluation) { \textbf{5. Evaluation und Artefakte}\\[2pt] Recall@k, MRR, hierarchisches nDCG\\ Modell-, Profil- und Metadatenartefakte }; 
