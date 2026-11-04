@@ -2,9 +2,10 @@
 
 \section{Herleitung}
 
-Die zunehmende Digitalisierung in der Industrie führt zu einer fortschreitenden Vernetzung von Maschinen, Sensoren und Informationssystemen.
-Im gleiche Zuge entsteht eine große Mengen an Daten und Datenquellen, die erfasst, gespeichert und analysiert werden müssen. 
-Dadurch steigt die Komplexität als auch die Dynamik von industriellen Systemen wie zum Beispiel Produktionsanlagen in der Automobilindustrie oder Fertigungsanlagen in der Elektronikindustrie kontinuierlich an.
+Die zunehmende Digitalisierung in der Industrie führt zu einer fortschreitenden Vernetzung von Maschinen, 
+Sensoren und industriellen Systemen wie zum Beispiel Produktionsanlagen in der Automobilindustrie oder Fertigungsanlagen in der Elektronikindustrie.
+Im gleiche Zuge entsteht eine große Mengen an Daten sowie Datenquellen, die erfasst, gespeichert und analysiert werden müssen. 
+Dieser Anstieg an Daten und Datenquellen sorgt dafür, dass sowohl die Komplexität als auch die Dynamik von industriellen Systemen kontinuierlich zunimmt.
 \parencite{OECD2024}
 
 Mit der steigenden Anzahl an Datenquellen und der wachsenden Datenmenge wächst auch die Herausforderung, relevante Informationen effizient zu identifizieren, zu analysieren und in fundierte Entscheidungen zu überführen.
@@ -15,28 +16,44 @@ Die hierfür erforderliche Informationsverarbeitung übersteigt häufig die kogn
 Künstliche Intelligenz (KI) bietet das Potenzial, diese Herausforderungen zu bewältigen, indem sie große Datenmengen analysiert sowie Muster, 
 Zusammenhängen und Abhängigkeiten erkennt die für einen Menschen nur schwer oder nicht in Echtzeit identifizierbar sind. 
 Darüber hinaus kann KI dazu beitragen, Entscheidungsprozesse sowie die Optimierung industrieller Systeme durch Prognosen
-Handlungsempfehlungen und Automatisierungen zu unterstützen. 
-Dadurch ist es möglich, die Effizienz, Qualität und Flexibilität industrieller Systeme zu steigern und gleichzeitig die Komplexität beherrschbarer zu machen.
+Handlungsempfehlungen und Automatisierungen zu unterstützen, was dazu beiträgt, 
+die Effizienz, die Qualität und die Flexibilität industrieller Systeme zu steigern und gleichzeitig die Komplexität beherrschbarer zu machen.
 \parencite{WEF2026}
 
 Die steigende Komplexität industrieller Systeme wirkt sich nicht nur auf den Betrieb von Produktionsanlagen aus, sondern beeinflusst auch die Planung, Konstruktion und das Engineering dieser Systeme.
 Eine Komponete der Konstruktion industrielle Systeme dabei ist die Elektrokonstruktion, die für die Planung, den Entwurf und die Dokumentation elektrischer Systeme verantwortlich ist.
 In der Elektrokonstruktion gehört es zu den zentralen Aufgaben Elektroschaltpläne über Projekte hinweg zu planen, zu dokumentieren, anzupassen und wiederzuverwenden.
-Gleichzeitig steigen die Anforderungen an Standardisierung, Qualität und Effizienz der Konstruktion elektrischer Systeme um die steigende Komplexität industrieller Systeme zu bewältigen.
-Deswegen besitzt die Wiederverwendung von Schaltplänen und den darin enthaltenen Baugruppen und Funktionen eine zunehmende Bedeutung.
+Gleichzeitig steigen die Anforderungen an Standardisierung, Qualität und Effizienz in der Elektrokonstruktion um die steigende Komplexität industrieller Systeme zu bewältigen.
 \parencite{EPLAN2022Makrobibliotheken}
 
 Einen etablierten Ansatz zur Bewältigung dieser Herausforderungen stellt die Makrotechnologie in EPLAN dar. 
 EPLAN ist eine Softwarelösung für die Elektrokonstruktion, die die Planung, den Entwurf und die Dokumentation elektrischer Systeme durch Elektroschaltpläne unterstützt.
-Makros ermöglichen dabei die Speicherung sowie die projektübergreifende Wiederverwendung von Baugruppen, Funktionen und Seiten aus Elektroschaltplänen.
-Diese Makros werden in EPLAN erstellt und in einer Makrobibliothek gespeichert. 
+Makros ermöglichen dabei die Speicherung sowie die projektübergreifende Wiederverwendung von standardisierten Baugruppen, Funktionen und Seiten aus Elektroschaltplänen um damit die Effizienz und Konsistenz in der Elektrokonstruktion zu erhöhen.
+Eine vereinfachte Darstellung eines Makros für einen Motor ist in Abbildung \ref{fig:motor} dargestellt.
 \parencite{EPLAN2022Makrobibliotheken}
 
-Um ein Makro mit technischen Informationen des Bauteils zu verknüpfen, wird in EPLAN die sogenannte Artikelverwaltung verwendet. 
-Die Artikelverwaltung ermöglicht die Zuordnung von Artikeln zu Makros, wodurch Daten wie Hersteller, Spannung, Strom, Leistung und weiterer technischer Eigenschaften direkt mit dem entsprechenden Makro verknüpft werden können.
+\begin{figure}[htbp] 
+    \centering 
+    \includegraphics[width=\textwidth] 
+    {03_abbildungen/02_schemas/pdf/Motor.pdf} 
+    \caption{Motor} 
+    \label{fig:motor} 
+\end{figure}
+
+
+Um ein Makro mit technischen Informationen eines Bauteils zu verknüpfen, wird in EPLAN die sogenannte Artikelverwaltung verwendet. 
+Die Artikelverwaltung ermöglicht die Zuordnung von Artikeln zu Makros, wodurch Daten wie zum Beispiel Hersteller, Spannung, Strom, 
+Leistung direkt mit einem ausgewählten Makro verknüpft werden können. Abbildung \ref{fig:beispielartikel_motor} zeigt ein Beispiel für einen Artikel eines Elektromotors, der einem Motor-Makro zugeordnet werden kann.
 \parencite{EPLAN2023Artikelverwaltung}
 
 
+\begin{figure}[htbp] 
+    \centering 
+    \includegraphics[width=\textwidth] 
+    {03_abbildungen/02_schemas/pdf/Beispielartikel_Motor.pdf} 
+    \caption{Beispielartikel Motor} 
+    \label{fig:beispielartikel_motor} 
+\end{figure}
 
 
 
