@@ -1,0 +1,251 @@
+﻿\chapter{Datenstruktur und Trainingsformat}
+\label{chap:analyse_der_datenstrukturen}
+
+\section{Analyse der Ausgangsdaten}
+
+Die Datengrundlage für das entwickelte System bilden EPLAN-Artikel \parencite{EPLANArtikelverwaltung} und EPLAN-Fenstermakros \parencite{EPLAN-Makros}. Die Artikeldaten liegen in XML-Dateien vor. XML (\textit{Extensible Markup Language}) ist ein textbasiertes Auszeichnungsformat zur hierarchischen Speicherung strukturierter Daten in Elementen und Attributen. Die Fenstermakros liegen in EMA-Dateien mit der Endung \texttt{.ema} vor. Dabei handelt es sich um ein EPLAN-spezifisches Dateiformat mit XML-Struktur. Die Dateien enthalten unter anderem Hauptobjekte, interne \textit{MacroVariants}, Beschreibungen und Symbolbibliotheken \parencite{srcStep911} und beschreiben somit die Struktur und den Inhalt eines EPLAN-Fenstermakros \parencite{EPLAN-Makros}.
+Um diese Daten für ein Learning-to-Rank-System nutzbar zu machen, müssen diese zunächst aufbereitet und in ein maschinenverständliches Format überführt werden.
+
+Das Ziel der Datenaufbereitung besteht darin, alle technisch wichtigen Informationen der EPLAN-Artikel \parencite{EPLANArtikelverwaltung} sowie die strukturellen Merkmale der EPLAN-Fenstermakros \parencite{EPLAN-Makros} zu extrahieren. Auf dieser Grundlage kann die Eignung eines EPLAN-Artikels \parencite{EPLANArtikelverwaltung} für ein EPLAN-Fenstermakro \parencite{EPLAN-Makros} bewertet werden. 
+Die Umsetzung dieser Datenaufbereitung erfolgt innerhalb der entwickelten Trainings- und Rankingpipeline \parencite{srcStep911,srcPipeline}.
+
+Zum Zeitpunkt der Durchführung dieser Arbeit umfasst der Datensatz insgesamt 1.559 EPLAN-Artikel \parencite{EPLANArtikelverwaltung} und 375 Ziel-Makros (Targets) \parencite{EPLAN-Makros}, die zu 55 Makrofamilien gehören, darunter 213 Singleton-Targets und 279 Targets mit weniger als drei Trainingsbeispielen, wie in Tabelle \ref{tab:datensatzstatistik} dargestellt. Ein Ziel-Makro (Target) ist das EPLAN-Makro, das einem EPLAN-Artikel in den Ausgangsdaten tatsächlich zugeordnet ist und deshalb vom Modell erwartet wird. Im Datensatz wird diese Zuordnung im Feld \texttt{target\_macro} gespeichert und aus dem Dateinamen des zugeordneten .ema-Pfades abgeleitet.
+Ein Singleton-Target ist ein Ziel-Makro, das für die Profilbildung im vorhandenen Trainingsbestand nur durch einen EPLAN-Artikel repräsentiert wird und somit auf nur einem Trainingsbeispiel beruht. Der Support beschreibt die Häufigkeit, mit der ein Ziel-Makro durch einen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} im Datensatz vertreten ist. 
+
+\begin{table}[H] 
+    \centering 
+    \caption{Statistische Kennzahlen des verwendeten Datensatzes} 
+    \label{tab:datensatzstatistik} 
+    \begin{tabular}{lr} 
+        \toprule 
+        \textbf{Kennzahl} & \textbf{Wert} \\ 
+        \midrule 
+        Artikel & 1.559 \\ 
+        Makro-Targets & 375 \\ 
+        Makrofamilien & 55 \\ 
+        Singleton-Targets & 213 \\ 
+        Targets mit Support < 3 & 279 \\ 
+        \bottomrule 
+    \end{tabular} 
+\end{table}
+
+
+\section{Makrostrukturanalyse}
+
+Die Analyse der Makrostrukturen der EPLAN-Fenstermakros \parencite{EPLAN-Makros} konzentriert sich auf die enthaltenen Funktions- und Strukturmerkmale, welche die Grundstruktur und Funktionalität der Makros bestimmen \parencite{srcStep911}. Unter der Makrostruktur wird die Gesamtheit der strukturellen Eigenschaften eines EPLAN-Makros \parencite{EPLAN-Makros} verstanden. Dazu gehören Function-Template-Kategorien, -Gruppen und -IDs, deren Reihenfolge, Anschlussrollen und -nummern, die I/O-Belegung, Sicherheits- und Busmerkmale sowie aus der EMA-Datei gewonnene Angaben wie Hauptobjekte, interne \textit{MacroVariants} und Symbolbibliotheken.
+Tabelle \ref{tab:makrostrukturmerkmale} fasst die analysierten Merkmalsgruppen, die jeweils extrahierten Informationen und deren Bedeutung zusammen.
+
+\begin{table}[H]
+    \centering
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.08}
+    \caption{Analysierte Merkmalsgruppen der EPLAN-Fenstermakros}
+    \label{tab:makrostrukturmerkmale}
+    \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{4.0cm} >{\raggedright\arraybackslash}X}
+        \toprule
+        \textbf{Merkmalsgruppe} & \textbf{Extrahierte Merkmale und Bedeutung} \\
+        \midrule
+        Function-Template-\newline Struktur &
+        \textbf{Merkmale:} Function-Template-Kategorien, Function-Template-Gruppen, Function-Template-IDs, Function-Template-Sequenzen, Struktur-Hashes, Sequenz-Hashes.\newline
+        \textbf{Bedeutung:} Function-Templates sind EPLAN-Datensätze, die eine Funktion beziehungsweise einen Anschluss eines EPLAN-Artikels beschreiben. Kategorie, Gruppe und ID bilden dabei eine Hierarchie. Die Ausprägung wird durch Attribute wieAnschlussbezeichnung, Anschlussrolle, Klemmennummer beschrieben. Die Sequenz bezeichnet die Reihenfolge dieser Function-Templates im Datensatz. Die Merkmale beschreiben damit die funktionale Struktur und ermöglichen die Identifikation ähnlicher oder identischer Makrostrukturen. \\
+        \addlinespace
+        Anschluss- und\newline Signalstruktur &
+        \textbf{Merkmale:} Anzahl der Anschlüsse, Anschlussrollen, Anschlussarten, Signalanzahlen, Kanalzahlen, I/O-Schemata, Klemmeninformationen.\newline
+        \textbf{Bedeutung:} Beschreibt die technische Funktion sowie die Anschlusslogik eines EPLAN-Fenstermakros \parencite{EPLAN-Makros}. \\
+        \addlinespace
+        Geräteeigenschaften &
+        \textbf{Merkmale:} Bus-Systeme, Steckersysteme, Safety-Eigenschaften, LED-Eigenschaften, Leistungsmerkmale, Kommunikationsinformationen.\newline
+        \textbf{Bedeutung:} Ordnet Makros technisch im Maschinen- und Anlagenbau-Kontext ein. \\
+        \addlinespace
+        Varianten-\newline informationen &
+        \textbf{Merkmale:} Variantenkennungen, Baugruppeninformationen, Konfigurationsmerkmale, produktspezifische Strukturinformationen.\newline
+        \textbf{Bedeutung:} Unterstützt die Auflösung fachlich ähnlicher Varianten, die sich nur durch einzelne technische Eigenschaften oder Konfigurationsmerkmale unterscheiden. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Die Makrostrukturmerkmale werden beim Aufbau der Makrokandidatenprofile gespeichert. In der regulären Query-Kandidat-Feature-Berechnung werden diese jedoch nicht direkt mit einer unbekannten Artikelanfrage verglichen, da deren Ziel-Makrostruktur zur Anfragezeit nicht verfügbar ist.
+Diese Informationen werden für das Grundverständnis der Makrostruktur und für zukünftige Optimierungen des Abgleichsprozesses gespeichert.
+
+Ein Fingerprint ist ein MD5-Prüfwert über alle sortierten Dimensionen und Werte des Merkmalsvektors eines EPLAN-Artikels. Gleiche Fingerprints kennzeichnen identische extrahierte Repräsentationen. Artikel mit demselben Fingerprint werden beim Datensplit als gemeinsame Einheit behandelt, damit identische Informationen nicht auf Trainings- und Testdaten verteilt werden.
+
+
+\section{Aufbereitung der Artikeldaten}
+
+Neben den vorhandenen EPLAN-Fenstermakros \parencite{EPLAN-Makros} werden auch die EPLAN-Artikeldaten \parencite{EPLANArtikelverwaltung} aufbereitet und analysiert \parencite{srcStep911}.
+Die verwendeten Merkmalsgruppen sind in Tabelle \ref{tab:artikelmerkmale} zusammengefasst.
+
+\begin{table}[H]
+    \centering
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.08}
+    \caption{Aufbereitete Merkmalsgruppen der EPLAN-Artikeldaten}
+    \label{tab:artikelmerkmale}
+    \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}X}
+        \toprule
+        \textbf{Merkmalsgruppe} & \textbf{Merkmale} \\
+        \midrule
+        Identifikationsmerkmale & Hersteller, Produktfamilie, Produkttyp, Bestellnummer, Produktcodes \\
+        Elektrische Eigenschaften & Spannungswerte, Stromwerte, Leistungswerte, Frequenzangaben \\
+        Mechanische Eigenschaften & Abmessungen, Gewicht, Baugrößen, Gehäusemerkmale \\
+        Technologische Eigenschaften & Schutzarten, Kommunikationsstandards, Anschlussinformationen, spezielle Gerätefunktionen \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Vor der Extraktion der Merkmale werden die Ursprungsdaten normalisiert und in ein einheitliches Format überführt. 
+Dabei werden Texte, Schreibvarianten sowie technische Einheiten mithilfe regulärer Ausdrücke (Regular Expressions, RegEx) aufbereitet \parencite{srcStep911}.
+
+\section{Generierung von Makrokandidatenprofilen}
+
+Im nächsten Schritt wird für jedes bekannte EPLAN-Fenstermakro \parencite{EPLAN-Makros} ein Makrokandidatenprofil erstellt. Ein Makrokandidat ist ein mögliches Ziel-Makro, welches durch das Rankingmodell als Eignung für einen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} bewertet wird. Dabei wird nicht die EMA-Datei selbst an das Modell übergeben, sondern das für dieses Ziel-Makro erzeugte Kandidatenprofil. Ein Kandidatenprofil ist eine aggregierte Repräsentation eines Makrokandidaten aus technischen Merkmalen. Dafür werden die Struktur-, Artikel- und Textmerkmale aller zugeordneten Trainingsartikel zusammengeführt und um Häufigkeiten, Wertebereiche, Support und Fingerprint-Anzahl ergänzt. Für Merkmals-Kategorien werden die häufigsten Ausprägungen gespeichert. Für numerische Merkmale werden statistische Werte wie Mittelwert, Median, Minimum, Maximum und Häufigkeiten berechnet. 
+Die Berechnung dieser Kandidatenprofile erfolgt innerhalb der Trainingspipeline \parencite{srcStep931}.
+
+Im aktuellen Datensatz entstehen dadurch 375 Makrokandidatenprofile. Die Erstellung der Profile erfolgt ausschließlich auf der Grundlage des Trainingssplits. 
+Informationen aus den Validierungs- oder Testdaten werden nicht zur Profilerstellung verwendet. Für jedes Profil werden unter anderem das Ziel-Makro, die Makrofamilie, Supportinformationen, technische Vektorrepräsentationen, lexikalische Merkmale, Strukturmerkmale sowie statistische Eigenschaften gespeichert. 
+Die Profilbreite ist abhängig von der untersuchten Konfiguration. Für den später als Referenz verwendeten A08-Modellstand beträgt die Profilbreite 16 Artikel pro Kandidatenprofil.
+
+\section{Transformation in ein Rankingproblem}
+
+Im Folgenden wird der Begriff Eingangsartikel bevorzugt verwendet. Er bezeichnet den EPLAN-Artikel, für den passende EPLAN-Makros gerankt werden sollen. Die Begriffe Anfrage und Query werden synonym verwendet.
+
+Die Zuordnung der EPLAN-Fenstermakros \parencite{EPLAN-Makros} wird als Ranking-Aufgabe betrachtet. Für jede Anfrage werden alle EPLAN-Fenstermakro-Kandidaten \parencite{EPLAN-Makros} betrachtet, deren Profile ausschließlich aus dem Trainingssplit abgeleitet wurden. 
+Eine vorgeschaltete Reduktion auf eine Top-$N$-Kandidatenmenge findet im aktuellen System nicht statt, sodass alle Trainingsartikel für die Paar-Bildung verwendet werden.
+
+\begin{align}
+    C_q = \{c_1,c_2,\dots,c_n\}
+\end{align}
+
+Dabei bezeichnet $q$ die Anfrage bzw. den Eingangsartikel, $C_q$ die Menge aller Makrokandidaten und $c_i$ einen einzelnen Makrokandidaten. Für jede Anfrage wird anschließend jeweils ein Paar $(q,c_i)$ gebildet. Dadurch entsteht eine Rankingstruktur, in der die Makrokandidaten gegeneinander bewertet werden.
+
+\section{Berechnung der Pairwise-Merkmale}
+
+Ein Feature ist ein für das Modell auswertbares Merkmal, beispielsweise die Übereinstimmung einer Anschlussart oder die Differenz zweier Anschlusszahlen. Ein Feature-Vektor ordnet jedem Feature einen numerischen Wert zu und dient damit als Eingabe für das Rankingmodell.
+Für jedes Paar von Anfrage und EPLAN-Fenstermakrokandidat \parencite{EPLAN-Makros} wird ein Feature-Vektor erzeugt. Die dabei berechneten Pairwise-Merkmale entstehen aus dem Vergleich eines Eingangsartikels mit dem Kandidatenprofil. Beispiele hierfür sind exakte Übereinstimmungen, Jaccard-Ähnlichkeiten, Zahlenabweichungen und übereinstimmende Struktur-Hashes. Das Modell bewertet Artikel und Makros nicht isoliert, sondern anhand von Artikel-Kandidaten-Paaren.
+Die Merkmale der Anfrage-Kandidat-Paare lassen sich in mehrere Gruppen unterteilen: mengenbasierte Ähnlichkeitsmerkmale, numerische Vergleichsmerkmale, Function-Template- und Strukturmerkmale, Hash- und Identitätsmerkmale, lexikalische Merkmale, Support- und Profilmerkmale, Varianten- und Baugruppenmerkmale sowie technische Artikelmerkmale. Die verwendeten Struktur-, Sequenz- und Rollenhashes sind Fingerprints von außgewählten Function-Template-Strukturen. Der Sequenz-Hash berücksichtigt die geordnete Folge aus Kategorie, Gruppe und ID. Detailliertere Hashes beziehen zusätzlich Anschlussbezeichnungen, Nummern oder Indizes mit ein. Der Rollenhash bildet die Reihenfolge funktionaler Anschlussrollen ab. Aus technischer Sicht handelt es sich um auf zwölf Zeichen verkürzte MD5-Werte.
+
+Zur Bewertung von Merkmalsüberschneidungen wird unter anderem die Jaccard-Ähnlichkeit verwendet:
+
+\begin{align}
+    J(A,B) = \frac{|A \cap B|} {|A \cup B|}
+\end{align}
+
+Dabei bezeichnet $A$ die Merkmalsmenge der Anfrage und $B$ die Merkmalsmenge des Makrokandidaten. Der Wertebereich liegt zwischen 0 und 1.
+
+Um numerische Eigenschaften zu bewerten, werden Differenzmerkmale berechnet. Die absolute Differenz ist definiert als:
+
+\begin{align}
+    d(x,y) = |x-y|
+\end{align}
+
+Die relative Differenz wird berechnet durch:
+
+\begin{align}
+    d_{rel}(x,y) = \frac{|x-y|} {\max(|x|,|y|,\varepsilon)}
+\end{align}
+
+Dabei bezeichnet $x$ den Eigenschaftswert der Anfrage, $y$ den Eigenschaftswert des Kandidaten und $\varepsilon$ eine kleine Konstante zur Vermeidung von Division durch Null. Durch diese Metriken können technische Kennwerte aus unterschiedlichen Größenordnungen verglichen werden.
+
+Die weiteren Pairwise-Merkmale sind in Tabelle \ref{tab:pairwise_merkmale} zusammengefasst. 
+Die Berechnung der Pairwise-Merkmale erfolgt innerhalb der entwickelten Trainingspipeline \parencite{srcStep931}.
+
+\begin{table}[H] 
+    \centering 
+    \caption{Gruppen der Pairwise-Merkmale} 
+    \label{tab:pairwise_merkmale} 
+    \begin{tabularx}{\textwidth}{p{4cm}X} 
+        \toprule 
+        \textbf{Merkmalsgruppe} & \textbf{Funktion} \\ 
+        \midrule 
+        Mengen- und Ähnlichkeitsmerkmale & Jaccard-Ähnlichkeiten, Overlap-Raten und Mengenüberdeckungen technischer Merkmale \\ 
+        Numerische Vergleichsmerkmale & Absolute und relative Differenzen technischer Kennwerte sowie Verhältnismerkmale \\ 
+        Function-Template- und Strukturmerkmale & Function-Templates, I/O-Schemata, Terminalfunktionen, Sequenzen und technische Strukturmerkmale. Ein I/O-Schema fasst die Ein- und Ausgänge eines EPLAN-Artikels oder EPLAN-Makros zusammen; I/O steht für \textit{Input/Output}. Zum Beispiel beschreibt ein Schema wie \texttt{DI\_8\_DO\_4\_AI\_2} acht digitale Eingänge, vier digitale Ausgänge und zwei analoge Eingänge. \\
+        Hash- und Identitätsmerkmale & Struktur-, Sequenz- und Rollenhashes zur Identifikation technischer Zusammenhänge \\ 
+        Lexikalische Merkmale & Extrahierte Texteinheiten aus Bezeichnungen und Beschreibungen der EPLAN-Artikel \parencite{EPLANArtikelverwaltung} und EPLAN-Makros \parencite{EPLAN-Makros}. Texte werden dabei bereinigt, vereinheitlicht und anhand definierter Trennzeichen zerlegt. Einzelne Tokens können somit Wörter, technische Kürzel oder Produktcodes sein. \\
+        Support- und Profilmerkmale & Supportwerte, Singleton-Kennzeichen, Profilbreiten und statistische Eigenschaften der Kandidatenprofile \\ 
+        Varianten- und Baugruppenmerkmale & Variantenkennungen, Baugruppeninformationen und EMA-Dateibezogene Strukturmerkmale \\ 
+        Technische Artikelmerkmale & Spannungs-, Strom-, Leistungs-, Kommunikations- und Anschlussmerkmale \\ 
+        \bottomrule 
+    \end{tabularx} 
+\end{table}
+
+Die aktuelle Featurematrix umfasst für die Referenzkonfiguration A08 insgesamt 2.381 Merkmale. Dabei werden für jede Anfrage sämtliche 375 Kandidatenprofile bewertet. 
+Die konkreten Größen der Trainings-, Validierungs- und Testmatrizen ergeben sich erst nach der Datensplit-Erzeugung und werden in Kapitel \ref{chap:datensplit_und_training} beschrieben.
+
+\section{Erzeugung der Relevanzlabels}
+
+Für jedes Anfrage-Kandidaten-Paar wird ein Relevanzlabel erzeugt, das angibt, ob der Kandidat für die jeweilige Anfrage relevant ist oder nicht \parencite{srcStep931}.
+Im verwendeten Trainingsmodus existiert pro Anfrage genau ein korrektes EPLAN-Fenstermakro \parencite{EPLAN-Makros}. Die Funktion für die Relevanz lautet:
+
+\begin{align}
+    y(q,c) = \begin{cases} 1, & \text{wenn } c \text{ das Ziel-Makro von } q \text{ ist} \\ 0, & \text{sonst} \end{cases}
+\end{align}
+
+Dabei bezeichnet $y(q,c)$ das Relevanzlabel, $q$ die Anfrage und $c$ den Makrokandidaten. Jede Anfragegruppe enthält genau einen positiven Kandidaten und mehrere negative Kandidaten. 
+Die negativen Kandidaten sind dazu da, das Modell darauf zu trainieren, irrelevante Makros korrekt zu erkennen und von relevanten zu unterscheiden. 
+Dadurch werden nicht einzelne Objekte klassifiziert, sondern die korrekte Sortierung der Menge an Kandidaten \parencite{srcStep931}.
+
+Die Referenzkonfiguration A08 verwendet diese binäre Labeldefinition. Zusätzlich wurde im Rahmen von Konfigurationsexperimenten eine hierarchische Labeldefinition untersucht. 
+Dabei werden Makros derselben Familie sowie Makros mit identischem Familienpräfix durch eine abgestufte Relevanz berücksichtigt. 
+Diese Variante wird in der späteren Gegenüberstellung der Konfigurationsexperimente als separate Konfiguration betrachtet.
+
+\section{Erstellung des Trainingsformats}
+
+Die berechneten Merkmale werden als Matrix gespeichert. Jede Zeile steht für ein Anfrage-Kandidat-Paar \parencite{srcStep931}:
+
+\begin{align}
+    (q,c_i) \rightarrow [x_1,x_2,\dots,x_n]
+\end{align}
+
+Dabei bezeichnet $q$ die Anfrage, $c_i$ den Makrokandidaten und $x_1,\dots,x_n$ die berechneten Features. Zusätzlich wird die Zuordnung jeder Anfrage zu einer Gruppe von Kandidaten gespeichert:
+
+\begin{align}
+    G_q = \{(q,c_1),(q,c_2),\dots,(q,c_n)\}
+\end{align}
+
+Dabei beschreibt $G_q$ die Menge aller Anfrage-Kandidat-Paare für die Anfrage $q$. Die Informationen aus den Gruppen werden zusammen mit den Featurevektoren an den LambdaRANK-Algorithmus übergeben \parencite{srcStep931}. 
+Dadurch können die Kandidaten innerhalb derselben Anfrage gegeneinander bewertet werden und somit die optimale Rangfolge erlernt werden.
+
+\section{Zielinformations-Leakage} 
+
+Beim Aufbau der Trainingsdaten muss sichergestellt werden, dass nur solche Informationen verwendet werden, die auch während einer realen Anfrage verfügbar wären. 
+Die Query-Darstellung wird deshalb auf Merkmale beschränkt, die aus einem eingehenden EPLAN-Artikel oder einem technischen Datenblatt abgeleitet werden können. 
+Direkte Zielinformationen wie \texttt{target\_macro}, \texttt{target\_family} sowie weitere makrobezogene Zielfelder werden ausgeschlossen. 
+Makrostrukturinformationen werden ausschließlich innerhalb der Kandidatenprofile gespeichert. Zusätzlich werden Kandidatenprofile ausschließlich aus Artikeln des Trainingssplits erstellt.  
+Validierungs- und Testdaten fließen nicht in die Profilerstellung ein. Diese Maßnahmen bilden die Grundlage für die Leakage-Sicherheit der Trainingsdaten. 
+Diese Schutzmechanismen werden im Rahmen der Evaluationssuite in Kapitel \ref{chap:evaluierungskonzept} beschrieben.
+
+
+Für eine bessere Veranschaulichung des Datenflusses der Datenaufbereitung wird in Abbildung \ref{fig:trainingsformat_pipeline} eine schematische Darstellung gezeigt.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        label distance=0.2cm,
+        >=stealth,
+        font=\normalsize,
+        pipelinebox/.style={draw, rounded corners, fill=blue!8, text width=3.05cm, minimum height=1.45cm, inner ysep=0pt, align=center},
+        check/.style={draw, rounded corners, fill=orange!15, text width=3.05cm, minimum height=1.45cm, inner ysep=0pt, align=center},
+        flow/.style={->, thick, blue!70!black}
+    ]
+        \node[pipelinebox] (raw) at (0, 0) {\textbf{1} Ausgangsdaten};
+        \node[pipelinebox] (norm) at (4.0, 0) {\textbf{2} Normalisierung};
+        \node[pipelinebox] (profiles) at (8.0, 0) {\textbf{3} Makro-\\kandidatenprofile};
+        \node[pipelinebox] (pairs) at (12.0, 0) {\textbf{4} Anfrage-Kandidat-\\Paare};
+
+        \node[pipelinebox] (features) at (12.0, -1.9) {\textbf{5} Pairwise-\\Merkmale};
+        \node[pipelinebox] (labels) at (8.0, -1.9) {\textbf{6} Relevanzlabels};
+        \node[pipelinebox] (format) at (4.0, -1.9) {\textbf{7} Trainingsformat};
+        \node[check] (leakage) at (0, -1.9) {\textbf{8} Leakage-Schutz \& Split-Prüfung};
+
+        \draw[flow] (raw) -- (norm);
+        \draw[flow] (norm) -- (profiles);
+        \draw[flow] (profiles) -- (pairs);
+        \draw[flow] (pairs) -- (features);
+        \draw[flow] (features) -- (labels);
+        \draw[flow] (labels) -- (format);
+        \draw[flow] (format) -- (leakage);
+    \end{tikzpicture}
+    \caption{Verarbeitungsschritte von den Ausgangsdaten bis zum Trainingsformat.}
+    \label{fig:trainingsformat_pipeline}
+\end{figure}

@@ -1,0 +1,206 @@
+﻿\chapter{Datenanalyse und Trainigsvorbereitung}\label{chap:datenanalyse_und_trainingsvorbereitung}
+
+\section{Analyse der Ausgangsdaten}
+
+Eplan Dateien, .ema, Artikel, Makros, xml-format + Aufbau ...
+
+\section{Aufbereitung der Trainingsdaten}
+
+\section{Datensplit}
+
+\section{Trainingsbasis}
+
+% Nach der Datenaufbereitung sowie der Qualitätsprüfung der Daten erfolgt die Aufteilung in Trainings-, Validierungs- und Testdaten \parencite{srcStep911,srcStep913,srcIdealDataset,srcStep921}.
+% Ziel ist es, eine klare Trennung zwischen Modelltraining, Hyperparameteroptimierung und Modellbewertung zu schaffen. 
+% Um reproduzierbare Ergebnisse mit einem erstellten Datensplit zu gewährleisten, wird ein fester Zufallsseed verwendet  \parencite{srcStep921}.
+
+% \begin{align}
+%     \text{RANDOM\_SEED} = 42
+% \end{align}
+
+% Dabei wird keine reine Zufallsaufteilung vorgenommen, sondern fachliche Zusammenhänge der Daten berücksichtigt, um eine konsistente Verteilung über die Anfragegruppen sicherzustellen. 
+% Darüber hinaus wird sichergestellt, dass jedes Ziel-Makro, welches im Validierungs- oder Testsplit vorkommt, mindestens einmal als Beispiel im Trainingssplit repräsentiert wird.
+% Ziel-Makros, die im Gesamtdatensatz nur einmal auftreten, werden vollständig dem Trainingssplit zugeordnet.
+% Dies verhindert, dass eng verwandte Beispiele in unterschiedlichen Datensplits landen und somit die Glaubwürdigkeit der Modellbewertung negativ beeinflussen. 
+
+% Abbildung \ref{fig:datensplit_schema} fasst diese Aufteilung schematisch zusammen.
+
+% \begin{figure}[H]
+%     \centering
+%     \begin{tikzpicture}[
+%         font=\small,
+%         bar/.style={draw=blue!60!black, thick, rounded corners=4pt, align=center, minimum height=2.2cm, inner sep=5pt},
+%         seed/.style={draw=gray!50!black, rounded corners=4pt, fill=gray!8, align=center, minimum height=1.1cm, inner sep=5pt}
+%     ]
+%         \node[bar, fill=blue!15, text width=5.6cm] (train) at (0,0) {\textbf{Trainings-Split (60\,\%)}\\[1pt]\footnotesize Modelltraining \& Feature-Extraktion};
+%         \node[bar, fill=orange!20, text width=3.6cm, right=3pt of train] (val) {\textbf{Validierungs-Split (20\,\%)}\\[1pt]\footnotesize Hyperparameter-\\optimierung};
+%         \node[bar, fill=green!18, text width=3.2cm, right=3pt of val] (test) {\textbf{Test-Split (20\,\%)}\\[1pt]\footnotesize Evaluation};
+
+%         \node[seed, below=0.3cm of train.south west, anchor=north west, text width=13.3cm] (seedbox) {\footnotesize \textbf{Reproduzierbarkeit:} \texttt{RANDOM\_SEED = 42} $\mid$ Fingerprint-gruppierter Split (Leakage-Schutz)};
+%     \end{tikzpicture}
+%     \caption{Schematische Aufteilung der Trainings-, Validierungs- und Testdatenbasis.}
+%     \label{fig:datensplit_schema}
+% \end{figure}
+
+% Für den in dieser Arbeit verwendeten Referenzlauf ergibt sich folgende Aufteilung: 
+
+% \begin{itemize} 
+% \item Training: 984 Artikel 
+% \item Validation: 322 Artikel 
+% \item Test: 253 Artikel 
+% \end{itemize}
+
+
+% \section{Generierung von Makrokandidatenprofilen}
+
+% Im nächsten Schritt wird für jedes bekannte EPLAN-Fenstermakro \parencite{EPLAN-Makros} ein Makrokandidatenprofil erstellt. Ein Makrokandidat ist ein mögliches Ziel-Makro, welches durch das Rankingmodell als Eignung für einen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} bewertet wird. Dabei wird nicht die EMA-Datei selbst an das Modell übergeben, sondern das für dieses Ziel-Makro erzeugte Kandidatenprofil. Ein Kandidatenprofil ist eine aggregierte Repräsentation eines Makrokandidaten aus technischen Merkmalen. Dafür werden die Struktur-, Artikel- und Textmerkmale aller zugeordneten Trainingsartikel zusammengeführt und um Häufigkeiten, Wertebereiche, Support und Fingerprint-Anzahl ergänzt. Für Merkmals-Kategorien werden die häufigsten Ausprägungen gespeichert. Für numerische Merkmale werden statistische Werte wie Mittelwert, Median, Minimum, Maximum und Häufigkeiten berechnet. 
+% Die Berechnung dieser Kandidatenprofile erfolgt innerhalb der Trainingspipeline \parencite{srcStep931}.
+
+% Im aktuellen Datensatz entstehen dadurch 375 Makrokandidatenprofile. Die Erstellung der Profile erfolgt ausschließlich auf der Grundlage des Trainingssplits. 
+% Informationen aus den Validierungs- oder Testdaten werden nicht zur Profilerstellung verwendet. Für jedes Profil werden unter anderem das Ziel-Makro, die Makrofamilie, Supportinformationen, technische Vektorrepräsentationen, lexikalische Merkmale, Strukturmerkmale sowie statistische Eigenschaften gespeichert. 
+% Die Profilbreite ist abhängig von der untersuchten Konfiguration. Für den später als Referenz verwendeten A08-Modellstand beträgt die Profilbreite 16 Artikel pro Kandidatenprofil.
+
+% \section{Transformation in ein Rankingproblem}
+
+% Im Folgenden wird der Begriff Eingangsartikel bevorzugt verwendet. Er bezeichnet den EPLAN-Artikel, für den passende EPLAN-Makros gerankt werden sollen. Die Begriffe Anfrage und Query werden synonym verwendet.
+
+% Die Zuordnung der EPLAN-Fenstermakros \parencite{EPLAN-Makros} wird als Ranking-Aufgabe betrachtet. Für jede Anfrage werden alle EPLAN-Fenstermakro-Kandidaten \parencite{EPLAN-Makros} betrachtet, deren Profile ausschließlich aus dem Trainingssplit abgeleitet wurden. 
+% Eine vorgeschaltete Reduktion auf eine Top-$N$-Kandidatenmenge findet im aktuellen System nicht statt, sodass alle Trainingsartikel für die Paar-Bildung verwendet werden.
+
+% \begin{align}
+%     C_q = \{c_1,c_2,\dots,c_n\}
+% \end{align}
+
+% Dabei bezeichnet $q$ die Anfrage bzw. den Eingangsartikel, $C_q$ die Menge aller Makrokandidaten und $c_i$ einen einzelnen Makrokandidaten. Für jede Anfrage wird anschließend jeweils ein Paar $(q,c_i)$ gebildet. Dadurch entsteht eine Rankingstruktur, in der die Makrokandidaten gegeneinander bewertet werden.
+
+% \section{Berechnung der Pairwise-Merkmale}
+
+% Ein Feature ist ein für das Modell auswertbares Merkmal, beispielsweise die Übereinstimmung einer Anschlussart oder die Differenz zweier Anschlusszahlen. Ein Feature-Vektor ordnet jedem Feature einen numerischen Wert zu und dient damit als Eingabe für das Rankingmodell.
+% Für jedes Paar von Anfrage und EPLAN-Fenstermakrokandidat \parencite{EPLAN-Makros} wird ein Feature-Vektor erzeugt. Die dabei berechneten Pairwise-Merkmale entstehen aus dem Vergleich eines Eingangsartikels mit dem Kandidatenprofil. Beispiele hierfür sind exakte Übereinstimmungen, Jaccard-Ähnlichkeiten, Zahlenabweichungen und übereinstimmende Struktur-Hashes. Das Modell bewertet Artikel und Makros nicht isoliert, sondern anhand von Artikel-Kandidaten-Paaren.
+% Die Merkmale der Anfrage-Kandidat-Paare lassen sich in mehrere Gruppen unterteilen: mengenbasierte Ähnlichkeitsmerkmale, numerische Vergleichsmerkmale, Function-Template- und Strukturmerkmale, Hash- und Identitätsmerkmale, lexikalische Merkmale, Support- und Profilmerkmale, Varianten- und Baugruppenmerkmale sowie technische Artikelmerkmale. Die verwendeten Struktur-, Sequenz- und Rollenhashes sind Fingerprints von außgewählten Function-Template-Strukturen. Der Sequenz-Hash berücksichtigt die geordnete Folge aus Kategorie, Gruppe und ID. Detailliertere Hashes beziehen zusätzlich Anschlussbezeichnungen, Nummern oder Indizes mit ein. Der Rollenhash bildet die Reihenfolge funktionaler Anschlussrollen ab. Aus technischer Sicht handelt es sich um auf zwölf Zeichen verkürzte MD5-Werte.
+
+% Zur Bewertung von Merkmalsüberschneidungen wird unter anderem die Jaccard-Ähnlichkeit verwendet:
+
+% \begin{align}
+%     J(A,B) = \frac{|A \cap B|} {|A \cup B|}
+% \end{align}
+
+% Dabei bezeichnet $A$ die Merkmalsmenge der Anfrage und $B$ die Merkmalsmenge des Makrokandidaten. Der Wertebereich liegt zwischen 0 und 1.
+
+% Um numerische Eigenschaften zu bewerten, werden Differenzmerkmale berechnet. Die absolute Differenz ist definiert als:
+
+% \begin{align}
+%     d(x,y) = |x-y|
+% \end{align}
+
+% Die relative Differenz wird berechnet durch:
+
+% \begin{align}
+%     d_{rel}(x,y) = \frac{|x-y|} {\max(|x|,|y|,\varepsilon)}
+% \end{align}
+
+% Dabei bezeichnet $x$ den Eigenschaftswert der Anfrage, $y$ den Eigenschaftswert des Kandidaten und $\varepsilon$ eine kleine Konstante zur Vermeidung von Division durch Null. Durch diese Metriken können technische Kennwerte aus unterschiedlichen Größenordnungen verglichen werden.
+
+% Die weiteren Pairwise-Merkmale sind in Tabelle \ref{tab:pairwise_merkmale} zusammengefasst. 
+% Die Berechnung der Pairwise-Merkmale erfolgt innerhalb der entwickelten Trainingspipeline \parencite{srcStep931}.
+
+% \begin{table}[H] 
+%     \centering 
+%     \caption{Gruppen der Pairwise-Merkmale} 
+%     \label{tab:pairwise_merkmale} 
+%     \begin{tabularx}{\textwidth}{p{4cm}X} 
+%         \toprule 
+%         \textbf{Merkmalsgruppe} & \textbf{Funktion} \\ 
+%         \midrule 
+%         Mengen- und Ähnlichkeitsmerkmale & Jaccard-Ähnlichkeiten, Overlap-Raten und Mengenüberdeckungen technischer Merkmale \\ 
+%         Numerische Vergleichsmerkmale & Absolute und relative Differenzen technischer Kennwerte sowie Verhältnismerkmale \\ 
+%         Function-Template- und Strukturmerkmale & Function-Templates, I/O-Schemata, Terminalfunktionen, Sequenzen und technische Strukturmerkmale. Ein I/O-Schema fasst die Ein- und Ausgänge eines EPLAN-Artikels oder EPLAN-Makros zusammen; I/O steht für \textit{Input/Output}. Zum Beispiel beschreibt ein Schema wie \texttt{DI\_8\_DO\_4\_AI\_2} acht digitale Eingänge, vier digitale Ausgänge und zwei analoge Eingänge. \\
+%         Hash- und Identitätsmerkmale & Struktur-, Sequenz- und Rollenhashes zur Identifikation technischer Zusammenhänge \\ 
+%         Lexikalische Merkmale & Extrahierte Texteinheiten aus Bezeichnungen und Beschreibungen der EPLAN-Artikel \parencite{EPLANArtikelverwaltung} und EPLAN-Makros \parencite{EPLAN-Makros}. Texte werden dabei bereinigt, vereinheitlicht und anhand definierter Trennzeichen zerlegt. Einzelne Tokens können somit Wörter, technische Kürzel oder Produktcodes sein. \\
+%         Support- und Profilmerkmale & Supportwerte, Singleton-Kennzeichen, Profilbreiten und statistische Eigenschaften der Kandidatenprofile \\ 
+%         Varianten- und Baugruppenmerkmale & Variantenkennungen, Baugruppeninformationen und EMA-Dateibezogene Strukturmerkmale \\ 
+%         Technische Artikelmerkmale & Spannungs-, Strom-, Leistungs-, Kommunikations- und Anschlussmerkmale \\ 
+%         \bottomrule 
+%     \end{tabularx} 
+% \end{table}
+
+% Die aktuelle Featurematrix umfasst für die Referenzkonfiguration A08 insgesamt 2.381 Merkmale. Dabei werden für jede Anfrage sämtliche 375 Kandidatenprofile bewertet. 
+% Die konkreten Größen der Trainings-, Validierungs- und Testmatrizen ergeben sich erst nach der Datensplit-Erzeugung und werden in Kapitel \ref{chap:datensplit_und_training} beschrieben.
+
+% \section{Erzeugung der Relevanzlabels}
+
+% Für jedes Anfrage-Kandidaten-Paar wird ein Relevanzlabel erzeugt, das angibt, ob der Kandidat für die jeweilige Anfrage relevant ist oder nicht \parencite{srcStep931}.
+% Im verwendeten Trainingsmodus existiert pro Anfrage genau ein korrektes EPLAN-Fenstermakro \parencite{EPLAN-Makros}. Die Funktion für die Relevanz lautet:
+
+% \begin{align}
+%     y(q,c) = \begin{cases} 1, & \text{wenn } c \text{ das Ziel-Makro von } q \text{ ist} \\ 0, & \text{sonst} \end{cases}
+% \end{align}
+
+% Dabei bezeichnet $y(q,c)$ das Relevanzlabel, $q$ die Anfrage und $c$ den Makrokandidaten. Jede Anfragegruppe enthält genau einen positiven Kandidaten und mehrere negative Kandidaten. 
+% Die negativen Kandidaten sind dazu da, das Modell darauf zu trainieren, irrelevante Makros korrekt zu erkennen und von relevanten zu unterscheiden. 
+% Dadurch werden nicht einzelne Objekte klassifiziert, sondern die korrekte Sortierung der Menge an Kandidaten \parencite{srcStep931}.
+
+% Die Referenzkonfiguration A08 verwendet diese binäre Labeldefinition. Zusätzlich wurde im Rahmen von Konfigurationsexperimenten eine hierarchische Labeldefinition untersucht. 
+% Dabei werden Makros derselben Familie sowie Makros mit identischem Familienpräfix durch eine abgestufte Relevanz berücksichtigt. 
+% Diese Variante wird in der späteren Gegenüberstellung der Konfigurationsexperimente als separate Konfiguration betrachtet.
+
+% \section{Erstellung des Trainingsformats}
+
+% Die berechneten Merkmale werden als Matrix gespeichert. Jede Zeile steht für ein Anfrage-Kandidat-Paar \parencite{srcStep931}:
+
+% \begin{align}
+%     (q,c_i) \rightarrow [x_1,x_2,\dots,x_n]
+% \end{align}
+
+% Dabei bezeichnet $q$ die Anfrage, $c_i$ den Makrokandidaten und $x_1,\dots,x_n$ die berechneten Features. Zusätzlich wird die Zuordnung jeder Anfrage zu einer Gruppe von Kandidaten gespeichert:
+
+% \begin{align}
+%     G_q = \{(q,c_1),(q,c_2),\dots,(q,c_n)\}
+% \end{align}
+
+% Dabei beschreibt $G_q$ die Menge aller Anfrage-Kandidat-Paare für die Anfrage $q$. Die Informationen aus den Gruppen werden zusammen mit den Featurevektoren an den LambdaRANK-Algorithmus übergeben \parencite{srcStep931}. 
+% Dadurch können die Kandidaten innerhalb derselben Anfrage gegeneinander bewertet werden und somit die optimale Rangfolge erlernt werden.
+
+% \section{Zielinformations-Leakage} 
+
+% Beim Aufbau der Trainingsdaten muss sichergestellt werden, dass nur solche Informationen verwendet werden, die auch während einer realen Anfrage verfügbar wären. 
+% Die Query-Darstellung wird deshalb auf Merkmale beschränkt, die aus einem eingehenden EPLAN-Artikel oder einem technischen Datenblatt abgeleitet werden können. 
+% Direkte Zielinformationen wie \texttt{target\_macro}, \texttt{target\_family} sowie weitere makrobezogene Zielfelder werden ausgeschlossen. 
+% Makrostrukturinformationen werden ausschließlich innerhalb der Kandidatenprofile gespeichert. Zusätzlich werden Kandidatenprofile ausschließlich aus Artikeln des Trainingssplits erstellt.  
+% Validierungs- und Testdaten fließen nicht in die Profilerstellung ein. Diese Maßnahmen bilden die Grundlage für die Leakage-Sicherheit der Trainingsdaten. 
+% Diese Schutzmechanismen werden im Rahmen der Evaluationssuite in Kapitel \ref{chap:evaluierungskonzept} beschrieben.
+
+
+% Für eine bessere Veranschaulichung des Datenflusses der Datenaufbereitung wird in Abbildung \ref{fig:trainingsformat_pipeline} eine schematische Darstellung gezeigt.
+
+% \begin{figure}[H]
+%     \centering
+%     \begin{tikzpicture}[
+%         label distance=0.2cm,
+%         >=stealth,
+%         font=\normalsize,
+%         pipelinebox/.style={draw, rounded corners, fill=blue!8, text width=3.05cm, minimum height=1.45cm, inner ysep=0pt, align=center},
+%         check/.style={draw, rounded corners, fill=orange!15, text width=3.05cm, minimum height=1.45cm, inner ysep=0pt, align=center},
+%         flow/.style={->, thick, blue!70!black}
+%     ]
+%         \node[pipelinebox] (raw) at (0, 0) {\textbf{1} Ausgangsdaten};
+%         \node[pipelinebox] (norm) at (4.0, 0) {\textbf{2} Normalisierung};
+%         \node[pipelinebox] (profiles) at (8.0, 0) {\textbf{3} Makro-\\kandidatenprofile};
+%         \node[pipelinebox] (pairs) at (12.0, 0) {\textbf{4} Anfrage-Kandidat-\\Paare};
+
+%         \node[pipelinebox] (features) at (12.0, -1.9) {\textbf{5} Pairwise-\\Merkmale};
+%         \node[pipelinebox] (labels) at (8.0, -1.9) {\textbf{6} Relevanzlabels};
+%         \node[pipelinebox] (format) at (4.0, -1.9) {\textbf{7} Trainingsformat};
+%         \node[check] (leakage) at (0, -1.9) {\textbf{8} Leakage-Schutz \& Split-Prüfung};
+
+%         \draw[flow] (raw) -- (norm);
+%         \draw[flow] (norm) -- (profiles);
+%         \draw[flow] (profiles) -- (pairs);
+%         \draw[flow] (pairs) -- (features);
+%         \draw[flow] (features) -- (labels);
+%         \draw[flow] (labels) -- (format);
+%         \draw[flow] (format) -- (leakage);
+%     \end{tikzpicture}
+%     \caption{Verarbeitungsschritte von den Ausgangsdaten bis zum Trainingsformat.}
+%     \label{fig:trainingsformat_pipeline}
+% \end{figure}

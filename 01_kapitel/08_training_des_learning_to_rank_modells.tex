@@ -1,0 +1,120 @@
+\chapter{Training des Learning-to-Rank-Modells}\label{chap:training_des_learning_to_rank_modells}
+
+
+\section{Aufbau der Trainingsmatrix} 
+
+Nach der Erstellung der Kandidatenprofile werden für jede Anfrage die verfügbaren Makrokandidaten bewertet. 
+Für jede Anfrage werden Anfrage-Kandidat-Paare erzeugt und anhand der Pairwise-Merkmale aus Kapitel \ref{chap:analyse_der_datenstrukturen} beschrieben. 
+Die Referenzkonfiguration A08 verwendet insgesamt 375 Kandidatenprofile und 2.381 Merkmale. 
+Für jede Anfrage werden alle 375 Kandidatenprofile vollständig bewertet. 
+
+Tabelle \ref{tab:matrixdimensionen} fasst die Größenordnung der erzeugten Rankingmatrizen zusammen.
+
+\begin{table}[H]
+    \centering
+    \setlength{\tabcolsep}{5pt}
+    \renewcommand{\arraystretch}{1.08}
+    \caption{Dimensionen der erzeugten Rankingmatrizen}
+    \label{tab:matrixdimensionen}
+    \begin{tabular}{lrrrr}
+        \toprule
+        \textbf{Split} & \textbf{Anfragen} & \textbf{Kandidaten je Anfrage} & \textbf{Matrixzeilen} & \textbf{Merkmale} \\
+        \midrule
+        Training & 984 & 375 & 369.000 & 2.381 \\
+        Validation & 322 & 375 & 120.750 & 2.381 \\
+        Test & 253 & 375 & 94.875 & 2.381 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Der erzeugte Artikel-Kandidat-Merkmalsraum ist sehr groß und viele Merkmalswerte besitzen den Wert null. Aus diesem Grund werden Sparse-Matrizen verwendet. Bei einer Sparse-Matrix werden nicht belegte Werte nicht vollständig gespeichert, wodurch der Speicherbedarf reduziert wird. Die numerischen Werte werden im 32-Bit-Gleitkommaformat \texttt{float32} verarbeitet. 
+
+\section{Parameter Suche des Learning-to-Rank-Modells}
+
+Das zentrale Element dieser Architektur basiert auf LightGBM. LightGBM ist eine Bibliothek für Gradient Boosting mithilfe von Entscheidungsbäumen. Dabei werden sequentiell Entscheidungsbäume erzeugt, welche die Fehler des bisherigen Modells schrittweise korrigieren. Für Rankingaufgaben ist der \texttt{LGBMRanker} besonders geeignet. Dieser ist auf Rankinggruppen sowie relative Ergebnisreihenfolgen spezialisiert und verwendet in diesem Projekt das LambdaRank-Verfahren \parencite{LightGBM}.
+Dieser basiert auf dem in Kapitel \ref{chap:stand_der_technik} beschriebenen LambdaRank-/LambdaMART-Prinzip.
+
+Das Modell wird mit den Parametern 
+
+\begin{align} 
+    \text{objective} = \text{lambdarank} \qquad \text{und} \qquad \text{metric} = \text{ndcg}
+\end{align} 
+
+trainiert \parencite{srcStep931}.
+
+Der Parameter \texttt{objective} legt das Optimierungsziel des Modells fest. Mit \texttt{lambdarank} wird die Optimierung der Kandidatenreihenfolge durch LambdaRank aktiviert. Der Parameter \texttt{metric} bestimmt die verwendete Rankingmetrik der Bewertung; \texttt{ndcg} steht für Normalized Discounted Cumulative Gain und wird im Kapitel \ref{chap:stand_der_technik} näher erläutert.
+
+Die für die spätere Referenzkonfiguration A08 ausgewählten Modellparameter lauten: 
+
+\begin{align} 
+    n\_estimators &= 900 \\ 
+    learning\_rate &= 0.025 \\ 
+    num\_leaves &= 15 \\ 
+    min\_child\_samples &= 50 \\ 
+    lambdarank\_truncation\_level &= 5 
+\end{align}
+
+Zusätzlich wird eine Kandidatenprofilbreite von 16 Artikeln pro Makro verwendet. 
+
+Wie in Kapitel \ref{chap:analyse_der_datenstrukturen} beschrieben, werden Kandidaten einer Anfrage als gemeinsame Rankinggruppe betrachtet.
+Entsprechend entsteht für jede Anfrage eine Gruppe:
+
+\begin{align} 
+    G_q = \{(q,c_1),(q,c_2),\dots,(q,c_n)\} 
+\end{align} 
+
+mit der Anfrage $q$ und den zugehörigen Makrokandidaten $c_i$.
+
+Dadurch erlernt das Modell nicht die allgemeine Zugehörigkeit eines einzelnen Kandidaten zu einer Klasse. Stattdessen wird die optimale Kandidatenreihenfolge innerhalb derselben Anfrage gelernt.
+Ziel dabei ist es, dass der relevanteste Kandidat möglichst weit oben in der Rangliste erscheint.
+
+Die Eingaben für das Modell sind die im Kapitel \ref{chap:analyse_der_datenstrukturen} beschriebenen Pairwise-Merkmale.
+Das Training erfolgt dabei ausschließlich auf den Trainingsdaten, während die Optimierung der Hyperparameter über die Validierungsdaten erfolgt \parencite{srcStep931}.
+
+\section{Hyperparameteroptimierung}
+
+Für die Hyperparameteroptimierung wird eine Grid-Search mit insgesamt 15 definierten Parameterkonfigurationen verwendet. Ein Grid-Search ist die systematische Erprobung von zuvor festgelegten Kombinationen an Modellparametern. Jede Kombination wird dabei trainiert und anhand des Validierungsbestands bewertet; anschließend wird anhand definierter Rankingmetriken die beste Konfiguration ausgewählt. 
+Variiert werden dabei folgende Parameter: 
+
+\begin{itemize} 
+    \item \texttt{n\_estimators}, 
+    \item \texttt{learning\_rate}, 
+    \item \texttt{num\_leaves}, 
+    \item \texttt{min\_child\_samples}, 
+    \item \texttt{lambdarank\_truncation\_level}. 
+\end{itemize} 
+
+
+Die Tabelle \ref{tab:hyperparameter} zeigt die untersuchten Hyperparameterkombinationen.
+
+\begin{table}[H] 
+    \centering 
+    \setlength{\tabcolsep}{8pt}
+    \renewcommand{\arraystretch}{1.1}
+    \caption{Variierte Hyperparameter der Grid-Search \parencite{srcStep931}}
+    \label{tab:hyperparameter} 
+    \begin{tabularx}{0.85\textwidth}{>{\raggedright\arraybackslash}p{5.5cm} >{\raggedright\arraybackslash}X} 
+        \toprule 
+        \textbf{Parameter} & \textbf{Wertebereich} \\ 
+        \midrule 
+        \texttt{n\_estimators} & 300 bis 900 \\ 
+        \texttt{learning\_rate} & 0.025 bis 0.05 \\ 
+        \texttt{num\_leaves} & 15 bis 127 \\ 
+        \texttt{min\_child\_samples} & 5 bis 80 \\ 
+        \texttt{lambdarank\_truncation\_level} & 5 bis 20 \\
+        \bottomrule 
+    \end{tabularx} 
+\end{table}
+
+Dabei sind die Hyperparameter wie folgt zu verstehen:
+
+\begin{itemize}
+    \item \textbf{\texttt{n\_estimators}:} Anzahl der aufgebauten Entscheidungsbäume im Modell. Mehr Bäume = komplexere Zusammenhänge, aber mehr Rechenaufwand.
+    \item \textbf{\texttt{learning\_rate}:} Lernrate pro Trainingsschritt. Kleinere Werte führen zu vorsichtigerem, aber stabilerem Lernen.
+    \item \textbf{\texttt{num\_leaves}:} Maximale Anzahl der Blätter pro Baum. Mehr Blätter führen zu komplexeren Bäumen und erhöhen dadurch das Risiko von Overfitting. 
+    \item \textbf{\texttt{min\_child\_samples}:} Minimale Anzahl an Trainingsbeispielen in einem Blatt. Kleinere Werte = mehr Detailtreue pro Blatt, größere Werte = bessere Regularisierung (verhindert Overfitting).
+    \item \textbf{\texttt{lambdarank\_\allowbreak truncation\_level}:} Begrenzung des Ranglistenbereichs, der durch LambdaRank optimiert werden soll (Top 10, Top 20).
+\end{itemize}
+
+
+

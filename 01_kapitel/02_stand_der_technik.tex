@@ -1,0 +1,118 @@
+\chapter{Stand der Technik}\label{chap:stand_der_technik}
+
+\section{Large Language Models }
+
+\section{Fine-Tuning}
+
+\section{Sentence Transformers}
+
+\section{Embedding-Modelle}
+
+\section{Triplet Loss}
+
+\section{Learning-to-Rank}
+
+\subsection{Grundprinzip von Learning-to-Rank}
+
+Learning-to-Rank (LTR) bezeichnet eine Klasse von maschinellen Lernverfahren, die das Ziel besitzen, die Reihenfolge in einer Ergebnisliste zu optimieren \parencite{liu2009learning}.
+Im Gegensatz zu klassischen Klassifikations- oder Regressionsansätzen bewertet Learning-to-Rank keine einzelnen Objekte isoliert, sondern die relative Relevanz dieser Objekte in einer Kandidatenmenge.
+Die Aufgabe eines Rankingmodells besteht darin, dass für eine Anfrage die relevanten Dokumente anhand ihrer Merkmale bewertet werden und anschließend in eine Rangliste überführt werden.
+
+\subsection{LambdaRank}
+
+\section{Recall@k} 
+
+Recall@k gehört zu den grundlegenden Bewertungsmetriken des Information Retrievals und beschreibt den Anteil der Anfragen, bei denen mindestens ein relevantes Ergebnis innerhalb der ersten $k$ Rangpositionen gefunden wird \parencite{manning2008ir}. 
+Diese Metrik berechnet sich wie folgt: 
+
+\begin{align} 
+  Recall@k = \frac{ \# \text{Anfragen mit relevantem Ergebnis in Top-}k }{ \# \text{Anfragen} } 
+\end{align} 
+
+mit 
+
+\begin{description} 
+    \item[$k$]: Anzahl der betrachteten Rangpositionen 
+    \item[$\text{Anfragen mit relevantem Ergebnis in Top-}k$]: Anzahl erfolgreicher Anfragen 
+    \item[$\text{Anfragen}$]: Gesamtzahl aller Anfragen 
+\end{description} 
+
+Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 bedeutet, dass sich für jede Anfrage mindestens ein relevantes Ergebnis innerhalb der Top-$k$ Positionen der Rangliste befindet. 
+In Ranking- und Empfehlungssystemen wird Recall@k häufig verwendet, um die praktische Verwendung eines Systems beurteilen zu können.
+Der Anwender betrachtet dabei in der Regel nur die ersten Ergebnisse einer Rangliste \parencite{manning2008ir}.
+
+\section{Mean Reciprocal Rank} 
+
+Der Mean Reciprocal Rank (MRR) zählt neben Recall@k zu etablierten Bewertungsmetriken des Information Retrievals und wird sowohl in klassischen Suchsystemen als auch in modernen Rankingverfahren eingesetzt \parencite{voorhees1999mrr,zhu2024llmirsurvey}. 
+Mit dieser Kennzahl wird die Position des ersten relevanten Ergebnisses innerhalb einer Rangliste bewertet.
+
+Die Berechnung ergibt sich wie folgt:  
+
+\begin{align} 
+  MRR= \frac{1}{N} \sum_{i=1}^{N} \frac{1}{rank_i} 
+\end{align} 
+
+mit 
+
+\begin{description} 
+    \item[$N$] Anzahl der ausgewerteten Anfragen 
+    \item[$rank_i$] Rangposition des ersten relevanten Ergebnisses für Anfrage $i$ 
+\end{description} 
+
+Der Wertebereich liegt zwischen 0 und 1. Ein hoher Wert zeigt an, dass ein relevantes Ergebnis bereits an einer der vorderen Positionen einer Rangliste erscheint. 
+Da frühe Treffer stärker gewichtet werden als spätere Treffer, eignet sich die Kennzahl besonders zur Bewertung der schnellen Auffindbarkeit relevanter Ergebnisse.
+
+\section{Normalized Discounted Cumulative Gain} 
+
+Der Discounted Cumulative Gain (DCG) wurde von Järvelin und Kekäläinen zur Bewertung verschiedener Relevanzstufen von Suchergebnissen eingeführt und zählt zu den wichtigsten Bewertungsmetriken für Ranking- und Suchsysteme \parencite{jarvelin2002dcg}. 
+Die Kennzahl berücksichtigt sowohl die Relevanz eines Ergebnisses als auch die Position innerhalb der Rangliste. Relevante Ergebnisse auf frühen Rangpositionen leisten dadurch einen höheren Beitrag zur Gesamtbewertung. 
+
+Die Berechnung des DCG erfolgt über 
+
+\begin{align} 
+  DCG@k = \sum_{i=1}^{k} \frac{2^{rel_i}-1} {\log_2(i+1)} 
+\end{align} 
+
+mit 
+
+\begin{description} 
+  \item[$k$] Anzahl der betrachteten Rangpositionen 
+  \item[$i$] Rangposition innerhalb der Rangliste 
+  \item[$rel_i$] Relevanzwert des Ergebnisses auf Rangposition $i$ 
+\end{description} 
+
+Um eine bessere Vergleichbarkeit zu schaffen, findet eine Normierung auf die ideale Rangliste statt. Hieraus ergibt sich der Normalized Discounted Cumulative Gain (nDCG): 
+
+\begin{align} 
+nDCG@k= \frac{DCG@k} {IDCG@k} 
+\end{align} 
+mit 
+\begin{description} 
+  \item[$DCG@k$] DCG-Wert der betrachteten Rangliste 
+  \item[$IDCG@k$] \textit{Ideal Discounted Cumulative Gain}, also der höchstmögliche DCG-Wert, der bei einer idealen Sortierung der Kandidaten nach absteigender Relevanz erreicht würde 
+\end{description} 
+
+Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 entspricht der optimal möglichen Rangfolge.
+
+\section{Hierarchische Bewertungsmetriken} 
+
+Nicht jede fachliche Fehlentscheidung hat in technischen Empfehlungssystemen dieselbe Bedeutung.
+Ein Ergebnis kann beispielsweise einer technisch verwandten Produkt- oder Makrofamilie angehören, aber trotz fehlender exakter Übereinstimmung für den Anwender weiterhin von Interesse sein. 
+Zur Berücksichtigung solcher Beziehungen werden hierarchische Bewertungsmetriken eingesetzt. 
+
+Diese basieren typischerweise auf dem Discounted Cumulative Gain \parencite{jarvelin2002dcg} und verwenden unterschiedliche Relevanzen in abgestufter Reihenfolge. 
+
+Eine mögliche Relevanzfunktion lautet: 
+
+\begin{align} 
+rel = 
+\begin{cases} 3,& \text{exakte Übereinstimmung}\\ 2,& \text{gleiche Familie}\\ 0,& \text{keine fachliche Beziehung} 
+\end{cases} \end{align} 
+
+Dadurch wird eine Rangliste bevorzugt, welche fachlich ähnliche Kandidaten auf höheren Positionen platziert. 
+Hierarchische Bewertungsmetriken eignen sich insbesondere für industrielle Empfehlungssysteme, bei denen zwischen exakter Übereinstimmung und fachlicher Nähe unterschieden werden muss.
+
+
+
+
+

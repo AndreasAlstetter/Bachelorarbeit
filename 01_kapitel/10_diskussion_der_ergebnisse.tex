@@ -1,0 +1,159 @@
+\chapter{Diskussion der Ergebnisse}\label{chap:diskussion_der_ergebnisse}
+
+% \section{Ergebnisse des Validierungssplits}
+
+% Die Ergebnisse des Validierungssplits werden im späteren Verlauf für die Auswahl der besten Modellkonfiguration verwendet.
+
+% Tabelle \ref{tab:validation_ergebnisse} fasst die wichtigsten Rankingmetriken des Referenzlaufs A08 auf dem Validierungssplit zusammen. 
+
+% \begin{table}[H] 
+%   \centering 
+%   \caption{Ergebnisse des Referenzlaufs A08 auf dem Validierungssplit} 
+%   \label{tab:validation_ergebnisse} 
+%   \begin{tabular}{lr} \toprule \textbf{Metrik} & \textbf{Wert} \\ 
+%     \midrule 
+%     Target Recall@1 & 0,3137 \\
+%     Target Recall@3 & 0,4472 \\
+%     Target Recall@5 & 0,5031 \\
+%     Target Recall@10 & 0,6211 \\
+%     Family Recall@1 & 0,8199 \\
+%     Family Recall@10 & 0,8913 \\
+%     MRR & 0,4121 \\
+%     Hierarchical nDCG@10 & 0,6766 \\
+%     \bottomrule 
+%   \end{tabular} 
+% \end{table}
+
+% Die Ergebnisse zeigen, dass das Modell bereits auf dem Validierungssplit die korrekte Makrofamilie besser identifiziert als das exakte Ziel-Makro \parencite{EPLAN-Makros}.
+% Während das korrekte Ziel-Makro \parencite{EPLAN-Makros} in 31,37\,\% der Anfragen auf Platz 1 steht, wird die korrekte Makrofamilie in 81,99\,\% der Anfragen auf die erste Position gesetzt.
+
+% Durch den Target Recall@10 lässt sich erkennen, dass das Modell in 62,11\,\% der Anfragen das korrekte Ziel-Makro \parencite{EPLAN-Makros} innerhalb der Top-10-Vorschläge platziert.
+% Interessant ist der Abstand zwischen Family Recall@10 (89,13\,\%) und Target Recall@10 (62,11\,\%). Dies deutet darauf hin, dass viele Fehlkategorisierungen innerhalb derselben Makrofamilie stattfinden.
+
+% Der erzielte MRR-Wert von 0,4121 sowie das hierarchische nDCG@10 von 67,66\,\% zeigen zusätzlich, dass beim Validierungssplit das Modell in der Lage ist, eine sinnvolle Reihenfolge zu erzeugen, 
+% dabei jedoch weiterhin Schwierigkeiten bei der korrekten Auflösung technischer Varianten besitzt, \parencite{LTR_Configuration_Test_Series}.
+
+\section{Interpretation der Ergebnisse}
+
+Nachdem die Modellauswahl abgeschlossen wurde, erfolgt die finale Evaluation des ausgewählten Modells auf dem unberührten Testsplit.
+
+Tabelle \ref{tab:test_ergebnisse} zeigt die erzielten Ergebnisse des Referenzlaufs A08 auf dem Testsplit. 
+
+\begin{table}[H] 
+  \centering 
+  \caption{Ergebnisse des Referenzlaufs A08 auf dem Testsplit} 
+  \label{tab:test_ergebnisse} 
+  \begin{tabular}{lr} \toprule \textbf{Metrik} & \textbf{Wert} \\ \midrule 
+    Target Recall@1 & 0,3478 \\
+    Target Recall@3 & 0,4783 \\
+    Target Recall@5 & 0,5494 \\
+    Target Recall@10 & 0,6798 \\
+    Family Recall@1 & 0,8735 \\
+    Family Recall@10 & 0,9368 \\
+    MRR & 0,4534 \\
+    Hierarchical nDCG@10 & 0,7449 \\
+    \bottomrule 
+  \end{tabular} 
+\end{table}
+
+Beim Testsplit zeigt sich ein ähnliches Bild wie beim Validierungssplit. Das Modell sagt bei 34,78\,\% der Anfragen das korrekte Ziel-Makro \parencite{EPLAN-Makros} auf Platz 1 voraus, während die korrekte Makrofamilie in 87,35\,\% der Anfragen auf die erste Position gesetzt wird.
+
+Wie beim Validierungssplit ist auch hier der deutliche Abstand zwischen Family Recall@10 (93,68\,\%) und Target Recall@10 (67,98\,\%) zu erkennen. 
+
+Der erreichte MRR-Wert von 45,34\,\% sowie die hierarchische nDCG@10 von 74,49\,\% bestätigen zusätzlich die Erkenntnisse aus dem Validierungssplit, \parencite{LTR_Configuration_Test_Series}.
+
+\section{Ursachenanalyse der Rankingfehler}
+
+Um die Modellleistung detailliert erfassen zu können, werden die Top-1-Ergebnisse des Testsplits analysiert. Dabei werden die fachlichen Beziehungen zum tatsächlichen Ziel-Makro untersucht.
+
+Tabelle \ref{tab:fehleranalyse_top1} zeigt die Verteilung der einzelnen Fehlerkategorien. 
+
+\begin{table}[H] 
+  \centering 
+  \caption{Top-1-Analyse der Vorhersagen auf dem Testdatensatz} 
+  \label{tab:fehleranalyse_top1} 
+  \begin{tabular}{lrr} 
+    \toprule 
+    \textbf{Kategorie} & \textbf{Anzahl} & \textbf{Anteil} \\ 
+    \midrule 
+    Exaktes Ziel-Makro \parencite{EPLAN-Makros} & 88 & 34,78\,\% \\
+    Gleiche Familie, falsches Target & 133 & 52,57\,\% \\
+    Gleiches Familienpräfix & 12 & 4,74\,\% \\
+    Andere Familie & 20 & 7,91\,\% \\
+    \bottomrule 
+  \end{tabular} 
+\end{table}
+
+Die Fehleranalyse bestätigt die Beobachtungen aus den Metriken. Von insgesamt 253 Testanfragen werden 133 Fälle einer gleichen Familie, aber einer falschen Variante zugeordnet, was 52,57\,\% entspricht.
+In 7,91\,\% der Fälle wird eine andere Familie vorhergesagt. Das zeigt, dass das Modell die grundlegenden technischen Zusammenhänge zwischen Artikeln und Makrofamilien zuverlässig erlernt hat.
+Die Analyse zeigt, dass die zentrale Herausforderung die Identifikation des korrekten Ziel-Makros \parencite{EPLAN-Makros} innerhalb der richtigen Makrofamilie ist. Dafür muss die Variantenauflösung innerhalb der Makrofamilie weiter verbessert werden.
+Die große Differenz zwischen dem Target Recall@1 und dem Family Recall@1 unterstreicht diese Herausforderung zusätzlich.
+Dies wird im Kapitel \ref{chap:grenzen_und_ausblick} genauer analysiert, \parencite{LTR_Configuration_Test_Series}.
+
+% \section{Rangstatistische Analyse}
+
+% Eine weitere wichtige Analyse ist die statistische Auswertung der erzeugten Ranglisten.
+
+
+% Die wichtigsten Rangstatistiken des Testdatensatzes werden in Tabelle \ref{tab:rangstatistik} dargestellt.
+
+% Der Mean Rank ist der arithmetische Mittelwert der Rangpositionen des korrekten Ziel-Makros. Der Median Rank bezeichnet die Rangposition, unter beziehungsweise über der jeweils 50\,\% der Fälle liegen. Das $p$-Perzentil bezeichnet den Rang, den $p$ Prozent der Fälle nicht überschreiten.
+
+% \begin{table}[H] 
+%   \centering 
+%   \caption{Rangstatistische Kennzahlen des Testsplits} 
+%   \label{tab:rangstatistik} 
+%   \begin{tabular}{lr} 
+%     \toprule 
+%     \textbf{Kennzahl} & \textbf{Wert} \\ 
+%     \midrule 
+%     Erwarteter Zielrang (Mean Rank) & 23,96 \\
+%     Median Rank & 4 \\
+%     90\,\%-Perzentil Rank & 61,6 \\
+%     Maximaler Rang & 360 \\
+%     \bottomrule 
+%   \end{tabular} 
+% \end{table}
+
+% Der Median Rank von 4 zeigt, dass das korrekte Makro \parencite{EPLAN-Makros} in der Hälfte der Testanfragen unter den ersten vier Positionen der Rangliste erscheint.
+% Der mittlere Rang (Mean Rank) von 23,96 zeigt gleichzeitig, dass es einzelne schwierige Anfragen gibt, die deutlich schlechter eingeordnet werden.
+% Diese Annahme wird durch das 90\,\%-Perzentil von 61,6 bestätigt. Dabei sitzt das Makro \parencite{EPLAN-Makros} in 90\,\% der Testanfragen unter den ersten 61,6 Positionen der Rangliste.
+
+% Auch die Rangstatistiken zeigen, dass das Modell in der Lage ist, die korrekte Makrofamilie in den meisten Fällen weit oben in der Rangliste zu platzieren, \parencite{LTR_Configuration_Test_Series}.
+
+% \section{Generalisierungsfähigkeit}
+
+% Die Generalisierungsfähigkeit bedeutet, dass das Modell in der Lage ist, zuverlässige Rankings für nicht im Training verwendete EPLAN-Artikel zu erzeugen.
+% Zur Beurteilung der Generalisierungsfähigkeit des Modells wurde eine zusätzliche Leave-One-Out-Kontrollanalyse durchgeführt. Bei diesem Verfahren wird jeweils ein Beispiel zurückgehalten und anhand der verbleibenden Beispiele bewertet. Projektspezifisch wird für jeden Trainingsartikel das Kandidatenprofil seines eigenen Ziel-Makros ohne diesen Artikel neu gebildet und anschließend bewertet. Das trainierte Modell bleibt dabei unverändert; die Analyse dient ausschließlich diagnostischen Zwecken. Um eine Verfälschung der Ergebnisse der Trainingsanalyse zu verhindern, wird bei einer Anfrage genau dieser Artikel aus der Anfragemenge ausgeschlossen.
+
+
+% Tabelle \ref{tab:loo_vergleich} stellt die Ergebnisse der Leave-One-Out-Analyse (LOO) sowie der Validierungs- und Testergebnisse gegenüber.
+
+% \begin{table}[H] 
+%   \centering 
+%   \caption{Vergleich von regulärer Trainingsbewertung, Leave-One-Out-Analyse, Validation und Test} 
+%   \label{tab:loo_vergleich} 
+%   \begin{tabular}{lrrrr} 
+%     \toprule 
+%     \textbf{Metrik} & \textbf{Train (LOO)} & \textbf{Validation} & \textbf{Test} \\ 
+%     \midrule 
+%     Recall@1 & 0,1870 & 0,3137 & 0,3478 \\
+%     Recall@3 & 0,3028 & 0,4472 & 0,4783 \\
+%     Recall@10 & 0,4695 & 0,6211 & 0,6798 \\
+%     MRR & 0,2864 & 0,4121 & 0,4534 \\
+%     Family Recall@1 & 0,7246 & 0,8199 & 0,8735 \\
+%     Hierarchical nDCG@10 & 0,5945 & 0,6766 & 0,7449 \\
+%     Mean Rank & 25,93 & 23,96 & 23,96 \\
+%     Median Rank & 13,0 & 4,0 & 4,0 \\
+%     90\,\%-Perzentil & 62,0 & 61,6 & 61,6 \\
+%         \bottomrule 
+%     \end{tabular} 
+%     \end{table}
+
+% Es zeigt sich, dass die Leave-One-Out-Bewertung eine strengere Evaluationsmethode als die Bewertung durch den Validierungs- und Testdatensatz darstellt.
+% Die Ursache dafür liegt im Support der Kandidatenprofile. Von den vorhandenen 375 Kandidatenprofilen basieren insgesamt 302 Profile ausschließlich auf einem Trainingsartikel.
+% Wenn dieser Artikel aus der Anfragemenge ausgeschlossen wird, enthält das entsprechende Kandidatenprofil keine unterstützenden Trainingsdaten mehr und kann dadurch keinen Beitrag zur korrekten Vorhersage leisten.
+
+% Bei den Validierungs- und Testdaten tritt dieser Effekt nicht auf, da durch die im Datensplit erzwungene Trainingsabdeckung für jedes Ziel-Makro \parencite{EPLAN-Makros} mindestens ein Artikel in jedem Split vorhanden ist, der nicht identisch zu den anderen beiden ist.
+
+

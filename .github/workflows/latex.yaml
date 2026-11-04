@@ -1,0 +1,26 @@
+name: Build LaTeX Thesis
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: LaTeX kompilieren
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: Bachelorarbeit.tex
+          latexmk_shell_escape: true
+
+      - name: PDF als Artefakt speichern
+        uses: actions/upload-artifact@v4
+        with:
+          name: Bachelorarbeit-PDF
+          path: Bachelorarbeit.pdf

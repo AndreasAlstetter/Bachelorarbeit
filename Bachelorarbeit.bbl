@@ -1,0 +1,528 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{LTR_Configuration_Test_Series}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=696af597b47fbc9d6218a97d8879bd63}{%
+           family={Alstetter},
+           familyi={A\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{fullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{bibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorbibnamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authornamehash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhash}{696af597b47fbc9d6218a97d8879bd63}
+      \strng{authorfullhashraw}{696af597b47fbc9d6218a97d8879bd63}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Eigene Untersuchung}
+      \field{note}{Interne Konfigurationsanalyse der LTR-Modelle}
+      \field{title}{LTR Configuration Test Series}
+      \field{year}{2026}
+    \endentry
+    \entry{EPLAN-Makros}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=2d35a1714a0ec7130c424fb4e8e52d8c}{%
+           family={{EPLAN GmbH \& Co. KG}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {EPLAN-Plattform Infoportal}%
+      }
+      \strng{namehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{fullhash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{fullhashraw}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{bibnamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authorbibnamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authornamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authorfullhash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authorfullhashraw}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \field{extraname}{1}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Makros}
+      \field{urlday}{31}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.eplan.help/de-de/Infoportal/Content/Plattform/2025/Content/htm/macrosgui_k_start.htm
+      \endverb
+      \verb{url}
+      \verb https://www.eplan.help/de-de/Infoportal/Content/Plattform/2025/Content/htm/macrosgui_k_start.htm
+      \endverb
+    \endentry
+    \entry{EPLANArtikelverwaltung}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=2d35a1714a0ec7130c424fb4e8e52d8c}{%
+           family={{EPLAN GmbH \& Co. KG}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {EPLAN-Hilfe}%
+      }
+      \strng{namehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{fullhash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{fullhashraw}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{bibnamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authorbibnamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authornamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authorfullhash}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \strng{authorfullhashraw}{2d35a1714a0ec7130c424fb4e8e52d8c}
+      \field{extraname}{2}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{url}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Artikelverwaltung}
+      \field{urlday}{31}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.eplan.help/de-de/Infoportal/Content/Plattform/2.9/EPLAN_Help.htm#htm/partsmanagementgui_k_start.htm
+      \endverb
+      \verb{url}
+      \verb https://www.eplan.help/de-de/Infoportal/Content/Plattform/2.9/EPLAN_Help.htm#htm/partsmanagementgui_k_start.htm
+      \endverb
+    \endentry
+    \entry{jarvelin2002dcg}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=cc5ad10d6e2bd65521f850e6a5783201}{%
+           family={J\"{a}rvelin},
+           familyi={J\bibinitperiod},
+           given={Kalervo},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4211fe9dfed31746f5563ba969b7bbbb}{%
+           family={Kek\"{a}l\"{a}inen},
+           familyi={K\bibinitperiod},
+           given={Jaana},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{fullhash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{fullhashraw}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{bibnamehash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{authorbibnamehash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{authornamehash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{authorfullhash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{authorfullhashraw}{54e34fc2deb3a92b3d69d923863efa9c}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{ACM TOIS}
+      \field{number}{4}
+      \field{title}{Cumulated Gain-Based Evaluation of IR Techniques}
+      \field{volume}{20}
+      \field{year}{2002}
+      \field{pages}{422\bibrangedash 446}
+      \range{pages}{25}
+      \verb{doi}
+      \verb 10.1145/582415.582418
+      \endverb
+    \endentry
+    \entry{liu2009learning}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=716b89cbb7332599ebb33cc58a52f648}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Tie-Yan},
+           giveni={T\bibinithyphendelim Y\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{fullhash}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{fullhashraw}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{bibnamehash}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{authorbibnamehash}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{authornamehash}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{authorfullhash}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{authorfullhashraw}{716b89cbb7332599ebb33cc58a52f648}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Foundations and Trends in Information Retrieval}
+      \field{number}{3}
+      \field{title}{Learning to Rank for Information Retrieval}
+      \field{volume}{3}
+      \field{year}{2009}
+      \field{pages}{225\bibrangedash 331}
+      \range{pages}{107}
+      \verb{doi}
+      \verb 10.1561/1500000016
+      \endverb
+    \endentry
+    \entry{manning2008ir}{book}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=2214edb8305f7ccd7cdc310b3a8ae1b4}{%
+           family={Manning},
+           familyi={M\bibinitperiod},
+           given={Christopher\bibnamedelima D.},
+           giveni={C\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=68f523934985e2f967ab2b15f4ded07c}{%
+           family={Raghavan},
+           familyi={R\bibinitperiod},
+           given={Prabhakar},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9a80de0e5ec6df57363aaf321a5d05be}{%
+           family={Sch\"{u}tze},
+           familyi={S\bibinitperiod},
+           given={Hinrich},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{74f8a4742e6176570536838efea19700}
+      \strng{fullhash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{fullhashraw}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{bibnamehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authorbibnamehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authornamehash}{74f8a4742e6176570536838efea19700}
+      \strng{authorfullhash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authorfullhashraw}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Introduction to Information Retrieval}
+      \field{year}{2008}
+    \endentry
+    \entry{LightGBM}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b9a8b868588ad4bc6b36c29936e26423}{%
+           family={{Microsoft Corporation}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Microsoft Corporation}%
+      }
+      \strng{namehash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{fullhash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{fullhashraw}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{bibnamehash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{authorbibnamehash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{authornamehash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{authorfullhash}{b9a8b868588ad4bc6b36c29936e26423}
+      \strng{authorfullhashraw}{b9a8b868588ad4bc6b36c29936e26423}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{LightGBM}
+      \field{urlday}{31}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://lightgbm.readthedocs.io/
+      \endverb
+      \verb{url}
+      \verb https://lightgbm.readthedocs.io/
+      \endverb
+    \endentry
+    \entry{peffers2007dsrm}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=3127efe8cdd4557b7228a8724f568529}{%
+           family={Peffers},
+           familyi={P\bibinitperiod},
+           given={Ken},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8b17b21a3e4c61d1302f46cba38c6e50}{%
+           family={Tuunanen},
+           familyi={T\bibinitperiod},
+           given={Tuure},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=33ad207ea3031c6d744a31f5bc43c547}{%
+           family={Rothenberger},
+           familyi={R\bibinitperiod},
+           given={Marcus\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=edf3e165ce4429b30d49e353a7d1417a}{%
+           family={Chatterjee},
+           familyi={C\bibinitperiod},
+           given={Samir},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{4ccaed1d47a4875e5f027cdf2d20bbca}
+      \strng{fullhash}{0d82c455b50c2b184d97697dac2e8660}
+      \strng{fullhashraw}{0d82c455b50c2b184d97697dac2e8660}
+      \strng{bibnamehash}{0d82c455b50c2b184d97697dac2e8660}
+      \strng{authorbibnamehash}{0d82c455b50c2b184d97697dac2e8660}
+      \strng{authornamehash}{4ccaed1d47a4875e5f027cdf2d20bbca}
+      \strng{authorfullhash}{0d82c455b50c2b184d97697dac2e8660}
+      \strng{authorfullhashraw}{0d82c455b50c2b184d97697dac2e8660}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Management Information Systems}
+      \field{number}{3}
+      \field{title}{A Design Science Research Methodology for Information Systems Research}
+      \field{volume}{24}
+      \field{year}{2007}
+      \field{pages}{45\bibrangedash 77}
+      \range{pages}{33}
+      \verb{doi}
+      \verb 10.2753/MIS0742-1222240302
+      \endverb
+    \endentry
+    \entry{srcStep931}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ea91dcc0388ea8a1b4032b360041dffd}{%
+           family={{Pipeline step 931}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{ea91dcc0388ea8a1b4032b360041dffd}
+      \strng{fullhash}{ea91dcc0388ea8a1b4032b360041dffd}
+      \strng{fullhashraw}{ea91dcc0388ea8a1b4032b360041dffd}
+      \strng{bibnamehash}{ea91dcc0388ea8a1b4032b360041dffd}
+      \strng{authorbibnamehash}{ea91dcc0388ea8a1b4032b360041dffd}
+      \strng{authornamehash}{ea91dcc0388ea8a1b4032b360041dffd}
+      \strng{authorfullhash}{ea91dcc0388ea8a1b4032b360041dffd}
+      \strng{authorfullhashraw}{ea91dcc0388ea8a1b4032b360041dffd}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Interner Projektquellcode}
+      \field{title}{Pipeline step 931: Learning-to-Rank macro ranker training}
+      \field{year}{2026}
+    \endentry
+    \entry{sein2011adr}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=34bf2dcab0d6d63e82f19bd2b98ba750}{%
+           family={Sein},
+           familyi={S\bibinitperiod},
+           given={Maung\bibnamedelima K.},
+           giveni={M\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7e75377b05d5d70bf875340f2da582af}{%
+           family={Henfridsson},
+           familyi={H\bibinitperiod},
+           given={Ola},
+           giveni={O\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b3b1fce90efea94644b2189df6155319}{%
+           family={Purao},
+           familyi={P\bibinitperiod},
+           given={Sandeep},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=17ba57d6ffcdf7c38bb96e0b62e0425d}{%
+           family={Rossi},
+           familyi={R\bibinitperiod},
+           given={Matti},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=74364df827ec3cd1bee14be02e7d25d7}{%
+           family={Lindgren},
+           familyi={L\bibinitperiod},
+           given={Rikard},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{059cc3a5e67145cfe4769fbec287b2d4}
+      \strng{fullhash}{417ac5c94c408741a78d3eb1a993f429}
+      \strng{fullhashraw}{417ac5c94c408741a78d3eb1a993f429}
+      \strng{bibnamehash}{417ac5c94c408741a78d3eb1a993f429}
+      \strng{authorbibnamehash}{417ac5c94c408741a78d3eb1a993f429}
+      \strng{authornamehash}{059cc3a5e67145cfe4769fbec287b2d4}
+      \strng{authorfullhash}{417ac5c94c408741a78d3eb1a993f429}
+      \strng{authorfullhashraw}{417ac5c94c408741a78d3eb1a993f429}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{MIS Quarterly}
+      \field{number}{1}
+      \field{title}{Action Design Research}
+      \field{volume}{35}
+      \field{year}{2011}
+      \field{pages}{37\bibrangedash 56}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.2307/23043488
+      \endverb
+    \endentry
+    \entry{voorhees1999mrr}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=f13b7b0549ebe341faaf24632ca6083d}{%
+           family={Voorhees},
+           familyi={V\bibinitperiod},
+           given={Ellen\bibnamedelima M.},
+           giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ccc001abcd9a4514d7c7b12c4eb85487}{%
+           family={Tice},
+           familyi={T\bibinitperiod},
+           given={Dawn\bibnamedelima M.},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{21f31ece8d636a36beb3b499143fd50a}
+      \strng{fullhash}{21f31ece8d636a36beb3b499143fd50a}
+      \strng{fullhashraw}{21f31ece8d636a36beb3b499143fd50a}
+      \strng{bibnamehash}{21f31ece8d636a36beb3b499143fd50a}
+      \strng{authorbibnamehash}{21f31ece8d636a36beb3b499143fd50a}
+      \strng{authornamehash}{21f31ece8d636a36beb3b499143fd50a}
+      \strng{authorfullhash}{21f31ece8d636a36beb3b499143fd50a}
+      \strng{authorfullhashraw}{21f31ece8d636a36beb3b499143fd50a}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Eighth Text REtrieval Conference (TREC-8)}
+      \field{title}{The TREC-8 Question Answering Track Evaluation}
+      \field{year}{1999}
+      \verb{doi}
+      \verb 10.6028/NIST.SP.500-246.qa-overview
+      \endverb
+    \endentry
+    \entry{zhu2024llmirsurvey}{article}{}{}
+      \name{author}{10}{}{%
+        {{un=0,uniquepart=base,hash=bfdcce1b15d18e9797da1693dbe19fee}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Yutao},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f76cdc517936a4e923be1f1c54b0dd6d}{%
+           family={Yuan},
+           familyi={Y\bibinitperiod},
+           given={Huaying},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5bfcebdfe4c104a8225a96f2ea190223}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Shuting},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2d672e46325dac73288bc802b4010a5a}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Jiongnan},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=40b30bead87b068133576be76de88f77}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Wenhan},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=93d0e79ae7e45f69f3be80e6ce7f9bb6}{%
+           family={Deng},
+           familyi={D\bibinitperiod},
+           given={Chenlong},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5aaf76b42312672cce68f13a4b42e59d}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Haonan},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7e48bdec050a7bea1bb0d4acff3023eb}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Zheng},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9501b60d1d2fd8acf8b7d5f83111ba57}{%
+           family={Dou},
+           familyi={D\bibinitperiod},
+           given={Zhicheng},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5ff29ba5ea8e6fdd73a84f998eec45f2}{%
+           family={Wen},
+           familyi={W\bibinitperiod},
+           given={Ji-Rong},
+           giveni={J\bibinithyphendelim R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{cf0448ba0cc5da33822422d43ffc6762}
+      \strng{fullhash}{e0ae3e694f10233a37f23f7a7ca7dcb9}
+      \strng{fullhashraw}{e0ae3e694f10233a37f23f7a7ca7dcb9}
+      \strng{bibnamehash}{e0ae3e694f10233a37f23f7a7ca7dcb9}
+      \strng{authorbibnamehash}{e0ae3e694f10233a37f23f7a7ca7dcb9}
+      \strng{authornamehash}{cf0448ba0cc5da33822422d43ffc6762}
+      \strng{authorfullhash}{e0ae3e694f10233a37f23f7a7ca7dcb9}
+      \strng{authorfullhashraw}{e0ae3e694f10233a37f23f7a7ca7dcb9}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2308.07107}
+      \field{title}{Large Language Models for Information Retrieval: A Survey}
+      \field{year}{2024}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

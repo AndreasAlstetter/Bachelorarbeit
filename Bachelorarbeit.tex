@@ -1,0 +1,102 @@
+%%% ---------------------------------------------------------------------------------
+%%% Bachelorarbeit (LaTeX)
+%%% Haupteinstiegspunkt: Kapitel und Ressourcen sind nummeriert abgelegt.
+%%% ---------------------------------------------------------------------------------
+\documentclass[12pt,a4paper%
+              ,oneside
+              ,titlepage
+              ,DIV=13
+              ,headinclude
+              ,footinclude=false%
+              ,cleardoublepage=empty%
+              ,parskip=half,
+              BCOR=0mm,
+              ]{scrreprt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[authorName={Andreas Alstetter}
+           ,authorEnrolmentNo={2147455}
+           ,authorStreet={Pfarrer-Kempter Str.~4}
+           ,authorZip={89358}
+           ,authorCity={Kammeltal/Behlingen}
+           ,authorEMail={andreas.alstetter@tha.de}
+           ,authorPhone= {+4915201472197}
+           ,authorSignaturePlace={Augsburg}
+           ,studyProgram={Systems Engineering}
+%           ,thesisType={Bachelorarbeit}
+           ,thesisTitle={Proximitätssuche von EPLAN-Makros auf Basis des LambdaRank-Algorithmus}
+           ,studyDegree={{Bachelor of Engineering}}
+           ,faculty={{Fakultät für \\ Informatik}}
+           ,topicAssignment={16. Juni 2026}
+           ,submissionDate={\today}
+%           ,defenseDate={\today}
+%           ,nonDisclosure={false}
+           ,supervisor={Prof.~Dr.~Thomas Kirchmeier}
+           ,supervisorDeputy={Prof.~Dr.~Jürgen Grinninger}
+%           ,language={en}
+           ]{05_konfiguration/01_tha-abschlussarbeit}
+
+\hypersetup{
+  colorlinks=true,
+  allcolors=THAi-Blue,
+  linktocpage
+}
+
+\bibliography{02_literatur/01_quellen}
+\graphicspath{{03_abbildungen/}}
+
+\usepackage{caption}
+\usepackage{float}
+\usepackage[section]{placeins}
+\usetikzlibrary{positioning, arrows.meta}
+\captionsetup{font=small, labelfont=bf, skip=4pt}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlist{itemsep=2pt, topsep=3pt, parsep=0pt, partopsep=0pt}
+\DeclareCaptionLabelFormat{something}{#2.#1.}
+\captionsetup[lstlisting]{labelformat=something}
+
+\begin{document}
+
+\selectlanguage{\thesisLanguage}
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\THAtitlepage
+\tableofcontents
+
+\cleardoublepage
+\pagenumbering{arabic}
+
+\input{01_kapitel/01_motivation}
+\input{01_kapitel/02_stand_der_technik}
+\input{01_kapitel/03_handlungsbedarf_und_forschungsfrage}
+\input{01_kapitel/04_vorgehensweise}
+\input{01_kapitel/05_architektur}
+\input{01_kapitel/06_datenanalyse_und_trainingsvorbereitung}
+\input{01_kapitel/07_auswahl_des_modellansatzes}
+\input{01_kapitel/08_training_des_learning_to_rank_modells}
+\input{01_kapitel/09_modellbewertung}
+
+\input{01_kapitel/10_diskussion_der_ergebnisse}
+\input{01_kapitel/11_grenzen_und_ausblick}
+
+\input{01_kapitel/12_zusammenfassung_und_fazit}
+
+\appendix
+%\AuthorDeclaration
+
+\listoffigures
+\listoftables
+
+\renewcommand{\bibfont}{\footnotesize}
+\printbibliography[title={Literaturverzeichnis}, heading=bibintoc]
+
+{\setkomafont{section}{\Huge}
+\printindex
+}
+
+\end{document}
