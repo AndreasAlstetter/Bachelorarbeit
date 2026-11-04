@@ -1,23 +1,23 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Seite-1" id="XkU2vP_43FHuOO8AJT6j">
-    <mxGraphModel dx="495" dy="270" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="583" math="0" shadow="0">
+    <mxGraphModel dx="1493" dy="814" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="583" pageHeight="413" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="0NR2zt8QUiqUPmys-OSs-38" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Artikel: Motor&lt;/font&gt;" vertex="1">
-          <mxGeometry height="227" width="200" x="314" y="163" as="geometry" />
+        <mxCell id="0NR2zt8QUiqUPmys-OSs-38" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Artikel: Elektromotor&lt;/font&gt;" vertex="1">
+          <mxGeometry height="243" width="200" x="192" y="77" as="geometry" />
         </mxCell>
         <mxCell id="0NR2zt8QUiqUPmys-OSs-48" parent="0NR2zt8QUiqUPmys-OSs-38" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Hersteller: Siemens&lt;/font&gt;" vertex="1">
-          <mxGeometry height="50" width="200" y="20" as="geometry" />
+          <mxGeometry height="50" width="200" y="33" as="geometry" />
         </mxCell>
         <mxCell id="0NR2zt8QUiqUPmys-OSs-49" parent="0NR2zt8QUiqUPmys-OSs-38" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Spannung: 400 Volt&lt;/font&gt;" vertex="1">
-          <mxGeometry height="50" width="200" y="70" as="geometry" />
+          <mxGeometry height="50" width="200" y="80" as="geometry" />
         </mxCell>
         <mxCell id="0NR2zt8QUiqUPmys-OSs-50" parent="0NR2zt8QUiqUPmys-OSs-38" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Strom: 10 Ampere&lt;/font&gt;" vertex="1">
-          <mxGeometry height="50" width="200" y="120" as="geometry" />
+          <mxGeometry height="50" width="200" y="130" as="geometry" />
         </mxCell>
         <mxCell id="0NR2zt8QUiqUPmys-OSs-51" parent="0NR2zt8QUiqUPmys-OSs-38" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Leistung: 4000 Watt&amp;nbsp;&lt;/font&gt;" vertex="1">
-          <mxGeometry height="50" width="200" y="170" as="geometry" />
+          <mxGeometry height="50" width="200" y="180" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

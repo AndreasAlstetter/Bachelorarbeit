@@ -29,21 +29,21 @@ Gleichzeitig steigen die Anforderungen an Standardisierung, Qualität und Effizi
 Einen etablierten Ansatz zur Bewältigung dieser Herausforderungen stellt die Makrotechnologie in EPLAN dar. 
 EPLAN ist eine Softwarelösung für die Elektrokonstruktion, die die Planung, den Entwurf und die Dokumentation elektrischer Systeme durch Elektroschaltpläne unterstützt.
 Makros ermöglichen dabei die Speicherung sowie die projektübergreifende Wiederverwendung von standardisierten Baugruppen, Funktionen und Seiten aus Elektroschaltplänen um damit die Effizienz und Konsistenz in der Elektrokonstruktion zu erhöhen.
-Eine vereinfachte Darstellung eines Makros für einen Motor ist in Abbildung \ref{fig:motor} dargestellt.
+Eine vereinfachte Darstellung eines Makros für einen Motor ist in Abbildung \ref{fig:elektromotor} dargestellt.
 \parencite{EPLAN2022Makrobibliotheken}
 
 \begin{figure}[htbp] 
     \centering 
     \includegraphics[width=\textwidth] 
     {03_abbildungen/02_schemas/pdf/Motor.pdf} 
-    \caption{Motor} 
-    \label{fig:motor} 
+    \caption{Elektromotor} 
+    \label{fig:elektromotor} 
 \end{figure}
 
 
-Um ein Makro mit technischen Informationen eines Bauteils zu verknüpfen, wird in EPLAN die sogenannte Artikelverwaltung verwendet. 
+Um ein Makro mit technischen Informationen eines Elektrobauteils wie einem Elektromotor zu verknüpfen, wird in EPLAN die Artikelverwaltung verwendet. 
 Die Artikelverwaltung ermöglicht die Zuordnung von Artikeln zu Makros, wodurch Daten wie zum Beispiel Hersteller, Spannung, Strom, 
-Leistung direkt mit einem ausgewählten Makro verknüpft werden können. Abbildung \ref{fig:beispielartikel_motor} zeigt ein Beispiel für einen Artikel eines Elektromotors, der einem Motor-Makro zugeordnet werden kann.
+Leistung direkt mit einem ausgewählten Makro verknüpft werden können. Abbildung \ref{fig:beispielartikel_elektromotor} zeigt ein Beispiel für einen Artikel eines Elektromotors, der einem Motor-Makro zugeordnet werden kann.
 \parencite{EPLAN2023Artikelverwaltung}
 
 
@@ -51,10 +51,13 @@ Leistung direkt mit einem ausgewählten Makro verknüpft werden können. Abbildu
     \centering 
     \includegraphics[width=\textwidth] 
     {03_abbildungen/02_schemas/pdf/Beispielartikel_Motor.pdf} 
-    \caption{Beispielartikel Motor} 
-    \label{fig:beispielartikel_motor} 
+    \caption{Beispielartikel Elektromotor} 
+    \label{fig:beispielartikel_elektromotor} 
 \end{figure}
 
+Durch diesen getrennten Aufbau ist es möglich einem Makro mehrere Artikel zuzuordnen, wodurch unterschiedliche Varianten eines Makros abgebildet werden können.
+Beispielhaft könnte dem Makro für einen Elektromotor ein anderer Artikel des Herstellers SEW mit 230 Volt Spannung 5 Ampere Stromstärke und einer Leistung von 1150 Watt zugeordnet werden, ohne dabei das Makro selbst ändern zu müssen.
+Dadurch ergibt sich eine flexible Möglichkeit, unterschiedliche Varianten eines Elektrobauteils innerhalb eines Projekts abzubilden, ohne die zugrunde liegenden Makros ändern zu müssen.
 
 
 \section{Vision}
