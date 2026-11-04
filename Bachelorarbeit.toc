@@ -2,68 +2,68 @@
 \babel@toc {ngerman}{}\relax 
 \contentsline {chapter}{\numberline {1}Motivation}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Herleitung}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Vision}{1}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Herausforderung}{1}{section.1.3}%
-\contentsline {chapter}{\numberline {2}Stand der Technik}{2}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Large Language Models}{2}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Fine-Tuning}{2}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Sentence Transformers}{2}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Embedding-Modelle}{2}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Triplet Loss}{2}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Learning-to-Rank}{2}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Grundprinzip von Learning-to-Rank}{2}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}LambdaRank}{2}{subsection.2.6.2}%
-\contentsline {section}{\numberline {2.7}Recall@k}{2}{section.2.7}%
-\contentsline {section}{\numberline {2.8}Mean Reciprocal Rank}{3}{section.2.8}%
-\contentsline {section}{\numberline {2.9}Normalized Discounted Cumulative Gain}{4}{section.2.9}%
-\contentsline {section}{\numberline {2.10}Hierarchische Bewertungsmetriken}{4}{section.2.10}%
-\contentsline {chapter}{\numberline {3}Handlungsbedarf und Forschungsfrage}{6}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Handlungsbedarf}{6}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Forschungsfrage}{6}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Vorgehensweise}{7}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Methodisches Vorgehen}{7}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Iterativer Entwicklungsprozess}{7}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Architekturübersicht}{10}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Empfehlungssystem auf Basis eines Large Language Models mit Fine-Tuning}{10}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Empfehlungssystem auf Basis eines Sentence Transformers}{10}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Empfehlungssystem auf Basis eines Embedding-Modells mit Triplet Loss}{10}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Empfehlungssystem auf Basis eines Learning-to-Rank-Modells}{10}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Datenanalyse und Trainigsvorbereitung}{11}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Analyse der Ausgangsdaten}{11}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Aufbereitung der Trainingsdaten}{11}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Datensplit}{11}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Trainingsbasis}{11}{section.6.4}%
-\contentsline {chapter}{\numberline {7}Auswahl des Modell-Ansatzes}{12}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Gegenüberstellung der Modell-Ansätze}{12}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Large Language Model mit Fine-Tuning}{12}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Sentence-Transformer}{12}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Embedding-Modell mit Triplet Loss}{12}{subsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.1.4}Learning-to-Rank-Modell}{12}{subsection.7.1.4}%
-\contentsline {section}{\numberline {7.2}Modellauswahl}{12}{section.7.2}%
-\contentsline {chapter}{\numberline {8}Training des Learning-to-Rank-Modells}{13}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Aufbau der Trainingsmatrix}{13}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Parameter Suche des Learning-to-Rank-Modells}{13}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Hyperparameteroptimierung}{15}{section.8.3}%
-\contentsline {chapter}{\numberline {9}Modellbewertung}{16}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Versuchsserie A01--A09}{16}{section.9.1}%
-\contentsline {subsection}{\numberline {9.1.1}Untersuchte Konfigurationsparameter}{16}{subsection.9.1.1}%
-\contentsline {subsection}{\numberline {9.1.2}Referenzkonfiguration A01}{17}{subsection.9.1.2}%
-\contentsline {subsection}{\numberline {9.1.3}Ergebnisse}{18}{subsection.9.1.3}%
-\contentsline {subsection}{\numberline {9.1.4}Same-Family-Gewicht}{18}{subsection.9.1.4}%
-\contentsline {subsection}{\numberline {9.1.5}Hierarchische Labeldefinition}{19}{subsection.9.1.5}%
-\contentsline {subsection}{\numberline {9.1.6}Profilbreite}{19}{subsection.9.1.6}%
-\contentsline {subsection}{\numberline {9.1.7}Regularisierung}{19}{subsection.9.1.7}%
-\contentsline {subsection}{\numberline {9.1.8}Top-Konfiguration}{20}{subsection.9.1.8}%
-\contentsline {chapter}{\numberline {10}Diskussion der Ergebnisse}{21}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Interpretation der Ergebnisse}{21}{section.10.1}%
-\contentsline {section}{\numberline {10.2}Ursachenanalyse der Rankingfehler}{21}{section.10.2}%
-\contentsline {chapter}{\numberline {11}Grenzen und Ausblick}{23}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Grenzen des aktuellen Systems}{23}{section.11.1}%
-\contentsline {subsection}{\numberline {11.1.1}Geringer Support von Ziel-Makros}{23}{subsection.11.1.1}%
-\contentsline {subsection}{\numberline {11.1.2}Variantenauflösung innerhalb einer Makrofamilie}{24}{subsection.11.1.2}%
-\contentsline {subsection}{\numberline {11.1.3}Support-Bias häufiger Ziel-Makros}{24}{subsection.11.1.3}%
-\contentsline {section}{\numberline {11.2}Ausblick}{24}{section.11.2}%
-\contentsline {chapter}{\numberline {12}Zusammenfassung und Fazit}{26}{chapter.12}%
+\contentsline {section}{\numberline {1.2}Vision}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Herausforderung}{2}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Stand der Technik}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Large Language Models}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Fine-Tuning}{3}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Sentence Transformers}{3}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Embedding-Modelle}{3}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Triplet Loss}{3}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Learning-to-Rank}{3}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Grundprinzip von Learning-to-Rank}{3}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}LambdaRank}{3}{subsection.2.6.2}%
+\contentsline {section}{\numberline {2.7}Recall@k}{3}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Mean Reciprocal Rank}{4}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Normalized Discounted Cumulative Gain}{5}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Hierarchische Bewertungsmetriken}{5}{section.2.10}%
+\contentsline {chapter}{\numberline {3}Handlungsbedarf und Forschungsfrage}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Handlungsbedarf}{7}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Forschungsfrage}{7}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Vorgehensweise}{8}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Methodisches Vorgehen}{8}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Iterativer Entwicklungsprozess}{8}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Architekturübersicht}{11}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Empfehlungssystem auf Basis eines Large Language Models mit Fine-Tuning}{11}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Empfehlungssystem auf Basis eines Sentence Transformers}{11}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Empfehlungssystem auf Basis eines Embedding-Modells mit Triplet Loss}{11}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Empfehlungssystem auf Basis eines Learning-to-Rank-Modells}{11}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Datenanalyse und Trainigsvorbereitung}{12}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Analyse der Ausgangsdaten}{12}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Aufbereitung der Trainingsdaten}{12}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Datensplit}{12}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Trainingsbasis}{12}{section.6.4}%
+\contentsline {chapter}{\numberline {7}Auswahl des Modell-Ansatzes}{13}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Gegenüberstellung der Modell-Ansätze}{13}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Large Language Model mit Fine-Tuning}{13}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Sentence-Transformer}{13}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Embedding-Modell mit Triplet Loss}{13}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}Learning-to-Rank-Modell}{13}{subsection.7.1.4}%
+\contentsline {section}{\numberline {7.2}Modellauswahl}{13}{section.7.2}%
+\contentsline {chapter}{\numberline {8}Training des Learning-to-Rank-Modells}{14}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Aufbau der Trainingsmatrix}{14}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Parameter Suche des Learning-to-Rank-Modells}{14}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Hyperparameteroptimierung}{16}{section.8.3}%
+\contentsline {chapter}{\numberline {9}Modellbewertung}{17}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Versuchsserie A01--A09}{17}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}Untersuchte Konfigurationsparameter}{17}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {9.1.2}Referenzkonfiguration A01}{18}{subsection.9.1.2}%
+\contentsline {subsection}{\numberline {9.1.3}Ergebnisse}{19}{subsection.9.1.3}%
+\contentsline {subsection}{\numberline {9.1.4}Same-Family-Gewicht}{19}{subsection.9.1.4}%
+\contentsline {subsection}{\numberline {9.1.5}Hierarchische Labeldefinition}{20}{subsection.9.1.5}%
+\contentsline {subsection}{\numberline {9.1.6}Profilbreite}{20}{subsection.9.1.6}%
+\contentsline {subsection}{\numberline {9.1.7}Regularisierung}{20}{subsection.9.1.7}%
+\contentsline {subsection}{\numberline {9.1.8}Top-Konfiguration}{21}{subsection.9.1.8}%
+\contentsline {chapter}{\numberline {10}Diskussion der Ergebnisse}{22}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Interpretation der Ergebnisse}{22}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Ursachenanalyse der Rankingfehler}{22}{section.10.2}%
+\contentsline {chapter}{\numberline {11}Grenzen und Ausblick}{24}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Grenzen des aktuellen Systems}{24}{section.11.1}%
+\contentsline {subsection}{\numberline {11.1.1}Geringer Support von Ziel-Makros}{24}{subsection.11.1.1}%
+\contentsline {subsection}{\numberline {11.1.2}Variantenauflösung innerhalb einer Makrofamilie}{25}{subsection.11.1.2}%
+\contentsline {subsection}{\numberline {11.1.3}Support-Bias häufiger Ziel-Makros}{25}{subsection.11.1.3}%
+\contentsline {section}{\numberline {11.2}Ausblick}{25}{section.11.2}%
+\contentsline {chapter}{\numberline {12}Zusammenfassung und Fazit}{27}{chapter.12}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{30}{chapter*.15}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{31}{chapter*.15}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

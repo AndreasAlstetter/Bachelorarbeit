@@ -47,6 +47,80 @@
       \field{title}{LTR Configuration Test Series}
       \field{year}{2026}
     \endentry
+    \entry{EPLAN2022Makrobibliotheken}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=41c33e8d678e777bc05e86cad847dc43}{%
+           family={{EPLAN}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {EPLAN}%
+      }
+      \strng{namehash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{fullhash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{fullhashraw}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{bibnamehash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{authorbibnamehash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{authornamehash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{authorfullhash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{authorfullhashraw}{41c33e8d678e777bc05e86cad847dc43}
+      \field{extraname}{1}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Effizientes Erstellen von Schaltpl\"{a}nen: Symbole, Makros und Makro-Bibliotheken in der Elektrokonstruktion}
+      \field{urlday}{4}
+      \field{urlmonth}{11}
+      \field{urlyear}{2026}
+      \field{year}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.eplan.com/de-de/blog/software/makros-und-makro-bibliotheken-in-der-elektrokonstruktion
+      \endverb
+      \verb{url}
+      \verb https://www.eplan.com/de-de/blog/software/makros-und-makro-bibliotheken-in-der-elektrokonstruktion
+      \endverb
+    \endentry
+    \entry{EPLAN2023Artikelverwaltung}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=41c33e8d678e777bc05e86cad847dc43}{%
+           family={{EPLAN}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {EPLAN}%
+      }
+      \strng{namehash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{fullhash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{fullhashraw}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{bibnamehash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{authorbibnamehash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{authornamehash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{authorfullhash}{41c33e8d678e777bc05e86cad847dc43}
+      \strng{authorfullhashraw}{41c33e8d678e777bc05e86cad847dc43}
+      \field{extraname}{2}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Artikelverwaltung: Grundlagen}
+      \field{urlday}{4}
+      \field{urlmonth}{11}
+      \field{urlyear}{2026}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.eplan.help/de-DE/Infoportal/Content/Plattform/2023/Content/htm/articlesgui_k_grundlagen.htm
+      \endverb
+      \verb{url}
+      \verb https://www.eplan.help/de-DE/Infoportal/Content/Plattform/2023/Content/htm/articlesgui_k_grundlagen.htm
+      \endverb
+    \endentry
     \entry{EPLAN-Makros}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=2d35a1714a0ec7130c424fb4e8e52d8c}{%
@@ -271,6 +345,42 @@
       \verb https://lightgbm.readthedocs.io/
       \endverb
     \endentry
+    \entry{OECD2024}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e5ba65f1950d98bb451c8203a599b274}{%
+           family={{Organisation for Economic Co-operation and Development (OECD)}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {OECD}%
+      }
+      \strng{namehash}{e5ba65f1950d98bb451c8203a599b274}
+      \strng{fullhash}{e5ba65f1950d98bb451c8203a599b274}
+      \strng{fullhashraw}{e5ba65f1950d98bb451c8203a599b274}
+      \strng{bibnamehash}{e5ba65f1950d98bb451c8203a599b274}
+      \strng{authorbibnamehash}{e5ba65f1950d98bb451c8203a599b274}
+      \strng{authornamehash}{e5ba65f1950d98bb451c8203a599b274}
+      \strng{authorfullhash}{e5ba65f1950d98bb451c8203a599b274}
+      \strng{authorfullhashraw}{e5ba65f1950d98bb451c8203a599b274}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The OECD's Contribution to Policies to Optimise the Digital Transformation}
+      \field{urlday}{4}
+      \field{urlmonth}{11}
+      \field{urlyear}{2026}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://one.oecd.org/document/C/MIN(2024)10/en/pdf
+      \endverb
+      \verb{url}
+      \verb https://one.oecd.org/document/C/MIN(2024)10/en/pdf
+      \endverb
+    \endentry
     \entry{peffers2007dsrm}{article}{}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=3127efe8cdd4557b7228a8724f568529}{%
@@ -439,6 +549,84 @@
       \field{year}{1999}
       \verb{doi}
       \verb 10.6028/NIST.SP.500-246.qa-overview
+      \endverb
+    \endentry
+    \entry{WEF2026}{misc}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=9f6d16e0eaf271813481bd46be0c7a35}{%
+           family={{World Economic Forum}},
+           familyi={W\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=1d55af1659424cf94d869e2580a11bf8}{%
+           family={{Accenture}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {World Economic Forum}%
+      }
+      \strng{namehash}{d07c1f8046112dfa50d614fb7dbed2f9}
+      \strng{fullhash}{d07c1f8046112dfa50d614fb7dbed2f9}
+      \strng{fullhashraw}{d07c1f8046112dfa50d614fb7dbed2f9}
+      \strng{bibnamehash}{d07c1f8046112dfa50d614fb7dbed2f9}
+      \strng{authorbibnamehash}{d07c1f8046112dfa50d614fb7dbed2f9}
+      \strng{authornamehash}{d07c1f8046112dfa50d614fb7dbed2f9}
+      \strng{authorfullhash}{d07c1f8046112dfa50d614fb7dbed2f9}
+      \strng{authorfullhashraw}{d07c1f8046112dfa50d614fb7dbed2f9}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Intelligent Industrial Operations Outlook 2026}
+      \field{urlday}{4}
+      \field{urlmonth}{11}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://reports.weforum.org/docs/WEF_Intelligent_Industrial_Operations_Outlook_2026.pdf
+      \endverb
+      \verb{url}
+      \verb https://reports.weforum.org/docs/WEF_Intelligent_Industrial_Operations_Outlook_2026.pdf
+      \endverb
+    \endentry
+    \entry{WEF2023AIRevolution}{misc}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=9f6d16e0eaf271813481bd46be0c7a35}{%
+           family={{World Economic Forum}},
+           familyi={W\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=3e2cfbd2f2461bae7dcbc515d263e44a}{%
+           family={{Boston Consulting Group}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {World Economic Forum}%
+      }
+      \strng{namehash}{a4445c1ce0ef00f10d51f9b26e0f051e}
+      \strng{fullhash}{a4445c1ce0ef00f10d51f9b26e0f051e}
+      \strng{fullhashraw}{a4445c1ce0ef00f10d51f9b26e0f051e}
+      \strng{bibnamehash}{a4445c1ce0ef00f10d51f9b26e0f051e}
+      \strng{authorbibnamehash}{a4445c1ce0ef00f10d51f9b26e0f051e}
+      \strng{authornamehash}{a4445c1ce0ef00f10d51f9b26e0f051e}
+      \strng{authorfullhash}{a4445c1ce0ef00f10d51f9b26e0f051e}
+      \strng{authorfullhashraw}{a4445c1ce0ef00f10d51f9b26e0f051e}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Harnessing the AI Revolution in Industrial Operations: A Guidebook}
+      \field{urlday}{4}
+      \field{urlmonth}{11}
+      \field{urlyear}{2026}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www3.weforum.org/docs/WEF_Harnessing_the_AI_Revolution_in_Industrial_Operations_2023.pdf
+      \endverb
+      \verb{url}
+      \verb https://www3.weforum.org/docs/WEF_Harnessing_the_AI_Revolution_in_Industrial_Operations_2023.pdf
       \endverb
     \endentry
     \entry{zhu2024llmirsurvey}{article}{}{}
