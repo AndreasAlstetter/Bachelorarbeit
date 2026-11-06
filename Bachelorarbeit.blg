@@ -1,16 +1,16 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'Bachelorarbeit.blg'
-[100] biber-MSWIN64:342> INFO - === 
-[144] Biber.pm:421> INFO - Reading 'Bachelorarbeit.bcf'
-[250] Biber.pm:1002> INFO - Found 24 citekeys in bib section 0
-[264] Biber.pm:4487> INFO - Processing section 0
-[278] Biber.pm:4678> INFO - Looking for bibtex file '02_literatur/01_quellen.bib' for section 0
-[367] bibtex.pm:1713> INFO - LaTeX decoding ...
-[424] bibtex.pm:1519> INFO - Found BibTeX data source '02_literatur/01_quellen.bib'
-[600] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[600] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[600] Biber.pm:4307> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'de_DE'
-[600] Biber.pm:4313> INFO - No sort tailoring available for locale 'de_DE'
-[634] bbl.pm:676> INFO - Writing 'Bachelorarbeit.bbl' with encoding 'ascii'
-[634] bbl.pm:677> INFO - Converting UTF-8 to TeX macros on output to .bbl
-[659] bbl.pm:779> INFO - Output to Bachelorarbeit.bbl
+[108] biber-MSWIN64:342> INFO - === 
+[160] Biber.pm:421> INFO - Reading 'Bachelorarbeit.bcf'
+[294] Biber.pm:1002> INFO - Found 24 citekeys in bib section 0
+[308] Biber.pm:4487> INFO - Processing section 0
+[319] Biber.pm:4678> INFO - Looking for bibtex file '02_literatur/01_quellen.bib' for section 0
+[422] bibtex.pm:1713> INFO - LaTeX decoding ...
+[483] bibtex.pm:1519> INFO - Found BibTeX data source '02_literatur/01_quellen.bib'
+[647] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[648] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[648] Biber.pm:4307> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'de_DE'
+[648] Biber.pm:4313> INFO - No sort tailoring available for locale 'de_DE'
+[684] bbl.pm:676> INFO - Writing 'Bachelorarbeit.bbl' with encoding 'ascii'
+[684] bbl.pm:677> INFO - Converting UTF-8 to TeX macros on output to .bbl
+[716] bbl.pm:779> INFO - Output to Bachelorarbeit.bbl

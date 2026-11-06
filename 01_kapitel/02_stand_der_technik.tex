@@ -3,9 +3,9 @@
 \section{Grundlagen}
 
 \subsection{Modell}
-\label{subsec:modell}
+\label{sec:modell}
 
-Ein Modell ist das Ergebnis eines Trainingsprozesses, bei dem aus einer großen Menge von Beispieldaten Muster und Zusammenhänge gelernt werden und dabei die Modellparameter angepasst werden. 
+Ein Modell ist das Ergebnis eines Trainingsprozesses, bei dem aus einer großen Menge von Beispieldaten Muster und Zusammenhänge gelernt, und dabei die Modellparameter angepasst werden. 
 Das dabei erlernte Wissen wird im Modell gespeichert und kann anschließend genutzt werden, um neue Eingaben zu verarbeiten und passende Vorhersagen zu erzeugen. 
 Ein Modell bildet somit die Grundlage dafür, bereits gelernte Zusammenhänge auf bisher unbekannte Daten anzuwenden \parencite{LeCun2015}.
 
@@ -68,14 +68,16 @@ sodass das Modell in der Lage ist, Muster und Zusammenhänge in den Eingaben zu 
 \end{figure}
 
 
-\subsection{Vektoren, Vektorraum, Embeddings und Embedding-Raum}
+\subsection{Vom Vektor zum Embedding-Raum}
+\label{vom_vektor_zum_embedding}
 
 Vektoren sind geordnete Mengen von Zahlen, die in der Mathematik und Informatik verwendet werden, um Objekte im mehrdimensionalen Vektorraum darzustellen. 
 In der Verarbeitung natürlicher Sprache werden Wörter, Sätze und Dokumente häufig in Vektoren überführt.
-Ein anderes Wort für diese Vektoren ist Embeddings. Embeddings ermöglichen es, semantische Ähnlichkeiten zwischen Wörtern zu erfassen, indem ähnliche Wörter im mehrdimensionalen Embedding-Raum (vergleiche Abbildung \ref{fig:embedding3d}) nahe beieinander liegen.
+Ein anderes Wort für diese Vektoren ist Embeddings. Embeddings ermöglichen es, semantische Ähnlichkeiten zwischen Wörtern zu erfassen, 
+indem ähnliche Wörter im mehrdimensionalen Embedding-Raum (vergleiche Abbildung \ref{fig:embedding3d}) nahe beieinander liegen.
 Der Embedding-Raum ist der mehrdimensionale Raum, in dem diese Embeddings angeordnet sind. 
 In diesem Raum repräsentieren die Positionen der Embeddings die semantischen Beziehungen zwischen den entsprechenden Wörtern. 
-Jedes Wort wird dabei durch mehrere Zahlenwerte, die verschiedene Merkmale des Wortes repräsentieren, in einem Embedding dargestellt.
+Jedes Wort wird dabei durch mehrere Zahlenwerte, welche die verschiedenen Merkmale des Wortes repräsentieren, in einem Embedding dargestellt.
 Die einzelnen Dimensionen eines Embeddings besitzen hier keine direkte, für Menschen verständliche Bedeutung.
 Erst die Position der Embeddings im Raum ermöglicht es, semantische Ähnlichkeiten zwischen Wörtern zu erkennen \parencite{Mikolov2013}.
 
@@ -131,10 +133,55 @@ Das Embedding des Wortes „Auto“ unterscheidet sich dagegen stärker von „K
     % Auto 
     \filldraw[red] (-0.34,0.88,0.70) circle (1pt) node[left] {Auto}; 
   \end{tikzpicture} 
-  \caption{Vereinfachte Darstellung der Beispiel-Embeddings im dreidimensionalen Embedding-Raum} 
+  \caption{Vereinfachte Darstellung von Embeddings im dreidimensionalen Embedding-Raum} 
   \label{fig:embedding3d} 
 \end{figure}
 
+\subsection{Cosine Similarity}
+\label{sec:cosine_similarity}
+
+Die Cosine Similarity misst den Winkel zwischen zwei Vektoren im Embedding-Raum. Je kleiner der Winkel zwischen diesen Vektoren ist, desto ähnlicher sind sie zueinander.
+Die Länge der Vektoren wird dabei nicht betrachtet, sondern ausschließlich ihre Richtung im Raum \parencite{Reimers2019SBERT}.
+
+Zur Veranschaulichung soll die Cosine Similarity zunächst für die Wörter „Katze“ und „Hund“ berechnet werden. 
+
+\[ \mathbf{e}_{\text{Katze}} = 
+\begin{bmatrix} 0.82\\ -0.15\\ 0.47 
+\end{bmatrix} , 
+\qquad \mathbf{e}_{\text{Hund}} = 
+\begin{bmatrix} 0.79\\ -0.12\\ 0.51 
+\end{bmatrix} \] 
+
+Zunächst wird das Skalarprodukt beider Vektoren berechnet: 
+
+\[ \mathbf{e}_{\text{Katze}} 
+\cdot 
+\mathbf{e}_{\text{Hund}} =
+(0.82 \cdot 0.79) + 
+(-0.15 \cdot -0.12) + 
+(0.47 \cdot 0.51) \] 
+\[ = 0.6478 + 0.0180 + 0.2397 = 0.9055 \] 
+
+Anschließend werden die Längen der beiden Vektoren bestimmt: 
+
+\[ \|\mathbf{e}_{\text{Katze}}\| = 
+\sqrt{ 0.82^2 + (-0.15)^2 + 0.47^2} \] 
+\[ = \sqrt{ 0.6724 + 0.0225 + 0.2209} = 
+\sqrt{0.9158} = 0.9570 \] 
+\[ \|\mathbf{e}_{\text{Hund}}\| = 
+\sqrt{ 0.79^2 + (-0.12)^2 + 0.51^2} \] 
+\[ = \sqrt{ 0.6241 + 0.0144 + 0.2601} = 
+\sqrt{0.8986} = 0.9480 \] 
+
+Damit ergibt sich die Cosine Similarity zu 
+\[ \text{cosine\_similarity} (\mathbf{e}_{\text{Katze}}, 
+\mathbf{e}_{\text{Hund}}) = 
+\frac{0.9055} {0.9570\cdot0.9480} = 0.998 \] 
+
+Der errechnete Wert von 0.998 liegt sehr nahe bei 1. Dies zeigt, dass die Embeddings von „Katze“ und „Hund“ nahezu in dieselbe Richtung weisen und daher als semantisch sehr ähnlich betrachtet werden.
+
+Wird dagegen die Cosine Similarity zwischen „Katze“ und „Auto“ berechnet, ergibt sich analog zur Berechnung für „Katze“ und „Hund“ ein Wert von -0.073.
+Der Wert liegt nahe bei 0 und sogar leicht im negativen Bereich. Die beiden Embeddings weisen daher in deutlich unterschiedliche Richtungen und werden als semantisch unähnlich betrachtet.
 
 \section {Modellansätze}
 
@@ -150,7 +197,7 @@ Large Language Models (LLMs) basieren auf neuronalen Sprachmodellen und erweiter
 Sie bilden die Grundlage für generative KI-Systeme und ermöglichen die Bearbeitung von verschiedenen Aufgaben aus dem bereich der natürlichen Sprachverarbeitung.
 Dazu zählen Textgenerierung, Textklassifikation, Frage-Antwort-Systeme sowie das liefern mehrer relevanter Ergebnisse zu einer Suchanfrage, dem sogenannten Information Retrieval \parencite{Zhao2023}.
 
-Moderne LLMs bestehen typischerweise aus mehreren Milliarden Parametern. Während des Trainings werden hierbei diese Modellparameter wie in \autoref{subsec:modell} beschrieben auf Zusammenhänge gelernt. 
+Moderne LLMs bestehen typischerweise aus mehreren Milliarden Parametern. Während des Trainings werden hierbei diese Modellparameter wie in \autoref{sec:modell} beschrieben auf Zusammenhänge gelernt. 
 Diese Zusammenhänge beziehen sich hier auf die statistischen Beziehungen zwischen Wörtern, Sätzen und Dokumenten.
 Dadurch können LLMs Aufgaben Lösen, auf die sie nicht explizit trainiert wurden, da die Antwort auf eine Eingabe aus dem erlernten Wissen abgeleitet werden kann. 
 Hierbei spielt die Generalisierungsfähigkeit des Modells eine entscheidende Rolle. Anhand dieser Fähigkeit wird die Leistungsfähigkeit eines LLMs bei der Bearbeitung neuer, bisher unbekannter Aufgaben bewertet \parencite{Zhao2023}.
@@ -162,24 +209,30 @@ Dabei erkennt das Modell, dass die Wörter „Anna“, „trinkt“ und „Kaffe
 \subsection{Fine-Tuning}
 
 Large Language Models werden auf allgemeine Textkorpora vortrainiert, um ein umfangreiches sprachliches und sachliches Wissen zu erwerben.
-Dies führt dazu, dass das Modell ein breites Wissen über Sprach und Sachverhalte erwirbt, aber möglicherweise nicht auf spezifische Aufgaben oder einzelnen Fachbereiche spezialisiert ist.
+Dies führt dazu, dass das Modell ein breites Wissen erwirbt, aber möglicherweise nicht auf spezifische Aufgaben oder einzelnen Fachbereiche spezialisiert ist.
 Um ein LLM auf spezifische Aufgaben oder Fachbereiche anzupassen, wird häufig das sogenannte Fine-Tuning eingesetzt. 
-Hierbei wird das vortrainierte LLM mit Informationen zu der spezifischen Aufgabe oder Fachbereichs weiter trainiert, 
+Hierbei wird das vortrainierte LLM mit Informationen zu der spezifischen Aufgabe oder dem Fachbereich weiter trainiert, 
 um damit die Leistungsfähigkeit an die Anforderrungen des jeweiligen Einsatzbereichs anzupassen \parencite{Wei2022,Zhang2023InstructionTuning}.
 
 Das Grundprinzip des Fine-Tunings ist es, dass ein vortrainiertes LLM nicht vollständig neu trainiert werden muss, 
-sondern das vorhanden Wissen als Ausgangspunkt genutzt werden kann und mit Daten aus dem spezifischen Fachbereich weiter trainiert wird.
-Dadurch ist es möglich, deutliche bessere Ergebnisse zu erzielen, als bei einem kompletten Neutraining eines neuronalen Sprachmodells
-Dadurch ist der Trainigsaufwand im Vergleich zu einem vollständigen Neutraining deutlich geringer.\parencite{Wei2022}.
+sondern das vorhanden Wissen als Ausgangspunkt genutzt werden kann.
+Dadurch ist es möglich, deutlich bessere Ergebnisse zu erzielen, als bei einem kompletten Neutraining eines neuronalen Sprachmodells.
+Der Trainingsaufwand ist im Vergleich zu einem vollständigen Neutraining deutlich geringer.\parencite{Wei2022}.
 
-Um dies am obrigen Beispiel zu verdeutlichen: Angenommen, das LLM soll zusätzlich Informationen über die Vorlieben von Anna beim Kaffeetrinken lernen. 
+Um dies am obrigen Beispiel mit Anna zu verdeutlichen: Angenommen, das LLM soll zusätzlich Informationen über die Vorlieben von Anna beim Kaffeetrinken lernen. 
 Durch Fine-Tuning mit entsprechenden Daten kann das Modell die Aufmerksamkeit gezielt auf relevante Zusammenhänge lenken, wie zum Beispiel die Präferenz von Anna für bestimmte Kaffeesorten oder Zubereitungsarten.
 Dabei wird dann der Attention-Mechanismus des Modells gezielt auf die neuen relevanten Informationen für Annas Kaffeetrinken ausgerichtet.
 
+\subsection{Embedding-Modelle}
+
+Embedding-Modelle bauen auf dem Grundpinzip aus Kapitel \ref{vom_vektor_zum_embedding} auf. 
+Es handelt sich um Modelle, welche jegliche Arte von Eingaben wie Wörter, Sätze, Bilder oder Audioinhalte in Embeddings überführen und diese Eingaben dann in einem Embedding-Raum abbilden.
+Dadurch ist es möglich, die semantische Ähnlichkeit zwischen verschiedenen Eingaben zu bestimmen, indem die Abstände ihrer Embeddings im Embedding-Raum betrachtet werden. 
+Hierfür wird typischerweise die Cosine Similarity (vergleiche Abschnitt \ref{sec:cosine_similarity}) zwischen den Embeddings berechnet, um die semantische Ähnlichkeit zu quantifizieren.
 
 \subsection{Sentence Transformers}
 
-Bei Sentence Transformers handelt es sich um neuronale Sprachmodelle, die vollständige Sätze oder Dokumente in Embeddings, überführen.
+Bei Sentence Transformers handelt es sich um eine weiterentwickelte Form von Embedding-Modellen, die vollständige Sätze oder Dokumente in Embeddings, überführen.
 Das Ziel eines Sentence Transformers ist es, semantisch ähnliche Texte im Embedding-Raum nahe beieinander zu platzieren, während semantisch unterschiedliche Texte weiter voneinander entfernt liegen.
 Sentence Transformers werden häufig für Aufgaben wie semantische Suche oder Empfehlungssysteme eingesetzt.
 Anstatt ausschließlich identische Schlüsselwörter zu suchen, ermöglichen sie die Identifikation inhaltlich ähnlicher Dokumente auch dann, wenn unterschiedliche Formulierungen verwendet werden \parencite{Reimers2019SBERT}.
@@ -194,44 +247,50 @@ Anstatt ausschließlich identische Schlüsselwörter zu suchen, ermöglichen sie
     { draw, fill=blue!10, rounded corners, minimum width=2.5cm, minimum height=1cm } ] 
     % Eingabetexte 
     \node[textnode] (t1) at (0,2) 
-    {Hund\\Braun, 2 Jahre alt}; 
+    {Der Hund ist Braun \\ und 2 Jahre alt}; 
     \node[textnode] (t2) at (0,0) 
-    {Dackel\\Braun, 2 Jahre alt}; 
+    {Der Dackel ist Braun \\ und 2 Jahre alt}; 
     \node[textnode] (t3) at (0,-2) 
-    {Katze\\Schwarz, 7 Jahre alt}; 
-    % Sentence Transformer 
-    \node[model] (m1) at (5,2) 
-    {Sentence\\Transformer}; 
-    \node[model] (m2) at (5,0) 
-    {Sentence\\Transformer}; 
-    \node[model] (m3) at (5,-2) 
-    {Sentence\\Transformer}; 
+    {Die Katze ist Schwarz \\ und 7 Jahre alt}; 
+    % Sentence Transformer
+    \node[model] (m1) at (5,2) {Sentence Transformer}; 
+    \node[model] (m2) at (5,0) {Sentence Transformer}; 
+    \node[model] (m3) at (5,-2) {Sentence Transformer}; 
     % Pfeile zum Modell 
     \draw[->] (t1) -- (m1); 
     \draw[->] (t2) -- (m2); 
     \draw[->] (t3) -- (m3); 
-    % Embedding-Raum 
-    \draw[->] (9,-3) -- (13,-3) node[right] {x}; 
-    \draw[->] (9,-3) -- (9,1) node[above] {y}; 
-    \node at (11,-3.8) {Embedding-Raum}; 
-    % Punkte 
-    \filldraw[blue] (10.5,-0.2) circle (2pt); 
-    \node[above] at (10.5,-0.2) {$e_1$}; 
-    \filldraw[blue] (10.9,-0.4) circle (2pt); 
-    \node[right] at (10.9,-0.4) {$e_2$}; 
-    \filldraw[red] (12.4,-2.0) circle (2pt); 
-    \node[right] at (12.4,-2.0) {$e_3$}; 
+    % 3D-Embedding-Raum (perspektivisch) %
+    % Ursprung 
+    \coordinate (O) at (10,-3); 
+    % Achsen 
+    \draw[->,thick] (O) -- ++(4,0) node[right] {$y$}; 
+    \draw[->,thick] (O) -- ++(0,4) node[above] {$z$}; 
+    \draw[->,thick] (O) -- ++(-1.8,-1.8) node[below] {$x$}; 
+    % Beschriftung 
+    \node at (12.2,-4.2) {Embedding-Raum}; 
+    % Embeddings im 3D-Raum 
+    \coordinate (E1) at (11.2,-0.6); % Hund 
+    \coordinate (E2) at (11.5,-0.8); % Dackel 
+    \coordinate (E3) at (13.0,-2.2); % Katze 
+    \filldraw[blue] (E1) circle (2pt); \node[above] at (E1) {$e_1$}; 
+    \filldraw[blue] (E2) circle (2pt); \node[right] at (E2) {$e_2$}; 
+    \filldraw[red] (E3) circle (2pt); \node[right] at (E3) {$e_3$}; 
+    % Hilfslinien zur Tiefenwirkung 
+    \draw[dashed,gray] (E1) -- ++(-0.6,-0.6); 
+    \draw[dashed,gray] (E2) -- ++(-0.8,-0.8); 
+    \draw[dashed,gray] (E3) -- ++(-1.0,-1.0);
     % Verbindungslinien 
-    \draw[->] (m1.east) -- (10.5,-0.2); 
-    \draw[->] (m2.east) -- (10.9,-0.4); 
-    \draw[->] (m3.east) -- (12.4,-2.0); 
+    \draw[->] (m1.east) -- (E1); 
+    \draw[->] (m2.east) -- (E2); 
+    \draw[->] (m3.east) -- (E3);
     \end{tikzpicture} 
     \caption{Prinzipielle Funktionsweise eines Sentence Transformers. Semantisch ähnliche Texte werden auf nahe beieinanderliegende Embeddings abgebildet, während inhaltlich unterschiedliche Texte größere Abstände im Embedding-Raum aufweisen.} 
     \label{fig:sentence_transformer} 
 \end{figure}
 
 
-\subsection{Embedding-Modelle}
+
 
 \subsection{Triplet Loss}
 
