@@ -19,7 +19,7 @@ Jede Schicht hat dabei eine spezifische Funktion: Die Eingabeschicht nimmt die R
 Während dem Lernens, dem sogenannten Training werden die Verbindungen und deren Gewichtungen zwischen den Neuronen schrittweise angepasst, 
 sodass das Modell in der Lage ist, Muster und Zusammenhänge in den Eingaben zu erkennen \parencite{LeCun2015}.
 
-\begin{figure}[ht] 
+\begin{figure}[H] 
   \centering 
   \begin{tikzpicture}[ neuron/.style={ circle, draw, minimum size=0.8cm }, >=stealth ] 
     % Eingabeschicht 
@@ -118,7 +118,7 @@ Abbildung \ref{fig:embedding3d} zeigt die Position dieser Embeddings in einem ve
 Da die Koordinaten der Wörter „Katze“ und „Hund“ sehr ähnlich sind, liegen ihre Positionen nahe beieinander. 
 Das Embedding des Wortes „Auto“ unterscheidet sich dagegen stärker von „Katze“ oder „Hund“ und befindet sich deshalb weiter entfernt. 
 
-\begin{figure}[ht] 
+\begin{figure}[H] 
   \centering 
   \tdplotsetmaincoords{70}{115} 
   \begin{tikzpicture}[tdplot_main_coords, scale=3] 
@@ -237,7 +237,7 @@ Das Ziel eines Sentence Transformers ist es, semantisch ähnliche Texte im Embed
 Sentence Transformers werden häufig für Aufgaben wie semantische Suche oder Empfehlungssysteme eingesetzt.
 Anstatt ausschließlich identische Schlüsselwörter zu suchen, ermöglichen sie die Identifikation inhaltlich ähnlicher Dokumente auch dann, wenn unterschiedliche Formulierungen verwendet werden \parencite{Reimers2019SBERT}.
 
-\begin{figure}[ht] 
+\begin{figure}[H] 
   \centering 
   \begin{tikzpicture}[ 
     node distance=1.8cm, every node/.style={font=\small}, 
@@ -299,7 +299,7 @@ Das Ziel des Triplet Loss besteht darin,
 den Abstand zwischen Anker und positivem Beispiel zu minimieren und gleichzeitig den Abstand zwischen Anker und negativem Beispiel um mindestens eine vorgegebene Margin (\textit{m}) zu vergrößern \parencite{Schroff2015}.
 
 
-\begin{figure}[ht] 
+\begin{figure}[H] 
   \centering 
   \begin{tikzpicture}[ >=stealth, 
     textnode/.style={ draw, rounded corners, align=center, minimum width=3.5cm, minimum height=1cm } ] 
@@ -347,7 +347,7 @@ Grundsätzlich lassen sich Learning-to-Rank-Verfahren in drei Kategorien unterte
 
 Die folgende Abbildung \ref{fig:ltr_ansaetze} veranschaulicht die Unterschiede zwischen den drei Kategorien von Learning-to-Rank-Verfahren.
 
-\begin{figure}[htbp] 
+\begin{figure}[H] 
   \centering 
   \begin{tikzpicture}[ >=stealth, font=\small, 
     title/.style={ font=\bfseries\large }, 
@@ -397,14 +397,14 @@ Fehlplatzierungen auf den hinteren Rangpositionen, beispielsweise zwischen Rang 
 Zur Umsetzung verwendet LambdaRank sogenannte $\lambda$-Gradienten. Dokumentenvergleiche mit großem Einfluss auf die Rangliste erzeugen große $\lambda$-Werte, während Vergleiche mit geringem Einfluss kleinere $\lambda$-Werte erzeugen. 
 Dadurch lernt das Modell insbesondere Fehler auf den oberen Rangpositionen zu korrigieren \parencite{Burges2006LambdaRank}.
 
-\begin{figure}[htbp] 
+\begin{figure}[H] 
   \centering 
   \begin{tikzpicture}[ >=stealth, font=\small, node distance=0.7cm, 
     rank/.style={ draw, rounded corners, minimum width=4cm, minimum height=0.8cm, align=center }, 
     important/.style={ draw=red!70, very thick, ->, red!70 }, 
     lessimportant/.style={ draw=gray, dashed, ->, gray } ] 
     % Titel 
-    \node[font=\bfseries\large] at (0,5.2) {LambdaRank}; 
+    \node[font=\bfseries\large] at (0,5.2) {Rangliste}; 
     % Rangliste 
     \node[rank,fill=green!15] (a) at (0,3.8) {Rang 1: Dokument A}; 
     \node[rank,fill=blue!10] (b) at (0,2.6) {Rang 2: Dokument B}; 
@@ -430,7 +430,7 @@ Es wird ausschließlich geprüft, ob mindestens ein relevantes Ergebnis innerhal
 
 Abbildung \ref{fig:recall_at_3} veranschaulicht das Prinzip von Recall@k an einem konkreten Beispiel für $k=3$.
 
-\begin{figure}[htbp] 
+\begin{figure}[H] 
   \centering \begin{tikzpicture}[ font=\small, >=stealth, rank/.style={ draw, rounded corners, minimum width=4cm, minimum height=0.8cm, align=center } ] 
     % Titel 
     \node[font=\bfseries\large] at (0,5.2) {Recall@3}; 
@@ -451,31 +451,6 @@ Abbildung \ref{fig:recall_at_3} veranschaulicht das Prinzip von Recall@k an eine
   \label{fig:recall_at_3} 
 \end{figure}
 
-Angenommen, Dokument C ist das gesuchte Ergebnis. Für $k=3$ wäre die Anfrage erfolgreich, da sich das relevante Ergebnis innerhalb der ersten drei Positionen befindet. 
-Befindet sich das relevante Dokument dagegen auf Rang 4 oder Rang 5, wäre die Anfrage für Recall@3 nicht erfolgreich. 
-
-
-Zur Veranschaulichung werden fünf Anfragen in Tabelle \ref{tab:recall_beispiel} betrachtet. Für jede Anfrage wird geprüft, ob sich mindestens ein relevantes Ergebnis innerhalb der ersten drei Rangpositionen befindet. 
-
-\begin{table}[ht] 
-  \centering 
-  \begin{tabular}{ccc} 
-    \toprule Anfrage & Relevantes Ergebnis in Top-3 & Erfolgreich \\ 
-    \midrule 1 & Ja & 1 \\ 2 & Ja & 1 \\ 3 & Nein & 0 \\ 4 & Ja & 1 \\ 5 & Ja & 1 \\ 
-    \bottomrule \end{tabular} 
-    \caption{Beispiel zur Berechnung von Recall@3} 
-    \label{tab:recall_beispiel} 
-  \end{table} 
-  
-Für vier der fünf Anfragen befindet sich mindestens ein relevantes Ergebnis innerhalb der ersten drei Positionen der Rangliste. 
-Lediglich die dritte Anfrage besitzt kein relevantes Ergebnis in den Top-3. 
-
-Die Berechnung ergibt somit: 
-\[ Recall@3 = \frac{ 4 }{ 5 } = 0.8 \] 
-
-Der Recall@3 beträgt folglich 0.8 beziehungsweise 80\,\%. 
-Dies bedeutet, dass für 80\,\% aller Anfragen mindestens ein relevantes Ergebnis innerhalb der ersten drei Rangpositionen gefunden wurde.
-
 Der Wertebereich der Berechnung liegt zwischen 0 und 1. Ein Wert von 1 bedeutet, dass für jede Anfrage mindestens ein relevantes Ergebnis innerhalb der ersten $k$ Positionen gefunden wurde. 
 
 \subsection{Mean Reciprocal Rank} 
@@ -491,7 +466,7 @@ Dadurch werden relevante Treffer auf den vorderen Positionen stärker belohnt al
 Im Beispiel aus Abbildung \ref{fig:mrr_beispiel} befindet sich das relevante Ergebnis auf Rang 3.
 Ein relevantes Ergebnis auf Rang 1 oder 2 würde in diesem Beispiel besser bewertet als das Ergebnis auf Rang 3.
 
-\begin{figure}[htbp] 
+\begin{figure}[H] 
   \centering 
   \begin{tikzpicture}[ font=\small, >=stealth, 
     rank/.style={ draw, rounded corners, minimum width=4cm, minimum height=0.8cm, align=center } ] 
@@ -516,78 +491,40 @@ Ein relevantes Ergebnis auf Rang 1 oder 2 würde in diesem Beispiel besser bewer
   \label{fig:mrr_beispiel} 
 \end{figure}
 
-
-Um dies zu veranschaulichen, wird ein Beispiel mit fünf Anfragen in Tabelle \ref{tab:mrr_beispiel} betrachtet. Für jede Anfrage wird die Position des ersten relevanten Ergebnisses bestimmt. 
-Anschließend wird der Kehrwert dieser Position berechnet. 
-
-\begin{table}[ht] 
-  \centering 
-  \begin{tabular}{cccc} 
-    \toprule Anfrage & Rang des ersten relevanten Ergebnisses & Reziproker Rang & Wert \\ 
-    \midrule 1 & 1 & $1/1$ & 1.00 \\ 2 & 2 & $1/2$ & 0.50 \\ 3 & 3 & $1/3$ & 0.33 \\ 4 & 1 & $1/1$ & 1.00 \\ 5 & 5 & $1/5$ & 0.20 \\ 
-    \bottomrule 
-  \end{tabular} 
-  \caption{Beispiel zur Berechnung des Mean Reciprocal Rank} 
-  \label{tab:mrr_beispiel} 
-\end{table}
-
-Der Mean Reciprocal Rank ergibt sich als Mittelwert aller reziproken Ränge: 
-\[ MRR = \frac{ 1.00 + 0.50 + 0.33 + 1.00 + 0.20 }{5} \] 
-\[ MRR = \frac{3.03}{5} = 0.606 \] 
-
-Der MRR beträgt somit 0.606. Dies bedeutet, dass relevante Ergebnisse im Durchschnitt relativ früh innerhalb der Ranglisten erscheinen. 
-Würden die ersten relevanten Ergebnisse häufiger auf den hinteren Positionen auftreten, würde der MRR entsprechend kleiner ausfallen.
-
 Der Wertebereich liegt auch hier zwischen 0 und 1. Ein hoher Wert zeigt an, dass ein relevantes Ergebnis bereits an einer der vorderen Positionen einer Rangliste erscheint. 
 
 \subsection{Normalized Discounted Cumulative Gain} 
 
-Der Discounted Cumulative Gain (DCG) wurde von Järvelin und Kekäläinen zur Bewertung verschiedener Relevanzstufen von Suchergebnissen eingeführt und zählt zu den wichtigsten Bewertungsmetriken für Ranking- und Suchsysteme \parencite{jarvelin2002dcg}. 
-Die Kennzahl berücksichtigt sowohl die Relevanz eines Ergebnisses als auch die Position innerhalb der Rangliste. Relevante Ergebnisse auf frühen Rangpositionen leisten dadurch einen höheren Beitrag zur Gesamtbewertung. 
+Der Normalized Discounted Cumulative Gain (nDCG) bewertet die Qualität einer gesamten Rangliste. Im Gegensatz zu Recall@k und MRR wird hierbei nicht nur betrachtet, 
+ob relevante Ergebnisse gefunden werden oder wie früh das erste relevante Ergebnis erscheint. 
+Stattdessen werden alle Ergebnisse innerhalb der Rangliste berücksichtigt. Zusätzlich unterscheidet nDCG zwischen verschiedenen Relevanzstufen. 
+Dadurch kann beispielsweise ein sehr relevantes Ergebnis stärker bewertet werden als ein nur teilweise relevantes Ergebnis \parencite{jarvelin2002dcg}. 
 
-Die Berechnung des DCG erfolgt über 
+Zur Veranschaulichung wird in Abbildung \ref{fig:ndcg_beispiel} eine Rangliste mit unterschiedlichen Relevanzwerten betrachtet. 
 
-\begin{align} 
-  DCG@k = \sum_{i=1}^{k} \frac{2^{rel_i}-1} {\log_2(i+1)} 
-\end{align} 
+\begin{figure}[H] 
+  \centering 
+  \begin{tikzpicture}[ font=\small, >=stealth, 
+    rank/.style={ draw, rounded corners, minimum width=5.2cm, minimum height=0.8cm, align=center } ] 
+    % Titel 
+    \node[font=\bfseries\large] at (0,5.7) {Normalized Discounted Cumulative Gain (nDCG)}; 
+    % Rangliste 
+    \node[rank,fill=yellow!15] (a) at (0,4.0) {Rang 1: Dokument A (Relevanz = 1)}; 
+    \node[rank,fill=green!15] (b) at (0,2.7) {Rang 2: Dokument B (Relevanz = 2)}; 
+    \node[ rank, fill=green!30, draw=green!60!black, very thick ] (c) at (0,1.4) {Rang 3: Dokument C (Relevanz = 3)}; 
+    \node[rank] (d) at (0,0.1) {Rang 4: Dokument D (Relevanz = 0)}; 
+    % Hinweise 
+    \draw[->,thick,green!60!black] (c.east) -- (4.7,1.4); 
+    \node[ draw, rounded corners, fill=green!10, text width=4.8cm, align=center ] at (8.0,1.4) { Sehr relevantes Ergebnis\\ erst auf Rang 3\\[1mm] $\Rightarrow$ Rangliste nicht optimal }; % Erklärung oben 
+    \draw[->,thick,orange] (a.east) -- (4.7,4); 
+    \node[ draw, rounded corners, fill=orange!10, text width=4.8cm, align=center ] at (8.0,4) { Wenig relevantes Ergebnis\\ auf Rang 1\\[1mm] $\Rightarrow$ ungünstige Platzierung }; % Ideal Ranking 
+    \node[ draw, rounded corners, fill=blue!10, text width=7cm, align=left ] at (0,-1.9) { \textbf{Ideale Rangliste:}\\[1mm] 1. Dokument C (Relevanz = 3)\\ 2. Dokument B (Relevanz = 2)\\ 3. Dokument A (Relevanz = 1)\\ 4. Dokument D (Relevanz = 0) };
+  \end{tikzpicture} 
+  \caption{Beispiel für nDCG. Die Relevanz eines Ergebnisses wird unabhängig von seiner Rangposition betrachtet. Obwohl Dokument C die höchste Relevanz besitzt, erscheint es erst auf Rang 3. nDCG erkennt diese Fehlplatzierung und bewertet die Rangliste schlechter als eine ideal sortierte Rangliste.} 
+  \label{fig:ndcg_beispiel} 
+\end{figure}
 
-mit 
+Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 bedeutet, dass die Ergebnisse optimal nach ihrer Relevanz sortiert wurden. 
 
-\begin{description} 
-  \item[$k$] Anzahl der betrachteten Rangpositionen 
-  \item[$i$] Rangposition innerhalb der Rangliste 
-  \item[$rel_i$] Relevanzwert des Ergebnisses auf Rangposition $i$ 
-\end{description} 
-
-Um eine bessere Vergleichbarkeit zu schaffen, findet eine Normierung auf die ideale Rangliste statt. Hieraus ergibt sich der Normalized Discounted Cumulative Gain (nDCG): 
-
-\begin{align} 
-nDCG@k= \frac{DCG@k} {IDCG@k} 
-\end{align} 
-mit 
-\begin{description} 
-  \item[$DCG@k$] DCG-Wert der betrachteten Rangliste 
-  \item[$IDCG@k$] \textit{Ideal Discounted Cumulative Gain}, also der höchstmögliche DCG-Wert, der bei einer idealen Sortierung der Kandidaten nach absteigender Relevanz erreicht würde 
-\end{description} 
-
-Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 entspricht der optimal möglichen Rangfolge.
-
-\subsection{Hierarchische Bewertungsmetriken} 
-
-Nicht jede fachliche Fehlentscheidung hat in technischen Empfehlungssystemen dieselbe Bedeutung.
-Ein Ergebnis kann beispielsweise einer technisch verwandten Produkt- oder Makrofamilie angehören, aber trotz fehlender exakter Übereinstimmung für den Anwender weiterhin von Interesse sein. 
-Zur Berücksichtigung solcher Beziehungen werden hierarchische Bewertungsmetriken eingesetzt. 
-
-Diese basieren typischerweise auf dem Discounted Cumulative Gain \parencite{jarvelin2002dcg} und verwenden unterschiedliche Relevanzen in abgestufter Reihenfolge. 
-
-Eine mögliche Relevanzfunktion lautet: 
-
-\begin{align} 
-rel = 
-\begin{cases} 3,& \text{exakte Übereinstimmung}\\ 2,& \text{gleiche Familie}\\ 0,& \text{keine fachliche Beziehung} 
-\end{cases} \end{align} 
-
-Dadurch wird eine Rangliste bevorzugt, welche fachlich ähnliche Kandidaten auf höheren Positionen platziert. 
-Hierarchische Bewertungsmetriken eignen sich insbesondere für industrielle Empfehlungssysteme, bei denen zwischen exakter Übereinstimmung und fachlicher Nähe unterschieden werden muss.
 
 \section{Handlungsbedarf}
