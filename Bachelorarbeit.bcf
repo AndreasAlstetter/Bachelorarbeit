@@ -2400,7 +2400,8 @@
     <bcf:citekey order="22" intorder="1">Burges2006LambdaRank</bcf:citekey>
     <bcf:citekey order="23" intorder="1">Burges2006LambdaRank</bcf:citekey>
     <bcf:citekey order="24" intorder="1">manning2008ir</bcf:citekey>
-    <bcf:citekey order="25" intorder="1">manning2008ir</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">voorhees1999mrr</bcf:citekey>
+    <bcf:citekey order="25" intorder="2">zhu2024llmirsurvey</bcf:citekey>
     <bcf:citekey order="26" intorder="1">voorhees1999mrr</bcf:citekey>
     <bcf:citekey order="26" intorder="2">zhu2024llmirsurvey</bcf:citekey>
     <bcf:citekey order="27" intorder="1">jarvelin2002dcg</bcf:citekey>

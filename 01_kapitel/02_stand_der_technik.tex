@@ -195,7 +195,7 @@ Hierzu werden Wörter, Sätze und Dokumente in Embeddings überführt, die als E
 
 Large Language Models (LLMs) basieren auf neuronalen Sprachmodellen und erweitern diese durch eine enorme Anzahl an Parametern sowie tieferen Architekturen.
 Sie bilden die Grundlage für generative KI-Systeme und ermöglichen die Bearbeitung von verschiedenen Aufgaben aus dem bereich der natürlichen Sprachverarbeitung.
-Dazu zählen Textgenerierung, Textklassifikation, Frage-Antwort-Systeme sowie das liefern mehrer relevanter Ergebnisse zu einer Suchanfrage, dem sogenannten Information Retrieval \parencite{Zhao2023}.
+Dazu zählen Textgenerierung, Textklassifikation, Frage-Antwort-Systeme sowie das liefern mehrer relevanter Ergebnisse zu einer Suchanfrage. \parencite{Zhao2023}.
 
 Moderne LLMs bestehen typischerweise aus mehreren Milliarden Parametern. Während des Trainings werden hierbei diese Modellparameter wie in \autoref{sec:modell} beschrieben auf Zusammenhänge gelernt. 
 Diese Zusammenhänge beziehen sich hier auf die statistischen Beziehungen zwischen Wörtern, Sätzen und Dokumenten.
@@ -362,7 +362,6 @@ Die folgende Abbildung \ref{fig:ltr_ansaetze} veranschaulicht die Unterschiede z
     \node[result] (pres) at (0,-0.5) { Dokument A: 0.95\\ Dokument B: 0.70\\ Dokument C: 0.20 }; 
     \draw[->] (pq) -- (pdocs); 
     \draw[->] (pdocs) -- (pres); 
-    \node[text width=4.2cm,align=center] at (0,-2.3) { Jedes Dokument wird einzeln bewertet.\\ Ein höherer Wert bedeutet eine höhere Relevanz. }; 
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %% PAIRWISE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     
@@ -372,7 +371,6 @@ Die folgende Abbildung \ref{fig:ltr_ansaetze} veranschaulicht die Unterschiede z
     \node[result] (qres) at (6.5,-0.5) { A $>$ B\\ A $>$ C\\ B $>$ C }; 
     \draw[->] (qq) -- (qdocs); 
     \draw[->] (qdocs) -- (qres); 
-    \node[text width=4.2cm,align=center] at (6.5,-2.3) { Das Modell lernt für jedes Dokumentenpaar,\\ welches Dokument relevanter ist. };
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %% LISTWISE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     
@@ -380,7 +378,6 @@ Die folgende Abbildung \ref{fig:ltr_ansaetze} veranschaulicht die Unterschiede z
     \node[box,fill=blue!10] (lq) at (13,3.5) {Anfrage}; 
     \node[box] (ldocs) at (13,1.8) {Dokument A\\Dokument B\\Dokument C}; 
     \node[result] (lres) at (13,-0.5) { Rang 1: Dokument A\\ Rang 2: Dokument B\\ Rang 3: Dokument C }; \draw[->] (lq) -- (ldocs); \draw[->] (ldocs) -- (lres); 
-    \node[text width=4.2cm,align=center] at (13,-2.3) { Die gesamte Rangliste wird\\ gemeinsam optimiert. }; 
   \end{tikzpicture} 
   \caption{Vergleich der Learning-to-Rank-Ansätze. Pointwise bewertet Dokumente einzeln, Pairwise vergleicht Dokumentenpaare miteinander und Listwise optimiert die vollständige Rangliste direkt.} \label{fig:ltr_ansaetze} 
 \end{figure}
@@ -418,56 +415,130 @@ Dadurch lernt das Modell insbesondere Fehler auf den oberen Rangpositionen zu ko
     \node[ text=red!70, align=left, anchor=west ] at (4.8,1.4) { gro{\ss}er Einfluss\\ hohes $\lambda$ }; 
     % Erklärung für Rang 4/5 
     \node[ text=gray, align=left, anchor=west ] at (3.0,-0.4) { geringer Einfluss\\ kleines $\lambda$ };
-    % Erklärung unten 
-    \node[text width=11cm,align=center] at (0,-3.1) {LambdaRank gewichtet Dokumentenvergleiche nach ihrem Einfluss auf die Qualität der Rangliste. Fehlplatzierungen an den oberen Positionen erzeugen größere Gradienten ($\lambda$) als Vertauschungen auf hinteren Rängen.}; 
-  \end{tikzpicture} 
+    \end{tikzpicture} 
   \caption{Prinzip von LambdaRank. Vergleiche, deren Vertauschung die Rangliste stark verändert, erhalten eine höhere Gewichtung als Vergleiche mit geringem Einfluss auf die Rangfolge \parencite{Burges2006LambdaRank}.} 
   \label{fig:lambdarank_prinzip} 
 \end{figure}
 
-  \section{Validierungsansätze}
+\section{Validierungsansätze}
 
 \subsection{Recall@k} 
 
-Recall@k gehört zu den grundlegenden Bewertungsmetriken des Information Retrievals und beschreibt den Anteil der Anfragen, bei denen mindestens ein relevantes Ergebnis innerhalb der ersten $k$ Rangpositionen gefunden wird \parencite{manning2008ir}. 
-Diese Metrik berechnet sich wie folgt: 
+Diese Metrik beantwortet die Frage, ob eine Anfrage an ein Empfehlungssystem ein relevantes Ergebnis innerhalb der ausgegebenen Rangliste liefert, wenn lediglich die ersten $k$ Plätze dieser Rangliste betrachtet werden. 
+Dabei wird nicht berücksichtigt, an welchem Platz innerhalb dieser ersten $k$ Positionen sich das relevante Ergebnis befindet. 
+Es wird ausschließlich geprüft, ob mindestens ein relevantes Ergebnis innerhalb der Top-$k$ Positionen vorhanden ist.\parencite{manning2008ir}.
 
-\begin{align} 
-  Recall@k = \frac{ \# \text{Anfragen mit relevantem Ergebnis in Top-}k }{ \# \text{Anfragen} } 
-\end{align} 
+Abbildung \ref{fig:recall_at_3} veranschaulicht das Prinzip von Recall@k an einem konkreten Beispiel für $k=3$.
 
-mit 
+\begin{figure}[htbp] 
+  \centering \begin{tikzpicture}[ font=\small, >=stealth, rank/.style={ draw, rounded corners, minimum width=4cm, minimum height=0.8cm, align=center } ] 
+    % Titel 
+    \node[font=\bfseries\large] at (0,5.2) {Recall@3}; 
+    % Top-k Bereich 
+    \fill[green!10,rounded corners] (-2.5,0.7) rectangle (2.5,4.4); 
+    \node[font=\bfseries,color=green!50!black] at (0,4.7) {Top-3-Bereich}; 
+    % Rangliste 
+    \node[rank] (a) at (0,3.8) {Rang 1: Dokument A}; 
+    \node[rank] (b) at (0,2.6) {Rang 2: Dokument B}; 
+    \node[ rank, fill=green!20, draw=green!60!black, very thick ] (c) at (0,1.4) {Rang 3: Dokument C (relevant)}; 
+    \node[rank] (d) at (0,0.2) {Rang 4: Dokument D}; 
+    \node[rank] (e) at (0,-1.0) {Rang 5: Dokument E}; 
+    % Erfolgsmarkierung 
+    \node[ draw, fill=green!20, rounded corners, text width=4.5cm, align=center ] at (6,2.0) { Recall@3 = 1\\[0.1cm] Relevantes Ergebnis\\ innerhalb der Top-3 }; 
+    \draw[->,thick,green!60!black] (c.east) -- (4.0,2.0); 
+  \end{tikzpicture} 
+  \caption{Beispiel für Recall@3. Da sich das relevante Dokument C innerhalb der ersten drei Rangpositionen befindet, gilt die Anfrage als erfolgreich und trägt positiv zum Recall@3-Wert bei.} 
+  \label{fig:recall_at_3} 
+\end{figure}
 
-\begin{description} 
-    \item[$k$]: Anzahl der betrachteten Rangpositionen 
-    \item[$\text{Anfragen mit relevantem Ergebnis in Top-}k$]: Anzahl erfolgreicher Anfragen 
-    \item[$\text{Anfragen}$]: Gesamtzahl aller Anfragen 
-\end{description} 
+Angenommen, Dokument C ist das gesuchte Ergebnis. Für $k=3$ wäre die Anfrage erfolgreich, da sich das relevante Ergebnis innerhalb der ersten drei Positionen befindet. 
+Befindet sich das relevante Dokument dagegen auf Rang 4 oder Rang 5, wäre die Anfrage für Recall@3 nicht erfolgreich. 
 
-Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 bedeutet, dass sich für jede Anfrage mindestens ein relevantes Ergebnis innerhalb der Top-$k$ Positionen der Rangliste befindet. 
-In Ranking- und Empfehlungssystemen wird Recall@k häufig verwendet, um die praktische Verwendung eines Systems beurteilen zu können.
-Der Anwender betrachtet dabei in der Regel nur die ersten Ergebnisse einer Rangliste \parencite{manning2008ir}.
+
+Zur Veranschaulichung werden fünf Anfragen in Tabelle \ref{tab:recall_beispiel} betrachtet. Für jede Anfrage wird geprüft, ob sich mindestens ein relevantes Ergebnis innerhalb der ersten drei Rangpositionen befindet. 
+
+\begin{table}[ht] 
+  \centering 
+  \begin{tabular}{ccc} 
+    \toprule Anfrage & Relevantes Ergebnis in Top-3 & Erfolgreich \\ 
+    \midrule 1 & Ja & 1 \\ 2 & Ja & 1 \\ 3 & Nein & 0 \\ 4 & Ja & 1 \\ 5 & Ja & 1 \\ 
+    \bottomrule \end{tabular} 
+    \caption{Beispiel zur Berechnung von Recall@3} 
+    \label{tab:recall_beispiel} 
+  \end{table} 
+  
+Für vier der fünf Anfragen befindet sich mindestens ein relevantes Ergebnis innerhalb der ersten drei Positionen der Rangliste. 
+Lediglich die dritte Anfrage besitzt kein relevantes Ergebnis in den Top-3. 
+
+Die Berechnung ergibt somit: 
+\[ Recall@3 = \frac{ 4 }{ 5 } = 0.8 \] 
+
+Der Recall@3 beträgt folglich 0.8 beziehungsweise 80\,\%. 
+Dies bedeutet, dass für 80\,\% aller Anfragen mindestens ein relevantes Ergebnis innerhalb der ersten drei Rangpositionen gefunden wurde.
+
+Der Wertebereich der Berechnung liegt zwischen 0 und 1. Ein Wert von 1 bedeutet, dass für jede Anfrage mindestens ein relevantes Ergebnis innerhalb der ersten $k$ Positionen gefunden wurde. 
 
 \subsection{Mean Reciprocal Rank} 
 
-Der Mean Reciprocal Rank (MRR) zählt neben Recall@k zu etablierten Bewertungsmetriken des Information Retrievals und wird sowohl in klassischen Suchsystemen als auch in modernen Rankingverfahren eingesetzt \parencite{voorhees1999mrr,zhu2024llmirsurvey}. 
-Mit dieser Kennzahl wird die Position des ersten relevanten Ergebnisses innerhalb einer Rangliste bewertet.
+Der Mean Reciprocal Rank (MRR) bewertet, wie früh das erste relevante Ergebnis einer Anfrage an das Empfehlungssystem innerhalb der ausgegebenen Rangliste erscheint \parencite{voorhees1999mrr,zhu2024llmirsurvey}. 
+Während Recall@k lediglich betrachtet, ob ein relevantes Ergebnis gefunden wird, berücksichtigt der MRR zusätzlich dessen Position. 
 
-Die Berechnung ergibt sich wie folgt:  
+Hierzu wird zunächst der Reziproke Rang bestimmt. Dieser gibt an, an welcher Position sich das erste relevante Ergebnis einer Rangliste befindet. 
+Dazu wird der Kehrwert (Reziprokwert) der Rangposition berechnet. 
+Je früher das erste relevante Ergebnis erscheint, desto größer ist der reziproke Rang. 
+Dadurch werden relevante Treffer auf den vorderen Positionen stärker belohnt als Treffer auf den hinteren Positionen. \parencite{voorhees1999mrr,zhu2024llmirsurvey}
 
-\begin{align} 
-  MRR= \frac{1}{N} \sum_{i=1}^{N} \frac{1}{rank_i} 
-\end{align} 
+Im Beispiel aus Abbildung \ref{fig:mrr_beispiel} befindet sich das relevante Ergebnis auf Rang 3.
+Ein relevantes Ergebnis auf Rang 1 oder 2 würde in diesem Beispiel besser bewertet als das Ergebnis auf Rang 3.
 
-mit 
+\begin{figure}[htbp] 
+  \centering 
+  \begin{tikzpicture}[ font=\small, >=stealth, 
+    rank/.style={ draw, rounded corners, minimum width=4cm, minimum height=0.8cm, align=center } ] 
+    % Titel
+    \node[font=\bfseries\large] at (0,5.2) {Mean Reciprocal Rank (MRR)}; 
+    % Rangliste 
+    \node[rank] (a) at (0,3.8) {Rang 1: Makro A}; 
+    \node[rank] (b) at (0,2.6) {Rang 2: Makro B}; 
+    \node[ rank, fill=green!20, draw=green!60!black, very thick ] (c) at (0,1.4) {Rang 3: Makro C (erstes relevantes Makro)}; 
+    \node[rank] (d) at (0,0.2) {Rang 4: Makro D}; 
+    \node[rank] (e) at (0,-1.0) {Rang 5: Makro E}; 
+    % Hervorhebung Rang 3 
+    \draw[->,thick,green!60!black] (c.east) -- (4.0,1.4); 
+    % Berechnung 
+    \node[ draw, rounded corners, fill=green!10, text width=4.5cm, align=center ] at (6.2,1.4) { Erstes relevantes\\ Ergebnis auf Rang 3\\[0.2cm] $MRR=\frac{1}{3}=0.33$ }; 
+    % Vergleich zu besseren Positionen 
+    \node[ draw, rounded corners, fill=blue!10, text width=5cm, align=left ] at (6.2,3.3) { Rang 1 $\rightarrow MRR = 1.00$\\ Rang 2 $\rightarrow MRR = 0.50$\\ Rang 3 $\rightarrow MRR = 0.33$ }; 
+    % Erklärung 
+    \node[ text width=11cm, align=center ] at (0,-2.8) { Der Mean Reciprocal Rank betrachtet ausschließlich die Position des ersten relevanten Ergebnisses. Frühere Treffer erhalten höhere Werte und werden daher stärker belohnt als spätere Treffer. }; 
+  \end{tikzpicture} 
+  \caption{Beispiel zur Berechnung des Mean Reciprocal Rank. Das erste relevante Makro befindet sich auf Rang 3, wodurch sich ein reziproker Rang von $1/3$ ergibt. Frühere relevante Treffer führen zu höheren MRR-Werten.} 
+  \label{fig:mrr_beispiel} 
+\end{figure}
 
-\begin{description} 
-    \item[$N$] Anzahl der ausgewerteten Anfragen 
-    \item[$rank_i$] Rangposition des ersten relevanten Ergebnisses für Anfrage $i$ 
-\end{description} 
 
-Der Wertebereich liegt zwischen 0 und 1. Ein hoher Wert zeigt an, dass ein relevantes Ergebnis bereits an einer der vorderen Positionen einer Rangliste erscheint. 
-Da frühe Treffer stärker gewichtet werden als spätere Treffer, eignet sich die Kennzahl besonders zur Bewertung der schnellen Auffindbarkeit relevanter Ergebnisse.
+Um dies zu veranschaulichen, wird ein Beispiel mit fünf Anfragen in Tabelle \ref{tab:mrr_beispiel} betrachtet. Für jede Anfrage wird die Position des ersten relevanten Ergebnisses bestimmt. 
+Anschließend wird der Kehrwert dieser Position berechnet. 
+
+\begin{table}[ht] 
+  \centering 
+  \begin{tabular}{cccc} 
+    \toprule Anfrage & Rang des ersten relevanten Ergebnisses & Reziproker Rang & Wert \\ 
+    \midrule 1 & 1 & $1/1$ & 1.00 \\ 2 & 2 & $1/2$ & 0.50 \\ 3 & 3 & $1/3$ & 0.33 \\ 4 & 1 & $1/1$ & 1.00 \\ 5 & 5 & $1/5$ & 0.20 \\ 
+    \bottomrule 
+  \end{tabular} 
+  \caption{Beispiel zur Berechnung des Mean Reciprocal Rank} 
+  \label{tab:mrr_beispiel} 
+\end{table}
+
+Der Mean Reciprocal Rank ergibt sich als Mittelwert aller reziproken Ränge: 
+\[ MRR = \frac{ 1.00 + 0.50 + 0.33 + 1.00 + 0.20 }{5} \] 
+\[ MRR = \frac{3.03}{5} = 0.606 \] 
+
+Der MRR beträgt somit 0.606. Dies bedeutet, dass relevante Ergebnisse im Durchschnitt relativ früh innerhalb der Ranglisten erscheinen. 
+Würden die ersten relevanten Ergebnisse häufiger auf den hinteren Positionen auftreten, würde der MRR entsprechend kleiner ausfallen.
+
+Der Wertebereich liegt auch hier zwischen 0 und 1. Ein hoher Wert zeigt an, dass ein relevantes Ergebnis bereits an einer der vorderen Positionen einer Rangliste erscheint. 
 
 \subsection{Normalized Discounted Cumulative Gain} 
 

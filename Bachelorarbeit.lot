@@ -3,25 +3,27 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {1.1}{\ignorespaces Beispielhafter Vergleich des Suchaufwands}}{4}{table.caption.4}%
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Beispiel zur Berechnung von Recall@3}}{15}{table.caption.13}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Beispiel zur Berechnung des Mean Reciprocal Rank}}{17}{table.caption.15}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {8.1}{\ignorespaces Dimensionen der erzeugten Rankingmatrizen}}{25}{table.caption.13}%
-\contentsline {table}{\numberline {8.2}{\ignorespaces Variierte Hyperparameter der Grid-Search \blx@tocontentsinit {0}\parencite {srcStep931}}}{27}{table.caption.14}%
+\contentsline {table}{\numberline {8.1}{\ignorespaces Dimensionen der erzeugten Rankingmatrizen}}{26}{table.caption.17}%
+\contentsline {table}{\numberline {8.2}{\ignorespaces Variierte Hyperparameter der Grid-Search \blx@tocontentsinit {0}\parencite {srcStep931}}}{28}{table.caption.18}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {9.1}{\ignorespaces Untersuchte Konfigurationsparameter}}{28}{table.caption.15}%
-\contentsline {table}{\numberline {9.2}{\ignorespaces Referenzkonfiguration A01}}{29}{table.caption.16}%
-\contentsline {table}{\numberline {9.3}{\ignorespaces Abweichungen der Konfigurationen gegenüber der Referenz A01}}{30}{table.caption.17}%
-\contentsline {table}{\numberline {9.4}{\ignorespaces Ergebnisse der A01--A09-Konfigurationen auf dem Testdatensatz}}{30}{table.caption.18}%
-\contentsline {table}{\numberline {9.5}{\ignorespaces Ergebnisse der besten Konfiguration A08}}{32}{table.caption.19}%
+\contentsline {table}{\numberline {9.1}{\ignorespaces Untersuchte Konfigurationsparameter}}{29}{table.caption.19}%
+\contentsline {table}{\numberline {9.2}{\ignorespaces Referenzkonfiguration A01}}{30}{table.caption.20}%
+\contentsline {table}{\numberline {9.3}{\ignorespaces Abweichungen der Konfigurationen gegenüber der Referenz A01}}{31}{table.caption.21}%
+\contentsline {table}{\numberline {9.4}{\ignorespaces Ergebnisse der A01--A09-Konfigurationen auf dem Testdatensatz}}{31}{table.caption.22}%
+\contentsline {table}{\numberline {9.5}{\ignorespaces Ergebnisse der besten Konfiguration A08}}{33}{table.caption.23}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {10.1}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Testsplit}}{33}{table.caption.20}%
-\contentsline {table}{\numberline {10.2}{\ignorespaces Top-1-Analyse der Vorhersagen auf dem Testdatensatz}}{34}{table.caption.21}%
+\contentsline {table}{\numberline {10.1}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Testsplit}}{34}{table.caption.24}%
+\contentsline {table}{\numberline {10.2}{\ignorespaces Top-1-Analyse der Vorhersagen auf dem Testdatensatz}}{35}{table.caption.25}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {11.1}{\ignorespaces Übersicht der zentralen Grenzen und Ansatzpunkte}}{35}{table.caption.22}%
+\contentsline {table}{\numberline {11.1}{\ignorespaces Übersicht der zentralen Grenzen und Ansatzpunkte}}{36}{table.caption.26}%
 \addvspace {10\p@ }
 \def \@chapapp {\appendixname }
 \addvspace {10\p@ }
