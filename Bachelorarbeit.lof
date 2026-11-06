@@ -8,9 +8,12 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Schematischer Aufbau eines mehrschichtigen neuronalen Netzes}}{7}{figure.caption.6}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Vereinfachte Darstellung von Embeddings im dreidimensionalen Embedding-Raum}}{8}{figure.caption.7}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Prinzipielle Funktionsweise eines Sentence Transformers. Semantisch ähnliche Texte werden auf nahe beieinanderliegende Embeddings abgebildet, während inhaltlich unterschiedliche Texte größere Abstände im Embedding-Raum aufweisen.}}{11}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Funktionsweise des Triplet Loss. Der Anchor (A) wird dem positiven Beispiel (P) angenähert, während der Abstand zum negativen Beispiel (N) vergrößert wird. Die Margin $m$ definiert dabei den Mindestabstand, um den das negative Beispiel weiter vom Anchor entfernt liegen muss als das positive Beispiel. }}{12}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Vergleich der Learning-to-Rank-Ansätze. Pointwise bewertet Dokumente einzeln, Pairwise vergleicht Dokumentenpaare miteinander und Listwise optimiert die vollständige Rangliste direkt.}}{13}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Prinzip von LambdaRank. Vergleiche, deren Vertauschung die Rangliste stark verändert, erhalten eine höhere Gewichtung als Vergleiche mit geringem Einfluss auf die Rangfolge \blx@tocontentsinit {0}\parencite {Burges2006LambdaRank}.}}{14}{figure.caption.11}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Verzahnung von DSRM und ADR. Die DSRM bildet den übergeordneten Forschungsrahmen, während ADR als iterativer Entwicklungszyklus innerhalb der Phase \glqq Design \& Entwicklung des Artefakts\grqq \ eingesetzt wird.}}{17}{figure.caption.9}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Verzahnung von DSRM und ADR. Die DSRM bildet den übergeordneten Forschungsrahmen, während ADR als iterativer Entwicklungszyklus innerhalb der Phase \glqq Design \& Entwicklung des Artefakts\grqq \ eingesetzt wird.}}{20}{figure.caption.12}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

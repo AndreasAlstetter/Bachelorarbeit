@@ -47,6 +47,45 @@
       \field{title}{LTR Configuration Test Series}
       \field{year}{2026}
     \endentry
+    \entry{Burges2006LambdaRank}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=57683730ceb22e5d170051dedfc04a8e}{%
+           family={Burges},
+           familyi={B\bibinitperiod},
+           given={Christopher\bibnamedelimb J.\bibnamedelimi C.},
+           giveni={C\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=178124c17e966ee88df0af94aafe35c1}{%
+           family={Ragno},
+           familyi={R\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=841a83a4bb5e622d6e1bde4818879016}{%
+           family={Le},
+           familyi={L\bibinitperiod},
+           given={Quoc},
+           giveni={Q\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{74a21a526019c57caceac58ba430356b}
+      \strng{fullhash}{093803ee1d02f08452731f99f18a83b7}
+      \strng{fullhashraw}{093803ee1d02f08452731f99f18a83b7}
+      \strng{bibnamehash}{093803ee1d02f08452731f99f18a83b7}
+      \strng{authorbibnamehash}{093803ee1d02f08452731f99f18a83b7}
+      \strng{authornamehash}{74a21a526019c57caceac58ba430356b}
+      \strng{authorfullhash}{093803ee1d02f08452731f99f18a83b7}
+      \strng{authorfullhashraw}{093803ee1d02f08452731f99f18a83b7}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Advances in Neural Information Processing Systems}
+      \field{title}{Learning to Rank with Nonsmooth Cost Functions}
+      \field{year}{2006}
+    \endentry
     \entry{EPLAN2022Makrobibliotheken}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=41c33e8d678e777bc05e86cad847dc43}{%
@@ -577,6 +616,50 @@
       \range{pages}{11}
       \verb{doi}
       \verb 10.18653/v1/D19-1410
+      \endverb
+    \endentry
+    \entry{Schroff2015}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=c62e96f68033a3d3cd4639e35a2de4da}{%
+           family={Schroff},
+           familyi={S\bibinitperiod},
+           given={Florian},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6cbb997a11c6922af719c32863261918}{%
+           family={Kalenichenko},
+           familyi={K\bibinitperiod},
+           given={Dmitry},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1e9a1d678032dfffb4e871a0f622e030}{%
+           family={Philbin},
+           familyi={P\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5eafdb6c00f832f72d64a3a8c5e2fa1c}
+      \strng{fullhash}{474363fec59aa6cdd11f5b6b8275a8f2}
+      \strng{fullhashraw}{474363fec59aa6cdd11f5b6b8275a8f2}
+      \strng{bibnamehash}{474363fec59aa6cdd11f5b6b8275a8f2}
+      \strng{authorbibnamehash}{474363fec59aa6cdd11f5b6b8275a8f2}
+      \strng{authornamehash}{5eafdb6c00f832f72d64a3a8c5e2fa1c}
+      \strng{authorfullhash}{474363fec59aa6cdd11f5b6b8275a8f2}
+      \strng{authorfullhashraw}{474363fec59aa6cdd11f5b6b8275a8f2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition}
+      \field{title}{FaceNet: A Unified Embedding for Face Recognition and Clustering}
+      \field{year}{2015}
+      \field{pages}{815\bibrangedash 823}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1109/CVPR.2015.7298682
       \endverb
     \endentry
     \entry{sein2011adr}{article}{}{}
