@@ -1,23 +1,24 @@
-\chapter{Stand der Technik}\label{chap:stand_der_technik}
+\chapter{Stand der Technik}
+\label{chap:stand_der_technik}
 
 \section{Grundlagen}
 
 \subsection{Modell}
 \label{sec:modell}
 
-Ein Modell ist das Ergebnis eines Trainingsprozesses, bei dem aus einer großen Menge von Beispieldaten Muster und Zusammenhänge gelernt, und dabei die Modellparameter angepasst werden. 
+Ein Modell ist das Ergebnis eines Lernprozesses, bei dem aus einer großen Menge von Beispieldaten Muster und Zusammenhänge gelernt, und dabei die Parameter des Modells angepasst werden. 
 Das dabei erlernte Wissen wird im Modell gespeichert und kann anschließend genutzt werden, um neue Eingaben zu verarbeiten und passende Vorhersagen zu erzeugen. 
 Ein Modell bildet somit die Grundlage dafür, bereits gelernte Zusammenhänge auf bisher unbekannte Daten anzuwenden \parencite{LeCun2015}.
 
 \subsection{Neuronale Netze}
+\label{neuronale_netze}
 
 Ein Neuronales Netz wie in Abbildung \ref{fig:neuronales_netz} dargestellt, ist ein Netzwerk aus miteinander verbundenen Knoten, den sogenannten Neuronen, die in ihrer Struktur und Funktionsweise an das menschliche Gehirn angelehnt sind.
 Diese Neuronen sind durch Verbindungen miteinander Verknüpft, die die Stärke der Signalübertragung zwischen den Neuronen bestimmen. 
 Ein Neuronales Netz besteht aus mehreren Schichten von Neuronen wie Eingabeschicht, versteckten Schichten und Ausgabeschicht.
 Diese Schichten arbeiten zusammen und verarbeiten die Eingaben wie Text, Bilder oder Sensordaten schrittweise.
 Jede Schicht hat dabei eine spezifische Funktion: Die Eingabeschicht nimmt die Rohdaten auf, die versteckten Schichten extrahieren Merkmale und Muster, und die Ausgabeschicht liefert die endgültigen Vorhersagen für den jeweiligen Anwendungsfall.
-Während dem Lernens, dem sogenannten Training werden die Verbindungen und deren Gewichtungen zwischen den Neuronen schrittweise angepasst, 
-sodass das Modell in der Lage ist, Muster und Zusammenhänge in den Eingaben zu erkennen \parencite{LeCun2015}.
+Während dem Lernens, dem sogenannten Training werden die Verbindungen und deren Gewichtungen zwischen den Neuronen schrittweise wie in Abschnitt \ref{sec:modell} beschrieben angepasst. \parencite{LeCun2015}.
 
 \begin{figure}[H] 
   \centering 
@@ -75,7 +76,6 @@ Vektoren sind geordnete Mengen von Zahlen, die in der Mathematik und Informatik 
 In der Verarbeitung natürlicher Sprache werden Wörter, Sätze und Dokumente häufig in Vektoren überführt.
 Ein anderes Wort für diese Vektoren ist Embeddings. Embeddings ermöglichen es, semantische Ähnlichkeiten zwischen Wörtern zu erfassen, 
 indem ähnliche Wörter im mehrdimensionalen Embedding-Raum (vergleiche Abbildung \ref{fig:embedding3d}) nahe beieinander liegen.
-Der Embedding-Raum ist der mehrdimensionale Raum, in dem diese Embeddings angeordnet sind. 
 In diesem Raum repräsentieren die Positionen der Embeddings die semantischen Beziehungen zwischen den entsprechenden Wörtern. 
 Jedes Wort wird dabei durch mehrere Zahlenwerte, welche die verschiedenen Merkmale des Wortes repräsentieren, in einem Embedding dargestellt.
 Die einzelnen Dimensionen eines Embeddings besitzen hier keine direkte, für Menschen verständliche Bedeutung.
@@ -140,8 +140,8 @@ Das Embedding des Wortes „Auto“ unterscheidet sich dagegen stärker von „K
 \subsection{Cosine Similarity}
 \label{sec:cosine_similarity}
 
-Die Cosine Similarity misst den Winkel zwischen zwei Vektoren im Embedding-Raum. Je kleiner der Winkel zwischen diesen Vektoren ist, desto ähnlicher sind sie zueinander.
-Die Länge der Vektoren wird dabei nicht betrachtet, sondern ausschließlich ihre Richtung im Raum \parencite{Reimers2019SBERT}.
+Die Cosine Similarity vergleicht den Winkel sowie die Längen zwischen zwei Vektoren im Embedding-Raum. 
+Je kleiner der Winkel zwischen diesen Vektoren und je ähnlicher ihre Längen sind, desto ähnlicher sind diese Vektoren im Embedding-Raum zueinander \parencite{Reimers2019SBERT}.
 
 Zur Veranschaulichung soll die Cosine Similarity zunächst für die Wörter „Katze“ und „Hund“ berechnet werden. 
 
@@ -184,23 +184,18 @@ Wird dagegen die Cosine Similarity zwischen „Katze“ und „Auto“ berechnet
 Der Wert liegt nahe bei 0 und sogar leicht im negativen Bereich. Die beiden Embeddings weisen daher in deutlich unterschiedliche Richtungen und werden als semantisch unähnlich betrachtet.
 
 \section {Modellansätze}
+\label{sec:modellansätze}
 
 \subsection{Neural Language Models}
 
-Neuronale Sprachmodelle (Neural Language Models, NLMs) sind spezielle neuronale Netze, die auf Textsammlungen, 
-sogenannten Textkorpora, vortrainiert werden, um sprachliche Muster, semantische Zusammenhänge sowie Wissensrepräsentationen zu erlernen.
-Hierzu werden Wörter, Sätze und Dokumente in Embeddings überführt, die als Eingabe für das neuronale Netz dienen \parencite{LeCun2015}.
+Neuronale Sprachmodelle (Neural Language Models, NLMs) sind spezielle neuronale Netze, die auf Textsammlungen vortrainiert werden, um sprachliche Muster, semantische Zusammenhänge sowie Wissensrepräsentationen zu erlernen.
+Hierzu werden Wörter, Sätze und Dokumente in Embeddings überführt, die als Eingabe für ein neuronales Netz, wie in Abschnitt \ref{neuronale_netze} beschrieben, dienen \parencite{LeCun2015}.
 
 \subsection{Large Language Models }
 
 Large Language Models (LLMs) basieren auf neuronalen Sprachmodellen und erweitern diese durch eine enorme Anzahl an Parametern sowie tieferen Architekturen.
 Sie bilden die Grundlage für generative KI-Systeme und ermöglichen die Bearbeitung von verschiedenen Aufgaben aus dem bereich der natürlichen Sprachverarbeitung.
-Dazu zählen Textgenerierung, Textklassifikation, Frage-Antwort-Systeme sowie das liefern mehrer relevanter Ergebnisse zu einer Suchanfrage. \parencite{Zhao2023}.
-
-Moderne LLMs bestehen typischerweise aus mehreren Milliarden Parametern. Während des Trainings werden hierbei diese Modellparameter wie in \autoref{sec:modell} beschrieben auf Zusammenhänge gelernt. 
-Diese Zusammenhänge beziehen sich hier auf die statistischen Beziehungen zwischen Wörtern, Sätzen und Dokumenten.
-Dadurch können LLMs Aufgaben Lösen, auf die sie nicht explizit trainiert wurden, da die Antwort auf eine Eingabe aus dem erlernten Wissen abgeleitet werden kann. 
-Hierbei spielt die Generalisierungsfähigkeit des Modells eine entscheidende Rolle. Anhand dieser Fähigkeit wird die Leistungsfähigkeit eines LLMs bei der Bearbeitung neuer, bisher unbekannter Aufgaben bewertet \parencite{Zhao2023}.
+Dazu zählen die Generierung (Erzeugung von Texten) , die Klassifikation (Einordnung von Texten in vordefinierte Kategorien), Frage-Antwort-Systeme sowie das liefern mehrer relevanter Ergebnisse zu einer Suchanfrage. \parencite{Zhao2023}.
 
 Die Architektur hinter einem LLM basiert auf dem Transformer-Modell. Dieses Modell nutzt sogenannte Attention-Mechanismen, um die statistischen Zusammenhänge zwischen einzelen Wörtern in einem Satz zu erfassen und zu gewichten \parencite{Vaswani2017}. 
 Ein Beispiel hierfür ist folgender Satz: „Anna trinkt Kaffee am Morgen.“ Der Attention-Mechanismus bewertet die Bedeutung jedes Wortes im Zusammenhang mit den anderen Wörtern des Satzes. 
@@ -208,20 +203,20 @@ Dabei erkennt das Modell, dass die Wörter „Anna“, „trinkt“ und „Kaffe
 
 \subsection{Fine-Tuning}
 
-Large Language Models werden auf allgemeine Textkorpora vortrainiert, um ein umfangreiches sprachliches und sachliches Wissen zu erwerben.
+Large Language Models werden auf allgemeine Textsammlungen vortrainiert, um ein umfangreiches sprachliches und sachliches Wissen zu erwerben.
 Dies führt dazu, dass das Modell ein breites Wissen erwirbt, aber möglicherweise nicht auf spezifische Aufgaben oder einzelnen Fachbereiche spezialisiert ist.
 Um ein LLM auf spezifische Aufgaben oder Fachbereiche anzupassen, wird häufig das sogenannte Fine-Tuning eingesetzt. 
 Hierbei wird das vortrainierte LLM mit Informationen zu der spezifischen Aufgabe oder dem Fachbereich weiter trainiert, 
 um damit die Leistungsfähigkeit an die Anforderrungen des jeweiligen Einsatzbereichs anzupassen \parencite{Wei2022,Zhang2023InstructionTuning}.
 
-Das Grundprinzip des Fine-Tunings ist es, dass ein vortrainiertes LLM nicht vollständig neu trainiert werden muss, 
-sondern das vorhanden Wissen als Ausgangspunkt genutzt werden kann.
-Dadurch ist es möglich, deutlich bessere Ergebnisse zu erzielen, als bei einem kompletten Neutraining eines neuronalen Sprachmodells.
-Der Trainingsaufwand ist im Vergleich zu einem vollständigen Neutraining deutlich geringer.\parencite{Wei2022}.
+Ein Vorteil des Fine-Tunings ist es, dass ein vortrainiertes LLM nicht vollständig neu trainiert werden muss, 
+sondern das vorhanden Wissen in als Ausgangspunkt genutzt werden kann und dieses um die neuen spezifischen Informationen erweitert wird.
+Dadurch ist es möglich, deutlich bessere Ergebnisse in kürzerer Zeit zu erzielen, als bei einem kompletten Neutraining eines neuronalen Sprachmodells \parencite{Wei2022}.
 
 Um dies am obrigen Beispiel mit Anna zu verdeutlichen: Angenommen, das LLM soll zusätzlich Informationen über die Vorlieben von Anna beim Kaffeetrinken lernen. 
-Durch Fine-Tuning mit entsprechenden Daten kann das Modell die Aufmerksamkeit gezielt auf relevante Zusammenhänge lenken, wie zum Beispiel die Präferenz von Anna für bestimmte Kaffeesorten oder Zubereitungsarten.
-Dabei wird dann der Attention-Mechanismus des Modells gezielt auf die neuen relevanten Informationen für Annas Kaffeetrinken ausgerichtet.
+Anna hat eine Vorliebe für Espresso aus Italien.
+Durch Fine-Tuning ist es möglich, die Attention-Mechanismen des Modells gezielt auf die Präferenz von Anna auszurichten.
+Nach dem Fine-Tuning weiß das Modell nicht nur, dass Anna Kaffee am morgen trinkt, sondern auch, dass sie Espresso aus Italien bevorzugt.
 
 \subsection{Embedding-Modelle}
 
@@ -233,7 +228,8 @@ Hierfür wird typischerweise die Cosine Similarity (vergleiche Abschnitt \ref{se
 \subsection{Sentence Transformers}
 
 Bei Sentence Transformers handelt es sich um eine weiterentwickelte Form von Embedding-Modellen, die vollständige Sätze oder Dokumente in Embeddings, überführen.
-Das Ziel eines Sentence Transformers ist es, semantisch ähnliche Texte im Embedding-Raum nahe beieinander zu platzieren, während semantisch unterschiedliche Texte weiter voneinander entfernt liegen.
+Im Gegensatz zu einem LLM, das auf die Vorhersage des nächsten Wortes trainiert wird, liegt der Fokus bei Sentence Transformers darauf, 
+semantisch ähnliche Texte im Embedding-Raum nahe beieinander zu platzieren, während semantisch unterschiedliche Texte weiter voneinander entfernt liegen.
 Sentence Transformers werden häufig für Aufgaben wie semantische Suche oder Empfehlungssysteme eingesetzt.
 Anstatt ausschließlich identische Schlüsselwörter zu suchen, ermöglichen sie die Identifikation inhaltlich ähnlicher Dokumente auch dann, wenn unterschiedliche Formulierungen verwendet werden \parencite{Reimers2019SBERT}.
 
@@ -359,7 +355,7 @@ Die folgende Abbildung \ref{fig:ltr_ansaetze} veranschaulicht die Unterschiede z
     \node[title] at (0,4.8) {Pointwise}; 
     \node[box,fill=blue!10] (pq) at (0,3.5) {Anfrage}; 
     \node[box] (pdocs) at (0,1.8) {Dokument A\\Dokument B\\Dokument C}; 
-    \node[result] (pres) at (0,-0.5) { Dokument A: 0.95\\ Dokument B: 0.70\\ Dokument C: 0.20 }; 
+    \node[result] (pres) at (0,-0.5) {Relevanz B: 95 \%\\ Relevanz A: 70 \%\\ Relevanz C: 20 \% }; 
     \draw[->] (pq) -- (pdocs); 
     \draw[->] (pdocs) -- (pres); 
     
@@ -368,7 +364,7 @@ Die folgende Abbildung \ref{fig:ltr_ansaetze} veranschaulicht die Unterschiede z
     \node[title] at (6.5,4.8) {Pairwise}; 
     \node[box,fill=blue!10] (qq) at (6.5,3.5) {Anfrage}; 
     \node[box] (qdocs) at (6.5,1.8) {Dokument A\\Dokument B\\Dokument C}; 
-    \node[result] (qres) at (6.5,-0.5) { A $>$ B\\ A $>$ C\\ B $>$ C }; 
+    \node[result] (qres) at (6.5,-0.5) { B $>$ A\\ A $>$ C\\ B $>$ C }; 
     \draw[->] (qq) -- (qdocs); 
     \draw[->] (qdocs) -- (qres); 
     
@@ -377,7 +373,7 @@ Die folgende Abbildung \ref{fig:ltr_ansaetze} veranschaulicht die Unterschiede z
     \node[title] at (13,4.8) {Listwise};
     \node[box,fill=blue!10] (lq) at (13,3.5) {Anfrage}; 
     \node[box] (ldocs) at (13,1.8) {Dokument A\\Dokument B\\Dokument C}; 
-    \node[result] (lres) at (13,-0.5) { Rang 1: Dokument A\\ Rang 2: Dokument B\\ Rang 3: Dokument C }; \draw[->] (lq) -- (ldocs); \draw[->] (ldocs) -- (lres); 
+    \node[result] (lres) at (13,-0.5) { B >  A >  C\\ A >  C  und A > B\\ C <  A <  B }; \draw[->] (lq) -- (ldocs); \draw[->] (ldocs) -- (lres); 
   \end{tikzpicture} 
   \caption{Vergleich der Learning-to-Rank-Ansätze. Pointwise bewertet Dokumente einzeln, Pairwise vergleicht Dokumentenpaare miteinander und Listwise optimiert die vollständige Rangliste direkt.} \label{fig:ltr_ansaetze} 
 \end{figure}
@@ -394,7 +390,7 @@ Hierbei wird bewertet, wie stark sich eine Fehlplatzierung auf die Qualität der
 Abbildung \ref{fig:lambdarank_prinzip} zeigt beispielhaft eine Rangliste, in der sich das eigentlich relevanteste Dokument auf Rang 3 befindet. 
 Da eine Korrektur dieser Fehlplatzierung die Qualität der Rangliste deutlich verbessern würde, erhält dieser Vergleich während des Trainings eine hohe Gewichtung. 
 Fehlplatzierungen auf den hinteren Rangpositionen, beispielsweise zwischen Rang 4 und Rang 5, haben dagegen meist nur einen geringen Einfluss auf die wahrgenommene Qualität der Rangliste und werden entsprechend schwächer gewichtet. 
-Zur Umsetzung verwendet LambdaRank sogenannte $\lambda$-Gradienten. Dokumentenvergleiche mit großem Einfluss auf die Rangliste erzeugen große $\lambda$-Werte, während Vergleiche mit geringem Einfluss kleinere $\lambda$-Werte erzeugen. 
+Zur Umsetzung verwendet LambdaRank sogenannte $\lambda$-Gradienten. Ein Gradient beschreibt hierbei die Richtung und Stärke der Anpassung einer Position innerhalb der Rangliste. Dokumentenvergleiche mit großem Einfluss auf die Rangliste erzeugen große $\lambda$-Werte, während Vergleiche mit geringem Einfluss kleinere $\lambda$-Werte erzeugen. 
 Dadurch lernt das Modell insbesondere Fehler auf den oberen Rangpositionen zu korrigieren \parencite{Burges2006LambdaRank}.
 
 \begin{figure}[H] 
@@ -421,6 +417,7 @@ Dadurch lernt das Modell insbesondere Fehler auf den oberen Rangpositionen zu ko
 \end{figure}
 
 \section{Validierungsansätze}
+\label{sec:validierungsansätze}
 
 \subsection{Recall@k} 
 
@@ -458,8 +455,8 @@ Der Wertebereich der Berechnung liegt zwischen 0 und 1. Ein Wert von 1 bedeutet,
 Der Mean Reciprocal Rank (MRR) bewertet, wie früh das erste relevante Ergebnis einer Anfrage an das Empfehlungssystem innerhalb der ausgegebenen Rangliste erscheint \parencite{voorhees1999mrr,zhu2024llmirsurvey}. 
 Während Recall@k lediglich betrachtet, ob ein relevantes Ergebnis gefunden wird, berücksichtigt der MRR zusätzlich dessen Position. 
 
-Hierzu wird zunächst der Reziproke Rang bestimmt. Dieser gibt an, an welcher Position sich das erste relevante Ergebnis einer Rangliste befindet. 
-Dazu wird der Kehrwert (Reziprokwert) der Rangposition berechnet. 
+Das Zentrale Element des MRR ist der Reziproke Rang. Dieser gibt an, an welcher Position sich das erste relevante Ergebnis einer Rangliste befindet. 
+Dazu wird der Kehrwert (Reziprokwert) der Rangposition berechnet: Befindet sich das erste relevante Ergebnis auf Rang 3, beträgt der reziproke Rang $\frac{1}{3}$.
 Je früher das erste relevante Ergebnis erscheint, desto größer ist der reziproke Rang. 
 Dadurch werden relevante Treffer auf den vorderen Positionen stärker belohnt als Treffer auf den hinteren Positionen. \parencite{voorhees1999mrr,zhu2024llmirsurvey}
 
@@ -484,8 +481,6 @@ Ein relevantes Ergebnis auf Rang 1 oder 2 würde in diesem Beispiel besser bewer
     \node[ draw, rounded corners, fill=green!10, text width=4.5cm, align=center ] at (6.2,1.4) { Erstes relevantes\\ Ergebnis auf Rang 3\\[0.2cm] $MRR=\frac{1}{3}=0.33$ }; 
     % Vergleich zu besseren Positionen 
     \node[ draw, rounded corners, fill=blue!10, text width=5cm, align=left ] at (6.2,3.3) { Rang 1 $\rightarrow MRR = 1.00$\\ Rang 2 $\rightarrow MRR = 0.50$\\ Rang 3 $\rightarrow MRR = 0.33$ }; 
-    % Erklärung 
-    \node[ text width=11cm, align=center ] at (0,-2.8) { Der Mean Reciprocal Rank betrachtet ausschließlich die Position des ersten relevanten Ergebnisses. Frühere Treffer erhalten höhere Werte und werden daher stärker belohnt als spätere Treffer. }; 
   \end{tikzpicture} 
   \caption{Beispiel zur Berechnung des Mean Reciprocal Rank. Das erste relevante Makro befindet sich auf Rang 3, wodurch sich ein reziproker Rang von $1/3$ ergibt. Frühere relevante Treffer führen zu höheren MRR-Werten.} 
   \label{fig:mrr_beispiel} 
@@ -524,7 +519,48 @@ Zur Veranschaulichung wird in Abbildung \ref{fig:ndcg_beispiel} eine Rangliste m
   \label{fig:ndcg_beispiel} 
 \end{figure}
 
-Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 bedeutet, dass die Ergebnisse optimal nach ihrer Relevanz sortiert wurden. 
+Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 bedeutet, dass die Ergebnisse optimal entsprechend der idealen Rangliste sortiert wurden. 
 
+\section{Handlungsbedarf und Forschungsfragen}
+\label{sec:handlungsbedarf_und_forschungsfragen} 
 
-\section{Handlungsbedarf}
+Die in Kapitel \ref{sec:herausforderung} beschriebene Herausforderung zeigt, dass die Suche nach geeigneten Makros innerhalb großer Makrobestände mit einem erheblichen zeitlichen und wirtschaftlichen Aufwand verbunden sein kann. 
+
+Gleichzeitig wurde in Kapitel \ref{chap:stand_der_technik} gezeigt, dass bereits verschiedene Verfahren zur Verarbeitung, Bewertung und Empfehlung von Informationen existieren. 
+Mit Large Language Models (LLMs) stehen leistungsfähige Modelle zur Verfügung, die umfangreiche sprachliche und sachliche Zusammenhänge aus großen Textsammlungen erlernen können \parencite{Zhao2023}. 
+Durch Fine-Tuning können diese Modelle gezielt an spezifische Domänen und Aufgaben angepasst werden, sodass auch fachspezifisches Wissen berücksichtigt werden kann \parencite{Wei2022,Zhang2023InstructionTuning}. 
+Darüber hinaus stehen mit Embedding-Modellen und Sentence Transformers Verfahren zur Verfügung, um technische Texte wie in Artikeln in Embeddings zu überführen \parencite{Mikolov2013,Reimers2019SBERT}.
+Triplet Loss ermöglicht die gezielte Optimierung dieser Embeddings, sodass ähnliche Embeddings im Embedding-Raum nahe beieinander liegen und fachlich unterschiedliche Embeddings größere Abstände aufweisen\parencite{Schroff2015}.
+Um Kandidaten aus vorhanden Artikel-Makro-Zuordnungen gezielt zu priorisieren, existieren außerdem mit Learning-to-Rank und LambdaRank Verfahren, 
+welche Ergebnisse entsprechend ihrer Relevanz innerhalb einer Rangliste sortieren können \parencite{liu2009learning,Burges2006LambdaRank}.
+Schließlich stehen mit Recall@k, Mean Reciprocal Rank und nDCG etablierte Bewertungsmetriken zur Verfügung, um die Qualität eines Empfehlungssystems objektiv zu messen \parencite{manning2008ir,voorhees1999mrr,jarvelin2002dcg}.
+
+Obwohl diese Technologien bereits erfolgreich in Suchmaschinen, Dokumentensuchen und Empfehlungssystemen eingesetzt werden \parencite{liu2009learning,Reimers2019SBERT}, 
+werden die in der EPLAN-Artikelverwaltung vorhandenen Zuordnungen zwischen Artikeln und Makros bislang nicht systematisch für die automatische Empfehlung von Makros verwendet. 
+Das in den bestehenden Artikel-Makro-Zuordnungen enthaltene Engineering-Wissen steht somit zwar zur Verfügung, wird jedoch überwiegend über manuelle Such- und Auswahlprozesse genutzt. 
+
+Hieraus ergibt sich ein Handlungsbedarf zur Entwicklung eines Systems, das die vorhandenen Artikel- und Makrodaten automatisiert auswerten kann. 
+Ein solches System soll technische Informationen aus Artikeln extrahieren, diese mit bereits bekannten Artikel-Makro-Zuordnungen vergleichen und anschließend geeignete Makros in Form einer Rangliste empfehlen. 
+
+Für die Entwicklung eines solchen Empfehlungssystems müssen zunächst die relevanten technischen Informationen innerhalb der verfügbaren Artikeldaten identifiziert und hinsichtlich ihrer Eignung zur Beschreibung von Makros untersucht werden. 
+Darauf aufbauend stellt sich die Frage, welcher Modellansatz die vorhandenen Informationen bestmöglich zur automatisierten Makroempfehlung nutzen kann. 
+Anschließend muss bewertet werden, welche Empfehlungsqualität der ausgewählte Ansatz erreicht und inwieweit die empfohlenen Makros hinsichtlich ihrer Relevanz korrekt priorisiert werden können. 
+Abschließend ist zu untersuchen, welchen praktischen Nutzen ein solches Empfehlungssystem für die Elektrokonstruktion besitzt und ob die in Kapitel \ref{sec:wirtschaftliche_auswirkungen} beschriebenen Such- und Auswahlaufwände tatsächlich reduziert werden können. 
+
+Vor diesem Hintergrund ergibt sich folgende übergeordnete Forschungsfrage: 
+
+\begin{quote} 
+  \textbf{RQ0:} Inwieweit eignet sich ein KI-basiertes Empfehlungssystem auf Basis vorhandener Artikel-Makro-Zuordnungen zur automatisierten Empfehlung geeigneter EPLAN-Makros für neue Elektrokonstruktionsaufgaben? 
+\end{quote} 
+
+Zur Beantwortung dieser Forschungsfrage werden folgende Teilforschungsfragen untersucht: 
+
+\begin{description} 
+  \item[RQ1:] Welche technischen Informationen aus EPLAN-Artikeln eignen sich zur Beschreibung und Unterscheidung von Makros und können als Trainings- und Evaluationsbasis eines Empfehlungssystems verwendet werden? 
+  \item[RQ2:] Welcher Modellansatz eignet sich zur Abbildung und Nutzung vorhandener Artikel-Makro-Zuordnungen für die automatisierte Empfehlung geeigneter Makros? 
+  \item[RQ3:] Welche Empfehlungsqualität erreicht der ausgewählte Modellansatz hinsichtlich Trefferwahrscheinlichkeit und Rankingqualität? 
+  \item[RQ4:] Welchen Einfluss besitzt das entwickelte Empfehlungssystem auf den Suchaufwand und die Wiederverwendung bestehender Makros in der Elektrokonstruktion? 
+\end{description} 
+
+Das Ziel dieser Arbeit besteht folglich darin, die Machbarkeit eines KI-basierten Makroempfehlungssystems zu untersuchen, einen geeigneten Modellansatz auf Basis der verfügbaren Daten auszuwählen, 
+dessen Empfehlungsqualität zu evaluieren und den potenziellen Nutzen für die Elektrokonstruktion zu bewerten.

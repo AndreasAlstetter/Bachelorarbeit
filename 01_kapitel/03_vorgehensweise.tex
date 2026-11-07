@@ -1,47 +1,36 @@
-\chapter{Vorgehensweise}\label{chap:vorgehensweise}
+\chapter{Vorgehensweise} \label{chap:vorgehensweise} 
 
 \section{Methodisches Vorgehen}
-
-Das methodische Vorgehen orientiert sich an der \textit{Design Science Research Methodology} (DSRM) nach Peffers et al. \citeyearpar{peffers2007dsrm}. 
-Die DSRM beschreibt einen strukturierten Forschungsprozess zur Entwicklung und Evaluation technischer Artefakte und eignet sich insbesondere für die Entwicklung von IT-Systemen.
-Das Ziel der Methodik besteht darin, eine konkrete Problemstellung systematisch zu analysieren, ein geeignetes Artefakt zu entwickeln und den Nutzen durch eine Evaluation nachzuweisen. 
-
-
+Zur Beantwortung der in Kapitel \ref{sec:handlungsbedarf_und_forschungsfragen} formulierten Forschungsfragen wird die Design Science Research Methodology (DSRM) nach Peffers et al. verwendet \parencite{peffers2007dsrm}. 
+Die DSRM beschreibt einen strukturierten Forschungsprozess zur Entwicklung und Evaluation technischer Artefakte und eignet sich insbesondere für die Entwicklung von Informationssystemen. 
+Das Ziel der Methodik besteht darin, eine Problemstellung systematisch zu analysieren, daraus Anforderungen abzuleiten, ein geeignetes Artefakt zu entwickeln und dessen Nutzen durch eine Evaluation nachzuweisen. 
 Der von Peffers et al. beschriebene Forschungsprozess umfasst die folgenden Schritte: 
 
 \begin{enumerate} 
     \item Problemidentifikation und Motivation 
     \item Definition der Lösungsziele 
     \item Design und Entwicklung des Artefakts 
-    \item Demonstration der entwickelten Lösung 
+    \item Demonstration der Lösung 
     \item Evaluation des Artefakts 
     \item Kommunikation der Ergebnisse 
 \end{enumerate} 
 
-In dieser Arbeit bildet die DSRM den übergeordneten Rahmen. Die iterative Entwicklung des Ranking-Systems erfolgt innerhalb der Design-, Entwicklungs- und Evaluationsphase durch wiederkehrende Entwicklungszyklen. 
-
 \section{Iterativer Entwicklungsprozess} 
-
-Zur Entwicklung des Artefakts wird die Design-Science-Methodik durch die Prinzipien des \textit{Action Design Research} (ADR) nach Sein et al. \citeyearpar{sein2011adr} verwendet.
-ADR verbindet dabei die Entwicklung eines Artefakts mit der fortlaufenden Anwendung, Evaluation und Verbesserung. 
-Während die DSRM den strukturellen Prozess beschreibt, liefert ADR den Entwicklungszyklus zur kontinuierlichen Verbesserung des Systems. 
-
-Der iterative Entwicklungsprozess besteht dabei aus den folgenden Schritten: 
-
+Innerhalb der Design-, Entwicklungs- und Evaluationsphase wird die DSRM durch die Prinzipien des Action Design Research (ADR) nach Sein et al. ergänzt \parencite{sein2011adr}. ADR verbindet die Entwicklung eines Artefakts mit dessen fortlaufender Analyse, Validierung und Verbesserung. Während die DSRM den übergeordneten Forschungsrahmen bereitstellt, definiert ADR einen iterativen Entwicklungszyklus zur schrittweisen Verbesserung des Empfehlungssystems. Der iterative Entwicklungsprozess umfasst die folgenden Schritte: 
 \begin{enumerate} 
-    \item Analyse des aktuellen Zustands und Identifikation von Verbesserungspotentialen 
-    \item Recherche wissenschaftlicher und technischer Lösungen
-    \item Konzeption neuer Komponenten, Merkmale oder Optimierungen
-    \item Implementierung und Anpassung der entwickelten Ansätze 
-    \item Durchführung von Tests und Validierungen 
-    \item Evaluation anhand definierter Qualitätsmetriken 
-    \item Interpretation der Ergebnisse 
-    \item Ableitung weiterer Verbesserungen
+\item Analyse des aktuellen Systemzustands 
+\item Recherche fachlicher und technischer Lösungsansätze 
+\item Konzeption neuer Komponenten oder Optimierungen 
+\item Implementierung der entwickelten Ansätze 
+\item Durchführung von Tests und Validierungen 
+\item Evaluation anhand definierter Qualitätsmetriken 
+\item Interpretation der Ergebnisse 
+\item Ableitung weiterer Verbesserungen 
 \end{enumerate} 
 
-Die Ergebnisse einer Iteration bilden jeweils die Grundlage für die nachfolgenden Iterationen. Auf diese Weise entsteht ein kontinuierlicher Verbesserungsprozess, in dem Forschung, Entwicklung, Evaluation und Optimierung miteinander verzahnt sind. 
-Die Kombination aus DSRM und ADR ermöglicht somit auf der einen Seite einen strukturierten Forschungsprozess und auf der anderen Seite eine iterative Verbesserung des entwickelten Ranking-Systems. 
-Abbildung \ref{fig:dsrm_adr_verzahnung} veranschaulicht diese Verzahnung der beiden Methodiken.
+Die Ergebnisse einer Iteration bilden jeweils die Grundlage für die nachfolgende Iteration. Dadurch entsteht ein kontinuierlicher Verbesserungsprozess, in dem Forschung, Entwicklung und Evaluation eng miteinander verzahnt sind. 
+Die Kombination aus DSRM und ADR ermöglicht einerseits einen strukturierten wissenschaftlichen Forschungsprozess und andererseits eine iterative Optimierung des entwickelten Empfehlungssystems. 
+Abbildung \ref{fig:dsrm_adr_verzahnung} veranschaulicht die Verzahnung beider Methodiken.
 
 \begin{figure}[H]
     \centering
@@ -110,6 +99,55 @@ Abbildung \ref{fig:dsrm_adr_verzahnung} veranschaulicht diese Verzahnung der bei
     \label{fig:dsrm_adr_verzahnung}
 \end{figure}
 
-Die theoretischen Grundlagen der verwendeten Bewertungsmetriken wurden bereits in Kapitel \ref{chap:stand_der_technik} vorgestellt. 
-Die Anwendung dieser Metriken zur Bewertung des entwickelten Systems erfolgt in Kapitel \ref{chap:evaluierungskonzept}.
-Eine Darstellung der finalen Systemarchitektur und der vollständigen Pipeline befindet sich ebenfalls in diesem Kapitel.
+Die in Abbildung \ref{fig:dsrm_adr_verzahnung} dargestellte Verzahnung von DSRM und ADR bildet den methodischen Rahmen der vorliegenden Arbeit. 
+Die Phasen „Problemidentifikation und Motivation“ sowie „Definition der Lösungsziele“ wurden bereits in Kapitel \ref{chap:motivation} und Kapitel \ref{chap:stand_der_technik} durchgeführt. 
+Hierbei wurden die Herausforderungen der Makrosuche analysiert, die Vision eines KI-basierten Empfehlungssystems entwickelt, der aktuelle Stand der Technik betrachtet und darauf aufbauend die Forschungsfragen RQ0 bis RQ4 abgeleitet. 
+Die nachfolgenden Kapitel bilden die Design-, Entwicklungs-, Demonstrations- und Evaluationsphase der DSRM ab. Dabei entsteht in jedem Kapitel ein Artefakt, das als Grundlage für die jeweils nachfolgenden Arbeitsschritte dient. 
+Die Zuordnung von Forschungsfragen, DSRM-Phasen, Artefakten und Kapiteln ist in Tabelle \ref{tab:artefakte_dsrm} dargestellt.
+
+\begin{table}[H] 
+    \centering 
+    \caption{Zuordnung von Forschungsfragen, DSRM-Phasen, Artefakten und Kapiteln} \label{tab:artefakte_dsrm} 
+    \begin{tabular}{p{2cm}p{3cm}p{4cm}p{4cm}} 
+        \hline Kapitel & DSRM-Phase & Forschungsfrage & Artefakt \\ 
+        \hline 
+        4 & Design \& Entwicklung & RQ1 & A1: Trainings- und Evaluationsbasis \\ 
+        5 & Design \& Entwicklung & RQ2 & A2: Ausgewählter Modellansatz \\ 
+        6 & Design \& Entwicklung & RQ2 & A3: Systemarchitektur \\ 
+        7 & Design \& Entwicklung & RQ2 & A4: Trainiertes Empfehlungssystem \\ 
+        8 & Demonstration \& Evaluation & RQ3 & A5: Evaluationsergebnisse \\ 
+        9 & Evaluation & RQ4 & A6: Nutzen- und Wirtschaftlichkeitsbewertung \\ 
+        10 & Kommunikation & RQ0 & A7: Beantwortung der Forschungsfragen \\ 
+        \hline 
+    \end{tabular} 
+\end{table}
+
+
+Die Bearbeitung der Arbeit erfolgt entlang dieser Artefaktkette. 
+
+Kapitel 4 untersucht zunächst die verfügbaren Artikel-, Makro- und Zuordnungsdaten und beantwortet damit Forschungsfrage RQ1. 
+Das Ergebnis dieses Kapitels ist die Trainings- und Evaluationsbasis des Empfehlungssystems (Artefakt A1). 
+
+Anschließend werden in Kapitel 5 verschiedene KI-basierte Modellansätze analysiert und gegenübergestellt. Hierbei werden insbesondere die Large Language Models mit Fine-Tuning, Sentence Transformer, 
+Embedding-Modelle mit Triplet Loss sowie Learning-to-Rank-Verfahren betrachtet (Vergleiche Kapitel \ref{modellansätze}). Ziel dieses Kapitels ist die Auswahl eines geeigneten Modellansatzes zur Beantwortung von Forschungsfrage RQ2. 
+Das Ergebnis bildet Artefakt A2. 
+
+Auf Grundlage des ausgewählten Modellansatzes wird in Kapitel 6 die Architektur des Empfehlungssystems entwickelt. Dieses Architekturkonzept bildet Artefakt A3 und spezifiziert die Komponenten, 
+Datenflüsse und Schnittstellen des Systems. 
+
+Kapitel 7 beschreibt die Implementierung und das Training des ausgewählten Modells. Hierzu gehören die Erstellung der Trainingsdaten, die Modellkonfiguration, die Hyperparameteroptimierung sowie der eigentliche Trainingsprozess. 
+Das Ergebnis dieses Kapitels ist das trainierte Empfehlungssystem (Artefakt A4). 
+
+Die Demonstration und Evaluation des entwickelten Artefakts erfolgt in Kapitel 8. Hierzu werden die im Kapitel \ref{sec:validierungsansätze} vorgestellten Bewertungsmetriken Recall@k, Mean Reciprocal Rank und nDCG verwendet. 
+Das Ergebnis dieser Untersuchungen bildet Artefakt A5 und dient der Beantwortung von Forschungsfrage RQ3. 
+
+Kapitel 9 bewertet die erzielten Ergebnisse hinsichtlich ihres praktischen Nutzens für die Elektrokonstruktion. Hierzu werden insbesondere Suchaufwand, Wiederverwendung von Makros und wirtschaftliche Auswirkungen wie in Kapitel \ref{sec:wirtschaftliche_auswirkungen} betrachtet. 
+Dieses Kapitel beantwortet Forschungsfrage RQ4 und erzeugt Artefakt A6. 
+
+Abschließend werden in Kapitel 10 die Ergebnisse der Arbeit zusammengeführt. Die Forschungsfragen RQ0 bis RQ4 werden beantwortet, die Grenzen des entwickelten Systems diskutiert und mögliche zukünftige Erweiterungen aufgezeigt. 
+Das Ergebnis dieses Kapitels bildet Artefakt A7.
+
+Die innerhalb der DSRM-Phasen „Design \& Entwicklung“ sowie „Evaluation“ entstehenden Artefakte werden nicht linear entwickelt, sondern durchlaufen die in Abbildung \ref{fig:dsrm_adr_verzahnung} dargestellten ADR-Zyklen. 
+Insbesondere während der Datenanalyse, Modellauswahl, Implementierung und Evaluation erfolgen wiederholte Iterationen aus Analyse, Recherche, Konzeption, Implementierung und Bewertung. 
+Die Ergebnisse jeder Iteration fließen dabei unmittelbar in die Weiterentwicklung der nachfolgenden Artefakte ein. Dadurch entsteht ein iterativer Entwicklungsprozess, 
+in dem die Forschungsfragen schrittweise beantwortet und die einzelnen Artefakte kontinuierlich verbessert werden.

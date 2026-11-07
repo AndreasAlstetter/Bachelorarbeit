@@ -1,4 +1,5 @@
 \chapter{Motivation} 
+\label{chap:motivation}
 
 \section{Herleitung}
 
@@ -8,7 +9,7 @@ Im gleiche Zuge entsteht eine große Mengen an Daten sowie Datenquellen, die erf
 Dieser Anstieg an Daten und Datenquellen sorgt dafür, dass sowohl die Komplexität als auch die Dynamik von industriellen Systemen kontinuierlich zunimmt \parencite{OECD2024}.
 
 Mit der steigenden Anzahl an Datenquellen und der wachsenden Datenmenge wächst auch die Herausforderung, relevante Informationen effizient zu identifizieren, zu analysieren und in fundierte Entscheidungen zu überführen.
-Insbesondere in komplexen industriellen Umgebungen wie der Produktion, der Konstruktion und des Engineerings müssen Mitarbeiter eine Vielzahl an Prozessparametern, Informationen und Datenquellen gleichzeitig berücksichtigen.
+Insbesondere in komplexen industriellen Umgebungen wie der Produktion, der Konstruktion und des Engineerings müssen Mitarbeiter eine Vielzahl an Prozessparametern und Informationen gleichzeitig berücksichtigen.
 Die hierfür erforderliche Informationsverarbeitung übersteigt häufig die kognitiven Kapazitäten einzelner Mitarbeiter, was zu Ineffizienzen, Fehlern und Verzögerungen in den Entscheidungsprozessen führen kann \parencite{WEF2023AIRevolution}.
 
 Künstliche Intelligenz (KI) bietet das Potenzial, diese Herausforderungen zu bewältigen, indem sie große Datenmengen analysiert sowie Muster, 
@@ -56,44 +57,68 @@ Beispielhaft könnte dem Makro für einen Elektromotor ein anderer Artikel des H
 Dadurch ergibt sich eine flexible Möglichkeit, unterschiedliche Varianten eines Elektrobauteils innerhalb eines Projekts abzubilden. 
 
 \section{Herausforderung}
+\label{sec:herausforderung}
 
 Mit der zunehmenden Anzahl an Makros und Artikel wächst auch die Komplexität ihrer Verwaltung und Wiederverwendung. 
 Dies kann für eine konkrete Elektrokonstruktionsaufgabe wie der Erstellung eines Elektroschaltplans für einen Motor zu einer Herausforderung werden. 
 Während die Wiederverwendung standardisierter Makros eine Effizienzsteigerung in der Elektrokonstruktion darstellt, 
-steigt gleichzeitig der Aufwand das passende Makro innerhalb der Makrobibliotheken für eine konkrete Elektrokonstruktionsaufgabe zu finden. 
+steigt gleichzeitig der Aufwand das passende Makro für eine konkrete Elektrokonstruktionsaufgabe zu finden. 
 Die Auswahl eines geeigneten Makros erfolgt dabei häufig auf Basis von Erfahrungswerten der Elektrokonstrukteure oder durch manuelle Such- und Vergleichsarbeiten. 
 Dies führt zu einem erhöten Zeitaufwand sowie der Nutzung suboptimaler oder redundanter Makros. 
 
-Um die wirtschafltichen Auswirkungen dieser Herausforderung Abzuschätzen, wird hier eine beispilehafte Analyse des Zeitaufwands für die Suche und Auswahl geeigneter Makros durchgeführt. 
-Angenommen ein Unternehmen verfügt über eine Makrobibliothek mit mehreren tausend Makros und ein Elektrokonstrukteur benötigt durchschnittlich fünf Minuten, um ein geeignetes Makro zu suchen, zu prüfen und auszuwählen. 
+\section{Wirtschaftliche Auswirkungen}
+\label{sec:wirtschaftliche_auswirkungen}
+
+Um die wirtschaftlichen Auswirkungen dieser Herausforderung abzuschätzen, wird hier eine beispielhafte Analyse des Zeitaufwands für die Suche und Auswahl geeigneter Makros durchgeführt und in Tabelle \ref{tab:wirtschaftlichkeit_ki} zusammengefasst:
+
+Angenommen ein Unternehmen verfügt über einen Makrobestand mit mehreren tausend Makros und ein Elektrokonstrukteur benötigt durchschnittlich fünf Minuten, um ein geeignetes Makro zu suchen, zu prüfen und auszuwählen. 
 Werden pro Projekt beispielsweise 100 Makros wiederverwendet, ergibt sich ein Suchaufwand von rund 500 Minuten beziehungsweise 8,3 Stunden pro Projekt. 
 Bei einem Stundensatz von 80 Euro für einen Elektrokonstrukteur entstehen für die Makrosuche Kosten in Höhe von etwa 664 Euro pro Projekt. 
-Werden jährlich 50 vergleichbare Projekte bearbeitet, ergibt sich ein Aufwand von rund 415 Stunden beziehungsweise jährliche Kosten von etwa 33.200 Euro. 
-
+Werden jährlich 50 vergleichbare Projekte bearbeitet, ergibt sich ein Aufwand von rund 415 Stunden was zu jährlichen Kosten von etwa 33.200 Euro führt. 
+    
 Wird hingegen ein KI-basiertes Empfehlungssystem eingesetzt, das bei der Eingabe eines Datenblatts mehrere geeignete Makros vorschlägt, kann der Suchaufwand deutlich reduziert werden. 
 Unter der Annahme, dass die benötigte Zeit für die Auswahl eines Makros von fünf Minuten auf eine Minute sinkt, reduziert sich der Gesamtaufwand auf 100 Minuten beziehungsweise 1,7 Stunden pro Projekt. 
 Dadurch ergibt sich eine Zeitersparnis von etwa 6,6 Stunden pro Projekt. 
 Bei einem Stundensatz von 80 Euro entspricht dies einer Kosteneinsparung von etwa 528 Euro pro Projekt beziehungsweise 26.400 Euro pro Jahr bei 50 Projekten. 
 Zusätzlich können durch die Empfehlung bereits etablierter Makros redundante Makroneuanlagen vermieden sowie die Standardisierung und Wiederverwendung bestehender Engineering-Lösungen gefördert werden.
 
-Die Tabelle \ref{tab:vergleich_suchaufwand} zeigt die Gegenüberstellung des Suchaufwands ohne und mit Einsatz eines KI-basierten Empfehlungssystems.
+Den jährlichen Einsparungen müssen die Kosten für die Entwicklung und den Betrieb des Empfehlungssystems gegenübergestellt werden. 
+Für ein prototypisches KI-basiertes Empfehlungssystem sind Entwicklungsaufwände für Datenaufbereitung, Modellentwicklung, Integration in die bestehende Engineering-Umgebung sowie Validierung und Tests erforderlich.
+
+Angenommen, die Entwicklung des Systems verursacht einen einmaligen Aufwand von 500 Arbeitsstunden. 
+Bei einem durchschnittlichen internen Stundensatz von 80 Euro ergeben sich Entwicklungskosten von etwa 40.000 Euro. 
+Zusätzlich fallen jährliche Kosten für Wartung, Weiterentwicklung und den Betrieb der IT-Infrastruktur an. 
+Werden hierfür beispielsweise 50 Stunden pro Jahr veranschlagt, entstehen laufende Kosten von rund 4.000 Euro jährlich.
+
+Demgegenüber steht die zuvor berechnete jährliche Einsparung von etwa 26.400 Euro durch die reduzierte Suchzeit bei der Makroauswahl. 
+Unter dieser Annahme amortisieren sich die Entwicklungskosten nach etwa 1,8 Jahren. 
+Nach Erreichen des Break-even-Punkts führt das System zu einer jährlichen Nettoeinsparung von rund 22.400 Euro.
+
+Zusätzlich sind mehrere wirtschaftliche Effekte in dieser vereinfachten Betrachtung noch nicht berücksichtigt. 
+Hierzu zählen insbesondere die Vermeidung redundanter Makroneuanlagen, eine höhere Standardisierung bestehender Lösungen, 
+ein geringerer Einarbeitungsaufwand neuer Mitarbeiter sowie eine Reduzierung von Such- und Auswahlfehlern. 
+Die tatsächlichen wirtschaftlichen Vorteile können daher über der allein aus der Zeiteinsparung berechneten Kostenreduktion liegen.
 
 \begin{table}[htbp] 
     \centering 
-    \caption{Beispielhafter Vergleich des Suchaufwands} 
-    \label{tab:vergleich_suchaufwand} 
+    \caption{Beispielhafte Wirtschaftlichkeitsbetrachtung des KI-basierten Empfehlungssystems} 
+    \label{tab:wirtschaftlichkeit_ki} 
     \begin{tabular}{lcc} 
         \hline Kennzahl & Ohne KI & Mit KI \\ 
-        \hline Suchzeit pro Makro & 5 min & 1 min \\ 
-        Makros pro Projekt & 100 & 100 \\ 
-        Gesamtzeit pro Projekt & 8,3 h & 1,7 h \\ 
-        Kosten pro Projekt (80 €/h) & 664 € & 136 € \\ 
-        Zeitersparnis pro Projekt & - & 6,6 h \\ 
-        Kosteneinsparung pro Projekt & - & 528 € \\ 
-        Kosteneinsparung pro Jahr (50 Projekte) & - & 26.400 € \\ 
-        \hline 
-    \end{tabular} 
-\end{table}
+        \hline Suchzeit pro Makro & 5 min & 1 min \\ Makros pro Projekt & 100 & 100 \\ 
+        \hline Gesamtzeit pro Projekt & 500 min & 100 min \\ & (= 8,3 h) & (= 1,7 h) \\ Stundensatz Konstrukteur & 80 € & 80 € \\ 
+        \hline Kosten pro Projekt & 664 € & 136 € \\ \hline Projekte pro Jahr & 50 & 50 \\ 
+        \hline Personalkosten pro Jahr & 33.200 € & 6.800 € \\ & (664 € $\cdot$ 50) & (136 € $\cdot$ 50) \\ 
+        \hline \multicolumn{3}{c}{\textbf{Kosten des KI-Systems}} \\ 
+            \hline Entwicklungskosten (einmalig) & - & 40.000 € \\ Wartungskosten pro Jahr & - & 4.000 € \\ 
+            \hline \multicolumn{3}{c}{\textbf{Gegenüberstellung Kosten/Jahr}} \\ 
+            \hline Gesamtkosten pro Jahr & 33.200 € & 10.800 € \\ & & (6.800 € + 4.000 €) \\ \hline \multicolumn{3}{c}{\textbf{Ergebnis}} \\ 
+            \hline Jährliche Einsparung & \multicolumn{2}{c}{33.200 € - 10.800 € = \textbf{22.400 €}} \\ 
+            \hline Amortisationszeit & \multicolumn{2}{c}{40.000 € / 22.400 € = \textbf{1,8 Jahre}} \\ 
+            \hline 
+        \end{tabular} 
+    \end{table}
+
 
 \section{Vision}
 
@@ -103,8 +128,8 @@ Die Vision \ref{fig:vision} besteht darin, ein KI-basiertes Empfehlungssystem zu
 um geeignete Makros für eine konkrete Elektrokonstruktionsaufgabe vorzuschlagen.
 Hierbei dienen die Artikelstammdaten wie Hersteller, Spannung, Strom und Leistung als Eingabedaten,
 während die zu empfehlende Makros als Ausgabedaten, für das Empfehlungssystem dienen. 
-Die Eingabedaten sollen dabei aus dem Datenblatt für den zu empfehlenden Artikel extrahiert, und für die Suchanfrage an das Empfehlungssystem verwendet werden.
-Die Ausgabedaten des Empfehlungssystem stellen die am besten zur den Eingabedaten passenden Makros dar. 
+Die Eingabedaten sollen dabei aus einem Artikel extrahiert, und für die Suchanfrage an das Empfehlungssystem verwendet werden.
+Die Ausgabedaten des Empfehlungssystem stellen die am besten zu den Eingabedaten passenden Makros dar. 
 Diese Makros sollen dann entsprechend ihrer Eignung für die konkrete Elektrokonstruktionsaufgabe in absteigender Reihenfolge in einer Rangliste sortiert werden.
 
 \begin{figure}[H] 
@@ -116,7 +141,7 @@ Diese Makros sollen dann entsprechend ihrer Eignung für die konkrete Elektrokon
 \end{figure}
 
 
-Durch die Nutzung eines solchen Empfehlungssystems soll es möglich werden, den Suchaufwand innerhalb der Makrobibliotheken zu reduzieren,
+Durch die Nutzung eines solchen Empfehlungssystems soll es möglich werden, den Suchaufwand für geeignete Makros aus einem bestehenden Makrobestand zu reduzieren,
 und gleichzeitig einen Beitrag zur weiteren Automatisierung wissensintensiver Tätigkeiten und der Nutzung der Potenziale Künstlicher Intelligenz in der Industrie zu leisten.
 
 

@@ -1,7 +1,17 @@
-\chapter{Training des Learning-to-Rank-Modells}\label{chap:training_des_learning_to_rank_modells}
 
 
-\section{Aufbau der Trainingsmatrix} 
+\chapter{Implementierung des Modells}
+\label{chap:implementierung_des_modells}
+
+\section{Kandidatenprofile} 
+
+\section{Feature Engineering} 
+
+Artikelvektor
+Macro Shape Vector
+Lexical Vector
+
+\section{Trainingsmatrix} 
 
 Nach der Erstellung der Kandidatenprofile werden für jede Anfrage die verfügbaren Makrokandidaten bewertet. 
 Für jede Anfrage werden Anfrage-Kandidat-Paare erzeugt und anhand der Pairwise-Merkmale aus Kapitel \ref{chap:analyse_der_datenstrukturen} beschrieben. 
@@ -29,47 +39,8 @@ Tabelle \ref{tab:matrixdimensionen} fasst die Größenordnung der erzeugten Rank
 
 Der erzeugte Artikel-Kandidat-Merkmalsraum ist sehr groß und viele Merkmalswerte besitzen den Wert null. Aus diesem Grund werden Sparse-Matrizen verwendet. Bei einer Sparse-Matrix werden nicht belegte Werte nicht vollständig gespeichert, wodurch der Speicherbedarf reduziert wird. Die numerischen Werte werden im 32-Bit-Gleitkommaformat \texttt{float32} verarbeitet. 
 
-\section{Parameter Suche des Learning-to-Rank-Modells}
 
-Das zentrale Element dieser Architektur basiert auf LightGBM. LightGBM ist eine Bibliothek für Gradient Boosting mithilfe von Entscheidungsbäumen. Dabei werden sequentiell Entscheidungsbäume erzeugt, welche die Fehler des bisherigen Modells schrittweise korrigieren. Für Rankingaufgaben ist der \texttt{LGBMRanker} besonders geeignet. Dieser ist auf Rankinggruppen sowie relative Ergebnisreihenfolgen spezialisiert und verwendet in diesem Projekt das LambdaRank-Verfahren \parencite{LightGBM}.
-Dieser basiert auf dem in Kapitel \ref{chap:stand_der_technik} beschriebenen LambdaRank-/LambdaMART-Prinzip.
-
-Das Modell wird mit den Parametern 
-
-\begin{align} 
-    \text{objective} = \text{lambdarank} \qquad \text{und} \qquad \text{metric} = \text{ndcg}
-\end{align} 
-
-trainiert \parencite{srcStep931}.
-
-Der Parameter \texttt{objective} legt das Optimierungsziel des Modells fest. Mit \texttt{lambdarank} wird die Optimierung der Kandidatenreihenfolge durch LambdaRank aktiviert. Der Parameter \texttt{metric} bestimmt die verwendete Rankingmetrik der Bewertung; \texttt{ndcg} steht für Normalized Discounted Cumulative Gain und wird im Kapitel \ref{chap:stand_der_technik} näher erläutert.
-
-Die für die spätere Referenzkonfiguration A08 ausgewählten Modellparameter lauten: 
-
-\begin{align} 
-    n\_estimators &= 900 \\ 
-    learning\_rate &= 0.025 \\ 
-    num\_leaves &= 15 \\ 
-    min\_child\_samples &= 50 \\ 
-    lambdarank\_truncation\_level &= 5 
-\end{align}
-
-Zusätzlich wird eine Kandidatenprofilbreite von 16 Artikeln pro Makro verwendet. 
-
-Wie in Kapitel \ref{chap:analyse_der_datenstrukturen} beschrieben, werden Kandidaten einer Anfrage als gemeinsame Rankinggruppe betrachtet.
-Entsprechend entsteht für jede Anfrage eine Gruppe:
-
-\begin{align} 
-    G_q = \{(q,c_1),(q,c_2),\dots,(q,c_n)\} 
-\end{align} 
-
-mit der Anfrage $q$ und den zugehörigen Makrokandidaten $c_i$.
-
-Dadurch erlernt das Modell nicht die allgemeine Zugehörigkeit eines einzelnen Kandidaten zu einer Klasse. Stattdessen wird die optimale Kandidatenreihenfolge innerhalb derselben Anfrage gelernt.
-Ziel dabei ist es, dass der relevanteste Kandidat möglichst weit oben in der Rangliste erscheint.
-
-Die Eingaben für das Modell sind die im Kapitel \ref{chap:analyse_der_datenstrukturen} beschriebenen Pairwise-Merkmale.
-Das Training erfolgt dabei ausschließlich auf den Trainingsdaten, während die Optimierung der Hyperparameter über die Validierungsdaten erfolgt \parencite{srcStep931}.
+\section{Hyperparameteroptimierung} 
 
 \section{Hyperparameteroptimierung}
 
@@ -118,3 +89,52 @@ Dabei sind die Hyperparameter wie folgt zu verstehen:
 
 
 
+\section{Training} 
+
+
+Das zentrale Element dieser Architektur basiert auf LightGBM. LightGBM ist eine Bibliothek für Gradient Boosting mithilfe von Entscheidungsbäumen. Dabei werden sequentiell Entscheidungsbäume erzeugt, welche die Fehler des bisherigen Modells schrittweise korrigieren. Für Rankingaufgaben ist der \texttt{LGBMRanker} besonders geeignet. Dieser ist auf Rankinggruppen sowie relative Ergebnisreihenfolgen spezialisiert und verwendet in diesem Projekt das LambdaRank-Verfahren \parencite{LightGBM}.
+Dieser basiert auf dem in Kapitel \ref{chap:stand_der_technik} beschriebenen LambdaRank-/LambdaMART-Prinzip.
+
+Das Modell wird mit den Parametern 
+
+\begin{align} 
+    \text{objective} = \text{lambdarank} \qquad \text{und} \qquad \text{metric} = \text{ndcg}
+\end{align} 
+
+trainiert \parencite{srcStep931}.
+
+Der Parameter \texttt{objective} legt das Optimierungsziel des Modells fest. Mit \texttt{lambdarank} wird die Optimierung der Kandidatenreihenfolge durch LambdaRank aktiviert. Der Parameter \texttt{metric} bestimmt die verwendete Rankingmetrik der Bewertung; \texttt{ndcg} steht für Normalized Discounted Cumulative Gain und wird im Kapitel \ref{chap:stand_der_technik} näher erläutert.
+
+Die für die spätere Referenzkonfiguration A08 ausgewählten Modellparameter lauten: 
+
+\begin{align} 
+    n\_estimators &= 900 \\ 
+    learning\_rate &= 0.025 \\ 
+    num\_leaves &= 15 \\ 
+    min\_child\_samples &= 50 \\ 
+    lambdarank\_truncation\_level &= 5 
+\end{align}
+
+Zusätzlich wird eine Kandidatenprofilbreite von 16 Artikeln pro Makro verwendet. 
+
+Wie in Kapitel \ref{chap:analyse_der_datenstrukturen} beschrieben, werden Kandidaten einer Anfrage als gemeinsame Rankinggruppe betrachtet.
+Entsprechend entsteht für jede Anfrage eine Gruppe:
+
+\begin{align} 
+    G_q = \{(q,c_1),(q,c_2),\dots,(q,c_n)\} 
+\end{align} 
+
+mit der Anfrage $q$ und den zugehörigen Makrokandidaten $c_i$.
+
+Dadurch erlernt das Modell nicht die allgemeine Zugehörigkeit eines einzelnen Kandidaten zu einer Klasse. Stattdessen wird die optimale Kandidatenreihenfolge innerhalb derselben Anfrage gelernt.
+Ziel dabei ist es, dass der relevanteste Kandidat möglichst weit oben in der Rangliste erscheint.
+
+Die Eingaben für das Modell sind die im Kapitel \ref{chap:analyse_der_datenstrukturen} beschriebenen Pairwise-Merkmale.
+Das Training erfolgt dabei ausschließlich auf den Trainingsdaten, während die Optimierung der Hyperparameter über die Validierungsdaten erfolgt \parencite{srcStep931}.
+
+
+
+\section{Kapitelergebnis} 
+
+Artefakt A4:
+Trainiertes Empfehlungssystem

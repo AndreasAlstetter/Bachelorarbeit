@@ -3,71 +3,96 @@
 \contentsline {chapter}{\numberline {1}Motivation}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Herleitung}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Herausforderung}{3}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Vision}{4}{section.1.3}%
-\contentsline {chapter}{\numberline {2}Stand der Technik}{6}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Grundlagen}{6}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Modell}{6}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Neuronale Netze}{6}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Vom Vektor zum Embedding-Raum}{7}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}Cosine Similarity}{8}{subsection.2.1.4}%
-\contentsline {section}{\numberline {2.2}Modellansätze}{9}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Neural Language Models}{9}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Large Language Models}{9}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Fine-Tuning}{10}{subsection.2.2.3}%
+\contentsline {section}{\numberline {1.3}Wirtschaftliche Auswirkungen}{4}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Vision}{5}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Stand der Technik}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Grundlagen}{7}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Modell}{7}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Neuronale Netze}{7}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Vom Vektor zum Embedding-Raum}{8}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Cosine Similarity}{9}{subsection.2.1.4}%
+\contentsline {section}{\numberline {2.2}Modellansätze}{10}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Neural Language Models}{10}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Large Language Models}{10}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Fine-Tuning}{11}{subsection.2.2.3}%
 \contentsline {subsection}{\numberline {2.2.4}Embedding-Modelle}{11}{subsection.2.2.4}%
-\contentsline {subsection}{\numberline {2.2.5}Sentence Transformers}{11}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.5}Sentence Transformers}{12}{subsection.2.2.5}%
 \contentsline {subsection}{\numberline {2.2.6}Triplet Loss}{12}{subsection.2.2.6}%
-\contentsline {subsection}{\numberline {2.2.7}Learning-to-Rank}{12}{subsection.2.2.7}%
-\contentsline {subsection}{\numberline {2.2.8}LambdaRank}{13}{subsection.2.2.8}%
-\contentsline {section}{\numberline {2.3}Validierungsansätze}{14}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Recall@k}{14}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Mean Reciprocal Rank}{15}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Normalized Discounted Cumulative Gain}{16}{subsection.2.3.3}%
-\contentsline {section}{\numberline {2.4}Handlungsbedarf}{17}{section.2.4}%
-\contentsline {chapter}{\numberline {3}Vorgehensweise}{18}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Methodisches Vorgehen}{18}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Iterativer Entwicklungsprozess}{18}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Architekturübersicht}{21}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Empfehlungssystem auf Basis eines Large Language Models mit Fine-Tuning}{21}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Empfehlungssystem auf Basis eines Sentence Transformers}{21}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Empfehlungssystem auf Basis eines Embedding-Modells mit Triplet Loss}{21}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Empfehlungssystem auf Basis eines Learning-to-Rank-Modells}{21}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Datenanalyse und Trainigsvorbereitung}{22}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Analyse der Ausgangsdaten}{22}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Aufbereitung der Trainingsdaten}{22}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Datensplit}{22}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Trainingsbasis}{22}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Auswahl des Modell-Ansatzes}{23}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Gegenüberstellung der Modell-Ansätze}{23}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Large Language Model mit Fine-Tuning}{23}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Sentence-Transformer}{23}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}Embedding-Modell mit Triplet Loss}{23}{subsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.1.4}Learning-to-Rank-Modell}{23}{subsection.6.1.4}%
-\contentsline {section}{\numberline {6.2}Modellauswahl}{23}{section.6.2}%
-\contentsline {chapter}{\numberline {7}Training des Learning-to-Rank-Modells}{24}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Aufbau der Trainingsmatrix}{24}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Parameter Suche des Learning-to-Rank-Modells}{24}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Hyperparameteroptimierung}{26}{section.7.3}%
-\contentsline {chapter}{\numberline {8}Modellbewertung}{27}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Versuchsserie A01--A09}{27}{section.8.1}%
-\contentsline {subsection}{\numberline {8.1.1}Untersuchte Konfigurationsparameter}{27}{subsection.8.1.1}%
-\contentsline {subsection}{\numberline {8.1.2}Referenzkonfiguration A01}{28}{subsection.8.1.2}%
-\contentsline {subsection}{\numberline {8.1.3}Ergebnisse}{29}{subsection.8.1.3}%
-\contentsline {subsection}{\numberline {8.1.4}Same-Family-Gewicht}{29}{subsection.8.1.4}%
-\contentsline {subsection}{\numberline {8.1.5}Hierarchische Labeldefinition}{30}{subsection.8.1.5}%
-\contentsline {subsection}{\numberline {8.1.6}Profilbreite}{30}{subsection.8.1.6}%
-\contentsline {subsection}{\numberline {8.1.7}Regularisierung}{30}{subsection.8.1.7}%
-\contentsline {subsection}{\numberline {8.1.8}Top-Konfiguration}{31}{subsection.8.1.8}%
-\contentsline {chapter}{\numberline {9}Diskussion der Ergebnisse}{32}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Interpretation der Ergebnisse}{32}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Ursachenanalyse der Rankingfehler}{32}{section.9.2}%
-\contentsline {chapter}{\numberline {10}Grenzen und Ausblick}{34}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Grenzen des aktuellen Systems}{34}{section.10.1}%
-\contentsline {subsection}{\numberline {10.1.1}Geringer Support von Ziel-Makros}{34}{subsection.10.1.1}%
-\contentsline {subsection}{\numberline {10.1.2}Variantenauflösung innerhalb einer Makrofamilie}{35}{subsection.10.1.2}%
-\contentsline {subsection}{\numberline {10.1.3}Support-Bias häufiger Ziel-Makros}{35}{subsection.10.1.3}%
-\contentsline {section}{\numberline {10.2}Ausblick}{35}{section.10.2}%
-\contentsline {chapter}{\numberline {11}Zusammenfassung und Fazit}{37}{chapter.11}%
+\contentsline {subsection}{\numberline {2.2.7}Learning-to-Rank}{13}{subsection.2.2.7}%
+\contentsline {subsection}{\numberline {2.2.8}LambdaRank}{14}{subsection.2.2.8}%
+\contentsline {section}{\numberline {2.3}Validierungsansätze}{15}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Recall@k}{15}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Mean Reciprocal Rank}{16}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Normalized Discounted Cumulative Gain}{17}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Handlungsbedarf und Forschungsfragen}{18}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Vorgehensweise}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Methodisches Vorgehen}{21}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Iterativer Entwicklungsprozess}{21}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Datenanalyse und Trainingsvorbereitung}{25}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Ausgangsdaten}{25}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Datenaufbereitung}{25}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Trainingsdatenmodell}{25}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Datensplit}{25}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Kapitelergebnis}{25}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Auswahl des Modellansatzes}{26}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Bewertungsmatrix für Modellansätze}{26}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Large Language Models}{26}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Sentence Transformer}{26}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Embedding-Modell mit Triplet Loss}{26}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Learning-to-Rank}{26}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Modellauswahl}{26}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Kapitelergebnis}{26}{section.5.7}%
+\contentsline {chapter}{\numberline {6}Datenanalyse und Trainigsvorbereitung}{27}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Analyse der Ausgangsdaten}{27}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Aufbereitung der Trainingsdaten}{27}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Datensplit}{27}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Trainingsbasis}{27}{section.6.4}%
+\contentsline {chapter}{\numberline {7}Konzeption des Empfehlungssystems}{28}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Gesamtarchitektur}{28}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Datenfluss}{28}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Komponentenmodell}{28}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Datenmodell}{28}{subsection.7.1.3}%
+\contentsline {section}{\numberline {7.2}Kapitelergebnis}{28}{section.7.2}%
+\contentsline {chapter}{\numberline {8}Implementierung des Modells}{29}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Kandidatenprofile}{29}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Feature Engineering}{29}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Trainingsmatrix}{29}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Hyperparameteroptimierung}{30}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Hyperparameteroptimierung}{30}{section.8.5}%
+\contentsline {section}{\numberline {8.6}Training}{31}{section.8.6}%
+\contentsline {section}{\numberline {8.7}Kapitelergebnis}{32}{section.8.7}%
+\contentsline {chapter}{\numberline {9}Evaluierung}{33}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Evaluierungskonzept}{33}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Versuchsaufbau}{33}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Versuchsergebnisse}{33}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}Untersuchte Konfigurationsparameter}{33}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}Referenzkonfiguration A01}{35}{subsection.9.3.2}%
+\contentsline {subsection}{\numberline {9.3.3}Ergebnisse}{35}{subsection.9.3.3}%
+\contentsline {section}{\numberline {9.4}Analyse}{36}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}Same-Family-Gewicht}{36}{subsection.9.4.1}%
+\contentsline {subsection}{\numberline {9.4.2}Hierarchische Labeldefinition}{36}{subsection.9.4.2}%
+\contentsline {subsection}{\numberline {9.4.3}Profilbreite}{37}{subsection.9.4.3}%
+\contentsline {subsection}{\numberline {9.4.4}Regularisierung}{37}{subsection.9.4.4}%
+\contentsline {subsection}{\numberline {9.4.5}Top-Konfiguration}{37}{subsection.9.4.5}%
+\contentsline {section}{\numberline {9.5}Kapitelergebnis}{38}{section.9.5}%
+\contentsline {chapter}{\numberline {10}Diskussion}{39}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Nutzenbewertung}{39}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Wirtschaftliche Betrachtung}{39}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Grenzen}{39}{section.10.3}%
+\contentsline {chapter}{\numberline {11}Grenzen und Ausblick}{40}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Grenzen des aktuellen Systems}{40}{section.11.1}%
+\contentsline {subsection}{\numberline {11.1.1}Geringer Support von Ziel-Makros}{40}{subsection.11.1.1}%
+\contentsline {subsection}{\numberline {11.1.2}Variantenauflösung innerhalb einer Makrofamilie}{41}{subsection.11.1.2}%
+\contentsline {subsection}{\numberline {11.1.3}Support-Bias häufiger Ziel-Makros}{41}{subsection.11.1.3}%
+\contentsline {section}{\numberline {11.2}Kritische Reflexion}{41}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Interpretation der Ergebnisse}{41}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Ursachenanalyse der Rankingfehler}{42}{section.11.4}%
+\contentsline {chapter}{\numberline {12}Fazit und Ausblick}{44}{chapter.12}%
+\contentsline {section}{\numberline {12.1}RQ1 beantworten}{44}{section.12.1}%
+\contentsline {section}{\numberline {12.2}RQ2 beantworten}{44}{section.12.2}%
+\contentsline {section}{\numberline {12.3}RQ3 beantworten}{44}{section.12.3}%
+\contentsline {section}{\numberline {12.4}RQ4 beantworten}{44}{section.12.4}%
+\contentsline {section}{\numberline {12.5}RQ0 beantworten}{44}{section.12.5}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{41}{chapter*.28}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{47}{chapter*.29}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

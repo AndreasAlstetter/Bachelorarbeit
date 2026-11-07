@@ -177,7 +177,6 @@
       \strng{authornamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
       \strng{authorfullhash}{2d35a1714a0ec7130c424fb4e8e52d8c}
       \strng{authorfullhashraw}{2d35a1714a0ec7130c424fb4e8e52d8c}
-      \field{extraname}{1}
       \field{sortinit}{E}
       \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
       \field{extradatescope}{labelyear}
@@ -195,42 +194,6 @@
       \endverb
       \verb{url}
       \verb https://www.eplan.help/de-de/Infoportal/Content/Plattform/2025/Content/htm/macrosgui_k_start.htm
-      \endverb
-    \endentry
-    \entry{EPLANArtikelverwaltung}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=2d35a1714a0ec7130c424fb4e8e52d8c}{%
-           family={{EPLAN GmbH \& Co. KG}},
-           familyi={E\bibinitperiod}}}%
-      }
-      \list{organization}{1}{%
-        {EPLAN-Hilfe}%
-      }
-      \strng{namehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
-      \strng{fullhash}{2d35a1714a0ec7130c424fb4e8e52d8c}
-      \strng{fullhashraw}{2d35a1714a0ec7130c424fb4e8e52d8c}
-      \strng{bibnamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
-      \strng{authorbibnamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
-      \strng{authornamehash}{2d35a1714a0ec7130c424fb4e8e52d8c}
-      \strng{authorfullhash}{2d35a1714a0ec7130c424fb4e8e52d8c}
-      \strng{authorfullhashraw}{2d35a1714a0ec7130c424fb4e8e52d8c}
-      \field{extraname}{2}
-      \field{sortinit}{E}
-      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{url}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Artikelverwaltung}
-      \field{urlday}{31}
-      \field{urlmonth}{8}
-      \field{urlyear}{2026}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.eplan.help/de-de/Infoportal/Content/Plattform/2.9/EPLAN_Help.htm#htm/partsmanagementgui_k_start.htm
-      \endverb
-      \verb{url}
-      \verb https://www.eplan.help/de-de/Infoportal/Content/Plattform/2.9/EPLAN_Help.htm#htm/partsmanagementgui_k_start.htm
       \endverb
     \endentry
     \entry{jarvelin2002dcg}{inproceedings}{}{}
