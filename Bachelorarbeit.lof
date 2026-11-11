@@ -3,7 +3,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Elektromotor}}{2}{figure.caption.2}%
 \contentsline {figure}{\numberline {1.2}{\ignorespaces Beispielartikel Elektromotor}}{3}{figure.caption.3}%
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Vision des KI-basierten Empfehlungssystems}}{6}{figure.caption.5}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Vision des Empfehlungssystems}}{6}{figure.caption.5}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Schematischer Aufbau eines mehrschichtigen neuronalen Netzes}}{8}{figure.caption.6}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Vereinfachte Darstellung von Embeddings im dreidimensionalen Embedding-Raum}}{9}{figure.caption.7}%
@@ -15,8 +15,11 @@
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Beispiel zur Berechnung des Mean Reciprocal Rank. Das erste relevante Makro befindet sich auf Rang 3, wodurch sich ein reziproker Rang von $1/3$ ergibt. Frühere relevante Treffer führen zu höheren MRR-Werten.}}{17}{figure.caption.13}%
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Beispiel für nDCG. Die Relevanz eines Ergebnisses wird unabhängig von seiner Rangposition betrachtet. Obwohl Dokument C die höchste Relevanz besitzt, erscheint es erst auf Rang 3. nDCG erkennt diese Fehlplatzierung und bewertet die Rangliste schlechter als eine ideal sortierte Rangliste.}}{18}{figure.caption.14}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Verzahnung von DSRM und ADR. Die DSRM bildet den übergeordneten Forschungsrahmen, während ADR als iterativer Entwicklungszyklus innerhalb der Phase \glqq Design \& Entwicklung des Artefakts\grqq \ eingesetzt wird.}}{22}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Verzahnung von DSRM und ADR. Die DSRM bildet den übergeordneten Forschungsrahmen, während ADR als iterativer Entwicklungszyklus innerhalb der Phase \glqq Design \& Entwicklung des Artefakts\grqq \ eingesetzt wird.}}{21}{figure.caption.15}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Beispielhafte Struktur eines XML-Artikels für einen Elektromotor. Die hierarchische Organisation ermöglicht die Speicherung von Herstellerinformationen, elektrischen Eigenschaften, technischen Merkmalen sowie Referenzen auf zugehörige Makros.}}{25}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Beispielhafte Struktur eines Motor-Makros im .ema-Format. Das Makro beschreibt die technische Umsetzung eines Elektromotors im Schaltplan und enthält Informationen zu Anschlussstrukturen, Bezeichnungen und Makrovarianten.}}{26}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Beispiel einer n:1-Beziehung zwischen Artikeln und Makros. Mehrere Artikel verweisen über die Eigenschaft \texttt {P\_ARTICLE\_MACRO} auf dasselbe Makro.}}{26}{figure.caption.19}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

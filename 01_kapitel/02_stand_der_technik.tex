@@ -527,17 +527,6 @@ Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 bedeutet, dass die Ergeb
 Die in Kapitel \ref{sec:herausforderung} beschriebene Herausforderung zeigt, dass die Suche nach geeigneten Makros innerhalb großer Makrobestände mit einem erheblichen zeitlichen und wirtschaftlichen Aufwand verbunden sein kann. 
 
 Gleichzeitig wurde in Kapitel \ref{chap:stand_der_technik} gezeigt, dass bereits verschiedene Verfahren zur Verarbeitung, Bewertung und Empfehlung von Informationen existieren. 
-Mit Large Language Models (LLMs) stehen leistungsfähige Modelle zur Verfügung, die umfangreiche sprachliche und sachliche Zusammenhänge aus großen Textsammlungen erlernen können \parencite{Zhao2023}. 
-Durch Fine-Tuning können diese Modelle gezielt an spezifische Domänen und Aufgaben angepasst werden, sodass auch fachspezifisches Wissen berücksichtigt werden kann \parencite{Wei2022,Zhang2023InstructionTuning}. 
-Darüber hinaus stehen mit Embedding-Modellen und Sentence Transformers Verfahren zur Verfügung, um technische Texte wie in Artikeln in Embeddings zu überführen \parencite{Mikolov2013,Reimers2019SBERT}.
-Triplet Loss ermöglicht die gezielte Optimierung dieser Embeddings, sodass ähnliche Embeddings im Embedding-Raum nahe beieinander liegen und fachlich unterschiedliche Embeddings größere Abstände aufweisen\parencite{Schroff2015}.
-Um Kandidaten aus vorhanden Artikel-Makro-Zuordnungen gezielt zu priorisieren, existieren außerdem mit Learning-to-Rank und LambdaRank Verfahren, 
-welche Ergebnisse entsprechend ihrer Relevanz innerhalb einer Rangliste sortieren können \parencite{liu2009learning,Burges2006LambdaRank}.
-Schließlich stehen mit Recall@k, Mean Reciprocal Rank und nDCG etablierte Bewertungsmetriken zur Verfügung, um die Qualität eines Empfehlungssystems objektiv zu messen \parencite{manning2008ir,voorhees1999mrr,jarvelin2002dcg}.
-
-Obwohl diese Technologien bereits erfolgreich in Suchmaschinen, Dokumentensuchen und Empfehlungssystemen eingesetzt werden \parencite{liu2009learning,Reimers2019SBERT}, 
-werden die in der EPLAN-Artikelverwaltung vorhandenen Zuordnungen zwischen Artikeln und Makros bislang nicht systematisch für die automatische Empfehlung von Makros verwendet. 
-Das in den bestehenden Artikel-Makro-Zuordnungen enthaltene Engineering-Wissen steht somit zwar zur Verfügung, wird jedoch überwiegend über manuelle Such- und Auswahlprozesse genutzt. 
 
 Hieraus ergibt sich ein Handlungsbedarf zur Entwicklung eines Systems, das die vorhandenen Artikel- und Makrodaten automatisiert auswerten kann. 
 Ein solches System soll technische Informationen aus Artikeln extrahieren, diese mit bereits bekannten Artikel-Makro-Zuordnungen vergleichen und anschließend geeignete Makros in Form einer Rangliste empfehlen. 
@@ -550,17 +539,17 @@ Abschließend ist zu untersuchen, welchen praktischen Nutzen ein solches Empfehl
 Vor diesem Hintergrund ergibt sich folgende übergeordnete Forschungsfrage: 
 
 \begin{quote} 
-  \textbf{RQ0:} Inwieweit eignet sich ein KI-basiertes Empfehlungssystem auf Basis vorhandener Artikel-Makro-Zuordnungen zur automatisierten Empfehlung geeigneter EPLAN-Makros für neue Elektrokonstruktionsaufgaben? 
+  \textbf{RQ0:} Inwieweit eignet sich ein KI-basiertes Empfehlungssystem auf Basis vorhandener Artikel-Makro-Zuordnungen zur automatisierten Empfehlung geeigneter Makros für neue Elektrokonstruktionsaufgaben? 
 \end{quote} 
 
 Zur Beantwortung dieser Forschungsfrage werden folgende Teilforschungsfragen untersucht: 
 
 \begin{description} 
-  \item[RQ1:] Welche technischen Informationen aus EPLAN-Artikeln eignen sich zur Beschreibung und Unterscheidung von Makros und können als Trainings- und Evaluationsbasis eines Empfehlungssystems verwendet werden? 
+  \item[RQ1:] Welche technischen Informationen aus Artikeln eignen sich zur Beschreibung und Unterscheidung von Makros und können als Trainings- und Evaluationsbasis für ein Empfehlungssystems verwendet werden? 
   \item[RQ2:] Welcher Modellansatz eignet sich zur Abbildung und Nutzung vorhandener Artikel-Makro-Zuordnungen für die automatisierte Empfehlung geeigneter Makros? 
   \item[RQ3:] Welche Empfehlungsqualität erreicht der ausgewählte Modellansatz hinsichtlich Trefferwahrscheinlichkeit und Rankingqualität? 
   \item[RQ4:] Welchen Einfluss besitzt das entwickelte Empfehlungssystem auf den Suchaufwand und die Wiederverwendung bestehender Makros in der Elektrokonstruktion? 
 \end{description} 
 
-Das Ziel dieser Arbeit besteht folglich darin, die Machbarkeit eines KI-basierten Makroempfehlungssystems zu untersuchen, einen geeigneten Modellansatz auf Basis der verfügbaren Daten auszuwählen, 
+Das Ziel dieser Arbeit besteht folglich darin, die Machbarkeit eines Empfehlungssystems zu untersuchen, einen geeigneten Modellansatz auf Basis der verfügbaren Daten auszuwählen, 
 dessen Empfehlungsqualität zu evaluieren und den potenziellen Nutzen für die Elektrokonstruktion zu bewerten.
