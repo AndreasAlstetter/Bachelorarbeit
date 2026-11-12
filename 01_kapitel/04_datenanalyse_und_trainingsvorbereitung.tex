@@ -141,7 +141,7 @@ Diese Zuordnung kann als n zu 1 Beziehung betrachtet werden, da mehrere Artikel 
 
 Bildlich kann dies wie folgt dargestellt werden: 
 
-\begin{figure}[htbp] 
+\begin{figure}[H] 
     \centering 
     \begin{tikzpicture}[ >=stealth, font=\small, 
         article/.style={ draw, rounded corners, fill=blue!10, minimum width=4cm, minimum height=0.9cm, align=center }, 
@@ -164,21 +164,15 @@ Bildlich kann dies wie folgt dargestellt werden:
     \label{fig:artikel_macro_n_zu_1} 
 \end{figure}
 
+\section{Grundlagen der Datenvor- und Aufbereitung}
+
+
 \section{Datenaufbereitung} 
 
 Die eigentliche Datenaufbereitung erfolgt innerhalb der Pipeline-Schritte 911 und 913. 
 Ziel dieser Schritte ist die Überführung der heterogenen Rohdaten in einen konsistenten Trainingsdatensatz. 
 
-\subsection{Architektur der Datenaufbereitung} 
 
-Die Architektur der Datenaufbereitung ist in Abbildung XX dargestellt. 
-Die XML-Artikeldaten und die EMA-Makrodaten bilden die beiden Eingabeschnittstellen der Pipeline. 
-
-Im Schritt \texttt{911 Prepare Raw Data} erfolgt die technische Analyse dieser Datenquellen. 
-Hierbei werden Merkmale extrahiert, normiert und in strukturierte Vektoren überführt. 
-Die resultierenden Daten werden anschließend im Schritt \texttt{913 Filter Training Data} hinsichtlich ihrer Qualität überprüft, 
-gefiltert und mit Qualitätsinformationen angereichert. Danach erfolgt im Schritt \texttt{921 Build Datasplit} die Aufteilung in Trainings-, Validierungs- und Testdaten.
-Das Ergebnis dieser Verarbeitung bildet Artefakt A1. 
 
 \subsection{Datenqualität} 
 
@@ -236,7 +230,9 @@ Nach der Extraktion erfolgt die Qualitätsprüfung. Hierbei werden Datensätze i
 
 Zusätzlich werden problematische Datensätze in Quarantäne verschoben und nicht für das Training verwendet. 
 
-\section{Trainingsdatenmodell} Maschinelle Lernverfahren können technische Informationen nicht direkt aus XML-Dateien verarbeiten. 
+\section{Trainingsdatenmodell} 
+
+Maschinelle Lernverfahren können technische Informationen nicht direkt aus XML-Dateien verarbeiten. 
 Daher werden die verfügbaren Informationen in numerische Merkmalsräume überführt. Die Pipeline erzeugt hierfür drei spezialisierte Vektormodelle. 
 
 \subsection{Artikelvektor} 
@@ -336,6 +332,90 @@ Damit existieren keine technisch identischen Datensätze über Split-Grenzen hin
 
 Zusätzlich wird sichergestellt, dass alle Makroziele, welche in Validierungs- oder Testdaten vorkommen, 
 bereits im Trainingsbestand vertreten sind. Dadurch wird verhindert, dass die Evaluation durch unbeabsichtigte Cold-Start-Situationen verfälscht wird. 
+
+
+\subsection{Architektur der Datenaufbereitung} 
+
+Die Architektur der Datenaufbereitung ist in Abbildung XX dargestellt. 
+Die XML-Artikeldaten und die EMA-Makrodaten bilden die beiden Eingabeschnittstellen der Pipeline. 
+
+Im Schritt \texttt{911 Prepare Raw Data} erfolgt die technische Analyse dieser Datenquellen. 
+Hierbei werden Merkmale extrahiert, normiert und in strukturierte Vektoren überführt. 
+Die resultierenden Daten werden anschließend im Schritt \texttt{913 Filter Training Data} hinsichtlich ihrer Qualität überprüft, 
+gefiltert und mit Qualitätsinformationen angereichert. Danach erfolgt im Schritt \texttt{921 Build Datasplit} die Aufteilung in Trainings-, Validierungs- und Testdaten.
+Das Ergebnis dieser Verarbeitung bildet Artefakt A1. 
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, 
+        font=\small, 
+        source/.style={ draw, rounded corners, fill=blue!15, minimum width=3.8cm, minimum height=1cm, align=center }, 
+        process/.style={ draw, rounded corners, fill=green!15, minimum width=4.5cm, minimum height=1.1cm, align=center }, 
+        artifact/.style={ draw, rounded corners, fill=orange!15, minimum width=5.0cm, minimum height=1cm, align=center } ] 
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[source] (article) at (-5,10) {XML-Artikeldaten}; 
+        \node[source] (macro) at (5,10) {EMA-Makrodaten}; 
+        \node[source] (mapping) at (0,10) {Artikel-Makro-Zuordnungen}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Schritt 911 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[process] (prepare) at (0,7.5) { Rohdatenaufbereitung\\ Extraktion\\ Normierung\\ Klassifikation }; 
+        \draw[->,thick] (article) -- (prepare); 
+        \draw[->,thick] (macro) -- (prepare); 
+        \draw[->,thick] (mapping) -- (prepare); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Übergabeartefakt %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[artifact] (features) at (0,5.0) { Zwischenartefakt \\ Einheitliche Artikel- und Makromerkmale inklusive Artikel-Makro-Zuordnungen }; 
+        \draw[->,thick] (prepare) -- (features); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Schritt 913 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[process] (filter) at (0,2.4) { Trainingsdaten vorbereiten \\ Qualitätsprüfung\\ Einheitennormalisierung\\ Entfernung von Datenleckagen }; 
+        \draw[->,thick] (features) -- (filter); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektoren %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[artifact] (articlevec) at (-6,-0.5) { Artikelvektor }; 
+        \node[artifact] (macrovec) at (0,-0.5) { Makrostrukturvektor }; 
+        \node[artifact] (lexicalvec) at (6,-0.5) { Lexikalvektor }; 
+        
+        \draw[->,thick] (filter) -- (articlevec); 
+        \draw[->,thick] (filter) -- (macrovec); 
+        \draw[->,thick] (filter) -- (lexicalvec); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Schritt 921 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[process] (split) at (0,-3) { Datasplit erstellen\\ Gruppierung von Artikeln über Fingerprints\\ Überprüfung der Makroabdeckung der Trainingsdaten}; 
+        \draw[->,thick] (articlevec) |- (split); 
+        \draw[->,thick] (macrovec) -- (split); 
+        \draw[->,thick] (lexicalvec) |- (split);
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Split %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[artifact] (train) at (-6,-6) {Training\\984 Artikel}; 
+        \node[artifact] (val) at (0,-6) {Validierung\\322 Artikel}; 
+        \node[artifact] (test) at (6,-6) {Test\\253 Artikel}; 
+        
+        \draw[->,thick] (split) -- (train); 
+        \draw[->,thick] (split) -- (val); 
+        \draw[->,thick] (split) -- (test); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artefakt A1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ draw, rounded corners, fill=yellow!20, minimum width=9cm, minimum height=1.6cm, align=center ] (a1) at (0,-8.5) { Artefakt A1\\ 1559 Artikel\\ 375 Makros\\ 2381 Features}; 
+        \draw[->,thick] (train.south) |- (a1.west); 
+        \draw[->,thick] (val.south) -- (a1.north); 
+        \draw[->,thick] (test.south) |- (a1.east); 
+    \end{tikzpicture} 
+    \caption{Architektur der Datenanalyse und Trainingsvorbereitung. XML-Artikeldaten, EMA-Makrodaten und Artikel-Makro-Zuordnungen bilden die Eingabeschnittstellen.
+    Die Rohdatenaufbereitung erzeugt strukturierte technische Repräsentationen, die Trainingsdatenvorbereitung prüft die Datenqualität, führt Einheitennormalisierung, Datenleckagen-Prüfungen durch und erstellt die Trainingsvektoren.
+    Die Erstellung des Datensplits erfolgt unter Berücksichtigung der Fingerprints und der Makroabdeckung. Das Ergebnis bildet Artefakt A1 als technische Wissensrepräsentation für die nachfolgende Modellauswahl.} 
+    \label{fig:datenaufbereitung_architektur} 
+\end{figure}
+
 
 \section{Kapitelergebnis} 
 
