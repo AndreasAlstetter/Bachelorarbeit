@@ -1,15 +1,15 @@
 \chapter{Datenanalyse und Trainingsvorbereitung} 
 \label{chap:datenanalyse_und_trainingsvorbereitung} 
 
-\section{Ausgangsdaten} 
+\section{Datenbasis} 
 
 \subsection{Artikeldaten}
 \label{sec:artikeldaten} 
 
 Die Artikeldaten liegen in XML-Dateien vor. 
-XML (\textit{Extensible Markup Language}) ist ein standardisiertes Format zur strukturierten Speicherung technischer Informationen. 
-Durch die hierarchische Struktur können sowohl einfache Stammdaten als auch komplexe technische Eigenschaften abgebildet werden. 
-Die Analyse der Artikeldaten hat ergeben, dass sie eine Vielzahl technischer Eigenschaften enthalten, darunter: 
+XML (\textit{Extensible Markup Language}) ist ein standardisiertes Format zur strukturierten Speicherung von Informationen. 
+Durch die hierarchische Struktur können sowohl einfache Stammdaten wie Herstellerinformationen als auch komplexe Eigenschaften wie Spannungen, Ströme oder Leistungen abgebildet werden. 
+Die Analyse der Artikeldaten hat ergeben, dass sie eine Vielzahl von technischen Eigenschaften enthalten, darunter: 
 
 \begin{itemize} 
     \item Herstellerinformationen, 
@@ -22,7 +22,7 @@ Die Analyse der Artikeldaten hat ergeben, dass sie eine Vielzahl technischer Eig
     \item Referenzen auf zugehörige Makros. 
 \end{itemize} 
 
-Um diese Eigenschaften anhand des Motorbeispiels aus Kapitel \ref{sec:herleitung} zu veranschaulichen, soll hierfür ein Motor von SEW betrachtet werden.
+Um diese technischen Eigenschaften anhand des Motorbeispiels aus Kapitel \ref{sec:herleitung} zu veranschaulichen, soll hierfür ein Motor von SEW betrachtet werden.
 Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML-Artikels für diesen Motor.
 
 \begin{figure}[H] 
@@ -63,7 +63,7 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
         % Makro
         \draw[ decorate, decoration={brace,mirror,amplitude=10pt}, thick ] (-8.25,-0.8) -- (8.25,-0.8) node[midway,yshift=-1cm] { \fbox{\strut Zugeordnetes Motor-Makro} };
     \end{tikzpicture} 
-    \caption{Beispielhafte Struktur eines XML-Artikels für einen Elektromotor. Die hierarchische Organisation ermöglicht die Speicherung von Herstellerinformationen, elektrischen Eigenschaften, technischen Merkmalen sowie Referenzen auf zugehörige Makros.} 
+    \caption{Beispielhafte Struktur eines XML-Artikels für einen Elektromotor. Die hierarchische Organisation ermöglicht die Speicherung von Herstellerinformationen, technischen Eigenschaften sowie Referenzen auf zugehörige Makros.} 
     \label{fig:xml_artikel_motor}
 \end{figure}
 
@@ -72,7 +72,7 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
 Neben den Artikeln werden die zugehörigen Makros analysiert. Die Makros werden im .ema-Format gespeichert. 
 Dieses Format entspricht einem XML-basierten Schema, das sowohl grafische als auch technische Informationen strukturiert abbildet. 
 
-Hierzu gehören: 
+Hierzu zählen: 
 
 \begin{itemize} 
     \item Anschlussstrukturen,  
@@ -81,7 +81,7 @@ Hierzu gehören:
 \end{itemize} 
 
 Während die Artikeldaten beschreiben, welche technischen Eigenschaften ein Gerät besitzt, 
-beschreiben die Makros die technische Umsetzung dieser Eigenschaft innerhalb eines Schaltplans. 
+beschreiben die Makros die technische Umsetzung dieser Eigenschaften innerhalb eines Schaltplans. 
 Beide Informationsquellen ergänzen sich daher gegenseitig. 
 
 Die Bezeichnungen eines Makros werden nach folgendem Muster aufgebaut: Makro-Familie-Variante (z.\,B. M1\_F1\_V1)
@@ -134,7 +134,8 @@ Die Abbildung \ref{fig:ema_motor_macro} gibt die Struktur eines Motor-Makros im 
     \label{fig:ema_motor_macro} 
 \end{figure}
 
-\subsection{Artikel-Makro-Zuordnungen} 
+\subsection{Artikel-Makro-Zuordnungen}
+\label{sec:artikel_macro_zuordnungen}
 
 Die Zuordnung von Artikel zu Makro erfolgt durch die Referenzierung des Makros über die Artikel-Eigenschaft \texttt{P\_ARTICLE\_MACRO}.
 Diese Zuordnung kann als n zu 1 Beziehung betrachtet werden, da mehrere Artikel auf dasselbe Makro verweisen können.
@@ -164,37 +165,51 @@ Bildlich kann dies wie folgt dargestellt werden:
     \label{fig:artikel_macro_n_zu_1} 
 \end{figure}
 
-\section{Grundlagen der Datenvor- und Aufbereitung}
-
 
 \section{Datenaufbereitung} 
+\label{sec:datenaufbereitung}
 
-Die eigentliche Datenaufbereitung erfolgt innerhalb der Pipeline-Schritte 911 und 913. 
-Ziel dieser Schritte ist die Überführung der heterogenen Rohdaten in einen konsistenten Trainingsdatensatz. 
+\subsection{Entfernung unvollständiger Artikel- und Makrodaten}
+
+In diesem Schritt werden alle Artikel und Makros entfernt, die unvollständige Informationen enthalten. 
+Dies betrifft fehlende technische Merkmale von Artikeln wie Spannung, Leistung oder Strom sowie fehlende Artikel-Makro-Zuordnungen und fehlerhafte Makroberschreibungen.
+
+Als Beispiel für solche unvollständigen Informationen soll folgendes Bild dienen:
+
+% Bild einfügen
 
 
+\subsection{Entfernung redundanter Artikel- und Makrodaten}
 
-\subsection{Datenqualität} 
+Hierbei werden Artikel und Makros identifiziert, die inhaltlich identisch sind. 
+Identische Inhalte führen zu einer Verzerrung der Datenbasis, da hierdurch die Gewichtung bestimmter Artikel oder Makros erhöt wird.
+Dies wird im Bereich des maschinellen Lernens als Bias bezeichnet. Ein Bias ist wie ein Vorurteil in den Daten, das die Ergebnisse der Modelle verzerren kann zu verstehen.
 
-Da die Daten aus realen Engineering-Projekten stammen, weisen sie unterschiedliche Qualitätsmerkmale auf. 
+Folgende Abbildung zeigt die Auswirkung der redundanter Artikel- und Makrodaten auf deren Gewichtung:
 
-Typische Probleme sind: 
+% Bild einfügen
 
-\begin{itemize} 
-    \item fehlende Werte, 
-    \item unterschiedliche Schreibweisen, 
-    \item verschiedene Einheiten, 
-    \item redundante Datensätze, 
-    \item mehrsprachige Beschreibungen, 
-    \item Varianten desselben Artikels. 
-\end{itemize} 
 
-Zusätzlich enthalten die Rohdaten Informationen wie Bearbeiter, Zeitstempel, Projektnamen oder Dateipfade. 
-Diese Informationen besitzen keinen technischen Zusammenhang zur späteren Makrowahl und dürfen deshalb nicht als Trainingssignal verwendet werden. 
+\subsection{Entfernen nicht nutzbarer Metadaten}
 
-\subsection{Einheitennormalisierung} 
+Metadaten sind zusätzliche Informationen über Daten, die nicht direkt mit dem Inhalt dieser Daten zusammenhängen. Beispiele hierfür sind Erstellungsdatum, Änderungsdatum oder Autor. 
+Diese Metadaten sind für die Erkennung technischer unterschiede zwischen Artikeln und Makros nicht relevant. Zusätzliche Metadaten, die keinen Beitrag zur Erkennung von technischen Unterschieden lierfern,
+führen zu sogenannten Rauschen in den Daten. Dieses Rauschen kann als Informationsüberflutung betrachtet werden, was dazu führt, dass relevante Informationen schwerer zu erkennen sind.
 
-Technische Informationen können in unterschiedlichen Einheiten oder Schreibweisen vorliegen. 
+Anhand folgender Abbildung soll verdeutlicht werden, wie nicht nutzbare Metadaten zu Rauschen in den Daten führen können:
+
+% Bild einfügen
+
+
+\subsection{Normaliserung von Einheiten} 
+
+Die Technischen Informationen der Artikel liegen in unterschiedlichen Einheiten oder Schreibweisen vor. Ohne zusätzliches Wissen was die Einheiten bedeuten,
+ist kein direkter Vergleich dieser Werte möglich. Diese fehlende Standardisierung führt zu einer Streuung identischer technischer Informationen, welche ein Rauschen in den Artikel- und Makrodaten erzeugt.
+Deswegen werden die technischen Informationen aus den Artikeln auf gemeinsame Basiseinheiten normiert.
+
+Folgende Abbildung soll dazu diesen Sachverhalt zu veranschaulichen:
+
+% Bild einfügen
 
 Beispielsweise können Spannungen als 
 
@@ -204,9 +219,19 @@ Beispielsweise können Spannungen als
     \item 0,024 kV 
 \end{itemize} 
 
-gespeichert sein. Obwohl alle Angaben dieselbe technische Bedeutung besitzen, würden sie ohne Vorverarbeitung als unterschiedliche Merkmale interpretiert werden. 
-Aus diesem Grund werden physikalische Größen auf gemeinsame Basiseinheiten normiert. Zusätzlich werden technische Klassen und Wertebereiche erzeugt. 
-Beispielsweise entstehen Spannungsklassen wie: 
+
+\subsection{Erstellung von Klassifikationen}
+
+Die Vorhandenen technischen Informationen der Artikeldaten liegen in unterschiedlichen Wertebereichen vor. 
+Dieses Wissen über die Wertebereiche ermöglicht es, die technischen Informationen zu Klassifikationen zusammenzufassen.
+Eine Klassifikation fasst Werte in bestimmte Kategorien zusammen, wodurch die Vergleichbarkeit und Analyse der technischen Informationen erleichtert wird.
+Diese Klassifikationen stellen ein zusätzliches Wissen über die technischen Informationen dar, welches für die Unterscheidung zwischen mehreren Artikeln nützlich ist.
+Gleichzeitig stellt eine Klassifkikation sicher, dass ähnliche Werte in dieselbe Kategorie fallen, 
+wodurch eine Vorsortierung der Artikeldaten erfolgt und somit die Suche nach relevanten Artikeln erleichtert wird.
+
+Im folgenden Beispiel wird die Klassifikation von Spannungen dargestellt: 
+
+% Bild einfügen
 
 \begin{itemize} 
     \item Low Voltage, 
@@ -214,30 +239,42 @@ Beispielsweise entstehen Spannungsklassen wie:
     \item High Voltage. 
 \end{itemize} 
 
-Dadurch können technisch ähnliche Geräte auch dann als ähnlich erkannt werden, wenn ihre numerischen Werte leicht voneinander abweichen. 
 
-\subsection{Qualitätsfilterung} 
+\subsection{Ergebnis der Datenaufbereitung}
+\label{sec:ergebnis_der_datenaufbereitung}
 
-Nach der Extraktion erfolgt die Qualitätsprüfung. Hierbei werden Datensätze identifiziert, welche: 
+Die Aufteilung der Artikel- und Makrodaten erfolgt unter Berücksichtigung der vorangegangenen Datenaufbereitung (siehe Abschnitt \ref{sec:datenaufbereitung}).
+Nach der Anwendung der in der Datenaufbereitung durgeführten Bereinigung, Normalisierung und Klassifizierung hat sich der Ursprüngliche Bestand an Artikeln und Makros von:
+
+% Einfügen der ursprünglichen Bestände an Artikeln und Makros
+
+auf 
 
 \begin{itemize} 
-    \item keine gültige Artikelnummer besitzen, 
-    \item keine Zielmakros besitzen, 
-    \item keine technischen Merkmale enthalten, 
-    \item Leakage-Merkmale enthalten, 
-    \item widersprüchliche Fingerprints aufweisen. 
+    \item 1.559 Artikel, 
+    \item 375 Makros, 
+    \item 2.381 technische . 
 \end{itemize} 
 
-Zusätzlich werden problematische Datensätze in Quarantäne verschoben und nicht für das Training verwendet. 
+reduziert.
 
-\section{Trainingsdatenmodell} 
 
-Maschinelle Lernverfahren können technische Informationen nicht direkt aus XML-Dateien verarbeiten. 
-Daher werden die verfügbaren Informationen in numerische Merkmalsräume überführt. Die Pipeline erzeugt hierfür drei spezialisierte Vektormodelle. 
+
+\section{Überführung in ein Trainingsformat} 
+
+Modelle wie sie in Kapitel \ref{sec:modellansätze} beschrieben werden, können technische Informationen nicht direkt aus XML-Dateien verarbeiten. 
+Um diese Informationen nutzbar zu machen, müssen sie in Embeddings (vergleiche Kapitel \ref{sec:vom_vektor_zum_embedding}) überführt werden.
+Deswegen werden die technischen Informationen aus Artikel- und Makrodaten in numerische Vektoren überführt, die als Eingabe für ein Modell dienen können.
+Die vorliegenden technischen Informationen werden in drei separate Vektoren überführt: den Artikelvektor, den Makrostrukturvektor und den Lexikalvektor.
+Diese Trennung sorgt für eine weitere Klassifikation der technischen Informationen. 
+Dadurch kann verhindert werden, dass sich technischen Informationen in unterschiedlichen Darstellungsformen vermischen.
+
 
 \subsection{Artikelvektor} 
 
-Der Artikelvektor beschreibt die technischen Eigenschaften eines Geräts. Hierzu gehören insbesondere: 
+Der Artikelvektor listet die technischen Eigenschaften eines einzelnen Artikels auf. 
+Folgende Merkmale konnten dabei konsistent aus dem vorhandenen Artikeldaten unter Beachtung der vorherigen Datenaufbereitung (Vergleiche Kapitel \ref{sec:datenaufbereitung}) extrahiert werden: 
+ 
 \begin{itemize} 
     \item Hersteller, 
     \item Produktfamilie, 
@@ -251,10 +288,15 @@ Der Artikelvektor beschreibt die technischen Eigenschaften eines Geräts. Hierzu
     \item Kanalzahlen, 
     \item Anschlussprofile. 
 \end{itemize} 
-Der Artikelvektor bildet die spätere Suchanfrage des Empfehlungssystems ab. 
+
+Die folgende Abbildung zeigt die Struktur und den Aufbau des Artikelvektors anhand des Motorbeispiels:
+
+% Bild einfügen
 
 \subsection{Makrostrukturvektor} 
-Der Makrostrukturvektor beschreibt die technische Struktur eines Makros. Hierzu werden unter anderem Merkmale aus den Function Templates extrahiert: 
+
+Der Makrostrukturvektor beschreibt die Struktur eines Makros. Aus den vorhandenen Makrodaten werden dabei folgende Merkmale extrahiert: 
+
 \begin{itemize} 
     \item Funktionskategorien, 
     \item Funktionsgruppen, 
@@ -266,72 +308,76 @@ Der Makrostrukturvektor beschreibt die technische Struktur eines Makros. Hierzu 
     \item Symbolbibliotheken, 
     \item Makrokategorien. 
 \end{itemize} 
-Function Templates besitzen hierbei eine besondere Bedeutung, da sie die tatsächliche elektrische Struktur eines Gerätes innerhalb eines Schaltplans beschreiben. 
+
+Im Bezug auf das Motorbeispiel ergibt sich folgende Struktur und Aufbau des Makrostrukturvektors:
+
+% Bild einfügen
 
 \subsection{Lexikalvektor} 
-Nicht alle technischen Informationen liegen in strukturierter Form vor. Viele Informationen befinden sich ausschließlich innerhalb von: 
+
+Nicht alle technischen Informationen liegen in Vorstrukturierter Form in den vorhandenen Artikel- und Makrodaten vor. Technische Hinweise in einem Artikel oder Makro liegen in Textform vor. 
+Diese textbasierten technischen Informationen werden getrennt in einem eigenen Vektor erfasst, um ein weiters Rauschen aufgrund der Vermischung von Informationen zu vermeiden.
+
+Aus den vorhandenen Artikel- und Makrodaten lassen sich folgende textbasierten Merkmale extrahieren: 
+
 \begin{itemize} 
     \item Typbezeichnungen, 
     \item Produktserien, 
     \item Kommunikationskennungen, 
     \item technischen Beschreibungen. 
 \end{itemize} 
-Der Lexikalvektor extrahiert gezielt diese technischen Begriffe. Dabei werden keine vollständigen Artikelnummern oder ERP-Kennungen verwendet, um ein Auswendiglernen einzelner Artikel zu verhindern. 
 
-\subsection{Warum drei getrennte Vektoren?} 
+Im Beispiel des Motors ergibt sich folgendes Bild:
 
-Die Aufteilung in Artikelvektor, Makrostrukturvektor und Lexikalvektor erfolgt bewusst. 
-Der Artikelvektor beschreibt die technischen Eigenschaften eines Gerätes. Der Makrostrukturvektor beschreibt die technische Umsetzung innerhalb des Schaltplans. 
-Der Lexikalvektor ergänzt beide Informationsquellen um zusätzliche technische Begriffe. 
-Durch diese Trennung können die einzelnen Wissensquellen unabhängig voneinander ausgewertet und später gezielt kombiniert werden. 
+% Bild einfügen
 
-\section{Datensplit} 
+\section{Erstellung des Datensplits} 
+\subsection{Trainings-, Validierungs- und Testdaten}
 
-Nach Abschluss der Datenaufbereitung erfolgt die Aufteilung der Daten in Trainings-, Validierungs- und Testdaten. 
+Ein Datensplit ist die Aufteilung vorhandener Daten in verschiedene Teilmengen, um damit den Lernprozess eines Modells überwachen, bewerten und überprüfen zu können.
+Hierfür werden die Artikel- und Makrodaten in Trainings-, Validierungs- und Testdaten aufgeteilt.
+Die Trainingsdaten dienen dem Lernprozess des Modells, wodurch die Zusammenhänge zwischen den technischen Informationen erlernt werden. 
+Die Validierungsdaten werden verwendet, um die Parameter des Modells während des Lernprozesses zu überwachen und anzupassen. 
+Die Testdaten dienen der abschließenden Bewertung des Modells, um dessen Leistungsfähigkeit auf unbekannte Artikeldaten zu überprüfen. 
 
-\subsection{Verwendete Datengröße} Der aktuelle Datensatz umfasst: 
+\subsection{Konsistenzprüfung der Artikel- und Makrodaten im Datensplit} 
+\label{sec:konsistenzpruefung_datensplit}
 
-\begin{itemize} 
-    \item 1.559 Artikel, 
-    \item 375 Makroziele, 
-    \item 2.381 technische Merkmale. 
-\end{itemize} 
+Um sicherzustellen, dass alle Artikel- und Makrodaten, welche in Validierungs- oder Testdaten vorkommen, 
+bereits im Trainingsbestand vertreten sind, wird eine Konsistenzprüfung durchgeführt.
+Da für Artikel und Makro in einer n zu 1 Beziehung stehen (siehe Kapitel \ref{sec:artikel_macro_zuordnungen}), können mehrere Artikel zu einem Makro auf den gesamten Datensplit verteilt sein.
+Falls Artikel- oder Makrodaten in den Validierungs- oder Testdaten vorkommen, die nicht im Trainingsbestand vorhanden sind, werden diese umsortiert.
 
-Diese Zahlen wurden nicht manuell festgelegt. Sie ergeben sich unmittelbar aus den verfügbaren Daten nach Abschluss der Datenbereinigung und Qualitätsfilterung. 
+Die Umsortierung erfolgt dabei nach folgenden Regeln:
 
-\subsection{Trainings-, Validierungs- und Testdaten} 
+\begin{itemize}
+    \item Ein Makro muss immer durch einen Artikel in den Trainingsdaten vertreten sein.
+    \item Ein Makro, das in den Validierungsdaten vorkommt, muss immer einen Artikel in den Trainingsdaten haben.
+    \item Ein Makro, das in den Testdaten vorkommt, muss jeweils einen Artikel in den Trainings- und Validierungsdaten haben.
+    \item Die restlichen Artikel von Makros werden entsprechend der Verteilung 60\% Trainingsdaten, 20\% Validierungsdaten und 20\% Testdaten aufgeteilt.
+\end{itemize}
 
-Die Pipeline verwendet als Zielkonfiguration zunächst: 
-\begin{itemize} 
-    \item 60 \% Training, 
-    \item 20 \% Validierung, 
-    \item 20 \% Test. 
-\end{itemize} 
+In der Literatur wird häufig eine Datensplit von 70\% Trainingsdaten, 20\% Validierungsdaten und 10\% Testdaten verwendet. 
+Hiervon wird in dieser Arbeit bewusst abgewichen, um eine erhöte Anzahl an Testdaten und somit eine robustere Bewertung des Modells zu ermöglichen.
+Die Umverteilung auf 60\% Trainingsdaten, 20\% Validierungsdaten und 20\% Testdaten erfolgt durch die Entfernung von 10\% der Trainingsdaten und deren Verschiebung in die Testdaten.
+Durch die oben genannten Regeln zur Konsistenzprüfung werden Artikel als erstens in die Trainingsdaten verschoben. 
+Dadruch entseht eine Bevorzugung der Trainingsdaten gegenüber Validierungs- und Testdaten und somit das Risiko, dass zu wenig Testdaten vorhanden sind.
+Um diesem Risiko entgegenzuwirken, werden die restlichen Artikel mit einer um 10\% erhöhten Wahrscheinlichkeit in die Testdaten verschoben.
 
-Die reale Verteilung beträgt: 
+\subsection{Ergebnis des Datensplits}
+
+Auf Grundlage des reduzierten Bestands aus Kapitel \ref{sec:ergebnis_der_datenaufbereitung}, sowie der Beachtung der Regeln zur Konsistenzprüfung aus Kapitel \ref{sec:konsistenzpruefung_datensplit} ergibt sich der folgende Datensplit:
+
 \begin{itemize} 
     \item 984 Trainingsartikel (63,1 \%), 
     \item 322 Validierungsartikel (20,7 \%), 
     \item 253 Testartikel (16,2 \%). 
 \end{itemize} 
 
-Die Abweichung gegenüber der Zielkonfiguration entsteht durch zusätzliche Randbedingungen zur Vermeidung von Leakage. 
+Dieser Datensplit zeigt eine leichte Abweichung gegenüber der Zielkonfiguration von 70\% Trainingsdaten, 20\% Validierungsdaten und 10\% Testdaten. 
+Diese Abweichung ist für das Ziel dieser Arbeit akzeptabel, da sie eine aussagekräftigere Bewertung des Modells durch eine erhöhte Anzahl an Testdaten ermöglicht.
 
-\subsection{Leakage-Schutz durch Fingerprints} 
-
-Zur Vermeidung von Data Leakage werden Fingerprints verwendet. Ein Fingerprint beschreibt nicht die Identität eines Artikels, sondern dessen technische Signatur. 
-Hierzu werden sämtliche technischen Merkmale eines Artikels zusammengeführt und in eine eindeutige Hashrepräsentation überführt. 
-Technisch identische Artikel besitzen dadurch denselben Fingerprint. 
-Alle Artikel derselben Fingerprint-Gruppe werden gemeinsam innerhalb desselben Datensplits gehalten. 
-Dadurch wird verhindert, dass technisch identische Artikel gleichzeitig in Trainings- und Testdaten erscheinen. Die finale Leakage-Prüfung ergibt: 
-
-\[ Fingerprint\text{-}Konflikte = 0 \] 
-Damit existieren keine technisch identischen Datensätze über Split-Grenzen hinweg. 
-
-\subsection{Target-Abdeckung} 
-
-Zusätzlich wird sichergestellt, dass alle Makroziele, welche in Validierungs- oder Testdaten vorkommen, 
-bereits im Trainingsbestand vertreten sind. Dadurch wird verhindert, dass die Evaluation durch unbeabsichtigte Cold-Start-Situationen verfälscht wird. 
+% Bild einfügen und im Text referenzieren
 
 
 \subsection{Architektur der Datenaufbereitung} 

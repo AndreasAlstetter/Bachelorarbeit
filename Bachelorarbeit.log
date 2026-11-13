@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  12 NOV 2026 20:48
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  13 NOV 2026 11:51
  restricted system commands enabled.
  file:line:error style messages enabled.
 **"c:/Users/alstetter/OneDrive - GROBGroup/Documents/Sys_Engineering/Bachelorar
@@ -2601,96 +2601,101 @@ Overfull \hbox (22.34416pt too wide) in paragraph at lines 132--133
  []
 
 LaTeX Font Info:    Trying to load font information for TU+newtxtt on input lin
-e 139.
-LaTeX Font Info:    No file TUnewtxtt.fd. on input line 139.
+e 140.
+LaTeX Font Info:    No file TUnewtxtt.fd. on input line 140.
 
 LaTeX Font Warning: Font shape `TU/newtxtt/m/n' undefined
-(Font)              using `TU/lmr/m/n' instead on input line 139.
+(Font)              using `TU/lmr/m/n' instead on input line 140.
 
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `newtxtt' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-[26] [27] [28] [29] [30]
-Overfull \hbox (24.47517pt too wide) in paragraph at lines 412--415
+[26] [27]
+
+LaTeX Warning: Reference `sec:vom_vektor_zum_embedding' on page 28 undefined on
+ input line 266.
+
+[28] [29] [30] [31]
+Overfull \hbox (24.47517pt too wide) in paragraph at lines 458--461
  [][] 
  []
 
-[31]
+[32]
 Overfull \vbox (47.41779pt too high) has occurred while \output is active []
 
 
-[32]) (./01_kapitel/05_auswahl_des_modellansatzes.tex [33]
+[33]) (./01_kapitel/05_auswahl_des_modellansatzes.tex [34]
 chapter 5.
 Package biblatex Info: Reference segment=6 on input line 1.
 Package biblatex Info: Setting label 'refsegment:06' on input line 1.
-[34
+[35
 
 ]
 chapter 6.
 Package biblatex Info: Reference segment=7 on input line 34.
 Package biblatex Info: Setting label 'refsegment:07' on input line 34.
-) (./01_kapitel/06_konzeption_des_empfehlungssystems.tex [35
+) (./01_kapitel/06_konzeption_des_empfehlungssystems.tex [36
 
 ]
 chapter 7.
 Package biblatex Info: Reference segment=8 on input line 1.
 Package biblatex Info: Setting label 'refsegment:08' on input line 1.
-) (./01_kapitel/07_implementierung_des_modells.tex [36
+) (./01_kapitel/07_implementierung_des_modells.tex [37
 
 ]
 chapter 8.
 Package biblatex Info: Reference segment=9 on input line 3.
 Package biblatex Info: Setting label 'refsegment:09' on input line 3.
 
-LaTeX Warning: Reference `chap:analyse_der_datenstrukturen' on page 37 undefine
+LaTeX Warning: Reference `chap:analyse_der_datenstrukturen' on page 38 undefine
 d on input line 17.
 
-[37
+[38
 
 ]
 
 LaTeX Font Warning: Font shape `TU/newtxtt/b/n' undefined
 (Font)              using `TU/newtxtt/m/n' instead on input line 83.
 
-[38]
-
-LaTeX Warning: Reference `chap:analyse_der_datenstrukturen' on page 39 undefine
-d on input line 120.
-
 [39]
 
 LaTeX Warning: Reference `chap:analyse_der_datenstrukturen' on page 40 undefine
+d on input line 120.
+
+[40]
+
+LaTeX Warning: Reference `chap:analyse_der_datenstrukturen' on page 41 undefine
 d on input line 132.
 
-) (./01_kapitel/08_evaluierung.tex [40]
+) (./01_kapitel/08_evaluierung.tex [41]
 chapter 9.
 Package biblatex Info: Reference segment=10 on input line 1.
 Package biblatex Info: Setting label 'refsegment:010' on input line 1.
-[41
+[42
 
-] [42]
+] [43]
 Underfull \hbox (badness 10000) in paragraph at lines 99--100
 []|\TU/TeXGyreTermesX(0)/m/n/12 L1-Regularisierung auf 0,1 und L2-
  []
 
-[43] [44] [45]) (./01_kapitel/09_disikussion.tex [46]
+[44] [45] [46]) (./01_kapitel/09_disikussion.tex [47]
 chapter 10.
 Package biblatex Info: Reference segment=11 on input line 3.
 Package biblatex Info: Setting label 'refsegment:011' on input line 3.
-[47
+[48
 
 ]
 chapter 11.
 Package biblatex Info: Reference segment=12 on input line 17.
 Package biblatex Info: Setting label 'refsegment:012' on input line 17.
-[48
+[49
 
-] [49] [50]) (./01_kapitel/10_fazit_und_ausblick.tex [51]
+] [50] [51]) (./01_kapitel/10_fazit_und_ausblick.tex [52]
 chapter 12.
 Package biblatex Info: Reference segment=13 on input line 2.
 Package biblatex Info: Setting label 'refsegment:013' on input line 2.
-) [52
+) [53
 
 ]
 Package biblatex Info: Reference segment=14 on input line 92.
@@ -2700,13 +2705,13 @@ Package tocbasic Info: character protrusion at lof deactivated on input line 92
  (./Bachelorarbeit.lof
 Package cleveref Info: loaded `ngerman' language definitions on input line 1.
 Package cleveref Info: loaded `ngerman' language definitions on input line 2.
- [53
+ [54
 
 ])
 \tf@lof=\write9
 
 \openout9 = Bachelorarbeit.lof
- [54]
+ [55]
 Package biblatex Info: Reference segment=15 on input line 93.
 Package biblatex Info: Setting label 'refsegment:015' on input line 93.
 Package tocbasic Info: character protrusion at lot deactivated on input line 93
@@ -2718,7 +2723,7 @@ Package cleveref Info: loaded `ngerman' language definitions on input line 2.
 \tf@lot=\write10
 
 \openout10 = Bachelorarbeit.lot
- [55
+ [56
 
 ]
 chapter without number
@@ -2782,14 +2787,14 @@ LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 (Font)              scaled to size 7.3pt on input line 96.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 (Font)              scaled to size 5.5pt on input line 96.
-[56
+[57
 
 ] (./Bachelorarbeit.ind)
 
 Package caption Warning: Unused \captionsetup[lstlisting] on input line 64.
 See the caption package documentation for explanation.
 
-[57] (./Bachelorarbeit.aux
+[58] (./Bachelorarbeit.aux
 Package cleveref Info: loaded `ngerman' language definitions on input line 11.
 Package cleveref Info: loaded `ngerman' language definitions on input line 12.
 )
@@ -2813,14 +2818,14 @@ Package logreq Info: Writing requests to 'Bachelorarbeit.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 53037 strings out of 476081
+ 53047 strings out of 476081
  125005,2373549 words of node,token memory allocated
- 24322 words of node memory still in use:
-   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 4051 kern, 1 penalty, 3 glyph,
- 1103 attribute, 102 glue_spec, 553 attribute_list, 2 write nodes
-   avail lists: 1:15,2:2575,3:1309,4:282,5:569,6:236,7:7981,8:50,9:924,10:25,11:
+ 25116 words of node memory still in use:
+   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 4211 kern, 1 penalty, 3 glyph,
+ 1101 attribute, 102 glue_spec, 552 attribute_list, 2 write nodes
+   avail lists: 1:15,2:2578,3:1309,4:282,5:569,6:236,7:7981,8:50,9:924,10:25,11:
 1075,12:1
- 73751 multiletter control sequences out of 65536+600000
+ 73760 multiletter control sequences out of 65536+600000
  255 fonts using 21716279 bytes
  110i,20n,115p,11311b,3555s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/opentype/public/newtx/Te
@@ -2843,9 +2848,9 @@ ta/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/alstetter
 /AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb><C:/Users/alst
 etter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/ztmb.pfb><C:/Users/
 alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/ztmr.pfb>
-Output written on Bachelorarbeit.pdf (62 pages, 678062 bytes).
+Output written on Bachelorarbeit.pdf (63 pages, 683333 bytes).
 
-PDF statistics: 1268 PDF objects out of 1440 (max. 8388607)
- 253 named destinations out of 1000 (max. 1048576)
+PDF statistics: 1281 PDF objects out of 1440 (max. 8388607)
+ 254 named destinations out of 1000 (max. 1048576)
  896 words of extra memory for PDF output out of 10000 (max. 100000000)
 
