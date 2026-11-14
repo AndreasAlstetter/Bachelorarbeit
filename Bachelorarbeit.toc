@@ -42,7 +42,7 @@
 \contentsline {subsection}{\numberline {4.2.6}Ergebnis der Datenaufbereitung}{32}{subsection.4.2.6}%
 \contentsline {section}{\numberline {4.3}Überführung in ein Trainingsformat}{33}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Artikelvektor}{33}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Makrostrukturvektor}{34}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.2}Makrovektor}{34}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}Lexikalvektor}{35}{subsection.4.3.3}%
 \contentsline {section}{\numberline {4.4}Erstellung des Datensplits}{36}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Trainings-, Validierungs- und Testdaten}{36}{subsection.4.4.1}%

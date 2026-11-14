@@ -2,12 +2,10 @@
 \label{chap:datenanalyse_und_trainingsvorbereitung} 
 
 Die in Kapitel \ref{sec:handlungsbedarf_und_forschungsfragen} formulierte Forschungsfrage RQ1 untersucht, welche technischen Informationen aus Artikeln geeignet sind, 
-um Makros zu beschreiben und als Trainingsbasis eines Empfehlungssystems genutzt zu werden. 
+um Makros voneinander zu unterscheiden und für die Trainingsbasis eines Empfehlungssystems geeignet sind. 
 
 Zur Beantwortung dieser Forschungsfrage werden in diesem Kapitel zunächst die verfügbaren Datenquellen analysiert. 
 Anschließend werden die Schritte der Datenaufbereitung beschrieben, die notwendig sind, um eine für das Empfehlungssystem geeignete Basis an Daten zu erzeugen. 
-
-Im Artefakt A1 wird diese Basis an Daten dann als Kapitelergebnis für die nächsten Schritte dargestellt.
 
 \section{Datenbasis} 
 
@@ -15,9 +13,9 @@ Im Artefakt A1 wird diese Basis an Daten dann als Kapitelergebnis für die näch
 \label{sec:artikeldaten} 
 
 Die Artikeldaten liegen in XML-Dateien vor. 
-XML (\textit{Extensible Markup Language}) ist ein standardisiertes Format zur strukturierten Speicherung von Informationen. 
-Durch die hierarchische Struktur können sowohl einfache Stammdaten wie Herstellerinformationen als auch komplexe Eigenschaften wie Spannungen, Ströme oder Leistungen abgebildet werden. 
-Die Analyse der Artikeldaten hat ergeben, dass sie eine Vielzahl von technischen Eigenschaften enthalten, darunter: 
+XML (\textit{Extensible Markup Language}) ist ein standardisiertes Format zur hierarchischen Speicherung von Informationen. 
+Durch die hierarchische Struktur können sowohl einfache Stammdaten wie Herstellerinformationen als auch komplexe Informationen wie Spannungen, Ströme oder Leistungen abgebildet werden. 
+Die Analyse der Artikeldaten hat ergeben, dass sie eine Vielzahl von technischen Informationen enthalten, darunter: 
 
 \begin{itemize} 
     \item Herstellerinformationen, 
@@ -30,7 +28,7 @@ Die Analyse der Artikeldaten hat ergeben, dass sie eine Vielzahl von technischen
     \item Referenzen auf zugehörige Makros. 
 \end{itemize} 
 
-Um diese technischen Eigenschaften anhand des Motorbeispiels aus Kapitel \ref{sec:herleitung} zu veranschaulichen, soll hierfür ein Motor von SEW betrachtet werden.
+Um diese technischen Informationen anhand des Motorbeispiels aus Kapitel \ref{sec:herleitung} zu veranschaulichen, soll hierfür ein Motor von SEW betrachtet werden.
 Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML-Artikels für diesen Motor.
 
 \begin{figure}[H] 
@@ -45,7 +43,7 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
         \node[root] (article) at (0,5) {XML-Artikel\\Elektromotor}; 
         % Kategorien 
         \node[category] (master) at (-4.5,2.5) {Stammdaten}; 
-        \node[category] (electrical) at (0,2.5) {Elektrische Eigenschaften}; 
+        \node[category] (electrical) at (0,2.5) {Elektrische Informationen}; 
         \node[category] (technical) at (4.5,2.5) {Technische Informationen};
         % Verbindungen 
         \draw[->] (article) -- (master); 
@@ -56,7 +54,7 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
         \node[feature] (type) at (-5.0,0) {Typnummer\\S123}; 
         \draw[->] (master) -- (manu); 
         \draw[->] (master) -- (type);
-        % Elektrische Eigenschaften 
+        % Elektrische Informationen 
         \node[feature] (voltage) at (-2.5,0) {Spannung\\400 V}; 
         \node[feature] (current) at (0,0) {Strom\\10 A}; 
         \node[feature] (power) at (2.5,0) {Leistung\\4000 W};
@@ -71,13 +69,13 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
         % Makro
         \draw[ decorate, decoration={brace,mirror,amplitude=10pt}, thick ] (-8.25,-0.8) -- (8.25,-0.8) node[midway,yshift=-1cm] { \fbox{\strut Zugeordnetes Motor-Makro} };
     \end{tikzpicture} 
-    \caption{Beispielhafte Struktur eines XML-Artikels für einen Elektromotor. Die hierarchische Organisation ermöglicht die Speicherung von Herstellerinformationen, technischen Eigenschaften sowie Referenzen auf zugehörige Makros.} 
+    \caption{Beispielhafte Struktur eines XML-Artikels für einen Elektromotor. Die hierarchische Organisation ermöglicht die Speicherung von Herstellerinformationen, technischen Informationen sowie Referenzen auf zugehörige Makros.} 
     \label{fig:xml_artikel_motor}
 \end{figure}
 
 \subsection{Makrodaten} 
 
-Neben den Artikeln werden die zugehörigen Makros analysiert. Die Makros werden im .ema-Format gespeichert. 
+Neben den Artikeln werden die zugehörigen Makros analysiert. Die Makros sind im .ema-Format gespeichert. 
 Dieses Format entspricht einem XML-basierten Schema, das sowohl grafische als auch technische Informationen strukturiert abbildet. 
 
 Hierzu zählen: 
@@ -88,8 +86,8 @@ Hierzu zählen:
     \item Bezeichnungen. 
 \end{itemize} 
 
-Während die Artikeldaten beschreiben, welche technischen Eigenschaften ein Gerät besitzt, 
-beschreiben die Makros die technische Umsetzung dieser Eigenschaften innerhalb eines Schaltplans. 
+Während die Artikeldaten beschreiben, welche technischen Informationen ein Gerät besitzt, 
+beschreiben die Makros die technische Umsetzung dieser Informationen innerhalb eines Schaltplans. 
 Beide Informationsquellen ergänzen sich daher gegenseitig. 
 
 Die Bezeichnungen eines Makros werden nach folgendem Muster aufgebaut: Makro-Familie-Variante (z.\,B. M1\_F1\_V1)
@@ -148,7 +146,7 @@ Die Abbildung \ref{fig:ema_motor_macro} gibt die Struktur eines Motor-Makros im 
 Die Zuordnung von Artikel zu Makro erfolgt durch die Referenzierung des Makros über die Artikel-Eigenschaft \texttt{P\_ARTICLE\_MACRO}.
 Diese Zuordnung kann als n zu 1 Beziehung betrachtet werden, da mehrere Artikel auf dasselbe Makro verweisen können.
 
-Bildlich kann dies wie folgt dargestellt werden: 
+Bildlich kann dies durch folgende Abbildung \ref{fig:artikel_macro_n_zu_1} dargestellt werden: 
 
 \begin{figure}[H] 
     \centering 
@@ -227,8 +225,9 @@ Abbildung \ref{fig:unvollstaendige_daten} zeigt die Unterscheidung zwischen voll
 \subsection{Entfernung redundanter Artikel- und Makrodaten}
 
 Hierbei werden Artikel und Makros identifiziert, die inhaltlich identisch sind. 
-Identische Inhalte führen zu einer Verzerrung der Datenbasis, da hierdurch die Gewichtung bestimmter Artikel oder Makros erhöt wird.
-Dies wird im Bereich des maschinellen Lernens als Bias bezeichnet. Ein Bias ist wie ein Vorurteil in den Daten, das die Ergebnisse der Modelle verzerren kann zu verstehen.
+Identische Inhalte führen zu einer Verzerrung der Datenbasis, da hierdurch die Gewichtung bestimmter Artikel erhöt wird.
+In einem späteren Lernprozess wird hierdurch das Wissen eines Modells verzerrt. 
+Das Modell erlernt dadurch ein Vorurteil auf übergewichteten Artikel, welche bei neuen Anfragen bevorzugt vorhergesagt werden.
 
 Abbildung \ref{fig:redundante_daten} zeigt die Auswirkung der redundanter Artikel- und Makrodaten auf deren Gewichtung:
 
@@ -262,7 +261,7 @@ Abbildung \ref{fig:redundante_daten} zeigt die Auswirkung der redundanter Artike
         \node[ draw, fill=green!10, rounded corners, text width=4cm, align=center ] at (5,-4.3) { Jeder technische\\ Datensatz wird\\ nur einmal gewertet }; 
         
     \end{tikzpicture} 
-    \caption{Auswirkung redundanter Artikel- und Makrodaten. Mehrfach vorhandene Datensätze erhöhen künstlich die Gewichtung bestimmter technischer Eigenschaften. Durch die Entfernung redundanter Daten wird diese Verzerrung reduziert.} 
+    \caption{Auswirkung redundanter Artikel- und Makrodaten. Mehrfach vorhandene Datensätze erhöhen künstlich die Gewichtung bestimmter technischer Informationen. Durch die Entfernung redundanter Daten wird diese Verzerrung reduziert.} 
     \label{fig:redundante_daten} 
 \end{figure}
 
@@ -270,10 +269,10 @@ Abbildung \ref{fig:redundante_daten} zeigt die Auswirkung der redundanter Artike
 \subsection{Entfernen nicht nutzbarer Metadaten}
 
 Metadaten sind zusätzliche Informationen über Daten, die nicht direkt mit dem Inhalt dieser Daten zusammenhängen. Beispiele hierfür sind Erstellungsdatum, Änderungsdatum oder Autor. 
-Diese Metadaten sind für die Erkennung technischer unterschiede zwischen Artikeln und Makros nicht relevant. Zusätzliche Metadaten, die keinen Beitrag zur Erkennung von technischen Unterschieden lierfern,
-führen zu sogenannten Rauschen in den Daten. Dieses Rauschen kann als Informationsüberflutung betrachtet werden, was dazu führt, dass relevante Informationen schwerer zu erkennen sind.
+Diese Metadaten sind für die Erkennung technischer unterschiede zwischen Artikeln und Makros nicht relevant und führen zu sogenanntem Rauschen in den Daten. 
+Dieses Rauschen kann als Informationsüberflutung betrachtet werden, was dazu führt, dass ein Modell später Wissen über irrelevante Informationen erlernt und dadurch die Erkennung relevanter technischer Unterschiede erschwert wird.
 
-Anhand der Abbildung \ref{fig:metadaten_filter} soll verdeutlicht werden, wie nicht nutzbare Metadaten zu Rauschen in den Daten führen können:
+Anhand der Abbildung \ref{fig:metadaten_filter} soll verdeutlicht werden, wie sich Metadaten von relevanten technischen Informationen unterscheiden:
 
 \begin{figure}[H] 
     \centering 
@@ -322,7 +321,7 @@ Anhand der Abbildung \ref{fig:metadaten_filter} soll verdeutlicht werden, wie ni
 \subsection{Normaliserung von Einheiten} 
 
 Die Technischen Informationen der Artikel liegen in unterschiedlichen Einheiten oder Schreibweisen vor. Ohne zusätzliches Wissen was die Einheiten bedeuten,
-ist kein direkter Vergleich dieser Werte möglich. Diese fehlende Standardisierung führt zu einer Streuung identischer technischer Informationen, welche ein Rauschen in den Artikel- und Makrodaten erzeugt.
+ist kein direkter Vergleich dieser Werte möglich. Diese fehlende Standardisierung führt zu einer Streuung identischer technischer Informationen, welche ein Rauschen in den Artikeldaten erzeugt.
 Deswegen werden die technischen Informationen aus den Artikeln auf gemeinsame Basiseinheiten normiert.
 
 Folgende Abbildung \ref{fig:einheitennormalisierung} soll dazu diesen Sachverhalt zu veranschaulichen:
@@ -364,10 +363,10 @@ Folgende Abbildung \ref{fig:einheitennormalisierung} soll dazu diesen Sachverhal
 
 Die Vorhandenen technischen Informationen der Artikeldaten liegen in unterschiedlichen Wertebereichen vor. 
 Dieses Wissen über die Wertebereiche ermöglicht es, die technischen Informationen zu Klassifikationen zusammenzufassen.
-Eine Klassifikation fasst Werte in bestimmte Kategorien zusammen, wodurch die Vergleichbarkeit und Analyse der technischen Informationen erleichtert wird.
-Diese Klassifikationen stellen ein zusätzliches Wissen über die technischen Informationen dar, welches für die Unterscheidung zwischen mehreren Artikeln nützlich ist.
-Gleichzeitig stellt eine Klassifkikation sicher, dass ähnliche Werte in dieselbe Kategorie fallen, 
-wodurch eine Vorsortierung der Artikeldaten erfolgt und somit die Suche nach relevanten Artikeln erleichtert wird.
+Eine Klassifikation fasst Werte in bestimmte Kategorien zusammen, wodurch die Vergleichbarkeit und die Analyse der technischen Informationen erleichtert wird.
+Diese Klassifikationen stellen ein zusätzliches Wissen in den technischen Informationen eines Artikels dar, welches für die Unterscheidung zwischen mehreren Artikeln nützlich ist.
+Gleichzeitig stellt eine Klassifkikation sicher, dass ähnliche Informationen in dieselbe Kategorie fallen, 
+wodurch eine Vorsortierung der Artikeldaten erfolgt und somit der Lernprozess des Modells Zielgerichteter gestaltet werden kann.
 
 Die folgende Abbildung \ref{fig:spannungsklassifikation} zeigt, wie die Klassifikation von Spannungen dargestellt wird: 
 
@@ -418,7 +417,8 @@ Die folgende Abbildung \ref{fig:spannungsklassifikation} zeigt, wie die Klassifi
         \draw[->] (hv3.east) -- (c3.west); 
         \draw[->,thick] (c3.east) -- (high.west); 
         \end{tikzpicture} 
-        \caption{Beispiel für die Klassifikation technischer Spannungswerte. Mehrere technisch ähnliche Spannungswerte werden durch einen Klassifikator gemeinsamen Spannungsklassen zugeordnet. Dadurch können ähnliche Geräte trotz leicht unterschiedlicher Spannungswerte gemeinsam betrachtet werden.} 
+        \caption{Beispiel für die Klassifikation technischer Spannungswerte. Mehrere technisch ähnliche Spannungswerte werden durch eine Klassifizierung zu gemeinsamen Spannungsklassen zugeordnet. 
+        Dadurch können ähnliche Geräte trotz leicht unterschiedlicher Spannungswerte gemeinsam betrachtet werden.} 
         \label{fig:spannungsklassifikation} 
         \end{figure}
 
@@ -450,14 +450,14 @@ reduziert.
 Modelle wie sie in Kapitel \ref{sec:modellansätze} beschrieben werden, können technische Informationen nicht direkt aus XML-Dateien verarbeiten. 
 Um diese Informationen nutzbar zu machen, müssen sie in Embeddings (vergleiche Kapitel \ref{sec:vom_vektor_zum_embedding}) überführt werden.
 Deswegen werden die technischen Informationen aus Artikel- und Makrodaten in numerische Vektoren überführt, die als Eingabe für ein Modell dienen können.
-Die vorliegenden technischen Informationen werden in drei separate Vektoren überführt: den Artikelvektor, den Makrostrukturvektor und den Lexikalvektor.
+Die vorliegenden technischen Informationen werden in drei separate Vektoren überführt: den Artikelvektor, den Makrovektor und den Lexikalvektor.
 Diese Trennung sorgt für eine weitere Klassifikation der technischen Informationen. 
-Dadurch kann verhindert werden, dass sich technischen Informationen in unterschiedlichen Darstellungsformen vermischen.
+Dadurch entsteht eine Vorstrukturierung, welche für eine Abgrenzung der einzelnen technischen Informationen sorgt. 
 
 
 \subsection{Artikelvektor} 
 
-Der Artikelvektor listet die technischen Eigenschaften eines einzelnen Artikels auf. 
+Der Artikelvektor listet die technischen Informationen eines einzelnen Artikels auf. 
 Folgende Merkmale konnten dabei konsistent aus dem vorhandenen Artikeldaten unter Beachtung der vorherigen Datenaufbereitung (Vergleiche Kapitel \ref{sec:datenaufbereitung}) extrahiert werden: 
  
 \begin{itemize} 
@@ -513,13 +513,13 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
         \draw[->] (current.east) -- (vector.west); 
         \draw[->] (power.east) -- (vector.west);
     \end{tikzpicture} 
-    \caption{Erzeugung eines Artikelvektors aus technischen Eigenschaften eines Motorartikels. Die extrahierten Merkmale werden zu einer gemeinsamen technischen Repräsentation zusammengeführt und dienen als Eingabe für das Empfehlungssystem.} 
+    \caption{Erzeugung eines Artikelvektors aus technischen Informationen eines Motorartikels. Die extrahierten Merkmale werden zu einer gemeinsamen technischen Repräsentation zusammengeführt und dienen als Eingabe für das Empfehlungssystem.} 
     \label{fig:artikelvektor} 
 \end{figure}
         
-\subsection{Makrostrukturvektor} 
+\subsection{Makrovektor} 
 
-Der Makrostrukturvektor beschreibt die Struktur und den Aufbau eines Makros. Aus den vorhandenen Makrodaten werden analog zum Artikelvektor folgende Merkmale extrahiert: 
+Der Makrovektor beschreibt die Struktur und den Aufbau eines Makros. Aus den vorhandenen Makrodaten werden analog zum Artikelvektor folgende Merkmale extrahiert: 
 
 \begin{itemize} 
     \item Funktionskategorien, 
@@ -533,7 +533,7 @@ Der Makrostrukturvektor beschreibt die Struktur und den Aufbau eines Makros. Aus
     \item Makrokategorien. 
 \end{itemize} 
 
-Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrostrukturvektor} den Aufbau des Makrostrukturvektors:
+Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} den Aufbau des Makrovektor:
 
 \begin{figure}[H] 
     \centering 
@@ -544,7 +544,7 @@ Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrostrukturve
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[font=\bfseries\large] at (-1,5) {Erstellung des Makrostrukturvektors}; 
+        \node[font=\bfseries\large] at (-1,5) {Erstellung des Makrovektors}; 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
@@ -565,7 +565,7 @@ Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrostrukturve
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=5.5cm, align=center ] (vector) at (5,0) { \textbf{Makrostruktur-\\vektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ Mit\\ Kühlung\\ 3 \end{array} \!\right]$ };
+        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=5.5cm, align=center ] (vector) at (5,0) { \textbf{Makrovektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ Mit\\ Kühlung\\ 3 \end{array} \!\right]$ };
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \draw[->] (terminal.east) -- (vector.west); 
@@ -574,8 +574,8 @@ Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrostrukturve
         \draw[->] (variant.east) -- (vector.west); 
         \draw[->] (channels.east) -- (vector.west); 
         \end{tikzpicture} 
-        \caption{Erstellung des Makrostrukturvektors. Aus dem .ema-Makro werden strukturelle Eigenschaften extrahiert und in einen numerischen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.} 
-        \label{fig:makrostrukturvektor} 
+        \caption{Erstellung des Makrovektor. Aus dem .ema-Makro werden strukturelle Informationen extrahiert und in einen numerischen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.} 
+        \label{fig:makrovektor} 
         \end{figure}
 
 \subsection{Lexikalvektor} 
@@ -634,7 +634,7 @@ Abbildung \ref{fig:lexikalvektor} stellt die Erstellung des Lexikalvektors für 
         \draw[->] (description.east) -- (vector.west); 
         \end{tikzpicture} 
         \caption{Erstellung des Lexikalvektors. Textuelle technische Informationen aus Artikel- und Makrodaten werden extrahiert und in einem separaten Vektor zusammengeführt. 
-        Der Lexikalvektor ergänzt die strukturierten Informationen des Artikel- und Makrostrukturvektors um technische Begriffe und Bezeichnungen.} 
+        Der Lexikalvektor ergänzt die strukturierten Informationen des Artikel- und Makrovektors um technische Begriffe und Bezeichnungen.} 
         \label{fig:lexikalvektor} 
         \end{figure}
 
@@ -720,7 +720,7 @@ Diese Abweichung ist für das Ziel dieser Arbeit akzeptabel, da sie eine aussage
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektoren %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
         \node[artifact] (articlevec) at (-6,-0.5) {Artikelvektor}; 
-        \node[artifact] (macrovec) at (0,-0.5) {Makrostrukturvektor}; 
+        \node[artifact] (macrovec) at (0,-0.5) {Makrovektor}; 
         \node[artifact] (lexicalvec) at (6,-0.5) {Lexikalvektor}; 
         \draw[->,thick] (vectorize) -- (articlevec); \draw[->,thick] (vectorize) -- (macrovec); 
         \draw[->,thick] (vectorize) -- (lexicalvec); 
@@ -751,7 +751,7 @@ Diese Abweichung ist für das Ziel dieser Arbeit akzeptabel, da sie eine aussage
 In diesem Kapitel wurden die verfügbaren Artikel- und Makrodaten  sowie die vollständige Datenaufbereitung beschrieben. 
 Die Analyse zeigt, dass die EPLAN-Artikelverwaltung eine umfangreiche technische Wissensbasis bereitstellt. 
 Diese Informationen werden innerhalb der De extrahiert, normiert, qualitätsgesichert und in Artikel-, 
-Makrostruktur- und Lexikalvektoren überführt. Zusätzlich wurden Mechanismen zur Leakage-Vermeidung und zur validen Aufteilung der Daten implementiert. 
+Makro- und Lexikalvektoren überführt. Zusätzlich wurden Mechanismen zur Leakage-Vermeidung und zur validen Aufteilung der Daten implementiert. 
 
 Artefakt A1 besteht damit aus: 
 \begin{itemize} 
@@ -759,7 +759,7 @@ Artefakt A1 besteht damit aus:
     \item 375 Makrozielen, 
     \item den vorhandenen Artikel-Makro-Zuordnungen, 
     \item den erzeugten Artikelvektoren, 
-    \item den erzeugten Makrostrukturvektoren, 
+    \item den erzeugten Makrovektor, 
     \item den erzeugten Lexikalvektoren, 
     \item einem Merkmalsraum mit 2.381 Features, 
     \item einem leakage-freien Trainings-, Validierungs- und Testsplit. 
