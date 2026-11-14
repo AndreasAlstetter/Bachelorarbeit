@@ -1,6 +1,14 @@
 \chapter{Datenanalyse und Trainingsvorbereitung} 
 \label{chap:datenanalyse_und_trainingsvorbereitung} 
 
+Die in Kapitel \ref{sec:handlungsbedarf_und_forschungsfragen} formulierte Forschungsfrage RQ1 untersucht, welche technischen Informationen aus Artikeln geeignet sind, 
+um Makros zu beschreiben und als Trainingsbasis eines Empfehlungssystems genutzt zu werden. 
+
+Zur Beantwortung dieser Forschungsfrage werden in diesem Kapitel zunächst die verfügbaren Datenquellen analysiert. 
+Anschließend werden die Schritte der Datenaufbereitung beschrieben, die notwendig sind, um eine für das Empfehlungssystem geeignete Basis an Daten zu erzeugen. 
+
+Im Artefakt A1 wird diese Basis an Daten dann als Kapitelergebnis für die nächsten Schritte dargestellt.
+
 \section{Datenbasis} 
 
 \subsection{Artikeldaten}
@@ -169,15 +177,52 @@ Bildlich kann dies wie folgt dargestellt werden:
 \section{Datenaufbereitung} 
 \label{sec:datenaufbereitung}
 
+Die vorliegende Struktur der Daten im XML-Format hat den Vorteil, dass Informationen nicht manuell ausgelesen und weiterverarbeitet werden müssen.
+Dadurch kann die Vorbereitung der Daten automatisiert erfolgen, so dass eine nachvollziehbare und reproduzierbare Datenaufbereitung gewährleistet werden kann.
+Zudem unterstützt diese Art der Datenaufbereitung die Vision aus Kapitel \ref{sec:vision}, ein automatisiertes Empfehlungssystem zu entwickeln. 
+
+Die in Kapitel \ref{sec:modellansätze} beschriebenen Modellansätze lernen statistische Zusammenhänge zwischen den Eingabedaten (Artikel) und den Ausgabedaten (Makros).
+Enthalten diese Daten fehlerhafte oder wiedersprüchlichen Informationen, so werden diese mit erlernt. Das Ziel der Datenaufbereitung besteht daher darin, die technische Qualität der Datenbasis zu erhöhen und gleichzeitig Störeinflüsse zu reduzieren
+
 \subsection{Entfernung unvollständiger Artikel- und Makrodaten}
 
 In diesem Schritt werden alle Artikel und Makros entfernt, die unvollständige Informationen enthalten. 
 Dies betrifft fehlende technische Merkmale von Artikeln wie Spannung, Leistung oder Strom sowie fehlende Artikel-Makro-Zuordnungen und fehlerhafte Makroberschreibungen.
 
-Als Beispiel für solche unvollständigen Informationen soll folgendes Bild dienen:
+Abbildung \ref{fig:unvollstaendige_daten} zeigt die Unterscheidung zwischen vollständigen und unvollständigen Artikeldaten:
 
-% Bild einfügen
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        valid/.style={ draw, rounded corners, fill=green!10, minimum width=4.8cm, minimum height=1.2cm, align=left }, 
+        invalid/.style={ draw, rounded corners, fill=red!10, minimum width=4.8cm, minimum height=1.2cm, align=left }, 
+        macro/.style={ draw, rounded corners, fill=orange!15, minimum width=4.5cm, minimum height=1.0cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Überschrift %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,5) {Vollständige und unvollständige Trainingsdaten}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Gültiger Artikel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[valid] (a1) at (-5,2) { Hersteller: SEW\\ Spannung: 400 V\\ Leistung: 4000 W\\ P\_ARTICLE\_MACRO: M1\_F1\_V1 }; 
+        \node[macro] (m1) at (5,2) {Motor-Makro\\M1\_F1\_V1}; \draw[->,thick] (a1.east) -- (m1.west); \node[text=green!50!black] at (0,3.2) {\textbf{Verwendbar für Training}}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ungültiger Artikel 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[invalid] (a2) at (-5,-1) { Hersteller: SEW\\ Spannung: ---\\ Leistung: 4000 W\\ P\_ARTICLE\_MACRO: M1\_F1\_V1 }; 
+        \node[macro] (m2) at (5,-1) {Motor-Makro\\M1\_F1\_V1}; 
+        \draw[dashed,red,thick,->] (a2.east) -- (m2.west); 
+        \node[text=red] at (0,-2.4) {Fehlendes technisches Merkmal}; 
 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ungültiger Artikel 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[invalid] (a3) at (-5,-4) { Hersteller: SEW\\ Spannung: 400 V\\ Leistung: 4000 W\\ P\_ARTICLE\_MACRO: --- }; 
+        \node[macro] (m3) at (5,-4) {Kein Zielmakro}; 
+        \draw[dashed,red,thick,->] (a3.east) -- (m3.west); 
+        \node[text=red] at (0,-5.4) {Fehlende Artikel-Makro-Zuordnung}; 
+    \end{tikzpicture} 
+    \caption{Beispiel für vollständige und unvollständige Artikeldaten. Fehlende technische Merkmale oder fehlende Artikel-Makro-Zuordnungen verhindern eine zuverlässige Verwendung der Datensätze im Training und führen daher zu deren Entfernung.} 
+    \label{fig:unvollstaendige_daten} 
+\end{figure}
 
 \subsection{Entfernung redundanter Artikel- und Makrodaten}
 
@@ -185,9 +230,41 @@ Hierbei werden Artikel und Makros identifiziert, die inhaltlich identisch sind.
 Identische Inhalte führen zu einer Verzerrung der Datenbasis, da hierdurch die Gewichtung bestimmter Artikel oder Makros erhöt wird.
 Dies wird im Bereich des maschinellen Lernens als Bias bezeichnet. Ein Bias ist wie ein Vorurteil in den Daten, das die Ergebnisse der Modelle verzerren kann zu verstehen.
 
-Folgende Abbildung zeigt die Auswirkung der redundanter Artikel- und Makrodaten auf deren Gewichtung:
+Abbildung \ref{fig:redundante_daten} zeigt die Auswirkung der redundanter Artikel- und Makrodaten auf deren Gewichtung:
 
-% Bild einfügen
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        article/.style={ draw, rounded corners, fill=blue!10, minimum width=4.2cm, minimum height=0.9cm, align=center }, 
+        clean/.style={ draw, rounded corners, fill=green!10, minimum width=4.2cm, minimum height=0.9cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vor Bereinigung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries] at (-5,4.5) {Vor der Bereinigung}; 
+        \node[article] (a1) at (-5,2.5) {Motor A\\400 V\\10 A}; 
+        \node[article] (a2) at (-5,1.0) {Motor A\\400 V\\10 A}; 
+        \node[article] (a3) at (-5,-0.5) {Motor A\\400 V\\10 A}; 
+        \node[article] (a4) at (-5,-2.0) {Motor B\\230 V\\5 A}; 
+        
+        % Gewichtung 
+        
+        \node[ draw, fill=red!10, rounded corners, text width=4cm, align=center ] at (-5,-4.3) { Motor A erscheint\\ 3-mal\\ $\Rightarrow$ Übergewichtung }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Pfeil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[->,very thick] (-1.5,0.5) -- (1.5,0.5) node[midway,above] {Redundanzprüfung}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Nach Bereinigung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries] at (5,4.5) {Nach der Bereinigung}; 
+        \node[clean] (c1) at (5,1.0) {Motor A\\400 V\\10 A}; 
+        \node[clean] (c2) at (5,-2.0) {Motor B\\230 V\\5 A}; 
+        \node[ draw, fill=green!10, rounded corners, text width=4cm, align=center ] at (5,-4.3) { Jeder technische\\ Datensatz wird\\ nur einmal gewertet }; 
+        
+    \end{tikzpicture} 
+    \caption{Auswirkung redundanter Artikel- und Makrodaten. Mehrfach vorhandene Datensätze erhöhen künstlich die Gewichtung bestimmter technischer Eigenschaften. Durch die Entfernung redundanter Daten wird diese Verzerrung reduziert.} 
+    \label{fig:redundante_daten} 
+\end{figure}
 
 
 \subsection{Entfernen nicht nutzbarer Metadaten}
@@ -196,9 +273,50 @@ Metadaten sind zusätzliche Informationen über Daten, die nicht direkt mit dem 
 Diese Metadaten sind für die Erkennung technischer unterschiede zwischen Artikeln und Makros nicht relevant. Zusätzliche Metadaten, die keinen Beitrag zur Erkennung von technischen Unterschieden lierfern,
 führen zu sogenannten Rauschen in den Daten. Dieses Rauschen kann als Informationsüberflutung betrachtet werden, was dazu führt, dass relevante Informationen schwerer zu erkennen sind.
 
-Anhand folgender Abbildung soll verdeutlicht werden, wie nicht nutzbare Metadaten zu Rauschen in den Daten führen können:
+Anhand der Abbildung \ref{fig:metadaten_filter} soll verdeutlicht werden, wie nicht nutzbare Metadaten zu Rauschen in den Daten führen können:
 
-% Bild einfügen
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        relevant/.style={ draw, rounded corners, fill=green!10, minimum width=3.2cm, minimum height=0.8cm, align=center }, 
+        metadata/.style={ draw, rounded corners, fill=red!10, minimum width=3.6cm, minimum height=0.8cm, align=center }, 
+        result/.style={ draw, rounded corners, fill=blue!10, minimum width=5cm, minimum height=1cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,6.5) {Entfernung nicht nutzbarer Metadaten}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % XML-Artikel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[result] (article) at (0,1.5) {XML-Artikel Motor}; 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Relevante Informationen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[ font=\bfseries, text=green!50!black, align=center ] at (-4,3.0) {Technisch relevante\\Informationen}; 
+        \node[relevant] (v) at (-4,5.2) {Spannung\\400 V}; 
+        \node[relevant] (i) at (0,5.2) {Strom\\10 A}; 
+        \node[relevant] (p) at (4,5.2) {Leistung\\4000 W}; 
+        \draw[->] (article.north) -- (v.south); 
+        \draw[->] (article.north) -- (i.south); 
+        \draw[->] (article.north) -- (p.south); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Metadaten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[ font=\bfseries, text=red!70, align=center ] at (-4,0.0) {Nicht nutzbare\\Metadaten}; 
+        \node[metadata] (author) at (-6,-2.5) {Bearbeiter\\Max Mustermann}; 
+        \node[metadata] (date) at (-2,-2.5) {Änderungsdatum\\01.01.2025}; 
+        \node[metadata] (project) at (2,-2.5) {Projektname\\Projekt X}; 
+        \node[metadata] (path) at (6,-2.5) {Dateipfad\\D:\textbackslash Projekte\textbackslash ...}; 
+        \draw[->,red,dashed] (article.south) -- (author.north); 
+        \draw[->,red,dashed] (article.south) -- (date.north); 
+        \draw[->,red,dashed] (article.south) -- (project.north); 
+        \draw[->,red,dashed] (article.south) -- (path.north); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Filter %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[ draw, rounded corners, fill=yellow!15, minimum width=4cm, minimum height=1cm ] (filter) at (0,-5) {Metadatenfilter}; 
+        \draw[->] (author) -- (filter); 
+        \draw[->] (date) -- (filter); 
+        \draw[->] (project) -- (filter); 
+        \draw[->] (path) -- (filter);
+
+        \end{tikzpicture} 
+        \caption{Entfernung nicht nutzbarer Metadaten. Technisch relevante Merkmale bleiben erhalten, während Metadaten ohne technischen Informationsgehalt entfernt werden.} 
+        \label{fig:metadaten_filter} 
+        \end{figure}
 
 
 \subsection{Normaliserung von Einheiten} 
@@ -207,18 +325,40 @@ Die Technischen Informationen der Artikel liegen in unterschiedlichen Einheiten 
 ist kein direkter Vergleich dieser Werte möglich. Diese fehlende Standardisierung führt zu einer Streuung identischer technischer Informationen, welche ein Rauschen in den Artikel- und Makrodaten erzeugt.
 Deswegen werden die technischen Informationen aus den Artikeln auf gemeinsame Basiseinheiten normiert.
 
-Folgende Abbildung soll dazu diesen Sachverhalt zu veranschaulichen:
+Folgende Abbildung \ref{fig:einheitennormalisierung} soll dazu diesen Sachverhalt zu veranschaulichen:
 
-% Bild einfügen
-
-Beispielsweise können Spannungen als 
-
-\begin{itemize} 
-    \item 24 V, 
-    \item 24VDC, 
-    \item 0,024 kV 
-\end{itemize} 
-
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        raw/.style={ draw, rounded corners, fill=red!10, minimum width=3.0cm, minimum height=0.9cm, align=center }, 
+        process/.style={ draw, rounded corners, fill=yellow!15, minimum width=4.0cm, minimum height=1.2cm, align=center }, 
+        norm/.style={ draw, rounded corners, fill=green!10, minimum width=3.5cm, minimum height=1.0cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,5) {Normalisierung von Einheiten}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ausgangswerte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries,text=red!70] at (-6,3.5) {Unterschiedliche Schreibweisen}; 
+        \node[raw] (v1) at (-6,2) {24 V}; 
+        \node[raw] (v2) at (-6,0.5) {24VDC}; 
+        \node[raw] (v3) at (-6,-1) {0,024 kV}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Prozess %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[process] (normprocess) at (0,0.5) { Einheiten-\\ normalisierung }; 
+        \draw[->,thick] (v1.east) -- (normprocess.west); 
+        \draw[->,thick] (v2.east) -- (normprocess.west); 
+        \draw[->,thick] (v3.east) -- (normprocess.west); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ergebnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[font=\bfseries,text=green!50!black] at (6,3.5) {Einheitliche Darstellung}; 
+        \node[norm] (result) at (6,0.5) { 24 V }; 
+        \draw[->,thick] (normprocess.east) -- (result.west); 
+    \end{tikzpicture} 
+    \caption{Beispiel für die Normalisierung technischer Einheiten. Unterschiedliche Schreibweisen derselben Spannung werden in eine einheitliche Darstellung überführt, wodurch die Vergleichbarkeit der Daten verbessert wird.} 
+    \label{fig:einheitennormalisierung} 
+\end{figure}
 
 \subsection{Erstellung von Klassifikationen}
 
@@ -229,15 +369,58 @@ Diese Klassifikationen stellen ein zusätzliches Wissen über die technischen In
 Gleichzeitig stellt eine Klassifkikation sicher, dass ähnliche Werte in dieselbe Kategorie fallen, 
 wodurch eine Vorsortierung der Artikeldaten erfolgt und somit die Suche nach relevanten Artikeln erleichtert wird.
 
-Im folgenden Beispiel wird die Klassifikation von Spannungen dargestellt: 
+Die folgende Abbildung \ref{fig:spannungsklassifikation} zeigt, wie die Klassifikation von Spannungen dargestellt wird: 
 
-% Bild einfügen
-
-\begin{itemize} 
-    \item Low Voltage, 
-    \item Medium Voltage, 
-    \item High Voltage. 
-\end{itemize} 
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        value/.style={ draw, rounded corners, fill=blue!10, minimum width=2.5cm, minimum height=0.7cm, align=center }, 
+        class/.style={ draw, rounded corners, fill=green!10, minimum width=3.5cm, minimum height=1cm, align=center }, 
+        process/.style={ draw, rounded corners, fill=yellow!15, minimum width=3.5cm, minimum height=1cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,7) {Erstellung von Klassifikationen}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Low Voltage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[value] (lv1) at (-6,4.5) {22 V}; 
+        \node[value] (lv2) at (-6,3.5) {24 V}; 
+        \node[value] (lv3) at (-6,2.5) {26 V}; 
+        \node[process] (c1) at (0,3.5) {Klassifikation}; 
+        \node[class] (low) at (6,3.5) {Low Voltage}; 
+        
+        \draw[->] (lv1.east) -- (c1.west); 
+        \draw[->] (lv2.east) -- (c1.west); 
+        \draw[->] (lv3.east) -- (c1.west); 
+        \draw[->,thick] (c1.east) -- (low.west); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Medium Voltage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[value] (mv1) at (-6,0.5) {380 V}; 
+        \node[value] (mv2) at (-6,-0.5) {400 V}; 
+        \node[value] (mv3) at (-6,-1.5) {420 V}; 
+        \node[process] (c2) at (0,-0.5) {Klassifikation}; 
+        \node[class] (medium) at (6,-0.5) {Medium Voltage}; 
+        \draw[->] (mv1.east) -- (c2.west); 
+        \draw[->] (mv2.east) -- (c2.west); 
+        \draw[->] (mv3.east) -- (c2.west); 
+        \draw[->,thick] (c2.east) -- (medium.west); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % High Voltage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[value] (hv1) at (-6,-3.5) {9 kV}; 
+        \node[value] (hv2) at (-6,-4.5) {10 kV}; 
+        \node[value] (hv3) at (-6,-5.5) {11 kV}; 
+        \node[process] (c3) at (0,-4.5) {Klassifikation}; 
+        \node[class] (high) at (6,-4.5) {High Voltage}; 
+        \draw[->] (hv1.east) -- (c3.west); 
+        \draw[->] (hv2.east) -- (c3.west); 
+        \draw[->] (hv3.east) -- (c3.west); 
+        \draw[->,thick] (c3.east) -- (high.west); 
+        \end{tikzpicture} 
+        \caption{Beispiel für die Klassifikation technischer Spannungswerte. Mehrere technisch ähnliche Spannungswerte werden durch einen Klassifikator gemeinsamen Spannungsklassen zugeordnet. Dadurch können ähnliche Geräte trotz leicht unterschiedlicher Spannungswerte gemeinsam betrachtet werden.} 
+        \label{fig:spannungsklassifikation} 
+        \end{figure}
 
 
 \subsection{Ergebnis der Datenaufbereitung}
@@ -246,14 +429,16 @@ Im folgenden Beispiel wird die Klassifikation von Spannungen dargestellt:
 Die Aufteilung der Artikel- und Makrodaten erfolgt unter Berücksichtigung der vorangegangenen Datenaufbereitung (siehe Abschnitt \ref{sec:datenaufbereitung}).
 Nach der Anwendung der in der Datenaufbereitung durgeführten Bereinigung, Normalisierung und Klassifizierung hat sich der Ursprüngliche Bestand an Artikeln und Makros von:
 
-% Einfügen der ursprünglichen Bestände an Artikeln und Makros
+\begin{itemize} 
+    \item .... Artikel, 
+    \item .... Makros, 
+\end{itemize} 
 
 auf 
 
 \begin{itemize} 
     \item 1.559 Artikel, 
     \item 375 Makros, 
-    \item 2.381 technische . 
 \end{itemize} 
 
 reduziert.
@@ -289,13 +474,52 @@ Folgende Merkmale konnten dabei konsistent aus dem vorhandenen Artikeldaten unte
     \item Anschlussprofile. 
 \end{itemize} 
 
-Die folgende Abbildung zeigt die Struktur und den Aufbau des Artikelvektors anhand des Motorbeispiels:
+Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Artikelvektors anhand des Motorbeispiels:
 
-% Bild einfügen
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        source/.style={ draw, rounded corners, fill=blue!15, minimum width=4.2cm, minimum height=1cm, align=center }, 
+        feature/.style={ draw, rounded corners, fill=green!10, minimum width=2.7cm, minimum height=0.8cm, align=center }, 
+        vector/.style={ draw, rounded corners, fill=orange!15, minimum width=11cm, minimum height=1cm, align=left } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (-1.5,5) {Erstellung des Artikelvektors}; 
 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[source] (article) at (-7,0) {XML-Artikel\\Motor}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[feature] (manufacturer) at (-1,2) {Hersteller\\SEW}; 
+        \node[feature] (type) at (-1,0.8) {Produkttyp\\Motor}; 
+        \node[feature] (voltage) at (-1,-0.4) {Spannung\\400 V}; 
+        \node[feature] (current) at (-1,-1.6) {Strom\\10 A}; 
+        \node[feature] (power) at (-1,-2.8) {Leistung\\4000 W}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Quelle -> Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \draw[->] (article.east) -- (manufacturer.west); 
+        \draw[->] (article.east) -- (type.west); 
+        \draw[->] (article.east) -- (voltage.west); 
+        \draw[->] (article.east) -- (current.west); 
+        \draw[->] (article.east) -- (power.west); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikelvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=5.5cm, align=center ] (vector) at (5,0) { \textbf{Artikelvektor\\} \vspace{2mm} $ \left[ \begin{array}{c} SEW\\ Motor\\ 400\,V\\ 10\,A\\ 4000\,W \end{array} \right] $ }; 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \draw[->] (manufacturer.east) -- (vector.west); 
+        \draw[->] (type.east) -- (vector.west); 
+        \draw[->] (voltage.east) -- (vector.west); 
+        \draw[->] (current.east) -- (vector.west); 
+        \draw[->] (power.east) -- (vector.west);
+    \end{tikzpicture} 
+    \caption{Erzeugung eines Artikelvektors aus technischen Eigenschaften eines Motorartikels. Die extrahierten Merkmale werden zu einer gemeinsamen technischen Repräsentation zusammengeführt und dienen als Eingabe für das Empfehlungssystem.} 
+    \label{fig:artikelvektor} 
+\end{figure}
+        
 \subsection{Makrostrukturvektor} 
 
-Der Makrostrukturvektor beschreibt die Struktur eines Makros. Aus den vorhandenen Makrodaten werden dabei folgende Merkmale extrahiert: 
+Der Makrostrukturvektor beschreibt die Struktur und den Aufbau eines Makros. Aus den vorhandenen Makrodaten werden analog zum Artikelvektor folgende Merkmale extrahiert: 
 
 \begin{itemize} 
     \item Funktionskategorien, 
@@ -309,9 +533,50 @@ Der Makrostrukturvektor beschreibt die Struktur eines Makros. Aus den vorhandene
     \item Makrokategorien. 
 \end{itemize} 
 
-Im Bezug auf das Motorbeispiel ergibt sich folgende Struktur und Aufbau des Makrostrukturvektors:
+Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrostrukturvektor} den Aufbau des Makrostrukturvektors:
 
-% Bild einfügen
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
+        feature/.style={ draw, rounded corners, fill=green!10, minimum width=3cm, minimum height=0.8cm, align=center }, 
+        vector/.style={ draw, rounded corners, fill=orange!15, minimum width=4cm, minimum height=3.5cm, align=left } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (-1,5) {Erstellung des Makrostrukturvektors}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[source] (macro) at (-7,0) {.ema-Makro\\Motor}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[feature] (terminal) at (-1,2) {Anschlüsse\\U1, V1, W1}; 
+        \node[feature] (category) at (-1,0.8) {Kategorie\\Motor}; 
+        \node[feature] (family) at (-1,-0.4) {Familie\\F1}; 
+        \node[feature] (variant) at (-1,-1.6) {Variante\\Mit Kühlung}; \node[feature] (channels) at (-1,-2.8) {Kanäle\\3}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Quelle -> Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[->] (macro.east) -- (terminal.west); \draw[->] (macro.east) -- (category.west); 
+        \draw[->] (macro.east) -- (family.west); \draw[->] (macro.east) -- (variant.west); 
+        \draw[->] (macro.east) -- (channels.west); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=5.5cm, align=center ] (vector) at (5,0) { \textbf{Makrostruktur-\\vektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ Mit\\ Kühlung\\ 3 \end{array} \!\right]$ };
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \draw[->] (terminal.east) -- (vector.west); 
+        \draw[->] (category.east) -- (vector.west); 
+        \draw[->] (family.east) -- (vector.west); 
+        \draw[->] (variant.east) -- (vector.west); 
+        \draw[->] (channels.east) -- (vector.west); 
+        \end{tikzpicture} 
+        \caption{Erstellung des Makrostrukturvektors. Aus dem .ema-Makro werden strukturelle Eigenschaften extrahiert und in einen numerischen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.} 
+        \label{fig:makrostrukturvektor} 
+        \end{figure}
 
 \subsection{Lexikalvektor} 
 
@@ -327,9 +592,52 @@ Aus den vorhandenen Artikel- und Makrodaten lassen sich folgende textbasierten M
     \item technischen Beschreibungen. 
 \end{itemize} 
 
-Im Beispiel des Motors ergibt sich folgendes Bild:
+Abbildung \ref{fig:lexikalvektor} stellt die Erstellung des Lexikalvektors für das Beispiel des Motors dar:
 
-% Bild einfügen
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
+        feature/.style={ draw, rounded corners, fill=green!10, minimum width=3.0cm, minimum height=0.8cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (-1,5) {Erstellung des Lexikalvektors}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[source] (article) at (-7,1.5) {XML-Artikel\\Motor}; 
+        \node[source] (macro) at (-7,-1.5) {.ema-Makro\\Motor}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalische Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[feature] (type) at (-1,2.5) {Typbezeichnung\\DRN112M4}; 
+        \node[feature] (series) at (-1,1.0) {Produktserie\\DRN}; 
+        \node[feature] (interface) at (-1,-0.5) {Kennung\\PROFINET}; 
+        \node[feature] (description) at (-1,-2.0) {Beschreibung\\Mit Kühlung}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle -> Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[->] (article.east) -- (type.west); 
+        \draw[->] (article.east) -- (series.west); 
+        \draw[->] (article.east) -- (interface.west); 
+        \draw[->] (macro.east) -- (description.west); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=6cm, align=center ] (vector) at (5,0) { \textbf{Lexikal-\\vektor} \vspace{2mm} $ \left[ \begin{array}{c} DRN112M4\\ DRN\\ PROFINET\\ Kühlung \end{array} \right] $ }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Merkmale -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \draw[->] (type.east) -- (vector.west); 
+        \draw[->] (series.east) -- (vector.west); 
+        \draw[->] (interface.east) -- (vector.west); 
+        \draw[->] (description.east) -- (vector.west); 
+        \end{tikzpicture} 
+        \caption{Erstellung des Lexikalvektors. Textuelle technische Informationen aus Artikel- und Makrodaten werden extrahiert und in einem separaten Vektor zusammengeführt. 
+        Der Lexikalvektor ergänzt die strukturierten Informationen des Artikel- und Makrostrukturvektors um technische Begriffe und Bezeichnungen.} 
+        \label{fig:lexikalvektor} 
+        \end{figure}
+
 
 \section{Erstellung des Datensplits} 
 \subsection{Trainings-, Validierungs- und Testdaten}
@@ -357,12 +665,12 @@ Die Umsortierung erfolgt dabei nach folgenden Regeln:
     \item Die restlichen Artikel von Makros werden entsprechend der Verteilung 60\% Trainingsdaten, 20\% Validierungsdaten und 20\% Testdaten aufgeteilt.
 \end{itemize}
 
-In der Literatur wird häufig eine Datensplit von 70\% Trainingsdaten, 20\% Validierungsdaten und 10\% Testdaten verwendet. 
-Hiervon wird in dieser Arbeit bewusst abgewichen, um eine erhöte Anzahl an Testdaten und somit eine robustere Bewertung des Modells zu ermöglichen.
-Die Umverteilung auf 60\% Trainingsdaten, 20\% Validierungsdaten und 20\% Testdaten erfolgt durch die Entfernung von 10\% der Trainingsdaten und deren Verschiebung in die Testdaten.
+Die konkrete Aufteilung von Trainings-, Validierungs- und Testdaten hängt von der Größe und Struktur des Datensatzes ab. 
+Häufig werden Aufteilungen von Trainings-, Validierungs- und Testdaten wie 80/10/10, 70/20/10 oder 60/20/20 verwendet. Entscheidend ist dabei weniger die exakte prozentuale Verteilung als vielmehr die Vermeidung von Datenleckagen und die Sicherstellung einer aussagekräftigen Evaluation.
 Durch die oben genannten Regeln zur Konsistenzprüfung werden Artikel als erstens in die Trainingsdaten verschoben. 
 Dadruch entseht eine Bevorzugung der Trainingsdaten gegenüber Validierungs- und Testdaten und somit das Risiko, dass zu wenig Testdaten vorhanden sind.
-Um diesem Risiko entgegenzuwirken, werden die restlichen Artikel mit einer um 10\% erhöhten Wahrscheinlichkeit in die Testdaten verschoben.
+Um diesem Risiko entgegenzuwirken, werden die restlichen Artikel nach dem 60/20/20-Verhältnis auf Trainings-, Validierungs- und Testdaten verteilt, um damit eine höhere Gewichtigkeit der Testdaten zu erreichen.
+
 
 \subsection{Ergebnis des Datensplits}
 
@@ -377,97 +685,72 @@ Auf Grundlage des reduzierten Bestands aus Kapitel \ref{sec:ergebnis_der_datenau
 Dieser Datensplit zeigt eine leichte Abweichung gegenüber der Zielkonfiguration von 70\% Trainingsdaten, 20\% Validierungsdaten und 10\% Testdaten. 
 Diese Abweichung ist für das Ziel dieser Arbeit akzeptabel, da sie eine aussagekräftigere Bewertung des Modells durch eine erhöhte Anzahl an Testdaten ermöglicht.
 
-% Bild einfügen und im Text referenzieren
-
-
 \subsection{Architektur der Datenaufbereitung} 
-
-Die Architektur der Datenaufbereitung ist in Abbildung XX dargestellt. 
-Die XML-Artikeldaten und die EMA-Makrodaten bilden die beiden Eingabeschnittstellen der Pipeline. 
-
-Im Schritt \texttt{911 Prepare Raw Data} erfolgt die technische Analyse dieser Datenquellen. 
-Hierbei werden Merkmale extrahiert, normiert und in strukturierte Vektoren überführt. 
-Die resultierenden Daten werden anschließend im Schritt \texttt{913 Filter Training Data} hinsichtlich ihrer Qualität überprüft, 
-gefiltert und mit Qualitätsinformationen angereichert. Danach erfolgt im Schritt \texttt{921 Build Datasplit} die Aufteilung in Trainings-, Validierungs- und Testdaten.
-Das Ergebnis dieser Verarbeitung bildet Artefakt A1. 
 
 \begin{figure}[H] 
     \centering 
-    \begin{tikzpicture}[ >=stealth, 
-        font=\small, 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
         source/.style={ draw, rounded corners, fill=blue!15, minimum width=3.8cm, minimum height=1cm, align=center }, 
         process/.style={ draw, rounded corners, fill=green!15, minimum width=4.5cm, minimum height=1.1cm, align=center }, 
         artifact/.style={ draw, rounded corners, fill=orange!15, minimum width=5.0cm, minimum height=1cm, align=center } ] 
-
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenbasis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
         \node[source] (article) at (-5,10) {XML-Artikeldaten}; 
         \node[source] (macro) at (5,10) {EMA-Makrodaten}; 
-        \node[source] (mapping) at (0,10) {Artikel-Makro-Zuordnungen}; 
+        \node[source] (mapping) at (0,10) {Artikel-Makro\\Zuordnungen}; 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Schritt 911 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenaufbereitung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[process] (prepare) at (0,7.5) { Rohdatenaufbereitung\\ Extraktion\\ Normierung\\ Klassifikation }; 
+        \node[process] (prepare) at (0,7.5) { Datenaufbereitung\\ Bereinigung\\ Normalisierung\\ Klassifikation }; 
         \draw[->,thick] (article) -- (prepare); 
         \draw[->,thick] (macro) -- (prepare); 
         \draw[->,thick] (mapping) -- (prepare); 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Übergabeartefakt %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[artifact] (features) at (0,5.0) { Zwischenartefakt \\ Einheitliche Artikel- und Makromerkmale inklusive Artikel-Makro-Zuordnungen }; 
+        \node[artifact] (features) at (0,5.0) { Bereinigte Datenbasis\\ Vollständige Artikel\\ Vollständige Makros\\ Einheitliche Merkmale }; 
         \draw[->,thick] (prepare) -- (features); 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Schritt 913 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsformat %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[process] (filter) at (0,2.4) { Trainingsdaten vorbereiten \\ Qualitätsprüfung\\ Einheitennormalisierung\\ Entfernung von Datenleckagen }; 
-        \draw[->,thick] (features) -- (filter); 
+        \node[process] (vectorize) at (0,2.4) { Überführung in\\ Trainingsformat\\ Merkmalsextraktion\\ Vektorisierung }; 
+        \draw[->,thick] (features) -- (vectorize); 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektoren %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[artifact] (articlevec) at (-6,-0.5) { Artikelvektor }; 
-        \node[artifact] (macrovec) at (0,-0.5) { Makrostrukturvektor }; 
-        \node[artifact] (lexicalvec) at (6,-0.5) { Lexikalvektor }; 
+        \node[artifact] (articlevec) at (-6,-0.5) {Artikelvektor}; 
+        \node[artifact] (macrovec) at (0,-0.5) {Makrostrukturvektor}; 
+        \node[artifact] (lexicalvec) at (6,-0.5) {Lexikalvektor}; 
+        \draw[->,thick] (vectorize) -- (articlevec); \draw[->,thick] (vectorize) -- (macrovec); 
+        \draw[->,thick] (vectorize) -- (lexicalvec); 
         
-        \draw[->,thick] (filter) -- (articlevec); 
-        \draw[->,thick] (filter) -- (macrovec); 
-        \draw[->,thick] (filter) -- (lexicalvec); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datensplit %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Schritt 921 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-        \node[process] (split) at (0,-3) { Datasplit erstellen\\ Gruppierung von Artikeln über Fingerprints\\ Überprüfung der Makroabdeckung der Trainingsdaten}; 
-        \draw[->,thick] (articlevec) |- (split); 
-        \draw[->,thick] (macrovec) -- (split); 
-        \draw[->,thick] (lexicalvec) |- (split);
+        \node[process] (split) at (0,-3) { Datensplit\\ Konsistenzprüfung\\ Makroabdeckung\\ 60/20/20-Aufteilung }; 
+        \draw[->,thick] (articlevec) |- (split); \draw[->,thick] (macrovec) -- (split); \draw[->,thick] (lexicalvec) |- (split); 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Split %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
         \node[artifact] (train) at (-6,-6) {Training\\984 Artikel}; 
         \node[artifact] (val) at (0,-6) {Validierung\\322 Artikel}; 
         \node[artifact] (test) at (6,-6) {Test\\253 Artikel}; 
-        
-        \draw[->,thick] (split) -- (train); 
-        \draw[->,thick] (split) -- (val); 
+        \draw[->,thick] (split) -- (train); \draw[->,thick] (split) -- (val); 
         \draw[->,thick] (split) -- (test); 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artefakt A1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[ draw, rounded corners, fill=yellow!20, minimum width=9cm, minimum height=1.6cm, align=center ] (a1) at (0,-8.5) { Artefakt A1\\ 1559 Artikel\\ 375 Makros\\ 2381 Features}; 
-        \draw[->,thick] (train.south) |- (a1.west); 
-        \draw[->,thick] (val.south) -- (a1.north); 
-        \draw[->,thick] (test.south) |- (a1.east); 
-    \end{tikzpicture} 
-    \caption{Architektur der Datenanalyse und Trainingsvorbereitung. XML-Artikeldaten, EMA-Makrodaten und Artikel-Makro-Zuordnungen bilden die Eingabeschnittstellen.
-    Die Rohdatenaufbereitung erzeugt strukturierte technische Repräsentationen, die Trainingsdatenvorbereitung prüft die Datenqualität, führt Einheitennormalisierung, Datenleckagen-Prüfungen durch und erstellt die Trainingsvektoren.
-    Die Erstellung des Datensplits erfolgt unter Berücksichtigung der Fingerprints und der Makroabdeckung. Das Ergebnis bildet Artefakt A1 als technische Wissensrepräsentation für die nachfolgende Modellauswahl.} 
-    \label{fig:datenaufbereitung_architektur} 
-\end{figure}
+        \node[ draw, rounded corners, fill=yellow!20, minimum width=9cm, minimum height=1.6cm, align=center ] (a1) at (0,-8.5) { Artefakt A1\\ 1559 Artikel\\ 375 Makros}; 
+        \draw[->,thick] (train.south) |- (a1.west); \draw[->,thick] (val.south) -- (a1.north); \draw[->,thick] (test.south) |- (a1.east); \end{tikzpicture} 
+        \caption{ Architektur der Datenanalyse und Trainingsvorbereitung.} 
+    \end{figure}
 
 
 \section{Kapitelergebnis} 
 
-In diesem Kapitel wurden die verfügbaren Artikel- und Makrodaten analysiert sowie die vollständige Datenaufbereitung beschrieben. 
+In diesem Kapitel wurden die verfügbaren Artikel- und Makrodaten  sowie die vollständige Datenaufbereitung beschrieben. 
 Die Analyse zeigt, dass die EPLAN-Artikelverwaltung eine umfangreiche technische Wissensbasis bereitstellt. 
-Diese Informationen werden innerhalb der Pipeline extrahiert, normiert, qualitätsgesichert und in strukturierte Artikel-, 
+Diese Informationen werden innerhalb der De extrahiert, normiert, qualitätsgesichert und in Artikel-, 
 Makrostruktur- und Lexikalvektoren überführt. Zusätzlich wurden Mechanismen zur Leakage-Vermeidung und zur validen Aufteilung der Daten implementiert. 
 
 Artefakt A1 besteht damit aus: 
