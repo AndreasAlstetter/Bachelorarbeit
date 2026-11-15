@@ -449,29 +449,22 @@ reduziert.
 
 Modelle wie sie in Kapitel \ref{sec:modellansätze} beschrieben werden, können technische Informationen nicht direkt aus XML-Dateien verarbeiten. 
 Um diese Informationen nutzbar zu machen, müssen sie in Embeddings (vergleiche Kapitel \ref{sec:vom_vektor_zum_embedding}) überführt werden.
-Deswegen werden die technischen Informationen aus Artikel- und Makrodaten in numerische Vektoren überführt, die als Eingabe für ein Modell dienen können.
-Die vorliegenden technischen Informationen werden in drei separate Vektoren überführt: den Artikelvektor, den Makrovektor und den Lexikalvektor.
-Diese Trennung sorgt für eine weitere Klassifikation der technischen Informationen. 
-Dadurch entsteht eine Vorstrukturierung, welche für eine Abgrenzung der einzelnen technischen Informationen sorgt. 
+Deswegen werden die technischen Informationen aus Artikel- und Makrodaten in numerische Vektoren überführt, die als Eingabe für ein Modell dienen.
 
 
 \subsection{Artikelvektor} 
 
 Der Artikelvektor listet die technischen Informationen eines einzelnen Artikels auf. 
-Folgende Merkmale konnten dabei konsistent aus dem vorhandenen Artikeldaten unter Beachtung der vorherigen Datenaufbereitung (Vergleiche Kapitel \ref{sec:datenaufbereitung}) extrahiert werden: 
+Dabei wurden unter anderem folgende Merkmale aus dem vorhandenen Artikeldaten unter Beachtung der vorherigen Datenaufbereitung (Vergleiche Kapitel \ref{sec:datenaufbereitung}) extrahiert: 
  
 \begin{itemize} 
     \item Hersteller, 
-    \item Produktfamilie, 
     \item Produkttyp, 
     \item Spannungen, 
     \item Ströme, 
     \item Leistungen, 
     \item Frequenzen, 
-    \item Kommunikationsstandards, 
-    \item IP-Schutzklassen, 
-    \item Kanalzahlen, 
-    \item Anschlussprofile. 
+    \item IP-Schutzklassen 
 \end{itemize} 
 
 Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Artikelvektors anhand des Motorbeispiels:
@@ -489,7 +482,7 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \node[source] (article) at (-7,0) {XML-Artikel\\Motor}; 
+        \node[source] (article) at (-7,-1.6) {XML-Artikel\\Motor}; 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \node[feature] (manufacturer) at (-1,2) {Hersteller\\SEW}; 
@@ -497,6 +490,8 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
         \node[feature] (voltage) at (-1,-0.4) {Spannung\\400 V}; 
         \node[feature] (current) at (-1,-1.6) {Strom\\10 A}; 
         \node[feature] (power) at (-1,-2.8) {Leistung\\4000 W}; 
+        \node[feature] (frequency) at (-1,-4) {Frequenz\\50 Hz};
+        \node[feature] (ip) at (-1,-5.2) {IP-Schutzklasse\\IP54};
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Quelle -> Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \draw[->] (article.east) -- (manufacturer.west); 
@@ -504,14 +499,18 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
         \draw[->] (article.east) -- (voltage.west); 
         \draw[->] (article.east) -- (current.west); 
         \draw[->] (article.east) -- (power.west); 
+        \draw[->] (article.east) -- (frequency.west); 
+        \draw[->] (article.east) -- (ip.west); 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikelvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=5.5cm, align=center ] (vector) at (5,0) { \textbf{Artikelvektor\\} \vspace{2mm} $ \left[ \begin{array}{c} SEW\\ Motor\\ 400\,V\\ 10\,A\\ 4000\,W \end{array} \right] $ }; 
+        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=5.5cm, align=center ] (vector) at (5,-1.6) { \textbf{Artikelvektor\\} \vspace{2mm} $ \left[ \begin{array}{c} SEW\\ Motor\\ 400\,V\\ 10\,A\\ 4000\,W\\ 50\,Hz\\ IP54 \end{array} \right] $ }; 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \draw[->] (manufacturer.east) -- (vector.west); 
         \draw[->] (type.east) -- (vector.west); 
         \draw[->] (voltage.east) -- (vector.west); 
         \draw[->] (current.east) -- (vector.west); 
         \draw[->] (power.east) -- (vector.west);
+        \draw[->] (frequency.east) -- (vector.west);
+        \draw[->] (ip.east) -- (vector.west);
     \end{tikzpicture} 
     \caption{Erzeugung eines Artikelvektors aus technischen Informationen eines Motorartikels. Die extrahierten Merkmale werden zu einer gemeinsamen technischen Repräsentation zusammengeführt und dienen als Eingabe für das Empfehlungssystem.} 
     \label{fig:artikelvektor} 
@@ -522,15 +521,11 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
 Der Makrovektor beschreibt die Struktur und den Aufbau eines Makros. Aus den vorhandenen Makrodaten werden analog zum Artikelvektor folgende Merkmale extrahiert: 
 
 \begin{itemize} 
-    \item Funktionskategorien, 
-    \item Funktionsgruppen, 
-    \item Anschlussrollen, 
-    \item IO-Schemata, 
-    \item Kanalstrukturen, 
-    \item Signalanzahlen, 
+    \item Anschlüsse, 
+    \item Makrokategorien, 
+    \item Familien, 
     \item Varianten, 
-    \item Symbolbibliotheken, 
-    \item Makrokategorien. 
+
 \end{itemize} 
 
 Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} den Aufbau des Makrovektor:
@@ -555,24 +550,22 @@ Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} de
         \node[feature] (terminal) at (-1,2) {Anschlüsse\\U1, V1, W1}; 
         \node[feature] (category) at (-1,0.8) {Kategorie\\Motor}; 
         \node[feature] (family) at (-1,-0.4) {Familie\\F1}; 
-        \node[feature] (variant) at (-1,-1.6) {Variante\\Mit Kühlung}; \node[feature] (channels) at (-1,-2.8) {Kanäle\\3}; 
-        
+        \node[feature] (variant) at (-1,-1.6) {Variante\\Mit Kühlung}; 
+    
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Quelle -> Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
         \draw[->] (macro.east) -- (terminal.west); \draw[->] (macro.east) -- (category.west); 
         \draw[->] (macro.east) -- (family.west); \draw[->] (macro.east) -- (variant.west); 
-        \draw[->] (macro.east) -- (channels.west); 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=5.5cm, align=center ] (vector) at (5,0) { \textbf{Makrovektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ Mit\\ Kühlung\\ 3 \end{array} \!\right]$ };
+        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=5.5cm, align=center ] (vector) at (5,0) { \textbf{Makrovektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ Mit\_Kühlung\end{array} \!\right]$ };
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \draw[->] (terminal.east) -- (vector.west); 
         \draw[->] (category.east) -- (vector.west); 
         \draw[->] (family.east) -- (vector.west); 
         \draw[->] (variant.east) -- (vector.west); 
-        \draw[->] (channels.east) -- (vector.west); 
         \end{tikzpicture} 
         \caption{Erstellung des Makrovektor. Aus dem .ema-Makro werden strukturelle Informationen extrahiert und in einen numerischen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.} 
         \label{fig:makrovektor} 
@@ -638,6 +631,16 @@ Abbildung \ref{fig:lexikalvektor} stellt die Erstellung des Lexikalvektors für 
         \label{fig:lexikalvektor} 
         \end{figure}
 
+\subsection{Warum Drei Vektoren ?}
+
+Die Aufteilung der technischen Informationen in drei separate Vektoren hat mehrere Vorteile.
+Zunächst wird durch die Trennung verhindert, dass sich Werte aus den Artikel- und Makrodaten wie Spannung, Strom oder Makrobezeichnungen mit textuellen Informationen aus den Hinweis- und Beschreibungsfeldern vermischen.
+Eine Spannung von 400 V besitzt eine andere Bedeutung als der Hinweis "Mit Kühlung". Durch die getrennte Speicherung bleiben diese unterschiedlichen Informationsarten für ein späteres Modell unterscheidbar. 
+Desweiteren ermöglicht diese Trennung eine unabhängige Weiterentwicklung der einzelnen Informationsquellen. Neue technische Merkmale können beispielsweise dem Artikelvektor hinzugefügt werden, 
+ohne die Struktur des Makrovektors oder des Lexikalvektors verändern zu müssen. Zusätzlich können die einzelnen Vektoren später unterschiedlich verarbeitet werden. 
+Strukturierte technische Merkmale des Artikel- und Makrovektors können beispielsweise direkt als numerische Eingaben für Learning-to-Rank-Verfahren verwendet werden, 
+während textuelle Informationen des Lexikalvektors zusätzlich durch Embedding-Modelle oder Sentence Transformer verarbeitet werden können. 
+Die gewählte Vorverarbeitung schränkt somit die spätere Auswahl möglicher Modellansätze nicht ein.
 
 \section{Erstellung des Datensplits} 
 \subsection{Trainings-, Validierungs- und Testdaten}

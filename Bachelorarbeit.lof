@@ -28,7 +28,7 @@
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Erzeugung eines Artikelvektors aus technischen Informationen eines Motorartikels. Die extrahierten Merkmale werden zu einer gemeinsamen technischen Repräsentation zusammengeführt und dienen als Eingabe für das Empfehlungssystem.}}{34}{figure.caption.25}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Erstellung des Makrovektor. Aus dem .ema-Makro werden strukturelle Informationen extrahiert und in einen numerischen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.}}{35}{figure.caption.26}%
 \contentsline {figure}{\numberline {4.11}{\ignorespaces Erstellung des Lexikalvektors. Textuelle technische Informationen aus Artikel- und Makrodaten werden extrahiert und in einem separaten Vektor zusammengeführt. Der Lexikalvektor ergänzt die strukturierten Informationen des Artikel- und Makrovektors um technische Begriffe und Bezeichnungen.}}{36}{figure.caption.27}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Architektur der Datenanalyse und Trainingsvorbereitung.}}{38}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Architektur der Datenanalyse und Trainingsvorbereitung.}}{39}{figure.caption.28}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
