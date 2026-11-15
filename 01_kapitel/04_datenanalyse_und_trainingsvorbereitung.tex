@@ -426,24 +426,24 @@ Die folgende Abbildung \ref{fig:spannungsklassifikation} zeigt, wie die Klassifi
 \subsection{Ergebnis der Datenaufbereitung}
 \label{sec:ergebnis_der_datenaufbereitung}
 
-Die Aufteilung der Artikel- und Makrodaten erfolgt unter Berücksichtigung der vorangegangenen Datenaufbereitung (siehe Abschnitt \ref{sec:datenaufbereitung}).
-Nach der Anwendung der in der Datenaufbereitung durgeführten Bereinigung, Normalisierung und Klassifizierung hat sich der Ursprüngliche Bestand an Artikeln und Makros von:
-
-\begin{itemize} 
-    \item .... Artikel, 
-    \item .... Makros, 
-\end{itemize} 
-
-auf 
+Das Ergebnis der Datenaufbereitung (siehe Abschnitt \ref{sec:datenaufbereitung}) bildet die bereinigte Datenbasis des Empfehlungssystems. 
+Diese umfasst insgesamt: 
 
 \begin{itemize} 
     \item 1.559 Artikel, 
-    \item 375 Makros, 
+    \item 375 unterschiedliche Makros. 
+\end{itemize}
+
+Nach der Bereinigung wurde zusätzlich die Verteilung der Artikel-Makro-Zuordnungen analysiert. Von den 375 vorhandenen Makros besitzen:
+
+\begin{itemize} 
+    \item 213 Makros (56,8\,\%) lediglich einen einzigen zugeordneten Artikel, 
+    \item 66 Makros (17,6\,\%) zwei zugeordnete Artikel,
+    \item 96 Makros (25,6\,\%) drei oder mehr zugeordnete Artikel.
 \end{itemize} 
 
-reduziert.
-
-
+Die Analyse ergibt, dass über die Hälfte der Makros nur eine geringe Anzahl an zugeordneten Artikeln besitzt. 
+Dies stellt eine Herausforderung für die den Lernprozess eines Modells dar und muss daher in Abschnitt \ref{sec:splitregeln} berücksichtigt werden.
 
 \section{Überführung in ein Trainingsformat} 
 
@@ -502,7 +502,7 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
         \draw[->] (article.east) -- (frequency.west); 
         \draw[->] (article.east) -- (ip.west); 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikelvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=5.5cm, align=center ] (vector) at (5,-1.6) { \textbf{Artikelvektor\\} \vspace{2mm} $ \left[ \begin{array}{c} SEW\\ Motor\\ 400\,V\\ 10\,A\\ 4000\,W\\ 50\,Hz\\ IP54 \end{array} \right] $ }; 
+        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, align=center ] (vector) at (5,-1.6) { \textbf{Artikelvektor\\} \vspace{2mm} $ \left[ \begin{array}{c} SEW\\ Motor\\ 400\,V\\ 10\,A\\ 4000\,W\\ 50\,Hz\\ IP54 \end{array} \right] $ }; 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \draw[->] (manufacturer.east) -- (vector.west); 
         \draw[->] (type.east) -- (vector.west); 
@@ -518,7 +518,7 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
         
 \subsection{Makrovektor} 
 
-Der Makrovektor beschreibt die Struktur und den Aufbau eines Makros. Aus den vorhandenen Makrodaten werden analog zum Artikelvektor folgende Merkmale extrahiert: 
+Der Makrovektor beschreibt die Struktur und den Aufbau eines Makros. Aus den vorhandenen Makrodaten werden analog zum Artikelvektor folgende Merkmale extrahiert und in einem gemeinsamen Vektor zusammengeführt: 
 
 \begin{itemize} 
     \item Anschlüsse, 
@@ -559,7 +559,7 @@ Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} de
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=5.5cm, align=center ] (vector) at (5,0) { \textbf{Makrovektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ Mit\_Kühlung\end{array} \!\right]$ };
+        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, align=center ] (vector) at (5,0) { \textbf{Makrovektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ \text{Mit Kühlung} \end{array} \!\right]$ };
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \draw[->] (terminal.east) -- (vector.west); 
@@ -567,7 +567,7 @@ Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} de
         \draw[->] (family.east) -- (vector.west); 
         \draw[->] (variant.east) -- (vector.west); 
         \end{tikzpicture} 
-        \caption{Erstellung des Makrovektor. Aus dem .ema-Makro werden strukturelle Informationen extrahiert und in einen numerischen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.} 
+        \caption{Erstellung des Makrovektor. Aus dem .ema-Makro werden strukturelle Informationen extrahiert und in einen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.} 
         \label{fig:makrovektor} 
         \end{figure}
 
@@ -581,11 +581,10 @@ Aus den vorhandenen Artikel- und Makrodaten lassen sich folgende textbasierten M
 \begin{itemize} 
     \item Typbezeichnungen, 
     \item Produktserien, 
-    \item Kommunikationskennungen, 
     \item technischen Beschreibungen. 
 \end{itemize} 
 
-Abbildung \ref{fig:lexikalvektor} stellt die Erstellung des Lexikalvektors für das Beispiel des Motors dar:
+Abbildung \ref{fig:lexikalvektor} stellt den Aufbau des Lexikalvektors für das Beispiel des Motors dar:
 
 \begin{figure}[H] 
     \centering 
@@ -605,25 +604,21 @@ Abbildung \ref{fig:lexikalvektor} stellt die Erstellung des Lexikalvektors für 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalische Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
         \node[feature] (type) at (-1,2.5) {Typbezeichnung\\DRN112M4}; 
-        \node[feature] (series) at (-1,1.0) {Produktserie\\DRN}; 
-        \node[feature] (interface) at (-1,-0.5) {Kennung\\PROFINET}; 
-        \node[feature] (description) at (-1,-2.0) {Beschreibung\\Mit Kühlung}; 
-        
+        \node[feature] (series) at (-1,0.5) {Produktserie\\DRN}; 
+        \node[feature] (description) at (-1,-1.5) {Beschreibung\\Wasserdichte Ausführung}; 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle -> Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
         \draw[->] (article.east) -- (type.west); 
         \draw[->] (article.east) -- (series.west); 
-        \draw[->] (article.east) -- (interface.west); 
         \draw[->] (macro.east) -- (description.west); 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, minimum height=6cm, align=center ] (vector) at (5,0) { \textbf{Lexikal-\\vektor} \vspace{2mm} $ \left[ \begin{array}{c} DRN112M4\\ DRN\\ PROFINET\\ Kühlung \end{array} \right] $ }; 
+        \node[ draw, rounded corners, fill=orange!15, text width=5cm, align=center ] (vector) at (5,0.5) { \textbf{Lexikalvektor\\} \vspace{2mm} $\left[ \begin{array}{c} \text{DRN112M4}\\ \text{DRN}\\ \text{Wasserdichte Ausführung} \end{array} \right]$ };
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Merkmale -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \draw[->] (type.east) -- (vector.west); 
         \draw[->] (series.east) -- (vector.west); 
-        \draw[->] (interface.east) -- (vector.west); 
         \draw[->] (description.east) -- (vector.west); 
         \end{tikzpicture} 
         \caption{Erstellung des Lexikalvektors. Textuelle technische Informationen aus Artikel- und Makrodaten werden extrahiert und in einem separaten Vektor zusammengeführt. 
@@ -633,140 +628,185 @@ Abbildung \ref{fig:lexikalvektor} stellt die Erstellung des Lexikalvektors für 
 
 \subsection{Warum Drei Vektoren ?}
 
-Die Aufteilung der technischen Informationen in drei separate Vektoren hat mehrere Vorteile.
-Zunächst wird durch die Trennung verhindert, dass sich Werte aus den Artikel- und Makrodaten wie Spannung, Strom oder Makrobezeichnungen mit textuellen Informationen aus den Hinweis- und Beschreibungsfeldern vermischen.
-Eine Spannung von 400 V besitzt eine andere Bedeutung als der Hinweis "Mit Kühlung". Durch die getrennte Speicherung bleiben diese unterschiedlichen Informationsarten für ein späteres Modell unterscheidbar. 
-Desweiteren ermöglicht diese Trennung eine unabhängige Weiterentwicklung der einzelnen Informationsquellen. Neue technische Merkmale können beispielsweise dem Artikelvektor hinzugefügt werden, 
-ohne die Struktur des Makrovektors oder des Lexikalvektors verändern zu müssen. Zusätzlich können die einzelnen Vektoren später unterschiedlich verarbeitet werden. 
-Strukturierte technische Merkmale des Artikel- und Makrovektors können beispielsweise direkt als numerische Eingaben für Learning-to-Rank-Verfahren verwendet werden, 
-während textuelle Informationen des Lexikalvektors zusätzlich durch Embedding-Modelle oder Sentence Transformer verarbeitet werden können. 
-Die gewählte Vorverarbeitung schränkt somit die spätere Auswahl möglicher Modellansätze nicht ein.
+Die Aufteilung der technischen Informationen in drei separate Vektoren hat mehrere Vorteile:
+
+\begin{itemize}
+    \item Es wird verhindert, dass sich Werte aus den Artikel- und Makrodaten wie Spannung, Strom oder Makrobezeichnungen mit textuellen Informationen aus den Hinweis- und Beschreibungsfeldern vermischen. Eine Spannung von 400 V besitzt eine andere Bedeutung als der Hinweis "Mit Kühlung". Durch die getrennte Speicherung bleiben diese unterschiedlichen Informationsarten für ein späteres Modell unterscheidbar.
+    \item Die Weiterentwicklung der einzelnen Informationsquellen ist unabhängig voneinander möglich. Neue technische Merkmale können beispielsweise dem Artikelvektor hinzugefügt werden, ohne die Struktur des Makrovektors oder des Lexikalvektors verändern zu müssen. 
+    \item Zusätzlich können die einzelnen Vektoren später unterschiedlich verarbeitet werden. Strukturierte technische Merkmale des Artikel- und Makrovektors können beispielsweise direkt als numerische Eingaben für Learning-to-Rank-Verfahren verwendet werden, während textuelle Informationen des Lexikalvektors zusätzlich durch Embedding-Modelle oder Sentence Transformer verarbeitet werden können (siehe Kapitel \ref{sec:modellansätze}).
+\end{itemize}
+ 
 
 \section{Erstellung des Datensplits} 
 \subsection{Trainings-, Validierungs- und Testdaten}
 
-Ein Datensplit ist die Aufteilung vorhandener Daten in verschiedene Teilmengen, um damit den Lernprozess eines Modells überwachen, bewerten und überprüfen zu können.
+Ein Datensplit (Abbildung \ref{fig:datensplit_funktion}) ist die Aufteilung vorhandener Menge an Daten in verschiedene Teilmengen, um damit den Lernprozess eines Modells überwachen, bewerten und überprüfen zu können.
 Hierfür werden die Artikel- und Makrodaten in Trainings-, Validierungs- und Testdaten aufgeteilt.
 Die Trainingsdaten dienen dem Lernprozess des Modells, wodurch die Zusammenhänge zwischen den technischen Informationen erlernt werden. 
 Die Validierungsdaten werden verwendet, um die Parameter des Modells während des Lernprozesses zu überwachen und anzupassen. 
 Die Testdaten dienen der abschließenden Bewertung des Modells, um dessen Leistungsfähigkeit auf unbekannte Artikeldaten zu überprüfen. 
 
-\subsection{Konsistenzprüfung der Artikel- und Makrodaten im Datensplit} 
-\label{sec:konsistenzpruefung_datensplit}
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        dataset/.style={ draw, rounded corners, fill=blue!15, minimum width=5cm, minimum height=1cm, align=center }, 
+        split/.style={ draw, rounded corners, minimum width=4cm, minimum height=2cm, align=center }, 
+        model/.style={ draw, rounded corners, fill=orange!15, minimum width=5cm, minimum height=1.2cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,7) {Technische Funktion der Datensplits}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenbasis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[dataset] (data) at (0,5) {Artikel- und Makrodaten}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datensplit %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ draw, rounded corners, fill=yellow!15, minimum width=4cm, minimum height=1cm ] (split) at (0,3) {Datensplit}; 
+        \draw[->,thick] (data) -- (split); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsdaten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ split, fill=green!15, text width=3.5cm ] (train) at (-6,-0.2) { \vspace{1mm} \textbf{Trainingsdaten} Lernen technischer Zusammenhänge }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Validierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ split, fill=yellow!20, text width=3.5cm ] (val) at (0,-0.2) {  \vspace{1mm} \textbf{Validierungsdaten} Überwachung und Parameteranpassung }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Test %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ split, fill=red!15, text width=3.5cm ] (test) at (6,-0.2) { \vspace{1mm} \textbf{Testdaten\\} Abschließende Bewertung }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Aufteilung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[->,thick] (split) -- (train); \draw[->,thick] (split) -- (val); \draw[->,thick] (split) -- (test); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Modell %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ draw, rounded corners, fill=orange!15, minimum width=5cm, minimum height=1.2cm, align=center ] (model) at (0,-4) { \vspace{2mm} \textbf{Empfehlungssystem} };
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenfluss %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[->,thick] (train.south) |- (model.west); 
+        \draw[->,thick] (val.south) -- (model.north); 
+        \draw[->,thick] (test.south) |- (model.east); 
+        \end{tikzpicture} 
+        \caption{Technische Funktion der Trainings-, Validierungs- und Testdaten. Während die Trainingsdaten für das Erlernen technischer Zusammenhänge genutzt werden, dienen die Validierungsdaten der Überwachung und Anpassung des Modells. Die Testdaten werden ausschließlich zur abschließenden Bewertung der Leistungsfähigkeit auf unbekannten Daten verwendet.} 
+        \label{fig:datensplit_funktion} 
+        \end{figure}
 
-Um sicherzustellen, dass alle Artikel- und Makrodaten, welche in Validierungs- oder Testdaten vorkommen, 
-bereits im Trainingsbestand vertreten sind, wird eine Konsistenzprüfung durchgeführt.
-Da für Artikel und Makro in einer n zu 1 Beziehung stehen (siehe Kapitel \ref{sec:artikel_macro_zuordnungen}), können mehrere Artikel zu einem Makro auf den gesamten Datensplit verteilt sein.
-Falls Artikel- oder Makrodaten in den Validierungs- oder Testdaten vorkommen, die nicht im Trainingsbestand vorhanden sind, werden diese umsortiert.
 
-Die Umsortierung erfolgt dabei nach folgenden Regeln:
+\subsection{Splitregelen}
+\label{sec:splitregeln} 
 
-\begin{itemize}
-    \item Ein Makro muss immer durch einen Artikel in den Trainingsdaten vertreten sein.
-    \item Ein Makro, das in den Validierungsdaten vorkommt, muss immer einen Artikel in den Trainingsdaten haben.
-    \item Ein Makro, das in den Testdaten vorkommt, muss jeweils einen Artikel in den Trainings- und Validierungsdaten haben.
-    \item Die restlichen Artikel von Makros werden entsprechend der Verteilung 60\% Trainingsdaten, 20\% Validierungsdaten und 20\% Testdaten aufgeteilt.
-\end{itemize}
+Die Herausforderung aus der Datenaufbereitung (siehe Abschnitt \ref{sec:ergebnis_der_datenaufbereitung}) soll in diesem Abschnitt durch die Festlegung von Splitregeln für die Trainings-, Validierungs- und Testdaten adressiert werden.
+Dabei ist zu beachten, dass Artikel und Makro in einer n:1-Beziehung stehen (siehe Kapitel \ref{sec:artikel_macro_zuordnungen}), das heißt, es können mehrere Artikel demselben Makro zugeordnet werden. Daraus lassen sich die folgenden Splitregeln ableiten: 
 
-Die konkrete Aufteilung von Trainings-, Validierungs- und Testdaten hängt von der Größe und Struktur des Datensatzes ab. 
-Häufig werden Aufteilungen von Trainings-, Validierungs- und Testdaten wie 80/10/10, 70/20/10 oder 60/20/20 verwendet. Entscheidend ist dabei weniger die exakte prozentuale Verteilung als vielmehr die Vermeidung von Datenleckagen und die Sicherstellung einer aussagekräftigen Evaluation.
-Durch die oben genannten Regeln zur Konsistenzprüfung werden Artikel als erstens in die Trainingsdaten verschoben. 
-Dadruch entseht eine Bevorzugung der Trainingsdaten gegenüber Validierungs- und Testdaten und somit das Risiko, dass zu wenig Testdaten vorhanden sind.
-Um diesem Risiko entgegenzuwirken, werden die restlichen Artikel nach dem 60/20/20-Verhältnis auf Trainings-, Validierungs- und Testdaten verteilt, um damit eine höhere Gewichtigkeit der Testdaten zu erreichen.
+\begin{itemize} 
+    \item Regel 1: Ein Makro muss immer durch mindestens einen Artikel in den Trainingsdaten vertreten sein. 
+    \item Regel 2: Ein Makro, das mit einem Artikel in den Testdaten vorkommt, muss mindestens einen Artikel in den Trainingsdaten besitzen. 
+    \item Regel 3: Ein Makro, das in den Validierungsdaten vorkommt, muss mindestens einen Artikel in den Trainings- und Testdaten besitzen. 
+    \item Regel 4: Es dürfen keine identischen Artikel gleichzeitig in Trainings-, Validierungs- und Testdaten vorkommen. 
+\end{itemize} 
+
+Alle Artikel- und Makrodaten, welche in den Validierungs- oder Testdaten vorkommen, müssen im Trainingsbestand vertreten sein, da fehlende Trainingsdaten die Bewertung des Modells verfälschen würden. 
+Angenommen ein Makro kommt in den Validierungs- oder Testdaten vor, aber nicht in den Trainingsdaten, dann würde am Ende ein Makro bewertet werden, zu dem das Modell kein Wissen besitzt. Dies würde die Bewertung des Modells negativ beeinflusst.
 
 
 \subsection{Ergebnis des Datensplits}
 
-Auf Grundlage des reduzierten Bestands aus Kapitel \ref{sec:ergebnis_der_datenaufbereitung}, sowie der Beachtung der Regeln zur Konsistenzprüfung aus Kapitel \ref{sec:konsistenzpruefung_datensplit} ergibt sich der folgende Datensplit:
+Auf Grundlage des Datenbestands aus Abschnitt \ref{sec:ergebnis_der_datenaufbereitung} sowie unter Berücksichtigung der definierten Splitregeln ergibt sich der folgende Datensplit: 
 
 \begin{itemize} 
-    \item 984 Trainingsartikel (63,1 \%), 
-    \item 322 Validierungsartikel (20,7 \%), 
-    \item 253 Testartikel (16,2 \%). 
-\end{itemize} 
+\item 1.300 Trainingsartikel (83,4\,\%), 
+\item 96 Validierungsartikel (6,2\,\%), 
+\item 163 Testartikel (10,4\,\%). 
+\end{itemize}
 
-Dieser Datensplit zeigt eine leichte Abweichung gegenüber der Zielkonfiguration von 70\% Trainingsdaten, 20\% Validierungsdaten und 10\% Testdaten. 
-Diese Abweichung ist für das Ziel dieser Arbeit akzeptabel, da sie eine aussagekräftigere Bewertung des Modells durch eine erhöhte Anzahl an Testdaten ermöglicht.
+Dieser Datensplit bildet die Basis für das Training und die Bewertung des Empfehlungssystems.
 
-\subsection{Architektur der Datenaufbereitung} 
+\newpage
 
-\begin{figure}[H] 
-    \centering 
-    \begin{tikzpicture}[ >=stealth, font=\small, 
-        source/.style={ draw, rounded corners, fill=blue!15, minimum width=3.8cm, minimum height=1cm, align=center }, 
-        process/.style={ draw, rounded corners, fill=green!15, minimum width=4.5cm, minimum height=1.1cm, align=center }, 
-        artifact/.style={ draw, rounded corners, fill=orange!15, minimum width=5.0cm, minimum height=1cm, align=center } ] 
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenbasis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-        \node[source] (article) at (-5,10) {XML-Artikeldaten}; 
-        \node[source] (macro) at (5,10) {EMA-Makrodaten}; 
-        \node[source] (mapping) at (0,10) {Artikel-Makro\\Zuordnungen}; 
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenaufbereitung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-        \node[process] (prepare) at (0,7.5) { Datenaufbereitung\\ Bereinigung\\ Normalisierung\\ Klassifikation }; 
-        \draw[->,thick] (article) -- (prepare); 
-        \draw[->,thick] (macro) -- (prepare); 
-        \draw[->,thick] (mapping) -- (prepare); 
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Übergabeartefakt %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-        \node[artifact] (features) at (0,5.0) { Bereinigte Datenbasis\\ Vollständige Artikel\\ Vollständige Makros\\ Einheitliche Merkmale }; 
-        \draw[->,thick] (prepare) -- (features); 
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsformat %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-        \node[process] (vectorize) at (0,2.4) { Überführung in\\ Trainingsformat\\ Merkmalsextraktion\\ Vektorisierung }; 
-        \draw[->,thick] (features) -- (vectorize); 
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektoren %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-        \node[artifact] (articlevec) at (-6,-0.5) {Artikelvektor}; 
-        \node[artifact] (macrovec) at (0,-0.5) {Makrovektor}; 
-        \node[artifact] (lexicalvec) at (6,-0.5) {Lexikalvektor}; 
-        \draw[->,thick] (vectorize) -- (articlevec); \draw[->,thick] (vectorize) -- (macrovec); 
-        \draw[->,thick] (vectorize) -- (lexicalvec); 
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datensplit %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-        \node[process] (split) at (0,-3) { Datensplit\\ Konsistenzprüfung\\ Makroabdeckung\\ 60/20/20-Aufteilung }; 
-        \draw[->,thick] (articlevec) |- (split); \draw[->,thick] (macrovec) -- (split); \draw[->,thick] (lexicalvec) |- (split); 
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Split %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-        \node[artifact] (train) at (-6,-6) {Training\\984 Artikel}; 
-        \node[artifact] (val) at (0,-6) {Validierung\\322 Artikel}; 
-        \node[artifact] (test) at (6,-6) {Test\\253 Artikel}; 
-        \draw[->,thick] (split) -- (train); \draw[->,thick] (split) -- (val); 
-        \draw[->,thick] (split) -- (test); 
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artefakt A1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-        \node[ draw, rounded corners, fill=yellow!20, minimum width=9cm, minimum height=1.6cm, align=center ] (a1) at (0,-8.5) { Artefakt A1\\ 1559 Artikel\\ 375 Makros}; 
-        \draw[->,thick] (train.south) |- (a1.west); \draw[->,thick] (val.south) -- (a1.north); \draw[->,thick] (test.south) |- (a1.east); \end{tikzpicture} 
-        \caption{ Architektur der Datenanalyse und Trainingsvorbereitung.} 
-    \end{figure}
+\section{Artefakt A1: Trainings- und Evaluationsbasis} 
 
+Das Ergebnis dieses Kapitels wird in Artefakt A1 zusammengefasst.
+Es stellt die Grundlage für die Bewertung und Auswahl des späteren Modellansatzes dar und setzt sich aus folgenden Bestandteilen zusammen:
 
-\section{Kapitelergebnis} 
-
-In diesem Kapitel wurden die verfügbaren Artikel- und Makrodaten  sowie die vollständige Datenaufbereitung beschrieben. 
-Die Analyse zeigt, dass die EPLAN-Artikelverwaltung eine umfangreiche technische Wissensbasis bereitstellt. 
-Diese Informationen werden innerhalb der De extrahiert, normiert, qualitätsgesichert und in Artikel-, 
-Makro- und Lexikalvektoren überführt. Zusätzlich wurden Mechanismen zur Leakage-Vermeidung und zur validen Aufteilung der Daten implementiert. 
-
-Artefakt A1 besteht damit aus: 
 \begin{itemize} 
-    \item 1.559 qualitätsgesicherten Artikeldatensätzen, 
-    \item 375 Makrozielen, 
-    \item den vorhandenen Artikel-Makro-Zuordnungen, 
-    \item den erzeugten Artikelvektoren, 
-    \item den erzeugten Makrovektor, 
-    \item den erzeugten Lexikalvektoren, 
-    \item einem Merkmalsraum mit 2.381 Features, 
-    \item einem leakage-freien Trainings-, Validierungs- und Testsplit. 
+    \item 1.559 Artikeln, 
+    \item 375 Makros, 
+    \item den Artikel-Makro-Zuordnungen, 
+    \item den Artikelvektoren, 
+    \item den Makrovektoren, 
+    \item den Lexikalvektoren, 
+    \item einem Datensplit mit:
+    \begin{itemize} 
+        \item 1.300 Trainingsartikeln, 
+        \item 96 Validierungsartikeln, 
+        \item 163 Testartikeln. 
+    \end{itemize} 
 \end{itemize} 
 
-Damit liegt erstmals eine vollständige technische Repräsentation der vorhandenen Engineering-Wissensbasis vor. 
-Dieses Artefakt beantwortet Forschungsfrage RQ1 und bildet die Grundlage für die Auswahl eines geeigneten Modellansatzes in Kapitel 5.
+
+
+% \subsection{Architektur der Datenanalyse und Trainingsvorbereitung} 
+
+% \begin{figure}[H] 
+%     \centering 
+%     \begin{tikzpicture}[ >=stealth, font=\small, 
+%         source/.style={ draw, rounded corners, fill=blue!15, minimum width=3.8cm, minimum height=1cm, align=center }, 
+%         process/.style={ draw, rounded corners, fill=green!15, minimum width=4.5cm, minimum height=1.1cm, align=center }, 
+%         artifact/.style={ draw, rounded corners, fill=orange!15, minimum width=5.0cm, minimum height=1cm, align=center } ] 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenbasis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[source] (article) at (-5,10) {XML-Artikeldaten}; 
+%         \node[source] (macro) at (5,10) {EMA-Makrodaten}; 
+%         \node[source] (mapping) at (0,10) {Artikel-Makro\\Zuordnungen}; 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenaufbereitung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[process] (prepare) at (0,7.5) { \vspace{2mm} \textbf{Datenaufbereitung}\\ Bereinigung\\ Normalisierung\\ Klassifikation }; 
+%         \draw[->,thick] (article) -- (prepare); 
+%         \draw[->,thick] (macro) -- (prepare); 
+%         \draw[->,thick] (mapping) -- (prepare); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Übergabeartefakt %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[artifact] (features) at (0,5.0) { \vspace{2mm} \textbf{Übergabeartefakt}\\ Geprüfte Datenbasis }; 
+%         \draw[->,thick] (prepare) -- (features); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsformat %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[process] (vectorize) at (0,2.4) { \vspace{2mm} \textbf{Überführung in Trainingsformat}\\ Merkmalsextraktion\\ Vektorisierung }; 
+%         \draw[->,thick] (features) -- (vectorize); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektoren %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[artifact] (articlevec) at (-6,-0.5) {Artikelvektor}; 
+%         \node[artifact] (macrovec) at (0,-0.5) {Makrovektor}; 
+%         \node[artifact] (lexicalvec) at (6,-0.5) {Lexikalvektor}; 
+%         \draw[->,thick] (vectorize) -- (articlevec); \draw[->,thick] (vectorize) -- (macrovec); 
+%         \draw[->,thick] (vectorize) -- (lexicalvec); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datensplit %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[process] (split) at (0,-3) { \vspace{2mm} \textbf{Datensplit}\\ Trainingsmenge: 1.300 Artikel\\ Validierungsmenge: 96 Artikel\\ Testmenge: 163 }; 
+%         \draw[->,thick] (articlevec) |- (split); \draw[->,thick] (macrovec) -- (split); \draw[->,thick] (lexicalvec) |- (split); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Split %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[artifact] (train) at (-6,-6) { \vspace{2mm} \textbf{Training}\\1.300 Artikel}; 
+%         \node[artifact] (val) at (0,-6) { \vspace{2mm} \textbf{Validierung}\\96 Artikel}; 
+%         \node[artifact] (test) at (6,-6) { \vspace{2mm} \textbf{Test}\\163 Artikel}; 
+%         \draw[->,thick] (split) -- (train); \draw[->,thick] (split) -- (val); 
+%         \draw[->,thick] (split) -- (test); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artefakt A1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[ draw, rounded corners, fill=yellow!20, minimum width=9cm, minimum height=1.6cm, align=center ] (a1) at (0,-8.5) { Artefakt A1\\ 1559 Artikel\\ 375 Makros}; 
+%         \draw[->,thick] (train.south) |- (a1.west); \draw[->,thick] (val.south) -- (a1.north); \draw[->,thick] (test.south) |- (a1.east); \end{tikzpicture} 
+%         \caption{ Architektur der Datenanalyse und Trainingsvorbereitung.} 
+%     \end{figure}
+
