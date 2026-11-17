@@ -1,47 +1,117 @@
-﻿\chapter{Auswahl des Modellansatzes}
-\label{chap:auswahl_des_modellansatzes}
+﻿\chapter{Auswahl des Modellansatzes} 
+\label{chap:auswahl_des_modellansatzes} 
 
-\section{Bewertungsmatrix für Modellansätze}
+Nach der Erstellung der Trainings- und Evaluationsbasis in Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} liegt mit Artefakt A1 eine strukturierte Datengrundlage aus Artikeln, Makros und Artikel-Makro-Zuordnungen vor. 
+Im nächsten Schritt muss untersucht werden, welcher Modellansatz geeignet ist, die in Forschungsfrage RQ2 formulierte Aufgabe der automatisierten Makroempfehlung umzusetzen. 
 
-Kriterien:
+Das Ziel des Empfehlungssystems besteht nicht darin, technische Informationen zu generieren oder einzelne Makros zu klassifizieren. Stattdessen soll für einen gegebenen Artikel eine Rangliste mit den am besten geeigneten Makros erzeugt werden. 
+Die Qualität der Lösung hängt somit maßgeblich davon ab, ob relevante Makros möglichst weit oben innerhalb dieser Rangliste erscheinen. 
 
-Datenbedarf
-Trainingsaufwand
-Interpretierbarkeit
-Skalierbarkeit
-Eignung für Makroempfehlungen
+Zur Auswahl eines geeigneten Modellansatzes werden daher verschiedene Verfahren aus dem Bereich des maschinellen Lernens betrachtet und hinsichtlich ihrer Eignung für die vorliegende Aufgabenstellung bewertet. 
+Hierzu gehören Large Language Models, Sentence Transformer, Embedding-Modelle mit Triplet Loss sowie Learning-to-Rank-Verfahren. Das Ergebnis dieses Kapitels bildet Artefakt A2, der ausgewählte Modellansatz für die weitere Entwicklung des Empfehlungssystems. 
 
-\section{Large Language Models}
+\section{Bewertungsmatrix für Modellansätze} 
 
-\section{Sentence Transformer}
+Um die verschiedenen Modellansätze systematisch miteinander vergleichen zu können, werden Bewertungskriterien definiert. 
+Die Kriterien orientieren sich sowohl an den Eigenschaften der verfügbaren Datenbasis aus Artefakt A1 als auch an den Anforderungen der Forschungsfrage RQ2. 
 
-\section{Embedding-Modell mit Triplet Loss}
+Folgende Kriterien werden verwendet: 
 
-\section{Learning-to-Rank}
+\paragraph{Datenbedarf} 
+Beschreibt die Menge an Trainingsdaten, die für ein zuverlässiges Training eines Modells erforderlich ist. Da die vorliegende Datenbasis lediglich 1.559 Artikel und 375 Makros umfasst, sind Verfahren mit sehr hohem Datenbedarf kritisch zu betrachten. 
 
-\section{Modellauswahl}
+\paragraph{Trainingsaufwand} 
+Bewertet den erforderlichen Rechen- und Zeitaufwand für Training und Optimierung eines Modells. Ein geringer Trainingsaufwand erleichtert die iterative Weiterentwicklung im Rahmen des in Kapitel \ref{chap:vorgehensweise} beschriebenen ADR-Prozesses. 
+
+\paragraph{Interpretierbarkeit} 
+Beschreibt die Nachvollziehbarkeit der Modellentscheidung. Insbesondere im industriellen Umfeld kann es von Vorteil sein, nachvollziehen zu können, warum ein bestimmtes Makro empfohlen wurde. 
+
+\paragraph{Skalierbarkeit} 
+Bewertet die Fähigkeit eines Ansatzes, auch bei wachsenden Makrobeständen effizient eingesetzt werden zu können. 
+
+\paragraph{Eignung für Makroempfehlungen} 
+Dieses Kriterium bewertet, wie gut ein Ansatz das eigentliche Ziel der Arbeit unterstützt, nämlich die Erzeugung einer möglichst hochwertigen Rangliste geeigneter Makros. 
+
+\section{Large Language Models} 
+
+Large Language Models besitzen die Fähigkeit, komplexe semantische Zusammenhänge zwischen Informationen zu erfassen und können durch Fine-Tuning an spezifische Aufgaben angepasst werden. 
+Für die vorliegende Aufgabenstellung ergeben sich jedoch mehrere Herausforderungen. Large Language Models wurden primär für generative Aufgaben entwickelt. Das Ziel eines Large Language Models besteht üblicherweise in der Erzeugung von Texten, 
+während die vorliegende Arbeit die Auswahl und Priorisierung bestehender Makros verfolgt. Hinzu kommt, dass moderne Large Language Models typischerweise auf mehreren Millionen bis Milliarden Trainingsbeispielen vortrainiert werden. 
+Die in Artefakt A1 vorhandenen 1.559 Artikel stellen im Vergleich dazu eine sehr kleine Datenbasis dar. Zwar könnte ein vortrainiertes Modell mittels Fine-Tuning angepasst werden, 
+dennoch besteht die Gefahr eines Overfittings sowie eines hohen Trainings- und Ressourcenaufwands. Darüber hinaus entstehen durch die Verwendung großer Sprachmodelle erhöhte Anforderungen an Hardwareressourcen, Speicherbedarf und spätere Betriebsumgebungen. 
+Für die Empfehlung strukturierter technischer Daten erscheint dieser Aufwand im Verhältnis zum erwarteten Nutzen als hoch. Large Language Models besitzen daher grundsätzlich das Potenzial zur Verarbeitung technischer Informationen, 
+erscheinen jedoch für die vorliegende Aufgabenstellung überdimensioniert. 
+
+\section{Sentence Transformer} 
+
+Sentence Transformer wurden speziell für die Berechnung semantischer Ähnlichkeiten entwickelt. Sie überführen Texte in Embeddings, die anschließend mittels Cosine Similarity miteinander verglichen werden können. 
+Ein Vorteil dieses Ansatzes besteht darin, dass sowohl Artikel als auch Makros über ihre Beschreibungen in einen gemeinsamen Embedding-Raum überführt werden können. Ähnliche technische Informationen liegen dadurch nahe beieinander. 
+Für die vorliegende Aufgabenstellung ergibt sich jedoch eine wesentliche Einschränkung. Sentence Transformer optimieren primär die semantische Ähnlichkeit zwischen Texten. Das eigentliche Ziel der Arbeit besteht jedoch nicht darin, 
+die ähnlichsten Dokumente zu identifizieren, sondern die geeignetsten Makros innerhalb einer Rangliste zu priorisieren. Zusätzlich liegt ein Großteil der verfügbaren Daten in strukturierter Form als technische Eigenschaften wie Spannungen, Ströme, 
+Leistungen oder Schutzarten vor. Diese Informationen können zwar in Textform dargestellt werden, werden dadurch jedoch künstlich linguistisch interpretiert, obwohl bereits strukturierte technische Merkmale verfügbar sind. 
+Sentence Transformer stellen deshalb eine leistungsfähige Lösung für semantische Ähnlichkeitssuchen dar, optimieren die eigentliche Ranking-Aufgabe jedoch nur indirekt. 
+
+\section{Embedding-Modell mit Triplet Loss} 
+
+Embedding-Modelle mit Triplet Loss verfolgen das Ziel, ähnliche Objekte innerhalb eines Embedding-Raums zusammenzuführen und unähnliche Objekte voneinander zu separieren. Für die vorliegende Arbeit könnten die vorhandenen Artikel-Makro-Zuordnungen genutzt werden, 
+um positive und negative Trainingsbeispiele zu erzeugen. Das Modell würde lernen, Artikel näher an ihre zugeordneten Makros zu positionieren als an nicht passende Makros. Dadurch könnte ein technischer Ähnlichkeitsraum für Artikel und Makros aufgebaut werden. 
+Die spätere Empfehlung würde über Distanzberechnungen innerhalb dieses Embedding-Raums erfolgen. Die zentrale Schwäche dieses Ansatzes besteht jedoch darin, dass wiederum die Ähnlichkeit und nicht die endgültige Rankingqualität optimiert wird. 
+Das Modell lernt zwar, passende Makros näher an einen Artikel heranzuführen, optimiert jedoch nicht direkt die Position dieser Makros innerhalb einer Rangliste. Der Ansatz ist daher insbesondere für Retrieval-Aufgaben interessant, 
+adressiert die eigentliche Optimierungsaufgabe eines Empfehlungssystems jedoch nur indirekt. 
+
+\section{Learning-to-Rank} 
+
+Learning-to-Rank-Verfahren unterscheiden sich grundlegend von den zuvor betrachteten Ansätzen. Während Large Language Models, Sentence Transformer und Embedding-Modelle primär Textrepräsentationen oder Ähnlichkeiten lernen, 
+optimieren Learning-to-Rank-Verfahren direkt die Qualität einer Rangliste. Diese Eigenschaft entspricht unmittelbar dem Ziel des vorliegenden Empfehlungssystems. Für einen Artikel sollen nicht lediglich ähnliche Makros identifiziert werden. 
+Vielmehr sollen die relevantesten Makros möglichst weit oben innerhalb der Ergebnisliste erscheinen. Ein weiterer Vorteil ergibt sich aus der verfügbaren Datenbasis. Die vorhandenen Artikel-Makro-Zuordnungen bilden bereits implizite Relevanzinformationen. 
+Aus jeder Zuordnung kann abgeleitet werden, welches Makro für einen Artikel relevanter ist als andere Makros. Dadurch entstehen unmittelbar Trainingsbeispiele für ein Learning-to-Rank-Verfahren. 
+Besonders relevant ist hierbei die Übereinstimmung zwischen dem Optimierungsziel des Verfahrens und den in Kapitel \ref{sec:validierungsansätze} vorgestellten Evaluationsmetriken. Recall@k, Mean Reciprocal Rank und nDCG bewerten die Qualität einer Rangliste. 
+Learning-to-Rank optimiert somit genau die Eigenschaften, die später im Rahmen der Evaluation betrachtet werden. Dadurch entsteht eine enge Übereinstimmung zwischen Trainingsziel und Evaluationsziel, 
+welche bei den zuvor betrachteten Verfahren nicht in gleicher Weise gegeben ist. 
+
+\section{Modellauswahl} 
+
+Die Analyse der betrachteten Modellansätze zeigt deutliche Unterschiede hinsichtlich ihrer Eignung für die vorliegende Aufgabenstellung. 
+Large Language Models ermöglichen zwar die Verarbeitung komplexer technischer Informationen, erfordern jedoch vergleichsweise hohe Rechenressourcen und optimieren primär generative Aufgaben. 
+Sentence Transformer und Embedding-Modelle mit Triplet Loss ermöglichen die Modellierung semantischer beziehungsweise technischer Ähnlichkeiten zwischen Artikeln und Makros. 
+Beide Ansätze fokussieren sich jedoch auf die Abbildung ähnlicher Objekte innerhalb eines Embedding-Raums und optimieren die Qualität einer Rangliste lediglich indirekt. Learning-to-Rank verfolgt dagegen unmittelbar die Zielsetzung des Empfehlungssystems. 
+Das Verfahren lernt nicht die Erzeugung von Texten oder die Berechnung von Ähnlichkeiten, sondern die optimale Reihenfolge relevanter Makros innerhalb einer Rangliste. Innerhalb der Learning-to-Rank-Verfahren wird LambdaRank als Modellansatz ausgewählt. 
+Der Algorithmus berücksichtigt während des Trainings nicht nur die Relevanz einzelner Makros, sondern gewichtet Fehler zusätzlich nach ihrem Einfluss auf die Qualität der gesamten Rangliste. 
+Fehlplatzierungen auf den oberen Rangpositionen erhalten dadurch eine höhere Bedeutung als Fehlplatzierungen auf hinteren Positionen. Dieses Verhalten entspricht unmittelbar den Anforderungen der Elektrokonstruktion. 
+Für einen Konstrukteur sind insbesondere die ersten vorgeschlagenen Makros relevant, da diese den Großteil der Such- und Auswahlentscheidung bestimmen. Ein Algorithmus, der gezielt die Qualität der oberen Rangpositionen optimiert, 
+besitzt daher einen direkten praktischen Nutzen. Zusätzlich harmoniert LambdaRank mit den in Kapitel \ref{sec:validierungsansätze} vorgestellten Evaluationsmetriken Recall@k, Mean Reciprocal Rank und nDCG. 
+Dadurch entsteht eine hohe Übereinstimmung zwischen Trainingsprozess und späterer Bewertung des Systems. LambdaRank wird daher als Modellansatz für die weitere Entwicklung des Empfehlungssystems ausgewählt. 
+
+\section{Kapitelergebnis} Ziel dieses Kapitels war die Beantwortung der Forschungsfrage RQ2 hinsichtlich eines geeigneten Modellansatzes für die automatisierte Makroempfehlung. Hierzu wurden Large Language Models, Sentence Transformer, 
+Embedding-Modelle mit Triplet Loss sowie Learning-to-Rank-Verfahren analysiert und hinsichtlich ihrer Eignung für die vorliegende Aufgabenstellung untersucht. Die Analyse zeigte, 
+dass die betrachteten Sprach- und Embedding-Modelle primär die Ähnlichkeit technischer Informationen modellieren, die Qualität einer Makro-Rangliste jedoch nur indirekt optimieren. 
+Learning-to-Rank-Verfahren verfolgen dagegen unmittelbar das Ziel der Ranglistenoptimierung und stimmen damit direkt mit den Anforderungen des Empfehlungssystems überein. Innerhalb dieser Verfahrensklasse wurde LambdaRank ausgewählt, 
+da der Algorithmus die Bedeutung oberer Rangpositionen berücksichtigt und somit die spätere Empfehlungsqualität gezielt verbessert. 
+
+Daraus ergibt sich folgendes Artefakt: 
+
+\begin{quote} 
+    \textbf{Artefakt A2: Ausgewählter Modellansatz} 
+\end{quote} \begin{itemize} 
+    \item Modellklasse: Learning-to-Rank 
+    \item Lernverfahren: Pairwise Ranking 
+    \item Ausgewählter Algorithmus: LambdaRank 
+    \item Eingabedaten: 
+    \begin{itemize} 
+        \item Artikelvektoren 
+        \item Makrovektoren 
+        \item Lexikalvektoren 
+    \end{itemize} 
+    \item Ausgabedaten: 
+    \begin{itemize} 
+        \item Rangliste relevanter Makros für einen gegebenen Artikel 
+    \end{itemize} 
+\end{itemize} 
+Artefakt A2 bildet die Grundlage für die Entwicklung der Systemarchitektur im nachfolgenden Kapitel.
 
 
-\section{Kapitelergebnis}
-
-Artefakt A2:
-Ausgewählter Modellansatz
 
 
-
-
-
-\chapter{Datenanalyse und Trainigsvorbereitung}\label{chap:datenanalyse_und_trainingsvorbereitung}
-
-\section{Analyse der Ausgangsdaten}
-
-Eplan Dateien, .ema, Artikel, Makros, xml-format + Aufbau ...
-
-\section{Aufbereitung der Trainingsdaten}
-
-\section{Datensplit}
-
-\section{Trainingsbasis}
 
 % Nach der Datenaufbereitung sowie der Qualitätsprüfung der Daten erfolgt die Aufteilung in Trainings-, Validierungs- und Testdaten \parencite{srcStep911,srcStep913,srcIdealDataset,srcStep921}.
 % Ziel ist es, eine klare Trennung zwischen Modelltraining, Hyperparameteroptimierung und Modellbewertung zu schaffen. 
