@@ -19,7 +19,7 @@ Zu diesen gehören unter anderen:
     \item Spannungen, 
     \item Ströme, 
     \item Leistungen,  
-    \item technische Hinweise, 
+    % \item technische Hinweise, 
     \item Referenzen auf zugehörige Makros. 
 \end{itemize} 
 
@@ -57,10 +57,10 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
         \draw[->] (electrical) -- (current); 
         \draw[->] (electrical) -- (power); 
         % Technische Informationen 
-        \node[feature] (ip) at (5.0,0) {Hinweis\\MIT\\GEHÄUSE}; 
-        \node[feature] (com) at (7.5,0) {Makro\\M1\_F1\_V1};
-        \draw[->] (technical) -- (ip); 
-        \draw[->] (technical) -- (com); 
+        % \node[feature] (ip) at (5.0,0) {Hinweis\\MIT\\GEHÄUSE}; 
+        % \node[feature] (com) at (7.5,0) {Makro\\M1\_F1\_V1};
+        % \draw[->] (technical) -- (ip); 
+        % \draw[->] (technical) -- (com); 
         % Makro
         \draw[ decorate, decoration={brace,mirror,amplitude=10pt}, thick ] (-8.25,-0.8) -- (8.25,-0.8) node[midway,yshift=-1cm] { \fbox{\strut Zugeordnetes Motor-Makro} };
     \end{tikzpicture} 
@@ -137,20 +137,21 @@ Die Abbildung \ref{fig:ema_motor_macro} gibt die Struktur eines Motor-Makros im 
 \subsection{Artikel-Makro-Zuordnungen}
 \label{sec:artikel_macro_zuordnungen}
 
-Die Zuordnung von Artikel zu Makro erfolgt durch die Referenzierung des Makros über die technische Informationen \texttt{P\_ARTICLE\_MACRO}.
-Diese Zuordnung kann als n zu 1 Beziehung betrachtet werden, da mehrere Artikel auf dasselbe Makro verweisen können.
+Die Zuordnung von Artikel zu Makro erfolgt durch die Referenzierung des Makros über die \textit{technische Artikeleigenschaft} \texttt{P\_ARTICLE\_MACRO}.
+Diese Zuordnung kann als n zu 1 Beziehung betrachtet werden, da mehrere Artikel auf dasselbe Makro verweisen können. Mehrer Artikel welche im Schaltplan dasselbe Makro repräsentieren, werden im folgenden als \textit{Artikelgruppe} bezeichnet.
+Beispielsweise können einem Makro eines Motors mehrere Artikel unterschiedlicher Hersteller zugeordnet werden.
 
 Bildlich kann dies durch folgende Abbildung \ref{fig:artikel_macro_n_zu_1} dargestellt werden: 
 
 \begin{figure}[H] 
     \centering 
     \begin{tikzpicture}[ >=stealth, font=\small, 
-        article/.style={ draw, rounded corners, fill=blue!10, minimum width=4cm, minimum height=0.9cm, align=center }, 
+        article/.style={ draw, rounded corners, fill=blue!10, minimum width=3.2cm, minimum height=1.2cm, align=center },
         macro/.style={ draw, rounded corners, fill=orange!15, minimum width=5cm, minimum height=1.1cm, align=center } ] 
         % Artikel 
-        \node[article] (a1) at (0, 2.5) {Motor A\\P\_ARTICLE\_MACRO = M1\_F1\_V1}; 
-        \node[article] (a2) at (0, 0) {Motor B\\P\_ARTICLE\_MACRO = M1\_F1\_V1}; 
-        \node[article] (a3) at (0,-2.5) {Motor C\\P\_ARTICLE\_MACRO = M1\_F1\_V1}; 
+        \node[article] (a1) at (0, 2.5) { Motor Siemens\\ P\_ARTICLE\_MACRO =\\ M1\_F1\_V1 }; 
+        \node[article] (a2) at (0, 0) { Motor Bosch\\ P\_ARTICLE\_MACRO =\\ M1\_F1\_V1 }; 
+        \node[article] (a3) at (0,-2.5) { Motor SEW\\ P\_ARTICLE\_MACRO =\\ M1\_F1\_V1 }; 
         % Makro 
         \node[macro] (m1) at (8,0) {Motor-Makro\\Kennung M1\_F1\_V1}; 
         % Verbindungen 
@@ -160,6 +161,8 @@ Bildlich kann dies durch folgende Abbildung \ref{fig:artikel_macro_n_zu_1} darge
         % Kardinalitäten 
         \node[font=\bfseries] at (3.3,1.25) {$n$}; 
         \node[font=\bfseries] at (6.5,1.25) {$1$}; 
+        % Artikelgruppe 
+        \draw[ decorate, decoration={brace,mirror,amplitude=8pt}, thick ] (-2.2,3.2) -- (-2.2,-3.2) node[midway,xshift=-2.0cm] { \begin{tabular}{c} \textbf{Artikelgruppe}\\ gleiches\\ Makro \end{tabular} };
     \end{tikzpicture} 
     \caption{Beispiel einer n:1-Beziehung zwischen Artikeln und Makros. Mehrere Artikel verweisen über die Eigenschaft \texttt{P\_ARTICLE\_MACRO} auf dasselbe Makro.} 
     \label{fig:artikel_macro_n_zu_1} 
@@ -170,22 +173,23 @@ Bildlich kann dies durch folgende Abbildung \ref{fig:artikel_macro_n_zu_1} darge
 \label{sec:datenaufbereitung}
 
 Die vorliegende Struktur der Daten im XML-Format hat den Vorteil, dass Informationen nicht manuell ausgelesen und weiterverarbeitet werden müssen.
-Dadurch kann die Vorbereitung der Daten automatisiert erfolgen, so dass eine nachvollziehbare und reproduzierbare Datenaufbereitung gewährleistet werden kann.
-Zudem unterstützt diese Art der Datenaufbereitung die Vision aus Kapitel \ref{sec:vision}, ein automatisiertes Empfehlungssystem zu entwickeln. 
+Die Vorbereitung der Daten kann somit automatisiert erfolgen, sodass eine nachvollziehbare und reproduzierbare Vorbereitung der Daten gewährleistet werden kann.
+Diese Vorbereitung der Daten wird im weiteren Verlauf als \textit{Datenaufbereitung} bezeichnet. 
 
 Die in Kapitel \ref{sec:modellansätze} beschriebenen Modellansätze lernen statistische Zusammenhänge zwischen den Eingabedaten (Artikel) und den Ausgabedaten (Makros).
 Enthalten diese Daten fehlerhafte, unvollständige oder widersprüchliche Informationen, 
 werden diese vom Modell während des Lernprozesses übernommen und können die Qualität des Modells negativ beeinflussen \cite{emmanuel2021missing,hastie2009elements}. 
-Das Ziel der Datenaufbereitung besteht daher darin, die technische Qualität der Datenbasis zu erhöhen und gleichzeitig Störeinflüsse zu reduzieren, um eine zuverlässige Grundlage für das Training der Modelle zu schaffen.
+Das Ziel der \textit{Datenaufbereitung} besteht daher darin, die Qualität der Datenbasis zu erhöhen und gleichzeitig Störeinflüsse zu reduzieren, um eine zuverlässige Grundlage für den Lernprozess eines Modells zu schaffen.
 
 \subsection{Entfernung unvollständiger Artikel- und Makrodaten}
 \label{sec:entfernen_unvollständiger_artikel_und_makrodaten}
 
 In diesem Schritt werden alle Artikel und Makros entfernt, die unvollständige Informationen enthalten. 
-Fehlende \textit{technischen Eigenschaften} können zu verzerrten Analysen und einer Verschlechterung der Modellleistung führen und müssen daher bereits während der Datenvorbereitung behandelt werden \cite{emmanuel2021missing}.
-Dies betrifft fehlende technische Merkmale von Artikeln wie Spannung, Leistung oder Strom sowie fehlende Artikel-Makro-Zuordnungen und fehlerhafte Makroberschreibungen.
+Fehlende \textit{technischen Artikel- und Makroeigenschaften} sind Informationslücken, welche die Vollständigkeit der Daten beeinträchtigen. Dies kann zu einer Verschlechterung der Modellleistung führen und müssen daher bereits während der \textit{Datenaufbereitung} behandelt werden \cite{emmanuel2021missing}.
+Angenommen, ein unvollständiger Motor-Artikel enthält keine Angaben zur Spannung, dann wird bei einem späteren Lernprozess diese Informationslücke vom Modell übernommen. Wenn dann eine Anfrage an das Modell gestellt wird, welche diesem Motor-Artikel entspricht, kann das Modell diesen Artikel nicht korrekt zuordnen, 
+da die notwendigen Informationen zum erkennen dieses Artikels fehlen.
 
-Abbildung \ref{fig:unvollstaendige_daten} zeigt die Unterscheidung zwischen vollständigen und unvollständigen Artikeldaten:
+Abbildung \ref{fig:unvollstaendige_daten} verdeutlicht die Unterscheidung zwischen vollständigen und unvollständigen Artikeldaten:
 
 \begin{figure}[H] 
     \centering 
@@ -196,40 +200,39 @@ Abbildung \ref{fig:unvollstaendige_daten} zeigt die Unterscheidung zwischen voll
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Überschrift %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[font=\bfseries\large] at (0,5) {Vollständige und unvollständige Trainingsdaten}; 
+        \node[font=\bfseries\large] at (0,5) {Vollständige und unvollständige Artikel- und Makrodaten}; 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Gültiger Artikel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
         \node[valid] (a1) at (-5,2) { Hersteller: SEW\\ Spannung: 400 V\\ Leistung: 4000 W\\ P\_ARTICLE\_MACRO: M1\_F1\_V1 }; 
-        \node[macro] (m1) at (5,2) {Motor-Makro\\M1\_F1\_V1}; \draw[->,thick] (a1.east) -- (m1.west); \node[text=green!50!black] at (0,3.2) {\textbf{Verwendbar für Training}}; 
+        \node[macro] (m1) at (5,2) {Motor-Makro\\M1\_F1\_V1}; \draw[->,thick] (a1.east) -- (m1.west); \node[text=green!50!black] at (0,3.2) {\textbf{Verwendbar für den Lernprozess}}; 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ungültiger Artikel 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
         \node[invalid] (a2) at (-5,-1) { Hersteller: SEW\\ Spannung: ---\\ Leistung: 4000 W\\ P\_ARTICLE\_MACRO: M1\_F1\_V1 }; 
         \node[macro] (m2) at (5,-1) {Motor-Makro\\M1\_F1\_V1}; 
         \draw[dashed,red,thick,->] (a2.east) -- (m2.west); 
-        \node[text=red] at (0,-2.4) {Fehlendes technisches Merkmal}; 
+        \node[text=red] at (0,-2.4) {Fehlende Spannung}; 
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ungültiger Artikel 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \node[invalid] (a3) at (-5,-4) { Hersteller: SEW\\ Spannung: 400 V\\ Leistung: 4000 W\\ P\_ARTICLE\_MACRO: --- }; 
-        \node[macro] (m3) at (5,-4) {Kein Zielmakro}; 
+        \node[macro] (m3) at (5,-4) {Kein Makro}; 
         \draw[dashed,red,thick,->] (a3.east) -- (m3.west); 
         \node[text=red] at (0,-5.4) {Fehlende Artikel-Makro-Zuordnung}; 
     \end{tikzpicture} 
-    \caption{Beispiel für vollständige und unvollständige Artikeldaten. Fehlende technische Merkmale oder fehlende Artikel-Makro-Zuordnungen verhindern eine zuverlässige Verwendung der Datensätze im Training und führen daher zu deren Entfernung.} 
+    \caption{Beispiel für vollständige und unvollständige Artikel- und Makrodaten. Fehlende \textit{technischen Artikeleigenschaften} sorgen für Informationslücken im späteren Lernprozess und werden daher aus den Artikel- und Makrodaten entfernt.} 
     \label{fig:unvollstaendige_daten} 
 \end{figure}
 
 \subsection{Entfernung redundanter Artikel- und Makrodaten}
 \label{sec:entfernung_redundanter_artikel_und_makrodaten}
 
-Hierbei werden Artikel und Makros identifiziert, die mehrfach identische \textit{technischen Eigenschaften} aufweisen. 
-Mehrfach identische \textit{technischen Eigenschaften} eines Artikels führen dazu, dass diese gegenüber anderen Artikeln welche eine \textit{technischen Eigenschaft} in einzelner Ausführung aufweisen, 
-übergewichtet werden. \cite{hastie2009elements,sabzekar2021noiseaware}.
-In einem späteren Lernprozess wird hierdurch das Wissen eines Modells verzerrt. 
-Das Modell erlernt dadurch ein Vorurteil auf übergewichtete \textit{technischen Eigenschaften} eines Artikels, welche bei neuen Anfragen bevorzugt vorhergesagt werden.
+Hierbei werden identische Artikel und Makros identifiziert, welche dieselben \textit{technischen Artikel- und Makroeigenschaften} aufweisen. 
+Identische Artikel und Makros, welche in mehrfacher Ausführung auftreten, führen dazu, dass diese gegenüber anderen Artikeln und Makros, welche in einzelner Ausführung auftreten, 
+übergewichtet werden. In einem späteren Lernprozess wird hierdurch das Wissen eines Modells verzerrt. 
+Das Modell erlernt dadurch ein Vorurteil auf übergewichtete Artikel und Makros, was dazu führt, dass diese bei neuen Anfragen bevorzugt für die Vorhersage verwendet werden \cite{hastie2009elements,sabzekar2021noiseaware}.
 
-Abbildung \ref{fig:redundante_daten} zeigt die Auswirkung der redundanter Artikel- und Makrodaten auf deren Gewichtung:
+Abbildung \ref{fig:redundante_daten} veranschaulicht die Übergewichtung redundanter Motor-Artikel. Nach der Bereinigung werden identische Artikel entfernt, sodass jedes Exemplar nur einmal vorkommt und die Gewichtung ausgeglichen ist.
 
 \begin{figure}[H] 
     \centering 
@@ -261,7 +264,7 @@ Abbildung \ref{fig:redundante_daten} zeigt die Auswirkung der redundanter Artike
         \node[ draw, fill=green!10, rounded corners, text width=4cm, align=center ] at (5,-4.3) { Jeder technische\\ Datensatz wird\\ nur einmal gewertet }; 
         
     \end{tikzpicture} 
-    \caption{Auswirkung redundanter Artikel- und Makrodaten. Mehrfach vorhandene Datensätze erhöhen künstlich die Gewichtung bestimmter technischer Informationen. Durch die Entfernung redundanter Daten wird diese Verzerrung reduziert.} 
+    \caption{Auswirkung redundanter Artikel. Mehrfach vorhandene Daten erhöhen künstlich deren Gewichtung. Durch die Entfernung redundanter Daten wird diese Übergewichtung verhindert.} 
     \label{fig:redundante_daten} 
 \end{figure}
 
@@ -269,9 +272,9 @@ Abbildung \ref{fig:redundante_daten} zeigt die Auswirkung der redundanter Artike
 \subsection{Entfernen nicht nutzbarer Metadaten}
 \label{sec:entfernen_nicht_nutzbarer_metadaten}
 
-Metadaten sind zusätzliche Informationen über Daten, die nicht direkt mit dem Inhalt dieser Daten zusammenhängen. Beispiele hierfür sind Erstellungsdatum, Änderungsdatum oder Autor. 
-Diese Metadaten sind für die Erkennung von Unterschieden zwischen \textit{technischen Eigenschaften} von Artikeln nicht relevant und werden als Rauschen bezeichnet.
-Dieses Rauschen kann als Informationsüberflutung betrachtet werden, was dazu führt, dass ein Modell später Wissen über irrelevante Informationen erlernt und dadurch die Erkennung relevanter \textit{technischer Eigenschaften} erschwert wird \cite{sabzekar2021noiseaware}.
+Metadaten sind Informationen über Daten, die nicht direkt mit dem Inhalt dieser Daten zusammenhängen. Beispiele hierfür sind Erstellungsdatum, Änderungsdatum oder Autor. 
+Diese Metadaten sind für die Erkennung von Unterschieden zwischen \textit{technischen Artikeleigenschaften} nicht relevant und werden als Rauschen bezeichnet.
+Dieses Rauschen kann als Informationsüberflutung betrachtet werden, was dazu führt, dass ein Modell später Wissen über irrelevante Informationen erlernt und dadurch die Erkennung relevanter \textit{technischen Artikeleigenschaften} erschwert wird \cite{sabzekar2021noiseaware}.
 
 Anhand der Abbildung \ref{fig:metadaten_filter} soll verdeutlicht werden, wie sich Metadaten von relevanten \textit{technischen Eigenschaften} unterscheiden:
 
@@ -284,12 +287,12 @@ Anhand der Abbildung \ref{fig:metadaten_filter} soll verdeutlicht werden, wie si
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[font=\bfseries\large] at (0,6.5) {Entfernung nicht nutzbarer Metadaten}; 
+        \node[font=\bfseries\large] at (0,6.5) {Entfernung von nicht relevanten Metadaten}; 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % XML-Artikel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \node[result] (article) at (0,1.5) {XML-Artikel Motor}; 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Relevante Informationen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \node[ font=\bfseries, text=green!50!black, align=center ] at (-4,3.0) {Relevante\\\textit{technische Eigenschaften}}; 
+        \node[ font=\bfseries, text=green!50!black, align=center ] at (-5,3.0) {Relevante\\\textit{technische Artikeleigenschaften}}; 
         \node[relevant] (v) at (-4,5.2) {Spannung\\400 V}; 
         \node[relevant] (i) at (0,5.2) {Strom\\10 A}; 
         \node[relevant] (p) at (4,5.2) {Leistung\\4000 W}; 
@@ -297,7 +300,7 @@ Anhand der Abbildung \ref{fig:metadaten_filter} soll verdeutlicht werden, wie si
         \draw[->] (article.north) -- (i.south); 
         \draw[->] (article.north) -- (p.south); 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Metadaten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \node[ font=\bfseries, text=red!70, align=center ] at (-4,0.0) {Nicht nutzbare\\Metadaten}; 
+        \node[ font=\bfseries, text=red!70, align=center ] at (-5,0.0) {Nicht nutzbare\\Metadaten}; 
         \node[metadata] (author) at (-6,-2.5) {Bearbeiter\\Max Mustermann}; 
         \node[metadata] (date) at (-2,-2.5) {Änderungsdatum\\01.01.2025}; 
         \node[metadata] (project) at (2,-2.5) {Projektname\\Projekt X}; 
@@ -314,7 +317,7 @@ Anhand der Abbildung \ref{fig:metadaten_filter} soll verdeutlicht werden, wie si
         \draw[->] (path) -- (filter);
 
         \end{tikzpicture} 
-        \caption{Entfernung nicht nutzbarer Metadaten. Technisch relevante Merkmale bleiben erhalten, während Metadaten ohne technischen Informationsgehalt entfernt werden.} 
+        \caption{Nicht relevanten Metadaten. \textit{Technische Artikeleigenschaften} bleiben erhalten, während Metadaten ohne relevanten Informationsgehalt entfernt werden.} 
         \label{fig:metadaten_filter} 
         \end{figure}
 
@@ -322,12 +325,12 @@ Anhand der Abbildung \ref{fig:metadaten_filter} soll verdeutlicht werden, wie si
 \subsection{Normaliserung von Einheiten} 
 \label{sec:normaliserung_von_einheiten}
 
-Die \textit{technischen Eigenschaften} der Artikel liegen in unterschiedlichen Einheiten oder Schreibweisen vor.
-Ohne eine einheitliche Darstellung numerischer Merkmale sind \textit{technischen Eigenschaften} ohne zusätzlichen Kontext über die einzelnen Schreibweisen nicht direkt vergleichbar. 
-Die Vereinheitlichung von \textit{technischen Eigenschaften} reduziert Variationen in den Artikeldaten und bildet die Basis für eine belastbare Bewertung des Modells \cite{hastie2009elements}. 
-Angenommen ein Artikel gibt die Spannung einmal als 24 V, einmal als 24VDC und einmal als 0,024 kV an, so handelt es sich um denselben Wert, der jedoch unterschiedlich dargestellt wird.
-Wird ein Modell das 24 V ausgibt, mit 24VDC oder 0,024 kV bewertet, wird fälschlicherweise ein Unterschied angenommen, obwohl es sich um denselben Wert handelt.
-Deswegen werden die \textit{technischen Eigenschaften} aus den Artikeln auf gemeinsame Basiseinheiten normiert.
+Die \textit{technischen Artikeleigenschaften} liegen in unterschiedlichen Einheiten oder Schreibweisen vor.
+Ohne zusätzliches Wissen über die einzelnen Schreibweisen der \textit{technischen Artikeleigenschaften} sind diese nicht direkt vergleichbar. 
+Die Vereinheitlichung der \textit{technischen Artikeleigenschaften} reduziert Variationen in den Artikeldaten und bildet die Basis für eine belastbare Bewertung des Modells \cite{hastie2009elements}. 
+Angenommen in mehreren Artikeln steht die Spannung einmal als 24 V, einmal als 24VDC und einmal als 0,024 kV, so handelt es sich um denselben Wert, der jedoch unterschiedlich dargestellt wird.
+Wird ein Modell das eine Spannung von 24 V ausgibt, mit einer Spannung von 24VDC oder 0,024 kV bewertet, wird fälschlicherweise ein Unterschied angenommen, obwohl es sich um dieselbe Spannung handelt.
+Deswegen werden die \textit{technischen Artikeleigenschaften} aus den Artikeln auf gemeinsame Basiseinheiten normiert.
 
 Folgende Abbildung \ref{fig:einheitennormalisierung} soll dazu diesen Sachverhalt zu veranschaulichen:
 
@@ -360,22 +363,23 @@ Folgende Abbildung \ref{fig:einheitennormalisierung} soll dazu diesen Sachverhal
         \node[norm] (result) at (6,0.5) { 24 V }; 
         \draw[->,thick] (normprocess.east) -- (result.west); 
     \end{tikzpicture} 
-    \caption{Beispiel für die Normalisierung technischer Einheiten. Unterschiedliche Schreibweisen derselben Spannung werden in eine einheitliche Darstellung überführt, wodurch die Vergleichbarkeit der Daten verbessert wird.} 
+    \caption{Beispiel für die Normalisierung technischer Einheiten. Unterschiedliche Schreibweisen derselben Spannung werden in eine einheitliche Darstellung überführt, wodurch die Vergleichbarkeit dieser Einheiten verbessert wird.} 
     \label{fig:einheitennormalisierung} 
 \end{figure}
 
 \subsection{Erstellung von Klassifikationen}
 \label{sec:erstellung_von_klassifikationen}
 
-Die Vorhandenen \textit{technischen Eigenschaften} der Artikeldaten liegen in unterschiedlichen Wertebereichen vor. 
-Dieses Wissen über die Wertebereiche ermöglicht es, die \textit{technischen Eigenschaften} zu Klassifikationen zusammenzufassen.
-Eine Klassifikation fasst kontinuierliche Wertebereiche zu einzelnen Kategorien zusammen \cite{fayyad1993discretization}.
-Diese Klassifikationen stellen ein zusätzliches Wissen in den \textit{technischen Eigenschaften} eines Artikels dar, welches für die Unterscheidung zwischen mehreren Artikeln nützlich ist.
-Als Beispiel kann die Spannung eines Artikels in die Kategorien \textit{niedrige Spannung}, \textit{mittlere Spannung} und \textit{hohe Spannung} eingeteilt werden.
-Diese Kategorien erzeugen die zusätzliche Information, dass \textit{technische Eigenschaften} eines Artikels trotz einer Streuung von Werten um einen Mittelwert in eine bestimmte Kategorie fallen.
-Ein späteres Modell kann diese Information nutzen, um Makros zu empfehlen, die nicht exakt einem konkreten Wert entsprechen.
-Zum Beispiel kann ein Makro für eine Spannung von 24 V empfohlen werden, wenn die Spannung des Artikels aus der Anfrage nur 22 V beträgt.
-Diese Information wird dann als zusätzliche \textit{technische Eigenschaft} in einem Artikel gespeichert.
+Die Vorhandenen \textit{technischen Artikeleigenschaften} liegen in unterschiedlichen Wertebereichen vor. 
+Dieses Wissen über die Wertebereiche ermöglicht es, die \textit{technischen Artikeleigenschaften} zu Klassifikationen zusammenzufassen.
+Eine Klassifikation fasst kontinuierliche Wertebereiche wie 22 Volt - 26 Volt zu einzelnen Kategorien zusammen \cite{fayyad1993discretization}.
+Diese Klassifikationen stellen ein zusätzliches Wissen in den \textit{technischen Artikeleigenschaften} dar, welches für die Vergleichbarkeit mehrerer Artikel nützlich ist.
+Um dies zu Verdeutlichen folgendes konkretes Beispiel: Die Spannung eines Artikels wird in die Kategorien \textit{niedrige Spannung}, \textit{mittlere Spannung} und \textit{hohe Spannung} eingeteilt werden.
+Dabei werden Spannungen bis 100 V der Kategorie \textit{niedrige Spannung}, Spannungen von 101 V bis 1000 V der Kategorie \textit{mittlere Spannung} und Spannungen über 1000 V der Kategorie \textit{hohe Spannung} zugeordnet.
+Diese Kategorien erzeugen die zusätzliche Information, dass \textit{technische Artikeleigenschaften} eines Artikels trotz einer Streuung von Werten um einen Mittelwert in eine bestimmte Kategorie fallen.
+Ein späteres Modell kann diese Information nutzen, um Makros zu empfehlen, deren Artikel nicht exakt den gleichen Wert haben wie der Artikel aus der Anfrage. 
+Somit kann ein Makro empfohlen werden, dass einen Artikel mit 48 V als Grundlage enthält, obwohl der Artikel aus der Anfrage 50 V aufweist. 
+Die entstehenden Kategorien werden als neue \textit{technische Artikeleigenschaft} in den Artikeln gespeichert.
 
 Die folgende Abbildung \ref{fig:spannungsklassifikation} zeigt, wie die Klassifikation von Spannungen dargestellt wird: 
 
@@ -383,52 +387,58 @@ Die folgende Abbildung \ref{fig:spannungsklassifikation} zeigt, wie die Klassifi
     \centering 
     \begin{tikzpicture}[ >=stealth, font=\small, 
         value/.style={ draw, rounded corners, fill=blue!10, minimum width=2.5cm, minimum height=0.7cm, align=center }, 
-        class/.style={ draw, rounded corners, fill=green!10, minimum width=3.5cm, minimum height=1cm, align=center }, 
-        process/.style={ draw, rounded corners, fill=yellow!15, minimum width=3.5cm, minimum height=1cm, align=center } ] 
+        class/.style={ draw, rounded corners, fill=green!10, minimum width=4.5cm, minimum height=1.0cm, align=center }, 
+        process/.style={ draw, rounded corners, fill=yellow!15, minimum width=3.5cm, minimum height=1cm, align=center },
+        macro/.style={ draw, rounded corners, fill=orange!15, minimum width=4.5cm, minimum height=1cm, align=center } ] 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[font=\bfseries\large] at (0,7) {Erstellung von Klassifikationen}; 
+        \node[font=\bfseries\large] at (0,9) {Klassifikation technischer Spannungen}; 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Low Voltage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Niedrige Spannung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[value] (lv1) at (-6,4.5) {22 V}; 
-        \node[value] (lv2) at (-6,3.5) {24 V}; 
-        \node[value] (lv3) at (-6,2.5) {26 V}; 
-        \node[process] (c1) at (0,3.5) {Klassifikation}; 
-        \node[class] (low) at (6,3.5) {Niedrige Spannung}; 
+        \node[value] (lv1) at (-8,6) {48 V}; 
+        \node[value] (lv2) at (-8,5) {50 V}; 
+        \node[value] (lv3) at (-8,4) {52 V}; 
+        \node[process] (c1) at (-2,5) {Klassifikation}; 
+        \node[class] (low) at (5,5) { Kategorie:\\ Niedrige Spannung\\ (0 V - 100 V) }; 
         
-        \draw[->] (lv1.east) -- (c1.west); 
-        \draw[->] (lv2.east) -- (c1.west); 
-        \draw[->] (lv3.east) -- (c1.west); 
-        \draw[->,thick] (c1.east) -- (low.west); 
+        \draw[->] (lv1) -- (c1); 
+        \draw[->] (lv2) -- (c1); 
+        \draw[->] (lv3) -- (c1); 
+        \draw[->,thick] (c1) -- (low); 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Medium Voltage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Mittlere Spannung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[value] (mv1) at (-6,0.5) {380 V}; 
-        \node[value] (mv2) at (-6,-0.5) {400 V}; 
-        \node[value] (mv3) at (-6,-1.5) {420 V}; 
-        \node[process] (c2) at (0,-0.5) {Klassifikation}; 
-        \node[class] (medium) at (6,-0.5) {Mittlere Spannung}; 
-        \draw[->] (mv1.east) -- (c2.west); 
-        \draw[->] (mv2.east) -- (c2.west); 
-        \draw[->] (mv3.east) -- (c2.west); 
-        \draw[->,thick] (c2.east) -- (medium.west); 
+        \node[value] (mv1) at (-8,1.5) {380 V}; 
+        \node[value] (mv2) at (-8,0.5) {400 V}; 
+        \node[value] (mv3) at (-8,-0.5) {420 V}; 
+        \node[process] (c2) at (-2,0.5) {Klassifikation}; 
+        \node[class] (medium) at (5,0.5) { Kategorie:\\ Mittlere Spannung\\ (101 V - 1000 V) }; 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % High Voltage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \node[value] (hv1) at (-6,-3.5) {9 kV}; 
-        \node[value] (hv2) at (-6,-4.5) {10 kV}; 
-        \node[value] (hv3) at (-6,-5.5) {11 kV}; 
-        \node[process] (c3) at (0,-4.5) {Klassifikation}; 
-        \node[class] (high) at (6,-4.5) {Hohe Spannung}; 
-        \draw[->] (hv1.east) -- (c3.west); 
-        \draw[->] (hv2.east) -- (c3.west); 
-        \draw[->] (hv3.east) -- (c3.west); 
-        \draw[->,thick] (c3.east) -- (high.west); 
-        \end{tikzpicture} 
-        \caption{Beispiel für die Klassifikation technischer Spannungswerte. Mehrere technisch ähnliche Spannungswerte werden durch eine Klassifizierung zu gemeinsamen Spannungsklassen zugeordnet.} 
-        \label{fig:spannungsklassifikation} 
-        \end{figure}
+        \draw[->] (mv1) -- (c2); 
+        \draw[->] (mv2) -- (c2); 
+        \draw[->] (mv3) -- (c2); 
+        \draw[->,thick] (c2) -- (medium); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Hohe Spannung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[value] (hv1) at (-8,-3) {9 kV}; 
+        \node[value] (hv2) at (-8,-4) {10 kV}; 
+        \node[value] (hv3) at (-8,-5) {11 kV}; 
+        \node[process] (c3) at (-2,-4) {Klassifikation}; 
+        \node[class] (high) at (5,-4) { Kategorie\\ Hohe Spannung\\ (> 1000 V) }; 
+        
+        \draw[->] (hv1) -- (c3); 
+        \draw[->] (hv2) -- (c3); 
+        \draw[->] (hv3) -- (c3); 
+        \draw[->,thick] (c3) -- (high); 
+        
+    \end{tikzpicture}
+    \caption{Klassifikation technischer Spannungen. Kontinuierliche Spannungswerte werden zu Kategorien zusammengefasst. 
+    Die zusätzliche Information durch die Kategorisierung verbessert die Vergleichbarkeit von Artikeln.} 
+    \label{fig:spannungsklassifikation} 
+\end{figure}
 
 
 \subsection{Ergebnis der Datenaufbereitung}
@@ -436,9 +446,10 @@ Die folgende Abbildung \ref{fig:spannungsklassifikation} zeigt, wie die Klassifi
 
 Den Ausgangspunkt für die Datenaufbereitung bildet die vorhandene EPLAN-Datenbank mit insgesamt 168.788 Artikeln. Über alle Artikel hinweg sind 268 unterschiedliche Artikeleigenschaften vorhanden. 
 Nach dem Entfernen von Artikeln ohne Makrozuordnung (siehe Abschnitt \ref{sec:entfernen_unvollständiger_artikel_und_makrodaten}) verbleiben 31.572 Artikel, die als Grundlage für die weitere Datenaufbereitung dienen.
-Im nächsten Schritt der Datenaufbereitung wurden Artikel fehlenden technischer Merkmalen wie Spannung, Leistung oder Strom entfernt, was zu einem Artikelbestand von 1.562 Artikeln führte (siehe Abschnitt \ref{sec:entfernen_unvollständiger_artikel_und_makrodaten}). 
-Die restliche Aufbereitung der Daten durch Entfernen von Duplikaten und nicht nutzbarer Metadaten sowie die Normaliserung von Einheiten und Erstellung von Klassifikationen erfolgte anschließend (vergleiche Abschnitte \ref{sec:entfernung_redundanter_artikel_und_makrodaten}, \ref{sec:entfernen_nicht_nutzbarer_metadaten}, \ref{sec:normaliserung_von_einheiten} und \ref{sec:erstellung_von_klassifikationen}).
-Daurch ergab sich der folgende aufbereitete Artikelbestand, welcher als Grundlage für das Empfehlungssystem dient:
+Im nächsten Schritt der Datenaufbereitung wurden Artikel mit fehlenden \textit{technischen Artikeleigenschaften} entfernt, was zu einem Artikelbestand von 1.562 Artikeln führte (siehe Abschnitt \ref{sec:entfernen_unvollständiger_artikel_und_makrodaten}). 
+Die weitere Aufbereitung der Daten durch Entfernen von Duplikaten und nicht nutzbarer Metadaten erfolgte anschließend (vergleiche Abschnitte \ref{sec:entfernung_redundanter_artikel_und_makrodaten}, \ref{sec:entfernen_nicht_nutzbarer_metadaten})
+Abschließend erfolgte die Normalisierung von Einheiten und die Erstellung von Klassifikationen (vergleiche Abschnitte \ref{sec:normaliserung_von_einheiten} und \ref{sec:erstellung_von_klassifikationen}).
+Dadurch ergab sich der folgende aufbereitete Artikelbestand, welcher als Grundlage für das spätere Modell dient:
  
 \begin{itemize} 
     \item 1.559 Artikel, 
@@ -455,19 +466,19 @@ Nach der Bereinigung wurde zusätzlich die Verteilung der Artikel-Makro-Zuordnun
 \end{itemize} 
 
 Die Analyse ergibt, dass über die Hälfte der Makros nur eine geringe Anzahl an zugeordneten Artikeln besitzt. 
-Dies stellt eine Herausforderung für die den Lernprozess eines Modells dar und muss daher in Abschnitt \ref{sec:splitregeln} berücksichtigt werden.
+Dies stellt eine Herausforderung für die den Lernprozess eines Modells dar und muss daher im weiteren Verlauf berücksichtigt werden.
 
 \section{Überführung in ein Trainingsformat} 
 
 Modelle wie sie in Kapitel \ref{sec:modellansätze} beschrieben werden, können technische Informationen nicht direkt aus XML-Dateien verarbeiten. 
 Um diese Informationen nutzbar zu machen, müssen sie in Embeddings (vergleiche Kapitel \ref{sec:vom_vektor_zum_embedding}) überführt werden.
-Deswegen werden die \textit{technischen Eigenschaften} aus Artikel- und Makrodaten in numerische Vektoren überführt, die als Eingabe für ein Modell dienen.
+Deswegen werden die \textit{technischen Artikel- und Makroeigenschaften} in numerische Vektoren überführt, die als Eingabe für ein Modell dienen.
 
 
 \subsection{Artikelvektor} 
 
-Der Artikelvektor listet die \textit{technischen Eigenschaften} eines einzelnen Artikels auf. 
-Dabei wurden unter anderem folgende Merkmale aus den vorhandenen Artikeldaten unter Beachtung der vorherigen Datenaufbereitung (Vergleiche Kapitel \ref{sec:datenaufbereitung}) extrahiert: 
+Der Artikelvektor stellt die \textit{technischen Artikeleigenschaften} in numerischer Form dar und fasst sie zu einem Vektor zusammen. 
+Dabei wurden unter anderem folgende \textit{technische Artikeleigenschaften} aus den vorhandenen Artikeldaten unter Beachtung der vorherigen Datenaufbereitung (Vergleiche Kapitel \ref{sec:datenaufbereitung}) extrahiert: 
  
 \begin{itemize} 
     \item Hersteller, 
@@ -476,10 +487,10 @@ Dabei wurden unter anderem folgende Merkmale aus den vorhandenen Artikeldaten un
     \item Ströme, 
     \item Leistungen, 
     \item Frequenzen, 
-    \item IP-Schutzklassen 
+    \item Makrobezeichnung
 \end{itemize} 
 
-Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Artikelvektors anhand des Motorbeispiels:
+Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Artikelvektors anhand des Motorbeispiels, die nummerischen Werte des Artikelvektors werden dabei zur leichteren Verständlichkeit exemplarisch als Text dargestellt:
 
 \begin{figure}[H] 
     \centering 
@@ -503,7 +514,7 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
         \node[feature] (current) at (-1,-1.6) {Strom\\10 A}; 
         \node[feature] (power) at (-1,-2.8) {Leistung\\4000 W}; 
         \node[feature] (frequency) at (-1,-4) {Frequenz\\50 Hz};
-        \node[feature] (ip) at (-1,-5.2) {IP-Schutzklasse\\IP54};
+        \node[feature] (macro) at (-1,-5.2) {Makrobezeichnung\\M1\_F1\_V1};
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Quelle -> Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \draw[->] (article.east) -- (manufacturer.west); 
@@ -512,9 +523,9 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
         \draw[->] (article.east) -- (current.west); 
         \draw[->] (article.east) -- (power.west); 
         \draw[->] (article.east) -- (frequency.west); 
-        \draw[->] (article.east) -- (ip.west); 
+        \draw[->] (article.east) -- (macro.west); 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikelvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, align=center ] (vector) at (5,-1.6) { \textbf{Artikelvektor\\} \vspace{2mm} $ \left[ \begin{array}{c} SEW\\ Motor\\ 400\,V\\ 10\,A\\ 4000\,W\\ 50\,Hz\\ IP54 \end{array} \right] $ }; 
+        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, align=center ] (vector) at (5,-1.6) { \textbf{Artikelvektor\\} \vspace{2mm} $ \left[ \begin{array}{c} SEW\\ Motor\\ 400\,V\\ 10\,A\\ 4000\,W\\ 50\,Hz\\ M1\_F1\_V1 \end{array} \right] $ }; 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \draw[->] (manufacturer.east) -- (vector.west); 
         \draw[->] (type.east) -- (vector.west); 
@@ -522,178 +533,190 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
         \draw[->] (current.east) -- (vector.west); 
         \draw[->] (power.east) -- (vector.west);
         \draw[->] (frequency.east) -- (vector.west);
-        \draw[->] (ip.east) -- (vector.west);
+        \draw[->] (macro.east) -- (vector.west);
     \end{tikzpicture} 
-    \caption{Erzeugung eines Artikelvektors aus \textit{technischen Eigenschaften} eines Motorartikels. Die extrahierten Merkmale werden zu einer gemeinsamen technischen Repräsentation zusammengeführt und dienen als Eingabe für das Empfehlungssystem.} 
+    \caption{Erzeugung eines Artikelvektors aus \textit{technischen Artikeleigenschaften} eines Motorartikels. Die extrahierten Merkmale werden zu einer gemeinsamen technischen Repräsentation zusammengeführt und dienen als Eingabe für das Empfehlungssystem.} 
     \label{fig:artikelvektor} 
 \end{figure}
         
-\subsection{Makrovektor} 
+% \subsection{Makrovektor} 
 
-Der Makrovektor beschreibt die Struktur und den Aufbau eines Makros. Aus den vorhandenen Makrodaten werden analog zum Artikelvektor folgende Merkmale extrahiert und in einem gemeinsamen Vektor zusammengeführt: 
+% Der Makrovektor stellt analog zum Artikelvektor folgende \textit{technische Makroeigenschaften} in numerischer Form in einem gemeinsamen Vektor zusammengeführt dar: 
 
-\begin{itemize} 
-    \item Anschlüsse, 
-    \item Makrokategorien, 
-    \item Familien, 
-    \item Varianten, 
+% \begin{itemize} 
+%     \item Anschlüsse, 
+%     \item Makrokategorien, 
+%     \item Familien, 
+%     \item Varianten, 
 
-\end{itemize} 
+% \end{itemize} 
 
-Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} den Aufbau des Makrovektor:
+% Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} den Aufbau des Makrovektors, die numerischen Werte des Makrovektors werden auch hier zur leichteren Verständlichkeit exemplarisch als Text dargestellt:
 
-\begin{figure}[H] 
-    \centering 
-    \begin{tikzpicture}[ >=stealth, font=\small, 
-        source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
-        feature/.style={ draw, rounded corners, fill=green!10, minimum width=3cm, minimum height=0.8cm, align=center }, 
-        vector/.style={ draw, rounded corners, fill=orange!15, minimum width=4cm, minimum height=3.5cm, align=left } ] 
+% \begin{figure}[H] 
+%     \centering 
+%     \begin{tikzpicture}[ >=stealth, font=\small, 
+%         source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
+%         feature/.style={ draw, rounded corners, fill=green!10, minimum width=3cm, minimum height=0.8cm, align=center }, 
+%         vector/.style={ draw, rounded corners, fill=orange!15, minimum width=4cm, minimum height=3.5cm, align=left } ] 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[font=\bfseries\large] at (-1,5) {Erstellung des Makrovektors}; 
+%         \node[font=\bfseries\large] at (-1,5) {Erstellung des Makrovektors}; 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[source] (macro) at (-7,0) {.ema-Makro\\Motor}; 
+%         \node[source] (macro) at (-7,0) {.ema-Makro\\Motor}; 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[feature] (terminal) at (-1,2) {Anschlüsse\\U1, V1, W1}; 
-        \node[feature] (category) at (-1,0.8) {Kategorie\\Motor}; 
-        \node[feature] (family) at (-1,-0.4) {Familie\\F1}; 
-        \node[feature] (variant) at (-1,-1.6) {Variante\\Mit Kühlung}; 
+%         \node[feature] (terminal) at (-1,2) {Anschlüsse\\U1, V1, W1}; 
+%         \node[feature] (category) at (-1,0.8) {Kategorie\\Motor}; 
+%         \node[feature] (family) at (-1,-0.4) {Familie\\F1}; 
+%         \node[feature] (variant) at (-1,-1.6) {Variante\\Mit Kühlung}; 
     
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Quelle -> Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Quelle -> Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \draw[->] (macro.east) -- (terminal.west); \draw[->] (macro.east) -- (category.west); 
-        \draw[->] (macro.east) -- (family.west); \draw[->] (macro.east) -- (variant.west); 
+%         \draw[->] (macro.east) -- (terminal.west); \draw[->] (macro.east) -- (category.west); 
+%         \draw[->] (macro.east) -- (family.west); \draw[->] (macro.east) -- (variant.west); 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, align=center ] (vector) at (5,0) { \textbf{Makrovektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ \text{Mit Kühlung} \end{array} \!\right]$ };
+%         \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, align=center ] (vector) at (5,0) { \textbf{Makrovektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ \text{Mit Kühlung} \end{array} \!\right]$ };
 
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \draw[->] (terminal.east) -- (vector.west); 
-        \draw[->] (category.east) -- (vector.west); 
-        \draw[->] (family.east) -- (vector.west); 
-        \draw[->] (variant.east) -- (vector.west); 
-        \end{tikzpicture} 
-        \caption{Erstellung des Makrovektor. Aus dem .ema-Makro werden strukturelle Informationen extrahiert und in einen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.} 
-        \label{fig:makrovektor} 
-        \end{figure}
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         \draw[->] (terminal.east) -- (vector.west); 
+%         \draw[->] (category.east) -- (vector.west); 
+%         \draw[->] (family.east) -- (vector.west); 
+%         \draw[->] (variant.east) -- (vector.west); 
+%         \end{tikzpicture} 
+%         \caption{Erstellung des Makrovektor. Aus dem .ema-Makro werden strukturelle Informationen extrahiert und in einen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.} 
+%         \label{fig:makrovektor} 
+%         \end{figure}
 
-\subsection{Lexikalvektor} 
+% \subsection{Lexikalvektor} 
 
-Nicht alle \textit{technischen Eigenschaften} liegen in Form von konkreten Werten wie zum Beispiel 24 V in den vorhandenen Artikel- und Makrodaten vor. Technische Hinweise in einem Artikel oder Makro liegen in Textform vor. 
-Diese technischen Hinweise stellen aufgrund der Textform eine andere Art von \textit{technischen Eigenschaften} dar als \textit{technischen Eigenschaften} mit konkreten Werten \cite{baltrusaitis2019multimodal}.
-Hierdurch können Informationen genutzt werden, die in Zahlen nicht Abbildbar sind, wie zum Beispiel die wasserdichte Ausführung eines Motors.
-Diese textbasierten \textit{technischen Eigenschaften} stellen somit eine weitere Information dar, welche Gemeinsamkeiten und Unterschiede zwischen Artikeln bestehen.
-Angenommen es liegt eine Anfrage an das Modell mit folgendem Artikel vor: 
+% Nicht alle \textit{technischen Artikel- und Makroeigenschaften} liegen in Form von konkreten Werten wie zum Beispiel 24 V in den vorhandenen Artikel- und Makrodaten vor. Technische Hinweise in einem Artikel oder Makro liegen in Textform vor. 
+% Diese \textit{technischen Hinweise } stellen aufgrund der Textform eine andere Art von \textit{technischen Artikel- und Makroeigenschaften} dar als solche mit konkreten Werten \cite{baltrusaitis2019multimodal}.
+% Hierdurch können Informationen genutzt werden, die in Zahlen nicht abbildbar sind, wie zum Beispiel die wasserdichte Ausführung eines Motors.
+% Diese textbasierten \textit{technischen Artikel- und Makroeigenschaften} stellen somit eine weitere Information dar, welche Gemeinsamkeiten und Unterschiede zwischen Artikeln aufzeigen.
+% Die folgende Abbildung \ref{fig:lexikalische_information_empfehlung} zeigt, welchen Einfluss \textit{technischen Hinweise} auf die Unterscheidung von Artikeln haben: 
 
-\begin{quote}
-Artikel: Elektromotor\\
-Hersteller: Siemens\\
-Spannung: 400 Volt\\
-Strom: 10 Ampere\\
-Leistung: 4000 Watt\\
-Anmerkung: Wasserdichte Ausführung\\
-\end{quote}
-
-Und es gibt in den vorhanden Artikeldaten folgende Artikel: 
-
-Artikel A:
-
-\begin{quote}
-Artikel: Elektromotor\\
-Hersteller: Siemens\\
-Spannung: 400 Volt\\
-Strom: 10 Ampere\\
-Leistung: 4000 Watt\\
-Anmerkung: Wasserdichte Ausführung\\
-Makro: M1\_F1\_V1
-\end{quote}
-
-Artikel B:
-
-\begin{quote}
-Artikel: Elektromotor\\
-Hersteller: Siemens\\
-Spannung: 400 Volt\\
-Strom: 10 Ampere\\
-Leistung: 4000 Watt\\
-Makro: M1\_F1\_V2
-\end{quote}
-
-Dann dient die Anmerkung "Wasserdichte Ausführung" dazu Artikel A gegenüber Artikel B zu bevorzugen und dessen Makro zu empfehlen, 
-da bei Artikel A eine größere Übereinstimmung mit der Anfrage besteht als bei Artikel B.
-
-Aus den vorhandenen Artikel- und Makrodaten lassen sich folgende textbasierten \textit{technischen Eigenschaften} extrahieren: 
-
-\begin{itemize} 
-    \item Typbezeichnungen, 
-    \item Produktserien, 
-    \item technischen Beschreibungen. 
-\end{itemize} 
-
-Abbildung \ref{fig:lexikalvektor} stellt den Aufbau des Lexikalvektors für das Beispiel des Motors dar:
-
-\begin{figure}[H] 
-    \centering 
-    \begin{tikzpicture}[ >=stealth, font=\small, 
-        source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
-        feature/.style={ draw, rounded corners, fill=green!10, minimum width=3.0cm, minimum height=0.8cm, align=center } ] 
+% \begin{figure}[H] 
+%     \centering 
+%     \begin{tikzpicture}[ >=stealth, font=\small, 
+%         query/.style={ draw, rounded corners, fill=blue!15, text width=5.2cm, minimum height=3.8cm, align=left, inner sep=7pt }, 
+%         candidate/.style={ draw, rounded corners, fill=gray!10, text width=4.8cm, minimum height=4.3cm, align=left, inner sep=7pt }, 
+%         match/.style={ draw, rounded corners, fill=green!10, text width=4.4cm, minimum height=1.1cm, align=center, inner sep=5pt }, 
+%         mismatch/.style={ draw, rounded corners, fill=red!10, text width=4.4cm, minimum height=1.1cm, align=center, inner sep=5pt }, 
+%         decision/.style={ draw, rounded corners, fill=yellow!20, text width=5.8cm, minimum height=1.4cm, align=center, inner sep=7pt }, 
+%         result/.style={ draw, rounded corners, fill=green!15, text width=6cm, minimum height=1.5cm, align=center, inner sep=7pt } ] 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% \
         
-        \node[font=\bfseries\large] at (-1,5) {Erstellung des Lexikalvektors}; 
+%         node[font=\bfseries\large] at (0,11) {Einfluss textbasierter Informationen auf die Makroempfehlung}; 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Anfrage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[source] (article) at (-7,1.5) {XML-Artikel\\Motor}; 
-        \node[source] (macro) at (-7,-1.5) {.ema-Makro\\Motor}; 
+%         \node[query] (request) at (0,8.2) { \centering \textbf{Anfrage}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ \textbf{Wasserdichte Ausführung} }; 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalische Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verzweigung der Kandidatensuche %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[feature] (type) at (-1,2.5) {Typbezeichnung\\DRN112M4}; 
-        \node[feature] (series) at (-1,0.5) {Produktserie\\DRN}; 
-        \node[feature] (description) at (-1,-1.5) {Beschreibung\\Wasserdichte Ausführung}; 
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle -> Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         \coordinate (branch) at (0,5.7); \draw[->,thick] (request.south) -- (branch); 
+%         \node[ fill=white, inner sep=3pt, font=\bfseries ] at (0,6.1) {Vergleich mit vorhandenen Artikeln}; 
         
-        \draw[->] (article.east) -- (type.west); 
-        \draw[->] (article.east) -- (series.west); 
-        \draw[->] (macro.east) -- (description.west); 
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikel A und Artikel B %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         \node[candidate] (articleA) at (-4.2,2.8) { \centering \textbf{Artikel A}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ \textbf{Wasserdichte Ausführung}\\[1mm] Makro: M1\_F1\_V1 }; 
+%         \node[candidate] (articleB) at (4.2,2.8) { \centering \textbf{Artikel B}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ keine Angabe\\[1mm] Makro: M1\_F1\_V2 }; 
         
-        \node[ draw, rounded corners, fill=orange!15, text width=5cm, align=center ] (vector) at (5,0.5) { \textbf{Lexikalvektor\\} \vspace{2mm} $\left[ \begin{array}{c} \text{DRN112M4}\\ \text{DRN}\\ \text{Wasserdichte Ausführung} \end{array} \right]$ };
+%         % Klare, symmetrische Verbindungen \draw[->,thick] (branch) -| (articleA.north); \draw[->,thick] (branch) -| (articleB.north); 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Merkmale -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \draw[->] (type.east) -- (vector.west); 
-        \draw[->] (series.east) -- (vector.west); 
-        \draw[->] (description.east) -- (vector.west); 
-        \end{tikzpicture} 
-        \caption{Erstellung des Lexikalvektors. Textuelle technische Informationen aus Artikel- und Makrodaten werden extrahiert und in einem separaten Vektor zusammengeführt. 
-        Der Lexikalvektor ergänzt die strukturierten Informationen des Artikel- und Makrovektors um technische Begriffe und Bezeichnungen.} 
-        \label{fig:lexikalvektor} 
-        \end{figure}
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Bewertung der Kandidaten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[match] (matchA) at (-4.2,-1.3) { \textbf{Hohe Übereinstimmung}\\ Anmerkung vorhanden }; 
+%         \node[mismatch] (matchB) at (4.2,-1.3) { \textbf{Geringere Übereinstimmung}\\ Anmerkung fehlt }; 
+        
+%         \draw[->,thick,green!50!black] (articleA.south) -- (matchA.north); \draw[->,thick,red!70!black] (articleB.south) -- (matchB.north); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Gemeinsame Entscheidung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[decision] (decision) at (0,-4.3) { \textbf{Entscheidender \textit{technischer Hinweis} }\\[1mm] „Wasserdichte Ausführung“ }; \draw[->,thick,green!50!black] (matchA.south) |- (decision.west); \draw[->,thick,red!70!black] (matchB.south) |- (decision.east); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Empfehlung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[result] (recommendation) at (0,-7) { \textbf{Empfehlung: Makro M1\_F1\_V1}\\[1mm] Artikel A besitzt die größere Gesamtübereinstimmung. }; 
+%         \draw[->,very thick,green!50!black] (decision.south) -- (recommendation.north); 
+%     \end{tikzpicture} 
+%     \caption{Einfluss einer textbasierten technischen Information auf die Makroempfehlung. Artikel A und B sind bis auf die Anmerkung „Wasserdichte Ausführung“ identisch. Dadurch wird Artikel A bevorzugt, sodass das zugeordnete Makro M1\_F1\_V1 empfohlen wird. } 
+%     \label{fig:lexikalische_information_empfehlung} 
+% \end{figure}
+% Aus den vorhandenen Artikel- und Makrodaten lassen sich folgende textbasierten \textit{technischen Artikel- und Makroeigenschaften} extrahieren: 
 
-\subsection{Warum Drei Vektoren ?}
+% \begin{itemize} 
+%     \item Typbezeichnungen, 
+%     \item Produktserien, 
+%     \item technischen Beschreibungen. 
+% \end{itemize} 
 
-Die Aufteilung der \textit{technischen Eigenschaften} in drei separate Vektoren hat mehrere Vorteile:
+% Abbildung \ref{fig:lexikalvektor} stellt den Aufbau des Lexikalvektors für das Beispiel des Motors dar:
 
-\begin{itemize}
-    \item Es wird verhindert, dass sich Werte aus den Artikel- und Makrodaten wie Spannung, Strom oder Makrobezeichnungen mit textuellen \textit{technischen Eigenschaften} aus den Hinweis- und Beschreibungsfeldern vermischen. Eine Spannung von 400 V besitzt eine andere Bedeutung als der Hinweis "Wasserdichte Ausführung". Durch die getrennte Speicherung bleiben diese unterschiedlichen Informationsarten für ein späteres Modell unterscheidbar. Dies folgt dem Konzept der multimodaler Datenrepräsentationen wie in \cite{baltrusaitis2019multimodal} und \cite{ebrahimi2024lanistr} beschrieben.
-    \item Die Weiterentwicklung der einzelnen Informationsquellen ist unabhängig voneinander möglich. Neue technische Merkmale können beispielsweise dem Artikelvektor hinzugefügt werden, ohne die Struktur des Makrovektors oder des Lexikalvektors verändern zu müssen. 
-    \item Zusätzlich können die einzelnen Vektoren später unterschiedlich verarbeitet werden. Strukturierte \textit{technische Eigenschaften} des Artikel- und Makrovektors können beispielsweise direkt als numerische Eingaben für Learning-to-Rank-Verfahren verwendet werden, während textuelle \textit{technische Eigenschaften} des Lexikalvektors zusätzlich durch Embedding-Modelle oder Sentence Transformer verarbeitet werden können (siehe Kapitel \ref{sec:modellansätze}).
-\end{itemize}
+% \begin{figure}[H] 
+%     \centering 
+%     \begin{tikzpicture}[ >=stealth, font=\small, 
+%         source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
+%         feature/.style={ draw, rounded corners, fill=green!10, minimum width=3.0cm, minimum height=0.8cm, align=center } ] 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[font=\bfseries\large] at (-1,5) {Erstellung des Lexikalvektors}; 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[source] (article) at (-7,1.5) {XML-Artikel\\Motor}; 
+%         \node[source] (macro) at (-7,-1.5) {.ema-Makro\\Motor}; 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalische Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[feature] (type) at (-1,2.5) {Typbezeichnung\\DRN112M4}; 
+%         \node[feature] (series) at (-1,0.5) {Produktserie\\DRN}; 
+%         \node[feature] (description) at (-1,-1.5) {Beschreibung\\Wasserdichte Ausführung}; 
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle -> Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \draw[->] (article.east) -- (type.west); 
+%         \draw[->] (article.east) -- (series.west); 
+%         \draw[->] (macro.east) -- (description.west); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[ draw, rounded corners, fill=orange!15, text width=5cm, align=center ] (vector) at (5,0.5) { \textbf{Lexikalvektor\\} \vspace{2mm} $\left[ \begin{array}{c} \text{DRN112M4}\\ \text{DRN}\\ \text{Wasserdichte Ausführung} \end{array} \right]$ };
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Merkmale -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         \draw[->] (type.east) -- (vector.west); 
+%         \draw[->] (series.east) -- (vector.west); 
+%         \draw[->] (description.east) -- (vector.west); 
+%         \end{tikzpicture} 
+%         \caption{Erstellung des Lexikalvektors. Textuelle technische Informationen aus Artikel- und Makrodaten werden extrahiert und in einem separaten Vektor zusammengeführt. 
+%         Der Lexikalvektor ergänzt die strukturierten Informationen des Artikel- und Makrovektors um technische Begriffe und Bezeichnungen.} 
+%         \label{fig:lexikalvektor} 
+%         \end{figure}
+
+% \subsection{Warum Drei Vektoren ?}
+
+% Die Aufteilung der \textit{technischen Artikel- und Makroeigenschaften} in drei separate Vektoren hat mehrere Vorteile:
+
+% \begin{itemize}
+%     \item Es wird verhindert, dass sich Werte aus den Artikel- und Makrodaten wie Spannung, Strom oder Makrobezeichnungen mit textuellen \textit{technischen Artikel- und Makroeigenschaften} aus den Hinweis- und Beschreibungsfeldern vermischen. Eine Spannung von 400 V besitzt eine andere Bedeutung als der Hinweis "Wasserdichte Ausführung". Durch die getrennte Speicherung bleiben diese unterschiedlichen Informationsarten für ein späteres Modell unterscheidbar. Dies folgt dem Konzept der multimodaler Datenrepräsentationen wie in \cite{baltrusaitis2019multimodal} und \cite{ebrahimi2024lanistr} beschrieben.
+%     \item Die Weiterentwicklung der einzelnen Informationsquellen ist unabhängig voneinander möglich. Neue technische Merkmale können beispielsweise dem Artikelvektor hinzugefügt werden, ohne die Struktur des Makrovektors oder des Lexikalvektors verändern zu müssen. 
+%     \item Zusätzlich können die einzelnen Vektoren später unterschiedlich verarbeitet werden. Strukturierte \textit{technische Eigenschaften} des Artikel- und Makrovektors können beispielsweise direkt als numerische Eingaben für Learning-to-Rank-Verfahren verwendet werden, während textuelle \textit{technische Eigenschaften} des Lexikalvektors zusätzlich durch Embedding-Modelle oder Sentence Transformer verarbeitet werden können (siehe Kapitel \ref{sec:modellansätze}).
+% \end{itemize}
  
 
 \section{Erstellung des Datensplits} 
 \subsection{Trainings-, Validierungs- und Testdaten}
 
 Ein Datensplit (Abbildung \ref{fig:datensplit_funktion}) ist die Aufteilung eines Datensatzes in voneinander getrennte Teilmengen, den Trainings-, Validierungs- und Testdaten. 
-Dabei dienen die Trainingsdaten dem Lernprozess des Modells, wodurch die Zusammenhänge zwischen den \textit{technischen Eigenschaften} erlernt werden. 
+Dabei dienen die Trainingsdaten dem Lernprozess des Modells, wodurch die Zusammenhänge zwischen den \textit{technischen Artikel- und Makroeigenschaften} erlernt werden. 
 Die Validierungsdaten werden verwendet, um die Parameter des Modells während des Lernprozesses zu überwachen und anzupassen. 
 Die Testdaten dienen der abschließenden Bewertung des Modells, um dessen Leistungsfähigkeit auf unbekannte Artikeldaten zu überprüfen \cite{kohavi1995cv,hastie2009elements}.
 
@@ -748,7 +771,7 @@ Die Testdaten dienen der abschließenden Bewertung des Modells, um dessen Leistu
         \end{figure}
 
 
-\subsection{Splitregelen}
+\subsection{Splitregeln und deren Ergebnis}
 \label{sec:splitregeln} 
 
 Die Herausforderung aus der Datenaufbereitung (siehe Abschnitt \ref{sec:ergebnis_der_datenaufbereitung}) soll in diesem Abschnitt durch die Festlegung von Splitregeln für die Trainings-, Validierungs- und Testdaten adressiert werden.
@@ -762,12 +785,9 @@ Dabei ist zu beachten, dass Artikel und Makro in einer n:1-Beziehung stehen (sie
 \end{itemize} 
 
 Alle Artikel- und Makrodaten, welche in den Validierungs- oder Testdaten vorkommen, müssen im Trainingsbestand vertreten sein, da fehlende Trainingsdaten die Bewertung des Modells verfälschen würden. 
-Angenommen ein Makro kommt in den Validierungs- oder Testdaten vor, aber nicht in den Trainingsdaten, dann würde am Ende ein Makro bewertet werden, zu dem das Modell kein Wissen besitzt. Dies würde die Bewertung des Modells negativ beeinflusst.
+Angenommen ein Makro kommt in den Validierungs- oder Testdaten vor, aber nicht in den Trainingsdaten. Die Bewertung für dieses Makro ist dann fehlerhaft, da ein Makro bewertet wird, zu dem das Modell kein Wissen besitzt.
 
-
-\subsection{Ergebnis des Datensplits}
-
-Auf Grundlage des Datenbestands aus Abschnitt \ref{sec:ergebnis_der_datenaufbereitung} sowie unter Berücksichtigung der definierten Splitregeln ergibt sich der folgende Datensplit: 
+Unter Berücksichtigung der definierten Splitregeln und auf Grundlage des Datenbestands aus Abschnitt \ref{sec:ergebnis_der_datenaufbereitung} sowie der zuvor beschriebenen Datenaufbereitung ergibt sich der folgende Datensplit: 
 
 \begin{itemize} 
 \item 1.300 Trainingsartikel (83,4\,\%), 
@@ -776,8 +796,6 @@ Auf Grundlage des Datenbestands aus Abschnitt \ref{sec:ergebnis_der_datenaufbere
 \end{itemize}
 
 Dieser Datensplit bildet die Basis für das Training und die Bewertung des Modells.
-
-\newpage
 
 \section{Artefakt A1: Trainings- und Evaluationsbasis} 
 
@@ -790,8 +808,6 @@ Es stellt die Grundlage für die Bewertung und Auswahl des späteren Modellansat
     \item 127  
     \item den Artikel-Makro-Zuordnungen, 
     \item den Artikelvektoren, 
-    \item den Makrovektoren, 
-    \item den Lexikalvektoren, 
     \item einem Datensplit mit:
     \begin{itemize} 
         \item 1.300 Trainingsartikeln, 

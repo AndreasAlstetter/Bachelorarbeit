@@ -47,52 +47,6 @@
       \field{title}{LTR Configuration Test Series}
       \field{year}{2026}
     \endentry
-    \entry{baltrusaitis2019multimodal}{article}{}{}
-      \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=66df84f9a5b3fb42b542824373ee39f5}{%
-           family={Baltru\v{s}aitis},
-           familyi={B\bibinitperiod},
-           given={Tadas},
-           giveni={T\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=93a92cb2f2018320f5fe203d00ae1cc3}{%
-           family={Ahuja},
-           familyi={A\bibinitperiod},
-           given={Chaitanya},
-           giveni={C\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=2b23af9d24a98a5912d3b7c941b08ed7}{%
-           family={Morency},
-           familyi={M\bibinitperiod},
-           given={Louis-Philippe},
-           giveni={L\bibinithyphendelim P\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{7145eaea20703c0e78765d167e909706}
-      \strng{fullhash}{061e120b3a83987b6b5ae04e43009d83}
-      \strng{fullhashraw}{061e120b3a83987b6b5ae04e43009d83}
-      \strng{bibnamehash}{061e120b3a83987b6b5ae04e43009d83}
-      \strng{authorbibnamehash}{061e120b3a83987b6b5ae04e43009d83}
-      \strng{authornamehash}{7145eaea20703c0e78765d167e909706}
-      \strng{authorfullhash}{061e120b3a83987b6b5ae04e43009d83}
-      \strng{authorfullhashraw}{061e120b3a83987b6b5ae04e43009d83}
-      \field{sortinit}{B}
-      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{IEEE Transactions on Pattern Analysis and Machine Intelligence}
-      \field{number}{2}
-      \field{title}{Multimodal Machine Learning: A Survey and Taxonomy}
-      \field{volume}{41}
-      \field{year}{2019}
-      \field{pages}{423\bibrangedash 443}
-      \range{pages}{21}
-      \verb{doi}
-      \verb 10.1109/TPAMI.2018.2798607
-      \endverb
-    \endentry
     \entry{bray2008xml}{misc}{}{}
       \name{author}{5}{}{%
         {{un=0,uniquepart=base,hash=3e2f0f38495aebf8b91a698c2ccbfae3}{%
@@ -190,51 +144,6 @@
       \field{booktitle}{Advances in Neural Information Processing Systems}
       \field{title}{Learning to Rank with Nonsmooth Cost Functions}
       \field{year}{2006}
-    \endentry
-    \entry{ebrahimi2024lanistr}{inproceedings}{}{}
-      \name{author}{4}{}{%
-        {{un=0,uniquepart=base,hash=6e97fd2b683fd4e591d85088889f15c8}{%
-           family={Ebrahimi},
-           familyi={E\bibinitperiod},
-           given={Sayna},
-           giveni={S\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=72627f6a0d57c6bcb972628b5d434f0e}{%
-           family={Arik},
-           familyi={A\bibinitperiod},
-           given={Sercan\bibnamedelima O.},
-           giveni={S\bibinitperiod\bibinitdelim O\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=77a34c886bebf4ccd3a01b388c7eba39}{%
-           family={Dong},
-           familyi={D\bibinitperiod},
-           given={Yihe},
-           giveni={Y\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=f769e681ea0c0a3a6ba5a36ddd18c253}{%
-           family={Pfister},
-           familyi={P\bibinitperiod},
-           given={Tomas},
-           giveni={T\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{1df2efed389697443650cb5159d64a4a}
-      \strng{fullhash}{03c92d5d7160582e80137fc48bc838ae}
-      \strng{fullhashraw}{03c92d5d7160582e80137fc48bc838ae}
-      \strng{bibnamehash}{03c92d5d7160582e80137fc48bc838ae}
-      \strng{authorbibnamehash}{03c92d5d7160582e80137fc48bc838ae}
-      \strng{authornamehash}{1df2efed389697443650cb5159d64a4a}
-      \strng{authorfullhash}{03c92d5d7160582e80137fc48bc838ae}
-      \strng{authorfullhashraw}{03c92d5d7160582e80137fc48bc838ae}
-      \field{sortinit}{E}
-      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{European Conference on Computer Vision (ECCV)}
-      \field{title}{LANISTR: Multimodal Learning from Structured and Unstructured Data}
-      \field{year}{2024}
     \endentry
     \entry{emmanuel2021missing}{article}{}{}
       \name{author}{6}{}{%
@@ -406,6 +315,50 @@
       \endverb
       \verb{url}
       \verb https://www.eplan.help/de-de/Infoportal/Content/Plattform/2025/Content/htm/macrosgui_k_start.htm
+      \endverb
+    \endentry
+    \entry{fayyad1993discretization}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=d72660528ebbfc30c6661be74afda5c2}{%
+           family={Fayyad},
+           familyi={F\bibinitperiod},
+           given={Usama\bibnamedelima M.},
+           giveni={U\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6bc7e8fbdb8fe8a4afb3113bbe072ead}{%
+           family={Irani},
+           familyi={I\bibinitperiod},
+           given={Keki\bibnamedelima B.},
+           giveni={K\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Morgan Kaufmann}%
+      }
+      \strng{namehash}{78773bb33bfc362cb53b23633aba436b}
+      \strng{fullhash}{78773bb33bfc362cb53b23633aba436b}
+      \strng{fullhashraw}{78773bb33bfc362cb53b23633aba436b}
+      \strng{bibnamehash}{78773bb33bfc362cb53b23633aba436b}
+      \strng{authorbibnamehash}{78773bb33bfc362cb53b23633aba436b}
+      \strng{authornamehash}{78773bb33bfc362cb53b23633aba436b}
+      \strng{authorfullhash}{78773bb33bfc362cb53b23633aba436b}
+      \strng{authorfullhashraw}{78773bb33bfc362cb53b23633aba436b}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 13th International Joint Conference on Artificial Intelligence. Chamb\'{e}ry, France, August 28 - September 3, 1993}
+      \field{title}{Multi-Interval Discretization of Continuous-Valued Attributes for Classification Learning}
+      \field{year}{1993}
+      \field{pages}{1022\bibrangedash 1029}
+      \range{pages}{8}
+      \verb{urlraw}
+      \verb http://ijcai.org/Proceedings/93-2/Papers/022.pdf
+      \endverb
+      \verb{url}
+      \verb http://ijcai.org/Proceedings/93-2/Papers/022.pdf
       \endverb
     \endentry
     \entry{hastie2009elements}{book}{}{}
@@ -1444,7 +1397,6 @@
       \field{year}{2024}
     \endentry
   \enddatalist
-  \missing{fayyad1993discretization}
 \endrefsection
 \endinput
 
