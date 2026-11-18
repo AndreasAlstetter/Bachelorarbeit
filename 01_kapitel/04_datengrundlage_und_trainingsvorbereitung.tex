@@ -1,35 +1,29 @@
 \chapter{Datenangrundlage und Trainingsvorbereitung} 
 \label{chap:datenangrundlage_und_trainingsvorbereitung} 
 
-Die in Kapitel \ref{sec:handlungsbedarf_und_forschungsfragen} formulierte Forschungsfrage RQ1 untersucht, welche technischen Informationen aus Artikeln geeignet sind, 
-um Makros voneinander zu unterscheiden und für die Trainingsbasis eines Modells geeignet sind. 
-
-Zur Beantwortung dieser Forschungsfrage werden in diesem Kapitel zunächst die verfügbaren Datenquellen analysiert. 
-Anschließend werden die Schritte der Datenaufbereitung beschrieben, die notwendig sind, um eine für das Modells geeignete Basis an Daten zu erzeugen. 
-
 \section{Datenbasis} 
 
 \subsection{Artikeldaten}
 \label{sec:artikeldaten} 
 
 Die Artikeldaten liegen in XML-Dateien vor. 
-XML (\textit{Extensible Markup Language}) ist ein standardisiertes Format zur hierarchischen Speicherung und Beschreibung strukturierter Informationen \cite{bray2008xml}.
+XML (\textit{Extensible Markup Language}) ist ein standardisiertes Format zur hierarchischen Speicherung und Beschreibung strukturierter Informationen wie Artikeldaten, die einem wiederkehrenden Schema folgen \cite{bray2008xml}.
 Durch die hierarchische Organisation von XML-Dokumenten können sowohl einfache Stammdaten wie Herstellerinformationen als auch komplexe technische Informationen wie Spannungen, 
 Ströme oder Leistungen strukturiert abgebildet werden \cite{bray2008xml}.
-Die Analyse der Artikeldaten hat ergeben, dass sie eine Vielzahl von technischen Informationen enthalten, welche im folgenden als \textit{technische Eigenschaften} bezeichnet werden, darunter: 
+Die in den Artikeldaten enthaltenen Informationen, werden im folgenden als \textit{technische Artikeleigenschaften} bezeichnet. 
+Zu diesen gehören unter anderen:
 
 \begin{itemize} 
     \item Herstellerinformationen, 
-    \item Typ- und Bestellnummern, 
+    \item Typnummern, 
     \item Spannungen, 
     \item Ströme, 
     \item Leistungen,  
-    \item Kommunikationsschnittstellen, 
     \item technische Hinweise, 
     \item Referenzen auf zugehörige Makros. 
 \end{itemize} 
 
-Um diese \textit{technischen Eigenschaften} anhand des Motorbeispiels aus Kapitel \ref{sec:herleitung} zu veranschaulichen, soll hierfür ein Motor von SEW betrachtet werden.
+Um diese \textit{technische Artikeleigenschaften} anhand des Motorbeispiels aus Kapitel \ref{sec:herleitung} zu veranschaulichen, soll hierfür ein Motor von SEW betrachtet werden.
 Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML-Artikels für diesen Motor.
 
 \begin{figure}[H] 
@@ -63,21 +57,23 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
         \draw[->] (electrical) -- (current); 
         \draw[->] (electrical) -- (power); 
         % Technische Informationen 
-        \node[feature] (ip) at (5.0,0) {Schnittstelle\\PROFINET}; 
-        \node[feature] (com) at (7.5,0) {Hinweis\\MIT\\GEHÄUSE};
+        \node[feature] (ip) at (5.0,0) {Hinweis\\MIT\\GEHÄUSE}; 
+        \node[feature] (com) at (7.5,0) {Makro\\M1\_F1\_V1};
         \draw[->] (technical) -- (ip); 
         \draw[->] (technical) -- (com); 
         % Makro
         \draw[ decorate, decoration={brace,mirror,amplitude=10pt}, thick ] (-8.25,-0.8) -- (8.25,-0.8) node[midway,yshift=-1cm] { \fbox{\strut Zugeordnetes Motor-Makro} };
     \end{tikzpicture} 
-    \caption{Beispielhafte Struktur eines XML-Artikels für einen Elektromotor. Die hierarchische Organisation ermöglicht die Speicherung von Herstellerinformationen, \textit{technischen Eigenschaften} sowie Referenzen auf zugehörige Makros.} 
+    \caption{Beispielhafte Struktur eines XML-Artikels für einen Elektromotor. Die hierarchische Organisation ermöglicht die strukturierte Speicherung von \textit{technischen Artikeleigenschaften} eines Motors nach einem vorgegebenen Schema.} 
     \label{fig:xml_artikel_motor}
 \end{figure}
 
 \subsection{Makrodaten} 
 
 Neben den Artikeln werden die zugehörigen Makros analysiert. Die Makros sind im .ema-Format gespeichert. 
-Dieses Format entspricht einem XML-basierten Schema, das sowohl grafische als auch technische Informationen strukturiert abbildet. 
+Dieses Format entspricht ebenfalls einem XML-Schema, das Informationen über die Makros in einem einheitlichen Schema strukturiert abbildet.
+
+Dies Informationen werden im folgenden als \textit{technische Makroeigenschaften} bezeichnet. 
 
 Hierzu zählen: 
 
@@ -87,12 +83,9 @@ Hierzu zählen:
     \item Bezeichnungen. 
 \end{itemize} 
 
-Während die Artikeldaten beschreiben, welche \textit{technischen Eigenschaften} ein Gerät besitzt, 
-beschreiben die Makros die Umsetzung dieser \textit{technischen Eigenschaften} innerhalb eines Schaltplans. 
-Beide Informationsquellen ergänzen sich daher gegenseitig. 
 
-Die Bezeichnungen eines Makros werden nach folgendem Muster aufgebaut: Makro-Familie-Variante (z.\,B. M1\_F1\_V1)
-Dabei gibt Makro die Nummerierung des Makros selbst an, die Familie beschreibt eine Unterkategorie des Makros und die Variante kennzeichnet unterschiedliche Ausführungen innerhalb dieser Familie.
+Die Bezeichnung eines Makros wird dabei nach folgendem Muster aufgebaut: Klasse-Familie-Variante (z.\,B. M1\_F1\_V1)
+Die Klasse gibt die Art des Makros selbst an, die Familie beschreibt eine Unterkategorie des Makros und die Variante kennzeichnet unterschiedliche Ausführungen innerhalb dieser Familie.
 Im Fall des Motorbeispiels aus Kapitel \ref{sec:herleitung} lässt sich die Bezeichnung M1\_F1\_V1 wie folgt interpretieren:
 
 \begin{itemize}
