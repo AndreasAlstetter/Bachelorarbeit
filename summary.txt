@@ -1,0 +1,2310 @@
+\chapter{Motivation} 
+\label{chap:motivation}
+
+\section{Herleitung}
+\label{sec:herleitung}
+
+Die zunehmende Digitalisierung in der Industrie führt zu einer fortschreitenden Vernetzung von Maschinen, 
+Sensoren und industriellen Systemen wie zum Beispiel Produktionsanlagen in der Automobilindustrie oder Fertigungsanlagen in der Elektronikindustrie.
+Im gleiche Zuge entsteht eine große Mengen an Daten sowie Datenquellen, die erfasst, gespeichert und analysiert werden müssen. 
+Dieser Anstieg an Daten und Datenquellen sorgt dafür, dass sowohl die Komplexität als auch die Dynamik von industriellen Systemen kontinuierlich zunimmt \parencite{OECD2024}.
+
+Mit der steigenden Anzahl an Datenquellen und der wachsenden Datenmenge wächst auch die Herausforderung, relevante Informationen effizient zu identifizieren, zu analysieren und in fundierte Entscheidungen zu überführen.
+Insbesondere in komplexen industriellen Umgebungen wie der Produktion, der Konstruktion und des Engineerings müssen Mitarbeiter eine Vielzahl an Prozessparametern und Informationen gleichzeitig berücksichtigen.
+Die hierfür erforderliche Informationsverarbeitung übersteigt häufig die kognitiven Kapazitäten einzelner Mitarbeiter, was zu Ineffizienzen, Fehlern und Verzögerungen in den Entscheidungsprozessen führen kann \parencite{WEF2023AIRevolution}.
+
+Künstliche Intelligenz (KI) bietet das Potenzial, diese Herausforderungen zu bewältigen, indem sie große Datenmengen analysiert sowie Muster, 
+Zusammenhängen und Abhängigkeiten erkennt die für einen Menschen nur schwer oder nicht in Echtzeit identifizierbar sind. 
+Darüber hinaus kann KI dazu beitragen, Entscheidungsprozesse sowie die Optimierung industrieller Systeme durch Prognosen
+Handlungsempfehlungen und Automatisierungen zu unterstützen, was dazu beiträgt, 
+die Effizienz, die Qualität und die Flexibilität industrieller Systeme zu steigern und gleichzeitig die Komplexität beherrschbarer zu machen \parencite{WEF2026}.
+
+Die steigende Komplexität industrieller Systeme wirkt sich nicht nur auf den Betrieb von Produktionsanlagen aus, sondern beeinflusst auch die Planung, Konstruktion und das Engineering dieser Systeme.
+Eine Komponete der Konstruktion industrielle Systeme dabei ist die Elektrokonstruktion, die für die Planung, den Entwurf und die Dokumentation elektrischer Systeme verantwortlich ist.
+In der Elektrokonstruktion gehört es zu den zentralen Aufgaben Elektroschaltpläne über Projekte hinweg zu planen, zu dokumentieren, anzupassen und wiederzuverwenden.
+Gleichzeitig steigen die Anforderungen an Standardisierung, Qualität und Effizienz in der Elektrokonstruktion um die steigende Komplexität industrieller Systeme zu bewältigen \parencite{EPLAN2022Makrobibliotheken}.
+
+Einen etablierten Ansatz zur Bewältigung dieser Herausforderungen stellt die Makrotechnologie in EPLAN dar. 
+EPLAN ist eine Softwarelösung für die Elektrokonstruktion, die die Planung, den Entwurf und die Dokumentation elektrischer Systeme durch Elektroschaltpläne unterstützt.
+Makros ermöglichen dabei die Speicherung sowie die projektübergreifende Wiederverwendung von standardisierten Baugruppen, Funktionen und Seiten aus Elektroschaltplänen um damit die Effizienz und Konsistenz in der Elektrokonstruktion zu erhöhen.
+Eine vereinfachte Darstellung eines Makros für einen Motor ist in Abbildung \ref{fig:elektromotor} dargestellt. Diese Makros lassen sich nach deren Erstellung in Makrobibliotheken speichern und organisieren.
+\parencite{EPLAN2022Makrobibliotheken}
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ font=\small, >=stealth, 
+        terminal/.style={ circle, draw, minimum size=0.9cm, inner sep=0pt, font=\bfseries }, 
+        motor/.style={ circle, draw=gray!70!black, fill=gray!5, minimum size=5.4cm, line width=0.9pt, align=center }, connection/.style={ line width=1pt } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Motor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[motor] (motor) at (0,0) { \textbf{Elektromotor}\\[1mm] \large M }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Anschlüsse %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
+        \node[ terminal, fill=red!15, draw=red!60!black ] (plus) at (-1.4,4.0) {$+$}; \node[ terminal, fill=blue!15, draw=blue!60!black ] (minus) at (1.4,4.0) {$-$}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Elektrische Verbindungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[connection] (plus.south) -- (-1.4,2.5); \draw[connection] (minus.south) -- (1.4,2.5); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Anschlussbezeichnungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ anchor=east, align=center, font=\footnotesize ] at (-1.55,3.15) {positiver\\Anschluss}; 
+        \node[ anchor=west, align=center, font=\footnotesize ] at (1.55,3.15) {negativer\\Anschluss};
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Makrorahmen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ draw=orange!70!black, dashed, rounded corners, line width=1pt, inner sep=0.7cm, fit=(motor)(plus)(minus), label={ [font=\bfseries, text=orange!70!black] above:Wiederverwendbares Motor-Makro } ] (macroframe) {}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Makrokennung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ draw, rounded corners, fill=orange!15, minimum width=4.5cm, minimum height=0.8cm, align=center, below=0.6cm of macroframe ] (macroID) { Makrobezeichnung: M1\_F1\_V1 }; 
+        \draw[ ->, thick, orange!70!black ] (macroframe.south) -- (macroID.north); 
+    \end{tikzpicture} 
+    \caption{ Vereinfachte Darstellung eines wiederverwendbaren Makros für einen Elektromotor. Das Makro fasst das Motorsymbol, die elektrischen Anschlüsse und die zugehörige Makrobezeichnung zu einer standardisierten Schaltplanfunktion zusammen. } 
+    \label{fig:elektromotor} 
+\end{figure}
+
+% \begin{figure}[H] 
+%     \centering 
+%     \includegraphics[width=\textwidth] 
+%     {03_abbildungen/02_schemas/pdf/Motor.pdf} 
+%     \caption{Elektromotor} 
+%     \label{fig:elektromotor} 
+% \end{figure}
+
+
+Um ein Makro mit technischen Informationen eines Elektrobauteils wie einem Elektromotor zu verknüpfen, wird in EPLAN die Artikelverwaltung verwendet. 
+Die Artikelverwaltung ermöglicht die Zuordnung von Artikeln zu Makros, wodurch Artikelstammdaten wie zum Beispiel Hersteller, Spannung, Strom, 
+Leistung direkt mit einem ausgewählten Makro verknüpft werden können. Abbildung \ref{fig:beispielartikel_elektromotor} zeigt ein Beispiel für einen Artikel eines Elektromotors, der einem Motor-Makro zugeordnet werden kann.
+\parencite{EPLAN2023Artikelverwaltung}
+
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        article/.style={ draw=blue!60!black, rounded corners, fill=blue!8, minimum width=5.2cm, minimum height=6.2cm, align=center, inner sep=8pt }, 
+        property/.style={ draw, rounded corners, fill=gray!8, text width=4.1cm, minimum height=0.65cm, align=left, inner sep=4pt } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,4.5) {Beispielartikel eines Elektromotors}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikelrahmen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[article] (article) at (0,0) {}; \node[ font=\bfseries, text=blue!60!black ] at (0,2.55) {Artikel: Elektromotor}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Technische Artikeleigenschaften % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[property] (manufacturer) at (0,1.65) {\textbf{Hersteller:} Siemens}; 
+        \node[property] (voltage) at (0,0.75) {\textbf{Spannung:} 400 V}; 
+        \node[property] (current) at (0,-0.15) {\textbf{Strom:} 10 A}; 
+        \node[property] (power) at (0,-1.05) {\textbf{Leistung:} 4000 W}; 
+
+    \end{tikzpicture} 
+    \caption{ Beispielartikel eines Elektromotors. Die technischen Artikeleigenschaften wie Hersteller, Spannung, Strom und Leistung werden in der Artikelverwaltung gespeichert. } 
+    \label{fig:beispielartikel_elektromotor} 
+\end{figure}
+
+% \begin{figure}[H] 
+%     \centering 
+%     \includegraphics[width=\textwidth] 
+%     {03_abbildungen/02_schemas/pdf/Beispielartikel_Motor.pdf} 
+%     \caption{Beispielartikel Elektromotor} 
+%     \label{fig:beispielartikel_elektromotor} 
+% \end{figure}
+
+Durch diesen getrennten Aufbau ist es möglich einem Makro mehrere Artikel zuzuordnen, wodurch unterschiedliche Varianten eines Makros abgebildet werden können.
+Beispielhaft könnte dem Makro für einen Elektromotor ein anderer Artikel des Herstellers SEW mit 230 Volt Spannung 5 Ampere Stromstärke und einer Leistung von 1150 Watt zugeordnet werden, ohne dabei das Makro selbst ändern zu müssen.
+Dadurch ergibt sich eine flexible Möglichkeit, unterschiedliche Varianten eines Elektrobauteils innerhalb eines Projekts abzubilden. 
+
+\section{Herausforderung}
+\label{sec:herausforderung}
+
+Mit der zunehmenden Anzahl an Makros und Artikel wächst auch die Komplexität ihrer Verwaltung und Wiederverwendung. 
+Dies kann für eine konkrete Elektrokonstruktionsaufgabe wie der Erstellung eines Elektroschaltplans für einen Motor zu einer Herausforderung werden. 
+Während die Wiederverwendung standardisierter Makros eine Effizienzsteigerung in der Elektrokonstruktion darstellt, 
+steigt gleichzeitig der Aufwand das passende Makro für eine konkrete Elektrokonstruktionsaufgabe zu finden. 
+Die Auswahl eines geeigneten Makros erfolgt dabei häufig auf Basis von Erfahrungswerten der Elektrokonstrukteure oder durch manuelle Such- und Vergleichsarbeiten. 
+Dies führt zu einem erhöten Zeitaufwand sowie der Nutzung suboptimaler oder redundanter Makros. 
+
+\section{Wirtschaftliche Auswirkungen}
+\label{sec:wirtschaftliche_auswirkungen}
+
+Um die wirtschaftlichen Auswirkungen dieser Herausforderung abzuschätzen, wird hier eine beispielhafte Analyse des Zeitaufwands für die Suche und Auswahl geeigneter Makros durchgeführt und in Tabelle \ref{tab:wirtschaftlichkeit_ki} zusammengefasst:
+
+Angenommen ein Unternehmen verfügt über einen Makrobestand mit mehreren tausend Makros und ein Elektrokonstrukteur benötigt durchschnittlich fünf Minuten, um ein geeignetes Makro zu suchen, zu prüfen und auszuwählen. 
+Werden pro Projekt beispielsweise 100 Makros wiederverwendet, ergibt sich ein Suchaufwand von rund 500 Minuten beziehungsweise 8,3 Stunden pro Projekt. 
+Bei einem Stundensatz von 80 Euro für einen Elektrokonstrukteur entstehen für die Makrosuche Kosten in Höhe von etwa 664 Euro pro Projekt. 
+Werden jährlich 50 vergleichbare Projekte bearbeitet, ergibt sich ein Aufwand von rund 415 Stunden was zu jährlichen Kosten von etwa 33.200 Euro führt. 
+    
+Wird hingegen ein KI-basiertes Empfehlungssystem eingesetzt, das bei der Eingabe eines Datenblatts mehrere geeignete Makros vorschlägt, kann der Suchaufwand deutlich reduziert werden. 
+Unter der Annahme, dass die benötigte Zeit für die Auswahl eines Makros von fünf Minuten auf eine Minute sinkt, reduziert sich der Gesamtaufwand auf 100 Minuten beziehungsweise 1,7 Stunden pro Projekt. 
+Dadurch ergibt sich eine Zeitersparnis von etwa 6,6 Stunden pro Projekt. 
+Bei einem Stundensatz von 80 Euro entspricht dies einer Kosteneinsparung von etwa 528 Euro pro Projekt beziehungsweise 26.400 Euro pro Jahr bei 50 Projekten. 
+Zusätzlich können durch die Empfehlung bereits etablierter Makros redundante Makroneuanlagen vermieden sowie die Standardisierung und Wiederverwendung bestehender Engineering-Lösungen gefördert werden.
+
+Den jährlichen Einsparungen müssen die Kosten für die Entwicklung und den Betrieb des Empfehlungssystems gegenübergestellt werden. 
+Für ein prototypisches KI-basiertes Empfehlungssystem sind Entwicklungsaufwände für Datenaufbereitung, Modellentwicklung, Integration in die bestehende Engineering-Umgebung sowie Validierung und Tests erforderlich.
+
+Angenommen, die Entwicklung des Systems verursacht einen einmaligen Aufwand von 500 Arbeitsstunden. 
+Bei einem durchschnittlichen internen Stundensatz von 80 Euro ergeben sich Entwicklungskosten von etwa 40.000 Euro. 
+Zusätzlich fallen jährliche Kosten für Wartung, Weiterentwicklung und den Betrieb der IT-Infrastruktur an. 
+Werden hierfür beispielsweise 50 Stunden pro Jahr veranschlagt, entstehen laufende Kosten von rund 4.000 Euro jährlich.
+
+Demgegenüber steht die zuvor berechnete jährliche Einsparung von etwa 26.400 Euro durch die reduzierte Suchzeit bei der Makroauswahl. 
+Unter dieser Annahme amortisieren sich die Entwicklungskosten nach etwa 1,8 Jahren. 
+Nach Erreichen des Break-even-Punkts führt das System zu einer jährlichen Nettoeinsparung von rund 22.400 Euro.
+
+Zusätzlich sind mehrere wirtschaftliche Effekte in dieser vereinfachten Betrachtung noch nicht berücksichtigt. 
+Hierzu zählen insbesondere die Vermeidung redundanter Makroneuanlagen, eine höhere Standardisierung bestehender Lösungen, 
+ein geringerer Einarbeitungsaufwand neuer Mitarbeiter sowie eine Reduzierung von Such- und Auswahlfehlern. 
+Die tatsächlichen wirtschaftlichen Vorteile können daher über der allein aus der Zeiteinsparung berechneten Kostenreduktion liegen.
+
+\begin{table}[htbp] 
+    \centering 
+    \caption{Beispielhafte Wirtschaftlichkeitsbetrachtung des Empfehlungssystems} 
+    \label{tab:wirtschaftlichkeit_ki} 
+    \begin{tabular}{lcc} 
+        \hline Kennzahl & Ohne KI & Mit KI \\ 
+        \hline Suchzeit pro Makro & 5 min & 1 min \\ Makros pro Projekt & 100 & 100 \\ 
+        \hline Gesamtzeit pro Projekt & 500 min & 100 min \\ & (= 8,3 h) & (= 1,7 h) \\ Stundensatz Konstrukteur & 80 € & 80 € \\ 
+        \hline Kosten pro Projekt & 664 € & 136 € \\ \hline Projekte pro Jahr & 50 & 50 \\ 
+        \hline Personalkosten pro Jahr & 33.200 € & 6.800 € \\ & (664 € $\cdot$ 50) & (136 € $\cdot$ 50) \\ 
+        \hline \multicolumn{3}{c}{\textbf{Kosten des KI-Systems}} \\ 
+            \hline Entwicklungskosten (einmalig) & - & 40.000 € \\ Wartungskosten pro Jahr & - & 4.000 € \\ 
+            \hline \multicolumn{3}{c}{\textbf{Gegenüberstellung Kosten/Jahr}} \\ 
+            \hline Gesamtkosten pro Jahr & 33.200 € & 10.800 € \\ & & (6.800 € + 4.000 €) \\ \hline \multicolumn{3}{c}{\textbf{Ergebnis}} \\ 
+            \hline Jährliche Einsparung & \multicolumn{2}{c}{33.200 € - 10.800 € = \textbf{22.400 €}} \\ 
+            \hline Amortisationszeit & \multicolumn{2}{c}{40.000 € / 22.400 € = \textbf{1,8 Jahre}} \\ 
+            \hline 
+        \end{tabular} 
+    \end{table}
+
+
+\section{Vision}
+\label{sec:vision}
+
+Die in der Artikelverwaltung vorhandenen Zuordnungen zwischen Artikeln und Makros stellen eine wertvolle Wissenquelle dar. 
+Dieses vorhandene Wissen eröffnet die Möglichkeit, Methoden der Künstlichen Intelligenz (KI) zur Unterstützung von Elektrokonstrukteuren einzusetzen.
+Die Vision \ref{fig:vision} besteht darin, ein KI-basiertes Empfehlungssystem zu entwickeln, das auf die in der Artikelverwaltung vorhandenen Zuordnungen zwischen Artikeln und Makros trainiert wird, 
+um geeignete Makros für eine konkrete Elektrokonstruktionsaufgabe vorzuschlagen.
+Hierbei dienen die Artikelstammdaten wie Hersteller, Spannung, Strom und Leistung als Eingabedaten,
+während die zu empfehlende Makros als Ausgabedaten, für das Empfehlungssystem dienen. 
+Die Eingabedaten sollen dabei aus einem Artikel extrahiert, und für die Suchanfrage an das Empfehlungssystem verwendet werden.
+Die Ausgabedaten des Empfehlungssystem stellen die am besten zu den Eingabedaten passenden Makros dar. 
+Diese Makros sollen dann entsprechend ihrer Eignung für die konkrete Elektrokonstruktionsaufgabe in absteigender Reihenfolge in einer Liste sortiert werden.
+
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ scale=0.9, transform shape, >=stealth, font=\small, 
+        article/.style={ draw=blue!60!black, rounded corners, fill=blue!8, text width=4.3cm, minimum height=4.8cm, align=left, inner sep=7pt }, 
+        property/.style={ draw, rounded corners, fill=gray!8, text width=3.5cm, minimum height=0.55cm, align=left, inner sep=3pt }, 
+        model/.style={ draw=green!50!black, rounded corners, fill=green!12, text width=3.2cm, minimum height=2.4cm, align=center, inner sep=5pt },
+        macro/.style={ draw=orange!70!black, rounded corners, fill=orange!12, minimum width=4.2cm, minimum height=3.8cm, align=center }, 
+        ranking/.style={ draw=orange!70!black, rounded corners, fill=orange!10, text width=4.1cm, minimum height=3.6cm, align=left, inner sep=7pt }, 
+        interface/.style={ draw, rounded corners, minimum width=1.8cm, minimum height=0.75cm, align=center, font=\bfseries\footnotesize, inner sep=4pt },
+        phase/.style={ draw, rounded corners, fill=yellow!15, minimum width=3.2cm, minimum height=0.7cm, align=center, font=\bfseries } ]
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,10.2) {Vision des KI-basierten Makroempfehlungssystems}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % OBEN: TRAININGSBASIS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[phase] at (0,9.1) {1. Vorhandenes Wissen und Training}; 
+        
+        % Artikel 
+        
+        \node[article] (trainingArticle) at (-5.5,6.0) {}; 
+        \node[ font=\bfseries, text=blue!60!black ] at (-5.5,7.95) {Artikel: Elektromotor}; 
+        \node[property] at (-5.5,7.15) {\textbf{Hersteller:} Siemens}; 
+        \node[property] at (-5.5,6.35) {\textbf{Spannung:} 400 V}; 
+        \node[property] at (-5.5,5.55) {\textbf{Strom:} 10 A}; 
+        \node[property] at (-5.5,4.75) {\textbf{Leistung:} 4000 W}; 
+        \node[property] at (-5.5,3.95) {\textbf{Makro:} M1\_F1\_V1}; 
+        
+        % Motor-Makro 
+        
+        \node[macro] (trainingMacro) at (5.5,6.0) {}; 
+        \node[ circle, draw=gray!70!black, fill=white, minimum size=2.2cm, align=center ] (motorSymbol) at (5.5,5.8) {\textbf{M}}; 
+        \node[ circle, draw=red!60!black, fill=red!15, minimum size=0.65cm, inner sep=0pt ] (plus) at (4.9,7.45) {$+$}; 
+        \node[ circle, draw=blue!60!black, fill=blue!15, minimum size=0.65cm, inner sep=0pt ] (minus) at (6.1,7.45) {$-$}; \draw (plus.south) -- (4.9,6.9); \draw (minus.south) -- (6.1,6.9); 
+        \node[font=\bfseries] at (5.5,4.4) {Makro: M1\_F1\_V1}; 
+        
+        % Artikel-Makro-Zuordnung 
+        
+        \draw[<->,very thick] (trainingArticle.east) -- (trainingMacro.west) node[ midway, above, fill=white, align=center, inner sep=4pt ] { Artikel-Makro-Zuordnung }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % TRENNLINIE 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[ dashed, gray!70!black, line width=0.9pt ] (-8.2,3.35) -- (8.2,3.35); 
+        
+        % Training nach unten 
+        
+        \draw[->,very thick,green!50!black] (0,4.5) -- (0,2.35) node[ midway, right, fill=white, align=left, inner sep=3pt ] { Training mit \\ Artikel-Makro-Zuordnungen }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % UNTEN: ANWENDUNG 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[phase] at (0,2.0) {2. Anwendung des Empfehlungssystems}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Anfrageartikel 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[article] (query) at (-6.6,-1.2) {}; 
+        \node[ font=\bfseries, text=blue!60!black ] at (-6.6,0.75) {Anfrage: Elektromotor}; 
+        \node[property] at (-6.6,-0.05) {\textbf{Hersteller:} Siemens}; \node[property] at (-6.6,-0.85) {\textbf{Spannung:} 400 V}; \node[property] at (-6.6,-1.65) {\textbf{Strom:} 10 A}; 
+        \node[property] at (-6.6,-2.45) {\textbf{Leistung:} 4000 W}; 
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % KI-Empfehlungssystem 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[model] (ai) at (0,-1.2) { \textbf{KI-basiertes}\\ \textbf{Empfehlungs-}\\ \textbf{system}\\[2mm] Vergleich der\\ Anfrage mit Makros };
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Makro-Rangliste 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[ranking] (ranking) at (6.6,-1.2) { \centering \textbf{Makro-Rangliste}\\[2mm] \raggedright \textbf{1. M1\_F1\_V1}\\ \hspace*{4mm}höchste Eignung\\[1mm] 2. M1\_F1\_V3\\[1mm] 3. M1\_F2\_V1 }; 
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Eingabeschnittstelle 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[ interface, draw=blue!60!black, fill=blue!5, text=blue!60!black ] (input) at (-3.0,-1.2) {Eingabe}; 
+        % Anfrage -> Eingabeschnittstelle 
+        \draw[ ->, thick, blue!60!black ] (query.east) -- (input.west); 
+        % Eingabeschnittstelle -> KI-System 
+        \draw[ ->, thick, blue!60!black ] (input.east) -- (ai.west); 
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Ausgabeschnittstelle 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[ interface, draw=orange!70!black, fill=orange!5, text=orange!70!black ] (output) at (3.0,-1.2) {Ausgabe}; 
+        % KI-System -> Ausgabeschnittstelle 
+        \draw[ ->, thick, orange!70!black ] (ai.east) -- (output.west); 
+        % Ausgabeschnittstelle -> Rangliste 
+        \draw[ ->, thick, orange!70!black ] (output.east) -- (ranking.west);
+
+        \end{tikzpicture} 
+        \caption{ Vision des KI-basierten Empfehlungssystems. Die Artikel-Makro-Zuordnungen bilden die Wissensbasis für das Training. Bei der späteren Anwendung wird bei einer Anfrage ein Artikel an das Empfehlungssystem übergeben. Das System ermittelt passende Makros und gibt diese nach ihrer Eignung absteigend in einer Liste aus. } 
+        \label{fig:vision} 
+        \end{figure}
+
+% \begin{figure}[H] 
+%     \centering 
+%     \includegraphics[width=\textwidth] 
+%     {03_abbildungen/02_schemas/pdf/Vision.pdf} 
+%     \caption{Vision des Empfehlungssystems} 
+%     \label{fig:vision} 
+% \end{figure}
+
+
+Durch die Nutzung eines solchen Empfehlungssystems soll es möglich werden, den Suchaufwand für geeignete Makros aus einem bestehenden Makrobestand zu reduzieren,
+und gleichzeitig einen Beitrag zur weiteren Automatisierung wissensintensiver Tätigkeiten und der Nutzung der Potenziale Künstlicher Intelligenz in der Industrie zu leisten.
+
+
+
+\chapter{Stand der Technik}
+\label{chap:stand_der_technik}
+
+\section{Grundlagen}
+
+\subsection{Modell}
+\label{sec:modell}
+
+Ein Modell ist das Ergebnis eines Lernprozesses, bei dem aus einer großen Menge von Beispieldaten Muster und Zusammenhänge gelernt, und dabei die Parameter des Modells angepasst werden. 
+Das dabei erlernte Wissen wird im Modell gespeichert und kann anschließend genutzt werden, um neue Eingaben zu verarbeiten und passende Vorhersagen zu erzeugen. 
+Ein Modell bildet somit die Grundlage dafür, bereits gelernte Zusammenhänge auf bisher unbekannte Daten anzuwenden \parencite{LeCun2015}.
+
+\subsection{Neuronale Netze}
+\label{neuronale_netze}
+
+Ein Neuronales Netz wie in Abbildung \ref{fig:neuronales_netz} dargestellt, ist ein Netzwerk aus miteinander verbundenen Knoten, den sogenannten Neuronen, die in ihrer Struktur und Funktionsweise an das menschliche Gehirn angelehnt sind.
+Diese Neuronen sind durch Verbindungen miteinander Verknüpft, die die Stärke der Signalübertragung zwischen den Neuronen bestimmen. 
+Ein Neuronales Netz besteht aus mehreren Schichten von Neuronen wie Eingabeschicht, versteckten Schichten und Ausgabeschicht.
+Diese Schichten arbeiten zusammen und verarbeiten die Eingaben wie Text, Bilder oder Sensordaten schrittweise.
+Jede Schicht hat dabei eine spezifische Funktion: Die Eingabeschicht nimmt die Rohdaten auf, die versteckten Schichten extrahieren Merkmale und Muster, und die Ausgabeschicht liefert die endgültigen Vorhersagen für den jeweiligen Anwendungsfall.
+Während dem Lernens, dem sogenannten Training werden die Verbindungen und deren Gewichtungen zwischen den Neuronen schrittweise wie in Abschnitt \ref{sec:modell} beschrieben angepasst. \parencite{LeCun2015}.
+
+\begin{figure}[H] 
+  \centering 
+  \begin{tikzpicture}[ neuron/.style={ circle, draw, minimum size=0.8cm }, >=stealth ] 
+    % Eingabeschicht 
+    \node[neuron] (i1) at (0,2) {}; 
+    \node[neuron] (i2) at (0,1) {}; 
+    \node[neuron] (i3) at (0,0) {}; 
+    \node[neuron] (i4) at (0,-1) {}; 
+    % Hidden Layer 1 
+    \node[neuron] (h11) at (3,2.5) {}; 
+    \node[neuron] (h12) at (3,1.5) {}; 
+    \node[neuron] (h13) at (3,0.5) {}; 
+    \node[neuron] (h14) at (3,-0.5) {}; 
+    % Hidden Layer 2 
+    \node[neuron] (h21) at (6,2) {}; 
+    \node[neuron] (h22) at (6,1) {}; 
+    \node[neuron] (h23) at (6,0) {}; 
+    % Ausgabeschicht 
+    \node[neuron] (o1) at (9,1) {}; 
+    % Verbindungen Input -> Hidden 1 
+    \foreach \i in {1,2,3,4} { 
+      \foreach \h in {1,2,3,4} { 
+        \draw[gray] (i\i) -- (h1\h); 
+      } 
+    } 
+    % Verbindungen Hidden 1 -> Hidden 2 
+    \foreach \h in {1,2,3,4} { 
+      \foreach \k in {1,2,3} { 
+        \draw[gray] (h1\h) -- (h2\k); 
+      } 
+    } 
+    % Verbindungen Hidden 2 -> Output 
+    \foreach \k in {1,2,3} { 
+      \draw[gray] (h2\k) -- (o1); 
+    } 
+    % Beschriftungen 
+    \node[align=center] at (0,-2) {Eingabeschicht}; 
+    \node[align=center] at (3,-2) {Versteckte\\Schicht 1}; 
+    \node[align=center] at (6,-2) {Versteckte\\Schicht 2}; 
+    \node[align=center] at (9,-2) {Ausgabeschicht}; 
+    % Pfeil für gewichtete Verbindungen 
+    \draw[->, thick] (4.5,-3) -- (4.5,-0.4);
+    \node[below] at (4.5,-3) {Gewichtete Verbindungen}; 
+  \end{tikzpicture} 
+  \caption{Schematischer Aufbau eines mehrschichtigen neuronalen Netzes} 
+  \label{fig:neuronales_netz} 
+\end{figure}
+
+
+\subsection{Vom Vektor zum Embedding-Raum}
+\label{sec:vom_vektor_zum_embedding}
+
+Vektoren sind geordnete Mengen von Zahlen, die in der Mathematik und Informatik verwendet werden, um Objekte im mehrdimensionalen Vektorraum darzustellen. 
+In der Verarbeitung natürlicher Sprache werden Wörter, Sätze und Dokumente häufig in Vektoren überführt.
+Ein anderes Wort für diese Vektoren ist Embeddings. Embeddings ermöglichen es, semantische Ähnlichkeiten zwischen Wörtern zu erfassen, 
+indem ähnliche Wörter im mehrdimensionalen Embedding-Raum (vergleiche Abbildung \ref{fig:embedding3d}) nahe beieinander liegen.
+In diesem Raum repräsentieren die Positionen der Embeddings die semantischen Beziehungen zwischen den entsprechenden Wörtern. 
+Jedes Wort wird dabei durch mehrere Zahlenwerte, welche die verschiedenen Merkmale des Wortes repräsentieren, in einem Embedding dargestellt.
+Die einzelnen Dimensionen eines Embeddings besitzen hier keine direkte, für Menschen verständliche Bedeutung.
+Erst die Position der Embeddings im Raum ermöglicht es, semantische Ähnlichkeiten zwischen Wörtern zu erkennen \parencite{Mikolov2013}.
+
+Ein Embedding kann dabei wie folgt veranschaulicht werden:
+
+\[ \mathbf{e}_{\text{Katze}} = \begin{bmatrix} 0.82 \\ -0.15 \\ 0.47 \end{bmatrix} \]
+
+Dieses Embedding repräsentiert das Wort „Katze“ im mehrdimensionalen Embedding-Raum, wobei jede Komponente des Vektors ein bestimmtes Merkmal oder eine Eigenschaft des Wortes „Katze“ kodiert.
+Um die Funktionalität von Embeddings weiter zu verdeutlichen, sollen hier mehrere Embeddings für verschiedene Wörter exemplarisch betrachtet werden:
+
+\[ 
+\mathbf{e}_{\text{Katze}} 
+= 
+\begin{bmatrix} 
+  0.82\\ 
+  -0.15\\ 
+  0.47 
+\end{bmatrix}, 
+\qquad 
+\mathbf{e}_{\text{Hund}} 
+= 
+\begin{bmatrix} 
+  0.79\\ 
+  -0.12\\ 
+  0.51 
+\end{bmatrix}, 
+\qquad 
+\mathbf{e}_{\text{Auto}} 
+= 
+\begin{bmatrix} 
+  -0.34\\ 
+  0.88\\ 
+  0.70 
+\end{bmatrix} 
+\]
+
+Abbildung \ref{fig:embedding3d} zeigt die Position dieser Embeddings in einem vereinfachten dreidimensionalen Embedding-Raum. 
+Da die Koordinaten der Wörter „Katze“ und „Hund“ sehr ähnlich sind, liegen ihre Positionen nahe beieinander. 
+Das Embedding des Wortes „Auto“ unterscheidet sich dagegen stärker von „Katze“ oder „Hund“ und befindet sich deshalb weiter entfernt. 
+
+\begin{figure}[H] 
+  \centering 
+  \tdplotsetmaincoords{70}{115} 
+  \begin{tikzpicture}[tdplot_main_coords, scale=3] 
+    % Achsen 
+    \draw[->] (-0.6,0,0) -- (1.1,0,0) node[right] {x}; 
+    \draw[->] (0,-0.4,0) -- (0,1.1,0) node[left] {y}; 
+    \draw[->] (0,0,-0.4) -- (0,0,0.8) node[above] {z}; 
+    % Katze 
+    \filldraw[brown] (0.82,-0.15,0.47) circle (1pt) node[above left] {Katze}; 
+    % Hund 
+    \filldraw[brown] (0.79,-0.12,0.51) circle (1pt) node[right] {Hund}; 
+    % Auto 
+    \filldraw[red] (-0.34,0.88,0.70) circle (1pt) node[left] {Auto}; 
+  \end{tikzpicture} 
+  \caption{Vereinfachte Darstellung von Embeddings im dreidimensionalen Embedding-Raum} 
+  \label{fig:embedding3d} 
+\end{figure}
+
+\subsection{Cosine Similarity}
+\label{sec:cosine_similarity}
+
+Die Cosine Similarity vergleicht den Winkel sowie die Längen zwischen zwei Vektoren im Embedding-Raum. 
+Je kleiner der Winkel zwischen diesen Vektoren und je ähnlicher ihre Längen sind, desto ähnlicher sind diese Vektoren im Embedding-Raum zueinander \parencite{Reimers2019SBERT}.
+
+Zur Veranschaulichung soll die Cosine Similarity zunächst für die Wörter „Katze“ und „Hund“ berechnet werden. 
+
+\[ \mathbf{e}_{\text{Katze}} = 
+\begin{bmatrix} 0.82\\ -0.15\\ 0.47 
+\end{bmatrix} , 
+\qquad \mathbf{e}_{\text{Hund}} = 
+\begin{bmatrix} 0.79\\ -0.12\\ 0.51 
+\end{bmatrix} \] 
+
+Zunächst wird das Skalarprodukt beider Vektoren berechnet: 
+
+\[ \mathbf{e}_{\text{Katze}} 
+\cdot 
+\mathbf{e}_{\text{Hund}} =
+(0.82 \cdot 0.79) + 
+(-0.15 \cdot -0.12) + 
+(0.47 \cdot 0.51) \] 
+\[ = 0.6478 + 0.0180 + 0.2397 = 0.9055 \] 
+
+Anschließend werden die Längen der beiden Vektoren bestimmt: 
+
+\[ \|\mathbf{e}_{\text{Katze}}\| = 
+\sqrt{ 0.82^2 + (-0.15)^2 + 0.47^2} \] 
+\[ = \sqrt{ 0.6724 + 0.0225 + 0.2209} = 
+\sqrt{0.9158} = 0.9570 \] 
+\[ \|\mathbf{e}_{\text{Hund}}\| = 
+\sqrt{ 0.79^2 + (-0.12)^2 + 0.51^2} \] 
+\[ = \sqrt{ 0.6241 + 0.0144 + 0.2601} = 
+\sqrt{0.8986} = 0.9480 \] 
+
+Damit ergibt sich die Cosine Similarity zu 
+\[ \text{cosine\_similarity} (\mathbf{e}_{\text{Katze}}, 
+\mathbf{e}_{\text{Hund}}) = 
+\frac{0.9055} {0.9570\cdot0.9480} = 0.998 \] 
+
+Der errechnete Wert von 0.998 liegt sehr nahe bei 1. Dies zeigt, dass die Embeddings von „Katze“ und „Hund“ nahezu in dieselbe Richtung weisen und daher als semantisch sehr ähnlich betrachtet werden.
+
+Wird dagegen die Cosine Similarity zwischen „Katze“ und „Auto“ berechnet, ergibt sich analog zur Berechnung für „Katze“ und „Hund“ ein Wert von -0.073.
+Der Wert liegt nahe bei 0 und sogar leicht im negativen Bereich. Die beiden Embeddings weisen daher in deutlich unterschiedliche Richtungen und werden als semantisch unähnlich betrachtet.
+
+\section {Modellansätze}
+\label{sec:modellansätze}
+
+\subsection{Neural Language Models}
+
+Neuronale Sprachmodelle (Neural Language Models, NLMs) sind spezielle neuronale Netze, die auf Textsammlungen vortrainiert werden, um sprachliche Muster, semantische Zusammenhänge sowie Wissensrepräsentationen zu erlernen.
+Hierzu werden Wörter, Sätze und Dokumente in Embeddings überführt, die als Eingabe für ein neuronales Netz, wie in Abschnitt \ref{neuronale_netze} beschrieben, dienen \parencite{LeCun2015}.
+
+\subsection{Large Language Models }
+
+Large Language Models (LLMs) basieren auf neuronalen Sprachmodellen und erweitern diese durch eine enorme Anzahl an Parametern sowie tieferen Architekturen.
+Sie bilden die Grundlage für generative KI-Systeme und ermöglichen die Bearbeitung von verschiedenen Aufgaben aus dem bereich der natürlichen Sprachverarbeitung.
+Dazu zählen die Generierung (Erzeugung von Texten) , die Klassifikation (Einordnung von Texten in vordefinierte Kategorien), Frage-Antwort-Systeme sowie das liefern mehrer relevanter Ergebnisse zu einer Suchanfrage. \parencite{Zhao2023}.
+
+Die Architektur hinter einem LLM basiert auf dem Transformer-Modell. Dieses Modell nutzt sogenannte Attention-Mechanismen, um die statistischen Zusammenhänge zwischen einzelen Wörtern in einem Satz zu erfassen und zu gewichten \parencite{Vaswani2017}. 
+Ein Beispiel hierfür ist folgender Satz: „Anna trinkt Kaffee am Morgen.“ Der Attention-Mechanismus bewertet die Bedeutung jedes Wortes im Zusammenhang mit den anderen Wörtern des Satzes. 
+Dabei erkennt das Modell, dass die Wörter „Anna“, „trinkt“ und „Kaffee“ stärker miteinander in Beziehung stehen als häufig vorkommende Wörter wie „am“ oder „der“. 
+
+\subsection{Fine-Tuning}
+
+Large Language Models werden auf allgemeine Textsammlungen vortrainiert, um ein umfangreiches sprachliches und sachliches Wissen zu erwerben.
+Dies führt dazu, dass das Modell ein breites Wissen erwirbt, aber möglicherweise nicht auf spezifische Aufgaben oder einzelnen Fachbereiche spezialisiert ist.
+Um ein LLM auf spezifische Aufgaben oder Fachbereiche anzupassen, wird häufig das sogenannte Fine-Tuning eingesetzt. 
+Hierbei wird das vortrainierte LLM mit Informationen zu der spezifischen Aufgabe oder dem Fachbereich weiter trainiert, 
+um damit die Leistungsfähigkeit an die Anforderrungen des jeweiligen Einsatzbereichs anzupassen \parencite{Wei2022,Zhang2023InstructionTuning}.
+
+Ein Vorteil des Fine-Tunings ist es, dass ein vortrainiertes LLM nicht vollständig neu trainiert werden muss, 
+sondern das vorhanden Wissen in als Ausgangspunkt genutzt werden kann und dieses um die neuen spezifischen Informationen erweitert wird.
+Dadurch ist es möglich, deutlich bessere Ergebnisse in kürzerer Zeit zu erzielen, als bei einem kompletten Neutraining eines neuronalen Sprachmodells \parencite{Wei2022}.
+
+Um dies am obrigen Beispiel mit Anna zu verdeutlichen: Angenommen, das LLM soll zusätzlich Informationen über die Vorlieben von Anna beim Kaffeetrinken lernen. 
+Anna hat eine Vorliebe für Espresso aus Italien.
+Durch Fine-Tuning ist es möglich, die Attention-Mechanismen des Modells gezielt auf die Präferenz von Anna auszurichten.
+Nach dem Fine-Tuning weiß das Modell nicht nur, dass Anna Kaffee am morgen trinkt, sondern auch, dass sie Espresso aus Italien bevorzugt.
+
+\subsection{Embedding-Modelle}
+
+Embedding-Modelle bauen auf dem Grundpinzip aus Kapitel \ref{vom_vektor_zum_embedding} auf. 
+Es handelt sich um Modelle, welche jegliche Arte von Eingaben wie Wörter, Sätze, Bilder oder Audioinhalte in Embeddings überführen und diese Eingaben dann in einem Embedding-Raum abbilden.
+Dadurch ist es möglich, die semantische Ähnlichkeit zwischen verschiedenen Eingaben zu bestimmen, indem die Abstände ihrer Embeddings im Embedding-Raum betrachtet werden. 
+Hierfür wird typischerweise die Cosine Similarity (vergleiche Abschnitt \ref{sec:cosine_similarity}) zwischen den Embeddings berechnet, um die semantische Ähnlichkeit zu quantifizieren.
+
+\subsection{Sentence Transformers}
+
+Bei Sentence Transformers handelt es sich um eine weiterentwickelte Form von Embedding-Modellen, die vollständige Sätze oder Dokumente in Embeddings, überführen.
+Im Gegensatz zu einem LLM, das auf die Vorhersage des nächsten Wortes trainiert wird, liegt der Fokus bei Sentence Transformers darauf, 
+semantisch ähnliche Texte im Embedding-Raum nahe beieinander zu platzieren, während semantisch unterschiedliche Texte weiter voneinander entfernt liegen.
+Sentence Transformers werden häufig für Aufgaben wie semantische Suche oder Empfehlungssysteme eingesetzt.
+Anstatt ausschließlich identische Schlüsselwörter zu suchen, ermöglichen sie die Identifikation inhaltlich ähnlicher Dokumente auch dann, wenn unterschiedliche Formulierungen verwendet werden \parencite{Reimers2019SBERT}.
+
+\begin{figure}[H] 
+  \centering 
+  \begin{tikzpicture}[ 
+    node distance=1.8cm, every node/.style={font=\small}, 
+    textnode/.style=
+    { draw, rounded corners, align=center, minimum width=4.0cm, minimum height=0.9cm }, 
+    model/.style=
+    { draw, fill=blue!10, rounded corners, minimum width=2.5cm, minimum height=1cm } ] 
+    % Eingabetexte 
+    \node[textnode] (t1) at (0,2) 
+    {Der Hund ist Braun \\ und 2 Jahre alt}; 
+    \node[textnode] (t2) at (0,0) 
+    {Die Katze ist Braun \\ und 2 Jahre alt}; 
+    \node[textnode] (t3) at (0,-2) 
+    {Das Auto ist Rot \\ und hat 150 PS}; 
+    % Sentence Transformer
+    \node[model] (m1) at (5,2) {Sentence Transformer}; 
+    \node[model] (m2) at (5,0) {Sentence Transformer}; 
+    \node[model] (m3) at (5,-2) {Sentence Transformer}; 
+    % Pfeile zum Modell 
+    \draw[->] (t1) -- (m1); 
+    \draw[->] (t2) -- (m2); 
+    \draw[->] (t3) -- (m3); 
+    % 3D-Embedding-Raum (perspektivisch) %
+    % Ursprung 
+    \coordinate (O) at (10,-3); 
+    % Achsen 
+    \draw[->,thick] (O) -- ++(4,0) node[right] {$y$}; 
+    \draw[->,thick] (O) -- ++(0,4) node[above] {$z$}; 
+    \draw[->,thick] (O) -- ++(-1.8,-1.8) node[below] {$x$}; 
+    % Beschriftung 
+    \node at (12.2,-4.2) {Embedding-Raum}; 
+    % Embeddings im 3D-Raum 
+    \coordinate (E1) at (11.2,-0.6); % Hund 
+    \coordinate (E2) at (11.5,-0.8); % Katze 
+    \coordinate (E3) at (13.0,-2.2); % Auto 
+    \filldraw[brown] (E1) circle (2pt); \node[above] at (E1) {$e_1$}; 
+    \filldraw[brown] (E2) circle (2pt); \node[right] at (E2) {$e_2$}; 
+    \filldraw[red] (E3) circle (2pt); \node[right] at (E3) {$e_3$}; 
+    % Hilfslinien zur Tiefenwirkung 
+    \draw[dashed,gray] (E1) -- ++(-0.6,-0.6); 
+    \draw[dashed,gray] (E2) -- ++(-0.8,-0.8); 
+    \draw[dashed,gray] (E3) -- ++(-1.0,-1.0);
+    % Verbindungslinien 
+    \draw[->] (m1.east) -- (E1); 
+    \draw[->] (m2.east) -- (E2); 
+    \draw[->] (m3.east) -- (E3);
+    \end{tikzpicture} 
+    \caption{Prinzipielle Funktionsweise eines Sentence Transformers. Semantisch ähnliche Texte werden auf nahe beieinanderliegende Embeddings abgebildet, während inhaltlich unterschiedliche Texte größere Abstände im Embedding-Raum aufweisen.} 
+    \label{fig:sentence_transformer} 
+\end{figure}
+
+\subsection{Triplet Loss}
+
+Um mithilfe von Embedding-Modellen semantische Ähnlichkeiten von Daten wie Texten oder Bildern zu lernen, wird häufig der Triplet Loss (vergleiche Abbildung \ref{fig:triplet_loss}) eingesetzt.
+Hierzu werden während des Trainings Dreiergruppen von Trainingsbeispielen, sogenannte Triplets, verwendet. 
+Jedes Triplet besteht aus einem Anker (\textit{A}), einem positiven Beispiel (\textit{P}) und einem negativen Beispiel (\textit{N}).
+Zusätzlich gibt es noch den Margin-Parameter (\textit{m}). Dieser legt fest, um wie viel der Abstand zwischen Anker und negativem Beispiel größer sein muss als der Abstand zwischen Anker und positivem Beispiel. 
+Das Ziel des Triplet Loss besteht darin, 
+den Abstand zwischen Anker und positivem Beispiel zu minimieren und gleichzeitig den Abstand zwischen Anker und negativem Beispiel um mindestens eine vorgegebene Margin (\textit{m}) zu vergrößern \parencite{Schroff2015}.
+
+
+\begin{figure}[H] 
+  \centering 
+  \begin{tikzpicture}[ >=stealth, 
+    textnode/.style={ draw, rounded corners, align=center, minimum width=3.5cm, minimum height=1cm } ] 
+    % Anchor 
+    \node[textnode,fill=blue!15] (A) at (0,0) { Der Hund ist Braun\\ und 2 Jahre alt }; 
+    % Positive 
+    \node[textnode,fill=green!15] (P) at (5,1.5) { Die Katze ist Braun\\ und 2 Jahre alt }; 
+    % Negative 
+    \node[textnode,fill=red!15] (N) at (10,-2) { Das Auto ist Rot\\ und hat 150 PS }; 
+    % Abstand Anchor -> Positive 
+    \draw[<->,thick,green!60!black] (A) -- node[above left] {$d(A,P)$} (P); 
+    % Abstand Anchor -> Negative 
+    \draw[<->,thick,red] (A) -- node[below] {$d(A,N)$} (N); 
+    % Margin-Bereich 
+    \draw[dashed,thick] (6.9,-0.5) -- (8.3,-0.5); 
+    \draw[dashed] (6.9,-0.2) -- (6.9,-0.8); 
+    \draw[dashed] (8.3,-0.2) -- (8.3,-0.8); 
+    \node at (7.6,-1.1) {Margin $m$}; 
+    % Positive Region 
+    \node[green!50!black] at (5.0,2.8) {ähnlich}; 
+    % Negative Region 
+    \node[red] at (10.0,-3.2) {unähnlich}; 
+    % Zielgleichung 
+    \node[ draw, rounded corners, fill=gray!10 ] at (5,-4.5) {$d(A,N) > d(A,P) + m$}; 
+  \end{tikzpicture} 
+  \caption{ Funktionsweise des Triplet Loss. Der Anchor (A) wird dem positiven Beispiel (P) angenähert, während der Abstand zum negativen Beispiel (N) vergrößert wird. Die Margin $m$ definiert dabei den Mindestabstand, um den das negative Beispiel weiter vom Anchor entfernt liegen muss als das positive Beispiel. } 
+  \label{fig:triplet_loss} 
+\end{figure}
+
+
+
+\subsection{Learning-to-Rank}
+
+Learning-to-Rank (LTR) bezeichnet eine Klasse von maschinellen Lernverfahren, deren Ziel darin besteht, die Reihenfolge von Ergebnissen innerhalb einer Rangliste zu optimieren. 
+Die Grundidee besteht darin, für eine Anfrage mehrere mögliche Ergebnisse zu bewerten und anschließend entsprechend ihrer Relevanz zu sortieren. 
+Je relevanter ein Ergebnis für die Anfrage ist, desto weiter oben soll es in der Rangliste erscheinen \parencite{liu2009learning}.
+
+Grundsätzlich lassen sich Learning-to-Rank-Verfahren in drei Kategorien unterteilen:
+
+\begin{description} 
+  \item[Pointwise:] Das Modell betrachtet jedes Ergebnis einzeln und bewertet dessen Relevanz unabhängig von den übrigen Ergebnissen. 
+  \item[Pairwise:] Das Modell betrachtet jeweils zwei Ergebnisse gleichzeitig und lernt, welches der beiden relevanter ist. 
+  \item[Listwise:] Das Modell betrachtet die gesamte Rangliste und optimiert direkt deren Qualität. 
+\end{description} 
+
+Die folgende Abbildung \ref{fig:ltr_ansaetze} veranschaulicht die Unterschiede zwischen den drei Kategorien von Learning-to-Rank-Verfahren.
+
+\begin{figure}[H] 
+  \centering 
+  \begin{tikzpicture}[ >=stealth, font=\small, 
+    title/.style={ font=\bfseries\large }, 
+    box/.style={ draw, rounded corners, align=center, minimum width=3.6cm, minimum height=0.8cm }, 
+    result/.style={ draw, rounded corners, fill=green!10, align=center, minimum width=3.8cm, minimum height=0.8cm } ] 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %% POINTWISE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[title] at (0,4.8) {Pointwise}; 
+    \node[box,fill=blue!10] (pq) at (0,3.5) {Anfrage}; 
+    \node[box] (pdocs) at (0,1.8) {Dokument A\\Dokument B\\Dokument C}; 
+    \node[result] (pres) at (0,-0.5) {Relevanz B: 95 \%\\ Relevanz A: 70 \%\\ Relevanz C: 20 \% }; 
+    \draw[->] (pq) -- (pdocs); 
+    \draw[->] (pdocs) -- (pres); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %% PAIRWISE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[title] at (6.5,4.8) {Pairwise}; 
+    \node[box,fill=blue!10] (qq) at (6.5,3.5) {Anfrage}; 
+    \node[box] (qdocs) at (6.5,1.8) {Dokument A\\Dokument B\\Dokument C}; 
+    \node[result] (qres) at (6.5,-0.5) { B $>$ A\\ A $>$ C\\ B $>$ C }; 
+    \draw[->] (qq) -- (qdocs); 
+    \draw[->] (qdocs) -- (qres); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %% LISTWISE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[title] at (13,4.8) {Listwise};
+    \node[box,fill=blue!10] (lq) at (13,3.5) {Anfrage}; 
+    \node[box] (ldocs) at (13,1.8) {Dokument A\\Dokument B\\Dokument C}; 
+    \node[result] (lres) at (13,-0.5) { B >  A >  C\\ A >  C  und A > B\\ C <  A <  B }; \draw[->] (lq) -- (ldocs); \draw[->] (ldocs) -- (lres); 
+  \end{tikzpicture} 
+  \caption{Vergleich der Learning-to-Rank-Ansätze. Pointwise bewertet Dokumente einzeln, Pairwise vergleicht Dokumentenpaare miteinander und Listwise optimiert die vollständige Rangliste direkt.} \label{fig:ltr_ansaetze} 
+\end{figure}
+
+\subsection{LambdaRank}
+
+LambdaRank ist eine Weiterentwicklung des zuvor beschriebenen Pairwise-Ansatzes des Learning-to-Rank-Verfahrens.
+Wie beim Pairwise-Ranking vergleicht das Modell jeweils zwei Ergebnisse gleichzeitig und lernt, welches Ergebnis für eine Anfrage relevanter ist. 
+Der Unterschied besteht darin, dass bei LambdaRank nicht alle Vergleiche gleich stark gewichtet werden \parencite{Burges2006LambdaRank}.
+
+Die Grundidee von LambdaRank besteht darin, die Position der Dokumente innerhalb der Rangliste während des Trainings zu berücksichtigen. 
+Hierbei wird bewertet, wie stark sich eine Fehlplatzierung auf die Qualität der gesamten Rangliste auswirkt. 
+
+Abbildung \ref{fig:lambdarank_prinzip} zeigt beispielhaft eine Rangliste, in der sich das eigentlich relevanteste Dokument auf Rang 3 befindet. 
+Da eine Korrektur dieser Fehlplatzierung die Qualität der Rangliste deutlich verbessern würde, erhält dieser Vergleich während des Trainings eine hohe Gewichtung. 
+Fehlplatzierungen auf den hinteren Rangpositionen, beispielsweise zwischen Rang 4 und Rang 5, haben dagegen meist nur einen geringen Einfluss auf die wahrgenommene Qualität der Rangliste und werden entsprechend schwächer gewichtet. 
+Zur Umsetzung verwendet LambdaRank sogenannte $\lambda$-Gradienten. Ein Gradient beschreibt hierbei die Richtung und Stärke der Anpassung einer Position innerhalb der Rangliste. Dokumentenvergleiche mit großem Einfluss auf die Rangliste erzeugen große $\lambda$-Werte, während Vergleiche mit geringem Einfluss kleinere $\lambda$-Werte erzeugen. 
+Dadurch lernt das Modell insbesondere Fehler auf den oberen Rangpositionen zu korrigieren \parencite{Burges2006LambdaRank}.
+
+\begin{figure}[H] 
+  \centering 
+  \begin{tikzpicture}[ >=stealth, font=\small, node distance=0.7cm, 
+    rank/.style={ draw, rounded corners, minimum width=4cm, minimum height=0.8cm, align=center }, 
+    important/.style={ draw=red!70, very thick, ->, red!70 }, 
+    lessimportant/.style={ draw=gray, dashed, ->, gray } ] 
+    % Titel 
+    \node[font=\bfseries\large] at (0,5.2) {Rangliste}; 
+    % Rangliste 
+    \node[rank,fill=green!15] (a) at (0,3.8) {Rang 1: Dokument A}; 
+    \node[rank,fill=blue!10] (b) at (0,2.6) {Rang 2: Dokument B}; 
+    \node[rank,fill=red!15] (c) at (0,1.4) {Rang 3: Dokument C (eigentlich relevantestes Dokument)}; 
+    \node[rank] (d) at (0,0.2) {Rang 4: Dokument D}; 
+    \node[rank] (e) at (0,-1.0) {Rang 5: Dokument E}; 
+    % Erklärung für Rang 3 
+    \node[ text=red!70, align=left, anchor=west ] at (4.8,1.4) { gro{\ss}er Einfluss\\ hohes $\lambda$ }; 
+    % Erklärung für Rang 4/5 
+    \node[ text=gray, align=left, anchor=west ] at (3.0,-0.4) { geringer Einfluss\\ kleines $\lambda$ };
+    \end{tikzpicture} 
+  \caption{Prinzip von LambdaRank. Vergleiche, deren Vertauschung die Rangliste stark verändert, erhalten eine höhere Gewichtung als Vergleiche mit geringem Einfluss auf die Rangfolge \parencite{Burges2006LambdaRank}.} 
+  \label{fig:lambdarank_prinzip} 
+\end{figure}
+
+\section{Validierungsansätze}
+\label{sec:validierungsansätze}
+
+\subsection{Recall@k} 
+
+Diese Metrik beantwortet die Frage, ob eine Anfrage an ein Empfehlungssystem ein relevantes Ergebnis innerhalb der ausgegebenen Rangliste liefert, wenn lediglich die ersten $k$ Plätze dieser Rangliste betrachtet werden. 
+Dabei wird nicht berücksichtigt, an welchem Platz innerhalb dieser ersten $k$ Positionen sich das relevante Ergebnis befindet. 
+Es wird ausschließlich geprüft, ob mindestens ein relevantes Ergebnis innerhalb der Top-$k$ Positionen vorhanden ist.\parencite{manning2008ir}.
+
+Abbildung \ref{fig:recall_at_3} veranschaulicht das Prinzip von Recall@k an einem konkreten Beispiel für $k=3$.
+
+\begin{figure}[H] 
+  \centering \begin{tikzpicture}[ font=\small, >=stealth, rank/.style={ draw, rounded corners, minimum width=4cm, minimum height=0.8cm, align=center } ] 
+    % Titel 
+    \node[font=\bfseries\large] at (0,5.2) {Recall@3}; 
+    % Top-k Bereich 
+    \fill[green!10,rounded corners] (-2.5,0.7) rectangle (2.5,4.4); 
+    \node[font=\bfseries,color=green!50!black] at (0,4.7) {Top-3-Bereich}; 
+    % Rangliste 
+    \node[rank] (a) at (0,3.8) {Rang 1: Dokument A}; 
+    \node[rank] (b) at (0,2.6) {Rang 2: Dokument B}; 
+    \node[ rank, fill=green!20, draw=green!60!black, very thick ] (c) at (0,1.4) {Rang 3: Dokument C (relevant)}; 
+    \node[rank] (d) at (0,0.2) {Rang 4: Dokument D}; 
+    \node[rank] (e) at (0,-1.0) {Rang 5: Dokument E}; 
+    % Erfolgsmarkierung 
+    \node[ draw, fill=green!20, rounded corners, text width=4.5cm, align=center ] at (6,2.0) { Recall@3 = 1\\[0.1cm] Relevantes Ergebnis\\ innerhalb der Top-3 }; 
+    \draw[->,thick,green!60!black] (c.east) -- (4.0,2.0); 
+  \end{tikzpicture} 
+  \caption{Beispiel für Recall@3. Da sich das relevante Dokument C innerhalb der ersten drei Rangpositionen befindet, gilt die Anfrage als erfolgreich und trägt positiv zum Recall@3-Wert bei.} 
+  \label{fig:recall_at_3} 
+\end{figure}
+
+Der Wertebereich der Berechnung liegt zwischen 0 und 1. Ein Wert von 1 bedeutet, dass für jede Anfrage mindestens ein relevantes Ergebnis innerhalb der ersten $k$ Positionen gefunden wurde. 
+
+\subsection{Mean Reciprocal Rank} 
+
+Der Mean Reciprocal Rank (MRR) bewertet, wie früh das erste relevante Ergebnis einer Anfrage an das Empfehlungssystem innerhalb der ausgegebenen Rangliste erscheint \parencite{voorhees1999mrr,zhu2024llmirsurvey}. 
+Während Recall@k lediglich betrachtet, ob ein relevantes Ergebnis gefunden wird, berücksichtigt der MRR zusätzlich dessen Position. 
+
+Das Zentrale Element des MRR ist der Reziproke Rang. Dieser gibt an, an welcher Position sich das erste relevante Ergebnis einer Rangliste befindet. 
+Dazu wird der Kehrwert (Reziprokwert) der Rangposition berechnet: Befindet sich das erste relevante Ergebnis auf Rang 3, beträgt der reziproke Rang $\frac{1}{3}$.
+Je früher das erste relevante Ergebnis erscheint, desto größer ist der reziproke Rang. 
+Dadurch werden relevante Treffer auf den vorderen Positionen stärker belohnt als Treffer auf den hinteren Positionen. \parencite{voorhees1999mrr,zhu2024llmirsurvey}
+
+Im Beispiel aus Abbildung \ref{fig:mrr_beispiel} befindet sich das relevante Ergebnis auf Rang 3.
+Ein relevantes Ergebnis auf Rang 1 oder 2 würde in diesem Beispiel besser bewertet als das Ergebnis auf Rang 3.
+
+\begin{figure}[H] 
+  \centering 
+  \begin{tikzpicture}[ font=\small, >=stealth, 
+    rank/.style={ draw, rounded corners, minimum width=4cm, minimum height=0.8cm, align=center } ] 
+    % Titel
+    \node[font=\bfseries\large] at (0,5.2) {Mean Reciprocal Rank (MRR)}; 
+    % Rangliste 
+    \node[rank] (a) at (0,3.8) {Rang 1: Makro A}; 
+    \node[rank] (b) at (0,2.6) {Rang 2: Makro B}; 
+    \node[ rank, fill=green!20, draw=green!60!black, very thick ] (c) at (0,1.4) {Rang 3: Makro C (erstes relevantes Makro)}; 
+    \node[rank] (d) at (0,0.2) {Rang 4: Makro D}; 
+    \node[rank] (e) at (0,-1.0) {Rang 5: Makro E}; 
+    % Hervorhebung Rang 3 
+    \draw[->,thick,green!60!black] (c.east) -- (4.0,1.4); 
+    % Berechnung 
+    \node[ draw, rounded corners, fill=green!10, text width=4.5cm, align=center ] at (6.2,1.4) { Erstes relevantes\\ Ergebnis auf Rang 3\\[0.2cm] $MRR=\frac{1}{3}=0.33$ }; 
+    % Vergleich zu besseren Positionen 
+    \node[ draw, rounded corners, fill=blue!10, text width=5cm, align=left ] at (6.2,3.3) { Rang 1 $\rightarrow MRR = 1.00$\\ Rang 2 $\rightarrow MRR = 0.50$\\ Rang 3 $\rightarrow MRR = 0.33$ }; 
+  \end{tikzpicture} 
+  \caption{Beispiel zur Berechnung des Mean Reciprocal Rank. Das erste relevante Makro befindet sich auf Rang 3, wodurch sich ein reziproker Rang von $1/3$ ergibt. Frühere relevante Treffer führen zu höheren MRR-Werten.} 
+  \label{fig:mrr_beispiel} 
+\end{figure}
+
+Der Wertebereich liegt auch hier zwischen 0 und 1. Ein hoher Wert zeigt an, dass ein relevantes Ergebnis bereits an einer der vorderen Positionen einer Rangliste erscheint. 
+
+\subsection{Normalized Discounted Cumulative Gain} 
+
+Der Normalized Discounted Cumulative Gain (nDCG) bewertet die Qualität einer gesamten Rangliste. Im Gegensatz zu Recall@k und MRR wird hierbei nicht nur betrachtet, 
+ob relevante Ergebnisse gefunden werden oder wie früh das erste relevante Ergebnis erscheint. 
+Stattdessen werden alle Ergebnisse innerhalb der Rangliste berücksichtigt. Zusätzlich unterscheidet nDCG zwischen verschiedenen Relevanzstufen. 
+Dadurch kann beispielsweise ein sehr relevantes Ergebnis stärker bewertet werden als ein nur teilweise relevantes Ergebnis \parencite{jarvelin2002dcg}. 
+
+Zur Veranschaulichung wird in Abbildung \ref{fig:ndcg_beispiel} eine Rangliste mit unterschiedlichen Relevanzwerten betrachtet. 
+
+\begin{figure}[H] 
+  \centering 
+  \begin{tikzpicture}[ font=\small, >=stealth, 
+    rank/.style={ draw, rounded corners, minimum width=5.2cm, minimum height=0.8cm, align=center } ] 
+    % Titel 
+    \node[font=\bfseries\large] at (0,5.7) {Normalized Discounted Cumulative Gain (nDCG)}; 
+    % Rangliste 
+    \node[rank,fill=yellow!15] (a) at (0,4.0) {Rang 1: Dokument A (Relevanz = 1)}; 
+    \node[rank,fill=green!15] (b) at (0,2.7) {Rang 2: Dokument B (Relevanz = 2)}; 
+    \node[ rank, fill=green!30, draw=green!60!black, very thick ] (c) at (0,1.4) {Rang 3: Dokument C (Relevanz = 3)}; 
+    \node[rank] (d) at (0,0.1) {Rang 4: Dokument D (Relevanz = 0)}; 
+    % Hinweise 
+    \draw[->,thick,green!60!black] (c.east) -- (4.7,1.4); 
+    \node[ draw, rounded corners, fill=green!10, text width=4.8cm, align=center ] at (8.0,1.4) { Sehr relevantes Ergebnis\\ erst auf Rang 3\\[1mm] $\Rightarrow$ Rangliste nicht optimal }; % Erklärung oben 
+    \draw[->,thick,orange] (a.east) -- (4.7,4); 
+    \node[ draw, rounded corners, fill=orange!10, text width=4.8cm, align=center ] at (8.0,4) { Wenig relevantes Ergebnis\\ auf Rang 1\\[1mm] $\Rightarrow$ ungünstige Platzierung }; % Ideal Ranking 
+    \node[ draw, rounded corners, fill=blue!10, text width=7cm, align=left ] at (0,-1.9) { \textbf{Ideale Rangliste:}\\[1mm] 1. Dokument C (Relevanz = 3)\\ 2. Dokument B (Relevanz = 2)\\ 3. Dokument A (Relevanz = 1)\\ 4. Dokument D (Relevanz = 0) };
+  \end{tikzpicture} 
+  \caption{Beispiel für nDCG. Die Relevanz eines Ergebnisses wird unabhängig von seiner Rangposition betrachtet. Obwohl Dokument C die höchste Relevanz besitzt, erscheint es erst auf Rang 3. nDCG erkennt diese Fehlplatzierung und bewertet die Rangliste schlechter als eine ideal sortierte Rangliste.} 
+  \label{fig:ndcg_beispiel} 
+\end{figure}
+
+Der Wertebereich liegt zwischen 0 und 1. Ein Wert von 1 bedeutet, dass die Ergebnisse optimal entsprechend der idealen Rangliste sortiert wurden. 
+
+\section{Handlungsbedarf und Forschungsfragen}
+\label{sec:handlungsbedarf_und_forschungsfragen} 
+
+Die in Kapitel \ref{sec:herausforderung} beschriebene Herausforderung zeigt, dass die Suche nach geeigneten Makros innerhalb großer Makrobestände mit einem erheblichen zeitlichen und wirtschaftlichen Aufwand verbunden sein kann. 
+
+Gleichzeitig wurde in Kapitel \ref{chap:stand_der_technik} gezeigt, dass bereits verschiedene Verfahren zur Verarbeitung, Bewertung und Empfehlung von Informationen existieren. 
+
+Hieraus ergibt sich ein Handlungsbedarf zur Entwicklung eines Systems, das die vorhandenen Artikel- und Makrodaten automatisiert auswerten kann. 
+Ein solches System soll technische Informationen aus Artikeln extrahieren, diese mit bereits bekannten Artikel-Makro-Zuordnungen vergleichen und anschließend geeignete Makros in Form einer Rangliste empfehlen. 
+
+Für die Entwicklung eines solchen Empfehlungssystems müssen zunächst die relevanten technischen Informationen innerhalb der verfügbaren Artikeldaten identifiziert und hinsichtlich ihrer Eignung zur Beschreibung von Makros untersucht werden. 
+Darauf aufbauend stellt sich die Frage, welcher Modellansatz die vorhandenen Informationen bestmöglich zur automatisierten Makroempfehlung nutzen kann. 
+Anschließend muss bewertet werden, welche Empfehlungsqualität der ausgewählte Ansatz erreicht und inwieweit die empfohlenen Makros hinsichtlich ihrer Relevanz korrekt priorisiert werden können. 
+Abschließend ist zu untersuchen, welchen praktischen Nutzen ein solches Empfehlungssystem für die Elektrokonstruktion besitzt und ob die in Kapitel \ref{sec:wirtschaftliche_auswirkungen} beschriebenen Such- und Auswahlaufwände tatsächlich reduziert werden können. 
+
+Vor diesem Hintergrund ergibt sich folgende übergeordnete Forschungsfrage: 
+
+\begin{quote} 
+  \textbf{RQ0:} Inwieweit eignet sich ein KI-basiertes Empfehlungssystem auf Basis vorhandener Artikel-Makro-Zuordnungen zur automatisierten Empfehlung geeigneter Makros für neue Elektrokonstruktionsaufgaben? 
+\end{quote} 
+
+Zur Beantwortung dieser Forschungsfrage werden folgende Teilforschungsfragen untersucht: 
+
+\begin{description} 
+  \item[RQ1:] Wie können Artikel und Makros als Lern- und Bewertungsbasis für ein Empfehlungssystems verwendet werden ? 
+  \item[RQ2:] Welcher Modellansatz eignet sich für die automatisierte Empfehlung geeigneter Makros ? 
+  \item[RQ3:] Welche Empfehlungsqualität erreicht der ausgewählte Modellansatz hinsichtlich Trefferwahrscheinlichkeit und Rankingqualität? 
+  \item[RQ4:] Welchen Einfluss besitzt das entwickelte Empfehlungssystem auf den Suchaufwand und die Wiederverwendung bestehender Makros in der Elektrokonstruktion? 
+\end{description} 
+
+Das Ziel dieser Arbeit besteht folglich darin, die Machbarkeit eines Empfehlungssystems zu untersuchen, einen geeigneten Modellansatz auf Basis der verfügbaren Daten auszuwählen, 
+dessen Empfehlungsqualität zu evaluieren und den potenziellen Nutzen für die Elektrokonstruktion zu bewerten.
+
+
+\chapter{Vorgehensweise} \label{chap:vorgehensweise} 
+
+\section{Methodisches Vorgehen}
+Zur Beantwortung der in Kapitel \ref{sec:handlungsbedarf_und_forschungsfragen} formulierten Forschungsfragen wird die Design Science Research Methodology (DSRM) nach Peffers et al. verwendet \parencite{peffers2007dsrm}. 
+Die DSRM beschreibt einen strukturierten Forschungsprozess zur Entwicklung und Evaluation technischer Artefakte und eignet sich insbesondere für die Entwicklung von Informationssystemen. 
+Das Ziel der Methodik besteht darin, eine Problemstellung systematisch zu analysieren, daraus Anforderungen abzuleiten, ein geeignetes Artefakt zu entwickeln und dessen Nutzen durch eine Evaluation nachzuweisen. 
+Der von Peffers et al. beschriebene Forschungsprozess umfasst die folgenden Schritte: 
+
+\begin{enumerate} 
+    \item Problemidentifikation und Motivation 
+    \item Definition der Lösungsziele 
+    \item Design und Entwicklung des Artefakts 
+    \item Demonstration der Lösung 
+    \item Evaluation des Artefakts 
+    \item Kommunikation der Ergebnisse 
+\end{enumerate} 
+
+\section{Iterativer Entwicklungsprozess} 
+Innerhalb der Design-, Entwicklungs- und Evaluationsphase wird die DSRM durch die Prinzipien des Action Design Research (ADR) nach Sein et al. ergänzt \parencite{sein2011adr}. 
+ADR verbindet die Entwicklung eines Artefakts mit dessen fortlaufender Analyse, Validierung und Verbesserung. Während die DSRM den übergeordneten Forschungsrahmen bereitstellt, 
+definiert ADR einen iterativen Entwicklungszyklus zur schrittweisen Verbesserung des Empfehlungssystems. Der iterative Entwicklungsprozess umfasst die folgenden Schritte: 
+
+\begin{enumerate} 
+\item Analyse des aktuellen Systemzustands 
+\item Recherche fachlicher und technischer Lösungsansätze 
+\item Konzeption neuer Komponenten oder Optimierungen 
+\item Implementierung der entwickelten Ansätze 
+\item Durchführung von Tests und Validierungen 
+\item Evaluation anhand definierter Qualitätsmetriken 
+\item Interpretation der Ergebnisse 
+\item Ableitung weiterer Verbesserungen 
+\end{enumerate} 
+
+Die Ergebnisse einer Iteration bilden jeweils die Grundlage für die nachfolgende Iteration. Dadurch entsteht ein kontinuierlicher Verbesserungsprozess, in dem Forschung, Entwicklung und Evaluation eng miteinander verzahnt sind. 
+Die Kombination aus DSRM und ADR ermöglicht einerseits einen strukturierten wissenschaftlichen Forschungsprozess und andererseits eine iterative Optimierung des entwickelten Empfehlungssystems. 
+Abbildung \ref{fig:dsrm_adr_verzahnung} veranschaulicht die Verzahnung beider Methodiken.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[
+        >=stealth,
+        font=\small,
+        dsrm/.style={draw, rounded corners, fill=blue!10, minimum width=4.2cm, minimum height=0.95cm, align=center},
+        adr/.style={draw, rounded corners, fill=orange!15, minimum width=2.9cm, minimum height=0.8cm, align=center},
+        analysis/.style={draw, rounded corners, fill=orange!25, minimum width=3.4cm, minimum height=0.95cm, align=center},
+        bridge/.style={draw, rounded corners, fill=blue!5, minimum width=1.8cm, minimum height=0.75cm, align=center, font=\scriptsize},
+        flow/.style={->, thick},
+        cycle/.style={->, thick, orange!80!black},
+        relation/.style={densely dashed, gray},
+        artifact/.style={->, thick, blue!80!black}
+    ]
+
+        \node[dsrm] (problem) at (0, 0) {Problemidentifikation\\und Motivation};
+        \node[dsrm] (goals) at (0, -1.45) {Definition der\\Lösungsziele};
+        \node[dsrm, minimum height=5.8cm] (designphase) at (0, -5.2) {Design \& Entwicklung\\des Artefakts};
+        \node[dsrm] (demo) at (0, -9.0) {Demonstration};
+        \node[dsrm] (eval) at (0, -10.45) {Evaluation};
+        \node[dsrm] (comm) at (0, -11.9) {Kommunikation};
+
+        \draw[flow] (problem) -- (goals);
+        \draw[flow] (goals) -- (designphase);
+        \draw[flow] (designphase) -- (demo);
+        \draw[flow] (demo) -- (eval);
+        \draw[flow] (eval) -- (comm);
+
+        \draw[blue!60, thick, rounded corners, fill=blue!5]
+            (4.2, -2.1) rectangle (13.2, -8.2);
+        \node[font=\bfseries, text=blue!80!black, align=center] at (8.7, -1.75)
+            {Eingebetteter Entwicklungsbereich};
+
+        \node[font=\bfseries, text=orange!80!black] at (8.7, -2.55)
+            {ADR-Entwicklungszyklus};
+        \node[adr] (analyse) at (5.55, -4.1) {Analyse};
+        \node[adr] (recherche) at (8.7, -3.25) {Recherche};
+        \node[adr] (konzeption) at (11.85, -4.1) {Konzeption};
+        \node[adr] (implement) at (11.85, -6.25) {Implementierung};
+        \node[adr] (test) at (8.7, -7.1) {Test \&\\Validierung};
+        \node[adr] (adreview) at (5.55, -6.25) {Evaluation};
+        \node[analysis] (improve) at (8.7, -5.2) {Ergebnisanalyse\\\& Verbesserung};
+
+        \draw[cycle] (analyse) to[bend left=12] (recherche);
+        \draw[cycle] (recherche) to[bend left=12] (konzeption);
+        \draw[cycle] (konzeption) to[bend left=12] (implement);
+        \draw[cycle] (implement) to[bend left=12] (test);
+        \draw[cycle] (test) to[bend left=12] (adreview);
+        \draw[cycle] (adreview) to[bend left=12] (analyse);
+
+        \foreach \n in {analyse,recherche,konzeption,implement,test,adreview} {
+            \draw[relation] (\n) -- (improve);
+        }
+
+        \node[bridge] (iteration) at (3.15, -5.2) {iterative\\Ausgestaltung};
+        \draw[artifact] (designphase.east) -- (iteration.west);
+        \draw[artifact] (iteration.east) -- (4.2, -5.2);
+        \draw[artifact] (13.2, -7.0) -- ++(0.9, 0) |- node[pos=0.25, right, align=left] {entwickeltes\\Artefakt} (demo.east);
+
+    \end{tikzpicture}%
+    }
+
+    \caption{Verzahnung von DSRM und ADR. Die DSRM bildet den übergeordneten Forschungsrahmen, während ADR als iterativer Entwicklungszyklus innerhalb der Phase \glqq Design \& Entwicklung des Artefakts\grqq\ eingesetzt wird.}
+    \label{fig:dsrm_adr_verzahnung}
+\end{figure}
+
+Die in Abbildung \ref{fig:dsrm_adr_verzahnung} dargestellte Verzahnung von DSRM und ADR bildet den methodischen Rahmen der vorliegenden Arbeit. 
+Die Phasen „Problemidentifikation und Motivation“ sowie „Definition der Lösungsziele“ wurden bereits in Kapitel \ref{chap:motivation} und Kapitel \ref{chap:stand_der_technik} durchgeführt. 
+Hierbei wurden die Herausforderungen der Makrosuche analysiert, die Vision des Empfehlungssystems entwickelt, der aktuelle Stand der Technik betrachtet und darauf aufbauend die Forschungsfragen RQ0 bis RQ4 abgeleitet, welche als Zielhierarchie für die vorliegende Arbeit dienen. 
+Die nachfolgenden Kapitel bilden die Design-, Entwicklungs-, Demonstrations- und Evaluationsphase der DSRM ab. Dabei entsteht in jedem Kapitel ein Artefakt, das als Grundlage für die jeweils nachfolgenden Arbeitsschritte dient. 
+Die Zuordnung von Forschungsfragen, DSRM-Phasen, Artefakten und Kapiteln ist in Tabelle \ref{tab:artefakte_dsrm} dargestellt.
+
+\begin{table}[H] 
+    \centering 
+    \caption{Zuordnung von Forschungsfragen, DSRM-Phasen, Artefakten und Kapiteln} \label{tab:artefakte_dsrm} 
+    \begin{tabular}{p{2cm}p{3cm}p{4cm}p{4cm}} 
+        \hline Kapitel & DSRM-Phase & Forschungsfrage & Artefakt \\ 
+        \hline 
+        4 & Design \& Entwicklung & RQ1 & A1: Trainings- und Evaluationsbasis \\ 
+        5 & Design \& Entwicklung & RQ2 & A2: Ausgewählter Modellansatz \\ 
+        6 & Design \& Entwicklung & RQ2 & A3: Systemarchitektur \\ 
+        7 & Design \& Entwicklung & RQ2 & A4: Trainiertes Empfehlungssystem \\ 
+        8 & Demonstration \& Evaluation & RQ3 & A5: Evaluationsergebnisse \\ 
+        9 & Evaluation & RQ4 & A6: Nutzen- und Wirtschaftlichkeitsbewertung \\ 
+        10 & Kommunikation & RQ0 & A7: Beantwortung der Forschungsfragen \\ 
+        \hline 
+    \end{tabular} 
+\end{table}
+
+
+Die Bearbeitung der Arbeit erfolgt entlang dieser Artefaktkette. 
+
+Kapitel 4 untersucht zunächst die verfügbaren Artikel-, Makro- und Zuordnungsdaten und dient der Beantwortung von Forschungsfrage RQ1. 
+Das Ergebnis dieses Kapitels ist die Trainings- und Evaluationsbasis des Empfehlungssystems (Artefakt A1). 
+
+Anschließend werden in Kapitel 5 verschiedene KI-basierte Modellansätze analysiert und gegenübergestellt. Hierbei werden insbesondere die Large Language Models mit Fine-Tuning, Sentence Transformer, 
+Embedding-Modelle mit Triplet Loss sowie Learning-to-Rank-Verfahren betrachtet (Vergleiche Kapitel \ref{modellansätze}). Ziel dieses Kapitels ist die Auswahl eines geeigneten Modellansatzes zur Beantwortung von Forschungsfrage RQ2. 
+Das Ergebnis bildet Artefakt A2. 
+
+Auf Grundlage des ausgewählten Modellansatzes wird in Kapitel 6 die Architektur des Empfehlungssystems entwickelt. Dieses Architekturkonzept bildet Artefakt A3 und spezifiziert die Komponenten, 
+Datenflüsse und Schnittstellen des Systems. 
+
+Kapitel 7 beschreibt die Implementierung und das Training des ausgewählten Modells. Hierzu gehören die Erstellung der Trainingsdaten, die Modellkonfiguration, die Hyperparameteroptimierung sowie der eigentliche Trainingsprozess. 
+Das Ergebnis dieses Kapitels ist das trainierte Empfehlungssystem (Artefakt A4). 
+
+Die Demonstration und Evaluation des entwickelten Artefakts erfolgt in Kapitel 8. Hierzu werden die im Kapitel \ref{sec:validierungsansätze} vorgestellten Bewertungsmetriken Recall@k, Mean Reciprocal Rank und nDCG verwendet. 
+Das Ergebnis dieser Untersuchungen bildet Artefakt A5 und dient der Beantwortung von Forschungsfrage RQ3. 
+
+Kapitel 9 bewertet die erzielten Ergebnisse hinsichtlich ihres praktischen Nutzens für die Elektrokonstruktion. Hierzu werden insbesondere Suchaufwand, Wiederverwendung von Makros und wirtschaftliche Auswirkungen (Vergleiche Kapitel \ref{sec:wirtschaftliche_auswirkungen}) betrachtet. 
+Dieses Kapitel liefert die notwendigen Erkenntnisse zur Beantwortung von Forschungsfrage RQ4 und erzeugt Artefakt A6. 
+
+Abschließend werden in Kapitel 10 die Ergebnisse der Arbeit zusammengeführt. Die Forschungsfragen RQ0 bis RQ4 werden beantwortet, die Grenzen des entwickelten Systems diskutiert und mögliche zukünftige Erweiterungen aufgezeigt. 
+Das Ergebnis dieses Kapitels bildet Artefakt A7.
+
+Die innerhalb der DSRM-Phasen „Design \& Entwicklung“ sowie „Evaluation“ entstehenden Artefakte werden nicht linear entwickelt, sondern durchlaufen die in Abbildung \ref{fig:dsrm_adr_verzahnung} dargestellten ADR-Zyklen. 
+Insbesondere während der Datenanalyse, Modellauswahl, Implementierung und Evaluation erfolgen wiederholte Iterationen aus Analyse, Recherche, Konzeption, Implementierung und Bewertung. 
+Die Ergebnisse jeder Iteration fließen dabei unmittelbar in die Weiterentwicklung der nachfolgenden Artefakte ein. Dadurch entsteht ein iterativer Entwicklungsprozess, 
+in dem die Forschungsfragen schrittweise beantwortet und die einzelnen Artefakte kontinuierlich verbessert werden.
+
+\chapter{Datenangrundlage und Trainingsvorbereitung} 
+\label{chap:datenangrundlage_und_trainingsvorbereitung} 
+
+\section{Datenbasis} 
+
+\subsection{Artikeldaten}
+\label{sec:artikeldaten} 
+
+Die Artikeldaten liegen in XML-Dateien vor. 
+XML (\textit{Extensible Markup Language}) ist ein standardisiertes Format zur hierarchischen Speicherung und Beschreibung von Informationen, die einem wiederkehrenden Schema folgen \cite{bray2008xml}.
+Durch die hierarchische Organisation von XML-Dokumenten können sowohl einfache Stammdaten wie Herstellerinformationen als auch komplexe technische Informationen wie Spannungen, 
+Ströme oder Leistungen strukturiert abgebildet werden \cite{bray2008xml}.
+Die in den Artikeldaten enthaltenen Informationen, werden im folgenden als \textit{technische Artikeleigenschaften} bezeichnet. 
+Zu diesen gehören unter anderen:
+
+\begin{itemize} 
+    \item Herstellerinformationen, 
+    %\item Typnummern, 
+    \item Spannungen, 
+    \item Ströme, 
+    \item Leistungen,  
+    % \item technische Hinweise, 
+    \item Referenzen auf zugehörige Makros. 
+\end{itemize} 
+
+Um diese \textit{technische Artikeleigenschaften} anhand des Motorbeispiels aus Kapitel \ref{sec:herleitung} zu veranschaulichen, soll hierfür ein Motor von SEW betrachtet werden.
+Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML-Artikels für diesen Motor.
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[>=stealth, font=\small, 
+        every node/.style={align=center}, 
+        root/.style={ draw, rounded corners, 
+        fill=blue!15, minimum width=4.5cm, minimum height=0.9cm }, 
+        category/.style={ draw, rounded corners, fill=green!10, minimum width=3.8cm, minimum height=0.8cm }, 
+        feature/.style={ draw, rounded corners, fill=gray!10, minimum width=2.3cm, minimum height=0.8cm, align=center } ] 
+        % Wurzel 
+        \node[root] (article) at (0,5) {XML-Artikel\\Elektromotor}; 
+        % Kategorien 
+        \node[category] (master) at (-4.5,2.5) {Stammdaten}; 
+        \node[category] (electrical) at (0,2.5) {Elektrische Informationen}; 
+        \node[category] (technical) at (4.5,2.5) {Referenzen};
+        % Verbindungen 
+        \draw[->] (article) -- (master); 
+        \draw[->] (article) -- (electrical); 
+        \draw[->] (article) -- (technical); 
+        % Stammdaten 
+        \node[feature] (manu) at (-7.5,0) {Hersteller\\SEW}; 
+        %\node[feature] (type) at (-5.0,0) {Typnummer\\S123}; 
+        \draw[->] (master) -- (manu); 
+        %\draw[->] (master) -- (type);
+        % Elektrische Informationen 
+        \node[feature] (voltage) at (-2.5,0) {Spannung\\400 V}; 
+        \node[feature] (current) at (0,0) {Strom\\10 A}; 
+        \node[feature] (power) at (2.5,0) {Leistung\\4000 W};
+        \draw[->] (electrical) -- (voltage); 
+        \draw[->] (electrical) -- (current); 
+        \draw[->] (electrical) -- (power); 
+        % Technische Informationen 
+        % \node[feature] (ip) at (5.0,0) {Hinweis\\MIT\\GEHÄUSE}; 
+        \node[feature] (com) at (7.5,0) {Makro\\M1\_F1\_V1};
+        \draw[->] (technical) -- (com); 
+        % \draw[->] (technical) -- (com); 
+        % Makro
+        %\draw[ decorate, decoration={brace,mirror,amplitude=10pt}, thick ] (-8.25,-0.8) -- (8.25,-0.8) node[midway,yshift=-1cm] { \fbox{\strut Zugeordnetes Motor-Makro} };
+    \end{tikzpicture} 
+    \caption{Beispielhafte Struktur eines XML-Artikels für einen Elektromotor. Die hierarchische Organisation ermöglicht die strukturierte Speicherung von \textit{technischen Artikeleigenschaften} eines Motors nach einem vorgegebenen Schema.} 
+    \label{fig:xml_artikel_motor}
+\end{figure}
+
+\subsection{Makrodaten} 
+
+Neben den Artikeln werden die zugehörigen Makros analysiert. Die Makros sind im .ema-Format gespeichert. 
+Dieses Format entspricht ebenfalls einem XML-Schema, das Informationen über die Makros in einem einheitlichen Schema strukturiert abbildet.
+
+Diese Informationen werden im folgenden als \textit{technische Makroeigenschaften} bezeichnet. 
+
+Hierzu zählen: 
+
+\begin{itemize} 
+    \item Anschlussstrukturen,  
+    \item Makrovarianten,   
+    \item Bezeichnungen. 
+\end{itemize} 
+
+
+Die Bezeichnung eines Makros wird dabei nach folgendem Muster aufgebaut: Klasse-Familie-Variante (z.\,B. M1\_F1\_V1)
+Die Klasse gibt die Art des Makros selbst an, die Familie beschreibt eine Unterkategorie des Makros und die Variante kennzeichnet unterschiedliche Ausführungen innerhalb dieser Familie.
+Im Fall des Motorbeispiels aus Kapitel \ref{sec:herleitung} lässt sich die Bezeichnung M1\_F1\_V1 wie folgt interpretieren:
+
+\begin{itemize}
+    \item  M1: Motor
+    \item  F1: Gleichstrommotor
+    \item  V1: Mit Kühlung
+\end{itemize}
+
+Die Abbildung \ref{fig:ema_motor_macro} gibt die Struktur eines Motor-Makros im .ema-Format wieder.
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[>=stealth, font=\small, 
+        every node/.style={align=center}, 
+        root/.style={ draw, rounded corners, 
+        fill=blue!15, minimum width=4.5cm, minimum height=0.9cm }, 
+        category/.style={ draw, rounded corners, fill=green!10, minimum width=3.8cm, minimum height=0.8cm }, 
+        feature/.style={ draw, rounded corners, fill=gray!10, minimum width=2.3cm, minimum height=0.8cm, align=center } ] 
+        % Wurzel 
+        \node[root] (macro) at (0,5) {.ema-Makro\\Elektromotor}; 
+        % Kategorien 
+        \node[category] (terminal) at (-5.0,2.5) {Anschlussstruktur}; 
+        \node[category] (function) at (0,2.5) {Bezeichnung}; 
+        \node[category] (variant) at (5.0,2.5) {Makrovarianten}; 
+        % Verbindungen 
+        \draw[->] (macro) -- (terminal); 
+        \draw[->] (macro) -- (function); 
+        \draw[->] (macro) -- (variant); 
+        % Anschlussstruktur 
+        \node[feature] (u1) at (-7.5,0) {Klemme\\U1}; 
+        \node[feature] (v1) at (-5.0,0) {Klemme\\V1}; 
+        \node[feature] (w1) at (-2.5,0) {Klemme\\W1}; 
+        \draw[->] (terminal) -- (u1); 
+        \draw[->] (terminal) -- (v1); 
+        \draw[->] (terminal) -- (w1); 
+        % Bezeichnung 
+        \node[feature] (motor) at (0,0) {M1\_F1\_V1}; 
+        \draw[->] (function) -- (motor); 
+        % Varianten 
+        \node[feature] (left) at (3.0,0) {Mit Kühlung}; 
+        \node[feature] (right) at (7.0,0) {Ohne Kühlung}; 
+        \draw[->] (variant) -- (left); 
+        \draw[->] (variant) -- (right); 
+    \end{tikzpicture} 
+    \caption{Beispielhafte Struktur eines Motor-Makros im .ema-Format. Das Makro beschreibt die technische Umsetzung eines Elektromotors im Schaltplan und enthält Informationen zu Anschlussstrukturen, Bezeichnungen und Makrovarianten.} 
+    \label{fig:ema_motor_macro} 
+\end{figure}
+
+\subsection{Artikel-Makro-Zuordnungen}
+\label{sec:artikel_macro_zuordnungen}
+
+Die Zuordnung von Artikel zu Makro erfolgt durch die Referenzierung des Makros über die \textit{technische Artikeleigenschaft} \texttt{P\_ARTICLE\_MACRO}.
+Diese Zuordnung kann als n zu 1 Beziehung betrachtet werden, da mehrere Artikel auf dasselbe Makro verweisen können. Mehrer Artikel welche im Schaltplan dasselbe Makro repräsentieren, werden im folgenden als \textit{Artikelgruppe} bezeichnet.
+Beispielsweise können einem Makro eines Motors mehrere Artikel unterschiedlicher Hersteller zugeordnet werden.
+
+Bildlich kann dies durch folgende Abbildung \ref{fig:artikel_macro_n_zu_1} dargestellt werden: 
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        article/.style={ draw, rounded corners, fill=blue!10, minimum width=3.2cm, minimum height=1.2cm, align=center },
+        macro/.style={ draw, rounded corners, fill=orange!15, minimum width=5cm, minimum height=1.1cm, align=center } ] 
+        % Artikel 
+        \node[article] (a1) at (0, 2.5) { Motor Siemens\\ P\_ARTICLE\_MACRO =\\ M1\_F1\_V1 }; 
+        \node[article] (a2) at (0, 0) { Motor Bosch\\ P\_ARTICLE\_MACRO =\\ M1\_F1\_V1 }; 
+        \node[article] (a3) at (0,-2.5) { Motor SEW\\ P\_ARTICLE\_MACRO =\\ M1\_F1\_V1 }; 
+        % Makro 
+        \node[macro] (m1) at (8,0) {Motor-Makro\\Kennung M1\_F1\_V1}; 
+        % Verbindungen 
+        \draw[->,thick] (a1.east) -- (m1.west); 
+        \draw[->,thick] (a2.east) -- (m1.west); 
+        \draw[->,thick] (a3.east) -- (m1.west); 
+        % Kardinalitäten 
+        \node[font=\bfseries] at (3.3,1.25) {$n$}; 
+        \node[font=\bfseries] at (6.5,1.25) {$1$}; 
+        % Artikelgruppe 
+        \draw[ decorate, decoration={brace,mirror,amplitude=8pt}, thick ] (-2.2,3.2) -- (-2.2,-3.2) node[midway,xshift=-2.0cm] { \begin{tabular}{c} \textbf{Artikelgruppe}\\ gleiches\\ Makro \end{tabular} };
+    \end{tikzpicture} 
+    \caption{Beispiel einer n:1-Beziehung zwischen Artikeln und Makros. Mehrere Artikel verweisen über die Eigenschaft \texttt{P\_ARTICLE\_MACRO} auf dasselbe Makro.} 
+    \label{fig:artikel_macro_n_zu_1} 
+\end{figure}
+
+
+\section{Datenaufbereitung} 
+\label{sec:datenaufbereitung}
+
+Die vorliegende Struktur der Daten im XML-Format hat den Vorteil, dass Informationen nicht manuell ausgelesen und weiterverarbeitet werden müssen.
+Die Vorbereitung der Daten kann somit automatisiert erfolgen, sodass eine nachvollziehbare und reproduzierbare Vorbereitung der Daten gewährleistet werden kann.
+Diese Vorbereitung der Daten wird im weiteren Verlauf als \textit{Datenaufbereitung} bezeichnet. 
+
+Die in Kapitel \ref{sec:modellansätze} beschriebenen Modellansätze lernen statistische Zusammenhänge zwischen den Eingabedaten (Artikel) und den Ausgabedaten (Makros).
+Enthalten diese Daten fehlerhafte, unvollständige oder widersprüchliche Informationen, 
+werden diese vom Modell während des Lernprozesses übernommen und können die Qualität des Modells negativ beeinflussen \cite{emmanuel2021missing,hastie2009elements}. 
+Das Ziel der \textit{Datenaufbereitung} besteht daher darin, die Qualität der Datenbasis zu erhöhen und gleichzeitig Störeinflüsse zu reduzieren, um eine zuverlässige Grundlage für den Lernprozess eines Modells zu schaffen.
+
+\subsection{Entfernung unvollständiger Artikel- und Makrodaten}
+\label{sec:entfernen_unvollständiger_artikel_und_makrodaten}
+
+In diesem Schritt werden alle Artikel entfernt, die unvollständige Informationen enthalten. 
+Fehlende \textit{technischen Artikeleigenschaften} sind Informationslücken, welche die Vollständigkeit der Daten beeinträchtigen. Dies kann zu einer Verschlechterung der Modellleistung führen und muss daher bereits während der \textit{Datenaufbereitung} behandelt werden \cite{emmanuel2021missing}.
+Angenommen, ein unvollständiger Motor-Artikel enthält keine Angaben zur Spannung, dann wird bei einem späteren Lernprozess diese Informationslücke vom Modell übernommen. Wenn dann eine Anfrage an das Modell gestellt wird, welche diesem "spannungslosen" Motor-Artikel entspricht, kann das Modell diesen Artikel nicht korrekt zuordnen, 
+da die notwendigen Informationen "Spannung" zum Erkennen dieses Artikels fehlt.
+
+Abbildung \ref{fig:unvollstaendige_daten} verdeutlicht die Unterscheidung zwischen vollständigen und unvollständigen Artikeldaten:
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        valid/.style={ draw, rounded corners, fill=green!10, minimum width=4.8cm, minimum height=1.2cm, align=left }, 
+        invalid/.style={ draw, rounded corners, fill=red!10, minimum width=4.8cm, minimum height=1.2cm, align=left }, 
+        macro/.style={ draw, rounded corners, fill=orange!15, minimum width=4.5cm, minimum height=1.0cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Überschrift %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,5) {Vollständige und unvollständige Artikel- und Makrodaten}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Gültiger Artikel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[valid] (a1) at (-5,2) { Hersteller: SEW\\ Spannung: 400 V\\ Leistung: 4000 W\\ P\_ARTICLE\_MACRO: M1\_F1\_V1 }; 
+        \node[macro] (m1) at (5,2) {Motor-Makro\\M1\_F1\_V1}; \draw[->,thick] (a1.east) -- (m1.west); \node[text=green!50!black] at (0,3.2) {\textbf{Verwendbar für den Lernprozess}}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ungültiger Artikel 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[invalid] (a2) at (-5,-1) { Hersteller: SEW\\ Spannung: ---\\ Leistung: 4000 W\\ P\_ARTICLE\_MACRO: M1\_F1\_V1 }; 
+        \node[macro] (m2) at (5,-1) {Motor-Makro\\M1\_F1\_V1}; 
+        \draw[dashed,red,thick,->] (a2.east) -- (m2.west); 
+        \node[text=red] at (0,-2.4) {Fehlende Spannung}; 
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ungültiger Artikel 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[invalid] (a3) at (-5,-4) { Hersteller: SEW\\ Spannung: 400 V\\ Leistung: 4000 W\\ P\_ARTICLE\_MACRO: --- }; 
+        \node[macro] (m3) at (5,-4) {Kein Makro}; 
+        \draw[dashed,red,thick,->] (a3.east) -- (m3.west); 
+        \node[text=red] at (0,-5.4) {Fehlende Artikel-Makro-Zuordnung}; 
+    \end{tikzpicture} 
+    \caption{Beispiel für vollständige und unvollständige Artikel- und Makrodaten. Fehlende \textit{technischen Artikeleigenschaften} sorgen für Informationslücken im späteren Lernprozess und werden daher aus den Artikel- und Makrodaten entfernt.} 
+    \label{fig:unvollstaendige_daten} 
+\end{figure}
+
+\subsection{Entfernung redundanter Artikel}
+\label{sec:entfernung_redundanter_artikel}
+
+Hierbei werden identische Artikel identifiziert, welche dieselben \textit{technischen Artikeleigenschaften} aufweisen. 
+Identische Artikel, welche in mehrfacher Ausführung auftreten, führen dazu, dass diese gegenüber anderen Artikeln, welche in einzelner Ausführung auftreten, 
+übergewichtet werden. In einem späteren Lernprozess wird hierdurch das Wissen eines Modells verzerrt, indem 
+das Modell ein Vorurteil auf übergewichtete Artikel erlernt, welche bei neuen Anfragen bevorzugt für die Vorhersage verwendet werden \cite{hastie2009elements,sabzekar2021noiseaware}.
+
+Abbildung \ref{fig:redundante_daten} veranschaulicht die Übergewichtung redundanter Motor-Artikel. Nach der Bereinigung werden identische Artikel entfernt, sodass jedes Exemplar nur einmal vorkommt.
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        article/.style={ draw, rounded corners, fill=blue!10, minimum width=4.2cm, minimum height=0.9cm, align=center }, 
+        clean/.style={ draw, rounded corners, fill=green!10, minimum width=4.2cm, minimum height=0.9cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vor Bereinigung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries] at (-5,4.5) {Vor der Bereinigung}; 
+        \node[article] (a1) at (-5,2.5) {Motor A\\400 V\\10 A}; 
+        \node[article] (a2) at (-5,1.0) {Motor A\\400 V\\10 A}; 
+        \node[article] (a3) at (-5,-0.5) {Motor A\\400 V\\10 A}; 
+        \node[article] (a4) at (-5,-2.0) {Motor B\\230 V\\5 A}; 
+        
+        % Gewichtung 
+        
+        \node[ draw, fill=red!10, rounded corners, text width=4cm, align=center ] at (-5,-4.3) { Motor A erscheint\\ 3-mal\\ $\Rightarrow$ Übergewichtung }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Pfeil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[->,very thick] (-1.5,0.5) -- (1.5,0.5) node[midway,above] {Redundanzprüfung}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Nach Bereinigung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries] at (5,4.5) {Nach der Bereinigung}; 
+        \node[clean] (c1) at (5,1.0) {Motor A\\400 V\\10 A}; 
+        \node[clean] (c2) at (5,-2.0) {Motor B\\230 V\\5 A}; 
+        \node[ draw, fill=green!10, rounded corners, text width=4cm, align=center ] at (5,-4.3) { Jeder technische\\ Datensatz wird\\ nur einmal gewertet }; 
+        
+    \end{tikzpicture} 
+    \caption{Auswirkung redundanter Artikel. Mehrfach vorhandene Daten erhöhen künstlich deren Gewichtung. Durch die Entfernung redundanter Daten wird diese Übergewichtung verhindert.} 
+    \label{fig:redundante_daten} 
+\end{figure}
+
+
+\subsection{Entfernen nicht nutzbarer Metadaten}
+\label{sec:entfernen_nicht_nutzbarer_metadaten}
+
+Metadaten sind Informationen über Daten, die nicht direkt mit dem Inhalt dieser Daten zusammenhängen. Beispiele hierfür sind Erstellungsdatum, Änderungsdatum oder Autor. 
+Diese Metadaten sind für die Erkennung von Unterschieden zwischen \textit{technischen Artikeleigenschaften} nicht relevant und werden als Rauschen bezeichnet.
+Dieses Rauschen kann als Informationsüberflutung betrachtet werden, was dazu führt, dass ein Modell später Wissen über irrelevante Informationen erlernt und dadurch die Erkennung relevanter \textit{technischen Artikeleigenschaften} erschwert wird \cite{sabzekar2021noiseaware}.
+
+Anhand der Abbildung \ref{fig:metadaten_filter} soll verdeutlicht werden, wie sich Metadaten von relevanten \textit{technischen Eigenschaften} unterscheiden:
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        relevant/.style={ draw, rounded corners, fill=green!10, minimum width=3.2cm, minimum height=0.8cm, align=center }, 
+        metadata/.style={ draw, rounded corners, fill=red!10, minimum width=3.6cm, minimum height=0.8cm, align=center }, 
+        result/.style={ draw, rounded corners, fill=blue!10, minimum width=5cm, minimum height=1cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,6.5) {Entfernung von nicht relevanten Metadaten}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % XML-Artikel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[result] (article) at (0,1.5) {XML-Artikel Motor}; 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Relevante Informationen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[ font=\bfseries, text=green!50!black, align=center ] at (-5,3.0) {Relevante\\\textit{technische Artikeleigenschaften}}; 
+        \node[relevant] (v) at (-4,5.2) {Spannung\\400 V}; 
+        \node[relevant] (i) at (0,5.2) {Strom\\10 A}; 
+        \node[relevant] (p) at (4,5.2) {Leistung\\4000 W}; 
+        \draw[->] (article.north) -- (v.south); 
+        \draw[->] (article.north) -- (i.south); 
+        \draw[->] (article.north) -- (p.south); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Metadaten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[ font=\bfseries, text=red!70, align=center ] at (-5,0.0) {Nicht nutzbare\\Metadaten}; 
+        \node[metadata] (author) at (-6,-2.5) {Bearbeiter\\Max Mustermann}; 
+        \node[metadata] (date) at (-2,-2.5) {Änderungsdatum\\01.01.2025}; 
+        \node[metadata] (project) at (2,-2.5) {Projektname\\Projekt X}; 
+        \node[metadata] (path) at (6,-2.5) {Dateipfad\\D:\textbackslash Projekte\textbackslash ...}; 
+        \draw[->,red,dashed] (article.south) -- (author.north); 
+        \draw[->,red,dashed] (article.south) -- (date.north); 
+        \draw[->,red,dashed] (article.south) -- (project.north); 
+        \draw[->,red,dashed] (article.south) -- (path.north); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Filter %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[ draw, rounded corners, fill=yellow!15, minimum width=4cm, minimum height=1cm ] (filter) at (0,-5) {Metadatenfilter}; 
+        \draw[->] (author) -- (filter); 
+        \draw[->] (date) -- (filter); 
+        \draw[->] (project) -- (filter); 
+        \draw[->] (path) -- (filter);
+
+        \end{tikzpicture} 
+        \caption{Nicht relevanten Metadaten. \textit{Technische Artikeleigenschaften} bleiben erhalten, während Metadaten ohne relevanten Informationsgehalt entfernt werden.} 
+        \label{fig:metadaten_filter} 
+        \end{figure}
+
+
+\subsection{Normaliserung von Einheiten} 
+\label{sec:normaliserung_von_einheiten}
+
+Die \textit{technischen Artikeleigenschaften} liegen in unterschiedlichen Einheiten oder Schreibweisen vor.
+Ohne zusätzliches Wissen über die einzelnen Schreibweisen der \textit{technischen Artikeleigenschaften} sind diese nicht direkt vergleichbar. 
+Die Vereinheitlichung der \textit{technischen Artikeleigenschaften} reduziert Variationen in den Artikeldaten und bildet die Basis für eine belastbare Bewertung des Modells \cite{hastie2009elements}. 
+Angenommen in mehreren Artikeln steht die Spannung einmal als 24 V, einmal als 24VDC und einmal als 0,024 kV, so handelt es sich um denselben Wert, der jedoch unterschiedlich dargestellt wird.
+Wird ein Modell das eine Spannung von 24 V ausgibt, mit einer Spannung von 24VDC oder 0,024 kV bewertet, wird fälschlicherweise ein Unterschied angenommen, obwohl es sich um dieselbe Spannung handelt.
+Deswegen werden die \textit{technischen Artikeleigenschaften} aus den Artikeln auf gemeinsame Basiseinheiten normiert.
+
+Folgende Abbildung \ref{fig:einheitennormalisierung} soll dazu diesen Sachverhalt zu veranschaulichen:
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        raw/.style={ draw, rounded corners, fill=red!10, minimum width=3.0cm, minimum height=0.9cm, align=center }, 
+        process/.style={ draw, rounded corners, fill=yellow!15, minimum width=4.0cm, minimum height=1.2cm, align=center }, 
+        norm/.style={ draw, rounded corners, fill=green!10, minimum width=3.5cm, minimum height=1.0cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,5) {Normalisierung von Einheiten}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ausgangswerte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries,text=red!70] at (-6,3.5) {Unterschiedliche Schreibweisen}; 
+        \node[raw] (v1) at (-6,2) {24 V}; 
+        \node[raw] (v2) at (-6,0.5) {24VDC}; 
+        \node[raw] (v3) at (-6,-1) {0,024 kV}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Prozess %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[process] (normprocess) at (0,0.5) { Einheiten-\\ normalisierung }; 
+        \draw[->,thick] (v1.east) -- (normprocess.west); 
+        \draw[->,thick] (v2.east) -- (normprocess.west); 
+        \draw[->,thick] (v3.east) -- (normprocess.west); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ergebnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[font=\bfseries,text=green!50!black] at (6,3.5) {Einheitliche Darstellung}; 
+        \node[norm] (result) at (6,0.5) { 24 V }; 
+        \draw[->,thick] (normprocess.east) -- (result.west); 
+    \end{tikzpicture} 
+    \caption{Beispiel für die Normalisierung technischer Einheiten. Unterschiedliche Schreibweisen derselben Spannung werden in eine einheitliche Darstellung überführt, wodurch die Vergleichbarkeit dieser Einheiten verbessert wird.} 
+    \label{fig:einheitennormalisierung} 
+\end{figure}
+
+\subsection{Erstellung von Klassifikationen}
+\label{sec:erstellung_von_klassifikationen}
+
+Die Vorhandenen \textit{technischen Artikeleigenschaften} liegen in unterschiedlichen Wertebereichen vor. 
+Dieses Wissen über die Wertebereiche ermöglicht es, die \textit{technischen Artikeleigenschaften} zu Klassifikationen zusammenzufassen.
+Eine Klassifikation fasst kontinuierliche Wertebereiche wie 22 Volt - 26 Volt zu einzelnen Kategorien zusammen \cite{fayyad1993discretization}.
+Diese Klassifikationen stellen ein zusätzliches Wissen in den \textit{technischen Artikeleigenschaften} dar, welches für die Vergleichbarkeit mehrerer Artikel nützlich ist.
+Um dies zu Verdeutlichen folgendes konkretes Beispiel: Die Spannung eines Artikels wird in die Kategorien \textit{niedrige Spannung}, \textit{mittlere Spannung} und \textit{hohe Spannung} eingeteilt werden.
+Dabei werden Spannungen bis 100 V der Kategorie \textit{niedrige Spannung}, Spannungen von 101 V bis 1000 V der Kategorie \textit{mittlere Spannung} und Spannungen über 1000 V der Kategorie \textit{hohe Spannung} zugeordnet.
+Diese Kategorien erzeugen die zusätzliche Information, dass \textit{technische Artikeleigenschaften} eines Artikels trotz einer Streuung von Werten um einen Mittelwert in eine bestimmte Kategorie fallen.
+Ein späteres Modell kann diese Information nutzen, um Makros zu empfehlen, deren Artikel nicht exakt den gleichen Wert haben wie der Artikel aus der Anfrage. 
+Somit kann ein Makro empfohlen werden, dass einen Artikel mit 48 V als Grundlage enthält, obwohl der Artikel aus der Anfrage 50 V aufweist. 
+Die entstehenden Kategorien werden als neue \textit{technische Artikeleigenschaft} in den Artikeln gespeichert.
+
+Die folgende Abbildung \ref{fig:spannungsklassifikation} zeigt, wie die Klassifikation von Spannungen dargestellt wird: 
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        value/.style={ draw, rounded corners, fill=blue!10, minimum width=2.5cm, minimum height=0.7cm, align=center }, 
+        class/.style={ draw, rounded corners, fill=green!10, minimum width=4.5cm, minimum height=1.0cm, align=center }, 
+        process/.style={ draw, rounded corners, fill=yellow!15, minimum width=3.5cm, minimum height=1cm, align=center },
+        macro/.style={ draw, rounded corners, fill=orange!15, minimum width=4.5cm, minimum height=1cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,9) {Klassifikation technischer Spannungen}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Niedrige Spannung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[value] (lv1) at (-8,6) {48 V}; 
+        \node[value] (lv2) at (-8,5) {50 V}; 
+        \node[value] (lv3) at (-8,4) {52 V}; 
+        \node[process] (c1) at (-2,5) {Klassifikation}; 
+        \node[class] (low) at (5,5) { Kategorie:\\ Niedrige Spannung\\ (0 V - 100 V) }; 
+        
+        \draw[->] (lv1) -- (c1); 
+        \draw[->] (lv2) -- (c1); 
+        \draw[->] (lv3) -- (c1); 
+        \draw[->,thick] (c1) -- (low); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Mittlere Spannung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[value] (mv1) at (-8,1.5) {380 V}; 
+        \node[value] (mv2) at (-8,0.5) {400 V}; 
+        \node[value] (mv3) at (-8,-0.5) {420 V}; 
+        \node[process] (c2) at (-2,0.5) {Klassifikation}; 
+        \node[class] (medium) at (5,0.5) { Kategorie:\\ Mittlere Spannung\\ (101 V - 1000 V) }; 
+        
+        \draw[->] (mv1) -- (c2); 
+        \draw[->] (mv2) -- (c2); 
+        \draw[->] (mv3) -- (c2); 
+        \draw[->,thick] (c2) -- (medium); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Hohe Spannung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[value] (hv1) at (-8,-3) {9 kV}; 
+        \node[value] (hv2) at (-8,-4) {10 kV}; 
+        \node[value] (hv3) at (-8,-5) {11 kV}; 
+        \node[process] (c3) at (-2,-4) {Klassifikation}; 
+        \node[class] (high) at (5,-4) { Kategorie\\ Hohe Spannung\\ (> 1000 V) }; 
+        
+        \draw[->] (hv1) -- (c3); 
+        \draw[->] (hv2) -- (c3); 
+        \draw[->] (hv3) -- (c3); 
+        \draw[->,thick] (c3) -- (high); 
+        
+    \end{tikzpicture}
+    \caption{Klassifikation technischer Spannungen. Kontinuierliche Spannungswerte werden zu Kategorien zusammengefasst. 
+    Die zusätzliche Information durch die Kategorisierung verbessert die Vergleichbarkeit von Artikeln.} 
+    \label{fig:spannungsklassifikation} 
+\end{figure}
+
+
+\subsection{Ergebnis der Datenaufbereitung}
+\label{sec:ergebnis_der_datenaufbereitung}
+
+Den Ausgangspunkt für die Datenaufbereitung bildet die vorhandene EPLAN-Datenbank mit insgesamt 168.788 Artikeln. Über alle Artikel hinweg sind 268 unterschiedliche Artikeleigenschaften vorhanden. 
+Nach dem Entfernen von Artikeln ohne Makrozuordnung (siehe Abschnitt \ref{sec:entfernen_unvollständiger_artikel}) verbleiben 31.572 Artikel, die als Grundlage für die weitere Datenaufbereitung dienen.
+Im nächsten Schritt der Datenaufbereitung wurden Artikel mit fehlenden \textit{technischen Artikeleigenschaften} entfernt, was zu einem Artikelbestand von 1.562 Artikeln führte (siehe Abschnitt \ref{sec:entfernen_unvollständiger_artikel}). 
+Die weitere Aufbereitung der Daten durch Entfernen von Duplikaten und nicht nutzbarer Metadaten erfolgte anschließend (vergleiche Abschnitte \ref{sec:entfernung_redundanter_artikel}, \ref{sec:entfernen_nicht_nutzbarer_metadaten})
+Abschließend erfolgte die Normalisierung von Einheiten und die Erstellung von Klassifikationen (vergleiche Abschnitte \ref{sec:normaliserung_von_einheiten} und \ref{sec:erstellung_von_klassifikationen}).
+Dadurch ergab sich der folgende aufbereitete Artikelbestand, welcher als Grundlage für das spätere Modell dient:
+ 
+\begin{itemize} 
+    \item 1.559 Artikel, 
+    \item 375 unterschiedliche Makros,
+    \item 127 unterschiedliche Artikeleigenschaften.
+\end{itemize}
+
+Nach der Bereinigung wurde zusätzlich die Verteilung der Artikel-Makro-Zuordnungen analysiert. Von den 375 vorhandenen Makros besitzen:
+
+\begin{itemize} 
+    \item 213 Makros (56,8\,\%) lediglich einen einzigen zugeordneten Artikel, 
+    \item 66 Makros (17,6\,\%) zwei zugeordnete Artikel,
+    \item 96 Makros (25,6\,\%) drei oder mehr zugeordnete Artikel.
+\end{itemize} 
+
+Die Analyse ergibt, dass über die Hälfte der Makros nur eine geringe Anzahl an zugeordneten Artikeln besitzt. 
+Dies stellt eine Herausforderung für die den Lernprozess eines Modells dar und muss daher im weiteren Verlauf berücksichtigt werden.
+
+\section{Überführung in ein Trainingsformat} 
+
+Modelle wie sie in Kapitel \ref{sec:modellansätze} beschrieben werden, können technische Informationen nicht direkt aus XML-Dateien verarbeiten. 
+Um diese Informationen nutzbar zu machen, müssen sie in Embeddings (vergleiche Kapitel \ref{sec:vom_vektor_zum_embedding}) überführt werden.
+Deswegen werden die \textit{technischen Artikeleigenschaften} in numerische Vektoren überführt, die als Eingabe für ein Modell dienen.
+
+
+\subsection{Artikelvektor} 
+
+Der Artikelvektor stellt die \textit{technischen Artikeleigenschaften} in numerischer Form dar und fasst sie zu einem Vektor zusammen. 
+Dabei wurden unter anderem folgende \textit{technische Artikeleigenschaften} aus den vorhandenen Artikeldaten unter Beachtung der vorherigen Datenaufbereitung (Vergleiche Kapitel \ref{sec:datenaufbereitung}) extrahiert: 
+ 
+\begin{itemize} 
+    \item Hersteller, 
+    \item Produkttyp, 
+    \item Spannungen, 
+    \item Ströme, 
+    \item Leistungen, 
+    \item Frequenzen, 
+    \item Makrobezeichnung
+\end{itemize} 
+
+Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Artikelvektors anhand des Motorbeispiels, die nummerischen Werte des Artikelvektors werden dabei zur leichteren Verständlichkeit exemplarisch als Text dargestellt:
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        source/.style={ draw, rounded corners, fill=blue!15, minimum width=4.2cm, minimum height=1cm, align=center }, 
+        feature/.style={ draw, rounded corners, fill=green!10, minimum width=2.7cm, minimum height=0.8cm, align=center }, 
+        vector/.style={ draw, rounded corners, fill=orange!15, minimum width=11cm, minimum height=1cm, align=left } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (-1.5,5) {Erstellung des Artikelvektors}; 
+
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[source] (article) at (-7,-1.6) {XML-Artikel\\Motor}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[feature] (manufacturer) at (-1,2) {Hersteller\\SEW}; 
+        \node[feature] (type) at (-1,0.8) {Produkttyp\\Motor}; 
+        \node[feature] (voltage) at (-1,-0.4) {Spannung\\400 V}; 
+        \node[feature] (current) at (-1,-1.6) {Strom\\10 A}; 
+        \node[feature] (power) at (-1,-2.8) {Leistung\\4000 W}; 
+        \node[feature] (frequency) at (-1,-4) {Frequenz\\50 Hz};
+        \node[feature] (macro) at (-1,-5.2) {Makrobezeichnung\\M1\_F1\_V1};
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Quelle -> Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \draw[->] (article.east) -- (manufacturer.west); 
+        \draw[->] (article.east) -- (type.west); 
+        \draw[->] (article.east) -- (voltage.west); 
+        \draw[->] (article.east) -- (current.west); 
+        \draw[->] (article.east) -- (power.west); 
+        \draw[->] (article.east) -- (frequency.west); 
+        \draw[->] (article.east) -- (macro.west); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikelvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, align=center ] (vector) at (5,-1.6) { \textbf{Artikelvektor\\} \vspace{2mm} $ \left[ \begin{array}{c} SEW\\ Motor\\ 400\,V\\ 10\,A\\ 4000\,W\\ 50\,Hz\\ M1\_F1\_V1 \end{array} \right] $ }; 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \draw[->] (manufacturer.east) -- (vector.west); 
+        \draw[->] (type.east) -- (vector.west); 
+        \draw[->] (voltage.east) -- (vector.west); 
+        \draw[->] (current.east) -- (vector.west); 
+        \draw[->] (power.east) -- (vector.west);
+        \draw[->] (frequency.east) -- (vector.west);
+        \draw[->] (macro.east) -- (vector.west);
+    \end{tikzpicture} 
+    \caption{Erzeugung eines Artikelvektors aus \textit{technischen Artikeleigenschaften} eines Motorartikels. Die extrahierten Merkmale werden zu einer gemeinsamen technischen Repräsentation zusammengeführt und dienen als Eingabe für das Empfehlungssystem.} 
+    \label{fig:artikelvektor} 
+\end{figure}
+        
+% \subsection{Makrovektor} 
+
+% Der Makrovektor stellt analog zum Artikelvektor folgende \textit{technische Makroeigenschaften} in numerischer Form in einem gemeinsamen Vektor zusammengeführt dar: 
+
+% \begin{itemize} 
+%     \item Anschlüsse, 
+%     \item Makrokategorien, 
+%     \item Familien, 
+%     \item Varianten, 
+
+% \end{itemize} 
+
+% Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} den Aufbau des Makrovektors, die numerischen Werte des Makrovektors werden auch hier zur leichteren Verständlichkeit exemplarisch als Text dargestellt:
+
+% \begin{figure}[H] 
+%     \centering 
+%     \begin{tikzpicture}[ >=stealth, font=\small, 
+%         source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
+%         feature/.style={ draw, rounded corners, fill=green!10, minimum width=3cm, minimum height=0.8cm, align=center }, 
+%         vector/.style={ draw, rounded corners, fill=orange!15, minimum width=4cm, minimum height=3.5cm, align=left } ] 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[font=\bfseries\large] at (-1,5) {Erstellung des Makrovektors}; 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[source] (macro) at (-7,0) {.ema-Makro\\Motor}; 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[feature] (terminal) at (-1,2) {Anschlüsse\\U1, V1, W1}; 
+%         \node[feature] (category) at (-1,0.8) {Kategorie\\Motor}; 
+%         \node[feature] (family) at (-1,-0.4) {Familie\\F1}; 
+%         \node[feature] (variant) at (-1,-1.6) {Variante\\Mit Kühlung}; 
+    
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Quelle -> Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \draw[->] (macro.east) -- (terminal.west); \draw[->] (macro.east) -- (category.west); 
+%         \draw[->] (macro.east) -- (family.west); \draw[->] (macro.east) -- (variant.west); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%         \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, align=center ] (vector) at (5,0) { \textbf{Makrovektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ \text{Mit Kühlung} \end{array} \!\right]$ };
+
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         \draw[->] (terminal.east) -- (vector.west); 
+%         \draw[->] (category.east) -- (vector.west); 
+%         \draw[->] (family.east) -- (vector.west); 
+%         \draw[->] (variant.east) -- (vector.west); 
+%         \end{tikzpicture} 
+%         \caption{Erstellung des Makrovektor. Aus dem .ema-Makro werden strukturelle Informationen extrahiert und in einen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.} 
+%         \label{fig:makrovektor} 
+%         \end{figure}
+
+% \subsection{Lexikalvektor} 
+
+% Nicht alle \textit{technischen Artikel- und Makroeigenschaften} liegen in Form von konkreten Werten wie zum Beispiel 24 V in den vorhandenen Artikel- und Makrodaten vor. Technische Hinweise in einem Artikel oder Makro liegen in Textform vor. 
+% Diese \textit{technischen Hinweise } stellen aufgrund der Textform eine andere Art von \textit{technischen Artikel- und Makroeigenschaften} dar als solche mit konkreten Werten \cite{baltrusaitis2019multimodal}.
+% Hierdurch können Informationen genutzt werden, die in Zahlen nicht abbildbar sind, wie zum Beispiel die wasserdichte Ausführung eines Motors.
+% Diese textbasierten \textit{technischen Artikel- und Makroeigenschaften} stellen somit eine weitere Information dar, welche Gemeinsamkeiten und Unterschiede zwischen Artikeln aufzeigen.
+% Die folgende Abbildung \ref{fig:lexikalische_information_empfehlung} zeigt, welchen Einfluss \textit{technischen Hinweise} auf die Unterscheidung von Artikeln haben: 
+
+% \begin{figure}[H] 
+%     \centering 
+%     \begin{tikzpicture}[ >=stealth, font=\small, 
+%         query/.style={ draw, rounded corners, fill=blue!15, text width=5.2cm, minimum height=3.8cm, align=left, inner sep=7pt }, 
+%         candidate/.style={ draw, rounded corners, fill=gray!10, text width=4.8cm, minimum height=4.3cm, align=left, inner sep=7pt }, 
+%         match/.style={ draw, rounded corners, fill=green!10, text width=4.4cm, minimum height=1.1cm, align=center, inner sep=5pt }, 
+%         mismatch/.style={ draw, rounded corners, fill=red!10, text width=4.4cm, minimum height=1.1cm, align=center, inner sep=5pt }, 
+%         decision/.style={ draw, rounded corners, fill=yellow!20, text width=5.8cm, minimum height=1.4cm, align=center, inner sep=7pt }, 
+%         result/.style={ draw, rounded corners, fill=green!15, text width=6cm, minimum height=1.5cm, align=center, inner sep=7pt } ] 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% \
+        
+%         node[font=\bfseries\large] at (0,11) {Einfluss textbasierter Informationen auf die Makroempfehlung}; 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Anfrage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[query] (request) at (0,8.2) { \centering \textbf{Anfrage}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ \textbf{Wasserdichte Ausführung} }; 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verzweigung der Kandidatensuche %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \coordinate (branch) at (0,5.7); \draw[->,thick] (request.south) -- (branch); 
+%         \node[ fill=white, inner sep=3pt, font=\bfseries ] at (0,6.1) {Vergleich mit vorhandenen Artikeln}; 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikel A und Artikel B %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[candidate] (articleA) at (-4.2,2.8) { \centering \textbf{Artikel A}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ \textbf{Wasserdichte Ausführung}\\[1mm] Makro: M1\_F1\_V1 }; 
+%         \node[candidate] (articleB) at (4.2,2.8) { \centering \textbf{Artikel B}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ keine Angabe\\[1mm] Makro: M1\_F1\_V2 }; 
+        
+%         % Klare, symmetrische Verbindungen \draw[->,thick] (branch) -| (articleA.north); \draw[->,thick] (branch) -| (articleB.north); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Bewertung der Kandidaten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[match] (matchA) at (-4.2,-1.3) { \textbf{Hohe Übereinstimmung}\\ Anmerkung vorhanden }; 
+%         \node[mismatch] (matchB) at (4.2,-1.3) { \textbf{Geringere Übereinstimmung}\\ Anmerkung fehlt }; 
+        
+%         \draw[->,thick,green!50!black] (articleA.south) -- (matchA.north); \draw[->,thick,red!70!black] (articleB.south) -- (matchB.north); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Gemeinsame Entscheidung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[decision] (decision) at (0,-4.3) { \textbf{Entscheidender \textit{technischer Hinweis} }\\[1mm] „Wasserdichte Ausführung“ }; \draw[->,thick,green!50!black] (matchA.south) |- (decision.west); \draw[->,thick,red!70!black] (matchB.south) |- (decision.east); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Empfehlung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[result] (recommendation) at (0,-7) { \textbf{Empfehlung: Makro M1\_F1\_V1}\\[1mm] Artikel A besitzt die größere Gesamtübereinstimmung. }; 
+%         \draw[->,very thick,green!50!black] (decision.south) -- (recommendation.north); 
+%     \end{tikzpicture} 
+%     \caption{Einfluss einer textbasierten technischen Information auf die Makroempfehlung. Artikel A und B sind bis auf die Anmerkung „Wasserdichte Ausführung“ identisch. Dadurch wird Artikel A bevorzugt, sodass das zugeordnete Makro M1\_F1\_V1 empfohlen wird. } 
+%     \label{fig:lexikalische_information_empfehlung} 
+% \end{figure}
+% Aus den vorhandenen Artikel- und Makrodaten lassen sich folgende textbasierten \textit{technischen Artikel- und Makroeigenschaften} extrahieren: 
+
+% \begin{itemize} 
+%     \item Typbezeichnungen, 
+%     \item Produktserien, 
+%     \item technischen Beschreibungen. 
+% \end{itemize} 
+
+% Abbildung \ref{fig:lexikalvektor} stellt den Aufbau des Lexikalvektors für das Beispiel des Motors dar:
+
+% \begin{figure}[H] 
+%     \centering 
+%     \begin{tikzpicture}[ >=stealth, font=\small, 
+%         source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
+%         feature/.style={ draw, rounded corners, fill=green!10, minimum width=3.0cm, minimum height=0.8cm, align=center } ] 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[font=\bfseries\large] at (-1,5) {Erstellung des Lexikalvektors}; 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[source] (article) at (-7,1.5) {XML-Artikel\\Motor}; 
+%         \node[source] (macro) at (-7,-1.5) {.ema-Makro\\Motor}; 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalische Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[feature] (type) at (-1,2.5) {Typbezeichnung\\DRN112M4}; 
+%         \node[feature] (series) at (-1,0.5) {Produktserie\\DRN}; 
+%         \node[feature] (description) at (-1,-1.5) {Beschreibung\\Wasserdichte Ausführung}; 
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle -> Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \draw[->] (article.east) -- (type.west); 
+%         \draw[->] (article.east) -- (series.west); 
+%         \draw[->] (macro.east) -- (description.west); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[ draw, rounded corners, fill=orange!15, text width=5cm, align=center ] (vector) at (5,0.5) { \textbf{Lexikalvektor\\} \vspace{2mm} $\left[ \begin{array}{c} \text{DRN112M4}\\ \text{DRN}\\ \text{Wasserdichte Ausführung} \end{array} \right]$ };
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Merkmale -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%         \draw[->] (type.east) -- (vector.west); 
+%         \draw[->] (series.east) -- (vector.west); 
+%         \draw[->] (description.east) -- (vector.west); 
+%         \end{tikzpicture} 
+%         \caption{Erstellung des Lexikalvektors. Textuelle technische Informationen aus Artikel- und Makrodaten werden extrahiert und in einem separaten Vektor zusammengeführt. 
+%         Der Lexikalvektor ergänzt die strukturierten Informationen des Artikel- und Makrovektors um technische Begriffe und Bezeichnungen.} 
+%         \label{fig:lexikalvektor} 
+%         \end{figure}
+
+% \subsection{Warum Drei Vektoren ?}
+
+% Die Aufteilung der \textit{technischen Artikel- und Makroeigenschaften} in drei separate Vektoren hat mehrere Vorteile:
+
+% \begin{itemize}
+%     \item Es wird verhindert, dass sich Werte aus den Artikel- und Makrodaten wie Spannung, Strom oder Makrobezeichnungen mit textuellen \textit{technischen Artikel- und Makroeigenschaften} aus den Hinweis- und Beschreibungsfeldern vermischen. Eine Spannung von 400 V besitzt eine andere Bedeutung als der Hinweis "Wasserdichte Ausführung". Durch die getrennte Speicherung bleiben diese unterschiedlichen Informationsarten für ein späteres Modell unterscheidbar. Dies folgt dem Konzept der multimodaler Datenrepräsentationen wie in \cite{baltrusaitis2019multimodal} und \cite{ebrahimi2024lanistr} beschrieben.
+%     \item Die Weiterentwicklung der einzelnen Informationsquellen ist unabhängig voneinander möglich. Neue technische Merkmale können beispielsweise dem Artikelvektor hinzugefügt werden, ohne die Struktur des Makrovektors oder des Lexikalvektors verändern zu müssen. 
+%     \item Zusätzlich können die einzelnen Vektoren später unterschiedlich verarbeitet werden. Strukturierte \textit{technische Eigenschaften} des Artikel- und Makrovektors können beispielsweise direkt als numerische Eingaben für Learning-to-Rank-Verfahren verwendet werden, während textuelle \textit{technische Eigenschaften} des Lexikalvektors zusätzlich durch Embedding-Modelle oder Sentence Transformer verarbeitet werden können (siehe Kapitel \ref{sec:modellansätze}).
+% \end{itemize}
+ 
+
+\section{Erstellung des Datensplits} 
+\subsection{Trainings-, Validierungs- und Testdaten}
+
+Ein Datensplit (Abbildung \ref{fig:datensplit_funktion}) ist die Aufteilung eines Datensatzes in voneinander getrennte Teilmengen, den Trainings-, Validierungs- und Testdaten. 
+Dabei dienen die Trainingsdaten dem Lernprozess des Modells, wodurch die Zusammenhänge zwischen den \textit{technischen Artikel- und Makroeigenschaften} erlernt werden. 
+Die Validierungsdaten werden verwendet, um die Parameter des Modells während des Lernprozesses zu überwachen und anzupassen. 
+Die Testdaten dienen der abschließenden Bewertung des Modells, um dessen Leistungsfähigkeit auf unbekannte Artikeldaten zu überprüfen \cite{kohavi1995cv,hastie2009elements}.
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        dataset/.style={ draw, rounded corners, fill=blue!15, minimum width=5cm, minimum height=1cm, align=center }, 
+        split/.style={ draw, rounded corners, minimum width=4cm, minimum height=2cm, align=center }, 
+        model/.style={ draw, rounded corners, fill=orange!15, minimum width=5cm, minimum height=1.2cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,7) {Technische Funktion der Datensplits}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenbasis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[dataset] (data) at (0,5) {Artikel- und Makrodaten}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datensplit %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ draw, rounded corners, fill=yellow!15, minimum width=4cm, minimum height=1cm ] (split) at (0,3) {Datensplit}; 
+        \draw[->,thick] (data) -- (split); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsdaten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ split, fill=green!15, text width=3.5cm ] (train) at (-6,-0.2) { \vspace{1mm} \textbf{Trainingsdaten} Lernen technischer Zusammenhänge }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Validierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ split, fill=yellow!20, text width=3.5cm ] (val) at (0,-0.2) {  \vspace{1mm} \textbf{Validierungsdaten} Überwachung und Parameteranpassung }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Test %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ split, fill=red!15, text width=3.5cm ] (test) at (6,-0.2) { \vspace{1mm} \textbf{Testdaten\\} Abschließende Bewertung }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Aufteilung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[->,thick] (split) -- (train); \draw[->,thick] (split) -- (val); \draw[->,thick] (split) -- (test); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Modell %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ draw, rounded corners, fill=orange!15, minimum width=5cm, minimum height=1.2cm, align=center ] (model) at (0,-4) { \vspace{2mm} \textbf{Modell} };
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenfluss %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[->,thick] (train.south) |- (model.west); 
+        \draw[->,thick] (val.south) -- (model.north); 
+        \draw[->,thick] (test.south) |- (model.east); 
+        \end{tikzpicture} 
+        \caption{Technische Funktion der Trainings-, Validierungs- und Testdaten. Während die Trainingsdaten für das Erlernen technischer Zusammenhänge genutzt werden, dienen die Validierungsdaten der Überwachung und Anpassung des Modells. Die Testdaten werden ausschließlich zur abschließenden Bewertung der Leistungsfähigkeit auf unbekannten Daten verwendet.} 
+        \label{fig:datensplit_funktion} 
+        \end{figure}
+
+
+\subsection{Splitregeln und deren Ergebnis}
+\label{sec:splitregeln} 
+
+Die Herausforderung aus der Datenaufbereitung (siehe Abschnitt \ref{sec:ergebnis_der_datenaufbereitung}) soll in diesem Abschnitt durch die Festlegung von Splitregeln für die Trainings-, Validierungs- und Testdaten adressiert werden.
+Dabei ist zu beachten, dass Artikel und Makro in einer n:1-Beziehung stehen (siehe Kapitel \ref{sec:artikel_macro_zuordnungen}), das heißt, es können mehrere Artikel demselben Makro zugeordnet werden. Daraus lassen sich die folgenden Splitregeln ableiten: 
+
+\begin{itemize} 
+    \item Regel 1: Ein Makro muss immer durch mindestens einen Artikel in den Trainingsdaten vertreten sein. 
+    \item Regel 2: Ein Makro, das mit einem Artikel in den Testdaten vorkommt, muss mindestens einen Artikel in den Trainingsdaten besitzen. 
+    \item Regel 3: Ein Makro, das in den Validierungsdaten vorkommt, muss mindestens einen Artikel in den Trainings- und Testdaten besitzen. 
+    \item Regel 4: Es dürfen keine identischen Artikel gleichzeitig in Trainings-, Validierungs- und Testdaten vorkommen. 
+\end{itemize} 
+
+Alle Artikel- und Makrodaten, welche in den Validierungs- oder Testdaten vorkommen, müssen im Trainingsbestand vertreten sein, da fehlende Trainingsdaten die Bewertung des Modells verfälschen würden. 
+Angenommen ein Makro kommt in den Validierungs- oder Testdaten vor, aber nicht in den Trainingsdaten. Die Bewertung für dieses Makro ist dann fehlerhaft, da ein Makro bewertet wird, zu dem das Modell kein Wissen besitzt.
+
+Unter Berücksichtigung der definierten Splitregeln und auf Grundlage des Datenbestands aus Abschnitt \ref{sec:ergebnis_der_datenaufbereitung} sowie der zuvor beschriebenen Datenaufbereitung ergibt sich der folgende Datensplit: 
+
+\begin{itemize} 
+\item 1.300 Trainingsartikel (83,4\,\%), 
+\item 96 Validierungsartikel (6,2\,\%), 
+\item 163 Testartikel (10,4\,\%). 
+\end{itemize}
+
+Dieser Datensplit bildet die Basis für das Training und die Bewertung des Modells.
+
+\section{Artefakt A1: Trainings- und Evaluationsbasis} 
+
+Ziel dieses Kapitels war die Beantwortung der Forschungsfrage RQ1: 
+
+\begin{quote} 
+    \textbf{RQ1:} Welche technischen Informationen aus Artikeln eignen sich zur Unterscheidung von Makros und können als Trainings- und Evaluationsbasis für ein Empfehlungssystem verwendet werden? 
+\end{quote} 
+
+Zur Beantwortung dieser Forschungsfrage wurden zunächst die verfügbaren Artikel-, Makro- und Zuordnungsdaten analysiert. 
+Anschließend erfolgte eine mehrstufige Datenaufbereitung bestehend aus der Entfernung unvollständiger Datensätze, der Entfernung redundanter Artikel, 
+der Bereinigung nicht nutzbarer Metadaten sowie der Normalisierung und Klassifikation technischer Eigenschaften. 
+Auf Basis der bereinigten Daten wurden die relevanten technischen Informationen in ein maschinell verarbeitbares Format überführt. 
+Hierzu wurden die technischen Artikeleigenschaften in Form von Artikelvektoren repräsentiert und anschließend in Trainings-, Validierungs- und Testdaten aufgeteilt. 
+Das Ergebnis dieser Schritte stellt die Trainings- und Evaluationsbasis des späteren Empfehlungssystems dar und bildet damit die Grundlage für die Auswahl und Bewertung geeigneter Modellansätze im nachfolgenden Kapitel. 
+
+Daraus ergibt sich folgendes Artefakt, dass an die nächsten Kapitel übergeben wird: 
+
+\begin{quote} 
+    \textbf{Artefakt A1: Trainings- und Evaluationsbasis} 
+\end{quote} 
+\begin{itemize} 
+    \item 1.559 aufbereitete Artikel,
+    \item 375 unterschiedliche Makros,
+    \item 127 \textit{technischen Artikeleigenschaften},
+    \item Artikel-Makro-Zuordnungen,
+    \item normalisierte und klassifizierte \textit{technischen Artikeleigenschaften},
+    \item Artikelvektoren als maschinenlesbare Repräsentation der Artikel,
+    \item Datensplit bestehend aus: 
+    \begin{itemize} 
+        \item 1.300 Trainingsartikeln
+        \item 96 Validierungsartikeln
+        \item 163 Testartikeln
+    \end{itemize} 
+\end{itemize} 
+
+
+
+% \subsection{Architektur der Datenanalyse und Trainingsvorbereitung} 
+
+% \begin{figure}[H] 
+%     \centering 
+%     \begin{tikzpicture}[ >=stealth, font=\small, 
+%         source/.style={ draw, rounded corners, fill=blue!15, minimum width=3.8cm, minimum height=1cm, align=center }, 
+%         process/.style={ draw, rounded corners, fill=green!15, minimum width=4.5cm, minimum height=1.1cm, align=center }, 
+%         artifact/.style={ draw, rounded corners, fill=orange!15, minimum width=5.0cm, minimum height=1cm, align=center } ] 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenbasis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[source] (article) at (-5,10) {XML-Artikeldaten}; 
+%         \node[source] (macro) at (5,10) {EMA-Makrodaten}; 
+%         \node[source] (mapping) at (0,10) {Artikel-Makro\\Zuordnungen}; 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenaufbereitung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[process] (prepare) at (0,7.5) { \vspace{2mm} \textbf{Datenaufbereitung}\\ Bereinigung\\ Normalisierung\\ Klassifikation }; 
+%         \draw[->,thick] (article) -- (prepare); 
+%         \draw[->,thick] (macro) -- (prepare); 
+%         \draw[->,thick] (mapping) -- (prepare); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Übergabeartefakt %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[artifact] (features) at (0,5.0) { \vspace{2mm} \textbf{Übergabeartefakt}\\ Geprüfte Datenbasis }; 
+%         \draw[->,thick] (prepare) -- (features); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsformat %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[process] (vectorize) at (0,2.4) { \vspace{2mm} \textbf{Überführung in Trainingsformat}\\ Merkmalsextraktion\\ Vektorisierung }; 
+%         \draw[->,thick] (features) -- (vectorize); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektoren %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[artifact] (articlevec) at (-6,-0.5) {Artikelvektor}; 
+%         \node[artifact] (macrovec) at (0,-0.5) {Makrovektor}; 
+%         \node[artifact] (lexicalvec) at (6,-0.5) {Lexikalvektor}; 
+%         \draw[->,thick] (vectorize) -- (articlevec); \draw[->,thick] (vectorize) -- (macrovec); 
+%         \draw[->,thick] (vectorize) -- (lexicalvec); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datensplit %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[process] (split) at (0,-3) { \vspace{2mm} \textbf{Datensplit}\\ Trainingsmenge: 1.300 Artikel\\ Validierungsmenge: 96 Artikel\\ Testmenge: 163 }; 
+%         \draw[->,thick] (articlevec) |- (split); \draw[->,thick] (macrovec) -- (split); \draw[->,thick] (lexicalvec) |- (split); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Split %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[artifact] (train) at (-6,-6) { \vspace{2mm} \textbf{Training}\\1.300 Artikel}; 
+%         \node[artifact] (val) at (0,-6) { \vspace{2mm} \textbf{Validierung}\\96 Artikel}; 
+%         \node[artifact] (test) at (6,-6) { \vspace{2mm} \textbf{Test}\\163 Artikel}; 
+%         \draw[->,thick] (split) -- (train); \draw[->,thick] (split) -- (val); 
+%         \draw[->,thick] (split) -- (test); 
+        
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artefakt A1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+%         \node[ draw, rounded corners, fill=yellow!20, minimum width=9cm, minimum height=1.6cm, align=center ] (a1) at (0,-8.5) { Artefakt A1\\ 1559 Artikel\\ 375 Makros}; 
+%         \draw[->,thick] (train.south) |- (a1.west); \draw[->,thick] (val.south) -- (a1.north); \draw[->,thick] (test.south) |- (a1.east); \end{tikzpicture} 
+%         \caption{ Architektur der Datenanalyse und Trainingsvorbereitung.} 
+%     \end{figure}
+
+\chapter{Auswahl des Modellansatzes} 
+\label{chap:auswahl_des_modellansatzes} 
+
+Nach der Erstellung der Trainings- und Evaluationsbasis in Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} liegt mit Artefakt A1 eine qualitätsgesicherte und bereinigte Datengrundlage aus Artikeln, Makros und Artikel-Makro-Zuordnungen vor. 
+Im nächsten Schritt muss untersucht werden, welcher Modellansatz geeignet ist, die in Forschungsfrage RQ2 formulierte Aufgabe der Makroempfehlung umzusetzen (siehe Kapitel \ref{sec:handlungsbedarf_und_forschungsfragen}). 
+
+Zur Auswahl eines geeigneten Modellansatzes werden daher verschiedene Verfahren aus dem Bereich des maschinellen Lernens betrachtet und hinsichtlich ihrer Eignung für die vorliegende Aufgabenstellung bewertet. 
+Hierzu gehören Large Language Models, Sentence Transformer, Embedding-Modelle mit Triplet Loss sowie Learning-to-Rank-Verfahren. Das Ergebnis dieses Kapitels bildet Artefakt A2, der ausgewählte Modellansatz für die weitere Entwicklung des Empfehlungssystems. 
+
+\section{Eignungsanalyse der Modellansätze} 
+
+Um die verschiedenen Modellansätze systematisch miteinander vergleichen zu können, werden Bewertungskriterien definiert. 
+Die Kriterien orientieren sich sowohl an den Eigenschaften der verfügbaren Datenbasis aus Artefakt A1 als auch an den Anforderungen der Forschungsfrage RQ2. 
+
+Folgende Kriterien werden verwendet: 
+
+\paragraph{Datenbedarf} 
+Beschreibt die Menge an Trainingsdaten, die für ein zuverlässiges Training eines Modells erforderlich ist. Da die vorliegende Datenbasis lediglich 1.559 Artikel und 375 Makros umfasst, sind Verfahren mit sehr hohem Datenbedarf kritisch zu betrachten. 
+
+\paragraph{Trainingsaufwand} 
+Bewertet den erforderlichen Rechen- und Zeitaufwand für Training und Optimierung eines Modells. Ein geringer Trainingsaufwand erleichtert die iterative Weiterentwicklung im Rahmen des in Kapitel \ref{chap:vorgehensweise} beschriebenen ADR-Prozesses. 
+
+\paragraph{Interpretierbarkeit} 
+Beschreibt die Nachvollziehbarkeit der Modellentscheidung. Insbesondere im industriellen Umfeld kann es von Vorteil sein, nachvollziehen zu können, warum ein bestimmtes Makro empfohlen wurde. 
+
+\paragraph{Skalierbarkeit} 
+Bewertet die Fähigkeit eines Ansatzes, auch bei wachsenden Makrobeständen effizient eingesetzt werden zu können. 
+
+\paragraph{Eignung für Makroempfehlungen} 
+Dieses Kriterium bewertet, wie gut ein Ansatz das eigentliche Ziel der Arbeit unterstützt, nämlich die Erzeugung einer möglichst hochwertigen Liste geeigneter Makros. 
+
+\section{Large Language Models} 
+
+Large Language Models besitzen die Fähigkeit, komplexe semantische Zusammenhänge zwischen Informationen zu erfassen und können durch Fine-Tuning an spezifische Aufgaben angepasst werden (siehe Kapitel \ref{sec:modellansätze}). 
+Für die vorliegende Aufgabenstellung ergeben sich jedoch mehrere Herausforderungen. Large Language Models wurden primär für generative Aufgaben entwickelt. Das Ziel eines Large Language Models besteht in der Erzeugung von Texten, 
+während die vorliegende Arbeit die Auswahl und Priorisierung bestehender Makros verfolgt. Hinzu kommt, dass moderne Large Language Models auf mehreren Millionen bis Milliarden Trainingsbeispielen vortrainiert werden. 
+Die in Artefakt A1 vorhandenen 1.559 Artikel stellen im Vergleich dazu eine sehr kleine Datenbasis dar. Zwar könnte ein vortrainiertes Modell mittels Fine-Tuning angepasst werden, 
+dennoch besteht die Gefahr, dass die kleine Datenbasis nicht ausreicht, um das vorhandene Modellwissen zuverlässig auf den Anwendungsfall dieser Arbeit zu übertragen. 
+Darüber hinaus entstehen durch die Verwendung großer Sprachmodelle erhöhte Anforderungen an Hardwareressourcen, Speicherbedarf und spätere Betriebsumgebungen. 
+Für die Empfehlung strukturierter technischer Daten erscheint dieser Aufwand im Verhältnis zum erwarteten Nutzen als hoch. 
+
+Im Hinblick auf die definierten Bewertungskriterien ergibt sich folgende Einschätzung: 
+
+\begin{itemize} 
+    \item \textbf{Datenbedarf:} hoch, da für eine zuverlässige Anpassung große Mengen domänenspezifischer Trainingsdaten erforderlich sind. 
+    \item \textbf{Trainingsaufwand:} hoch aufgrund erheblicher Rechen- und Speicheranforderungen. 
+    \item \textbf{Interpretierbarkeit:} eher gering, da die Entscheidungsfindung innerhalb der Modellparameter nur eingeschränkt nachvollziehbar ist. 
+    \item \textbf{Skalierbarkeit:} mittel, da neue Makros zwar ergänzt werden können, die Inferenzkosten jedoch vergleichsweise hoch ausfallen. 
+    \item \textbf{Eignung für Makroempfehlungen:} mittel, da die eigentliche Sortierung einer Makro-Liste nicht dem ursprünglichen Anwendungsfall von Large Language Models entspricht. 
+\end{itemize} 
+
+Large Language Models besitzen daher grundsätzlich das Potenzial zur Verarbeitung technischer Informationen, erscheinen jedoch für die vorliegende Aufgabenstellung überdimensioniert.
+
+\section{Sentence Transformer} 
+
+Sentence Transformer wurden für die Berechnung semantischer Ähnlichkeiten entwickelt. Sie überführen Texte in Embeddings, die anschließend mittels Cosine Similarity miteinander verglichen werden können (siehe Kapitel \ref{sec:modellansätze} und \ref{sec:cosine_similarity}). 
+Für die vorliegende Aufgabenstellung ergibt sich jedoch eine wesentliche Einschränkung. Sentence Transformer optimieren primär die semantische Ähnlichkeit zwischen Texten. 
+Das eigentliche Ziel der Arbeit besteht jedoch nicht darin, die ähnlichsten Dokumente zu identifizieren, sondern die geeignetsten Makros innerhalb einer Liste zu priorisieren. 
+Zusätzlich liegen die verfügbaren Daten in strukturierter XML-Form als \textit{technische Artikeleigenschaften} vor. Diese Informationen können zwar in Textform dargestellt werden, werden dadurch aber künstlich mit Sprache angereichert, 
+wodurch die bereits vorhandene Datenstruktur nicht mehr direkt genutzt wird. Es entsteht somit ein zusätzlicher Verarbeitungsschritt, der keinen direkten Mehrwert für die eigentliche Aufgabe der Erstellung einer Makro-Liste bietet. 
+
+Im Hinblick auf die definierten Bewertungskriterien ergibt sich folgende Einschätzung: 
+
+\begin{itemize} 
+    \item \textbf{Datenbedarf:} mittel, da vortrainierte Modelle genutzt werden können und nur begrenzte zusätzliche Trainingsdaten benötigt werden. 
+    \item \textbf{Trainingsaufwand:} mittel, da Fine-Tuning und Embedding-Erzeugung ressourcenschonender als bei Large Language Models erfolgen. 
+    \item \textbf{Interpretierbarkeit:} mittel, da Ähnlichkeiten zwischen Embeddings nachvollzogen werden können, die interne Repräsentation jedoch schwer interpretierbar bleibt. 
+    \item \textbf{Skalierbarkeit:} hoch, da neue Artikel und Makros als Embeddings verarbeitet werden können. 
+    \item \textbf{Eignung für Makroempfehlungen:} gut, da ähnliche technische Informationen identifiziert werden können, die eigentliche Sortierung der Makros in einer Liste jedoch nicht direkt erfolgt. 
+\end{itemize} 
+
+Sentence Transformer stellen deshalb eine leistungsfähige Lösung für semantische Ähnlichkeitssuchen dar, optimieren die eigentliche Aufgabe jedoch nur indirekt.
+
+
+\section{Embedding-Modell mit Triplet Loss} 
+
+Embedding-Modelle mit Triplet Loss verfolgen das Ziel, ähnliche Objekte innerhalb eines Embedding-Raums zusammenzuführen und unähnliche Objekte voneinander zu separieren (siehe Kapitel \ref{sec:modellansätze}). 
+Für die vorliegende Arbeit könnten die vorhandenen Artikel-Makro-Zuordnungen genutzt werden, um positive und negative Trainingsbeispiele zu erzeugen. 
+Das Modell würde lernen, Artikel näher an ihre zugeordneten Makros zu positionieren als an nicht passende Makros. 
+Dadurch könnte ein gemeinsamer Embedding-Raum für Artikel und Makros aufgebaut werden. 
+Die spätere Empfehlung würde über Distanzberechnungen mittels Cosine Similarity innerhalb dieses Embedding-Raums erfolgen (siehe Kapitel \ref{sec:cosine_similarity}). 
+Die zentrale Schwäche dieses Ansatzes besteht jedoch darin, dass wiederum die Ähnlichkeit und nicht die Sortierung der Makro-Liste optimiert wird. 
+Das Modell lernt zwar, passende Makros näher an einen Artikel heranzuführen, optimiert jedoch nicht deren Position innerhalb einer Empfehlungsliste. 
+
+Im Hinblick auf die definierten Bewertungskriterien ergibt sich folgende Einschätzung: 
+
+\begin{itemize} 
+    \item \textbf{Datenbedarf:} mittel, da aus den vorhandenen Artikel-Makro-Zuordnungen Trainings-Triplets erzeugt werden können. 
+    \item \textbf{Trainingsaufwand:} mittel, da das Training eines Embedding-Modells deutlich weniger Ressourcen erfordert als die Anpassung eines Large Language Models. 
+    \item \textbf{Interpretierbarkeit:} mittel, da Abstände im Embedding-Raum analysierbar sind, die Bedeutung einzelner Dimensionen jedoch nicht direkt interpretierbar ist. 
+    \item \textbf{Skalierbarkeit:} hoch, da neue Makros lediglich als zusätzliche Embeddings eingebracht werden müssen. 
+    \item \textbf{Eignung für Makroempfehlungen:} gut, da passende Makros zuverlässig gefunden werden können, die Reihenfolge innerhalb der Makro Liste jedoch nicht direkt optimiert wird. 
+\end{itemize} 
+
+Der Ansatz ist daher insbesondere dafür interessant, viele mögliche Makros für einen Artikel zu finden, adressiert die eigentliche Optimierungsaufgabe eines Empfehlungssystems jedoch nur indirekt.
+
+\section{Learning-to-Rank} 
+
+Learning-to-Rank-Verfahren unterscheiden sich grundlegend von den zuvor betrachteten Ansätzen. Während Large Language Models, Sentence Transformer und Embedding-Modelle primär Textrepräsentationen oder Ähnlichkeiten lernen, 
+optimieren Learning-to-Rank-Verfahren direkt die Qualität einer Rangliste (siehe Kapitel \ref{sec:modellansätze}). Diese Eigenschaft entspricht dem Ziel des vorliegenden Empfehlungssystems. 
+Es sollen die relevantesten Makros möglichst weit oben innerhalb der Rangliste erscheinen. Ein weiterer Vorteil ergibt sich aus der verfügbaren Datenbasis. 
+Die vorhandenen Artikel-Makro-Zuordnungen bilden bereits durch die Zuordnung selbst Relevanzinformationen ab. Aus jeder Zuordnung kann abgeleitet werden, welches Makro für einen Artikel relevant ist und welches nicht. 
+Daraus lassen sich direkt Trainingsbeispiele für ein Learning-to-Rank-Verfahren erzeugen. 
+
+Im Hinblick auf die definierten Bewertungskriterien ergibt sich folgende Einschätzung: 
+
+\begin{itemize} 
+    \item \textbf{Datenbedarf:} gering bis mittel, da bereits vorhandene Artikel-Makro-Zuordnungen als Information für die Relevanz genutzt werden können. 
+    \item \textbf{Trainingsaufwand:} gering bis mittel, da Learning-to-Rank-Modelle typischerweise deutlich weniger Rechenleistung benötigen als große Sprachmodelle. 
+    \item \textbf{Interpretierbarkeit:} hoch, da die Relevanzbewertung einzelner Merkmale nachvollzogen werden kann. 
+    \item \textbf{Skalierbarkeit:} hoch, da auch große Mengen von Makros effizient bewertet und gerankt werden können. 
+    \item \textbf{Eignung für Makroempfehlungen:} sehr gut, da die Optimierung einer Rangliste unmittelbar der Zielsetzung des Empfehlungssystems entspricht. 
+\end{itemize} 
+
+Dieser Ansatz stellt die vielversprechendste Methode dar, um eine nach Rang sortierte Makro-Liste zu erzeugen und somit den Anforderungen des Empfehlungssystems gerecht zu werden.
+
+\section{Modellauswahl} 
+
+Für die Auswahl des geeigneten Modellansatzes wurden die Ergebnisse der Eignungsanalyse in Tabelle \ref{tab:modellvergleich} dargestellt.
+Die Analyse der betrachteten Modellansätze zeigt deutliche Unterschiede hinsichtlich ihrer Eignung für die vorliegende Aufgabenstellung. 
+Large Language Models ermöglichen zwar die Verarbeitung komplexer technischer Informationen, erfordern jedoch vergleichsweise hohe Rechenressourcen und optimieren primär generative Aufgaben. 
+Sentence Transformer und Embedding-Modelle mit Triplet Loss ermöglichen es, semantische und technische Ähnlichkeiten zwischen Artikeln und Makros zu erfassen. 
+Beide Ansätze fokussieren sich jedoch auf die Abbildung ähnlicher Objekte innerhalb eines Embedding-Raums und optimieren die Qualität einer Makro-List nur indirekt. 
+Learning-to-Rank verfolgt dagegen die Zielsetzung des Empfehlungssystems. 
+Das Verfahren lernt nicht die Erzeugung von Texten oder die Berechnung von Ähnlichkeiten, sondern die optimale Reihenfolge relevanter Makros innerhalb einer Rangliste.
+
+\begin{table}[H] 
+    \centering 
+    \caption{Bewertung der betrachteten Modellansätze} 
+    \label{tab:modellvergleich} 
+    \begin{tabular}{p{4.0cm}ccccc} 
+        \hline 
+        \textbf{Modellansatz} & 
+        \textbf{Datenbedarf} & 
+        \makecell{\textbf{Trainings-}\\\textbf{aufwand}} & 
+        \makecell{\textbf{Interpretier-}\\\textbf{barkeit}} & 
+        \makecell{\textbf{Skalier-}\\\textbf{barkeit}} & 
+        \makecell{\textbf{Eignung für}\\\textbf{Makroempfehlungen}} \\
+        \hline 
+        Large Language Models & - - & - - & - & o & o \\ 
+        Sentence Transformer & o & o & o & + & + \\ 
+        Embedding-Modell mit Triplet Loss & o & o & o & + & + \\ 
+        Learning-to-Rank & + & + & + & + & ++ \\ 
+        \hline \end{tabular} 
+        \vspace{0.2cm} 
+        \begin{tabular}{ll} 
+            \textbf{Legende:} & - - = ungeeignet \\ & - = gering geeignet \\ & o = mittel geeignet \\ & + = gut geeignet \\ & ++ = sehr gut geeignet \\ 
+        \end{tabular} 
+    \end{table}
+
+Innerhalb der Learning-to-Rank-Verfahren wird hierfür LambdaRank als Modellansatz ausgewählt. 
+Der Algorithmus berücksichtigt während des Trainings nicht nur die Relevanz einzelner Makros, sondern gewichtet Fehler zusätzlich nach ihrem Einfluss auf die Qualität der gesamten Rangliste. 
+Fehlplatzierungen auf den oberen Rangpositionen erhalten dadurch eine höhere Bedeutung als Fehlplatzierungen auf hinteren Positionen. 
+Dieses Verhalten entspricht der Anforderung aus der Vision eine in absteigender Reihenfolge sortierte Makro-Liste zu erzeugen.
+Für einen Konstrukteur sind insbesondere die ersten vorgeschlagenen Makros relevant, da diese den Großteil der Such- und Auswahlentscheidung bestimmen. Ein Algorithmus, der gezielt die Qualität der oberen Rangpositionen optimiert, 
+besitzt daher einen direkten praktischen Nutzen. LambdaRank wird daher als Modellansatz für die weitere Entwicklung des Empfehlungssystems ausgewählt. 
+
+\section{Kapitelergebnis} 
+
+Ziel dieses Kapitels war die Beantwortung der Forschungsfrage RQ2 hinsichtlich eines geeigneten Modellansatzes für die automatisierte Makroempfehlung. Hierzu wurden Large Language Models, Sentence Transformer, 
+Embedding-Modelle mit Triplet Loss sowie Learning-to-Rank-Verfahren analysiert und hinsichtlich ihrer Eignung für die vorliegende Aufgabenstellung untersucht. Die Analyse zeigte, 
+dass die betrachteten Sprach- und Embedding-Modelle primär die Ähnlichkeit technischer Informationen modellieren, die Qualität einer Makro-Rangliste jedoch nur indirekt optimieren. 
+Learning-to-Rank-Verfahren verfolgen dagegen unmittelbar das Ziel der Ranglistenoptimierung und stimmen damit direkt mit den Anforderungen des Empfehlungssystems überein. Innerhalb dieser Verfahrensklasse wurde LambdaRank ausgewählt, 
+da der Algorithmus die Bedeutung oberer Rangpositionen berücksichtigt und somit die spätere Empfehlungsqualität gezielt verbessert. 
+
+Daraus ergibt sich folgendes Artefakt als Übergabe an die nächsten Kapitel: 
+
+\begin{quote} 
+    \textbf{Artefakt A2: Ausgewählter Modellansatz} 
+\end{quote} \begin{itemize} 
+    \item Modellklasse: Learning-to-Rank 
+    \item Lernverfahren: Pairwise Ranking 
+    \item Ausgewählter Algorithmus: LambdaRank 
+    \item Eingabedaten: 
+    \begin{itemize} 
+        \item Artikelvektoren 
+        \item Makrovektoren 
+        \item Lexikalvektoren 
+    \end{itemize} 
+    \item Ausgabedaten: 
+    \begin{itemize} 
+        \item Rangliste relevanter Makros für einen gegebenen Artikel 
+    \end{itemize} 
+\end{itemize} 
+
+
+
+
+
+
+% Nach der Datenaufbereitung sowie der Qualitätsprüfung der Daten erfolgt die Aufteilung in Trainings-, Validierungs- und Testdaten \parencite{srcStep911,srcStep913,srcIdealDataset,srcStep921}.
+% Ziel ist es, eine klare Trennung zwischen Modelltraining, Hyperparameteroptimierung und Modellbewertung zu schaffen. 
+% Um reproduzierbare Ergebnisse mit einem erstellten Datensplit zu gewährleisten, wird ein fester Zufallsseed verwendet  \parencite{srcStep921}.
+
+% \begin{align}
+%     \text{RANDOM\_SEED} = 42
+% \end{align}
+
+% Dabei wird keine reine Zufallsaufteilung vorgenommen, sondern fachliche Zusammenhänge der Daten berücksichtigt, um eine konsistente Verteilung über die Anfragegruppen sicherzustellen. 
+% Darüber hinaus wird sichergestellt, dass jedes Ziel-Makro, welches im Validierungs- oder Testsplit vorkommt, mindestens einmal als Beispiel im Trainingssplit repräsentiert wird.
+% Ziel-Makros, die im Gesamtdatensatz nur einmal auftreten, werden vollständig dem Trainingssplit zugeordnet.
+% Dies verhindert, dass eng verwandte Beispiele in unterschiedlichen Datensplits landen und somit die Glaubwürdigkeit der Modellbewertung negativ beeinflussen. 
+
+% Abbildung \ref{fig:datensplit_schema} fasst diese Aufteilung schematisch zusammen.
+
+% \begin{figure}[H]
+%     \centering
+%     \begin{tikzpicture}[
+%         font=\small,
+%         bar/.style={draw=blue!60!black, thick, rounded corners=4pt, align=center, minimum height=2.2cm, inner sep=5pt},
+%         seed/.style={draw=gray!50!black, rounded corners=4pt, fill=gray!8, align=center, minimum height=1.1cm, inner sep=5pt}
+%     ]
+%         \node[bar, fill=blue!15, text width=5.6cm] (train) at (0,0) {\textbf{Trainings-Split (60\,\%)}\\[1pt]\footnotesize Modelltraining \& Feature-Extraktion};
+%         \node[bar, fill=orange!20, text width=3.6cm, right=3pt of train] (val) {\textbf{Validierungs-Split (20\,\%)}\\[1pt]\footnotesize Hyperparameter-\\optimierung};
+%         \node[bar, fill=green!18, text width=3.2cm, right=3pt of val] (test) {\textbf{Test-Split (20\,\%)}\\[1pt]\footnotesize Evaluation};
+
+%         \node[seed, below=0.3cm of train.south west, anchor=north west, text width=13.3cm] (seedbox) {\footnotesize \textbf{Reproduzierbarkeit:} \texttt{RANDOM\_SEED = 42} $\mid$ Fingerprint-gruppierter Split (Leakage-Schutz)};
+%     \end{tikzpicture}
+%     \caption{Schematische Aufteilung der Trainings-, Validierungs- und Testdatenbasis.}
+%     \label{fig:datensplit_schema}
+% \end{figure}
+
+% Für den in dieser Arbeit verwendeten Referenzlauf ergibt sich folgende Aufteilung: 
+
+% \begin{itemize} 
+% \item Training: 984 Artikel 
+% \item Validation: 322 Artikel 
+% \item Test: 253 Artikel 
+% \end{itemize}
+
+
+% \section{Generierung von Makrokandidatenprofilen}
+
+% Im nächsten Schritt wird für jedes bekannte EPLAN-Fenstermakro \parencite{EPLAN-Makros} ein Makrokandidatenprofil erstellt. Ein Makrokandidat ist ein mögliches Ziel-Makro, welches durch das Rankingmodell als Eignung für einen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} bewertet wird. Dabei wird nicht die EMA-Datei selbst an das Modell übergeben, sondern das für dieses Ziel-Makro erzeugte Kandidatenprofil. Ein Kandidatenprofil ist eine aggregierte Repräsentation eines Makrokandidaten aus technischen Merkmalen. Dafür werden die Struktur-, Artikel- und Textmerkmale aller zugeordneten Trainingsartikel zusammengeführt und um Häufigkeiten, Wertebereiche, Support und Fingerprint-Anzahl ergänzt. Für Merkmals-Kategorien werden die häufigsten Ausprägungen gespeichert. Für numerische Merkmale werden statistische Werte wie Mittelwert, Median, Minimum, Maximum und Häufigkeiten berechnet. 
+% Die Berechnung dieser Kandidatenprofile erfolgt innerhalb der Trainingspipeline \parencite{srcStep931}.
+
+% Im aktuellen Datensatz entstehen dadurch 375 Makrokandidatenprofile. Die Erstellung der Profile erfolgt ausschließlich auf der Grundlage des Trainingssplits. 
+% Informationen aus den Validierungs- oder Testdaten werden nicht zur Profilerstellung verwendet. Für jedes Profil werden unter anderem das Ziel-Makro, die Makrofamilie, Supportinformationen, technische Vektorrepräsentationen, lexikalische Merkmale, Strukturmerkmale sowie statistische Eigenschaften gespeichert. 
+% Die Profilbreite ist abhängig von der untersuchten Konfiguration. Für den später als Referenz verwendeten A08-Modellstand beträgt die Profilbreite 16 Artikel pro Kandidatenprofil.
+
+% \section{Transformation in ein Rankingproblem}
+
+% Im Folgenden wird der Begriff Eingangsartikel bevorzugt verwendet. Er bezeichnet den EPLAN-Artikel, für den passende EPLAN-Makros gerankt werden sollen. Die Begriffe Anfrage und Query werden synonym verwendet.
+
+% Die Zuordnung der EPLAN-Fenstermakros \parencite{EPLAN-Makros} wird als Ranking-Aufgabe betrachtet. Für jede Anfrage werden alle EPLAN-Fenstermakro-Kandidaten \parencite{EPLAN-Makros} betrachtet, deren Profile ausschließlich aus dem Trainingssplit abgeleitet wurden. 
+% Eine vorgeschaltete Reduktion auf eine Top-$N$-Kandidatenmenge findet im aktuellen System nicht statt, sodass alle Trainingsartikel für die Paar-Bildung verwendet werden.
+
+% \begin{align}
+%     C_q = \{c_1,c_2,\dots,c_n\}
+% \end{align}
+
+% Dabei bezeichnet $q$ die Anfrage bzw. den Eingangsartikel, $C_q$ die Menge aller Makrokandidaten und $c_i$ einen einzelnen Makrokandidaten. Für jede Anfrage wird anschließend jeweils ein Paar $(q,c_i)$ gebildet. Dadurch entsteht eine Rankingstruktur, in der die Makrokandidaten gegeneinander bewertet werden.
+
+% \section{Berechnung der Pairwise-Merkmale}
+
+% Ein Feature ist ein für das Modell auswertbares Merkmal, beispielsweise die Übereinstimmung einer Anschlussart oder die Differenz zweier Anschlusszahlen. Ein Feature-Vektor ordnet jedem Feature einen numerischen Wert zu und dient damit als Eingabe für das Rankingmodell.
+% Für jedes Paar von Anfrage und EPLAN-Fenstermakrokandidat \parencite{EPLAN-Makros} wird ein Feature-Vektor erzeugt. Die dabei berechneten Pairwise-Merkmale entstehen aus dem Vergleich eines Eingangsartikels mit dem Kandidatenprofil. Beispiele hierfür sind exakte Übereinstimmungen, Jaccard-Ähnlichkeiten, Zahlenabweichungen und übereinstimmende Struktur-Hashes. Das Modell bewertet Artikel und Makros nicht isoliert, sondern anhand von Artikel-Kandidaten-Paaren.
+% Die Merkmale der Anfrage-Kandidat-Paare lassen sich in mehrere Gruppen unterteilen: mengenbasierte Ähnlichkeitsmerkmale, numerische Vergleichsmerkmale, Function-Template- und Strukturmerkmale, Hash- und Identitätsmerkmale, lexikalische Merkmale, Support- und Profilmerkmale, Varianten- und Baugruppenmerkmale sowie technische Artikelmerkmale. Die verwendeten Struktur-, Sequenz- und Rollenhashes sind Fingerprints von außgewählten Function-Template-Strukturen. Der Sequenz-Hash berücksichtigt die geordnete Folge aus Kategorie, Gruppe und ID. Detailliertere Hashes beziehen zusätzlich Anschlussbezeichnungen, Nummern oder Indizes mit ein. Der Rollenhash bildet die Reihenfolge funktionaler Anschlussrollen ab. Aus technischer Sicht handelt es sich um auf zwölf Zeichen verkürzte MD5-Werte.
+
+% Zur Bewertung von Merkmalsüberschneidungen wird unter anderem die Jaccard-Ähnlichkeit verwendet:
+
+% \begin{align}
+%     J(A,B) = \frac{|A \cap B|} {|A \cup B|}
+% \end{align}
+
+% Dabei bezeichnet $A$ die Merkmalsmenge der Anfrage und $B$ die Merkmalsmenge des Makrokandidaten. Der Wertebereich liegt zwischen 0 und 1.
+
+% Um numerische Eigenschaften zu bewerten, werden Differenzmerkmale berechnet. Die absolute Differenz ist definiert als:
+
+% \begin{align}
+%     d(x,y) = |x-y|
+% \end{align}
+
+% Die relative Differenz wird berechnet durch:
+
+% \begin{align}
+%     d_{rel}(x,y) = \frac{|x-y|} {\max(|x|,|y|,\varepsilon)}
+% \end{align}
+
+% Dabei bezeichnet $x$ den Eigenschaftswert der Anfrage, $y$ den Eigenschaftswert des Kandidaten und $\varepsilon$ eine kleine Konstante zur Vermeidung von Division durch Null. Durch diese Metriken können technische Kennwerte aus unterschiedlichen Größenordnungen verglichen werden.
+
+% Die weiteren Pairwise-Merkmale sind in Tabelle \ref{tab:pairwise_merkmale} zusammengefasst. 
+% Die Berechnung der Pairwise-Merkmale erfolgt innerhalb der entwickelten Trainingspipeline \parencite{srcStep931}.
+
+% \begin{table}[H] 
+%     \centering 
+%     \caption{Gruppen der Pairwise-Merkmale} 
+%     \label{tab:pairwise_merkmale} 
+%     \begin{tabularx}{\textwidth}{p{4cm}X} 
+%         \toprule 
+%         \textbf{Merkmalsgruppe} & \textbf{Funktion} \\ 
+%         \midrule 
+%         Mengen- und Ähnlichkeitsmerkmale & Jaccard-Ähnlichkeiten, Overlap-Raten und Mengenüberdeckungen technischer Merkmale \\ 
+%         Numerische Vergleichsmerkmale & Absolute und relative Differenzen technischer Kennwerte sowie Verhältnismerkmale \\ 
+%         Function-Template- und Strukturmerkmale & Function-Templates, I/O-Schemata, Terminalfunktionen, Sequenzen und technische Strukturmerkmale. Ein I/O-Schema fasst die Ein- und Ausgänge eines EPLAN-Artikels oder EPLAN-Makros zusammen; I/O steht für \textit{Input/Output}. Zum Beispiel beschreibt ein Schema wie \texttt{DI\_8\_DO\_4\_AI\_2} acht digitale Eingänge, vier digitale Ausgänge und zwei analoge Eingänge. \\
+%         Hash- und Identitätsmerkmale & Struktur-, Sequenz- und Rollenhashes zur Identifikation technischer Zusammenhänge \\ 
+%         Lexikalische Merkmale & Extrahierte Texteinheiten aus Bezeichnungen und Beschreibungen der EPLAN-Artikel \parencite{EPLANArtikelverwaltung} und EPLAN-Makros \parencite{EPLAN-Makros}. Texte werden dabei bereinigt, vereinheitlicht und anhand definierter Trennzeichen zerlegt. Einzelne Tokens können somit Wörter, technische Kürzel oder Produktcodes sein. \\
+%         Support- und Profilmerkmale & Supportwerte, Singleton-Kennzeichen, Profilbreiten und statistische Eigenschaften der Kandidatenprofile \\ 
+%         Varianten- und Baugruppenmerkmale & Variantenkennungen, Baugruppeninformationen und EMA-Dateibezogene Strukturmerkmale \\ 
+%         Technische Artikelmerkmale & Spannungs-, Strom-, Leistungs-, Kommunikations- und Anschlussmerkmale \\ 
+%         \bottomrule 
+%     \end{tabularx} 
+% \end{table}
+
+% Die aktuelle Featurematrix umfasst für die Referenzkonfiguration A08 insgesamt 2.381 Merkmale. Dabei werden für jede Anfrage sämtliche 375 Kandidatenprofile bewertet. 
+% Die konkreten Größen der Trainings-, Validierungs- und Testmatrizen ergeben sich erst nach der Datensplit-Erzeugung und werden in Kapitel \ref{chap:datensplit_und_training} beschrieben.
+
+% \section{Erzeugung der Relevanzlabels}
+
+% Für jedes Anfrage-Kandidaten-Paar wird ein Relevanzlabel erzeugt, das angibt, ob der Kandidat für die jeweilige Anfrage relevant ist oder nicht \parencite{srcStep931}.
+% Im verwendeten Trainingsmodus existiert pro Anfrage genau ein korrektes EPLAN-Fenstermakro \parencite{EPLAN-Makros}. Die Funktion für die Relevanz lautet:
+
+% \begin{align}
+%     y(q,c) = \begin{cases} 1, & \text{wenn } c \text{ das Ziel-Makro von } q \text{ ist} \\ 0, & \text{sonst} \end{cases}
+% \end{align}
+
+% Dabei bezeichnet $y(q,c)$ das Relevanzlabel, $q$ die Anfrage und $c$ den Makrokandidaten. Jede Anfragegruppe enthält genau einen positiven Kandidaten und mehrere negative Kandidaten. 
+% Die negativen Kandidaten sind dazu da, das Modell darauf zu trainieren, irrelevante Makros korrekt zu erkennen und von relevanten zu unterscheiden. 
+% Dadurch werden nicht einzelne Objekte klassifiziert, sondern die korrekte Sortierung der Menge an Kandidaten \parencite{srcStep931}.
+
+% Die Referenzkonfiguration A08 verwendet diese binäre Labeldefinition. Zusätzlich wurde im Rahmen von Konfigurationsexperimenten eine hierarchische Labeldefinition untersucht. 
+% Dabei werden Makros derselben Familie sowie Makros mit identischem Familienpräfix durch eine abgestufte Relevanz berücksichtigt. 
+% Diese Variante wird in der späteren Gegenüberstellung der Konfigurationsexperimente als separate Konfiguration betrachtet.
+
+% \section{Erstellung des Trainingsformats}
+
+% Die berechneten Merkmale werden als Matrix gespeichert. Jede Zeile steht für ein Anfrage-Kandidat-Paar \parencite{srcStep931}:
+
+% \begin{align}
+%     (q,c_i) \rightarrow [x_1,x_2,\dots,x_n]
+% \end{align}
+
+% Dabei bezeichnet $q$ die Anfrage, $c_i$ den Makrokandidaten und $x_1,\dots,x_n$ die berechneten Features. Zusätzlich wird die Zuordnung jeder Anfrage zu einer Gruppe von Kandidaten gespeichert:
+
+% \begin{align}
+%     G_q = \{(q,c_1),(q,c_2),\dots,(q,c_n)\}
+% \end{align}
+
+% Dabei beschreibt $G_q$ die Menge aller Anfrage-Kandidat-Paare für die Anfrage $q$. Die Informationen aus den Gruppen werden zusammen mit den Featurevektoren an den LambdaRANK-Algorithmus übergeben \parencite{srcStep931}. 
+% Dadurch können die Kandidaten innerhalb derselben Anfrage gegeneinander bewertet werden und somit die optimale Rangfolge erlernt werden.
+
+% \section{Zielinformations-Leakage} 
+
+% Beim Aufbau der Trainingsdaten muss sichergestellt werden, dass nur solche Informationen verwendet werden, die auch während einer realen Anfrage verfügbar wären. 
+% Die Query-Darstellung wird deshalb auf Merkmale beschränkt, die aus einem eingehenden EPLAN-Artikel oder einem technischen Datenblatt abgeleitet werden können. 
+% Direkte Zielinformationen wie \texttt{target\_macro}, \texttt{target\_family} sowie weitere makrobezogene Zielfelder werden ausgeschlossen. 
+% Makrostrukturinformationen werden ausschließlich innerhalb der Kandidatenprofile gespeichert. Zusätzlich werden Kandidatenprofile ausschließlich aus Artikeln des Trainingssplits erstellt.  
+% Validierungs- und Testdaten fließen nicht in die Profilerstellung ein. Diese Maßnahmen bilden die Grundlage für die Leakage-Sicherheit der Trainingsdaten. 
+% Diese Schutzmechanismen werden im Rahmen der Evaluationssuite in Kapitel \ref{chap:evaluierungskonzept} beschrieben.
+
+
+% Für eine bessere Veranschaulichung des Datenflusses der Datenaufbereitung wird in Abbildung \ref{fig:trainingsformat_pipeline} eine schematische Darstellung gezeigt.
+
+% \begin{figure}[H]
+%     \centering
+%     \begin{tikzpicture}[
+%         label distance=0.2cm,
+%         >=stealth,
+%         font=\normalsize,
+%         pipelinebox/.style={draw, rounded corners, fill=blue!8, text width=3.05cm, minimum height=1.45cm, inner ysep=0pt, align=center},
+%         check/.style={draw, rounded corners, fill=orange!15, text width=3.05cm, minimum height=1.45cm, inner ysep=0pt, align=center},
+%         flow/.style={->, thick, blue!70!black}
+%     ]
+%         \node[pipelinebox] (raw) at (0, 0) {\textbf{1} Ausgangsdaten};
+%         \node[pipelinebox] (norm) at (4.0, 0) {\textbf{2} Normalisierung};
+%         \node[pipelinebox] (profiles) at (8.0, 0) {\textbf{3} Makro-\\kandidatenprofile};
+%         \node[pipelinebox] (pairs) at (12.0, 0) {\textbf{4} Anfrage-Kandidat-\\Paare};
+
+%         \node[pipelinebox] (features) at (12.0, -1.9) {\textbf{5} Pairwise-\\Merkmale};
+%         \node[pipelinebox] (labels) at (8.0, -1.9) {\textbf{6} Relevanzlabels};
+%         \node[pipelinebox] (format) at (4.0, -1.9) {\textbf{7} Trainingsformat};
+%         \node[check] (leakage) at (0, -1.9) {\textbf{8} Leakage-Schutz \& Split-Prüfung};
+
+%         \draw[flow] (raw) -- (norm);
+%         \draw[flow] (norm) -- (profiles);
+%         \draw[flow] (profiles) -- (pairs);
+%         \draw[flow] (pairs) -- (features);
+%         \draw[flow] (features) -- (labels);
+%         \draw[flow] (labels) -- (format);
+%         \draw[flow] (format) -- (leakage);
+%     \end{tikzpicture}
+%     \caption{Verarbeitungsschritte von den Ausgangsdaten bis zum Trainingsformat.}
+%     \label{fig:trainingsformat_pipeline}
+% \end{figure}

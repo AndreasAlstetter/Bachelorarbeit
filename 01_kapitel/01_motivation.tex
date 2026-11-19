@@ -32,11 +32,47 @@ Eine vereinfachte Darstellung eines Makros für einen Motor ist in Abbildung \re
 
 \begin{figure}[H] 
     \centering 
-    \includegraphics[width=\textwidth] 
-    {03_abbildungen/02_schemas/pdf/Motor.pdf} 
-    \caption{Elektromotor} 
+    \begin{tikzpicture}[ font=\small, >=stealth, 
+        terminal/.style={ circle, draw, minimum size=0.9cm, inner sep=0pt, font=\bfseries }, 
+        motor/.style={ circle, draw=gray!70!black, fill=gray!5, minimum size=5.4cm, line width=0.9pt, align=center }, connection/.style={ line width=1pt } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Motor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[motor] (motor) at (0,0) { \textbf{Elektromotor}\\[1mm] \large M }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Anschlüsse %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
+        \node[ terminal, fill=red!15, draw=red!60!black ] (plus) at (-1.4,4.0) {$+$}; \node[ terminal, fill=blue!15, draw=blue!60!black ] (minus) at (1.4,4.0) {$-$}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Elektrische Verbindungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[connection] (plus.south) -- (-1.4,2.5); \draw[connection] (minus.south) -- (1.4,2.5); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Anschlussbezeichnungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ anchor=east, align=center, font=\footnotesize ] at (-1.55,3.15) {positiver\\Anschluss}; 
+        \node[ anchor=west, align=center, font=\footnotesize ] at (1.55,3.15) {negativer\\Anschluss};
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Makrorahmen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ draw=orange!70!black, dashed, rounded corners, line width=1pt, inner sep=0.7cm, fit=(motor)(plus)(minus), label={ [font=\bfseries, text=orange!70!black] above:Wiederverwendbares Motor-Makro } ] (macroframe) {}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Makrokennung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ draw, rounded corners, fill=orange!15, minimum width=4.5cm, minimum height=0.8cm, align=center, below=0.6cm of macroframe ] (macroID) { Makrobezeichnung: M1\_F1\_V1 }; 
+        \draw[ ->, thick, orange!70!black ] (macroframe.south) -- (macroID.north); 
+    \end{tikzpicture} 
+    \caption{ Vereinfachte Darstellung eines wiederverwendbaren Makros für einen Elektromotor. Das Makro fasst das Motorsymbol, die elektrischen Anschlüsse und die zugehörige Makrobezeichnung zu einer standardisierten Schaltplanfunktion zusammen. } 
     \label{fig:elektromotor} 
 \end{figure}
+
+% \begin{figure}[H] 
+%     \centering 
+%     \includegraphics[width=\textwidth] 
+%     {03_abbildungen/02_schemas/pdf/Motor.pdf} 
+%     \caption{Elektromotor} 
+%     \label{fig:elektromotor} 
+% \end{figure}
 
 
 Um ein Makro mit technischen Informationen eines Elektrobauteils wie einem Elektromotor zu verknüpfen, wird in EPLAN die Artikelverwaltung verwendet. 
@@ -47,11 +83,37 @@ Leistung direkt mit einem ausgewählten Makro verknüpft werden können. Abbildu
 
 \begin{figure}[H] 
     \centering 
-    \includegraphics[width=\textwidth] 
-    {03_abbildungen/02_schemas/pdf/Beispielartikel_Motor.pdf} 
-    \caption{Beispielartikel Elektromotor} 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        article/.style={ draw=blue!60!black, rounded corners, fill=blue!8, minimum width=5.2cm, minimum height=6.2cm, align=center, inner sep=8pt }, 
+        property/.style={ draw, rounded corners, fill=gray!8, text width=4.1cm, minimum height=0.65cm, align=left, inner sep=4pt } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,4.5) {Beispielartikel eines Elektromotors}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikelrahmen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[article] (article) at (0,0) {}; \node[ font=\bfseries, text=blue!60!black ] at (0,2.55) {Artikel: Elektromotor}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Technische Artikeleigenschaften % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[property] (manufacturer) at (0,1.65) {\textbf{Hersteller:} Siemens}; 
+        \node[property] (voltage) at (0,0.75) {\textbf{Spannung:} 400 V}; 
+        \node[property] (current) at (0,-0.15) {\textbf{Strom:} 10 A}; 
+        \node[property] (power) at (0,-1.05) {\textbf{Leistung:} 4000 W}; 
+
+    \end{tikzpicture} 
+    \caption{ Beispielartikel eines Elektromotors. Die technischen Artikeleigenschaften wie Hersteller, Spannung, Strom und Leistung werden in der Artikelverwaltung gespeichert. } 
     \label{fig:beispielartikel_elektromotor} 
 \end{figure}
+
+% \begin{figure}[H] 
+%     \centering 
+%     \includegraphics[width=\textwidth] 
+%     {03_abbildungen/02_schemas/pdf/Beispielartikel_Motor.pdf} 
+%     \caption{Beispielartikel Elektromotor} 
+%     \label{fig:beispielartikel_elektromotor} 
+% \end{figure}
 
 Durch diesen getrennten Aufbau ist es möglich einem Makro mehrere Artikel zuzuordnen, wodurch unterschiedliche Varianten eines Makros abgebildet werden können.
 Beispielhaft könnte dem Makro für einen Elektromotor ein anderer Artikel des Herstellers SEW mit 230 Volt Spannung 5 Ampere Stromstärke und einer Leistung von 1150 Watt zugeordnet werden, ohne dabei das Makro selbst ändern zu müssen.
@@ -132,15 +194,119 @@ Hierbei dienen die Artikelstammdaten wie Hersteller, Spannung, Strom und Leistun
 während die zu empfehlende Makros als Ausgabedaten, für das Empfehlungssystem dienen. 
 Die Eingabedaten sollen dabei aus einem Artikel extrahiert, und für die Suchanfrage an das Empfehlungssystem verwendet werden.
 Die Ausgabedaten des Empfehlungssystem stellen die am besten zu den Eingabedaten passenden Makros dar. 
-Diese Makros sollen dann entsprechend ihrer Eignung für die konkrete Elektrokonstruktionsaufgabe in absteigender Reihenfolge in einer Rangliste sortiert werden.
+Diese Makros sollen dann entsprechend ihrer Eignung für die konkrete Elektrokonstruktionsaufgabe in absteigender Relevanz in einer Liste sortiert werden.
+
 
 \begin{figure}[H] 
     \centering 
-    \includegraphics[width=\textwidth] 
-    {03_abbildungen/02_schemas/pdf/Vision.pdf} 
-    \caption{Vision des Empfehlungssystems} 
-    \label{fig:vision} 
-\end{figure}
+    \begin{tikzpicture}[ scale=0.9, transform shape, >=stealth, font=\small, 
+        article/.style={ draw=blue!60!black, rounded corners, fill=blue!8, text width=4.3cm, minimum height=4.8cm, align=left, inner sep=7pt }, 
+        property/.style={ draw, rounded corners, fill=gray!8, text width=3.5cm, minimum height=0.55cm, align=left, inner sep=3pt }, 
+        model/.style={ draw=green!50!black, rounded corners, fill=green!12, text width=3.2cm, minimum height=2.4cm, align=center, inner sep=5pt },
+        macro/.style={ draw=orange!70!black, rounded corners, fill=orange!12, minimum width=4.2cm, minimum height=3.8cm, align=center }, 
+        ranking/.style={ draw=orange!70!black, rounded corners, fill=orange!10, text width=4.1cm, minimum height=3.6cm, align=left, inner sep=7pt }, 
+        interface/.style={ draw, rounded corners, minimum width=1.8cm, minimum height=0.75cm, align=center, font=\bfseries\footnotesize, inner sep=4pt },
+        phase/.style={ draw, rounded corners, fill=yellow!15, minimum width=3.2cm, minimum height=0.7cm, align=center, font=\bfseries } ]
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,10.2) {Vision des KI-basierten Makroempfehlungssystems}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % OBEN: TRAININGSBASIS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[phase] at (0,9.1) {1. Vorhandenes Wissen und Training}; 
+        
+        % Artikel 
+        
+        \node[article] (trainingArticle) at (-5.5,6.0) {}; 
+        \node[ font=\bfseries, text=blue!60!black ] at (-5.5,7.95) {Artikel: Elektromotor}; 
+        \node[property] at (-5.5,7.15) {\textbf{Hersteller:} Siemens}; 
+        \node[property] at (-5.5,6.35) {\textbf{Spannung:} 400 V}; 
+        \node[property] at (-5.5,5.55) {\textbf{Strom:} 10 A}; 
+        \node[property] at (-5.5,4.75) {\textbf{Leistung:} 4000 W}; 
+        \node[property] at (-5.5,3.95) {\textbf{Makro:} M1\_F1\_V1}; 
+        
+        % Motor-Makro 
+        
+        \node[macro] (trainingMacro) at (5.5,6.0) {}; 
+        \node[ circle, draw=gray!70!black, fill=white, minimum size=2.2cm, align=center ] (motorSymbol) at (5.5,5.8) {\textbf{M}}; 
+        \node[ circle, draw=red!60!black, fill=red!15, minimum size=0.65cm, inner sep=0pt ] (plus) at (4.9,7.45) {$+$}; 
+        \node[ circle, draw=blue!60!black, fill=blue!15, minimum size=0.65cm, inner sep=0pt ] (minus) at (6.1,7.45) {$-$}; \draw (plus.south) -- (4.9,6.9); \draw (minus.south) -- (6.1,6.9); 
+        \node[font=\bfseries] at (5.5,4.4) {Makro: M1\_F1\_V1}; 
+        
+        % Artikel-Makro-Zuordnung 
+        
+        \draw[<->,very thick] (trainingArticle.east) -- (trainingMacro.west) node[ midway, above, fill=white, align=center, inner sep=4pt ] { Artikel-Makro-Zuordnung }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % TRENNLINIE 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[ dashed, gray!70!black, line width=0.9pt ] (-8.2,3.35) -- (8.2,3.35); 
+        
+        % Training nach unten 
+        
+        \draw[->,very thick,green!50!black] (0,4.5) -- (0,2.35) node[ midway, right, fill=white, align=left, inner sep=3pt ] { Training mit \\ Artikel-Makro-Zuordnungen }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % UNTEN: ANWENDUNG 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[phase] at (0,2.0) {2. Anwendung des Empfehlungssystems}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Anfrageartikel 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[article] (query) at (-6.6,-1.2) {}; 
+        \node[ font=\bfseries, text=blue!60!black ] at (-6.6,0.75) {Anfrage: Elektromotor}; 
+        \node[property] at (-6.6,-0.05) {\textbf{Hersteller:} Siemens}; \node[property] at (-6.6,-0.85) {\textbf{Spannung:} 400 V}; \node[property] at (-6.6,-1.65) {\textbf{Strom:} 10 A}; 
+        \node[property] at (-6.6,-2.45) {\textbf{Leistung:} 4000 W}; 
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % KI-Empfehlungssystem 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[model] (ai) at (0,-1.2) { \textbf{KI-basiertes}\\ \textbf{Empfehlungs-}\\ \textbf{system}\\[2mm] Vergleich der\\ Anfrage mit Makros };
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Makro-Rangliste 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[ranking] (ranking) at (6.6,-1.2) { \centering \textbf{Makro-Rangliste}\\[2mm] \raggedright \textbf{1. M1\_F1\_V1}\\ \hspace*{4mm}höchste Eignung\\[1mm] 2. M1\_F1\_V3\\[1mm] 3. M1\_F2\_V1 }; 
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Eingabeschnittstelle 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[ interface, draw=blue!60!black, fill=blue!5, text=blue!60!black ] (input) at (-3.0,-1.2) {Eingabe}; 
+        % Anfrage -> Eingabeschnittstelle 
+        \draw[ ->, thick, blue!60!black ] (query.east) -- (input.west); 
+        % Eingabeschnittstelle -> KI-System 
+        \draw[ ->, thick, blue!60!black ] (input.east) -- (ai.west); 
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Ausgabeschnittstelle 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+        \node[ interface, draw=orange!70!black, fill=orange!5, text=orange!70!black ] (output) at (3.0,-1.2) {Ausgabe}; 
+        % KI-System -> Ausgabeschnittstelle 
+        \draw[ ->, thick, orange!70!black ] (ai.east) -- (output.west); 
+        % Ausgabeschnittstelle -> Rangliste 
+        \draw[ ->, thick, orange!70!black ] (output.east) -- (ranking.west);
+
+        \end{tikzpicture} 
+        \caption{ Vision des KI-basierten Empfehlungssystems. Die Artikel-Makro-Zuordnungen bilden die Wissensbasis für das Training. Bei der späteren Anwendung wird bei einer Anfrage ein Artikel an das Empfehlungssystem übergeben. Das System ermittelt passende Makros und gibt diese nach ihrer Eignung absteigend in einer Liste aus. } 
+        \label{fig:vision} 
+        \end{figure}
+
+% \begin{figure}[H] 
+%     \centering 
+%     \includegraphics[width=\textwidth] 
+%     {03_abbildungen/02_schemas/pdf/Vision.pdf} 
+%     \caption{Vision des Empfehlungssystems} 
+%     \label{fig:vision} 
+% \end{figure}
 
 
 Durch die Nutzung eines solchen Empfehlungssystems soll es möglich werden, den Suchaufwand für geeignete Makros aus einem bestehenden Makrobestand zu reduzieren,

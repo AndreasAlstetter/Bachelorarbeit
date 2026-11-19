@@ -7,7 +7,7 @@
 \label{sec:artikeldaten} 
 
 Die Artikeldaten liegen in XML-Dateien vor. 
-XML (\textit{Extensible Markup Language}) ist ein standardisiertes Format zur hierarchischen Speicherung und Beschreibung strukturierter Informationen wie Artikeldaten, die einem wiederkehrenden Schema folgen \cite{bray2008xml}.
+XML (\textit{Extensible Markup Language}) ist ein standardisiertes Format zur hierarchischen Speicherung und Beschreibung von Informationen, die einem wiederkehrenden Schema folgen \cite{bray2008xml}.
 Durch die hierarchische Organisation von XML-Dokumenten können sowohl einfache Stammdaten wie Herstellerinformationen als auch komplexe technische Informationen wie Spannungen, 
 Ströme oder Leistungen strukturiert abgebildet werden \cite{bray2008xml}.
 Die in den Artikeldaten enthaltenen Informationen, werden im folgenden als \textit{technische Artikeleigenschaften} bezeichnet. 
@@ -15,7 +15,7 @@ Zu diesen gehören unter anderen:
 
 \begin{itemize} 
     \item Herstellerinformationen, 
-    \item Typnummern, 
+    %\item Typnummern, 
     \item Spannungen, 
     \item Ströme, 
     \item Leistungen,  
@@ -39,16 +39,16 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
         % Kategorien 
         \node[category] (master) at (-4.5,2.5) {Stammdaten}; 
         \node[category] (electrical) at (0,2.5) {Elektrische Informationen}; 
-        \node[category] (technical) at (4.5,2.5) {Technische Informationen};
+        \node[category] (technical) at (4.5,2.5) {Referenzen};
         % Verbindungen 
         \draw[->] (article) -- (master); 
         \draw[->] (article) -- (electrical); 
         \draw[->] (article) -- (technical); 
         % Stammdaten 
         \node[feature] (manu) at (-7.5,0) {Hersteller\\SEW}; 
-        \node[feature] (type) at (-5.0,0) {Typnummer\\S123}; 
+        %\node[feature] (type) at (-5.0,0) {Typnummer\\S123}; 
         \draw[->] (master) -- (manu); 
-        \draw[->] (master) -- (type);
+        %\draw[->] (master) -- (type);
         % Elektrische Informationen 
         \node[feature] (voltage) at (-2.5,0) {Spannung\\400 V}; 
         \node[feature] (current) at (0,0) {Strom\\10 A}; 
@@ -58,11 +58,11 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
         \draw[->] (electrical) -- (power); 
         % Technische Informationen 
         % \node[feature] (ip) at (5.0,0) {Hinweis\\MIT\\GEHÄUSE}; 
-        % \node[feature] (com) at (7.5,0) {Makro\\M1\_F1\_V1};
-        % \draw[->] (technical) -- (ip); 
+        \node[feature] (com) at (7.5,0) {Makro\\M1\_F1\_V1};
+        \draw[->] (technical) -- (com); 
         % \draw[->] (technical) -- (com); 
         % Makro
-        \draw[ decorate, decoration={brace,mirror,amplitude=10pt}, thick ] (-8.25,-0.8) -- (8.25,-0.8) node[midway,yshift=-1cm] { \fbox{\strut Zugeordnetes Motor-Makro} };
+        %\draw[ decorate, decoration={brace,mirror,amplitude=10pt}, thick ] (-8.25,-0.8) -- (8.25,-0.8) node[midway,yshift=-1cm] { \fbox{\strut Zugeordnetes Motor-Makro} };
     \end{tikzpicture} 
     \caption{Beispielhafte Struktur eines XML-Artikels für einen Elektromotor. Die hierarchische Organisation ermöglicht die strukturierte Speicherung von \textit{technischen Artikeleigenschaften} eines Motors nach einem vorgegebenen Schema.} 
     \label{fig:xml_artikel_motor}
@@ -73,7 +73,7 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
 Neben den Artikeln werden die zugehörigen Makros analysiert. Die Makros sind im .ema-Format gespeichert. 
 Dieses Format entspricht ebenfalls einem XML-Schema, das Informationen über die Makros in einem einheitlichen Schema strukturiert abbildet.
 
-Dies Informationen werden im folgenden als \textit{technische Makroeigenschaften} bezeichnet. 
+Diese Informationen werden im folgenden als \textit{technische Makroeigenschaften} bezeichnet. 
 
 Hierzu zählen: 
 
@@ -184,10 +184,10 @@ Das Ziel der \textit{Datenaufbereitung} besteht daher darin, die Qualität der D
 \subsection{Entfernung unvollständiger Artikel- und Makrodaten}
 \label{sec:entfernen_unvollständiger_artikel_und_makrodaten}
 
-In diesem Schritt werden alle Artikel und Makros entfernt, die unvollständige Informationen enthalten. 
-Fehlende \textit{technischen Artikel- und Makroeigenschaften} sind Informationslücken, welche die Vollständigkeit der Daten beeinträchtigen. Dies kann zu einer Verschlechterung der Modellleistung führen und müssen daher bereits während der \textit{Datenaufbereitung} behandelt werden \cite{emmanuel2021missing}.
-Angenommen, ein unvollständiger Motor-Artikel enthält keine Angaben zur Spannung, dann wird bei einem späteren Lernprozess diese Informationslücke vom Modell übernommen. Wenn dann eine Anfrage an das Modell gestellt wird, welche diesem Motor-Artikel entspricht, kann das Modell diesen Artikel nicht korrekt zuordnen, 
-da die notwendigen Informationen zum erkennen dieses Artikels fehlen.
+In diesem Schritt werden alle Artikel entfernt, die unvollständige Informationen enthalten. 
+Fehlende \textit{technischen Artikeleigenschaften} sind Informationslücken, welche die Vollständigkeit der Daten beeinträchtigen. Dies kann zu einer Verschlechterung der Modellleistung führen und muss daher bereits während der \textit{Datenaufbereitung} behandelt werden \cite{emmanuel2021missing}.
+Angenommen, ein unvollständiger Motor-Artikel enthält keine Angaben zur Spannung, dann wird bei einem späteren Lernprozess diese Informationslücke vom Modell übernommen. Wenn dann eine Anfrage an das Modell gestellt wird, welche diesem "spannungslosen" Motor-Artikel entspricht, kann das Modell diesen Artikel nicht korrekt zuordnen, 
+da die notwendigen Informationen "Spannung" zum Erkennen dieses Artikels fehlt.
 
 Abbildung \ref{fig:unvollstaendige_daten} verdeutlicht die Unterscheidung zwischen vollständigen und unvollständigen Artikeldaten:
 
@@ -224,15 +224,15 @@ Abbildung \ref{fig:unvollstaendige_daten} verdeutlicht die Unterscheidung zwisch
     \label{fig:unvollstaendige_daten} 
 \end{figure}
 
-\subsection{Entfernung redundanter Artikel- und Makrodaten}
-\label{sec:entfernung_redundanter_artikel_und_makrodaten}
+\subsection{Entfernung redundanter Artikel}
+\label{sec:entfernung_redundanter_artikel}
 
-Hierbei werden identische Artikel und Makros identifiziert, welche dieselben \textit{technischen Artikel- und Makroeigenschaften} aufweisen. 
-Identische Artikel und Makros, welche in mehrfacher Ausführung auftreten, führen dazu, dass diese gegenüber anderen Artikeln und Makros, welche in einzelner Ausführung auftreten, 
-übergewichtet werden. In einem späteren Lernprozess wird hierdurch das Wissen eines Modells verzerrt. 
-Das Modell erlernt dadurch ein Vorurteil auf übergewichtete Artikel und Makros, was dazu führt, dass diese bei neuen Anfragen bevorzugt für die Vorhersage verwendet werden \cite{hastie2009elements,sabzekar2021noiseaware}.
+Hierbei werden identische Artikel identifiziert, welche dieselben \textit{technischen Artikeleigenschaften} aufweisen. 
+Identische Artikel, welche in mehrfacher Ausführung auftreten, führen dazu, dass diese gegenüber anderen Artikeln, welche in einzelner Ausführung auftreten, 
+übergewichtet werden. In einem späteren Lernprozess wird hierdurch das Wissen eines Modells verzerrt, indem 
+das Modell ein Vorurteil auf übergewichtete Artikel erlernt, welche bei neuen Anfragen bevorzugt für die Vorhersage verwendet werden \cite{hastie2009elements,sabzekar2021noiseaware}.
 
-Abbildung \ref{fig:redundante_daten} veranschaulicht die Übergewichtung redundanter Motor-Artikel. Nach der Bereinigung werden identische Artikel entfernt, sodass jedes Exemplar nur einmal vorkommt und die Gewichtung ausgeglichen ist.
+Abbildung \ref{fig:redundante_daten} veranschaulicht die Übergewichtung redundanter Motor-Artikel. Nach der Bereinigung werden identische Artikel entfernt, sodass jedes Exemplar nur einmal vorkommt.
 
 \begin{figure}[H] 
     \centering 
@@ -445,9 +445,9 @@ Die folgende Abbildung \ref{fig:spannungsklassifikation} zeigt, wie die Klassifi
 \label{sec:ergebnis_der_datenaufbereitung}
 
 Den Ausgangspunkt für die Datenaufbereitung bildet die vorhandene EPLAN-Datenbank mit insgesamt 168.788 Artikeln. Über alle Artikel hinweg sind 268 unterschiedliche Artikeleigenschaften vorhanden. 
-Nach dem Entfernen von Artikeln ohne Makrozuordnung (siehe Abschnitt \ref{sec:entfernen_unvollständiger_artikel_und_makrodaten}) verbleiben 31.572 Artikel, die als Grundlage für die weitere Datenaufbereitung dienen.
-Im nächsten Schritt der Datenaufbereitung wurden Artikel mit fehlenden \textit{technischen Artikeleigenschaften} entfernt, was zu einem Artikelbestand von 1.562 Artikeln führte (siehe Abschnitt \ref{sec:entfernen_unvollständiger_artikel_und_makrodaten}). 
-Die weitere Aufbereitung der Daten durch Entfernen von Duplikaten und nicht nutzbarer Metadaten erfolgte anschließend (vergleiche Abschnitte \ref{sec:entfernung_redundanter_artikel_und_makrodaten}, \ref{sec:entfernen_nicht_nutzbarer_metadaten})
+Nach dem Entfernen von Artikeln ohne Makrozuordnung (siehe Abschnitt \ref{sec:entfernen_unvollständiger_artikel}) verbleiben 31.572 Artikel, die als Grundlage für die weitere Datenaufbereitung dienen.
+Im nächsten Schritt der Datenaufbereitung wurden Artikel mit fehlenden \textit{technischen Artikeleigenschaften} entfernt, was zu einem Artikelbestand von 1.562 Artikeln führte (siehe Abschnitt \ref{sec:entfernen_unvollständiger_artikel}). 
+Die weitere Aufbereitung der Daten durch Entfernen von Duplikaten und nicht nutzbarer Metadaten erfolgte anschließend (vergleiche Abschnitte \ref{sec:entfernung_redundanter_artikel}, \ref{sec:entfernen_nicht_nutzbarer_metadaten})
 Abschließend erfolgte die Normalisierung von Einheiten und die Erstellung von Klassifikationen (vergleiche Abschnitte \ref{sec:normaliserung_von_einheiten} und \ref{sec:erstellung_von_klassifikationen}).
 Dadurch ergab sich der folgende aufbereitete Artikelbestand, welcher als Grundlage für das spätere Modell dient:
  
@@ -472,7 +472,7 @@ Dies stellt eine Herausforderung für die den Lernprozess eines Modells dar und 
 
 Modelle wie sie in Kapitel \ref{sec:modellansätze} beschrieben werden, können technische Informationen nicht direkt aus XML-Dateien verarbeiten. 
 Um diese Informationen nutzbar zu machen, müssen sie in Embeddings (vergleiche Kapitel \ref{sec:vom_vektor_zum_embedding}) überführt werden.
-Deswegen werden die \textit{technischen Artikel- und Makroeigenschaften} in numerische Vektoren überführt, die als Eingabe für ein Modell dienen.
+Deswegen werden die \textit{technischen Artikeleigenschaften} in numerische Vektoren überführt, die als Eingabe für ein Modell dienen.
 
 
 \subsection{Artikelvektor} 
@@ -799,20 +799,36 @@ Dieser Datensplit bildet die Basis für das Training und die Bewertung des Model
 
 \section{Artefakt A1: Trainings- und Evaluationsbasis} 
 
-Das Ergebnis dieses Kapitels wird in Artefakt A1 zusammengefasst.
-Es stellt die Grundlage für die Bewertung und Auswahl des späteren Modellansatzes dar und setzt sich aus folgenden Bestandteilen zusammen:
+Ziel dieses Kapitels war die Beantwortung der Forschungsfrage RQ1: 
 
+\begin{quote} 
+    \textbf{RQ1:} Welche technischen Informationen aus Artikeln eignen sich zur Unterscheidung von Makros und können als Trainings- und Evaluationsbasis für ein Empfehlungssystem verwendet werden? 
+\end{quote} 
+
+Zur Beantwortung dieser Forschungsfrage wurden zunächst die verfügbaren Artikel-, Makro- und Zuordnungsdaten analysiert. 
+Anschließend erfolgte eine mehrstufige Datenaufbereitung bestehend aus der Entfernung unvollständiger Datensätze, der Entfernung redundanter Artikel, 
+der Bereinigung nicht nutzbarer Metadaten sowie der Normalisierung und Klassifikation technischer Eigenschaften. 
+Auf Basis der bereinigten Daten wurden die relevanten technischen Informationen in ein maschinell verarbeitbares Format überführt. 
+Hierzu wurden die technischen Artikeleigenschaften in Form von Artikelvektoren repräsentiert und anschließend in Trainings-, Validierungs- und Testdaten aufgeteilt. 
+Das Ergebnis dieser Schritte stellt die Trainings- und Evaluationsbasis des späteren Empfehlungssystems dar und bildet damit die Grundlage für die Auswahl und Bewertung geeigneter Modellansätze im nachfolgenden Kapitel. 
+
+Daraus ergibt sich folgendes Artefakt, dass an die nächsten Kapitel übergeben wird: 
+
+\begin{quote} 
+    \textbf{Artefakt A1: Trainings- und Evaluationsbasis} 
+\end{quote} 
 \begin{itemize} 
-    \item 1.559 Artikeln, 
-    \item 375 Makros,
-    \item 127  
-    \item den Artikel-Makro-Zuordnungen, 
-    \item den Artikelvektoren, 
-    \item einem Datensplit mit:
+    \item 1.559 aufbereitete Artikel,
+    \item 375 unterschiedliche Makros,
+    \item 127 \textit{technischen Artikeleigenschaften},
+    \item Artikel-Makro-Zuordnungen,
+    \item normalisierte und klassifizierte \textit{technischen Artikeleigenschaften},
+    \item Artikelvektoren als maschinenlesbare Repräsentation der Artikel,
+    \item Datensplit bestehend aus: 
     \begin{itemize} 
-        \item 1.300 Trainingsartikeln, 
-        \item 96 Validierungsartikeln, 
-        \item 163 Testartikeln. 
+        \item 1.300 Trainingsartikeln
+        \item 96 Validierungsartikeln
+        \item 163 Testartikeln
     \end{itemize} 
 \end{itemize} 
 

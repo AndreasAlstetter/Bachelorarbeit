@@ -183,15 +183,18 @@ Der errechnete Wert von 0.998 liegt sehr nahe bei 1. Dies zeigt, dass die Embedd
 Wird dagegen die Cosine Similarity zwischen „Katze“ und „Auto“ berechnet, ergibt sich analog zur Berechnung für „Katze“ und „Hund“ ein Wert von -0.073.
 Der Wert liegt nahe bei 0 und sogar leicht im negativen Bereich. Die beiden Embeddings weisen daher in deutlich unterschiedliche Richtungen und werden als semantisch unähnlich betrachtet.
 
+
 \section {Modellansätze}
 \label{sec:modellansätze}
 
 \subsection{Neural Language Models}
+\label{sec:neural_language_models}
 
-Neuronale Sprachmodelle (Neural Language Models, NLMs) sind spezielle neuronale Netze, die auf Textsammlungen vortrainiert werden, um sprachliche Muster, semantische Zusammenhänge sowie Wissensrepräsentationen zu erlernen.
+Neuronale Sprachmodelle (Neural Language Models, NLMs) sind spezielle neuronale Netze, die auf umfangreiche Textsammlungen vortrainiert werden, um sprachliche Muster, semantische Zusammenhänge sowie Wissensrepräsentationen zu erlernen.
 Hierzu werden Wörter, Sätze und Dokumente in Embeddings überführt, die als Eingabe für ein neuronales Netz, wie in Abschnitt \ref{neuronale_netze} beschrieben, dienen \parencite{LeCun2015}.
 
 \subsection{Large Language Models }
+\label{sec:large_language_models}
 
 Large Language Models (LLMs) basieren auf neuronalen Sprachmodellen und erweitern diese durch eine enorme Anzahl an Parametern sowie tieferen Architekturen.
 Sie bilden die Grundlage für generative KI-Systeme und ermöglichen die Bearbeitung von verschiedenen Aufgaben aus dem bereich der natürlichen Sprachverarbeitung.
@@ -202,7 +205,7 @@ Ein Beispiel hierfür ist folgender Satz: „Anna trinkt Kaffee am Morgen.“ De
 Dabei erkennt das Modell, dass die Wörter „Anna“, „trinkt“ und „Kaffee“ stärker miteinander in Beziehung stehen als häufig vorkommende Wörter wie „am“ oder „der“. 
 
 \subsection{Fine-Tuning}
-
+\label{sec:fine_tuning}
 Large Language Models werden auf allgemeine Textsammlungen vortrainiert, um ein umfangreiches sprachliches und sachliches Wissen zu erwerben.
 Dies führt dazu, dass das Modell ein breites Wissen erwirbt, aber möglicherweise nicht auf spezifische Aufgaben oder einzelnen Fachbereiche spezialisiert ist.
 Um ein LLM auf spezifische Aufgaben oder Fachbereiche anzupassen, wird häufig das sogenannte Fine-Tuning eingesetzt. 
@@ -219,6 +222,7 @@ Durch Fine-Tuning ist es möglich, die Attention-Mechanismen des Modells gezielt
 Nach dem Fine-Tuning weiß das Modell nicht nur, dass Anna Kaffee am morgen trinkt, sondern auch, dass sie Espresso aus Italien bevorzugt.
 
 \subsection{Embedding-Modelle}
+\label{sec:embedding_modelle}
 
 Embedding-Modelle bauen auf dem Grundpinzip aus Kapitel \ref{vom_vektor_zum_embedding} auf. 
 Es handelt sich um Modelle, welche jegliche Arte von Eingaben wie Wörter, Sätze, Bilder oder Audioinhalte in Embeddings überführen und diese Eingaben dann in einem Embedding-Raum abbilden.
@@ -226,6 +230,7 @@ Dadurch ist es möglich, die semantische Ähnlichkeit zwischen verschiedenen Ein
 Hierfür wird typischerweise die Cosine Similarity (vergleiche Abschnitt \ref{sec:cosine_similarity}) zwischen den Embeddings berechnet, um die semantische Ähnlichkeit zu quantifizieren.
 
 \subsection{Sentence Transformers}
+\label{sec:sentence_transformers}
 
 Bei Sentence Transformers handelt es sich um eine weiterentwickelte Form von Embedding-Modellen, die vollständige Sätze oder Dokumente in Embeddings, überführen.
 Im Gegensatz zu einem LLM, das auf die Vorhersage des nächsten Wortes trainiert wird, liegt der Fokus bei Sentence Transformers darauf, 
@@ -286,6 +291,7 @@ Anstatt ausschließlich identische Schlüsselwörter zu suchen, ermöglichen sie
 \end{figure}
 
 \subsection{Triplet Loss}
+\label{sec:triplet_loss}
 
 Um mithilfe von Embedding-Modellen semantische Ähnlichkeiten von Daten wie Texten oder Bildern zu lernen, wird häufig der Triplet Loss (vergleiche Abbildung \ref{fig:triplet_loss}) eingesetzt.
 Hierzu werden während des Trainings Dreiergruppen von Trainingsbeispielen, sogenannte Triplets, verwendet. 
@@ -328,16 +334,17 @@ den Abstand zwischen Anker und positivem Beispiel zu minimieren und gleichzeitig
 
 
 \subsection{Learning-to-Rank}
+\label{sec:learning_to_rank}
 
-Learning-to-Rank (LTR) bezeichnet eine Klasse von maschinellen Lernverfahren, deren Ziel darin besteht, die Reihenfolge von Ergebnissen innerhalb einer Rangliste zu optimieren. 
-Die Grundidee besteht darin, für eine Anfrage mehrere mögliche Ergebnisse zu bewerten und anschließend entsprechend ihrer Relevanz zu sortieren. 
-Je relevanter ein Ergebnis für die Anfrage ist, desto weiter oben soll es in der Rangliste erscheinen \parencite{liu2009learning}.
+Learning-to-Rank (LTR) bezeichnet eine Klasse von maschinellen Lernverfahren, deren Ziel darin besteht, die Reihenfolge von Kandidaten innerhalb einer Rangliste zu optimieren. 
+Die Grundidee besteht darin, für eine Anfrage mehrere mögliche Kandidaten zu bewerten und anschließend entsprechend ihrer Relevanz zu sortieren. 
+Je relevanter ein Kandidat für die Anfrage ist, desto weiter oben soll es in der Rangliste erscheinen. Dies wird in diesem Zusammenhang als Ranking bezeichnet \parencite{liu2009learning}.
 
 Grundsätzlich lassen sich Learning-to-Rank-Verfahren in drei Kategorien unterteilen:
 
 \begin{description} 
-  \item[Pointwise:] Das Modell betrachtet jedes Ergebnis einzeln und bewertet dessen Relevanz unabhängig von den übrigen Ergebnissen. 
-  \item[Pairwise:] Das Modell betrachtet jeweils zwei Ergebnisse gleichzeitig und lernt, welches der beiden relevanter ist. 
+  \item[Pointwise:] Das Modell betrachtet jeden Kandidaten einzeln und bewertet dessen Relevanz unabhängig von den übrigen Kandidaten. 
+  \item[Pairwise:] Das Modell betrachtet jeweils zwei Kandidaten gleichzeitig und lernt, welcher der beiden relevanter ist. 
   \item[Listwise:] Das Modell betrachtet die gesamte Rangliste und optimiert direkt deren Qualität. 
 \end{description} 
 
@@ -414,6 +421,224 @@ Dadurch lernt das Modell insbesondere Fehler auf den oberen Rangpositionen zu ko
     \end{tikzpicture} 
   \caption{Prinzip von LambdaRank. Vergleiche, deren Vertauschung die Rangliste stark verändert, erhalten eine höhere Gewichtung als Vergleiche mit geringem Einfluss auf die Rangfolge \parencite{Burges2006LambdaRank}.} 
   \label{fig:lambdarank_prinzip} 
+\end{figure}
+
+\subsection{LambdaMART}
+
+LambdaMART (vergleiche Abbildung \ref{fig:lambdamart_prinzip}) baut auf dem zuvor beschriebenen LambdaRank-Verfahren auf und kombiniert dessen $\lambda$-Gradienten mit dem Verfahren der Gradient-Boosting-Entscheidungsbäume. 
+Ein Entscheidungsbaum wie er in Abbildung \ref{fig:entscheidungsbaum} dargestellt ist, ist ein Modell, das Entscheidungen anhand von Verästelungen trifft. An jeder Verästelung wird eine Bedingung überprüft, die den weiteren Pfad im Baum bestimmt. 
+Die Blätter des Baums liefern anhand von Blattwerten die endgültigen Entscheidungen oder Vorhersagen, die auf den zuvor getroffenen Verzweigungen basieren.
+
+\begin{figure}[H] 
+  \centering 
+  \begin{tikzpicture}[ >=stealth, font=\small, 
+    input/.style={ draw, rounded corners, minimum width=5.4cm, minimum height=2.1cm, align=center, inner sep=7pt }, 
+    features/.style={ draw, rounded corners, fill=gray!10, text width=11.5cm, minimum height=1.3cm, align=center, inner sep=7pt }, 
+    decision/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=4.8cm, minimum height=1.4cm, align=center, inner sep=6pt }, 
+    high/.style={ draw=green!60!black, rounded corners, fill=green!15, text width=3.6cm, minimum height=1.7cm, align=center, inner sep=6pt }, 
+    medium/.style={ draw=yellow!60!black, rounded corners, fill=yellow!20, text width=3.6cm, minimum height=1.7cm, align=center, inner sep=6pt }, 
+    low/.style={ draw=red!60!black, rounded corners, fill=red!12, text width=3.6cm, minimum height=1.7cm, align=center, inner sep=6pt }, 
+    aggregation/.style={ draw, rounded corners, fill=gray!10, text width=5.7cm, minimum height=1.0cm, align=center, inner sep=6pt }, 
+    result/.style={ draw=orange!70!black, rounded corners, fill=orange!15, text width=9.2cm, minimum height=1.1cm, align=center, inner sep=7pt }, 
+    edge/.style={ ->, thick }, pathlabel/.style={ draw, rounded corners, fill=white, minimum width=0.9cm, minimum height=0.45cm, align=center, inner sep=2pt, font=\footnotesize\bfseries } ] 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[font=\bfseries\large] at (0,12.3) {Beispiel eines Entscheidungsbaums}; 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 1: Anfrage und Kandidaten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[ input, fill=blue!10, draw=blue!60!black ] (query) at (-4.5,10.3) { \textbf{Anfrage}\\[2mm] Thema: LambdaMART\\ Schlüsselbegriffe:\\ Learning-to-Rank, Entscheidungsbäume }; 
+    \node[ input, fill=gray!10, draw=gray!70!black ] (documents) at (4.5,10.3) { \textbf{Dokumentenkandidat}\\[2mm] Jeweils ein Kandidat aus:\\ Dokument A, Dokument B\\ oder Dokument C }; 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 2: Vergleichsmerkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[features] (comparison) at (0,7.6) { \textbf{Vergleichsmerkmale aus Anfrage und Dokumentenkandidat}\\[1mm] thematische Ähnlichkeit \quad Schlüsselbegriffe \quad zusätzliche Beschreibungen }; 
+    
+    % Gerade Eingabepfeile 
+    
+    \draw[ edge, shorten >=2pt ] (query.south) -- ([xshift=-4.2cm]comparison.north); \draw[ edge, shorten >=2pt ] (documents.south) -- ([xshift=4.2cm]comparison.north);
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 3: Erste Entscheidung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[decision] (topic) at (0,5.6) { Beträgt die thematische\\ Ähnlichkeit mindestens $80\,\%$? }; 
+    \draw[edge] (comparison.south) -- (topic.north); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Zweite Entscheidung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+    \node[decision] (keywords) at (-4.0,3.0) { Stimmen mindestens zwei zentrale\\ Schlüsselbegriffe mit der Anfrage überein? }; 
+
+    % Ja-Pfad von der ersten zur zweiten Entscheidung 
+
+    \draw[edge] (topic.south west) -- (keywords.north); 
+    \node[pathlabel] at (-1.85,4.45) {Ja}; 
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Gemeinsame Ebene der drei Blattknoten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+    \node[high] (documentB) at (-6.5,-0.8) { \textbf{Dokument B}\\[1mm] Thema und Schlüsselbegriffe\\ stimmen überein\\[1mm] Blattwert: $0{,}95$ }; 
+    \node[medium] (documentA) at (-1.5,-0.8) { \textbf{Dokument A}\\[1mm] Thema stimmt überein,\\ Begriffe nur teilweise\\[1mm] Blattwert: $0{,}70$ }; 
+    \node[low] (documentC) at (4.8,-0.8) { \textbf{Dokument C}\\[1mm] anderes Thema\\ geringe Ähnlichkeit\\[1mm] Blattwert: $0{,}20$ }; 
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Nein-Pfad der ersten Entscheidung zu Dokument C %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+    % Rechtwinkliger Verlauf: % zuerst nach rechts, dann senkrecht nach unten 
+
+    \coordinate (topicNoBranch) at (4.8,4.35); \draw[edge] (topic.east) -| (topicNoBranch) -- (documentC.north); \node[pathlabel] at (3.5,5.05) {Nein}; 
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Senkrechte Verzweigung zu Dokument B und A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    % Gemeinsamer Verzweigungspunkt unter dem 
+    % Schlüsselbegriffe-Kasten 
+    \coordinate (keywordBranch) at (-4.0,1.25); 
+    % Senkrechter Stamm 
+    \draw[thick] (keywords.south) -- (keywordBranch); 
+    % Linker Ja-Pfad zu Dokument B 
+    \draw[edge] (keywordBranch) -| (documentB.north); 
+    % Rechter Nein-Pfad zu Dokument A 
+    \draw[edge] (keywordBranch) -| (documentA.north); 
+    % Pfadbeschriftungen 
+    \node[pathlabel] at (-5.55,1.25) {Ja}; 
+    \node[pathlabel] at (-2.45,1.25) {Nein}; 
+    \end{tikzpicture} 
+    \caption{ Beispielhafte Funktionsweise eines Entscheidungsbaums im Dokumentenranking. Die Anfrage und der Dokumentenkandidat werden zunächst getrennt eingelesen und verglichen.
+Die Entscheidungen entlang des Baums führen zu den erreichten Blattwerten und damit zur abgeleiteten Reihenfolge Dokument B vor Dokument A vor Dokument C. } 
+\label{fig:entscheidungsbaum} 
+\end{figure}
+
+
+Gradient-Boosting ist ein Verfahren, bei dem Lernmodelle, wie Entscheidungsbäume, in sich wiederholenden Schritten zu einem verbesserten Modell kombiniert werden. Jeder neue Baum wird dabei so trainiert, dass er die Fehler des bisherigen Modells reduziert. 
+Die Ergebnisse aller Bäume werden anschließend addiert und ergeben einen abschließenden Relevanzwert für einen Kandidaten innerhalb der Rangliste. Je höher der Relevanzwert ist, umso weiter oben wird der Kandidat in einer Rangliste eingeordnet \parencite{burges2010lambdamart,ke2017lightgbm}.
+
+Abbildung \ref{fig:gradient_boosting} zeigt ein Beispiel für Gradient-Boosting anhand mehrerer aufeinanderfolgender Entscheidungsbäume.
+
+\begin{figure}[H] 
+  \centering 
+  \begin{tikzpicture}[ >=stealth, font=\small, 
+    input/.style={ draw, rounded corners, fill=gray!10, text width=10.5cm, minimum height=1.1cm, align=center, inner sep=7pt }, 
+    tree/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=4.0cm, minimum height=1.4cm, align=center, inner sep=6pt }, 
+    output/.style={ draw, rounded corners, fill=yellow!15, text width=5.4cm, minimum height=1.4cm, align=center, inner sep=6pt }, 
+    correction/.style={ draw=red!60!black, rounded corners, dashed, fill=red!5, text width=4.7cm, minimum height=0.8cm, align=center, inner sep=5pt }, 
+    aggregation/.style={ draw=green!50!black, rounded corners, fill=green!12, text width=7.0cm, minimum height=1.4cm, align=center, inner sep=7pt }, 
+    ranking/.style={ draw=orange!70!black, rounded corners, fill=orange!15, text width=8.0cm, minimum height=1.4cm, align=center, inner sep=7pt }, 
+    % step/.style={ draw, circle, fill=white, minimum size=0.75cm, align=center, inner sep=0pt },
+    edge/.style={ ->, thick } ] 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[font=\bfseries\large] at (0,10.3) {Beispiel für Gradient-Boosting}; 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Eingabe %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[input] (features) at (0,8.8) { \textbf{Vergleichsmerkmale zwischen Anfrage und Dokumenten}\\[1mm] thematische Ähnlichkeit, Schlüsselbegriffe und zusätzliche Beschreibungen }; 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Baum 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[ draw, circle, fill=white, minimum size=8mm, font=\bfseries ] at (-6.2,6.0) {1};
+    \node[tree] (tree1) at (-3.5,6.0) { \textbf{Entscheidungsbaum 1}\\[1mm] erzeugt eine erste\\ Relevanzschätzung }; 
+    \node[output] (result1) at (3.4,6.0) { \textbf{Erste Schätzung}\\[1mm] B wird höher bewertet als A und C }; 
+    \draw[edge] (features.south) -- (tree1.north); 
+    \draw[edge] (tree1.east) -- (result1.west);
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbleibender Fehler 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[correction] (error1) at (0,4.2) { Verbleibende Fehler werden bestimmt }; 
+    \draw[edge,red!60!black] (result1.south) |- (error1.east); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Baum 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[ draw, circle, fill=white, minimum size=8mm, font=\bfseries ] at (-6.2,2.3) {2};
+    \node[tree] (tree2) at (-3.5,2.3) { \textbf{Entscheidungsbaum 2}\\[1mm] korrigiert Fehler der\\ ersten Schätzung }; 
+    \node[output] (result2) at (3.4,2.3) { \textbf{Korrekturbeitrag}\\[1mm] Unterschiede zwischen B, A und C\\ werden genauer abgebildet }; 
+    \draw[edge,red!60!black] (error1.west) -| (tree2.north); 
+    \draw[edge] (tree2.east) -- (result2.west); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbleibender Fehler 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[correction] (error2) at (0,0.3) { Noch verbleibende Fehler werden bestimmt }; 
+    \draw[edge,red!60!black] (result2.south) |- (error2.east); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Baum 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[ draw, circle, fill=white, minimum size=8mm, font=\bfseries ] at (-6.2,-1.3) {3};
+    \node[tree] (tree3) at (-3.5,-1.3) { \textbf{Entscheidungsbaum 3}\\[1mm] verfeinert die bisherige\\ Relevanzschätzung }; 
+    \node[output] (result3) at (3.4,-1.3) { \textbf{Weiterer Korrekturbeitrag}\\[1mm] verbleibende Fehlbewertungen\\ werden reduziert }; 
+    \draw[edge,red!60!black] (error2.west) -| (tree3.north); \draw[edge] (tree3.east) -- (result3.west); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Addition der Baumbeiträge %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[aggregation] (sum) at (0,-5.0) { \textbf{Addition der Beiträge aller Entscheidungsbäume}\\[1mm] Baum 1 $+$ Baum 2 $+$ Baum 3\\[1mm] $\Rightarrow$ abschließender Relevanzwert je Dokument }; 
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Sammelpfad am rechten Rand %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    % Gemeinsame Sammellinie rechts 
+    
+    \coordinate (collectorTop) at (8.5,6.0); 
+    \coordinate (collectorMid) at (8.5,2.9); 
+    \coordinate (collectorLow) at (8.5,-1.1);
+    
+    % Verbindung Beitrag 1 -> Sammelpfad 
+    \draw[ thick, green!50!black ] (result1.east) -| (collectorTop); 
+    % Verbindung Beitrag 2 -> Sammelpfad 
+    \draw[ thick, green!50!black ] (result2.east) -| (collectorMid); 
+    % Verbindung Beitrag 3 -> Sammelpfad 
+    \draw[ thick, green!50!black ] (result3.east) -| (collectorLow); 
+    % Gemeinsame vertikale Sammellinie 
+    \draw[ thick, green!50!black ] (collectorTop) -- (8.5,-5.0); 
+    % EINZIGER Pfeil in Richtung Addition 
+    \coordinate (sumEntry) at ([xshift=0cm]sum.east); 
+    \draw[ ->, very thick, green!50!black ] (8.5,-5.0) |- (sumEntry);
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Rangliste %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[ranking] (ranking) at (0,-8.0) { \textbf{Rangliste nach absteigendem Relevanzwert}\\[1mm] 1. Dokument B, 2. Dokument A, 3. Dokument C }; 
+    \draw[ ->, very thick, orange!70!black ] (sum.south) -- (ranking.north); 
+  \end{tikzpicture} 
+  \caption{ Funktionsweise des Gradient-Boosting-Verfahrens. Der erste Entscheidungsbaum erzeugt eine erste Relevanzschätzung. 
+  Jeder nachfolgende Baum wird anhand der verbleibenden Fehler trainiert und ergänzt das bisherige Modell um einen weiteren Korrekturbeitrag. 
+  Die Beiträge aller Entscheidungsbäume werden addiert und ergeben den abschließenden Relevanzwert jedes Dokuments. 
+  Auf dieser Grundlage werden die Dokumente in absteigender Reihenfolge sortiert. } 
+  \label{fig:gradient_boosting} 
+\end{figure}
+
+
+Während LambdaRank bestimmt, wie stark einzelne Fehlplatzierungen innerhalb einer Rangliste gewichtet werden, legt LambdaMART fest, mit welcher Struktur innerhalb eines Modells die Relevanz der Kandidaten gelernt wird.
+Dabei werden Entscheidungsmerkmale wie die Ähnlichkeit zwischen Dokumenten verwendet, um die Relevanz der Kandidaten innerhalb der Rangliste zu bestimmen \parencite{burges2010lambdamart}.
+
+Die Bezeichnung LambdaMART setzt sich aus den Bestandteilen \textit{LambdaRank} und \textit{MART} zusammen. MART steht für \textit{Multiple Additive Regression Trees} und ist eine Form des Gradient-Boosting-Verfahren für Entscheidungsbäume \parencite{burges2010lambdamart}.
+
+
+\begin{figure}[H] 
+  \centering 
+  \begin{tikzpicture}[ >=stealth, font=\small, input/.style={ draw, rounded corners, fill=green!10, minimum width=4.7cm, minimum height=1.1cm, align=center }, 
+    tree/.style={ draw, rounded corners, fill=blue!10, minimum width=2.5cm, minimum height=1.2cm, align=center }, 
+    score/.style={ draw, rounded corners, fill=orange!15, minimum width=4.5cm, minimum height=1.1cm, align=center }, 
+    result/.style={ draw, rounded corners, fill=yellow!15, minimum width=4.5cm, minimum height=1.1cm, align=center } ] 
+    % Titel 
+    \node[font=\bfseries\large] at (0,5.7) {Prinzip von LambdaMART}; 
+    % Eingabe 
+    \node[input] (features) at (0,4.2) {Entscheidungsmerkmale\\ eines Dokumenten-Paares}; 
+    % Entscheidungsbäume 
+    \node[tree] (tree1) at (-4.5,1.8) {Entscheidungs-\\baum 1}; 
+    \node[tree] (tree2) at (0,1.8) {Entscheidungs-\\baum 2}; 
+    \node[tree] (treen) at (4.5,1.8) {Entscheidungs-\\baum $n$}; 
+    % Verbindungen zu Bäumen 
+    \draw[->,thick] (features.south) -- (tree1.north); \draw[->,thick] (features.south) -- (tree2.north); \draw[->,thick] (features.south) -- (treen.north); 
+    % Addition 
+    \node[font=\large] at (-2.25,0.3) {$+$}; 
+    \node[font=\large] at (2.25,0.3) {$+\cdots+$}; 
+    % Relevanzscore 
+    \node[score] (score) at (0,-1.0) {Gemeinsamer Relevanzwert\\ des Dokumenten-Paares}; 
+    \draw[->,thick] (tree1.south) -- (score.north west); 
+    \draw[->,thick] (tree2.south) -- (score.north); 
+    \draw[->,thick] (treen.south) -- (score.north east); 
+    % Rangliste 
+    \node[result] (ranking) at (0,-3.4) {Sortierung des Dokumenten-Paares\\ nach absteigendem Relevanzwert}; 
+    \draw[->,very thick] (score) -- (ranking); 
+    % Lambda-Steuerung 
+    \node[ draw, dashed, rounded corners, fill=red!10, align=center, text width=4.4cm ] (lambda) at (6.1,-1.0) {$\lambda$-Gradienten gewichten\\ Fehler nach ihrer Auswirkung\\ auf die Ranglistenqualität}; 
+    \draw[->,dashed,red!70,thick] (lambda.north) |- (treen.east); 
+  \end{tikzpicture} 
+  \caption{Funktionsweise von LambdaMART. Mehrere schrittweise trainierte Entscheidungsbäume verarbeiten .... . Ihre Ergebnisse bilden gemeinsam einen Vorhersagewert, anhand dessen ... sortiert werden. Die Gewichtung der Trainingsfehler erfolgt durch die $\lambda$-Gradienten des LambdaRank-Verfahrens.} 
+  \label{fig:lambdamart_prinzip} 
 \end{figure}
 
 \section{Validierungsansätze}
@@ -545,8 +770,8 @@ Vor diesem Hintergrund ergibt sich folgende übergeordnete Forschungsfrage:
 Zur Beantwortung dieser Forschungsfrage werden folgende Teilforschungsfragen untersucht: 
 
 \begin{description} 
-  \item[RQ1:] Welche technischen Informationen aus Artikeln eignen sich zur Unterscheidung von Makros und können als Trainings- und Evaluationsbasis für ein Empfehlungssystems verwendet werden? 
-  \item[RQ2:] Welcher Modellansatz eignet sich zur Abbildung und Nutzung vorhandener Artikel-Makro-Zuordnungen für die automatisierte Empfehlung geeigneter Makros? 
+  \item[RQ1:] Wie können Artikel und Makros als Lern- und Bewertungsbasis für ein Empfehlungssystems verwendet werden ? 
+  \item[RQ2:] Welcher Modellansatz eignet sich für die automatisierte Empfehlung geeigneter Makros ? 
   \item[RQ3:] Welche Empfehlungsqualität erreicht der ausgewählte Modellansatz hinsichtlich Trefferwahrscheinlichkeit und Rankingqualität? 
   \item[RQ4:] Welchen Einfluss besitzt das entwickelte Empfehlungssystem auf den Suchaufwand und die Wiederverwendung bestehender Makros in der Elektrokonstruktion? 
 \end{description} 
