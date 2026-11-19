@@ -52,57 +52,55 @@
 \contentsline {section}{\numberline {5.2}Large Language Models}{42}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Sentence Transformer}{43}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Embedding-Modell mit Triplet Loss}{44}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Learning-to-Rank}{45}{section.5.5}%
+\contentsline {section}{\numberline {5.5}Learning-to-Rank mit LambdaMART}{45}{section.5.5}%
 \contentsline {section}{\numberline {5.6}Modellauswahl}{46}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Auswahl zwischen Pointwise, Pairwise und Listwise}{47}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}Auswahl von LambdaMART}{47}{subsection.5.6.2}%
-\contentsline {section}{\numberline {5.7}Kapitelergebnis}{48}{section.5.7}%
-\contentsline {chapter}{\numberline {6}Konzeption des Empfehlungssystems}{51}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Gesamtarchitektur}{51}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Datenfluss}{51}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Komponentenmodell}{51}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}Datenmodell}{51}{subsection.6.1.3}%
-\contentsline {section}{\numberline {6.2}Kapitelergebnis}{51}{section.6.2}%
-\contentsline {chapter}{\numberline {7}Implementierung des Modells}{52}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Kandidatenprofile}{52}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Feature Engineering}{52}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Trainingsmatrix}{52}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Hyperparameteroptimierung}{53}{section.7.4}%
-\contentsline {section}{\numberline {7.5}Hyperparameteroptimierung}{53}{section.7.5}%
-\contentsline {section}{\numberline {7.6}Training}{54}{section.7.6}%
-\contentsline {section}{\numberline {7.7}Kapitelergebnis}{55}{section.7.7}%
-\contentsline {chapter}{\numberline {8}Evaluierung}{56}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Evaluierungskonzept}{56}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Versuchsaufbau}{56}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Versuchsergebnisse}{56}{section.8.3}%
-\contentsline {subsection}{\numberline {8.3.1}Untersuchte Konfigurationsparameter}{56}{subsection.8.3.1}%
-\contentsline {subsection}{\numberline {8.3.2}Referenzkonfiguration A01}{58}{subsection.8.3.2}%
-\contentsline {subsection}{\numberline {8.3.3}Ergebnisse}{58}{subsection.8.3.3}%
-\contentsline {section}{\numberline {8.4}Analyse}{59}{section.8.4}%
-\contentsline {subsection}{\numberline {8.4.1}Same-Family-Gewicht}{59}{subsection.8.4.1}%
-\contentsline {subsection}{\numberline {8.4.2}Hierarchische Labeldefinition}{59}{subsection.8.4.2}%
-\contentsline {subsection}{\numberline {8.4.3}Profilbreite}{60}{subsection.8.4.3}%
-\contentsline {subsection}{\numberline {8.4.4}Regularisierung}{60}{subsection.8.4.4}%
-\contentsline {subsection}{\numberline {8.4.5}Top-Konfiguration}{60}{subsection.8.4.5}%
-\contentsline {section}{\numberline {8.5}Kapitelergebnis}{61}{section.8.5}%
-\contentsline {chapter}{\numberline {9}Diskussion}{62}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Nutzenbewertung}{62}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Wirtschaftliche Betrachtung}{62}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Grenzen}{62}{section.9.3}%
-\contentsline {chapter}{\numberline {10}Grenzen und Ausblick}{63}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Grenzen des aktuellen Systems}{63}{section.10.1}%
-\contentsline {subsection}{\numberline {10.1.1}Geringer Support von Ziel-Makros}{63}{subsection.10.1.1}%
-\contentsline {subsection}{\numberline {10.1.2}Variantenauflösung innerhalb einer Makrofamilie}{64}{subsection.10.1.2}%
-\contentsline {subsection}{\numberline {10.1.3}Support-Bias häufiger Ziel-Makros}{64}{subsection.10.1.3}%
-\contentsline {section}{\numberline {10.2}Kritische Reflexion}{64}{section.10.2}%
-\contentsline {section}{\numberline {10.3}Interpretation der Ergebnisse}{64}{section.10.3}%
-\contentsline {section}{\numberline {10.4}Ursachenanalyse der Rankingfehler}{65}{section.10.4}%
-\contentsline {chapter}{\numberline {11}Fazit und Ausblick}{67}{chapter.11}%
-\contentsline {section}{\numberline {11.1}RQ1 beantworten}{67}{section.11.1}%
-\contentsline {section}{\numberline {11.2}RQ2 beantworten}{67}{section.11.2}%
-\contentsline {section}{\numberline {11.3}RQ3 beantworten}{67}{section.11.3}%
-\contentsline {section}{\numberline {11.4}RQ4 beantworten}{67}{section.11.4}%
-\contentsline {section}{\numberline {11.5}RQ0 beantworten}{67}{section.11.5}%
+\contentsline {section}{\numberline {5.7}Kapitelergebnis}{47}{section.5.7}%
+\contentsline {chapter}{\numberline {6}Konzeption des Empfehlungssystems}{48}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Gesamtarchitektur}{48}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Datenfluss}{48}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Komponentenmodell}{48}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Datenmodell}{48}{subsection.6.1.3}%
+\contentsline {section}{\numberline {6.2}Kapitelergebnis}{48}{section.6.2}%
+\contentsline {chapter}{\numberline {7}Implementierung des Modells}{49}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Kandidatenprofile}{49}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Feature Engineering}{49}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Trainingsmatrix}{49}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Hyperparameteroptimierung}{50}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Hyperparameteroptimierung}{50}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Training}{51}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Kapitelergebnis}{52}{section.7.7}%
+\contentsline {chapter}{\numberline {8}Evaluierung}{53}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Evaluierungskonzept}{53}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Versuchsaufbau}{53}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Versuchsergebnisse}{53}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Untersuchte Konfigurationsparameter}{53}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Referenzkonfiguration A01}{55}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}Ergebnisse}{55}{subsection.8.3.3}%
+\contentsline {section}{\numberline {8.4}Analyse}{56}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}Same-Family-Gewicht}{56}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}Hierarchische Labeldefinition}{56}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {8.4.3}Profilbreite}{57}{subsection.8.4.3}%
+\contentsline {subsection}{\numberline {8.4.4}Regularisierung}{57}{subsection.8.4.4}%
+\contentsline {subsection}{\numberline {8.4.5}Top-Konfiguration}{57}{subsection.8.4.5}%
+\contentsline {section}{\numberline {8.5}Kapitelergebnis}{58}{section.8.5}%
+\contentsline {chapter}{\numberline {9}Diskussion}{59}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Nutzenbewertung}{59}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Wirtschaftliche Betrachtung}{59}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Grenzen}{59}{section.9.3}%
+\contentsline {chapter}{\numberline {10}Grenzen und Ausblick}{60}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Grenzen des aktuellen Systems}{60}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}Geringer Support von Ziel-Makros}{60}{subsection.10.1.1}%
+\contentsline {subsection}{\numberline {10.1.2}Variantenauflösung innerhalb einer Makrofamilie}{61}{subsection.10.1.2}%
+\contentsline {subsection}{\numberline {10.1.3}Support-Bias häufiger Ziel-Makros}{61}{subsection.10.1.3}%
+\contentsline {section}{\numberline {10.2}Kritische Reflexion}{61}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Interpretation der Ergebnisse}{61}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Ursachenanalyse der Rankingfehler}{62}{section.10.4}%
+\contentsline {chapter}{\numberline {11}Fazit und Ausblick}{64}{chapter.11}%
+\contentsline {section}{\numberline {11.1}RQ1 beantworten}{64}{section.11.1}%
+\contentsline {section}{\numberline {11.2}RQ2 beantworten}{64}{section.11.2}%
+\contentsline {section}{\numberline {11.3}RQ3 beantworten}{64}{section.11.3}%
+\contentsline {section}{\numberline {11.4}RQ4 beantworten}{64}{section.11.4}%
+\contentsline {section}{\numberline {11.5}RQ0 beantworten}{64}{section.11.5}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{72}{chapter*.43}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{69}{chapter*.43}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

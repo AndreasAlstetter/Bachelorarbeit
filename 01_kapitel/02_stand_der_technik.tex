@@ -427,7 +427,7 @@ Dadurch lernt das Modell insbesondere Fehler auf den oberen Rangpositionen zu ko
 
 LambdaMART (vergleiche Abbildung \ref{fig:lambdamart_prinzip}) baut auf dem zuvor beschriebenen LambdaRank-Verfahren auf und kombiniert dessen $\lambda$-Gradienten mit dem Verfahren der Gradient-Boosting-Entscheidungsbäume. 
 Ein Entscheidungsbaum wie er in Abbildung \ref{fig:entscheidungsbaum} dargestellt ist, ist ein Modell, das Entscheidungen anhand von Verästelungen trifft. An jeder Verästelung wird eine Bedingung überprüft, die den weiteren Pfad im Baum bestimmt. 
-Die Blätter des Baums liefern anhand von Blattwerten die endgültigen Entscheidungen oder Vorhersagen, die auf den zuvor getroffenen Verzweigungen basieren.
+Die Blätter des Baums liefern anhand von Blattwerten die endgültigen Vorhersagen.
 
 \begin{figure}[H] 
   \centering 
@@ -637,7 +637,7 @@ Die Bezeichnung LambdaMART setzt sich aus den Bestandteilen \textit{LambdaRank} 
     \node[ draw, dashed, rounded corners, fill=red!10, align=center, text width=4.4cm ] (lambda) at (6.1,-1.0) {$\lambda$-Gradienten gewichten\\ Fehler nach ihrer Auswirkung\\ auf die Ranglistenqualität}; 
     \draw[->,dashed,red!70,thick] (lambda.north) |- (treen.east); 
   \end{tikzpicture} 
-  \caption{Funktionsweise von LambdaMART. Mehrere schrittweise trainierte Entscheidungsbäume verarbeiten .... . Ihre Ergebnisse bilden gemeinsam einen Vorhersagewert, anhand dessen ... sortiert werden. Die Gewichtung der Trainingsfehler erfolgt durch die $\lambda$-Gradienten des LambdaRank-Verfahrens.} 
+  \caption{Funktionsweise von LambdaMART. Mehrere trainierte Entscheidungsbäume verarbeiten die Merkmale eines Dokumenten-Paares. Ihre Ergebnisse bilden gemeinsam einen Vorhersagewert, anhand dessen die Dokumenten-Paare sortiert werden. Die Gewichtung der Trainingsfehler erfolgt durch die $\lambda$-Gradienten des LambdaRank-Verfahrens.} 
   \label{fig:lambdamart_prinzip} 
 \end{figure}
 
