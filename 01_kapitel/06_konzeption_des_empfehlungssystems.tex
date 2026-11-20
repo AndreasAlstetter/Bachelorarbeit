@@ -1,46 +1,206 @@
-﻿\chapter{Konzeption des Empfehlungssystems}
+﻿\chapter{Konzeption des Empfehlungssystems} 
 \label{chap:konzeption_des_empfehlungssystems} 
 
-\section{Gesamtarchitektur}   
+In Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} wurde mit Artefakt A1 eine Trainings- und Evaluationsbasis aus Artikeln, Makros sowie Artikel-Makro-Zuordnungen erstellt. 
+Anschließend wurde in Kapitel \ref{chap:auswahl_des_modellansatzes} mit LambdaMART ein geeigneter Modellansatz für die Generierung einer nach Relevanz sortierten Makro-Liste ausgewählt. 
+Für die Entwicklung des Empfehlungssystems müssen die in Artefakt A1 bereitgestellten Datenstrukturen und der in Artefakt A2 ausgewählte Modellansatz in eine gemeinsame Architektur überführt werden. 
+Diese Architektur legt fest, wie \textit{technischen Artikeleigenschaften} verarbeitet, Kandidaten für die Empfehlung von Makros gebildet (Makrokandidaten), Merkmale für den Vergleich zwischen Anfrage und Kandidat erzeugt (Vergleichsmerkmale) und 
+durch das Learning-to-Rank-Modell bewertet werden. Das Ziel dieses Kapitels besteht daher in der Entwicklung einer fachlichen und technischen Architektur des Empfehlungssystems. Das Ergebnis bildet Artefakt A3. 
 
-Aus Vision + Modellwahl
+\section{Gesamtkonzept} 
+
+Die Architektur für das Empfehlungssystems lässt sich aus der Vision in Abschnitt \ref{sec:vision} ableiten. Ziel ist es, 
+für einen Artikel aus einer Anfrage an das Empfehlungssystem geeignete Makros zu identifizieren und diese entsprechend ihrer Relevanz in Form einer Makro-Liste auszugeben. 
+Die hierfür erforderlichen Informationen stammen aus den in Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} aufbereiteten Artikeln und Makros. 
+Die eigentliche Bewertung erfolgt anschließend durch das in Kapitel \ref{chap:auswahl_des_modellansatzes} ausgewählte LambdaMART-Modell. 
+
+Die Architektur gliedert sich hierzu in die folgenden Bereiche: 
+
+\begin{enumerate} 
+    \item Extraktion \textit{technischen Artikeleigenschaften} aus dem Artikel der Anfrage, 
+    \item Bildung eines Anfragekandidaten aus den extrahierten \textit{technischen Artikeleigenschaften}, 
+    \item Erzeugung von Makrokandidaten, 
+    \item Berechnung von Vergleichsmerkmale, 
+    \item Bewertung der Makrokandidaten mittels LambdaMART, 
+    \item Sortierung der Makrokandidaten nach ihrer Relevanz. 
+\end{enumerate} 
+
+Dadurch wird die eigentliche Aufgabe des Rankings von der Datenaufbereitung und den zugrunde liegenden Datenquellen getrennt. 
+Die Architektur ermöglicht somit eine unabhängige Weiterentwicklung der einzelnen Komponenten innerhalb des in Kapitel \ref{chap:vorgehensweise} beschriebenen ADR-Prozesses. 
+
+\subsection{Datenfluss} 
+
+Der Datenfluss beginnt mit einem Artikel, für den ein geeignetes Makro empfohlen werden soll. Aus den \textit{technischen Artikeleigenschaften} werden zunächst die für die Empfehlung relevanten Informationen extrahiert. 
+Anschließend wird aus diesen Informationen ein Anfragekandidat gebildet. Dieser Anfragekandidat wird danach mit allen verfügbaren Makrokandidaten verglichen. 
+Hierzu werden Vergleichsmerkmale erzeugt, welche die Gemeinsamkeiten und Unterschiede zwischen Anfragekandidaten und Makrokandidat beschreiben. 
+Die Vergleichsmerkmale werden anschließend durch das LambdaMART-Modell bewertet. Für jeden Makrokandidaten berechnet das Modell einen numerischen Wert, den sogenannten Relevanzscore. 
+Die Makrokandidaten werden entsprechend dieses Relevanzscores sortiert, wodurch die finale Empfehlung für ein Makro entsteht. 
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, node/.style={ draw, rounded corners, minimum width=4cm, minimum height=0.9cm, align=center } ] 
+        \node[node,fill=blue!10] (article) at (0,0) {Artikel}; 
+        \node[node,fill=green!10] (features) at (0,-1.8) {Extraktion \textit{technischen Artikeleigenschaften}};
+        \node[node,fill=green!10] (candidates) at (0,-3.6) {Bildung von Anfrage- und Makrokandidaten}; 
+        \node[node,fill=orange!10] (ranking) at (0,-5.4) {Bewertung mittels LambdaMART}; 
+        \node[node,fill=yellow!15] (result) at (0,-7.2) {Empfehlung von Makrokandidaten auf Basis des Relevanzscores};
+        \draw[->] (article) -- (features); \draw[->] (features) -- (candidates); 
+        \draw[->] (candidates) -- (ranking); 
+        \draw[->] (ranking) -- (result); 
+    \end{tikzpicture}
+    \caption{Datenfluss des Empfehlungssystems} 
+    \label{fig:datenfluss_empfehlungssystem} 
+\end{figure} 
+
+\subsection{Verarbeitungsstufen des Empfehlungssystems} 
+
+Die fachliche Architektur wird in einer mehrstufigen Kette aus Prozessschritten umgesetzt. 
+Ein Prozessschritt entspricht einer abgeschlossenen Verarbeitungsstufe, die eine spezifische Aufgabe in der Prozesskette übernimmt und ein Ergebnis an die nachfolgende Verarbeitungsstufe übergibt.
+Im Folgenden werden die Prozessschritte des Empfehlungssystems in der Tabelle \ref{tab:verarbeitungsstufen} unterschieden:
+
+\begin{table}[H] 
+    \centering 
+    \caption{Verarbeitungsstufen des Empfehlungssystems} 
+    \label{tab:verarbeitungsstufen} 
+    \renewcommand{\arraystretch}{1.2} 
+    \begin{tabular}{p{1.6cm}p{3.6cm}p{7.0cm}} 
+        \hline \textbf{Prozessschritt} & \textbf{Komponente} & \textbf{Aufgabe} \\ 
+        \hline 
+        1 & Datenaufbereitung & Extraktion technischer Eigenschaften aus Artikel- und Makrodaten sowie Erzeugung einheitlicher Datenstrukturen \\ 
+        2 & Datenbereinigung & Entfernung nicht nutzbarer, redundanter oder unvollständiger Informationen \\ 
+        3 & Datensplit & Aufteilung der Daten in Trainings-, Validierungs- und Testdaten \\ 
+        4 & Trainingsvorbereitung und Training & Bildung von Makrokandidaten, Erzeugung der Vergleichsmerkmale und Training des LambdaMART-Modells \\ 
+        5 & Analyse & Analyse des Modellverhaltens, der Vergleichsmerkmale und der Ranglistenergebnisse \\ 
+        6 & Evaluation & Bewertung der Empfehlungsqualität mittels Recall@k, MRR und nDCG \\ 
+        \hline 
+    \end{tabular} 
+\end{table} 
+
+Jede Komponente besitzt eine klar abgegrenzte Aufgabe und übergibt ihre Ergebnisse an die nachfolgende Verarbeitungsstufe. Dadurch wird eine Architektur geschaffen, 
+welche die iterative Verbesserung der einzelnen Komponenten unterstützt. 
+
+\subsection{Datenmodell} 
+
+Für die Verarbeitung der Daten im Empfehlungssystem werden mehrere Datenobjekte verwendet, welche unterschiedliche Aspekte des Empfehlungsprozesses beschreiben. 
+Die Datenobjekte bilden die fachliche Grundlage für die spätere Erzeugung von Vergleichsmerkmalen und die Bewertung durch das Learning-to-Rank-Modell. 
+
+\subsubsection{Einordnung der Vektoren} 
+
+Die in Artefakt A1 erzeugten Artikel-, Makro- und Lexikalvektoren werden nicht direkt als Eingabe für LambdaMART verwendet. Stattdessen dienen sie der Beschreibung von Artikeln und Makros sowie der Bildung von Profilen,
+aus denen später die Vergleichsmerkmale für das Ranking abgeleitet werden.
+
+Der Aufbau dieser Vektoren wurde in Kapitel \ref{sec:überführung_in_ein_Trainingsformat} näher erläutert
+Gemeinsam bilden diese Vektoren die Grundlage für die Erzeugung der im Empfehlungssystem verwendeten Profile. 
+
+Dabei müssen die Bestandteile des Datensplits getrennt betrachtet werden:
+
+Trainingsdaten:
+Aus der Zusammenführung aller Artikel, Lexikal-, und Makrovektoren eines Makros entsteht das sogenannten Makroprofil. 
+Dabei liefert der Artikelvektor die \textit{technischen Artikeleigenschaften} aller Artikel,
+der Lexikalvektor die \textit{technischen Hinweise} und
+der Makrovektor die \textit{technischen Makroeigenschaften} des Makros.
+Diese Makroprofile werden anschließend miteinander verglichen, um Vergleichsmerkmale zu berechnen. 
+Erst diese Vergleichsmerkmale bilden dann die eigentliche Eingabe für das LambdaMART-Modell. 
+Damit erfolgt eine klare Trennung zwischen der fachlichen Beschreibung von Artikeln und Makros durch Vektoren und Profile einerseits sowie der eigentlichen Bewertung durch das Learning-to-Rank-Modell andererseits. 
+
+Validierungs und Testdaten:
+Aus einem Artikelvektor wird das Anfrageprofil eines zu empfehlenden Artikels erzeugt, 
+indem die Referenz zum Makro entfernt wird. Der rest des Artikelvektors wird unverändert in das Anfrageprofil übernommen. 
+
+Die folgende Abbildung \ref{fig:} zeigt die Zusammenhänge zwischen den einzelnen Begriffen des obrigen Textes:
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, box/.style={ draw, rounded corners, minimum width=3.2cm, minimum height=0.9cm, align=center } ] 
+        \node[box,fill=blue!10] (article) at (0,-1.5) {Artikel};  
+        \node[box,fill=blue!10] (articlevec) at (0,-3.0) {Artikelvektor}; 
+        \node[box,fill=green!10] (query) at (-4,-4.8) {Anfrageprofil}; 
+        \node[box,fill=green!10] (macro) at (5,0) {Makro}; 
+        \node[box,fill=green!10] (macrovec) at (5,-1.5) {Makrovektor}; 
+        \node[box,fill=yellow!10] (lex) at (10,0) {Typbezeichnung\\Beschreibung\\Serie}; 
+        \node[box,fill=yellow!10] (lexvec) at (10,-1.5) {Lexikalvektor}; 
+        \node[box,fill=green!10] (macroprof) at (7.5,-4.8) {Makrokandidatenprofil}; 
+        \node[box,fill=orange!10] (compare) at (1.75,-7.0) {Vergleichsmerkmale}; 
+        \node[box,fill=red!10] (ltr) at (1.75,-9.0) {LambdaMART}; 
+        \draw[->] (article) -- (articlevec); 
+        \draw[->] (articlevec) -- (query); 
+        \draw[->] (articlevec) -- (macroprof); 
+        \draw[->] (macro) -- (macrovec); 
+        \draw[->] (macrovec) -- (macroprof); 
+        \draw[->] (lex) -- (lexvec); 
+        \draw[->] (lexvec) -- (macroprof); 
+        \draw[->] (query) -- (compare); 
+        \draw[->] (macroprof) -- (compare); 
+        \draw[->] (compare) -- (ltr); 
+    \end{tikzpicture} 
+    \caption{Zusammenhang zwischen Vektoren, Profilen und Vergleichsmerkmalen} 
+    \label{fig:vektoren_profile_vergleichsmerkmale} 
+\end{figure} 
+
+\subsubsection{Artikelprofil} Das Artikelprofil beschreibt die technischen Eigenschaften eines einzelnen Artikels. Es basiert auf den in Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} erzeugten Artikelvektoren. Ein Artikelprofil kann beispielsweise Informationen zu Hersteller, Produkttyp, Spannung, Strom, Leistung, Frequenz sowie den erzeugten Klassifikationen enthalten. Das Artikelprofil stellt die kleinste fachliche Beschreibungseinheit des Empfehlungssystems dar. Es dient einerseits als Vorlage für die Bildung eines Anfrageprofils und andererseits als Grundlage für die Erzeugung von Makrokandidatenprofilen. Somit bildet es die Verbindung zwischen den ursprünglichen Artikeldaten und den späteren Rankingobjekten des Empfehlungssystems. \subsubsection{Makrokandidatenprofil} Ein Makrokandidatenprofil beschreibt die technischen Eigenschaften eines Makros. Da einem Makro mehrere Artikel zugeordnet sein können (vergleiche Abschnitt \ref{sec:artikel_macro_zuordnungen}), wird das Profil aus den Artikelprofilen aller diesem Makro zugeordneten Artikel erzeugt. Das Makrokandidatenprofil stellt somit eine aggregierte Repräsentation mehrerer Artikelprofile dar und bildet keine eigenständige Datenquelle. Hierbei werden die technischen Eigenschaften der zugeordneten Artikel nicht auf einzelne Mittelwerte reduziert. Stattdessen werden die beobachteten Merkmalswerte als Mengen technischer Eigenschaften gespeichert. Enthalten die einem Makro zugeordneten Artikel beispielsweise die Spannungswerte \[ \{380V,\ 400V,\ 420V\}, \] dann bleibt diese Wertevielfalt im Kandidatenprofil erhalten. Dadurch können unterschiedliche technische Ausprägungen eines Makros berücksichtigt werden, ohne die zugrunde liegenden Informationen durch eine Verdichtung auf einen Einzelwert zu verlieren. \subsubsection{Anfrageprofil} Das Anfrageprofil beschreibt den Artikel, für den eine Empfehlung erzeugt werden soll. Seine Struktur entspricht der eines Artikelprofils. Es enthält die technischen Eigenschaften des Anfrageartikels und wird direkt aus dessen Artikelprofil abgeleitet. Im Gegensatz zu den Trainingsdaten ist die tatsächliche Makrozuordnung des Anfrageartikels während der Empfehlung jedoch unbekannt. Das Anfrageprofil enthält daher ausschließlich die aus dem Artikel ableitbaren technischen Informationen. Es bildet den Ausgangspunkt für den Vergleich mit den verfügbaren Makrokandidatenprofilen. \subsubsection{Anfrage-Kandidat-Paar} LambdaMART verarbeitet weder Anfrageprofile noch Makrokandidatenprofile direkt. Stattdessen werden beide Profile miteinander verglichen. Hierbei entstehen sogenannte Vergleichsmerkmale, welche die technische Beziehung zwischen einem Anfrageprofil und einem Makrokandidatenprofil beschreiben. Beispiele für Vergleichsmerkmale sind: \begin{itemize} \item Übereinstimmung von Spannungsklassen, \item Differenz numerischer Leistungswerte, \item Übereinstimmung von Produkttypen, \item Zugehörigkeit zur gleichen technischen Kategorie, \item Anzahl gemeinsamer technischer Eigenschaften, \item Ähnlichkeit textueller Merkmale aus Lexikalvektoren. \end{itemize} Die Gesamtheit dieser Vergleichsmerkmale bildet ein Anfrage-Kandidat-Paar. Dieses Anfrage-Kandidat-Paar stellt die eigentliche Eingabe für das LambdaMART-Modell dar. Das Modell bewertet die Merkmale und berechnet daraus einen Relevanzscore, welcher anschließend für die Sortierung der Makrokandidaten verwendet wird. Abbildung \ref{fig:vergleichsmerkmale} veranschaulicht diesen Zusammenhang. \begin{figure}[H] \centering \begin{tikzpicture}[ >=stealth, box/.style={ draw, rounded corners, minimum width=4cm, minimum height=1.0cm, align=center } ] \node[box,fill=blue!10] (query) at (-4,0) {Anfrageprofil}; \node[box,fill=green!10] (macro) at (4,0) {Makrokandidatenprofil}; \node[box,fill=orange!10] (compare) at (0,-2.5) {Vergleichsmerkmale}; \node[box,fill=yellow!15] (ltr) at (0,-5) {LambdaMART}; \draw[->] (query) -- (compare); \draw[->] (macro) -- (compare); \draw[->] (compare) -- (ltr); \end{tikzpicture} \caption{Erzeugung von Vergleichsmerkmalen für LambdaMART} \label{fig:vergleichsmerkmale} \end{figure}
+\section{Kapitelergebnis} 
+
+Ziel dieses Kapitels war die Entwicklung einer Architektur für das Empfehlungssystem auf Grundlage der in Artefakt A1 bereitgestellten Trainingsbasis und des in Artefakt A2 ausgewählten LambdaMART-Verfahrens. 
+Hierzu wurden die Komponenten, Datenflüsse und Datenstrukturen des Systems definiert. Besonderes Augenmerk lag auf der Trennung von Anfrageprofilen, Makrokandidatenprofilen und den daraus gebildeten Vergleichsmerkmalen, 
+welche die eigentliche Eingabe des Rankingmodells darstellen. 
+
+Daraus ergibt sich folgendes Artefakt: 
+\begin{quote} 
+    \textbf{Artefakt A3: Architektur des Empfehlungssystems} 
+\end{quote} 
+
+\begin{itemize} 
+    \item Datenfluss: \begin{itemize} \item Artikel, \item Featureextraktion, \item Kandidatenbildung, \item Vergleichsmerkmale, \item LambdaMART-Ranking, \item Makroempfehlung. \end{itemize} 
+    \item Verarbeitungskomponenten: \begin{itemize} \item 911 Data Preparation, \item 913 Filtering, \item 921 Data Split, \item 931 Training, \item 944 Analyse, \item 949 Evaluation. \end{itemize} 
+    \item Datenobjekte: \begin{itemize} \item Artikelprofil, \item Makrokandidatenprofil, \item Anfrageprofil, \item Anfrage-Kandidat-Paar. \end{itemize} 
+    \item Modell: \begin{itemize} \item Learning-to-Rank, \item LambdaMART, \item Eingabe: Vergleichsmerkmale, \item Ausgabe: Relevanzscore und Makrorangliste. \end{itemize} 
+\end{itemize} 
+Artefakt A3 bildet die Grundlage für die Implementierung und das Training des Empfehlungssystems im nachfolgenden Kapitel.
 
 
-\subsection{Datenfluss}
+
+% \chapter{Konzeption des Empfehlungssystems}
+% \label{chap:konzeption_des_empfehlungssystems} 
+
+% \section{Gesamtarchitektur}   
+
+% Aus Vision + Modellwahl
 
 
-Beispiel:
-Artikel
-↓
-Featureextraktion
-↓
-Kandidatenbildung
-↓
-Ranking
-↓
-Makroempfehlung
+% \subsection{Datenfluss}
 
 
-\subsection{Komponentenmodell}
-
-Beschreibung der realen Pipeline
-911 Data Preparation
-913 Filtering
-921 Split
-931 Training
-944 Analyse
-949 Evaluation
-
-
-\subsection{Datenmodell}
-
-Artikelprofil
-Kandidatenprofil
-Anfrageprofil
+% Beispiel:
+% Artikel
+% ↓
+% Featureextraktion
+% ↓
+% Kandidatenbildung
+% ↓
+% Ranking
+% ↓
+% Makroempfehlung
 
 
-\section{Kapitelergebnis}
+% \subsection{Komponentenmodell}
 
-Artefakt A3:
-Architektur des Empfehlungssystems
+% Beschreibung der realen Pipeline
+% 911 Data Preparation
+% 913 Filtering
+% 921 Split
+% 931 Training
+% 944 Analyse
+% 949 Evaluation
+
+
+% \subsection{Datenmodell}
+
+% Artikelprofil
+% Kandidatenprofil
+% Anfrageprofil
+
+
+% \section{Kapitelergebnis}
+
+% Artefakt A3:
+% Architektur des Empfehlungssystems
 

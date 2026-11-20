@@ -3,11 +3,11 @@
 
 Nach der Erstellung der Trainings- und Evaluationsbasis in Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} liegt mit Artefakt A1 eine bereinigte Datengrundlage aus Artikeln, Makros und Artikel-Makro-Zuordnungen vor. 
 Diese umfasst 1.559 Artikel, 375 Makros, 127 \textit{technischen Artikeleigenschaften}, sowie eine Aufteilung in Trainings-, Validierungs- und Testdaten (siehe Abschnitt \ref{sec:ergebnis_der_datenaufbereitung} und Abschnitt \ref{sec:splitregeln}). 
-Im nächsten Schritt wird untersucht, welcher Modellansatz geeignet ist, die in Abschnitt \ref{sec:handlungsbedarf_und_forschungsfragen} formulierte Forschungsfrage RQ2 zu beantworten. 
-Das Ziel besteht darin, für einen gegebenen Artikel eine nach ihrer Relevanz sortierte Liste geeigneter Makros zu erzeugen. 
+Im nächsten Schritt wird untersucht, welcher Modellansatz geeignet ist, die in Abschnitt \ref{sec:handlungsbedarf_und_forschungsfragen} formulierte Forschungsfrage RQ2 zu beantworten:
+Welcher Modellansatz eignet sich für ein Empfehlungssystem zur automatisierten Empfehlung von Makros? 
 
 Zur Auswahl eines geeigneten Modellansatzes werden Large Language Models, Sentence Transformer, Embedding-Modelle mit Triplet Loss sowie Learning-to-Rank-Verfahren betrachtet. 
-Das Ergebnis dieses Kapitels bildet Artefakt A2, der ausgewählte Modellansatz für die Entwicklung der Systemarchitektur und das spätere Training des Empfehlungssystems.
+Das Ergebnis dieses Kapitels bildet Artefakt A2.
 
 \section{Eignungsanalyse der Modellansätze} 
 \label{sec:eignungsanalyse_modellansaetze} 
@@ -26,112 +26,117 @@ Die Bewertung wird anhand der folgenden Skala vorgenommen:
     \item \textbf{++}: sehr gut geeignet. 
 \end{itemize} 
 
-Die Skala beschreibt jeweils die \textit{Eignung} eines Ansatzes hinsichtlich des betrachteten Kriteriums. Eine gute Bewertung beim Datenbedarf bedeutet daher beispielsweise, 
-dass ein Verfahren mit der verfügbaren Datenmenge voraussichtlich zweckmäßig eingesetzt werden kann. 
+Die Skala beschreibt jeweils die \textit{Eignung} eines Ansatzes hinsichtlich eines betrachteten Kriteriums. 
 Die Bewertungen stellen eine begründete Eignungsanalyse dar und ersetzen keine Bewertung eines Modells anhand definierter Metriken. 
 Diese Bewertung erfolgt in einem späteren Kapitel anhand der in Abschnitt \ref{sec:validierungsansätze} beschriebenen Metriken.
 
 Folgende Kriterien werden verwendet: 
 
-\paragraph{Datenbedarf} 
-Beschreibt die Menge an Trainingsdaten, die für ein zuverlässiges Training eines Modells erforderlich ist. 
+\paragraph{\textbf{Datenbedarf}} 
+Bewertet die Eignung der verfügbaren Datenbasis für den jeweiligen Modellansatz. 
+\begin{itemize}
+    \item Grund: Ein Modellansatz sollte die vorhandenen Daten aus Artefakt A1 nutzen können, ohne dass umfangreiche zusätzliche Datenbeschaffung erforderlich ist.
+\end{itemize}
 
-\paragraph{Trainingsaufwand} 
-Bewertet den erforderlichen Rechen- und Zeitaufwand für Training und Optimierung eines Modells. 
+\paragraph{\textbf{Trainingsaufwand}} 
+Bewertet den voraussichtlichen Aufwand für das Training eines Modellansatzes. 
+\begin{itemize}
+    \item Grund: Ein hoher Trainingsaufwand kann die iterative Entwicklung wie in Kapitel \ref{chap:vorgehensweise} beschrieben behindern. Außerdem kann ein zu hoher Trainingsaufwand die Kosten für die Entwicklung und den Betrieb des Modells erheblich steigern.
+\end{itemize}
 
-\paragraph{Interpretierbarkeit} 
-Beschreibt die Nachvollziehbarkeit der Modellentscheidung. 
+\paragraph{\textbf{Interpretierbarkeit}} 
+Bewertet die Nachvollziehbarkeit der im Modellansatz getroffenen Entscheidungen. 
+\begin{itemize}
+    \item Grund: Eine hohe Interpretierbarkeit ist im Industrieumfeld wichtig, sodass die Modellentscheidungen kritisch von den Anwendern überprüft und nachvollzogen werden können.
+\end{itemize}
 
-\paragraph{Skalierbarkeit} 
-Bewertet die Fähigkeit eines Ansatzes, auch bei wachsenden Makrobeständen eingesetzt werden zu können. 
+\paragraph{\textbf{Skalierbarkeit}}
+Bewertet die Fähigkeit eines Modellansatzes, auchbei wachsender Datenmenge eingesetzt werden zu können.
+\begin{itemize}
+    \item Grund: Eine hohe Skalierbarkeit ermöglicht es, dass das Modell auch bei zunehmender Datenmenge eingesetzt werden kann, ohne dass die Leistung sinkt oder die Kosten unverhältnismäßig steigen.
+\end{itemize}
 
-\paragraph{Eignung für Makroempfehlungen} 
-Dieses Kriterium bewertet, wie gut ein Ansatz das eigentliche Ziel der Arbeit unterstützt eine in absteigender Relevanz geordneten Makro-Liste zu erzeugen. 
+\paragraph{\textbf{Eignung für Makroempfehlungen}} 
+Dieses Kriterium bewertet, wie gut ein Modellansatz das eigentliche Ziel dieser Arbeit unterstützt, eine Makro-Liste zu erzeugen. 
+\begin{itemize}
+    \item Grund: Ein Modellansatz, der das Ziel dieser Arbeit mehr unterstützt, als ein anderer, reduziert überflüssigen Aufwand bei der Erstellung der Makro-Liste.
+\end{itemize}
 
 \section{Large Language Models} 
 \label{sec:eignung_large_language_models} 
 
-Large Language Models sind Sprachmodelle, die auf umfangreichen Textmengen vortrainiert und für unterschiedliche Aufgaben der Sprachverarbeitung eingesetzt werden können. 
-Zu ihren Anwendungsgebieten zählen unter anderem Textgenerierung, Klassifikation, Frage-Antwort-Aufgaben und die Verarbeitung natürlichsprachlicher Anweisungen \parencite{vaswani2017attention,zhao2023llmsurvey}. 
 Die Grundlagen dieser Modelle und ihre Anpassung durch Fine-Tuning wurden bereits in Abschnitt \ref{sec:large_language_models} beschrieben. 
 
 Für die vorliegende Aufgabe könnten \textit{technischen Artikeleigenschaften} in eine textuelle Darstellung überführt und anschließend durch ein vortrainiertes Sprachmodell verarbeitet werden. 
-Ein solches Vorgehen würde die Fähigkeit des Modells nutzen Text zu Klassifizieren. Die vorhandenen Daten liegen jedoch überwiegend als \textit{technischen Artikeleigenschaften} XML-Dateien vor (siehe Abschnitt \ref{sec:artikeldaten}). 
-Für die Verarbeitung durch ein Sprachmodell müssten die \textit{technischen Artikeleigenschaften} zunächst in eine textuelle Eingabe überführt werden. 
+Ein solches Vorgehen würde die Fähigkeit des Modells nutzen Text zu Klassifizieren. Die vorhandenen Daten liegen jedoch als \textit{technischen Artikeleigenschaften} in XML-Dateien vor (siehe Abschnitt \ref{sec:artikeldaten}). 
+Für die Verarbeitung durch ein Sprachmodell müssten die \textit{technischen Artikeleigenschaften} zunächst in eine textuelle Eingabe für das Modell überführt werden. 
 Eine domänenspezifische Anpassung vortrainierter Sprachmodelle ist grundsätzlich durch Fine-Tuning möglich. 
 Die Qualität einer solchen Anpassung hängt jedoch von der Repräsentation und Qualität der Trainingsdaten ab \parencite{zhao2023llmsurvey}. 
 
-Mit 1.300 Trainingsartikeln steht in Artefakt A1 eine im Vergleich zum Umfang heutiger Textmengen vortrainierter LLM´s geringe Trainingsmenge zur Verfügung (siehe Abschnitt \ref{sec:splitregeln} und \ref{sec:neural_language_models}).
-Aus der Größe allein kann zwar nicht abgeleitet werden, dass ein Fine-Tuning zwingend scheitert. 
-Die begrenzte Datenmenge erhöht jedoch das Risiko, dass die technischen Unterschiede durch Fine-Tuning nicht ausreichend abgebildet werden.
+Für das Fine-Tuning eines LLMs benötigt es vortrainiertes Modell, welches ausreichend Wissen für die Anwendungsdomäne enthält. 
+In der Industriellen Domäne der Elektrokonstruktion existieren Zwar KI-gestütze Systeme zur Bauteilklassifikation und -empfehlung, jedoch sind diese meist auf spezifische Hersteller oder Bauteilarten beschränkt und 
+nicht frei verfügbar \parencite{AltiumComponentSearch2026,SiemensCapitalCopilot2026}. Somit steht kein vortrainiertes Modell mit ausreichendem domänenspezifischen Wissen zur Verfügung, welches für das Fine-Tuning genutzt werden könnte.
+Zudem erhöht die begrenzte Datenmenge von 13 Trainingsartikeln aus Artefakt A1 das Risiko, dass die technischen Unterschiede durch Fine-Tuning nicht ausreichend abgebildet werden.
 Die Anpassung von Modellparametern könnte in diesem Fall zu gering sein um das Wissen des Modells geziehlt auf die Empfehlung von Makros anzupassen\parencite{hastie2009elements,zhao2023llmsurvey}. 
-
-Darüber hinaus ist die Erzeugung einer in absteigender Relevanz geordneten Makro-Liste keine Zielsetzung des Training eines LLM´s. 
-Ein LLM könnte zwar zur Erzeugung oder Bewertung von Empfehlungen eingesetzt werden, für die direkte Erzeugung Makro-Liste wäre jedoch ein nachgelagertes Verfahren zur erforderlich \parencite{liu2009learning}. 
+Darüber hinaus ist die Erzeugung einer Makro-Liste für Makros keine Zielsetzung des Training eines LLM´s. 
+Ein LLM könnte zwar zur Erzeugung von Empfehlungen eingesetzt werden, für die direkte Erzeugung einer Makro-Liste wäre jedoch ein nachgelagertes Verfahren zur Sortierung erforderlich.
 
 Im Hinblick auf die Bewertungskriterien ergibt sich folgende Einschätzung:
 
 \begin{itemize} 
-    \item \textbf{Datenbedarf:} gering geeignet (\textbf{-}), weil die verfügbare Trainingsmenge im Verhältnis zur Modellkomplexität begrenzt ist \parencite{hastie2009elements,zhao2023llmsurvey}. 
-    \item \textbf{Trainingsaufwand:} gering geeignet (\textbf{-}), weil Training und Anpassung großer Sprachmodelle einen vergleichsweise hohen Rechen- und Speicherbedarf verursachen \parencite{zhao2023llmsurvey}.
-    \item \textbf{Interpretierbarkeit:} gering geeignet (\textbf{-}), weil die Zuordnung einer Empfehlung zu einzelnen Eingaben nicht direkt aus einem neuronalen Netz, wie es in LLM´s vorkommt, abgeleitet werden können \parencite{molnar2022interpretable}. 
-    \item \textbf{Skalierbarkeit:} gut geeignet (\textbf{+}), weil vortrainierte Modelle vielseitig wiederverwendet werden können \parencite{zhao2023llmsurvey,reimers2019sbert}. 
-    \item \textbf{Eignung für Makroempfehlungen:} mittel geeignet (\textbf{o}), weil ein LLM technische Informationen verarbeiten kann, die Erzeugung Makro-Liste jedoch nicht unmittelbar durch das generative Vortraining optimiert wird \parencite{zhao2023llmsurvey,liu2009learning}. 
+    \item \textbf{Datenbedarf:} gering geeignet (\textbf{-}): Die verfügbare Trainingsmenge stellt für das Fine-Tuning eines LLMs eine Einschränkung dar. 
+    \item \textbf{Trainingsaufwand:} gut geeignet (\textbf{+}): Durch Fine-Tuning kann ein vortrainiertes LLM mit einer vergleichsweise geringen Menge an domänenspezifischen Daten angepasst werden.
+    \item \textbf{Interpretierbarkeit:} gering geeignet (\textbf{-}): Die Zuordnung einer Vorhersage des Modells zu einzelnen Eingaben kann nicht direkt aus einem neuronalen Netz, wie es in LLM´s vorkommt, abgeleitet werden \parencite{molnar2022interpretable}. 
+    \item \textbf{Skalierbarkeit:} gut geeignet (\textbf{+}): Vortrainierte Modelle können vielseitig wiederverwendet und angepasst werden. 
+    \item \textbf{Eignung für das Empfehlungssystem:} ungeeignet (\textbf{--}): Es gibt keine frei verfügbaren domänenspezifischen Modelle, die für das Fine-Tuning auf die Empfehlung von Makros genutzt werden könnten. 
 \end{itemize} 
 
 \section{Sentence Transformer} 
 \label{sec:eignung_sentence_transformer} 
 
-Sentence Transformer überführen Sätze oder Dokumente in Embeddings. Semantisch ähnliche Texte sollen dabei nahe beieinander im Embedding-Raum liegen. Die erzeugten Embeddings können beispielsweise mit der Cosine Similarity verglichen werden \parencite{reimers2019sbert}. 
-Die Grundlagen zu Embeddings Cosine Similarity und Sentence Transformern wurden in den Abschnitten \ref{sec:vom_vektor_zum_embedding}, \ref{sec:cosine_similarity} und \ref{sec:sentence_transformer} erläutert. 
-Ein Sentence Transformer könnte die Artikeldaten in Embeddings überführen. 
-Anschließend könnten die Makros anhand der Ähnlichkeit ihrer Embeddings zur Anfrage sortiert werden. 
-Die in Artefakt A1 vorhandenen Informationen liegen jedoch als technische Artikeleigenschaften im XML-Format vor. Spannungen, Ströme, Leistungen und Klassifikationen müssten daher zunächst in Textsequenzen überführt werden. 
+Die Grundlagen zu Embeddings, Cosine Similarity und Sentence Transformern wurden in den Abschnitten \ref{sec:vom_vektor_zum_embedding}, \ref{sec:cosine_similarity} und \ref{sec:sentence_transformer} erläutert. 
+Sentence Transformer können die Artikel zu einer Anfrage anhand ihrer Ähnlichkeiten bewerten und anschließend Makros anhand dieser Bewertung auswählen. 
+Die in Artefakt A1 vorhandenen Informationen liegen jedoch als technische Artikeleigenschaften im XML-Format vor. Spannungen, Ströme, Leistungen und Klassifikationen müssten daher zunächst in Text überführt werden. 
 Dies ist technisch möglich, bedeutet aber, dass bereits strukturierte und einheitenbezogene Informationen in eine sprachliche Repräsentation umgewandelt werden. 
-Der resultierende Abstand der Embeddings im Raum bildet anschließend eine Ähnlichkeit ab, garantiert jedoch nicht, dass technische Abweichungen aufgrund der fachlichen Unerscheidung gewichtet werden und nicht aufgrund unterschiedlicher Formulierungen.
-Eine weitere Einschränkung ergibt die Erzeugung einer in absteigender Relevanz geordneten Makro-Liste. Diese wird nicht direkt durch den Stentence-Transformer erstellt, sondern erst nachträglich durch das Sortieren der Ähnlichkeiten zwischen den Embeddings.
+Der spätere Abstand der Embeddings im Embedding-Raum bildet anschließend eine Ähnlichkeit ab, garantiert jedoch nicht, dass die Abweichungen in der Ähnlichkeit aufgrund technischer Unterschiede gewichtet werden und nicht aufgrund unterschiedlicher Formulierungen.
+Eine weitere Einschränkung ergibt die Erzeugung einer in absteigender Relevanz geordneten Makro-Liste. Diese wird nicht direkt durch den Stentence-Transformer erstellt, sondern muss nachträglich durch das Sortieren der Ähnlichkeiten zwischen den Embeddings erfolgen.
 
 Im Hinblick auf die Bewertungskriterien ergibt sich folgende Einschätzung: 
 \begin{itemize} 
-    \item \textbf{Datenbedarf:} gut geeignet (\textbf{+}), weil ein vortrainiertes Sentence-Transformer-Modell ohne vollständiges Neutraining verwendet werden kann. \parencite{reimers2019sbert}. 
-    \item \textbf{Trainingsaufwand:} gut geeignet (\textbf{+}), weil die Anpassung und Embedding-Erzeugung weniger aufwendig als das vollständige Training eines großen Sprachmodells sind \parencite{reimers2019sbert}. 
-    \item \textbf{Interpretierbarkeit:} mittel geeignet (\textbf{o}), weil Embedding-Abstände und Ähnlichkeitswerte ausgewertet werden können, die Bedeutung der einzelnen Werte eines Embeddings jedoch nicht direkt fachlich interperiert werden können \parencite{reimers2019sbert,molnar2022interpretable}. 
-    \item \textbf{Skalierbarkeit:} gut geeignet (\textbf{+}), weil Embeddings der Artikel vorab berechnet und bei neuen Anfragen miteinander verglichen werden können \parencite{reimers2019sbert}. 
-    \item \textbf{Eignung für Makroempfehlungen:} mittel geeignet (\textbf{o}), weil ähnliche Kandidaten gefunden werden können. Die Sortierung der Makro-Liste muss noch im Nachgang erfolgen \parencite{reimers2019sbert,liu2009learning}. 
+    \item \textbf{Datenbedarf:} gut geeignet (\textbf{+}): Es gibt Sentence-Transformer-Modelle, die mit einer geringen Menge an Daten trainiert werden können \parencite{Reimers2019SentenceBERT,MiniLM2021,Wang2022E5}. 
+    \item \textbf{Trainingsaufwand:} mittel geeignet (\textbf{o}): Die Artikel müssten zunächst in Text überführt werden, bevor das Modell trainiert werden kann.
+    \item \textbf{Interpretierbarkeit:} mittel geeignet (\textbf{o}): Es können Embedding-Abstände und Ähnlichkeitswerte ausgewertet werden, die nummerischen Werte eines Embeddings können jedoch nicht direkt interperiert werden. 
+    \item \textbf{Skalierbarkeit:} gut geeignet (\textbf{+}): Die Embeddings der Artikel können vorab berechnet und bei neuen Anfragen miteinander verglichen werden.
+    \item \textbf{Eignung für das Empfehlungssystem:} mittel geeignet (\textbf{o}): Es können ähnliche Kandidaten gefunden werden. Die Sortierung der Makro-Liste muss jedoch im Nachgang erfolgen. 
 \end{itemize} 
 
 \section{Embedding-Modell mit Triplet Loss} 
 \label{sec:eignung_triplet_loss} 
 
-Der Triplet Loss verwendet Trainingsgruppen aus einem Anker, einem positiven Beispiel und einem negativen Beispiel. 
-Während des Trainings soll der Abstand zwischen Anker und positivem Beispiel kleiner werden als der Abstand zwischen Anker und negativem Beispiel. 
-Eine festgelegte Margin definiert dabei den gewünschten Mindestunterschied zwischen diesen Abständen \parencite{schroff2015facenet}. Das Grundprinzip wurde bereits in Abschnitt \ref{sec:embedding_modelle} erläutert. 
+Das Grundprinzip dieses Modellansatzes wurde bereits in den Abschnitten \ref{sec:embedding_modelle} und \ref{sec:triplet_loss} erläutert. 
 Für die vorliegende Arbeit könnte ein Artikel als Anker, das ihm zugeordnete Makro als positives Beispiel und ein anderes Makro als negatives Beispiel verwendet werden. 
-Die in Abschnitt \ref{sec:artikel_macro_zuordnungen} beschriebenen Artikel-Makro-Zuordnungen könnten damit zur Bildung positiver Trainingsbeispiele genutzt werden. Negative Beispiele müssten aus den nicht zugeordneten Makros ausgewählt werden. 
-Das Training würde einen gemeinsamen Embedding-Raum erzeugen, in dem Artikel möglichst nahe bei ihren zugeordneten Makros und weiter von nicht zugeordneten Makros entfernt liegen. 
-Nach dem Training könnten die Makros anhand ihrer Cosine Similarity zum Anfrageartikel sortiert werden. 
-Triplet-basierte Verfahren optimieren relative Abstände zwischen ausgewählten Beispielen \parencite{schroff2015facenet}. 
+Die in Abschnitt \ref{sec:artikel_macro_zuordnungen} beschriebenen Artikel-Makro-Zuordnungen könnten damit zur Bildung positiver Trainingsbeispiele genutzt werden. 
+Das Training würde einen gemeinsamen Embedding-Raum erzeugen, in dem Artikel möglichst nahe bei ihren zugeordneten Makros und weiter von nicht zugeordneten Makros liegen. 
+Nach dem Training könnten die Makros anhand ihrer Ähnlichkeit zum Anfrageartikel sortiert werden. 
 Die Qualität des Trainings hängt unter anderem von der Auswahl negativer Beispiele ab. Sind negative Beispiele bereits deutlich vom Anker entfernt, erzeugen sie nur einen geringen Trainingsimpuls. 
 Die Auswahl geeigneter beziehungsweise schwieriger negativer Beispiele ist daher ein wesentlicher Bestandteil triplet-basierter Trainingsverfahren \parencite{schroff2015facenet}. 
-
-Die Erzeugung einer in absteigender Relevanz geordneten Makro-Liste wrid auch bei diesem Verfahren nicht berücksichtigt. Die Rangliste entsteht erst nachträglich durch Sortierung der Abstände. 
+Die Erzeugung einer in absteigender Relevanz geordneten Makro-Liste wrid auch bei diesem Verfahren nicht berücksichtigt. Die Rangliste entsteht erst nachträglich durch Sortierung der Ähnlichkeiten. 
 
 Im Hinblick auf die Bewertungskriterien ergibt sich folgende Einschätzung: 
 
 \begin{itemize}
-    \item \textbf{Datenbedarf:} mittel geeignet (\textbf{o}), weil aus den vorhandenen Zuordnungen Triplets erzeugt werden können, die nutzbare Trainingsmenge und Trainingsqualität jedoch von der Auswahl geeigneter negativer Beispiele abhängen \parencite{schroff2015facenet}.
-    \item \textbf{Trainingsaufwand:} mittel geeignet (\textbf{o}), weil neben dem Training des Embedding-Modells eine Strategie zur Auswahl von Triplets benötigt wird \parencite{schroff2015facenet}. 
-    \item \textbf{Interpretierbarkeit:} mittel geeignet (\textbf{o}), weil Abstände zwischen den Artikeln im Embedding-Raum untersucht werden können, einzelne Werte der Embeddings jedoch keine unmittelbar fachlich verständliche Bedeutung besitzen \parencite{schroff2015facenet,molnar2022interpretable}. 
-    \item \textbf{Skalierbarkeit:} gut geeignet (\textbf{+}), weil Embeddings der Artikel vorab berechnet und bei neuen Anfragen miteinander verglichen werden können \parencite{reimers2019sbert}. 
-    \item \textbf{Eignung für Makroempfehlungen:} gut geeignet (\textbf{+}), weil passende Makros über Abstände im Embedding-Raum gelernt werden können.  Die Sortierung der Makro-Liste muss noch im Nachgang erfolgen \parencite{schroff2015facenet,liu2009learning}. 
+    \item \textbf{Datenbedarf:} sehr gut geeignet (\textbf{++}): Embedding-Modelle können an die größe eines Datensatzes angepasst werden \parencite{Goodfellow2016DeepLearning, Hagan2014NeuralNetworkDesign}.
+    \item \textbf{Trainingsaufwand:} mittel geeignet (\textbf{o}): Es ist neben dem Training des Embedding-Modells eine Strategie zur Auswahl von Triplets erforderlich. 
+    \item \textbf{Interpretierbarkeit:} mittel geeignet (\textbf{o}): Es können Embedding-Abstände und Ähnlichkeitswerte ausgewertet werden, die nummerischen Werte eines Embeddings können jedoch nicht direkt interperiert werden.  
+    \item \textbf{Skalierbarkeit:} gut geeignet (\textbf{+}): Die Embeddings der Artikel können vorab berechnet und bei neuen Anfragen miteinander verglichen werden.
+    \item \textbf{Eignung für das Empfehlungssystem} mittel geeignet (\textbf{0}): Es können ähnliche Kandidaten gefunden werden. Die Sortierung der Makro-Liste muss jedoch im Nachgang erfolgen. 
 \end{itemize} 
 
 \section{Learning-to-Rank mit LambdaMART} 
 \label{sec:eignung_learning_to_rank} 
 
-Learning-to-Rank bezeichnet Verfahren, die für eine Anfrage mehrere Kandidaten bewerten und nach ihrer geschätzten Relevanz sortieren \parencite{liu2009learning}. 
-Die Grundlagen hierfür wurden im Kaptiel \ref{sec:learning_to_rank} näher behandelt
-Dies entspricht dem in Abschnitt \ref{sec:vision} definierten Ziel, für einen Artikel eine absteigend sortierte Liste geeigneter Makros zu erzeugen. 
+Die Grundlagen hierfür wurden im Kaptiel \ref{sec:learning_to_rank} näher behandelt.
+Dies entspricht dem in Abschnitt \ref{sec:vision} definierten Ziel, Makros in einer Liste zu ordnen. 
 Hierzu wird für jeden Artikel zwischen dem ihm zugeordneten Makro und den nicht zugeordneten Makros unterschieden. 
 Das zugeordnete Makro erhält die Relevanz 1, nicht zugeordnete Makros die Relevanz 0. Aus diesen Relevanzen lässt sich ableiten, 
 dass das Makro mit Relevanz 1 früher in der Makro-Liste eingeordnet werden soll, als die Makros mit Relevanz 0. 
@@ -146,11 +151,11 @@ verschiedene Ausprägungen von Makro-Listen zu kombinieren um dadurch die Qualit
 Im Hinblick auf die Bewertungskriterien ergibt sich folgende Einschätzung: 
 
 \begin{itemize} 
-    \item \textbf{Datenbedarf:} gut geeignet (\textbf{+}), weil aus den vorhandenen Artikel-Makro-Zuordnungen unmittelbar Relevanzen erzeugt werden können \parencite{liu2009learning}. 
-    \item \textbf{Trainingsaufwand:} gut geeignet (\textbf{+}), weil LambdaMART auf schnell trainierbaren Gradient-Boosting-Entscheidungsbäumen basiert, \parencite{burges2010lambdamart,ke2017lightgbm}. 
-    \item \textbf{Interpretierbarkeit:} gut geeignet (\textbf{+}), weil der Einfluss von Entscheidungen bei Entscheidungsbäumen entlang der Verästelungen nachvollzogen werden kann \parencite{molnar2022interpretable}. 
-    \item \textbf{Skalierbarkeit:} mittel geeignet (\textbf{o}), weil das Verfahren für neue Trainingsdaten erneut durchlaufen werden muss \parencite{ke2017lightgbm}. 
-    \item \textbf{Eignung für Makroempfehlungen:} sehr gut geeignet (\textbf{++}), weil das Verfahren unmittelbar die Reihenfolge der Makro-Liste optimiert \parencite{liu2009learning,burges2006lambdarank}. 
+    \item \textbf{Datenbedarf:} gut geeignet (\textbf{+}): Aus den vorhandenen Artikel-Makro-Zuordnungen unmittelbar Relevanzen erzeugt werden können. 
+    \item \textbf{Trainingsaufwand:} gut geeignet (\textbf{+}): LambdaMART basiert auf schnell trainierbaren Gradient-Boosting-Entscheidungsbäumen \parencite{burges2010lambdamart,ke2017lightgbm}. 
+    \item \textbf{Interpretierbarkeit:} gut geeignet (\textbf{+}): Der Einfluss von Entscheidungen bei Entscheidungsbäumen kann entlang der Verästelungen nachvollzogen werden. 
+    \item \textbf{Skalierbarkeit:} mittel geeignet (\textbf{o}): Das Verfahren muss für neue Trainingsdaten erneut durchlaufen werden. 
+    \item \textbf{Eignung für das Empfehlungssystem} sehr gut geeignet (\textbf{++}): Das Verfahren optimiert unmittelbar die Reihenfolge der Makro-Liste. 
 \end{itemize}
 
 
@@ -166,24 +171,23 @@ Die Ergebnisse der Eignungsanalyse sind in Tabelle
     \label{tab:modellvergleich} 
     \renewcommand{\arraystretch}{1.25} \setlength{\tabcolsep}{4pt} 
     \begin{tabular}{ p{3.7cm} >{\centering\arraybackslash}p{1.8cm} >{\centering\arraybackslash}p{2.0cm} >{\centering\arraybackslash}p{2.2cm} >{\centering\arraybackslash}p{1.8cm} >{\centering\arraybackslash}p{2.6cm} } 
-        \hline \textbf{Modellansatz} & \textbf{Datenbedarf} & \textbf{Trainings\-aufwand} & \textbf{Interpretier\-barkeit} & \textbf{Skalier\-barkeit} & \textbf{Eignung für Makro\-empfehlungen} \\ 
-        \hline Large Language Models & - & - & - & + & o \\ Sentence Transformer & + & + & o & + & o \\ Embedding-Modell mit Triplet Loss & o & o & o & + & + \\ Learning-to-Rank & + & + & + & o & ++ \\ 
+        \hline \textbf{Modellansatz} & \textbf{Datenbedarf} & \textbf{Trainings\-aufwand} & \textbf{Interpretier\-barkeit} & \textbf{Skalier\-barkeit} & \textbf{Eignung für das Empfehlungssystem} \\ 
+        \hline Large Language Models & - & + & - & + & -- \\ Sentence Transformer & + & o & o & + & o \\ Embedding-Modell mit Triplet Loss & ++ & o & o & + & o \\ Learning-to-Rank & + & + & + & o & ++ \\ 
         \hline \end{tabular} \vspace{0.3cm} \begin{minipage}{0.94\textwidth} \footnotesize 
             \textbf{Legende:} -- = ungeeignet, - = gering geeignet, o = mittel geeignet, + = gut geeignet, ++ = sehr gut geeignet. 
          \end{minipage} 
         \end{table} 
         
-Die Tabelle \ref{tab:modellvergleich} zeigt, dass Learning-to-Rank im Vergleich in den meisten Bewertungskriterien gut abschneidet und insbesondere für die Eignung bei Makroempfehlungen sehr gut geeignet ist. 
-Im Vergleich zu den restlichen Kandidaten schneidet dieser Ansatz bei der Bewertung am besten ab.
+Die Tabelle \ref{tab:modellvergleich} zeigt, dass Learning-to-Rank im Vergleich in den Bewertungskriterien am besten abschneidet und insbesondere in der Eignung für das Empfehlungssystem am besten bewertet wird. 
 Daher wird Learning-to-Rank als Modell für das Empfehlunssystem ausgewählt.
 
 \section{Kapitelergebnis} 
 
-Ziel dieses Kapitels war die Beantwortung der Forschungsfrage RQ2: Welcher Modellansatz eignet sich für die automatisierte Empfehlung geeigneter Makros? 
+Ziel dieses Kapitels war die Beantwortung der Forschungsfrage RQ2: Welcher Modellansatz eignet sich für ein Empfehlungssystem zur automatisierten Empfehlung von Makros? 
 Hierzu wurden Large Language Models, Sentence Transformer, Embedding-Modelle mit Triplet Loss und Learning-to-Rank-Verfahren untersucht. 
-Learning-to-Rank bildet das Ziel des Empfehlungssystems als Rankingaufgabe ab. Als konkretes Verfahren wurde LambdaMART ausgewählt. 
 
-Daraus ergibt sich folgendes Artefakt als Übergabe an die nächsten Kapitel: 
+
+Aus der Analyse der verschiedenen Modellansätze ergibt sich folgendes Artefakt A2, das als Ergebnis an die nächsten Kapitel übergeben wird:
 
 \begin{quote} 
     \textbf{Artefakt A2: Ausgewählter Modellansatz} 

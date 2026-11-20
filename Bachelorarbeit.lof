@@ -29,9 +29,14 @@
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Beispiel für die Normalisierung technischer Einheiten. Unterschiedliche Schreibweisen derselben Spannung werden in eine einheitliche Darstellung überführt, wodurch die Vergleichbarkeit dieser Einheiten verbessert wird.}}{34}{figure.caption.26}%
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Klassifikation technischer Spannungen. Kontinuierliche Spannungswerte werden zu Kategorien zusammengefasst. Die zusätzliche Information durch die Kategorisierung verbessert die Vergleichbarkeit von Artikeln.}}{35}{figure.caption.27}%
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Erzeugung eines Artikelvektors aus \textit {technischen Artikeleigenschaften} eines Motorartikels. Die extrahierten Merkmale werden zu einer gemeinsamen technischen Repräsentation zusammengeführt und dienen als Eingabe für das Empfehlungssystem.}}{37}{figure.caption.28}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Technische Funktion der Trainings-, Validierungs- und Testdaten. Während die Trainingsdaten für das Erlernen technischer Zusammenhänge genutzt werden, dienen die Validierungsdaten der Überwachung und Anpassung des Modells. Die Testdaten werden ausschließlich zur abschließenden Bewertung der Leistungsfähigkeit auf unbekannten Daten verwendet.}}{38}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Erstellung des Makrovektor. Aus dem .ema-Makro werden strukturelle Informationen extrahiert und in einen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.}}{38}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Einfluss einer textbasierten technischen Information auf die Makroempfehlung. Artikel A und B sind bis auf die Anmerkung „Wasserdichte Ausführung“ identisch. Dadurch wird Artikel A bevorzugt, sodass das zugeordnete Makro M1\_F1\_V1 empfohlen wird. }}{39}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Erstellung des Lexikalvektors. Textuelle technische Informationen aus Artikel- und Makrodaten werden extrahiert und in einem separaten Vektor zusammengeführt. Der Lexikalvektor ergänzt die strukturierten Informationen des Artikel- und Makrovektors um technische Begriffe und Bezeichnungen.}}{40}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Technische Funktion der Trainings-, Validierungs- und Testdaten. Während die Trainingsdaten für das Erlernen technischer Zusammenhänge genutzt werden, dienen die Validierungsdaten der Überwachung und Anpassung des Modells. Die Testdaten werden ausschließlich zur abschließenden Bewertung der Leistungsfähigkeit auf unbekannten Daten verwendet.}}{41}{figure.caption.32}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Datenfluss des Empfehlungssystems}}{52}{figure.caption.34}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Erzeugung von Vergleichsmerkmalen für LambdaMART}}{55}{figure.caption.41}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
