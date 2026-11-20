@@ -4,80 +4,233 @@
 In Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} wurde mit Artefakt A1 eine Trainings- und Evaluationsbasis aus Artikeln, Makros sowie Artikel-Makro-Zuordnungen erstellt. 
 Anschließend wurde in Kapitel \ref{chap:auswahl_des_modellansatzes} mit LambdaMART ein geeigneter Modellansatz für die Generierung einer nach Relevanz sortierten Makro-Liste ausgewählt. 
 Für die Entwicklung des Empfehlungssystems müssen die in Artefakt A1 bereitgestellten Datenstrukturen und der in Artefakt A2 ausgewählte Modellansatz in eine gemeinsame Architektur überführt werden. 
-Diese Architektur legt fest, wie \textit{technischen Artikeleigenschaften} verarbeitet, Kandidaten für die Empfehlung von Makros gebildet (Makrokandidaten), Merkmale für den Vergleich zwischen Anfrage und Kandidat erzeugt (Vergleichsmerkmale) und 
-durch das Learning-to-Rank-Modell bewertet werden. Das Ziel dieses Kapitels besteht daher in der Entwicklung einer fachlichen und technischen Architektur des Empfehlungssystems. Das Ergebnis bildet Artefakt A3. 
+Das Ziel dieses Kapitels besteht daher in der Entwicklung einer fachlichen Architektur des Empfehlungssystems. Das Ergebnis bildet Artefakt A3. 
 
-\section{Gesamtkonzept} 
+\section{Gesamtarchitektur und Datenfluss} 
+\label{sec:gesamtarchitektur_und_datenfluss} 
 
-Die Architektur für das Empfehlungssystems lässt sich aus der Vision in Abschnitt \ref{sec:vision} ableiten. Ziel ist es, 
-für einen Artikel aus einer Anfrage an das Empfehlungssystem geeignete Makros zu identifizieren und diese entsprechend ihrer Relevanz in Form einer Makro-Liste auszugeben. 
-Die hierfür erforderlichen Informationen stammen aus den in Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} aufbereiteten Artikeln und Makros. 
-Die eigentliche Bewertung erfolgt anschließend durch das in Kapitel \ref{chap:auswahl_des_modellansatzes} ausgewählte LambdaMART-Modell. 
+Die Architektur des Empfehlungssystems lässt sich aus der Vision in Abschnitt \ref{sec:vision} ableiten. Ziel des Systems ist es, 
+für eine Anfrage geeignete Makros zu identifizieren und diese entsprechend ihrer Relevanz in Form einer sortierten Makro-Liste auszugeben. 
+Die hierfür erforderlichen Informationen stammen aus den in Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} aufbereiteten Artikel- und Makrodaten. 
+Aus ihnen wurden Artikel-, Makro- und Lexikalvektoren erzeugt, welche die \textit{technischen Artikeleigenschaften}, 
+die \textit{technischen Makroeigenschaften} und die \textit{technischen Hinweise} in einheitlichen Datenstrukturen bereitstellen. 
+Diese Vektoren werden nicht unmittelbar durch LambdaMART verarbeitet. Stattdessen dienen sie zur Bildung von Makroprofilen und Anfrageprofilen. 
+Aus dem Vergleich eines Anfrageprofils mit dem Makroprofil eines Makrokandidaten werden numerische Vergleichsmerkmale berechnet. 
+Die Vergleichsmerkmale bilden die Eingabe des in Kapitel \ref{chap:auswahl_des_modellansatzes} ausgewählten LambdaMART-Modells. 
+Die Gesamtarchitektur umfasst sowohl den Trainingsprozess als auch den späteren Anwendungsprozess. Beide Prozesse verwenden dieselben Datenstrukturen und dieselbe Berechnung der Vergleichsmerkmale. 
+Sie unterscheiden sich jedoch hinsichtlich der Verfügbarkeit der bekannten Artikel-Makro-Zuordnungen und des Zwecks, für den die erzeugten Relevanzwerte verwendet werden. 
 
-Die Architektur gliedert sich hierzu in die folgenden Bereiche: 
+\subsection{Gemeinsame Verarbeitungsschritte} 
 
-\begin{enumerate} 
-    \item Extraktion \textit{technischen Artikeleigenschaften} aus dem Artikel der Anfrage, 
-    \item Bildung eines Anfragekandidaten aus den extrahierten \textit{technischen Artikeleigenschaften}, 
-    \item Erzeugung von Makrokandidaten, 
-    \item Berechnung von Vergleichsmerkmale, 
-    \item Bewertung der Makrokandidaten mittels LambdaMART, 
-    \item Sortierung der Makrokandidaten nach ihrer Relevanz. 
-\end{enumerate} 
+Training und Anwendung greifen auf eine gemeinsame Verarbeitungskette zurück. Ausgangspunkt sind die aus den vorhandenen Daten extrahierten \textit{technischen Artikel- und Makroeigenschaften}. 
+Diese werden aufbereitet, bereinigt und in Artikel-, Makro- und Lexikalvektoren überführt. Der Artikelvektor enthält die strukturierten \textit{technischen Artikeleigenschaften}. 
+Der Makrovektor beschreibt die technischen und strukturellen Eigenschaften eines Makros. Der Lexikalvektor ergänzt die strukturierten Merkmale um \textit{technische Hinweise} aus den Artikeldaten, 
+beispielsweise aus Typbezeichnungen, Produktserien und Beschreibungen. Aus den Vektoren der Trainingsdaten werden Makroprofile erzeugt. 
+Ein Makro wird dabei als Makrokandidat betrachtet, sobald es als mögliches Ergebnis einer Empfehlung bewertet wird. 
+Das zugehörige Makroprofil stellt die technische Beschreibung dieses Makrokandidaten bereit. Für eine Anfrage wird dagegen ein Anfrageprofil erzeugt. Dieses enthält nur diejenigen Informationen, 
+die zum Zeitpunkt der Anfrage bekannt oder aus dem Anfrageartikel ableitbar sind. Informationen, welche unmittelbar die Identität oder die bekannte Zuordnung des Zielmakros offenlegen würden, 
+werden nicht in das Anfrageprofil übernommen. Anschließend wird das Anfrageprofil mit den Makroprofilen der verfügbaren Makrokandidaten verglichen. Aus jedem Vergleich entstehen numerische Vergleichsmerkmale. 
+Die Gesamtheit der Vergleichsmerkmale eines Anfrageprofils und eines Makroprofils bildet ein Anfrage-Kandidat-Paar. LambdaMART verarbeitet die Anfrage-Kandidat-Paare und berechnet für jeden Makrokandidaten einen Relevanzwert. 
+Durch die absteigende Sortierung dieser Relevanzwerte entsteht eine Rangliste der Makrokandidaten.
 
-Dadurch wird die eigentliche Aufgabe des Rankings von der Datenaufbereitung und den zugrunde liegenden Datenquellen getrennt. 
-Die Architektur ermöglicht somit eine unabhängige Weiterentwicklung der einzelnen Komponenten innerhalb des in Kapitel \ref{chap:vorgehensweise} beschriebenen ADR-Prozesses. 
+\subsection{Trainingsprozess} 
 
-\subsection{Datenfluss} 
+Der Trainingsprozess dient dazu, aus den vorhandenen Artikel-Makro- Zuordnungen ein LambdaMART-Modell zu erzeugen. Hierzu werden die aufbereiteten und bereinigten Daten zunächst in Trainings-, 
+Validierungs- und Testdaten aufgeteilt. Der Datensplit erfolgt vor dem Aufbau der Makroprofile, damit keine Informationen aus den Validierungs- oder Testdaten in die Makroprofile einfließen. 
+Die Makroprofile werden ausschließlich aus den Daten des Trainingssplits gebildet. Hierzu werden alle Trainingsartikel, die demselben Makro zugeordnet sind, zusammengeführt. 
+Die Artikelvektoren liefern dabei die \textit{technischen Artikeleigenschaften}, die Makrovektoren die \textit{technischen Makroeigenschaften} und die Lexikalvektoren die \textit{technischen Hinweise}. 
+Da einem Makro mehrere Artikel zugeordnet sein können, enthält ein Makroprofil die unterschiedlichen beobachteten Merkmalswerte der zugeordneten Trainingsartikel. 
+Die Werte werden nicht auf einen einzigen Mittelwert reduziert. Dadurch kann ein Makroprofil beispielsweise mehrere Spannungen, Hersteller oder Produktausprägungen enthalten. 
+Aus den Trainingsartikeln werden zusätzlich Trainingsanfragen erzeugt. Hierzu wird jeder Trainingsartikel als Anfrage betrachtet. 
+Die bekannte Makrozuordnung wird nicht als Vergleichsmerkmal in das Anfrageprofil übernommen. Sie wird ausschließlich dazu verwendet, die Relevanz der Makrokandidaten für diese Trainingsanfrage festzulegen. 
+Für jede Trainingsanfrage wird anschließend ein Anfrage-Kandidat-Paar mit jedem verfügbaren Makrokandidaten erzeugt. Hierzu wird das Anfrageprofil mit dem jeweiligen Makroprofil verglichen. 
+Aus dem Vergleich entstehen numerische Vergleichsmerkmale, beispielsweise Merkmalsübereinstimmungen, mengenbasierte Ähnlichkeiten, lexikalische Vergleichsmerkmale und makrostrukturelle Vergleichsmerkmale. 
+Die Vergleichsmerkmale und die aus den bekannten Artikel-Makro-Zuordnungen abgeleiteten Relevanzwerte bilden gemeinsam die Trainingsgrundlage von LambdaMART. 
+Das Modell lernt daraus, welche Kombinationen von Vergleichsmerkmalen für die Einordnung eines Makrokandidaten an einer bestimmten Position der Rangliste relevant sind. 
+Das Ergebnis des Trainingsprozesses besteht aus dem trainierten LambdaMART-Modell, den verwendeten Vergleichsmerkmalen und den aus dem Trainingssplit erzeugten Makroprofilen. 
+Diese Ergebnisse bilden die Grundlage für die anschließende Validierung, den Test und die spätere Anwendung des Empfehlungssystems. 
+Bei der diagnostischen Bewertung der Trainingsdaten kann der jeweils als Anfrage verwendete Trainingsartikel aus dem Makroprofil seines Zielmakros ausgeschlossen werden. 
+Dadurch wird verhindert, dass die Eigenschaften eines Trainingsartikels bei seiner eigenen Bewertung zugleich auf der Anfrage- und Kandidatenseite auftreten. 
+Diese Auswertung verändert jedoch weder das trainierte Modell noch die für Validierung, Test und Anwendung verwendeten Makroprofile.
 
-Der Datenfluss beginnt mit einem Artikel, für den ein geeignetes Makro empfohlen werden soll. Aus den \textit{technischen Artikeleigenschaften} werden zunächst die für die Empfehlung relevanten Informationen extrahiert. 
-Anschließend wird aus diesen Informationen ein Anfragekandidat gebildet. Dieser Anfragekandidat wird danach mit allen verfügbaren Makrokandidaten verglichen. 
-Hierzu werden Vergleichsmerkmale erzeugt, welche die Gemeinsamkeiten und Unterschiede zwischen Anfragekandidaten und Makrokandidat beschreiben. 
-Die Vergleichsmerkmale werden anschließend durch das LambdaMART-Modell bewertet. Für jeden Makrokandidaten berechnet das Modell einen numerischen Wert, den sogenannten Relevanzscore. 
-Die Makrokandidaten werden entsprechend dieses Relevanzscores sortiert, wodurch die finale Empfehlung für ein Makro entsteht. 
+
+\subsection{Validierungs- und Testprozess} 
+
+Validierungs- und Testdaten durchlaufen grundsätzlich dieselbe Verarbeitungskette wie spätere Anfragen im Anwendungsprozess. Für jeden Artikel wird zunächst ein Anfrageprofil erzeugt. 
+Hierbei werden Informationen entfernt, welche unmittelbar die Identität oder die bekannte Zuordnung des Zielmakros offenlegen würden. Die bekannte Artikel-Makro-Zuordnung bleibt außerhalb des Anfrageprofils erhalten. 
+Sie wird benötigt, um die vom Modell erzeugte Rangliste nach der Bewertung mit der tatsächlich bekannten Zuordnung vergleichen zu können. 
+Jedes Anfrageprofil wird mit allen aus dem Trainingssplit erzeugten Makroprofilen verglichen. 
+Für jeden Makrokandidaten entsteht dadurch ein Anfrage-Kandidat-Paar mit derselben Struktur der Vergleichsmerkmale wie im Trainingsprozess. Das trainierte LambdaMART-Modell berechnet für jedes Paar einen Relevanzscore. 
+Die Makrokandidaten werden anschließend nach den Relevanzscores sortiert. Validierungs- und Testdaten unterscheiden sich nicht in der technischen Verarbeitung, sondern in ihrem Verwendungszweck. 
+Die Ergebnisse der Validierungsdaten dürfen zur Auswahl von Modellparametern und Modellvarianten verwendet werden. 
+Die Testdaten dürfen dagegen erst nach Abschluss dieser Anpassungen verwendet werden und dienen ausschließlich der abschließenden Bewertung des ausgewählten Modells. 
+Die Bewertung erfolgt anhand der in Abschnitt \ref{sec:evaluationsmetriken} beschriebenen Metriken. Hierzu zählen insbesondere Recall@k, MRR und nDCG. 
+Diese Metriken vergleichen die erzeugte Rangliste mit der bekannten Makrozuordnung, ohne dass diese Zuordnung zuvor als Eingabe des Modells verwendet wurde.
+
+
+\subsection{Anwendungsprozess} 
+
+Der Anwendungsprozess beginnt mit einer neuen Anfrage, für die keine Artikel-Makro-Zuordnung bekannt ist. 
+Aus den verfügbaren Informationen werden zunächst die \textit{technischen Artikeleigenschaften} und die \textit{technischen Hinweise} extrahiert und in die für das Empfehlungssystem verwendeten Vektoren überführt. 
+Aus diesen Vektoren wird ein Anfrageprofil erzeugt. Es enthält nur Informationen, die zum Zeitpunkt der Anfrage verfügbar sind. Technische Eigenschaften, Anschlussstrukturen, 
+Kategorien und Variantenmerkmale dürfen berücksichtigt werden, sofern sie aus der Anfrage ableitbar sind. Informationen, welche unmittelbar auf die Identität eines Zielmakros verweisen, 
+stehen im Anwendungsprozess dagegen nicht zur Verfügung. Das Anfrageprofil wird anschließend mit den Makroprofilen aller verfügbaren Makrokandidaten verglichen. 
+Für jeden Makrokandidaten werden dieselben Vergleichsmerkmale berechnet, die bereits während des Trainings verwendet wurden. Aus diesen Vergleichsmerkmalen entsteht jeweils ein Anfrage-Kandidat-Paar. 
+Das trainierte LambdaMART-Modell berechnet für jedes Anfrage-Kandidat-Paar einen Relevanzscore. Anschließend werden die Makrokandidaten anhand ihrer Relevanzscores in absteigender Reihenfolge sortiert. 
+Das Ergebnis des Anwendungsprozesses ist eine Makro-Liste, in der die nach Einschätzung des Modells am besten zur Anfrage passenden Makros an den oberen Rangpositionen stehen. 
+Da im Anwendungsprozess keine bekannte Artikel-Makro-Zuordnung vorhanden ist, kann die Rangliste nicht unmittelbar mit einer vorgegebenen Lösung verglichen werden. 
+Eine automatische Berechnung der Evaluationsmetriken ist daher nur möglich, wenn nachträglich eine fachlich geprüfte Zuordnung oder eine andere Relevanzbewertung bereitgestellt wird.
+
+\subsection{Gemeinsamkeiten, Unterschiede und Grenzen} 
+
+Trainings- und Anwendungsprozess verwenden dieselbe fachliche Grundlage. In beiden Prozessen werden Anfrageprofile mit den Makroprofilen der Makrokandidaten verglichen. 
+Für jedes daraus entstehende Anfrage-Kandidat-Paar werden dieselben Vergleichsmerkmale in derselben Reihenfolge berechnet. Dadurch entspricht die Eingabestruktur während der Anwendung der Eingabestruktur, 
+auf deren Grundlage LambdaMART trainiert wurde. Der wesentliche Unterschied besteht in der Verwendung der bekannten Artikel-Makro-Zuordnung. 
+Während des Trainings wird sie zur Erzeugung der Relevanzwerte benötigt. Bei Validierungs- und Testdaten wird sie ausschließlich zur Bewertung der erzeugten Rangliste verwendet. 
+Im Anwendungsprozess ist die korrekte Makrozuordnung dagegen unbekannt und steht weder für die Bildung des Anfrageprofils noch für die Bewertung durch LambdaMART zur Verfügung. 
+Eine weitere Abgrenzung betrifft die Makroprofile. Diese werden ausschließlich aus den Trainingsdaten erzeugt und anschließend in Training, Validierung, Test und Anwendung wiederverwendet. 
+Validierungs-, Test- oder Anfrageartikel dürfen nicht nachträglich in die Makroprofile einfließen, da ansonsten Informationen aus den zu bewertenden Daten in den Suchraum übernommen würden. 
+Die Vergleichsmerkmale bilden in allen Prozessen die gemeinsame Schnittstelle zum LambdaMART-Modell. Die Artikel-, Makro- und Lexikalvektoren beschreiben die fachlichen Eigenschaften, 
+während LambdaMART ausschließlich die numerischen Beziehungen zwischen Anfrageprofil und Makroprofil bewertet. Die Grenze des Empfehlungssystems liegt darin, dass nur Makrokandidaten bewertet werden können, 
+für die ein Makroprofil vorhanden ist. Ein Makro, das nicht in den aus dem Trainingssplit erzeugten Makroprofilen enthalten ist, gehört nicht zum Suchraum und kann folglich nicht in der Rangliste erscheinen. 
+Ebenso können technische Eigenschaften nur berücksichtigt werden, wenn sie während der Datenaufbereitung extrahiert und durch die vorhandenen Vektoren sowie Vergleichsmerkmale abgebildet wurden.
+
+\begin{table}[H] 
+    \centering 
+    \caption{Gemeinsamkeiten und Unterschiede zwischen Training, Validierung, Test und Anwendung} 
+    \label{tab:vergleich_train_validierung_test_anwendung} 
+    \renewcommand{\arraystretch}{1.25} \begin{tabular}{p{3.1cm}p{3.0cm}p{3.0cm}p{3.0cm}} 
+        \hline \textbf{Aspekt} & \textbf{Training} & \textbf{Validierung und Test} & \textbf{Anwendung} \\ 
+        \hline Anfrageprofil & aus Trainingsartikeln & aus Validierungs- beziehungsweise Testartikeln & aus einer neuen Anfrage \\ 
+        Makroprofile & aus dem Trainingssplit erzeugt & aus dem Training übernommen & aus dem Training übernommen \\ 
+        Vergleichsmerkmale & werden für jedes Anfrage-Kandidat-Paar berechnet & werden in derselben Form berechnet & werden in derselben Form berechnet \\ 
+        Artikel-Makro-Zuordnung & zur Erzeugung der Relevanzwerte verwendet & ausschließlich zur Bewertung verwendet & unbekannt \\ 
+        LambdaMART & lernt die Bewertung der Vergleichsmerkmale & berechnet Relevanzscores & berechnet Relevanzscores \\ 
+        Ergebnis & trainiertes Modell & Bewertungsmetriken und Ranglisten & sortierte Makro-Liste \\ 
+        Rückwirkung & Modellparameter werden angepasst & nur Validierung darf Modellentscheidungen beeinflussen & keine Modellanpassung während der Anfrage \\ 
+        \hline 
+    \end{tabular} 
+\end{table}
+
+\subsection{Bild der Gesamtarchitektur}
 
 \begin{figure}[H] 
     \centering 
-    \begin{tikzpicture}[ >=stealth, node/.style={ draw, rounded corners, minimum width=4cm, minimum height=0.9cm, align=center } ] 
-        \node[node,fill=blue!10] (article) at (0,0) {Artikel}; 
-        \node[node,fill=green!10] (features) at (0,-1.8) {Extraktion \textit{technischen Artikeleigenschaften}};
-        \node[node,fill=green!10] (candidates) at (0,-3.6) {Bildung von Anfrage- und Makrokandidaten}; 
-        \node[node,fill=orange!10] (ranking) at (0,-5.4) {Bewertung mittels LambdaMART}; 
-        \node[node,fill=yellow!15] (result) at (0,-7.2) {Empfehlung von Makrokandidaten auf Basis des Relevanzscores};
-        \draw[->] (article) -- (features); \draw[->] (features) -- (candidates); 
-        \draw[->] (candidates) -- (ranking); 
-        \draw[->] (ranking) -- (result); 
-    \end{tikzpicture}
-    \caption{Datenfluss des Empfehlungssystems} 
-    \label{fig:datenfluss_empfehlungssystem} 
-\end{figure} 
+    \begin{tikzpicture}[ >=stealth, 
+        font=\small, box/.style={ draw, rounded corners, minimum width=4.4cm, minimum height=0.9cm, align=center }, 
+        widebox/.style={ draw, rounded corners, minimum width=9.2cm, minimum height=0.9cm, align=center }, 
+        train/.style={ box, fill=blue!10, draw=blue!60!black }, application/.style={ box, fill=green!10, draw=green!50!black }, 
+        common/.style={ box, fill=orange!12, draw=orange!70!black }, result/.style={ box, fill=yellow!18, draw=yellow!60!black }, 
+        boundary/.style={ draw, dashed, rounded corners, inner sep=0.35cm } ] 
+        
+        % Gemeinsame Datenbasis 
+        
+        \node[widebox,fill=gray!10] (raw) at (0,12.5) {Artikel- und Makrodaten mit bekannten Artikel-Makro-Zuordnungen}; 
+        \node[widebox,fill=gray!10] (prep) at (0,11.0) {Extraktion, Aufbereitung und Bereinigung der \textit{technischen Artikel- und Makroeigenschaften}}; 
+        \node[widebox,fill=gray!10] (vectors) at (0,9.5) {Artikelvektoren, Makrovektoren und Lexikalvektoren}; 
+        \node[widebox,fill=gray!10] (split) at (0,8.0) {Datensplit: Training, Validierung und Test}; 
+        \draw[->] (raw) -- (prep); \draw[->] (prep) -- (vectors); \draw[->] (vectors) -- (split); 
+        
+        % Training 
+        
+        \node[train] (trainarticles) at (-7.0,6.1) {Trainingsartikel und\\bekannte Artikel-Makro-Zuordnungen}; 
+        \node[train] (profiles) at (-4.5,4.5) {Makroprofile aus\\Trainingsdaten}; 
+        \node[train] (trainqueries) at (-2.0,6.1) {Trainingsanfragen}; 
+        
+        % Val/Test 
+        
+        \node[application] (valtest) at (6.5,6.1) {Validierungs- und\\Testanfragen}; 
+        \draw[->] (split.south) -- ++(0,-0.5) -| (trainarticles.north); 
+        \draw[->] (split.south) -- ++(0,-0.5) -| (trainqueries.north); 
+        \draw[->] (split.south) -- ++(0,-0.5) -| (valtest.north); \draw[->] (trainarticles) -- (profiles); 
+        
+        % Gemeinsamer Vergleich 
+        
+        \node[common] (trainpairs) at (-1.0,4.5) {Anfrage-Kandidat-Paare\\mit Vergleichsmerkmalen}; 
+        \node[common] (valpairs) at (6.5,4.5) {Anfrage-Kandidat-Paare\\mit Vergleichsmerkmalen}; 
+        \draw[->] (trainqueries) -- (trainpairs); \draw[->] (profiles) -- (trainpairs); 
+        \draw[->] (valtest) -- (valpairs); \draw[->] (profiles.east) -- ++(1.0,0) |- (valpairs.west); 
+        
+        % Modelltraining 
+        
+        \node[train] (training) at (-1.0,2.7) {Training und Auswahl\\des LambdaMART-Modells}; 
+        \node[result] (model) at (0,1.1) {Trainiertes LambdaMART-Modell}; 
+        \draw[->] (trainpairs) -- (training); \draw[->] (training) -- (model); 
+        
+        % Bewertung Val/Test 
+        
+        \node[application] (valranking) at (6.5,2.7) {Relevanzscores und\\Makro-Ranglisten}; 
+        \node[result] (evaluation) at (6.5,1.1) {Validierungs- und Testmetriken}; 
+        \draw[->] (valpairs) -- (valranking); \draw[->] (model.east) -- ++(1.0,0) |- (valranking.west); 
+        \draw[->] (valranking) -- (evaluation); 
+        
+        % Anwendung 
+        
+        \node[widebox,fill=gray!5] (separator) at (0,-0.4) {Übergang vom Trainingsprozess zum Anwendungsprozess}; 
+        \node[application] (newquery) at (-6.5,-2.5) {Neue Anfrage ohne\\bekannte Makrozuordnung}; 
+        \node[application] (queryprofile) at (-6.5,-4.2) {Anfrageprofil}; 
+        \node[common] (applicationpairs) at (-1.5,-4.2) {Anfrage-Kandidat-Paare\\mit Vergleichsmerkmalen}; 
+        \node[application] (scoring) at (0,-4.2) {Bewertung durch das\\trainierte LambdaMART-Modell}; 
+        \node[result] (ranking) at (4.0,-5.5) {Nach Relevanz sortierte\\Makro-Liste}; 
+        \draw[->] (evaluation.south) -- ++(0,-0.5) -| (separator.east); 
+        \draw[->] (model.south) -- ++(0,-0.5) -| (separator.west); 
+        \draw[->] (newquery) -- (queryprofile); 
+        \draw[->] (queryprofile) -- (applicationpairs); 
+        \draw[->] (profiles.south) -- ++(0,-6.8) -| (applicationpairs.north); 
+        \draw[->] (applicationpairs) -- (scoring); 
+        \draw[-> ] (model.south) -- (scoring.north); 
+        \draw[->] (scoring) -- (ranking); 
+        
+        % Prozessgrenzen 
+        
+        \node[boundary,fit=(trainarticles)(profiles)(trainqueries) (trainpairs)(training)(model)] {}; 
+        \node at (-3.5,7.0) {\textbf{Trainingsprozess}}; 
+        \node[boundary,fit=(valtest)(valpairs)(valranking)(evaluation)] {}; 
+        \node at (5.0,7.0) {\textbf{Validierung und Test}}; 
+        \node[boundary,fit=(newquery)(queryprofile)(applicationpairs) (scoring)(ranking)] {}; 
+        \node at (0,-7.0) {\textbf{Anwendungsprozess}}; 
+
+    \end{tikzpicture} 
+    \caption{Gesamtarchitektur und Datenfluss des Empfehlungssystems während Training, Validierung, Test und Anwendung} 
+    \label{fig:gesamtarchitektur_datenfluss} 
+\end{figure}
+
+Abbildung \ref{fig:gesamtarchitektur_datenfluss} zeigt die Trennung und die gemeinsamen Bestandteile der Prozesse. Der obere Teil beschreibt die gemeinsame Datenaufbereitung und den Datensplit. 
+Im Trainingsprozess werden aus dem Trainingssplit die Makroprofile aufgebaut und die Anfrage-Kandidat-Paare für das Lernen des LambdaMART-Modells erzeugt. 
+Validierungs- und Testanfragen werden gegen dieselben Makroprofile verglichen. Die daraus erzeugten Ranglisten werden mit den bekannten Artikel-Makro-Zuordnungen bewertet. 
+Nur die Validierung darf zur Auswahl oder Anpassung der Modellkonfiguration verwendet werden. Die Testergebnisse dienen ausschließlich der abschließenden Bewertung. 
+Der untere Teil zeigt den Anwendungsprozess. Eine neue Anfrage wird in ein Anfrageprofil überführt und mit den gespeicherten Makroprofilen verglichen. 
+Die daraus erzeugten Anfrage-Kandidat-Paare werden vom trainierten LambdaMART-Modell bewertet. Als Ergebnis entsteht eine nach Relevanz sortierte Makro-Liste. 
+Da für die neue Anfrage keine bekannte Makrozuordnung vorliegt, endet der reguläre Anwendungsprozess mit der Ausgabe der Rangliste.
+
 
 \subsection{Verarbeitungsstufen des Empfehlungssystems} 
 
-Die fachliche Architektur wird in einer mehrstufigen Kette aus Prozessschritten umgesetzt. 
-Ein Prozessschritt entspricht einer abgeschlossenen Verarbeitungsstufe, die eine spezifische Aufgabe in der Prozesskette übernimmt und ein Ergebnis an die nachfolgende Verarbeitungsstufe übergibt.
-Im Folgenden werden die Prozessschritte des Empfehlungssystems in der Tabelle \ref{tab:verarbeitungsstufen} unterschieden:
+Die Architektur wird in einer mehrstufigen Kette von Prozessschritten umgesetzt. Tabelle \ref{tab:verarbeitungsstufen} ordnet die Verarbeitungsstufen dem Trainingsprozess, 
+dem Validierungs- und Testprozess sowie dem Anwendungsprozess zu. 
 
 \begin{table}[H] 
     \centering 
     \caption{Verarbeitungsstufen des Empfehlungssystems} 
     \label{tab:verarbeitungsstufen} 
     \renewcommand{\arraystretch}{1.2} 
-    \begin{tabular}{p{1.6cm}p{3.6cm}p{7.0cm}} 
-        \hline \textbf{Prozessschritt} & \textbf{Komponente} & \textbf{Aufgabe} \\ 
+    \begin{tabular}{p{1.1cm}p{3.3cm}p{6.2cm}p{2.5cm}} 
+        \hline \textbf{Nr.} & \textbf{Komponente} & \textbf{Aufgabe} & \textbf{Verwendung} \\ 
         \hline 
-        1 & Datenaufbereitung & Extraktion technischer Eigenschaften aus Artikel- und Makrodaten sowie Erzeugung einheitlicher Datenstrukturen \\ 
-        2 & Datenbereinigung & Entfernung nicht nutzbarer, redundanter oder unvollständiger Informationen \\ 
-        3 & Datensplit & Aufteilung der Daten in Trainings-, Validierungs- und Testdaten \\ 
-        4 & Trainingsvorbereitung und Training & Bildung von Makrokandidaten, Erzeugung der Vergleichsmerkmale und Training des LambdaMART-Modells \\ 
-        5 & Analyse & Analyse des Modellverhaltens, der Vergleichsmerkmale und der Ranglistenergebnisse \\ 
-        6 & Evaluation & Bewertung der Empfehlungsqualität mittels Recall@k, MRR und nDCG \\ 
+        1 & Datenaufbereitung & Extraktion und Strukturierung der \textit{technischen Artikel- und Makroeigenschaften} & Training und Anwendung \\ 
+        2 & Datenbereinigung & Entfernung nicht nutzbarer, redundanter oder unvollständiger Informationen & Training und Anwendung \\ 
+        3 & Datensplit & Aufteilung der vorhandenen Daten in Training, Validierung und Test & nur Training \\ 
+        4 & Makroprofile & Zusammenführung der Artikel-, Makro- und Lexikalvektoren der Trainingsdaten je Makro & Training; danach Wiederverwendung \\ 
+        5 & Anfrageprofile & Bildung der Anfrageprofile ohne unmittelbar identitätsstiftende Makroinformationen & alle Prozesse \\ 
+        6 & Vergleichsmerkmale & Berechnung der numerischen Beziehungen zwischen Anfrageprofil und Makroprofil & alle Prozesse \\ 
+        7 & Training & Lernen der Bewertungsfunktion von LambdaMART aus Anfrage-Kandidat-Paaren und bekannten Artikel-Makro-Zuordnungen & nur Training \\ 
+        8 & Bewertung & Berechnung eines Relevanzscores je Makrokandidat & Validierung, Test und Anwendung \\ 
+        9 & Sortierung & Sortierung der Makrokandidaten anhand der Relevanzscores & Validierung, Test und Anwendung \\ 
+        10 & Analyse und Evaluation & Analyse der Ranglisten sowie Berechnung von Recall@k, MRR und nDCG & Validierung und Test \\ 
+        11 & Makroempfehlung & Ausgabe einer nach Relevanz sortierten Makro-Liste & Anwendung \\ 
         \hline 
     \end{tabular} 
-\end{table} 
-
-Jede Komponente besitzt eine klar abgegrenzte Aufgabe und übergibt ihre Ergebnisse an die nachfolgende Verarbeitungsstufe. Dadurch wird eine Architektur geschaffen, 
-welche die iterative Verbesserung der einzelnen Komponenten unterstützt. 
+\end{table}
 
 \subsection{Datenmodell} 
 
@@ -307,91 +460,6 @@ Für jeden Makrokandidaten wird ein eigenes Anfrage-Kandidat-Paar erzeugt.
 LambdaMART bewertet diese Paare anhand der enthaltenen Vergleichsmerkmale und berechnet für jeden Kandidaten einen Relevanzscore. 
 Die resultierenden Scores bilden die Grundlage für die Sortierung der Makrokandidaten und somit für die finale Empfehlung.
 
-\subsubsection{Verwendung der Datenobjekte in Training, Validierung und Test}
-
-\textbf{Trainingsdaten} 
-Die Bildung der Makroprofile erfolgt entsprechend der in Abschnitt \ref{sec:makroprofil} beschriebenen Vorgehensweise. 
-Die Makroprofile bilden den Suchraum des Empfehlungssystems und werden ausschließlich aus dem Trainingssplit erzeugt. Dadurch wird sichergestellt, 
-dass keine Informationen aus den Validierungs- oder Testdaten in die Makroprofile einfließen. Aus den Makroprofilen und den zugehörigen Anfrageprofilen für das Training (Trainigsanfragen) werden anschließend Vergleichsmerkmale berechnet. 
-Diese Vergleichsmerkmale bilden gemeinsam mit den bekannten Artikel-Makro-Zuordnungen die Grundlage für das Training des LambdaMART-Modells. 
-
-\textbf{Validierungsdaten} 
-Für die Validierungsdaten wird aus den 3 Vektoren ein Anfrageprofil erzeugt (Validierungsanfrage). Hierbei werden diejenigen Informationen entfernt, 
-welche die Identität oder Zuordnung eines Makros zu einem Artikel offenlegen würden. 
-Anschlüsse, Makrokategorien sowie Varianten bleiben hingegen erhalten (siehe Kapitel \ref{sec:makrovektor}). Anschließend wird die Validierungsanfrage mit allen aus dem Trainingssplit erzeugten Makroprofilen verglichen. 
-Aus diesem Vergleich entstehen dieselben Vergleichsmerkmale wie im Trainingsprozess. Diese werden durch das trainierte LambdaMART-Modell bewertet und zu einer Rangliste zusammengeführt. 
-Die bekannte Makrozuordnung der Validierungsanfrage wird dabei nicht zum Lernen verwendet, sondern ausschließlich zur Bewertung verschiedener Modell- und Parametervarianten während der Entwicklung herangezogen. 
-
-\textbf{Testdaten} 
-Die Testdaten werden identisch zu den Validierungsdaten verarbeitet. Aus den Artikel-, Makro- und Lexikalvektoren werden zunächst ein Anfrageprofil erzeugt (Testanfragen), 
-Dabei werden diejenigen Informationen entfernt, welche die Identität oder Zuordnung eines Makros zu einem Artikel offenlegen würden.
-Anschließend erfolgt der Vergleich mit den aus dem Trainingssplit erzeugten Makroprofilen. 
-Die daraus resultierenden Vergleichsmerkmale werden durch das trainierte LambdaMART-Modell bewertet und zu einer Rangliste verarbeitet. 
-Die bekannte Makrozuordnung wird hierbei ausschließlich zur abschließenden Berechnung der Evaluationsmetriken verwendet (siehe Kapitel \ref{sec:evaluationsmetriken}). 
-Im Gegensatz zu den Validierungsdaten dürfen die Ergebnisse der Testdaten nicht mehr zur Anpassung des Modells oder seiner Parameter genutzt werden. 
-
-\subsubsection{Zusammenhang der Datenobjekte}
-
-Die beschriebenen Datenobjekte bilden gemeinsam die Grundlage für das Rankingverfahren. Ausgangspunkt sind die aus den Rohdaten erzeugten Artikel-, Makro- und Lexikalvektoren. 
-Aus diesen werden Makroprofile und Anfrageprofile erzeugt. Anschließend werden zwischen beiden Profiltypen Vergleichsmerkmale berechnet, welche die eigentliche Eingabe des Learning-to-Rank-Modells darstellen.
-
-Abbildung \ref{fig:vektoren_profile_vergleichsmerkmale} zeigt den Zusammenhang zwischen den einzelnen Datenobjekten.
-
-\begin{figure}[H]
-    \centering
-    \begin{tikzpicture}[
-        >=stealth,
-        box/.style={
-            draw,
-            rounded corners,
-            minimum width=3.4cm,
-            minimum height=0.9cm,
-            align=center
-        }
-    ]
-
-        \node[box,fill=blue!10] (article) at (-5,0) {Artikel};
-
-        \node[box,fill=blue!10] (articlevec) at (-5,-1.6) {Artikelvektor};
-
-        \node[box,fill=green!10] (query) at (-8,-4.5) {Anfrageprofil};
-
-        \node[box,fill=green!10] (macroprofile) at (2,-4.5) {Makroprofil};
-
-        \node[box,fill=yellow!10] (macrovec) at (0,-1.6) {Makrovektor};
-
-        \node[box,fill=yellow!10] (lexvec) at (5,-1.6) {Lexikalvektor};
-
-        \node[box,fill=orange!10] (compare) at (-3,-7) {Vergleichsmerkmale};
-
-        \node[box,fill=orange!10] (pair) at (-3,-8.6) {Anfrage-Kandidat-Paar};
-
-        \node[box,fill=red!10] (ltr) at (-3,-10.2) {LambdaMART};
-
-        \draw[->] (article) -- (articlevec);
-
-        \draw[->] (articlevec) -- (query);
-
-        \draw[->] (articlevec) -- (macroprofile);
-        \draw[->] (macrovec) -- (macroprofile);
-        \draw[->] (lexvec) -- (macroprofile);
-
-        \draw[->] (query) -- (compare);
-        \draw[->] (macroprofile) -- (compare);
-
-        \draw[->] (compare) -- (pair);
-        \draw[->] (pair) -- (ltr);
-
-    \end{tikzpicture}
-
-    \caption{Zusammenhang zwischen Vektoren, Profilen, Vergleichsmerkmalen und LambdaMART}
-    \label{fig:vektoren_profile_vergleichsmerkmale}
-\end{figure}
-
-Die Abbildung verdeutlicht die schrittweise Transformation der Daten. Die Vektoren beschreiben zunächst die technischen Informationen eines Artikels beziehungsweise Makros. 
-Durch die Profilbildung werden diese Informationen in eine für das Empfehlungssystem geeignete Form überführt. 
-Anschließend werden die Profile miteinander verglichen und in Form numerischer Vergleichsmerkmale beschrieben. 
-Erst diese Vergleichsmerkmale werden durch LambdaMART verarbeitet und zur Berechnung eines Relevanzscores verwendet.
 
 \section{Kapitelergebnis} 
 

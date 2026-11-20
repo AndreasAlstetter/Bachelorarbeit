@@ -35,8 +35,7 @@
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Technische Funktion der Trainings-, Validierungs- und Testdaten. Während die Trainingsdaten für das Erlernen technischer Zusammenhänge genutzt werden, dienen die Validierungsdaten der Überwachung und Anpassung des Modells. Die Testdaten werden ausschließlich zur abschließenden Bewertung der Leistungsfähigkeit auf unbekannten Daten verwendet.}}{41}{figure.caption.32}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Datenfluss des Empfehlungssystems}}{52}{figure.caption.34}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Zusammenhang zwischen Vektoren, Profilen, Vergleichsmerkmalen und LambdaMART}}{60}{figure.caption.46}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Gesamtarchitektur und Datenfluss des Empfehlungssystems während Training, Validierung, Test und Anwendung}}{57}{figure.caption.35}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
