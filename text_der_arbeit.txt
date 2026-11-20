@@ -1795,177 +1795,182 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
     \label{fig:artikelvektor} 
 \end{figure}
         
-% \subsection{Makrovektor} 
+\subsection{Makrovektor}
+\label{sec:makrovektor} 
 
-% Der Makrovektor stellt analog zum Artikelvektor folgende \textit{technische Makroeigenschaften} in numerischer Form in einem gemeinsamen Vektor zusammengeführt dar: 
+Der Makrovektor stellt analog zum Artikelvektor folgende \textit{technische Makroeigenschaften} in numerischer Form in einem gemeinsamen Vektor zusammengeführt dar: 
 
-% \begin{itemize} 
-%     \item Anschlüsse, 
-%     \item Makrokategorien, 
-%     \item Familien, 
-%     \item Varianten, 
+\begin{itemize} 
+    \item Anschlüsse, 
+    \item Makrokategorien, 
+    \item Familien, 
+    \item Varianten, 
 
-% \end{itemize} 
+\end{itemize} 
 
-% Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} den Aufbau des Makrovektors, die numerischen Werte des Makrovektors werden auch hier zur leichteren Verständlichkeit exemplarisch als Text dargestellt:
+Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} den Aufbau des Makrovektors, die numerischen Werte des Makrovektors werden auch hier zur leichteren Verständlichkeit exemplarisch als Text dargestellt:
 
-% \begin{figure}[H] 
-%     \centering 
-%     \begin{tikzpicture}[ >=stealth, font=\small, 
-%         source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
-%         feature/.style={ draw, rounded corners, fill=green!10, minimum width=3cm, minimum height=0.8cm, align=center }, 
-%         vector/.style={ draw, rounded corners, fill=orange!15, minimum width=4cm, minimum height=3.5cm, align=left } ] 
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
+        feature/.style={ draw, rounded corners, fill=green!10, minimum width=3cm, minimum height=0.8cm, align=center }, 
+        vector/.style={ draw, rounded corners, fill=orange!15, minimum width=4cm, minimum height=3.5cm, align=left } ] 
         
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-%         \node[font=\bfseries\large] at (-1,5) {Erstellung des Makrovektors}; 
+        \node[font=\bfseries\large] at (-1,5) {Erstellung des Makrovektors}; 
         
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-%         \node[source] (macro) at (-7,0) {.ema-Makro\\Motor}; 
+        \node[source] (macro) at (-7,0) {.ema-Makro\\Motor}; 
         
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-%         \node[feature] (terminal) at (-1,2) {Anschlüsse\\U1, V1, W1}; 
-%         \node[feature] (category) at (-1,0.8) {Kategorie\\Motor}; 
-%         \node[feature] (family) at (-1,-0.4) {Familie\\F1}; 
-%         \node[feature] (variant) at (-1,-1.6) {Variante\\Mit Kühlung}; 
+        \node[feature] (terminal) at (-1,2) {Anschlüsse\\U1, V1, W1}; 
+        \node[feature] (category) at (-1,0.8) {Kategorie\\Motor}; 
+        \node[feature] (family) at (-1,-0.4) {Familie\\F1}; 
+        \node[feature] (variant) at (-1,-1.6) {Variante\\Mit Kühlung}; 
     
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Quelle -> Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Quelle -> Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-%         \draw[->] (macro.east) -- (terminal.west); \draw[->] (macro.east) -- (category.west); 
-%         \draw[->] (macro.east) -- (family.west); \draw[->] (macro.east) -- (variant.west); 
+        \draw[->] (macro.east) -- (terminal.west); \draw[->] (macro.east) -- (category.west); 
+        \draw[->] (macro.east) -- (family.west); \draw[->] (macro.east) -- (variant.west); 
         
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-%         \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, align=center ] (vector) at (5,0) { \textbf{Makrovektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ \text{Mit Kühlung} \end{array} \!\right]$ };
+        \node[ draw, rounded corners, fill=orange!15, text width=3.5cm, align=center ] (vector) at (5,0) { \textbf{Makrovektor\\} \vspace{2mm} $\left[\! \begin{array}{c} U1,V1,W1\\ Motor\\ F1\\ \text{Mit Kühlung} \end{array} \!\right]$ };
 
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%         \draw[->] (terminal.east) -- (vector.west); 
-%         \draw[->] (category.east) -- (vector.west); 
-%         \draw[->] (family.east) -- (vector.west); 
-%         \draw[->] (variant.east) -- (vector.west); 
-%         \end{tikzpicture} 
-%         \caption{Erstellung des Makrovektor. Aus dem .ema-Makro werden strukturelle Informationen extrahiert und in einen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.} 
-%         \label{fig:makrovektor} 
-%         \end{figure}
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verbindungen Features -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \draw[->] (terminal.east) -- (vector.west); 
+        \draw[->] (category.east) -- (vector.west); 
+        \draw[->] (family.east) -- (vector.west); 
+        \draw[->] (variant.east) -- (vector.west); 
+        \end{tikzpicture} 
+        \caption{Erstellung des Makrovektor. Aus dem .ema-Makro werden strukturelle Informationen extrahiert und in einen Vektor überführt, der die technische Struktur des Makros für das Empfehlungssystem beschreibt.} 
+        \label{fig:makrovektor} 
+        \end{figure}
 
-% \subsection{Lexikalvektor} 
+\subsection{Lexikalvektor} 
 
-% Nicht alle \textit{technischen Artikel- und Makroeigenschaften} liegen in Form von konkreten Werten wie zum Beispiel 24 V in den vorhandenen Artikel- und Makrodaten vor. Technische Hinweise in einem Artikel oder Makro liegen in Textform vor. 
-% Diese \textit{technischen Hinweise } stellen aufgrund der Textform eine andere Art von \textit{technischen Artikel- und Makroeigenschaften} dar als solche mit konkreten Werten \cite{baltrusaitis2019multimodal}.
-% Hierdurch können Informationen genutzt werden, die in Zahlen nicht abbildbar sind, wie zum Beispiel die wasserdichte Ausführung eines Motors.
-% Diese textbasierten \textit{technischen Artikel- und Makroeigenschaften} stellen somit eine weitere Information dar, welche Gemeinsamkeiten und Unterschiede zwischen Artikeln aufzeigen.
-% Die folgende Abbildung \ref{fig:lexikalische_information_empfehlung} zeigt, welchen Einfluss \textit{technischen Hinweise} auf die Unterscheidung von Artikeln haben: 
+ES WERDEN NUR HINWEISE AUS DEN ARTIKELDATEN VERWENDET, NICHT AUS DEN MAKRODATEN. !!!!!!!!!!
 
-% \begin{figure}[H] 
-%     \centering 
-%     \begin{tikzpicture}[ >=stealth, font=\small, 
-%         query/.style={ draw, rounded corners, fill=blue!15, text width=5.2cm, minimum height=3.8cm, align=left, inner sep=7pt }, 
-%         candidate/.style={ draw, rounded corners, fill=gray!10, text width=4.8cm, minimum height=4.3cm, align=left, inner sep=7pt }, 
-%         match/.style={ draw, rounded corners, fill=green!10, text width=4.4cm, minimum height=1.1cm, align=center, inner sep=5pt }, 
-%         mismatch/.style={ draw, rounded corners, fill=red!10, text width=4.4cm, minimum height=1.1cm, align=center, inner sep=5pt }, 
-%         decision/.style={ draw, rounded corners, fill=yellow!20, text width=5.8cm, minimum height=1.4cm, align=center, inner sep=7pt }, 
-%         result/.style={ draw, rounded corners, fill=green!15, text width=6cm, minimum height=1.5cm, align=center, inner sep=7pt } ] 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% \
-        
-%         node[font=\bfseries\large] at (0,11) {Einfluss textbasierter Informationen auf die Makroempfehlung}; 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Anfrage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[query] (request) at (0,8.2) { \centering \textbf{Anfrage}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ \textbf{Wasserdichte Ausführung} }; 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verzweigung der Kandidatensuche %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \coordinate (branch) at (0,5.7); \draw[->,thick] (request.south) -- (branch); 
-%         \node[ fill=white, inner sep=3pt, font=\bfseries ] at (0,6.1) {Vergleich mit vorhandenen Artikeln}; 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikel A und Artikel B %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[candidate] (articleA) at (-4.2,2.8) { \centering \textbf{Artikel A}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ \textbf{Wasserdichte Ausführung}\\[1mm] Makro: M1\_F1\_V1 }; 
-%         \node[candidate] (articleB) at (4.2,2.8) { \centering \textbf{Artikel B}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ keine Angabe\\[1mm] Makro: M1\_F1\_V2 }; 
-        
-%         % Klare, symmetrische Verbindungen \draw[->,thick] (branch) -| (articleA.north); \draw[->,thick] (branch) -| (articleB.north); 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Bewertung der Kandidaten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[match] (matchA) at (-4.2,-1.3) { \textbf{Hohe Übereinstimmung}\\ Anmerkung vorhanden }; 
-%         \node[mismatch] (matchB) at (4.2,-1.3) { \textbf{Geringere Übereinstimmung}\\ Anmerkung fehlt }; 
-        
-%         \draw[->,thick,green!50!black] (articleA.south) -- (matchA.north); \draw[->,thick,red!70!black] (articleB.south) -- (matchB.north); 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Gemeinsame Entscheidung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[decision] (decision) at (0,-4.3) { \textbf{Entscheidender \textit{technischer Hinweis} }\\[1mm] „Wasserdichte Ausführung“ }; \draw[->,thick,green!50!black] (matchA.south) |- (decision.west); \draw[->,thick,red!70!black] (matchB.south) |- (decision.east); 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Empfehlung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[result] (recommendation) at (0,-7) { \textbf{Empfehlung: Makro M1\_F1\_V1}\\[1mm] Artikel A besitzt die größere Gesamtübereinstimmung. }; 
-%         \draw[->,very thick,green!50!black] (decision.south) -- (recommendation.north); 
-%     \end{tikzpicture} 
-%     \caption{Einfluss einer textbasierten technischen Information auf die Makroempfehlung. Artikel A und B sind bis auf die Anmerkung „Wasserdichte Ausführung“ identisch. Dadurch wird Artikel A bevorzugt, sodass das zugeordnete Makro M1\_F1\_V1 empfohlen wird. } 
-%     \label{fig:lexikalische_information_empfehlung} 
-% \end{figure}
-% Aus den vorhandenen Artikel- und Makrodaten lassen sich folgende textbasierten \textit{technischen Artikel- und Makroeigenschaften} extrahieren: 
 
-% \begin{itemize} 
-%     \item Typbezeichnungen, 
-%     \item Produktserien, 
-%     \item technischen Beschreibungen. 
-% \end{itemize} 
 
-% Abbildung \ref{fig:lexikalvektor} stellt den Aufbau des Lexikalvektors für das Beispiel des Motors dar:
+Nicht alle \textit{technischen Artikel- und Makroeigenschaften} liegen in Form von konkreten Werten wie zum Beispiel 24 V in den vorhandenen Artikel- und Makrodaten vor. Technische Hinweise in einem Artikel oder Makro liegen in Textform vor. 
+Diese \textit{technischen Hinweise} stellen aufgrund der Textform eine andere Art von \textit{technischen Artikel- und Makroeigenschaften} dar als solche mit konkreten Werten \cite{baltrusaitis2019multimodal}.
+Hierdurch können Informationen genutzt werden, die in Zahlen nicht abbildbar sind, wie zum Beispiel die wasserdichte Ausführung eines Motors.
+Diese textbasierten \textit{technischen Artikel- und Makroeigenschaften} stellen somit eine weitere Information dar, welche Gemeinsamkeiten und Unterschiede zwischen Artikeln aufzeigen.
+Die folgende Abbildung \ref{fig:lexikalische_information_empfehlung} zeigt, welchen Einfluss \textit{technischen Hinweise} auf die Unterscheidung von Artikeln haben: 
 
-% \begin{figure}[H] 
-%     \centering 
-%     \begin{tikzpicture}[ >=stealth, font=\small, 
-%         source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
-%         feature/.style={ draw, rounded corners, fill=green!10, minimum width=3.0cm, minimum height=0.8cm, align=center } ] 
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        query/.style={ draw, rounded corners, fill=blue!15, text width=5.2cm, minimum height=3.8cm, align=left, inner sep=7pt }, 
+        candidate/.style={ draw, rounded corners, fill=gray!10, text width=4.8cm, minimum height=4.3cm, align=left, inner sep=7pt }, 
+        match/.style={ draw, rounded corners, fill=green!10, text width=4.4cm, minimum height=1.1cm, align=center, inner sep=5pt }, 
+        mismatch/.style={ draw, rounded corners, fill=red!10, text width=4.4cm, minimum height=1.1cm, align=center, inner sep=5pt }, 
+        decision/.style={ draw, rounded corners, fill=yellow!20, text width=5.8cm, minimum height=1.4cm, align=center, inner sep=7pt }, 
+        result/.style={ draw, rounded corners, fill=green!15, text width=6cm, minimum height=1.5cm, align=center, inner sep=7pt } ] 
         
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% \
         
-%         \node[font=\bfseries\large] at (-1,5) {Erstellung des Lexikalvektors}; 
+        node[font=\bfseries\large] at (0,11) {Einfluss textbasierter Informationen auf die Makroempfehlung}; 
         
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Anfrage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-%         \node[source] (article) at (-7,1.5) {XML-Artikel\\Motor}; 
-%         \node[source] (macro) at (-7,-1.5) {.ema-Makro\\Motor}; 
+        \node[query] (request) at (0,8.2) { \centering \textbf{Anfrage}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ \textbf{Wasserdichte Ausführung} }; 
         
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalische Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Verzweigung der Kandidatensuche %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-%         \node[feature] (type) at (-1,2.5) {Typbezeichnung\\DRN112M4}; 
-%         \node[feature] (series) at (-1,0.5) {Produktserie\\DRN}; 
-%         \node[feature] (description) at (-1,-1.5) {Beschreibung\\Wasserdichte Ausführung}; 
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle -> Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \coordinate (branch) at (0,5.7); \draw[->,thick] (request.south) -- (branch); 
+        \node[ fill=white, inner sep=3pt, font=\bfseries ] at (0,6.1) {Vergleich mit vorhandenen Artikeln}; 
         
-%         \draw[->] (article.east) -- (type.west); 
-%         \draw[->] (article.east) -- (series.west); 
-%         \draw[->] (macro.east) -- (description.west); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikel A und Artikel B %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[candidate] (articleA) at (-4.2,2.8) { \centering \textbf{Artikel A}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ \textbf{Wasserdichte Ausführung}\\[1mm] Makro: M1\_F1\_V1 }; 
+        \node[candidate] (articleB) at (4.2,2.8) { \centering \textbf{Artikel B}\\[2mm] \raggedright Artikel: Elektromotor\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\[1mm] \textbf{Anmerkung:}\\ keine Angabe\\[1mm] Makro: M1\_F1\_V2 }; 
         
-%         \node[ draw, rounded corners, fill=orange!15, text width=5cm, align=center ] (vector) at (5,0.5) { \textbf{Lexikalvektor\\} \vspace{2mm} $\left[ \begin{array}{c} \text{DRN112M4}\\ \text{DRN}\\ \text{Wasserdichte Ausführung} \end{array} \right]$ };
+        % Klare, symmetrische Verbindungen \draw[->,thick] (branch) -| (articleA.north); \draw[->,thick] (branch) -| (articleB.north); 
         
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Merkmale -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%         \draw[->] (type.east) -- (vector.west); 
-%         \draw[->] (series.east) -- (vector.west); 
-%         \draw[->] (description.east) -- (vector.west); 
-%         \end{tikzpicture} 
-%         \caption{Erstellung des Lexikalvektors. Textuelle technische Informationen aus Artikel- und Makrodaten werden extrahiert und in einem separaten Vektor zusammengeführt. 
-%         Der Lexikalvektor ergänzt die strukturierten Informationen des Artikel- und Makrovektors um technische Begriffe und Bezeichnungen.} 
-%         \label{fig:lexikalvektor} 
-%         \end{figure}
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Bewertung der Kandidaten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[match] (matchA) at (-4.2,-1.3) { \textbf{Hohe Übereinstimmung}\\ Anmerkung vorhanden }; 
+        \node[mismatch] (matchB) at (4.2,-1.3) { \textbf{Geringere Übereinstimmung}\\ Anmerkung fehlt }; 
+        
+        \draw[->,thick,green!50!black] (articleA.south) -- (matchA.north); \draw[->,thick,red!70!black] (articleB.south) -- (matchB.north); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Gemeinsame Entscheidung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[decision] (decision) at (0,-4.3) { \textbf{Entscheidender \textit{technischer Hinweis} }\\[1mm] „Wasserdichte Ausführung“ }; \draw[->,thick,green!50!black] (matchA.south) |- (decision.west); \draw[->,thick,red!70!black] (matchB.south) |- (decision.east); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Empfehlung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[result] (recommendation) at (0,-7) { \textbf{Empfehlung: Makro M1\_F1\_V1}\\[1mm] Artikel A besitzt die größere Gesamtübereinstimmung. }; 
+        \draw[->,very thick,green!50!black] (decision.south) -- (recommendation.north); 
+    \end{tikzpicture} 
+    \caption{Einfluss einer textbasierten technischen Information auf die Makroempfehlung. Artikel A und B sind bis auf die Anmerkung „Wasserdichte Ausführung“ identisch. Dadurch wird Artikel A bevorzugt, sodass das zugeordnete Makro M1\_F1\_V1 empfohlen wird. } 
+    \label{fig:lexikalische_information_empfehlung} 
+\end{figure}
+Aus den vorhandenen Artikel- und Makrodaten lassen sich folgende textbasierten \textit{technischen Artikel- und Makroeigenschaften} extrahieren: 
 
-% \subsection{Warum Drei Vektoren ?}
+\begin{itemize} 
+    \item Typbezeichnungen, 
+    \item Produktserien, 
+    \item technischen Beschreibungen. 
+\end{itemize} 
 
-% Die Aufteilung der \textit{technischen Artikel- und Makroeigenschaften} in drei separate Vektoren hat mehrere Vorteile:
+Abbildung \ref{fig:lexikalvektor} stellt den Aufbau des Lexikalvektors für das Beispiel des Motors dar:
 
-% \begin{itemize}
-%     \item Es wird verhindert, dass sich Werte aus den Artikel- und Makrodaten wie Spannung, Strom oder Makrobezeichnungen mit textuellen \textit{technischen Artikel- und Makroeigenschaften} aus den Hinweis- und Beschreibungsfeldern vermischen. Eine Spannung von 400 V besitzt eine andere Bedeutung als der Hinweis "Wasserdichte Ausführung". Durch die getrennte Speicherung bleiben diese unterschiedlichen Informationsarten für ein späteres Modell unterscheidbar. Dies folgt dem Konzept der multimodaler Datenrepräsentationen wie in \cite{baltrusaitis2019multimodal} und \cite{ebrahimi2024lanistr} beschrieben.
-%     \item Die Weiterentwicklung der einzelnen Informationsquellen ist unabhängig voneinander möglich. Neue technische Merkmale können beispielsweise dem Artikelvektor hinzugefügt werden, ohne die Struktur des Makrovektors oder des Lexikalvektors verändern zu müssen. 
-%     \item Zusätzlich können die einzelnen Vektoren später unterschiedlich verarbeitet werden. Strukturierte \textit{technische Eigenschaften} des Artikel- und Makrovektors können beispielsweise direkt als numerische Eingaben für Learning-to-Rank-Verfahren verwendet werden, während textuelle \textit{technische Eigenschaften} des Lexikalvektors zusätzlich durch Embedding-Modelle oder Sentence Transformer verarbeitet werden können (siehe Kapitel \ref{sec:modellansätze}).
-% \end{itemize}
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        source/.style={ draw, rounded corners, fill=blue!15, minimum width=4cm, minimum height=1.2cm, align=center }, 
+        feature/.style={ draw, rounded corners, fill=green!10, minimum width=3.0cm, minimum height=0.8cm, align=center } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (-1,5) {Erstellung des Lexikalvektors}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[source] (article) at (-7,1.5) {XML-Artikel\\Motor}; 
+        \node[source] (macro) at (-7,-1.5) {.ema-Makro\\Motor}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalische Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[feature] (type) at (-1,2.5) {Typbezeichnung\\DRN112M4}; 
+        \node[feature] (series) at (-1,0.5) {Produktserie\\DRN}; 
+        \node[feature] (description) at (-1,-1.5) {Beschreibung\\Wasserdichte Ausführung}; 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle -> Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \draw[->] (article.east) -- (type.west); 
+        \draw[->] (article.east) -- (series.west); 
+        \draw[->] (macro.east) -- (description.west); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ draw, rounded corners, fill=orange!15, text width=5cm, align=center ] (vector) at (5,0.5) { \textbf{Lexikalvektor\\} \vspace{2mm} $\left[ \begin{array}{c} \text{DRN112M4}\\ \text{DRN}\\ \text{Wasserdichte Ausführung} \end{array} \right]$ };
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Merkmale -> Vektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \draw[->] (type.east) -- (vector.west); 
+        \draw[->] (series.east) -- (vector.west); 
+        \draw[->] (description.east) -- (vector.west); 
+        \end{tikzpicture} 
+        \caption{Erstellung des Lexikalvektors. Textuelle technische Informationen aus Artikel- und Makrodaten werden extrahiert und in einem separaten Vektor zusammengeführt. 
+        Der Lexikalvektor ergänzt die strukturierten Informationen des Artikel- und Makrovektors um technische Begriffe und Bezeichnungen.} 
+        \label{fig:lexikalvektor} 
+        \end{figure}
+
+ \subsection{Warum Drei Vektoren ?}
+
+ Die Aufteilung der \textit{technischen Artikel- und Makroeigenschaften} in drei separate Vektoren hat mehrere Vorteile:
+
+ \begin{itemize}
+     \item Es wird verhindert, dass sich Werte aus den Artikel- und Makrodaten wie Spannung, Strom oder Makrobezeichnungen mit textuellen \textit{technischen Artikel- und Makroeigenschaften} aus den Hinweis- und Beschreibungsfeldern vermischen. Eine Spannung von 400 V besitzt eine andere Bedeutung als der Hinweis "Wasserdichte Ausführung". Durch die getrennte Speicherung bleiben diese unterschiedlichen Informationsarten für ein späteres Modell unterscheidbar. Dies folgt dem Konzept der multimodaler Datenrepräsentationen wie in \cite{baltrusaitis2019multimodal} und \cite{ebrahimi2024lanistr} beschrieben.
+     \item Die Weiterentwicklung der einzelnen Informationsquellen ist unabhängig voneinander möglich. Neue technische Merkmale können beispielsweise dem Artikelvektor hinzugefügt werden, ohne die Struktur des Makrovektors oder des Lexikalvektors verändern zu müssen. 
+     \item Zusätzlich können die einzelnen Vektoren später unterschiedlich verarbeitet werden. Strukturierte \textit{technische Eigenschaften} des Artikel- und Makrovektors können beispielsweise direkt als numerische Eingaben für Learning-to-Rank-Verfahren verwendet werden, während textuelle \textit{technische Eigenschaften} des Lexikalvektors zusätzlich durch Embedding-Modelle oder Sentence Transformer verarbeitet werden können (siehe Kapitel \ref{sec:modellansätze}).
+ \end{itemize}
  
 
 \section{Erstellung des Datensplits} 
@@ -2087,68 +2092,6 @@ Daraus ergibt sich folgendes Artefakt, dass an die nächsten Kapitel übergeben 
         \item 163 Testartikeln
     \end{itemize} 
 \end{itemize} 
-
-
-
-% \subsection{Architektur der Datenanalyse und Trainingsvorbereitung} 
-
-% \begin{figure}[H] 
-%     \centering 
-%     \begin{tikzpicture}[ >=stealth, font=\small, 
-%         source/.style={ draw, rounded corners, fill=blue!15, minimum width=3.8cm, minimum height=1cm, align=center }, 
-%         process/.style={ draw, rounded corners, fill=green!15, minimum width=4.5cm, minimum height=1.1cm, align=center }, 
-%         artifact/.style={ draw, rounded corners, fill=orange!15, minimum width=5.0cm, minimum height=1cm, align=center } ] 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenbasis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[source] (article) at (-5,10) {XML-Artikeldaten}; 
-%         \node[source] (macro) at (5,10) {EMA-Makrodaten}; 
-%         \node[source] (mapping) at (0,10) {Artikel-Makro\\Zuordnungen}; 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenaufbereitung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[process] (prepare) at (0,7.5) { \vspace{2mm} \textbf{Datenaufbereitung}\\ Bereinigung\\ Normalisierung\\ Klassifikation }; 
-%         \draw[->,thick] (article) -- (prepare); 
-%         \draw[->,thick] (macro) -- (prepare); 
-%         \draw[->,thick] (mapping) -- (prepare); 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Übergabeartefakt %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[artifact] (features) at (0,5.0) { \vspace{2mm} \textbf{Übergabeartefakt}\\ Geprüfte Datenbasis }; 
-%         \draw[->,thick] (prepare) -- (features); 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsformat %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[process] (vectorize) at (0,2.4) { \vspace{2mm} \textbf{Überführung in Trainingsformat}\\ Merkmalsextraktion\\ Vektorisierung }; 
-%         \draw[->,thick] (features) -- (vectorize); 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Vektoren %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[artifact] (articlevec) at (-6,-0.5) {Artikelvektor}; 
-%         \node[artifact] (macrovec) at (0,-0.5) {Makrovektor}; 
-%         \node[artifact] (lexicalvec) at (6,-0.5) {Lexikalvektor}; 
-%         \draw[->,thick] (vectorize) -- (articlevec); \draw[->,thick] (vectorize) -- (macrovec); 
-%         \draw[->,thick] (vectorize) -- (lexicalvec); 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datensplit %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[process] (split) at (0,-3) { \vspace{2mm} \textbf{Datensplit}\\ Trainingsmenge: 1.300 Artikel\\ Validierungsmenge: 96 Artikel\\ Testmenge: 163 }; 
-%         \draw[->,thick] (articlevec) |- (split); \draw[->,thick] (macrovec) -- (split); \draw[->,thick] (lexicalvec) |- (split); 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Split %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[artifact] (train) at (-6,-6) { \vspace{2mm} \textbf{Training}\\1.300 Artikel}; 
-%         \node[artifact] (val) at (0,-6) { \vspace{2mm} \textbf{Validierung}\\96 Artikel}; 
-%         \node[artifact] (test) at (6,-6) { \vspace{2mm} \textbf{Test}\\163 Artikel}; 
-%         \draw[->,thick] (split) -- (train); \draw[->,thick] (split) -- (val); 
-%         \draw[->,thick] (split) -- (test); 
-        
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artefakt A1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        
-%         \node[ draw, rounded corners, fill=yellow!20, minimum width=9cm, minimum height=1.6cm, align=center ] (a1) at (0,-8.5) { Artefakt A1\\ 1559 Artikel\\ 375 Makros}; 
-%         \draw[->,thick] (train.south) |- (a1.west); \draw[->,thick] (val.south) -- (a1.north); \draw[->,thick] (test.south) |- (a1.east); \end{tikzpicture} 
-%         \caption{ Architektur der Datenanalyse und Trainingsvorbereitung.} 
-%     \end{figure}
 
 
 \chapter{Auswahl des Modellansatzes} 
@@ -2351,356 +2294,196 @@ Aus der Analyse der verschiedenen Modellansätze ergibt sich folgendes Artefakt 
     \item ausgewähltes Modellverfahren: LambdaMART,  
 \end{itemize} 
 
-% \section{Large Language Models} 
-
-% Large Language Models besitzen die Fähigkeit, komplexe semantische Zusammenhänge zwischen Informationen zu erfassen und können durch Fine-Tuning an spezifische Aufgaben angepasst werden (siehe Kapitel \ref{sec:modellansätze}). 
-% Für die vorliegende Aufgabenstellung ergeben sich jedoch mehrere Herausforderungen. Large Language Models wurden primär für generative Aufgaben entwickelt. Das Ziel eines Large Language Models besteht in der Erzeugung von Texten, 
-% während die vorliegende Arbeit die Auswahl und Priorisierung bestehender Makros verfolgt. Hinzu kommt, dass moderne Large Language Models auf mehreren Millionen bis Milliarden Trainingsbeispielen vortrainiert werden. 
-% Die in Artefakt A1 vorhandenen 1.559 Artikel stellen im Vergleich dazu eine sehr kleine Datenbasis dar. Zwar könnte ein vortrainiertes Modell mittels Fine-Tuning angepasst werden, 
-% dennoch besteht die Gefahr, dass die kleine Datenbasis nicht ausreicht, um das vorhandene Modellwissen zuverlässig auf den Anwendungsfall dieser Arbeit zu übertragen. 
-% Darüber hinaus entstehen durch die Verwendung großer Sprachmodelle erhöhte Anforderungen an Hardwareressourcen, Speicherbedarf und spätere Betriebsumgebungen. 
-% Für die Empfehlung strukturierter technischer Daten erscheint dieser Aufwand im Verhältnis zum erwarteten Nutzen als hoch. 
-
-% Im Hinblick auf die definierten Bewertungskriterien ergibt sich folgende Einschätzung: 
-
-% \begin{itemize} 
-%     \item \textbf{Datenbedarf:} hoch, da für eine zuverlässige Anpassung große Mengen domänenspezifischer Trainingsdaten erforderlich sind. 
-%     \item \textbf{Trainingsaufwand:} hoch aufgrund erheblicher Rechen- und Speicheranforderungen. 
-%     \item \textbf{Interpretierbarkeit:} eher gering, da die Entscheidungsfindung innerhalb der Modellparameter nur eingeschränkt nachvollziehbar ist. 
-%     \item \textbf{Skalierbarkeit:} mittel, da neue Makros zwar ergänzt werden können, die Inferenzkosten jedoch vergleichsweise hoch ausfallen. 
-%     \item \textbf{Eignung für Makroempfehlungen:} mittel, da die eigentliche Sortierung einer Makro-Liste nicht dem ursprünglichen Anwendungsfall von Large Language Models entspricht. 
-% \end{itemize} 
-
-% Large Language Models besitzen daher grundsätzlich das Potenzial zur Verarbeitung technischer Informationen, erscheinen jedoch für die vorliegende Aufgabenstellung überdimensioniert.
-
-% \section{Sentence Transformer} 
-
-% Sentence Transformer wurden für die Berechnung semantischer Ähnlichkeiten entwickelt. Sie überführen Texte in Embeddings, die anschließend mittels Cosine Similarity miteinander verglichen werden können (siehe Kapitel \ref{sec:modellansätze} und \ref{sec:cosine_similarity}). 
-% Für die vorliegende Aufgabenstellung ergibt sich jedoch eine wesentliche Einschränkung. Sentence Transformer optimieren primär die semantische Ähnlichkeit zwischen Texten. 
-% Das eigentliche Ziel der Arbeit besteht jedoch nicht darin, die ähnlichsten Dokumente zu identifizieren, sondern die geeignetsten Makros innerhalb einer Liste zu priorisieren. 
-% Zusätzlich liegen die verfügbaren Daten in strukturierter XML-Form als \textit{technische Artikeleigenschaften} vor. Diese Informationen können zwar in Textform dargestellt werden, werden dadurch aber künstlich mit Sprache angereichert, 
-% wodurch die bereits vorhandene Datenstruktur nicht mehr direkt genutzt wird. Es entsteht somit ein zusätzlicher Verarbeitungsschritt, der keinen direkten Mehrwert für die eigentliche Aufgabe der Erstellung einer Makro-Liste bietet. 
-
-% Im Hinblick auf die definierten Bewertungskriterien ergibt sich folgende Einschätzung: 
-
-% \begin{itemize} 
-%     \item \textbf{Datenbedarf:} mittel, da vortrainierte Modelle genutzt werden können und nur begrenzte zusätzliche Trainingsdaten benötigt werden. 
-%     \item \textbf{Trainingsaufwand:} mittel, da Fine-Tuning und Embedding-Erzeugung ressourcenschonender als bei Large Language Models erfolgen. 
-%     \item \textbf{Interpretierbarkeit:} mittel, da Ähnlichkeiten zwischen Embeddings nachvollzogen werden können, die interne Repräsentation jedoch schwer interpretierbar bleibt. 
-%     \item \textbf{Skalierbarkeit:} hoch, da neue Artikel und Makros als Embeddings verarbeitet werden können. 
-%     \item \textbf{Eignung für Makroempfehlungen:} gut, da ähnliche technische Informationen identifiziert werden können, die eigentliche Sortierung der Makros in einer Liste jedoch nicht direkt erfolgt. 
-% \end{itemize} 
-
-% Sentence Transformer stellen deshalb eine leistungsfähige Lösung für semantische Ähnlichkeitssuchen dar, optimieren die eigentliche Aufgabe jedoch nur indirekt.
-
-
-% \section{Embedding-Modell mit Triplet Loss} 
-
-% Embedding-Modelle mit Triplet Loss verfolgen das Ziel, ähnliche Objekte innerhalb eines Embedding-Raums zusammenzuführen und unähnliche Objekte voneinander zu separieren (siehe Kapitel \ref{sec:modellansätze}). 
-% Für die vorliegende Arbeit könnten die vorhandenen Artikel-Makro-Zuordnungen genutzt werden, um positive und negative Trainingsbeispiele zu erzeugen. 
-% Das Modell würde lernen, Artikel näher an ihre zugeordneten Makros zu positionieren als an nicht passende Makros. 
-% Dadurch könnte ein gemeinsamer Embedding-Raum für Artikel und Makros aufgebaut werden. 
-% Die spätere Empfehlung würde über Distanzberechnungen mittels Cosine Similarity innerhalb dieses Embedding-Raums erfolgen (siehe Kapitel \ref{sec:cosine_similarity}). 
-% Die zentrale Schwäche dieses Ansatzes besteht jedoch darin, dass wiederum die Ähnlichkeit und nicht die Sortierung der Makro-Liste optimiert wird. 
-% Das Modell lernt zwar, passende Makros näher an einen Artikel heranzuführen, optimiert jedoch nicht deren Position innerhalb einer Empfehlungsliste. 
-
-% Im Hinblick auf die definierten Bewertungskriterien ergibt sich folgende Einschätzung: 
-
-% \begin{itemize} 
-%     \item \textbf{Datenbedarf:} mittel, da aus den vorhandenen Artikel-Makro-Zuordnungen Trainings-Triplets erzeugt werden können. 
-%     \item \textbf{Trainingsaufwand:} mittel, da das Training eines Embedding-Modells deutlich weniger Ressourcen erfordert als die Anpassung eines Large Language Models. 
-%     \item \textbf{Interpretierbarkeit:} mittel, da Abstände im Embedding-Raum analysierbar sind, die Bedeutung einzelner Dimensionen jedoch nicht direkt interpretierbar ist. 
-%     \item \textbf{Skalierbarkeit:} hoch, da neue Makros lediglich als zusätzliche Embeddings eingebracht werden müssen. 
-%     \item \textbf{Eignung für Makroempfehlungen:} gut, da passende Makros zuverlässig gefunden werden können, die Reihenfolge innerhalb der Makro Liste jedoch nicht direkt optimiert wird. 
-% \end{itemize} 
-
-% Der Ansatz ist daher insbesondere dafür interessant, viele mögliche Makros für einen Artikel zu finden, adressiert die eigentliche Optimierungsaufgabe eines Empfehlungssystems jedoch nur indirekt.
-
-% \section{Learning-to-Rank} 
-
-% Learning-to-Rank-Verfahren unterscheiden sich grundlegend von den zuvor betrachteten Ansätzen. Während Large Language Models, Sentence Transformer und Embedding-Modelle primär Textrepräsentationen oder Ähnlichkeiten lernen, 
-% optimieren Learning-to-Rank-Verfahren direkt die Qualität einer Rangliste (siehe Kapitel \ref{sec:modellansätze}). Diese Eigenschaft entspricht dem Ziel des vorliegenden Empfehlungssystems. 
-% Es sollen die relevantesten Makros möglichst weit oben innerhalb der Rangliste erscheinen. Ein weiterer Vorteil ergibt sich aus der verfügbaren Datenbasis. 
-% Die vorhandenen Artikel-Makro-Zuordnungen bilden bereits durch die Zuordnung selbst Relevanzinformationen ab. Aus jeder Zuordnung kann abgeleitet werden, welches Makro für einen Artikel relevant ist und welches nicht. 
-% Daraus lassen sich direkt Trainingsbeispiele für ein Learning-to-Rank-Verfahren erzeugen. 
-
-% Im Hinblick auf die definierten Bewertungskriterien ergibt sich folgende Einschätzung: 
-
-% \begin{itemize} 
-%     \item \textbf{Datenbedarf:} gering bis mittel, da bereits vorhandene Artikel-Makro-Zuordnungen als Information für die Relevanz genutzt werden können. 
-%     \item \textbf{Trainingsaufwand:} gering bis mittel, da Learning-to-Rank-Modelle typischerweise deutlich weniger Rechenleistung benötigen als große Sprachmodelle. 
-%     \item \textbf{Interpretierbarkeit:} hoch, da die Relevanzbewertung einzelner Merkmale nachvollzogen werden kann. 
-%     \item \textbf{Skalierbarkeit:} hoch, da auch große Mengen von Makros effizient bewertet und gerankt werden können. 
-%     \item \textbf{Eignung für Makroempfehlungen:} sehr gut, da die Optimierung einer Rangliste unmittelbar der Zielsetzung des Empfehlungssystems entspricht. 
-% \end{itemize} 
-
-% Dieser Ansatz stellt die vielversprechendste Methode dar, um eine nach Rang sortierte Makro-Liste zu erzeugen und somit den Anforderungen des Empfehlungssystems gerecht zu werden.
-
-% \section{Modellauswahl} 
-
-% Für die Auswahl des geeigneten Modellansatzes wurden die Ergebnisse der Eignungsanalyse in Tabelle \ref{tab:modellvergleich} dargestellt.
-% Die Analyse der betrachteten Modellansätze zeigt deutliche Unterschiede hinsichtlich ihrer Eignung für die vorliegende Aufgabenstellung. 
-% Large Language Models ermöglichen zwar die Verarbeitung komplexer technischer Informationen, erfordern jedoch vergleichsweise hohe Rechenressourcen und optimieren primär generative Aufgaben. 
-% Sentence Transformer und Embedding-Modelle mit Triplet Loss ermöglichen es, semantische und technische Ähnlichkeiten zwischen Artikeln und Makros zu erfassen. 
-% Beide Ansätze fokussieren sich jedoch auf die Abbildung ähnlicher Objekte innerhalb eines Embedding-Raums und optimieren die Qualität einer Makro-List nur indirekt. 
-% Learning-to-Rank verfolgt dagegen die Zielsetzung des Empfehlungssystems. 
-% Das Verfahren lernt nicht die Erzeugung von Texten oder die Berechnung von Ähnlichkeiten, sondern die optimale Reihenfolge relevanter Makros innerhalb einer Rangliste.
-
-% \begin{table}[H] 
-%     \centering 
-%     \caption{Bewertung der betrachteten Modellansätze} 
-%     \label{tab:modellvergleich} 
-%     \begin{tabular}{p{4.0cm}ccccc} 
-%         \hline 
-%         \textbf{Modellansatz} & 
-%         \textbf{Datenbedarf} & 
-%         \makecell{\textbf{Trainings-}\\\textbf{aufwand}} & 
-%         \makecell{\textbf{Interpretier-}\\\textbf{barkeit}} & 
-%         \makecell{\textbf{Skalier-}\\\textbf{barkeit}} & 
-%         \makecell{\textbf{Eignung für}\\\textbf{Makroempfehlungen}} \\
-%         \hline 
-%         Large Language Models & - - & - - & - & o & o \\ 
-%         Sentence Transformer & o & o & o & + & + \\ 
-%         Embedding-Modell mit Triplet Loss & o & o & o & + & + \\ 
-%         Learning-to-Rank & + & + & + & + & ++ \\ 
-%         \hline \end{tabular} 
-%         \vspace{0.2cm} 
-%         \begin{tabular}{ll} 
-%             \textbf{Legende:} & - - = ungeeignet \\ & - = gering geeignet \\ & o = mittel geeignet \\ & + = gut geeignet \\ & ++ = sehr gut geeignet \\ 
-%         \end{tabular} 
-%     \end{table}
-
-% Innerhalb der Learning-to-Rank-Verfahren wird hierfür LambdaRank als Modellansatz ausgewählt. 
-% Der Algorithmus berücksichtigt während des Trainings nicht nur die Relevanz einzelner Makros, sondern gewichtet Fehler zusätzlich nach ihrem Einfluss auf die Qualität der gesamten Rangliste. 
-% Fehlplatzierungen auf den oberen Rangpositionen erhalten dadurch eine höhere Bedeutung als Fehlplatzierungen auf hinteren Positionen. 
-% Dieses Verhalten entspricht der Anforderung aus der Vision eine in absteigender Reihenfolge sortierte Makro-Liste zu erzeugen.
-% Für einen Konstrukteur sind insbesondere die ersten vorgeschlagenen Makros relevant, da diese den Großteil der Such- und Auswahlentscheidung bestimmen. Ein Algorithmus, der gezielt die Qualität der oberen Rangpositionen optimiert, 
-% besitzt daher einen direkten praktischen Nutzen. LambdaRank wird daher als Modellansatz für die weitere Entwicklung des Empfehlungssystems ausgewählt. 
-
-% \section{Kapitelergebnis} 
-
-% Ziel dieses Kapitels war die Beantwortung der Forschungsfrage RQ2 hinsichtlich eines geeigneten Modellansatzes für die automatisierte Makroempfehlung. Hierzu wurden Large Language Models, Sentence Transformer, 
-% Embedding-Modelle mit Triplet Loss sowie Learning-to-Rank-Verfahren analysiert und hinsichtlich ihrer Eignung für die vorliegende Aufgabenstellung untersucht. Die Analyse zeigte, 
-% dass die betrachteten Sprach- und Embedding-Modelle primär die Ähnlichkeit technischer Informationen modellieren, die Qualität einer Makro-Rangliste jedoch nur indirekt optimieren. 
-% Learning-to-Rank-Verfahren verfolgen dagegen unmittelbar das Ziel der Ranglistenoptimierung und stimmen damit direkt mit den Anforderungen des Empfehlungssystems überein. Innerhalb dieser Verfahrensklasse wurde LambdaRank ausgewählt, 
-% da der Algorithmus die Bedeutung oberer Rangpositionen berücksichtigt und somit die spätere Empfehlungsqualität gezielt verbessert. 
-
-% Daraus ergibt sich folgendes Artefakt als Übergabe an die nächsten Kapitel: 
-
-% \begin{quote} 
-%     \textbf{Artefakt A2: Ausgewählter Modellansatz} 
-% \end{quote} \begin{itemize} 
-%     \item Modellklasse: Learning-to-Rank 
-%     \item Lernverfahren: Pairwise Ranking 
-%     \item Ausgewählter Algorithmus: LambdaRank 
-%     \item Eingabedaten: 
-%     \begin{itemize} 
-%         \item Artikelvektoren 
-%         \item Makrovektoren 
-%         \item Lexikalvektoren 
-%     \end{itemize} 
-%     \item Ausgabedaten: 
-%     \begin{itemize} 
-%         \item Rangliste relevanter Makros für einen gegebenen Artikel 
-%     \end{itemize} 
-% \end{itemize} 
 
 
 
 
-
-
-% Nach der Datenaufbereitung sowie der Qualitätsprüfung der Daten erfolgt die Aufteilung in Trainings-, Validierungs- und Testdaten \parencite{srcStep911,srcStep913,srcIdealDataset,srcStep921}.
-% Ziel ist es, eine klare Trennung zwischen Modelltraining, Hyperparameteroptimierung und Modellbewertung zu schaffen. 
-% Um reproduzierbare Ergebnisse mit einem erstellten Datensplit zu gewährleisten, wird ein fester Zufallsseed verwendet  \parencite{srcStep921}.
-
-% \begin{align}
-%     \text{RANDOM\_SEED} = 42
-% \end{align}
-
-% Dabei wird keine reine Zufallsaufteilung vorgenommen, sondern fachliche Zusammenhänge der Daten berücksichtigt, um eine konsistente Verteilung über die Anfragegruppen sicherzustellen. 
-% Darüber hinaus wird sichergestellt, dass jedes Ziel-Makro, welches im Validierungs- oder Testsplit vorkommt, mindestens einmal als Beispiel im Trainingssplit repräsentiert wird.
-% Ziel-Makros, die im Gesamtdatensatz nur einmal auftreten, werden vollständig dem Trainingssplit zugeordnet.
-% Dies verhindert, dass eng verwandte Beispiele in unterschiedlichen Datensplits landen und somit die Glaubwürdigkeit der Modellbewertung negativ beeinflussen. 
-
-% Abbildung \ref{fig:datensplit_schema} fasst diese Aufteilung schematisch zusammen.
-
-% \begin{figure}[H]
-%     \centering
-%     \begin{tikzpicture}[
-%         font=\small,
-%         bar/.style={draw=blue!60!black, thick, rounded corners=4pt, align=center, minimum height=2.2cm, inner sep=5pt},
-%         seed/.style={draw=gray!50!black, rounded corners=4pt, fill=gray!8, align=center, minimum height=1.1cm, inner sep=5pt}
-%     ]
-%         \node[bar, fill=blue!15, text width=5.6cm] (train) at (0,0) {\textbf{Trainings-Split (60\,\%)}\\[1pt]\footnotesize Modelltraining \& Feature-Extraktion};
-%         \node[bar, fill=orange!20, text width=3.6cm, right=3pt of train] (val) {\textbf{Validierungs-Split (20\,\%)}\\[1pt]\footnotesize Hyperparameter-\\optimierung};
-%         \node[bar, fill=green!18, text width=3.2cm, right=3pt of val] (test) {\textbf{Test-Split (20\,\%)}\\[1pt]\footnotesize Evaluation};
-
-%         \node[seed, below=0.3cm of train.south west, anchor=north west, text width=13.3cm] (seedbox) {\footnotesize \textbf{Reproduzierbarkeit:} \texttt{RANDOM\_SEED = 42} $\mid$ Fingerprint-gruppierter Split (Leakage-Schutz)};
-%     \end{tikzpicture}
-%     \caption{Schematische Aufteilung der Trainings-, Validierungs- und Testdatenbasis.}
-%     \label{fig:datensplit_schema}
-% \end{figure}
-
-% Für den in dieser Arbeit verwendeten Referenzlauf ergibt sich folgende Aufteilung: 
-
-% \begin{itemize} 
-% \item Training: 984 Artikel 
-% \item Validation: 322 Artikel 
-% \item Test: 253 Artikel 
-% \end{itemize}
-
-
-% \section{Generierung von Makrokandidatenprofilen}
-
-% Im nächsten Schritt wird für jedes bekannte EPLAN-Fenstermakro \parencite{EPLAN-Makros} ein Makrokandidatenprofil erstellt. Ein Makrokandidat ist ein mögliches Ziel-Makro, welches durch das Rankingmodell als Eignung für einen EPLAN-Artikel \parencite{EPLANArtikelverwaltung} bewertet wird. Dabei wird nicht die EMA-Datei selbst an das Modell übergeben, sondern das für dieses Ziel-Makro erzeugte Kandidatenprofil. Ein Kandidatenprofil ist eine aggregierte Repräsentation eines Makrokandidaten aus technischen Merkmalen. Dafür werden die Struktur-, Artikel- und Textmerkmale aller zugeordneten Trainingsartikel zusammengeführt und um Häufigkeiten, Wertebereiche, Support und Fingerprint-Anzahl ergänzt. Für Merkmals-Kategorien werden die häufigsten Ausprägungen gespeichert. Für numerische Merkmale werden statistische Werte wie Mittelwert, Median, Minimum, Maximum und Häufigkeiten berechnet. 
-% Die Berechnung dieser Kandidatenprofile erfolgt innerhalb der Trainingspipeline \parencite{srcStep931}.
-
-% Im aktuellen Datensatz entstehen dadurch 375 Makrokandidatenprofile. Die Erstellung der Profile erfolgt ausschließlich auf der Grundlage des Trainingssplits. 
-% Informationen aus den Validierungs- oder Testdaten werden nicht zur Profilerstellung verwendet. Für jedes Profil werden unter anderem das Ziel-Makro, die Makrofamilie, Supportinformationen, technische Vektorrepräsentationen, lexikalische Merkmale, Strukturmerkmale sowie statistische Eigenschaften gespeichert. 
-% Die Profilbreite ist abhängig von der untersuchten Konfiguration. Für den später als Referenz verwendeten A08-Modellstand beträgt die Profilbreite 16 Artikel pro Kandidatenprofil.
-
-% \section{Transformation in ein Rankingproblem}
-
-% Im Folgenden wird der Begriff Eingangsartikel bevorzugt verwendet. Er bezeichnet den EPLAN-Artikel, für den passende EPLAN-Makros gerankt werden sollen. Die Begriffe Anfrage und Query werden synonym verwendet.
 
-% Die Zuordnung der EPLAN-Fenstermakros \parencite{EPLAN-Makros} wird als Ranking-Aufgabe betrachtet. Für jede Anfrage werden alle EPLAN-Fenstermakro-Kandidaten \parencite{EPLAN-Makros} betrachtet, deren Profile ausschließlich aus dem Trainingssplit abgeleitet wurden. 
-% Eine vorgeschaltete Reduktion auf eine Top-$N$-Kandidatenmenge findet im aktuellen System nicht statt, sodass alle Trainingsartikel für die Paar-Bildung verwendet werden.
-
-% \begin{align}
-%     C_q = \{c_1,c_2,\dots,c_n\}
-% \end{align}
-
-% Dabei bezeichnet $q$ die Anfrage bzw. den Eingangsartikel, $C_q$ die Menge aller Makrokandidaten und $c_i$ einen einzelnen Makrokandidaten. Für jede Anfrage wird anschließend jeweils ein Paar $(q,c_i)$ gebildet. Dadurch entsteht eine Rankingstruktur, in der die Makrokandidaten gegeneinander bewertet werden.
-
-% \section{Berechnung der Pairwise-Merkmale}
 
-% Ein Feature ist ein für das Modell auswertbares Merkmal, beispielsweise die Übereinstimmung einer Anschlussart oder die Differenz zweier Anschlusszahlen. Ein Feature-Vektor ordnet jedem Feature einen numerischen Wert zu und dient damit als Eingabe für das Rankingmodell.
-% Für jedes Paar von Anfrage und EPLAN-Fenstermakrokandidat \parencite{EPLAN-Makros} wird ein Feature-Vektor erzeugt. Die dabei berechneten Pairwise-Merkmale entstehen aus dem Vergleich eines Eingangsartikels mit dem Kandidatenprofil. Beispiele hierfür sind exakte Übereinstimmungen, Jaccard-Ähnlichkeiten, Zahlenabweichungen und übereinstimmende Struktur-Hashes. Das Modell bewertet Artikel und Makros nicht isoliert, sondern anhand von Artikel-Kandidaten-Paaren.
-% Die Merkmale der Anfrage-Kandidat-Paare lassen sich in mehrere Gruppen unterteilen: mengenbasierte Ähnlichkeitsmerkmale, numerische Vergleichsmerkmale, Function-Template- und Strukturmerkmale, Hash- und Identitätsmerkmale, lexikalische Merkmale, Support- und Profilmerkmale, Varianten- und Baugruppenmerkmale sowie technische Artikelmerkmale. Die verwendeten Struktur-, Sequenz- und Rollenhashes sind Fingerprints von außgewählten Function-Template-Strukturen. Der Sequenz-Hash berücksichtigt die geordnete Folge aus Kategorie, Gruppe und ID. Detailliertere Hashes beziehen zusätzlich Anschlussbezeichnungen, Nummern oder Indizes mit ein. Der Rollenhash bildet die Reihenfolge funktionaler Anschlussrollen ab. Aus technischer Sicht handelt es sich um auf zwölf Zeichen verkürzte MD5-Werte.
-
-% Zur Bewertung von Merkmalsüberschneidungen wird unter anderem die Jaccard-Ähnlichkeit verwendet:
-
-% \begin{align}
-%     J(A,B) = \frac{|A \cap B|} {|A \cup B|}
-% \end{align}
-
-% Dabei bezeichnet $A$ die Merkmalsmenge der Anfrage und $B$ die Merkmalsmenge des Makrokandidaten. Der Wertebereich liegt zwischen 0 und 1.
-
-% Um numerische Eigenschaften zu bewerten, werden Differenzmerkmale berechnet. Die absolute Differenz ist definiert als:
-
-% \begin{align}
-%     d(x,y) = |x-y|
-% \end{align}
-
-% Die relative Differenz wird berechnet durch:
-
-% \begin{align}
-%     d_{rel}(x,y) = \frac{|x-y|} {\max(|x|,|y|,\varepsilon)}
-% \end{align}
-
-% Dabei bezeichnet $x$ den Eigenschaftswert der Anfrage, $y$ den Eigenschaftswert des Kandidaten und $\varepsilon$ eine kleine Konstante zur Vermeidung von Division durch Null. Durch diese Metriken können technische Kennwerte aus unterschiedlichen Größenordnungen verglichen werden.
-
-% Die weiteren Pairwise-Merkmale sind in Tabelle \ref{tab:pairwise_merkmale} zusammengefasst. 
-% Die Berechnung der Pairwise-Merkmale erfolgt innerhalb der entwickelten Trainingspipeline \parencite{srcStep931}.
-
-% \begin{table}[H] 
-%     \centering 
-%     \caption{Gruppen der Pairwise-Merkmale} 
-%     \label{tab:pairwise_merkmale} 
-%     \begin{tabularx}{\textwidth}{p{4cm}X} 
-%         \toprule 
-%         \textbf{Merkmalsgruppe} & \textbf{Funktion} \\ 
-%         \midrule 
-%         Mengen- und Ähnlichkeitsmerkmale & Jaccard-Ähnlichkeiten, Overlap-Raten und Mengenüberdeckungen technischer Merkmale \\ 
-%         Numerische Vergleichsmerkmale & Absolute und relative Differenzen technischer Kennwerte sowie Verhältnismerkmale \\ 
-%         Function-Template- und Strukturmerkmale & Function-Templates, I/O-Schemata, Terminalfunktionen, Sequenzen und technische Strukturmerkmale. Ein I/O-Schema fasst die Ein- und Ausgänge eines EPLAN-Artikels oder EPLAN-Makros zusammen; I/O steht für \textit{Input/Output}. Zum Beispiel beschreibt ein Schema wie \texttt{DI\_8\_DO\_4\_AI\_2} acht digitale Eingänge, vier digitale Ausgänge und zwei analoge Eingänge. \\
-%         Hash- und Identitätsmerkmale & Struktur-, Sequenz- und Rollenhashes zur Identifikation technischer Zusammenhänge \\ 
-%         Lexikalische Merkmale & Extrahierte Texteinheiten aus Bezeichnungen und Beschreibungen der EPLAN-Artikel \parencite{EPLANArtikelverwaltung} und EPLAN-Makros \parencite{EPLAN-Makros}. Texte werden dabei bereinigt, vereinheitlicht und anhand definierter Trennzeichen zerlegt. Einzelne Tokens können somit Wörter, technische Kürzel oder Produktcodes sein. \\
-%         Support- und Profilmerkmale & Supportwerte, Singleton-Kennzeichen, Profilbreiten und statistische Eigenschaften der Kandidatenprofile \\ 
-%         Varianten- und Baugruppenmerkmale & Variantenkennungen, Baugruppeninformationen und EMA-Dateibezogene Strukturmerkmale \\ 
-%         Technische Artikelmerkmale & Spannungs-, Strom-, Leistungs-, Kommunikations- und Anschlussmerkmale \\ 
-%         \bottomrule 
-%     \end{tabularx} 
-% \end{table}
-
-% Die aktuelle Featurematrix umfasst für die Referenzkonfiguration A08 insgesamt 2.381 Merkmale. Dabei werden für jede Anfrage sämtliche 375 Kandidatenprofile bewertet. 
-% Die konkreten Größen der Trainings-, Validierungs- und Testmatrizen ergeben sich erst nach der Datensplit-Erzeugung und werden in Kapitel \ref{chap:datensplit_und_training} beschrieben.
-
-% \section{Erzeugung der Relevanzlabels}
-
-% Für jedes Anfrage-Kandidaten-Paar wird ein Relevanzlabel erzeugt, das angibt, ob der Kandidat für die jeweilige Anfrage relevant ist oder nicht \parencite{srcStep931}.
-% Im verwendeten Trainingsmodus existiert pro Anfrage genau ein korrektes EPLAN-Fenstermakro \parencite{EPLAN-Makros}. Die Funktion für die Relevanz lautet:
-
-% \begin{align}
-%     y(q,c) = \begin{cases} 1, & \text{wenn } c \text{ das Ziel-Makro von } q \text{ ist} \\ 0, & \text{sonst} \end{cases}
-% \end{align}
-
-% Dabei bezeichnet $y(q,c)$ das Relevanzlabel, $q$ die Anfrage und $c$ den Makrokandidaten. Jede Anfragegruppe enthält genau einen positiven Kandidaten und mehrere negative Kandidaten. 
-% Die negativen Kandidaten sind dazu da, das Modell darauf zu trainieren, irrelevante Makros korrekt zu erkennen und von relevanten zu unterscheiden. 
-% Dadurch werden nicht einzelne Objekte klassifiziert, sondern die korrekte Sortierung der Menge an Kandidaten \parencite{srcStep931}.
-
-% Die Referenzkonfiguration A08 verwendet diese binäre Labeldefinition. Zusätzlich wurde im Rahmen von Konfigurationsexperimenten eine hierarchische Labeldefinition untersucht. 
-% Dabei werden Makros derselben Familie sowie Makros mit identischem Familienpräfix durch eine abgestufte Relevanz berücksichtigt. 
-% Diese Variante wird in der späteren Gegenüberstellung der Konfigurationsexperimente als separate Konfiguration betrachtet.
-
-% \section{Erstellung des Trainingsformats}
-
-% Die berechneten Merkmale werden als Matrix gespeichert. Jede Zeile steht für ein Anfrage-Kandidat-Paar \parencite{srcStep931}:
-
-% \begin{align}
-%     (q,c_i) \rightarrow [x_1,x_2,\dots,x_n]
-% \end{align}
-
-% Dabei bezeichnet $q$ die Anfrage, $c_i$ den Makrokandidaten und $x_1,\dots,x_n$ die berechneten Features. Zusätzlich wird die Zuordnung jeder Anfrage zu einer Gruppe von Kandidaten gespeichert:
-
-% \begin{align}
-%     G_q = \{(q,c_1),(q,c_2),\dots,(q,c_n)\}
-% \end{align}
-
-% Dabei beschreibt $G_q$ die Menge aller Anfrage-Kandidat-Paare für die Anfrage $q$. Die Informationen aus den Gruppen werden zusammen mit den Featurevektoren an den LambdaRANK-Algorithmus übergeben \parencite{srcStep931}. 
-% Dadurch können die Kandidaten innerhalb derselben Anfrage gegeneinander bewertet werden und somit die optimale Rangfolge erlernt werden.
-
-% \section{Zielinformations-Leakage} 
-
-% Beim Aufbau der Trainingsdaten muss sichergestellt werden, dass nur solche Informationen verwendet werden, die auch während einer realen Anfrage verfügbar wären. 
-% Die Query-Darstellung wird deshalb auf Merkmale beschränkt, die aus einem eingehenden EPLAN-Artikel oder einem technischen Datenblatt abgeleitet werden können. 
-% Direkte Zielinformationen wie \texttt{target\_macro}, \texttt{target\_family} sowie weitere makrobezogene Zielfelder werden ausgeschlossen. 
-% Makrostrukturinformationen werden ausschließlich innerhalb der Kandidatenprofile gespeichert. Zusätzlich werden Kandidatenprofile ausschließlich aus Artikeln des Trainingssplits erstellt.  
-% Validierungs- und Testdaten fließen nicht in die Profilerstellung ein. Diese Maßnahmen bilden die Grundlage für die Leakage-Sicherheit der Trainingsdaten. 
-% Diese Schutzmechanismen werden im Rahmen der Evaluationssuite in Kapitel \ref{chap:evaluierungskonzept} beschrieben.
-
-
-% Für eine bessere Veranschaulichung des Datenflusses der Datenaufbereitung wird in Abbildung \ref{fig:trainingsformat_pipeline} eine schematische Darstellung gezeigt.
-
-% \begin{figure}[H]
-%     \centering
-%     \begin{tikzpicture}[
-%         label distance=0.2cm,
-%         >=stealth,
-%         font=\normalsize,
-%         pipelinebox/.style={draw, rounded corners, fill=blue!8, text width=3.05cm, minimum height=1.45cm, inner ysep=0pt, align=center},
-%         check/.style={draw, rounded corners, fill=orange!15, text width=3.05cm, minimum height=1.45cm, inner ysep=0pt, align=center},
-%         flow/.style={->, thick, blue!70!black}
-%     ]
-%         \node[pipelinebox] (raw) at (0, 0) {\textbf{1} Ausgangsdaten};
-%         \node[pipelinebox] (norm) at (4.0, 0) {\textbf{2} Normalisierung};
-%         \node[pipelinebox] (profiles) at (8.0, 0) {\textbf{3} Makro-\\kandidatenprofile};
-%         \node[pipelinebox] (pairs) at (12.0, 0) {\textbf{4} Anfrage-Kandidat-\\Paare};
-
-%         \node[pipelinebox] (features) at (12.0, -1.9) {\textbf{5} Pairwise-\\Merkmale};
-%         \node[pipelinebox] (labels) at (8.0, -1.9) {\textbf{6} Relevanzlabels};
-%         \node[pipelinebox] (format) at (4.0, -1.9) {\textbf{7} Trainingsformat};
-%         \node[check] (leakage) at (0, -1.9) {\textbf{8} Leakage-Schutz \& Split-Prüfung};
-
-%         \draw[flow] (raw) -- (norm);
-%         \draw[flow] (norm) -- (profiles);
-%         \draw[flow] (profiles) -- (pairs);
-%         \draw[flow] (pairs) -- (features);
-%         \draw[flow] (features) -- (labels);
-%         \draw[flow] (labels) -- (format);
-%         \draw[flow] (format) -- (leakage);
-%     \end{tikzpicture}
-%     \caption{Verarbeitungsschritte von den Ausgangsdaten bis zum Trainingsformat.}
-%     \label{fig:trainingsformat_pipeline}
-% \end{figure}
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Konzeption des Empfehlungssystems} 
+\label{chap:konzeption_des_empfehlungssystems} 
+
+In Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} wurde mit Artefakt A1 eine Trainings- und Evaluationsbasis aus Artikeln, Makros sowie Artikel-Makro-Zuordnungen erstellt. 
+Anschließend wurde in Kapitel \ref{chap:auswahl_des_modellansatzes} mit LambdaMART ein geeigneter Modellansatz für die Generierung einer nach Relevanz sortierten Makro-Liste ausgewählt. 
+Für die Entwicklung des Empfehlungssystems müssen die in Artefakt A1 bereitgestellten Datenstrukturen und der in Artefakt A2 ausgewählte Modellansatz in eine gemeinsame Architektur überführt werden. 
+Diese Architektur legt fest, wie \textit{technischen Artikeleigenschaften} verarbeitet, Kandidaten für die Empfehlung von Makros gebildet (Makrokandidaten), Merkmale für den Vergleich zwischen Anfrage und Kandidat erzeugt (Vergleichsmerkmale) und 
+durch das Learning-to-Rank-Modell bewertet werden. Das Ziel dieses Kapitels besteht daher in der Entwicklung einer fachlichen und technischen Architektur des Empfehlungssystems. Das Ergebnis bildet Artefakt A3. 
+
+\section{Gesamtkonzept} 
+
+Die Architektur für das Empfehlungssystems lässt sich aus der Vision in Abschnitt \ref{sec:vision} ableiten. Ziel ist es, 
+für einen Artikel aus einer Anfrage an das Empfehlungssystem geeignete Makros zu identifizieren und diese entsprechend ihrer Relevanz in Form einer Makro-Liste auszugeben. 
+Die hierfür erforderlichen Informationen stammen aus den in Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} aufbereiteten Artikeln und Makros. 
+Die eigentliche Bewertung erfolgt anschließend durch das in Kapitel \ref{chap:auswahl_des_modellansatzes} ausgewählte LambdaMART-Modell. 
+
+Die Architektur gliedert sich hierzu in die folgenden Bereiche: 
+
+\begin{enumerate} 
+    \item Extraktion \textit{technischen Artikeleigenschaften} aus dem Artikel der Anfrage, 
+    \item Bildung eines Anfragekandidaten aus den extrahierten \textit{technischen Artikeleigenschaften}, 
+    \item Erzeugung von Makrokandidaten, 
+    \item Berechnung von Vergleichsmerkmale, 
+    \item Bewertung der Makrokandidaten mittels LambdaMART, 
+    \item Sortierung der Makrokandidaten nach ihrer Relevanz. 
+\end{enumerate} 
+
+Dadurch wird die eigentliche Aufgabe des Rankings von der Datenaufbereitung und den zugrunde liegenden Datenquellen getrennt. 
+Die Architektur ermöglicht somit eine unabhängige Weiterentwicklung der einzelnen Komponenten innerhalb des in Kapitel \ref{chap:vorgehensweise} beschriebenen ADR-Prozesses. 
+
+\subsection{Datenfluss} 
+
+Der Datenfluss beginnt mit einem Artikel, für den ein geeignetes Makro empfohlen werden soll. Aus den \textit{technischen Artikeleigenschaften} werden zunächst die für die Empfehlung relevanten Informationen extrahiert. 
+Anschließend wird aus diesen Informationen ein Anfragekandidat gebildet. Dieser Anfragekandidat wird danach mit allen verfügbaren Makrokandidaten verglichen. 
+Hierzu werden Vergleichsmerkmale erzeugt, welche die Gemeinsamkeiten und Unterschiede zwischen Anfragekandidaten und Makrokandidat beschreiben. 
+Die Vergleichsmerkmale werden anschließend durch das LambdaMART-Modell bewertet. Für jeden Makrokandidaten berechnet das Modell einen numerischen Wert, den sogenannten Relevanzscore. 
+Die Makrokandidaten werden entsprechend dieses Relevanzscores sortiert, wodurch die finale Empfehlung für ein Makro entsteht. 
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, node/.style={ draw, rounded corners, minimum width=4cm, minimum height=0.9cm, align=center } ] 
+        \node[node,fill=blue!10] (article) at (0,0) {Artikel}; 
+        \node[node,fill=green!10] (features) at (0,-1.8) {Extraktion \textit{technischen Artikeleigenschaften}};
+        \node[node,fill=green!10] (candidates) at (0,-3.6) {Bildung von Anfrage- und Makrokandidaten}; 
+        \node[node,fill=orange!10] (ranking) at (0,-5.4) {Bewertung mittels LambdaMART}; 
+        \node[node,fill=yellow!15] (result) at (0,-7.2) {Empfehlung von Makrokandidaten auf Basis des Relevanzscores};
+        \draw[->] (article) -- (features); \draw[->] (features) -- (candidates); 
+        \draw[->] (candidates) -- (ranking); 
+        \draw[->] (ranking) -- (result); 
+    \end{tikzpicture}
+    \caption{Datenfluss des Empfehlungssystems} 
+    \label{fig:datenfluss_empfehlungssystem} 
+\end{figure} 
+
+\subsection{Verarbeitungsstufen des Empfehlungssystems} 
+
+Die fachliche Architektur wird in einer mehrstufigen Kette aus Prozessschritten umgesetzt. 
+Ein Prozessschritt entspricht einer abgeschlossenen Verarbeitungsstufe, die eine spezifische Aufgabe in der Prozesskette übernimmt und ein Ergebnis an die nachfolgende Verarbeitungsstufe übergibt.
+Im Folgenden werden die Prozessschritte des Empfehlungssystems in der Tabelle \ref{tab:verarbeitungsstufen} unterschieden:
+
+\begin{table}[H] 
+    \centering 
+    \caption{Verarbeitungsstufen des Empfehlungssystems} 
+    \label{tab:verarbeitungsstufen} 
+    \renewcommand{\arraystretch}{1.2} 
+    \begin{tabular}{p{1.6cm}p{3.6cm}p{7.0cm}} 
+        \hline \textbf{Prozessschritt} & \textbf{Komponente} & \textbf{Aufgabe} \\ 
+        \hline 
+        1 & Datenaufbereitung & Extraktion technischer Eigenschaften aus Artikel- und Makrodaten sowie Erzeugung einheitlicher Datenstrukturen \\ 
+        2 & Datenbereinigung & Entfernung nicht nutzbarer, redundanter oder unvollständiger Informationen \\ 
+        3 & Datensplit & Aufteilung der Daten in Trainings-, Validierungs- und Testdaten \\ 
+        4 & Trainingsvorbereitung und Training & Bildung von Makrokandidaten, Erzeugung der Vergleichsmerkmale und Training des LambdaMART-Modells \\ 
+        5 & Analyse & Analyse des Modellverhaltens, der Vergleichsmerkmale und der Ranglistenergebnisse \\ 
+        6 & Evaluation & Bewertung der Empfehlungsqualität mittels Recall@k, MRR und nDCG \\ 
+        \hline 
+    \end{tabular} 
+\end{table} 
+
+Jede Komponente besitzt eine klar abgegrenzte Aufgabe und übergibt ihre Ergebnisse an die nachfolgende Verarbeitungsstufe. Dadurch wird eine Architektur geschaffen, 
+welche die iterative Verbesserung der einzelnen Komponenten unterstützt. 
+
+\subsection{Datenmodell} 
+
+Für die Verarbeitung der Daten im Empfehlungssystem werden mehrere Datenobjekte verwendet, welche unterschiedliche Aspekte des Empfehlungsprozesses beschreiben. 
+Die Datenobjekte bilden die fachliche Grundlage für die spätere Erzeugung von Vergleichsmerkmalen und die Bewertung durch das Learning-to-Rank-Modell. 
+
+\subsubsection{Einordnung der Vektoren} 
+
+Die in Artefakt A1 erzeugten Artikel-, Makro- und Lexikalvektoren werden nicht direkt als Eingabe für LambdaMART verwendet. Stattdessen dienen sie der Beschreibung von Artikeln und Makros sowie der Bildung von Profilen, 
+aus denen später die Vergleichsmerkmale für das Ranking abgeleitet werden. Der Aufbau dieser Vektoren wurde in Kapitel \ref{sec:überführung_in_ein_Trainingsformat} erläutert. 
+Gemeinsam bilden die Vektoren die Grundlage für die Erzeugung der im Empfehlungssystem verwendeten Profile. Dabei müssen die einzelnen Bestandteile des Datensplits getrennt betrachtet werden. 
+
+\textbf{Trainingsdaten} 
+Aus den Artikel-, Makro- und Lexikalvektoren der Trainingsdaten werden die Makroprofile aufgebaut. Hierzu werden alle einem Makro zugeordneten Artikel zusammengeführt. 
+Der Artikelvektor liefert die \textit{technischen Artikeleigenschaften}  der zugeordneten Artikel, der Lexikalvektor die \textit{technischen Hinweis} und 
+vorhandenen der Makrovektor die \textit{technischen Makroeigenschaften} des Makros. Dadurch entsteht für jedes Makro ein Makroprofil, welches die Eigenschaften dieses Makros durch die vorhandenen Informationen aus der
+EPLAN-Datenbank beschreibt. Die Makroprofile bilden den Suchraum des Empfehlungssystems und werden ausschließlich aus dem Trainingssplit erzeugt. Dadurch wird sichergestellt, 
+dass keine Informationen aus den Validierungs- oder Testdaten in die Makroprofile einfließen. Aus den Makroprofilen und den zugehörigen Anfrageprofilen für das Training (Trainigsanfragen) werden anschließend Vergleichsmerkmale berechnet. 
+Diese Vergleichsmerkmale bilden gemeinsam mit den bekannten Artikel-Makro-Zuordnungen die Grundlage für das Training des LambdaMART-Modells. 
+
+\textbf{Validierungsdaten} 
+Für die Validierungsdaten wird aus jedem Vektor ein Anfrageprofil erzeugt (Validierungsanfrage). Hierbei werden diejenigen Informationen entfernt, 
+welche die Identität oder Zuordnung eines Makros zu einem Artikel offenlegen würden. 
+Anschlüsse, Makrokategorien sowie Varianten bleiben hingegen erhalten (siehe Kapitel \ref{sec:makrovektor}). Anschließend wird die Validierungsanfrage mit allen aus dem Trainingssplit erzeugten Makroprofilen verglichen. 
+Aus diesem Vergleich entstehen dieselben Vergleichsmerkmale wie im Trainingsprozess. Diese werden durch das trainierte LambdaMART-Modell bewertet und zu einer Rangliste zusammengeführt. 
+Die bekannte Makrozuordnung der Validierungsanfrage wird dabei nicht zum Lernen verwendet, sondern ausschließlich zur Bewertung verschiedener Modell- und Parametervarianten während der Entwicklung herangezogen. 
+
+\textbf{Testdaten} 
+Die Testdaten werden identisch zu den Validierungsdaten verarbeitet. Aus den Artikel-, Makro- und Lexikalvektoren werden zunächst ein Anfrageprofil erzeugt (Testanfragen), 
+Dabei werden diejenigen Informationen entfernt, welche die Identität oder Zuordnung eines Makros zu einem Artikel offenlegen würden.
+Anschließend erfolgt der Vergleich mit den aus dem Trainingssplit erzeugten Makroprofilen. 
+Die daraus resultierenden Vergleichsmerkmale werden durch das trainierte LambdaMART-Modell bewertet und zu einer Rangliste verarbeitet. 
+Die bekannte Makrozuordnung wird hierbei ausschließlich zur abschließenden Berechnung der Evaluationsmetriken verwendet (siehe Kapitel \ref{sec:evaluationsmetriken}). 
+Im Gegensatz zu den Validierungsdaten dürfen die Ergebnisse der Testdaten nicht mehr zur Anpassung des Modells oder seiner Parameter genutzt werden. 
+
+Unabhängig vom jeweiligen Split bilden die Vergleichsmerkmale die eigentliche Eingabe des LambdaMART-Modells. 
+Die Vektoren und Profile dienen somit der fachlichen Beschreibung von Artikeln und Makros, während die Bewertung ausschließlich auf Basis der Vergleichsmerkmale aus diesen Vektoren und Profilen erfolgt. 
+Dadurch wird eine klare Trennung zwischen Datenrepräsentation und Learning-to-Rank erreicht.
+
+Die folgende Abbildung \ref{fig:vektoren_profile_vergleichsmerkmale} zeigt die Zusammenhänge zwischen den einzelnen Begriffen des obrigen Textes:
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, box/.style={ draw, rounded corners, minimum width=3.2cm, minimum height=0.9cm, align=center } ] 
+        \node[box,fill=blue!10] (article) at (0,-1.5) {Artikel};  
+        \node[box,fill=blue!10] (articlevec) at (0,-3.0) {Artikelvektor}; 
+        \node[box,fill=green!10] (query) at (-4,-4.8) {Anfrageprofil}; 
+        \node[box,fill=green!10] (macro) at (5,0) {Makro}; 
+        \node[box,fill=green!10] (macrovec) at (5,-1.5) {Makrovektor}; 
+        \node[box,fill=yellow!10] (lex) at (10,0) {Typbezeichnung\\Beschreibung\\Serie}; 
+        \node[box,fill=yellow!10] (lexvec) at (10,-1.5) {Lexikalvektor}; 
+        \node[box,fill=green!10] (macroprof) at (7.5,-4.8) {Makroprofil}; 
+        \node[box,fill=orange!10] (compare) at (1.75,-7.0) {Vergleichsmerkmale}; 
+        \node[box,fill=red!10] (ltr) at (1.75,-9.0) {LambdaMART}; 
+        \draw[->] (article) -- (articlevec); 
+        \draw[->] (articlevec) -- (query); 
+        \draw[->] (articlevec) -- (macroprof); 
+        \draw[->] (macro) -- (macrovec); 
+        \draw[->] (macrovec) -- (macroprof); 
+        \draw[->] (lex) -- (lexvec); 
+        \draw[->] (lexvec) -- (macroprof); 
+        \draw[->] (macroprof) -- (compare); 
+        \draw[->] (compare) -- (ltr); 
+    \end{tikzpicture} 
+    \caption{Zusammenhänge zwischen Artikeln, Makros, Vektoren, Profilen und Vergleichsmerkmalen im Empfehlungssystem.} 
+    \label{fig:vektoren_profile_vergleichsmerkmale} 
+\end{figure} 
+        \draw[->] (query) -- (compare); 
+        \draw[->] (compare) -- (ltr); 
+        \draw[->] (lexvec) -- (macroprof); 
+        \draw[->] (query) -- (compare); 
+        \draw[->] (macroprof) -- (compare); 
+        \draw[->] (compare) -- (ltr); 
+    \end{tikzpicture} 
+    \caption{Zusammenhang zwischen Vektoren, Profilen und Vergleichsmerkmalen} 
+    \label{fig:vektoren_profile_vergleichsmerkmale} 
+\end{figure} 
+
+\subsubsection{Artikelprofil} Das Artikelprofil beschreibt die technischen Eigenschaften eines einzelnen Artikels. Es basiert auf den in Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} erzeugten Artikelvektoren. Ein Artikelprofil kann beispielsweise Informationen zu Hersteller, Produkttyp, Spannung, Strom, Leistung, Frequenz sowie den erzeugten Klassifikationen enthalten. Das Artikelprofil stellt die kleinste fachliche Beschreibungseinheit des Empfehlungssystems dar. Es dient einerseits als Vorlage für die Bildung eines Anfrageprofils und andererseits als Grundlage für die Erzeugung von Makrokandidatenprofilen. Somit bildet es die Verbindung zwischen den ursprünglichen Artikeldaten und den späteren Rankingobjekten des Empfehlungssystems. \subsubsection{Makrokandidatenprofil} Ein Makrokandidatenprofil beschreibt die technischen Eigenschaften eines Makros. Da einem Makro mehrere Artikel zugeordnet sein können (vergleiche Abschnitt \ref{sec:artikel_macro_zuordnungen}), wird das Profil aus den Artikelprofilen aller diesem Makro zugeordneten Artikel erzeugt. Das Makrokandidatenprofil stellt somit eine aggregierte Repräsentation mehrerer Artikelprofile dar und bildet keine eigenständige Datenquelle. Hierbei werden die technischen Eigenschaften der zugeordneten Artikel nicht auf einzelne Mittelwerte reduziert. Stattdessen werden die beobachteten Merkmalswerte als Mengen technischer Eigenschaften gespeichert. Enthalten die einem Makro zugeordneten Artikel beispielsweise die Spannungswerte \[ \{380V,\ 400V,\ 420V\}, \] dann bleibt diese Wertevielfalt im Kandidatenprofil erhalten. Dadurch können unterschiedliche technische Ausprägungen eines Makros berücksichtigt werden, ohne die zugrunde liegenden Informationen durch eine Verdichtung auf einen Einzelwert zu verlieren. \subsubsection{Anfrageprofil} Das Anfrageprofil beschreibt den Artikel, für den eine Empfehlung erzeugt werden soll. Seine Struktur entspricht der eines Artikelprofils. Es enthält die technischen Eigenschaften des Anfrageartikels und wird direkt aus dessen Artikelprofil abgeleitet. Im Gegensatz zu den Trainingsdaten ist die tatsächliche Makrozuordnung des Anfrageartikels während der Empfehlung jedoch unbekannt. Das Anfrageprofil enthält daher ausschließlich die aus dem Artikel ableitbaren technischen Informationen. Es bildet den Ausgangspunkt für den Vergleich mit den verfügbaren Makrokandidatenprofilen. \subsubsection{Anfrage-Kandidat-Paar} LambdaMART verarbeitet weder Anfrageprofile noch Makrokandidatenprofile direkt. Stattdessen werden beide Profile miteinander verglichen. Hierbei entstehen sogenannte Vergleichsmerkmale, welche die technische Beziehung zwischen einem Anfrageprofil und einem Makrokandidatenprofil beschreiben. Beispiele für Vergleichsmerkmale sind: \begin{itemize} \item Übereinstimmung von Spannungsklassen, \item Differenz numerischer Leistungswerte, \item Übereinstimmung von Produkttypen, \item Zugehörigkeit zur gleichen technischen Kategorie, \item Anzahl gemeinsamer technischer Eigenschaften, \item Ähnlichkeit textueller Merkmale aus Lexikalvektoren. \end{itemize} Die Gesamtheit dieser Vergleichsmerkmale bildet ein Anfrage-Kandidat-Paar. Dieses Anfrage-Kandidat-Paar stellt die eigentliche Eingabe für das LambdaMART-Modell dar. Das Modell bewertet die Merkmale und berechnet daraus einen Relevanzscore, welcher anschließend für die Sortierung der Makrokandidaten verwendet wird. Abbildung \ref{fig:vergleichsmerkmale} veranschaulicht diesen Zusammenhang. \begin{figure}[H] \centering \begin{tikzpicture}[ >=stealth, box/.style={ draw, rounded corners, minimum width=4cm, minimum height=1.0cm, align=center } ] \node[box,fill=blue!10] (query) at (-4,0) {Anfrageprofil}; \node[box,fill=green!10] (macro) at (4,0) {Makrokandidatenprofil}; \node[box,fill=orange!10] (compare) at (0,-2.5) {Vergleichsmerkmale}; \node[box,fill=yellow!15] (ltr) at (0,-5) {LambdaMART}; \draw[->] (query) -- (compare); \draw[->] (macro) -- (compare); \draw[->] (compare) -- (ltr); \end{tikzpicture} \caption{Erzeugung von Vergleichsmerkmalen für LambdaMART} \label{fig:vergleichsmerkmale} \end{figure}
+\section{Kapitelergebnis} 
+
+Ziel dieses Kapitels war die Entwicklung einer Architektur für das Empfehlungssystem auf Grundlage der in Artefakt A1 bereitgestellten Trainingsbasis und des in Artefakt A2 ausgewählten LambdaMART-Verfahrens. 
+Hierzu wurden die Komponenten, Datenflüsse und Datenstrukturen des Systems definiert. Besonderes Augenmerk lag auf der Trennung von Anfrageprofilen, Makrokandidatenprofilen und den daraus gebildeten Vergleichsmerkmalen, 
+welche die eigentliche Eingabe des Rankingmodells darstellen. 
+
+Daraus ergibt sich folgendes Artefakt: 
+\begin{quote} 
+    \textbf{Artefakt A3: Architektur des Empfehlungssystems} 
+\end{quote} 
+
+\begin{itemize} 
+    \item Datenfluss: \begin{itemize} \item Artikel, \item Featureextraktion, \item Kandidatenbildung, \item Vergleichsmerkmale, \item LambdaMART-Ranking, \item Makroempfehlung. \end{itemize} 
+    \item Verarbeitungskomponenten: \begin{itemize} \item 911 Data Preparation, \item 913 Filtering, \item 921 Data Split, \item 931 Training, \item 944 Analyse, \item 949 Evaluation. \end{itemize} 
+    \item Datenobjekte: \begin{itemize} \item Artikelprofil, \item Makrokandidatenprofil, \item Anfrageprofil, \item Anfrage-Kandidat-Paar. \end{itemize} 
+    \item Modell: \begin{itemize} \item Learning-to-Rank, \item LambdaMART, \item Eingabe: Vergleichsmerkmale, \item Ausgabe: Relevanzscore und Makrorangliste. \end{itemize} 
+\end{itemize} 
+Artefakt A3 bildet die Grundlage für die Implementierung und das Training des Empfehlungssystems im nachfolgenden Kapitel.

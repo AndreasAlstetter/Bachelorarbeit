@@ -86,61 +86,317 @@ Die Datenobjekte bilden die fachliche Grundlage für die spätere Erzeugung von 
 
 \subsubsection{Einordnung der Vektoren} 
 
-Die in Artefakt A1 erzeugten Artikel-, Makro- und Lexikalvektoren werden nicht direkt als Eingabe für LambdaMART verwendet. Stattdessen dienen sie der Beschreibung von Artikeln und Makros sowie der Bildung von Profilen,
-aus denen später die Vergleichsmerkmale für das Ranking abgeleitet werden.
+Die in Artefakt A1 erzeugten Artikel-, Makro- und Lexikalvektoren werden nicht direkt als Eingabe für LambdaMART verwendet. Stattdessen dienen sie der Beschreibung von Artikeln und Makros sowie der Bildung von Profilen, 
+aus denen später die Vergleichsmerkmale für das Ranking abgeleitet werden. Der Aufbau dieser Vektoren wurde in Kapitel \ref{sec:überführung_in_ein_Trainingsformat} erläutert. 
+Gemeinsam bilden die Vektoren die Grundlage für die Erzeugung der im Empfehlungssystem verwendeten Profile. 
+Die Vektoren und Profile dienen somit der fachlichen Beschreibung von Artikeln und Makros, während die Bewertung ausschließlich auf Basis der Vergleichsmerkmale aus diesen Vektoren und Profilen erfolgt. 
+Dadurch wird eine klare Trennung zwischen Datenrepräsentation und Learning-to-Rank erreicht.
 
-Der Aufbau dieser Vektoren wurde in Kapitel \ref{sec:überführung_in_ein_Trainingsformat} näher erläutert
-Gemeinsam bilden diese Vektoren die Grundlage für die Erzeugung der im Empfehlungssystem verwendeten Profile. 
+% Die folgende Abbildung \ref{fig:vektoren_profile_vergleichsmerkmale} zeigt die Zusammenhänge zwischen den einzelnen Begriffen des obrigen Textes:
+% \begin{figure}[H] 
+%     \centering 
+%     \begin{tikzpicture}[ >=stealth, box/.style={ draw, rounded corners, minimum width=3.2cm, minimum height=0.9cm, align=center } ] 
+%         \node[box,fill=blue!10] (article) at (0,-1.5) {Artikel};  
+%         \node[box,fill=blue!10] (articlevec) at (0,-3.0) {Artikelvektor}; 
+%         \node[box,fill=green!10] (query) at (-4,-4.8) {Anfrageprofil}; 
+%         \node[box,fill=green!10] (macro) at (5,0) {Makro}; 
+%         \node[box,fill=green!10] (macrovec) at (5,-1.5) {Makrovektor}; 
+%         \node[box,fill=yellow!10] (lex) at (10,0) {Typbezeichnung\\Beschreibung\\Serie}; 
+%         \node[box,fill=yellow!10] (lexvec) at (10,-1.5) {Lexikalvektor}; 
+%         \node[box,fill=green!10] (macroprof) at (7.5,-4.8) {Makroprofil}; 
+%         \node[box,fill=orange!10] (compare) at (1.75,-7.0) {Vergleichsmerkmale}; 
+%         \node[box,fill=red!10] (ltr) at (1.75,-9.0) {LambdaMART}; 
+%         \draw[->] (article) -- (articlevec); 
+%         \draw[->] (articlevec) -- (query); 
+%         \draw[->] (articlevec) -- (macroprof); 
+%         \draw[->] (macro) -- (macrovec); 
+%         \draw[->] (macrovec) -- (macroprof); 
+%         \draw[->] (lex) -- (lexvec); 
+%         \draw[->] (lexvec) -- (macroprof); 
+%         \draw[->] (macroprof) -- (compare); 
+%         \draw[->] (compare) -- (ltr); 
+%     \end{tikzpicture} 
+%     \caption{Zusammenhänge zwischen Artikeln, Makros, Vektoren, Profilen und Vergleichsmerkmalen im Empfehlungssystem.} 
+%     \label{fig:vektoren_profile_vergleichsmerkmale} 
+% \end{figure} 
 
-Dabei müssen die Bestandteile des Datensplits getrennt betrachtet werden:
 
-Trainingsdaten:
-Aus der Zusammenführung aller Artikel, Lexikal-, und Makrovektoren eines Makros entsteht das sogenannten Makroprofil. 
-Dabei liefert der Artikelvektor die \textit{technischen Artikeleigenschaften} aller Artikel,
-der Lexikalvektor die \textit{technischen Hinweise} und
-der Makrovektor die \textit{technischen Makroeigenschaften} des Makros.
-Diese Makroprofile werden anschließend miteinander verglichen, um Vergleichsmerkmale zu berechnen. 
-Erst diese Vergleichsmerkmale bilden dann die eigentliche Eingabe für das LambdaMART-Modell. 
-Damit erfolgt eine klare Trennung zwischen der fachlichen Beschreibung von Artikeln und Makros durch Vektoren und Profile einerseits sowie der eigentlichen Bewertung durch das Learning-to-Rank-Modell andererseits. 
+% \subsubsection{Makroprofil} 
+%  WICHITG !!!!!!!!!
 
-Validierungs und Testdaten:
-Aus einem Artikelvektor wird das Anfrageprofil eines zu empfehlenden Artikels erzeugt, 
-indem die Referenz zum Makro entfernt wird. Der rest des Artikelvektors wird unverändert in das Anfrageprofil übernommen. 
+% Enthalten die einem Makro zugeordneten Artikel beispielsweise die Spannungswerte \[ \{380V,\ 400V,\ 420V\}, \] dann bleibt diese Wertevielfalt im Kandidatenprofil erhalten. 
+% Dadurch können unterschiedliche technische Ausprägungen eines Makros berücksichtigt werden, ohne die zugrunde liegenden Informationen durch eine Verdichtung auf einen Einzelwert zu verlieren. 
 
-Die folgende Abbildung \ref{fig:} zeigt die Zusammenhänge zwischen den einzelnen Begriffen des obrigen Textes:
-\begin{figure}[H] 
+\subsubsection{Makroprofil}
+\label{sec:makroprofil}
+
+Ein Makro wird im Rahmen des Empfehlungssystems als Makrokandidat betrachtet, sobald es als möglicher Bestandteil einer Empfehlung bewertet werden soll. 
+Das Makroprofil beschreibt die technischen Eigenschaften dieses Makrokandidaten und dient als Grundlage für den späteren Vergleich mit einem Anfrageprofil. Jeder Makrokandidat besitzt somit genau ein zugehöriges Makroprofil.
+Es stellt die fachliche Repräsentation eines Makros dar und dient als Vergleichspartner für spätere Anfrageprofile. 
+Da einem Makro mehrere Artikel zugeordnet sein können (siehe Abschnitt \ref{sec:artikel_macro_zuordnungen}), wird ein Makroprofil nicht aus einem einzelnen Artikel erzeugt. 
+Stattdessen werden die Artikel-, Makro- und Lexikalvektoren aller einem Makro zugeordneten Trainingsartikel zusammengeführt. Der Artikelvektor liefert hierbei die technischen Eigenschaften der zugeordneten Artikel. 
+Der Makrovektor beschreibt technische und strukturelle Eigenschaften des Makros selbst. Der Lexikalvektor ergänzt diese Informationen um technische Hinweise aus Typbezeichnungen, Beschreibungen und Serienbezeichnungen. 
+Die enthaltenen Informationen werden nicht auf einzelne Mittelwerte reduziert. Stattdessen bleiben unterschiedliche technische Ausprägungen innerhalb des Profils erhalten. 
+Enthalten die einem Makro zugeordneten Artikel beispielsweise die Spannungswerte \[ \{380V,\;400V,\;420V\}, \] dann wird diese Wertevielfalt im Makroprofil beibehalten. 
+Dadurch können unterschiedliche technische Ausprägungen desselben Makros berücksichtigt werden, ohne Informationen durch eine Verdichtung auf einen Einzelwert zu verlieren. 
+Ein Makroprofil beschreibt somit die Menge der technischen Eigenschaften, die innerhalb eines Makros beobachtet wurden. Die Gesamtheit aller Makroprofile bildet den Suchraum des Empfehlungssystems.
+In der praktischen Umsetzung fließen dabei die Vektoren aller einem Makro zugeordneten Trainingsartikel in die Bildung eines gemeinsamen Makroprofils ein.
+ 
+
+\subsubsection{Anfrageprofil} 
+
+Das Anfrageprofil stellt den Inhalt einer Anfrage an das Empfehlungssystem dar. Seine Struktur entspricht der Struktur der zugrunde liegenden Artikel-, Makro- und Lexikalvektoren. 
+Es enthält die technischen Eigenschaften des Anfrageartikels und wird direkt aus dessen Artikel-, Makro- und Lexikalvektoren abgeleitet.
+Im Gegensatz zu den Trainingsdaten ist die tatsächliche Makrozuordnung des Anfrageartikels während der Empfehlung jedoch unbekannt. 
+Das Anfrageprofil enthält daher ausschließlich die aus dem Artikel ableitbaren technischen Informationen. Es bildet den Ausgangspunkt für den Vergleich mit den verfügbaren Makroprofilen.
+Hierbei werden ausschließlich diejenigen Informationen entfernt, welche unmittelbar die Identität oder die bekannte Zuordnung eines Makros offenlegen würden. 
+Technische Struktur- und Klassifikationsmerkmale, beispielsweise Anschlussstrukturen, Kategorien oder Variantenmerkmale, bleiben hingegen erhalten, da sie zur fachlichen Unterscheidung von Makros beitragen.
+
+\subsubsection{Vergleichsmerkmale} 
+
+Die Artikel-, Makro- und Lexikalvektoren werden nicht direkt durch das Learning-to-Rank-Modell verarbeitet. 
+Stattdessen werden aus dem Vergleich eines Anfrageprofils mit einem Makroprofil sogenannte Vergleichsmerkmale erzeugt. 
+Vergleichsmerkmale beschreiben die technische Beziehung zwischen einem Anfrageprofil und einem Makroprofil.
+Sie stellen die Verbindung zwischen der fachlichen Beschreibung eines Artikels beziehungsweise Makros und der numerischen Eingabe für das LambdaMART-Modell dar. 
+Die Notwendigkeit dieser Transformation ergibt sich aus der Arbeitsweise von LambdaMART. Das Verfahren basiert auf Gradient-Boosting-Entscheidungsbäumen und verarbeitet numerische Merkmale. 
+Technische Informationen wie Hersteller, Produkttypen, technische Hinweise, Anschlussstrukturen oder Spannungsbereiche müssen daher zunächst in numerische Vergleichswerte überführt werden. 
+Vergleichsmerkmale bilden somit die eigentliche Schnittstelle zwischen den fachlichen Datenobjekten aus Artefakt A1 und dem Learning-to-Rank-Modell aus Artefakt A2. 
+Sie dienen dazu, die Informationen aus den Makroprofilen in eine für das Modell verständliche numerische Form zu überführen.
+
+\subsubsection{Kategorien von Vergleichsmerkmalen} 
+
+Die in der Implementierung verwendeten Vergleichsmerkmale lassen sich entsprechend ihrer fachlichen Bedeutung in mehrere Gruppen unterteilen. 
+
+\paragraph{Merkmalsübereinstimmungen} 
+
+Diese Merkmale prüfen, ob einzelne technische Eigenschaften der Anfrage auch im Makroprofil vorkommen. 
+
+Beispiele sind: 
+\begin{itemize} 
+    \item Hersteller-Match 
+    \item Produkttyp-Match 
+    \item Klassifikations-Match 
+    \item Spannungsklassen-Match 
+    \item Stromklassen-Match 
+\end{itemize} 
+
+Die resultierenden Werte werden typischerweise als binäre Merkmale dargestellt. 
+
+\paragraph{Mengenbasierte Ähnlichkeiten} 
+
+Da die Makroprofile mehrere technische Ausprägungen enthalten können, werden zusätzliche Mengenmaße verwendet. 
+Hierzu zählen insbesondere: 
+\begin{itemize} 
+    \item Jaccard-Ähnlichkeit 
+    \item Overlap-Koeffizient 
+    \item Anfrageabdeckung 
+    \item Kandidatenabdeckung 
+\end{itemize} 
+Diese Merkmale beschreiben, wie stark sich die Merkmalsmengen zwischen Anfrage und Makroprofil überschneiden. 
+
+\paragraph{Numerische Vergleichsmerkmale} 
+
+Für numerische Eigenschaften werden Distanz- und Differenzmerkmale erzeugt. Hierzu zählen beispielsweise: 
+\begin{itemize} 
+    \item Spannungsdifferenz 
+    \item Stromdifferenz 
+    \item Leistungsdifferenz 
+    \item Frequenzdifferenz 
+\end{itemize} 
+Diese Merkmale beschreiben die technische Nähe zweier numerischer Eigenschaften. 
+
+\paragraph{Lexikalische Vergleichsmerkmale} 
+
+Die aus Beschreibungen, Serienbezeichnungen und Typbezeichnungen erzeugten technischen Hinweise werden ebenfalls miteinander verglichen. Hierbei werden unter anderem berücksichtigt: 
+\begin{itemize} 
+    \item gemeinsame technische Hinweise 
+    \item gemeinsame Produktbezeichnungen 
+    \item gemeinsame Serienmerkmale 
+    \item gemeinsame technische Schlagwörter 
+\end{itemize} 
+Diese Merkmale unterstützen insbesondere die Bewertung von Eigenschaften, welche nicht als explizite technische Werte vorliegen. 
+
+\paragraph{Makrostrukturelle Vergleichsmerkmale} 
+
+Zusätzlich werden technische Strukturinformationen der Makros berücksichtigt. Hierzu gehören beispielsweise: 
+\begin{itemize} 
+    \item Anschlussstrukturen 
+    \item Makrokategorien 
+    \item Variantenstrukturen 
+    \item Objektstrukturen 
+    \item Symbolbibliotheken 
+\end{itemize} 
+Diese Merkmale beschreiben die strukturelle Ähnlichkeit zwischen einem Anfrageprofil und einem Makroprofil.
+
+\paragraph{Aggregierte Vergleichsmerkmale} 
+
+Neben den Einzelmerkmalen werden zusätzlich aggregierte Kennzahlen gebildet. Hierzu gehören beispielsweise: 
+\begin{itemize} 
+    \item Anzahl gemeinsamer Merkmale 
+    \item Anteil übereinstimmender Eigenschaften 
+    \item Gesamtabdeckung der Anfrage 
+    \item Gesamtähnlichkeit des Kandidaten 
+\end{itemize} 
+Diese Merkmale verdichten mehrere Einzelvergleiche zu einer übergeordneten Bewertung.
+
+
+\subsubsection{Beispiel zur Bildung von Vergleichsmerkmalen} 
+
+Zur Veranschaulichung der zuvor beschriebenen Vergleichsmerkmale soll das Motorbeispiel aus Kapitel \ref{sec:herleitung} betrachtet werden.
+Angenommen, für einen Artikel soll eine Makroempfehlung erzeugt werden. Aus dem Artikel wird das folgende Anfrageprofil gebildet: 
+
+\begin{quote} 
+Hersteller = Siemens \\ 
+Spannung = 400\,V \\ 
+Spannungsklasse = Mittlere Spannung \\ 
+Strom = 10\,A \\ 
+Produkttyp = Elektromotor \\ 
+Technischer Hinweis = Wasserdichte Ausführung 
+\end{quote} 
+
+Weiterhin existiert das folgende Makroprofil: 
+
+\begin{quote} 
+Hersteller = \{ Siemens, SEW \} \\ 
+Spannung = \{ 380\,V, 400\,V, 420\,V \} \\ 
+Spannungsklasse = \{ Mittlere Spannung \} \\ 
+Produkttyp = \{ Elektromotor \} \\ 
+Technischer Hinweis = \{ Wasserdichte Ausführung \} 
+\end{quote} 
+
+Aus dem Vergleich beider Profile lassen sich anschließend Vergleichsmerkmale ableiten, beispielsweise: 
+
+\begin{itemize} 
+    \item Übereinstimmung des Stroms: Ja 
+    \item Übereinstimmung der Spannung: Ja 
+    \item Übereinstimmung der Spannungsklasse: Ja 
+    \item Übereinstimmung des Herstellers: Ja 
+    \item Übereinstimmung des Produkttyps: Ja 
+    \item Übereinstimmung des technischen Hinweises: Ja 
+\end{itemize} 
+
+Aus Sicht des Empfehlungssystems werden dadurch nicht mehr die ursprünglichen Eigenschaften der Profile betrachtet, sondern deren  Beziehung zueinander beschrieben. 
+Die Vergleichsmerkmale bilden damit eine verdichtete Darstellung der Ähnlichkeit zwischen Anfrage und Makrokandidat.
+
+\begin{table}[H] 
     \centering 
-    \begin{tikzpicture}[ >=stealth, box/.style={ draw, rounded corners, minimum width=3.2cm, minimum height=0.9cm, align=center } ] 
-        \node[box,fill=blue!10] (article) at (0,-1.5) {Artikel};  
-        \node[box,fill=blue!10] (articlevec) at (0,-3.0) {Artikelvektor}; 
-        \node[box,fill=green!10] (query) at (-4,-4.8) {Anfrageprofil}; 
-        \node[box,fill=green!10] (macro) at (5,0) {Makro}; 
-        \node[box,fill=green!10] (macrovec) at (5,-1.5) {Makrovektor}; 
-        \node[box,fill=yellow!10] (lex) at (10,0) {Typbezeichnung\\Beschreibung\\Serie}; 
-        \node[box,fill=yellow!10] (lexvec) at (10,-1.5) {Lexikalvektor}; 
-        \node[box,fill=green!10] (macroprof) at (7.5,-4.8) {Makrokandidatenprofil}; 
-        \node[box,fill=orange!10] (compare) at (1.75,-7.0) {Vergleichsmerkmale}; 
-        \node[box,fill=red!10] (ltr) at (1.75,-9.0) {LambdaMART}; 
-        \draw[->] (article) -- (articlevec); 
-        \draw[->] (articlevec) -- (query); 
-        \draw[->] (articlevec) -- (macroprof); 
-        \draw[->] (macro) -- (macrovec); 
-        \draw[->] (macrovec) -- (macroprof); 
-        \draw[->] (lex) -- (lexvec); 
-        \draw[->] (lexvec) -- (macroprof); 
-        \draw[->] (query) -- (compare); 
-        \draw[->] (macroprof) -- (compare); 
-        \draw[->] (compare) -- (ltr); 
-    \end{tikzpicture} 
-    \caption{Zusammenhang zwischen Vektoren, Profilen und Vergleichsmerkmalen} 
-    \label{fig:vektoren_profile_vergleichsmerkmale} 
-\end{figure} 
+    \caption{Beispielhafte Vergleichsmerkmale zwischen Anfrage und Makrokandidat} 
+    \begin{tabular}{p{8cm}p{2cm}} 
+        \hline Vergleichsmerkmal & Wert \\ 
+        \hline Hersteller-Match & 1 \\ 
+        Produkttyp-Match & 1 \\ 
+        Spannungs-Match & 1 \\ 
+        Spannungsklassen-Match & 1 \\ 
+        Technischer-Hinweis-Match & 1 \\ 
+        Jaccard-Ähnlichkeit & 0{,}83 \\ 
+        Anfrageabdeckung & 1{,}00 \\ 
+        Gemeinsame Merkmale & 6 \\ 
+        \hline 
+    \end{tabular} 
+\end{table}
 
-\subsubsection{Artikelprofil} Das Artikelprofil beschreibt die technischen Eigenschaften eines einzelnen Artikels. Es basiert auf den in Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} erzeugten Artikelvektoren. Ein Artikelprofil kann beispielsweise Informationen zu Hersteller, Produkttyp, Spannung, Strom, Leistung, Frequenz sowie den erzeugten Klassifikationen enthalten. Das Artikelprofil stellt die kleinste fachliche Beschreibungseinheit des Empfehlungssystems dar. Es dient einerseits als Vorlage für die Bildung eines Anfrageprofils und andererseits als Grundlage für die Erzeugung von Makrokandidatenprofilen. Somit bildet es die Verbindung zwischen den ursprünglichen Artikeldaten und den späteren Rankingobjekten des Empfehlungssystems. \subsubsection{Makrokandidatenprofil} Ein Makrokandidatenprofil beschreibt die technischen Eigenschaften eines Makros. Da einem Makro mehrere Artikel zugeordnet sein können (vergleiche Abschnitt \ref{sec:artikel_macro_zuordnungen}), wird das Profil aus den Artikelprofilen aller diesem Makro zugeordneten Artikel erzeugt. Das Makrokandidatenprofil stellt somit eine aggregierte Repräsentation mehrerer Artikelprofile dar und bildet keine eigenständige Datenquelle. Hierbei werden die technischen Eigenschaften der zugeordneten Artikel nicht auf einzelne Mittelwerte reduziert. Stattdessen werden die beobachteten Merkmalswerte als Mengen technischer Eigenschaften gespeichert. Enthalten die einem Makro zugeordneten Artikel beispielsweise die Spannungswerte \[ \{380V,\ 400V,\ 420V\}, \] dann bleibt diese Wertevielfalt im Kandidatenprofil erhalten. Dadurch können unterschiedliche technische Ausprägungen eines Makros berücksichtigt werden, ohne die zugrunde liegenden Informationen durch eine Verdichtung auf einen Einzelwert zu verlieren. \subsubsection{Anfrageprofil} Das Anfrageprofil beschreibt den Artikel, für den eine Empfehlung erzeugt werden soll. Seine Struktur entspricht der eines Artikelprofils. Es enthält die technischen Eigenschaften des Anfrageartikels und wird direkt aus dessen Artikelprofil abgeleitet. Im Gegensatz zu den Trainingsdaten ist die tatsächliche Makrozuordnung des Anfrageartikels während der Empfehlung jedoch unbekannt. Das Anfrageprofil enthält daher ausschließlich die aus dem Artikel ableitbaren technischen Informationen. Es bildet den Ausgangspunkt für den Vergleich mit den verfügbaren Makrokandidatenprofilen. \subsubsection{Anfrage-Kandidat-Paar} LambdaMART verarbeitet weder Anfrageprofile noch Makrokandidatenprofile direkt. Stattdessen werden beide Profile miteinander verglichen. Hierbei entstehen sogenannte Vergleichsmerkmale, welche die technische Beziehung zwischen einem Anfrageprofil und einem Makrokandidatenprofil beschreiben. Beispiele für Vergleichsmerkmale sind: \begin{itemize} \item Übereinstimmung von Spannungsklassen, \item Differenz numerischer Leistungswerte, \item Übereinstimmung von Produkttypen, \item Zugehörigkeit zur gleichen technischen Kategorie, \item Anzahl gemeinsamer technischer Eigenschaften, \item Ähnlichkeit textueller Merkmale aus Lexikalvektoren. \end{itemize} Die Gesamtheit dieser Vergleichsmerkmale bildet ein Anfrage-Kandidat-Paar. Dieses Anfrage-Kandidat-Paar stellt die eigentliche Eingabe für das LambdaMART-Modell dar. Das Modell bewertet die Merkmale und berechnet daraus einen Relevanzscore, welcher anschließend für die Sortierung der Makrokandidaten verwendet wird. Abbildung \ref{fig:vergleichsmerkmale} veranschaulicht diesen Zusammenhang. \begin{figure}[H] \centering \begin{tikzpicture}[ >=stealth, box/.style={ draw, rounded corners, minimum width=4cm, minimum height=1.0cm, align=center } ] \node[box,fill=blue!10] (query) at (-4,0) {Anfrageprofil}; \node[box,fill=green!10] (macro) at (4,0) {Makrokandidatenprofil}; \node[box,fill=orange!10] (compare) at (0,-2.5) {Vergleichsmerkmale}; \node[box,fill=yellow!15] (ltr) at (0,-5) {LambdaMART}; \draw[->] (query) -- (compare); \draw[->] (macro) -- (compare); \draw[->] (compare) -- (ltr); \end{tikzpicture} \caption{Erzeugung von Vergleichsmerkmalen für LambdaMART} \label{fig:vergleichsmerkmale} \end{figure}
+Die Gesamtheit der Vergleichsmerkmale wird als Merkmalsvektor bezeichnet. 
+Dieser Merkmalsvektor beschreibt die Beziehung zwischen einem Anfrageprofil und einem Makroprofil in numerischer Form und dient als Grundlage für die Bildung eines Anfrage-Kandidat-Paares.
+
+\subsubsection{Anfrage-Kandidat-Paar} 
+
+Die Gesamtheit aller Vergleichsmerkmale eines Anfrageprofils und eines Makroprofils wird als Anfrage-Kandidat-Paar bezeichnet. 
+Ein Anfrage-Kandidat-Paar besteht somit nicht aus den ursprünglichen Profilen selbst, sondern aus den aus ihnen berechneten Vergleichsmerkmalen. 
+Für jedes Makroprofil wird ein eigenes Anfrage-Kandidat-Paar erzeugt. LambdaMART bewertet diese Anfrage-Kandidat-Paare anhand der enthaltenen Vergleichsmerkmale und berechnet daraus einen Relevanzscore.
+Für jeden Makrokandidaten wird ein eigenes Anfrage-Kandidat-Paar erzeugt. 
+LambdaMART bewertet diese Paare anhand der enthaltenen Vergleichsmerkmale und berechnet für jeden Kandidaten einen Relevanzscore. 
+Die resultierenden Scores bilden die Grundlage für die Sortierung der Makrokandidaten und somit für die finale Empfehlung.
+
+\subsubsection{Verwendung der Datenobjekte in Training, Validierung und Test}
+
+\textbf{Trainingsdaten} 
+Die Bildung der Makroprofile erfolgt entsprechend der in Abschnitt \ref{sec:makroprofil} beschriebenen Vorgehensweise. 
+Die Makroprofile bilden den Suchraum des Empfehlungssystems und werden ausschließlich aus dem Trainingssplit erzeugt. Dadurch wird sichergestellt, 
+dass keine Informationen aus den Validierungs- oder Testdaten in die Makroprofile einfließen. Aus den Makroprofilen und den zugehörigen Anfrageprofilen für das Training (Trainigsanfragen) werden anschließend Vergleichsmerkmale berechnet. 
+Diese Vergleichsmerkmale bilden gemeinsam mit den bekannten Artikel-Makro-Zuordnungen die Grundlage für das Training des LambdaMART-Modells. 
+
+\textbf{Validierungsdaten} 
+Für die Validierungsdaten wird aus den 3 Vektoren ein Anfrageprofil erzeugt (Validierungsanfrage). Hierbei werden diejenigen Informationen entfernt, 
+welche die Identität oder Zuordnung eines Makros zu einem Artikel offenlegen würden. 
+Anschlüsse, Makrokategorien sowie Varianten bleiben hingegen erhalten (siehe Kapitel \ref{sec:makrovektor}). Anschließend wird die Validierungsanfrage mit allen aus dem Trainingssplit erzeugten Makroprofilen verglichen. 
+Aus diesem Vergleich entstehen dieselben Vergleichsmerkmale wie im Trainingsprozess. Diese werden durch das trainierte LambdaMART-Modell bewertet und zu einer Rangliste zusammengeführt. 
+Die bekannte Makrozuordnung der Validierungsanfrage wird dabei nicht zum Lernen verwendet, sondern ausschließlich zur Bewertung verschiedener Modell- und Parametervarianten während der Entwicklung herangezogen. 
+
+\textbf{Testdaten} 
+Die Testdaten werden identisch zu den Validierungsdaten verarbeitet. Aus den Artikel-, Makro- und Lexikalvektoren werden zunächst ein Anfrageprofil erzeugt (Testanfragen), 
+Dabei werden diejenigen Informationen entfernt, welche die Identität oder Zuordnung eines Makros zu einem Artikel offenlegen würden.
+Anschließend erfolgt der Vergleich mit den aus dem Trainingssplit erzeugten Makroprofilen. 
+Die daraus resultierenden Vergleichsmerkmale werden durch das trainierte LambdaMART-Modell bewertet und zu einer Rangliste verarbeitet. 
+Die bekannte Makrozuordnung wird hierbei ausschließlich zur abschließenden Berechnung der Evaluationsmetriken verwendet (siehe Kapitel \ref{sec:evaluationsmetriken}). 
+Im Gegensatz zu den Validierungsdaten dürfen die Ergebnisse der Testdaten nicht mehr zur Anpassung des Modells oder seiner Parameter genutzt werden. 
+
+\subsubsection{Zusammenhang der Datenobjekte}
+
+Die beschriebenen Datenobjekte bilden gemeinsam die Grundlage für das Rankingverfahren. Ausgangspunkt sind die aus den Rohdaten erzeugten Artikel-, Makro- und Lexikalvektoren. 
+Aus diesen werden Makroprofile und Anfrageprofile erzeugt. Anschließend werden zwischen beiden Profiltypen Vergleichsmerkmale berechnet, welche die eigentliche Eingabe des Learning-to-Rank-Modells darstellen.
+
+Abbildung \ref{fig:vektoren_profile_vergleichsmerkmale} zeigt den Zusammenhang zwischen den einzelnen Datenobjekten.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        >=stealth,
+        box/.style={
+            draw,
+            rounded corners,
+            minimum width=3.4cm,
+            minimum height=0.9cm,
+            align=center
+        }
+    ]
+
+        \node[box,fill=blue!10] (article) at (-5,0) {Artikel};
+
+        \node[box,fill=blue!10] (articlevec) at (-5,-1.6) {Artikelvektor};
+
+        \node[box,fill=green!10] (query) at (-8,-4.5) {Anfrageprofil};
+
+        \node[box,fill=green!10] (macroprofile) at (2,-4.5) {Makroprofil};
+
+        \node[box,fill=yellow!10] (macrovec) at (0,-1.6) {Makrovektor};
+
+        \node[box,fill=yellow!10] (lexvec) at (5,-1.6) {Lexikalvektor};
+
+        \node[box,fill=orange!10] (compare) at (-3,-7) {Vergleichsmerkmale};
+
+        \node[box,fill=orange!10] (pair) at (-3,-8.6) {Anfrage-Kandidat-Paar};
+
+        \node[box,fill=red!10] (ltr) at (-3,-10.2) {LambdaMART};
+
+        \draw[->] (article) -- (articlevec);
+
+        \draw[->] (articlevec) -- (query);
+
+        \draw[->] (articlevec) -- (macroprofile);
+        \draw[->] (macrovec) -- (macroprofile);
+        \draw[->] (lexvec) -- (macroprofile);
+
+        \draw[->] (query) -- (compare);
+        \draw[->] (macroprofile) -- (compare);
+
+        \draw[->] (compare) -- (pair);
+        \draw[->] (pair) -- (ltr);
+
+    \end{tikzpicture}
+
+    \caption{Zusammenhang zwischen Vektoren, Profilen, Vergleichsmerkmalen und LambdaMART}
+    \label{fig:vektoren_profile_vergleichsmerkmale}
+\end{figure}
+
+Die Abbildung verdeutlicht die schrittweise Transformation der Daten. Die Vektoren beschreiben zunächst die technischen Informationen eines Artikels beziehungsweise Makros. 
+Durch die Profilbildung werden diese Informationen in eine für das Empfehlungssystem geeignete Form überführt. 
+Anschließend werden die Profile miteinander verglichen und in Form numerischer Vergleichsmerkmale beschrieben. 
+Erst diese Vergleichsmerkmale werden durch LambdaMART verarbeitet und zur Berechnung eines Relevanzscores verwendet.
+
 \section{Kapitelergebnis} 
 
 Ziel dieses Kapitels war die Entwicklung einer Architektur für das Empfehlungssystem auf Grundlage der in Artefakt A1 bereitgestellten Trainingsbasis und des in Artefakt A2 ausgewählten LambdaMART-Verfahrens. 
-Hierzu wurden die Komponenten, Datenflüsse und Datenstrukturen des Systems definiert. Besonderes Augenmerk lag auf der Trennung von Anfrageprofilen, Makrokandidatenprofilen und den daraus gebildeten Vergleichsmerkmalen, 
+Hierzu wurden die Komponenten, Datenflüsse und Datenstrukturen des Systems definiert. Besonderes Augenmerk lag auf der Trennung von Anfrageprofilen, Makroprofilen und den daraus gebildeten Vergleichsmerkmalen, 
 welche die eigentliche Eingabe des Rankingmodells darstellen. 
 
 Daraus ergibt sich folgendes Artefakt: 
@@ -151,7 +407,7 @@ Daraus ergibt sich folgendes Artefakt:
 \begin{itemize} 
     \item Datenfluss: \begin{itemize} \item Artikel, \item Featureextraktion, \item Kandidatenbildung, \item Vergleichsmerkmale, \item LambdaMART-Ranking, \item Makroempfehlung. \end{itemize} 
     \item Verarbeitungskomponenten: \begin{itemize} \item 911 Data Preparation, \item 913 Filtering, \item 921 Data Split, \item 931 Training, \item 944 Analyse, \item 949 Evaluation. \end{itemize} 
-    \item Datenobjekte: \begin{itemize} \item Artikelprofil, \item Makrokandidatenprofil, \item Anfrageprofil, \item Anfrage-Kandidat-Paar. \end{itemize} 
+    \item Datenobjekte: \begin{itemize} \item Makroprofil, \item Anfrageprofil, \item Vergleichsmerkmale, \item Anfrage-Kandidat-Paar. \end{itemize} 
     \item Modell: \begin{itemize} \item Learning-to-Rank, \item LambdaMART, \item Eingabe: Vergleichsmerkmale, \item Ausgabe: Relevanzscore und Makrorangliste. \end{itemize} 
 \end{itemize} 
 Artefakt A3 bildet die Grundlage für die Implementierung und das Training des Empfehlungssystems im nachfolgenden Kapitel.

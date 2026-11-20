@@ -15,11 +15,11 @@ Zu diesen gehören unter anderen:
 
 \begin{itemize} 
     \item Herstellerinformationen, 
-    %\item Typnummern, 
+    \item Typnummern, 
     \item Spannungen, 
     \item Ströme, 
     \item Leistungen,  
-    % \item technische Hinweise, 
+    \item technische Hinweise, 
     \item Referenzen auf zugehörige Makros. 
 \end{itemize} 
 
@@ -46,9 +46,9 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
         \draw[->] (article) -- (technical); 
         % Stammdaten 
         \node[feature] (manu) at (-7.5,0) {Hersteller\\SEW}; 
-        %\node[feature] (type) at (-5.0,0) {Typnummer\\S123}; 
+        \node[feature] (type) at (-5.0,0) {Typnummer\\S123}; 
         \draw[->] (master) -- (manu); 
-        %\draw[->] (master) -- (type);
+        \draw[->] (master) -- (type);
         % Elektrische Informationen 
         \node[feature] (voltage) at (-2.5,0) {Spannung\\400 V}; 
         \node[feature] (current) at (0,0) {Strom\\10 A}; 
@@ -57,10 +57,10 @@ Abbildung \ref{fig:xml_artikel_motor} zeigt die beispielhafte Struktur eines XML
         \draw[->] (electrical) -- (current); 
         \draw[->] (electrical) -- (power); 
         % Technische Informationen 
-        % \node[feature] (ip) at (5.0,0) {Hinweis\\MIT\\GEHÄUSE}; 
+        \node[feature] (ip) at (5.0,0) {Hinweis\\MIT\\GEHÄUSE}; 
         \node[feature] (com) at (7.5,0) {Makro\\M1\_F1\_V1};
         \draw[->] (technical) -- (com); 
-        % \draw[->] (technical) -- (com); 
+        \draw[->] (technical) -- (ip); 
         % Makro
         %\draw[ decorate, decoration={brace,mirror,amplitude=10pt}, thick ] (-8.25,-0.8) -- (8.25,-0.8) node[midway,yshift=-1cm] { \fbox{\strut Zugeordnetes Motor-Makro} };
     \end{tikzpicture} 
@@ -471,14 +471,9 @@ Dies stellt eine Herausforderung für die den Lernprozess eines Modells dar und 
 \section{Überführung in ein Trainingsformat} 
 \label{sec:überführung_in_ein_Trainingsformat}
 
-Modelle wie sie in Kapitel \ref{sec:modellansätze} beschrieben werden, können technische Informationen nicht direkt aus XML-Dateien verarbeiten. 
-Um diese Informationen nutzbar zu machen, müssen sie in Embeddings (vergleiche Kapitel \ref{sec:vom_vektor_zum_embedding}) überführt werden.
-Deswegen werden die \textit{technischen Artikeleigenschaften} in numerische Vektoren überführt, die als Eingabe für ein Modell dienen.
-
-
 \subsection{Artikelvektor} 
 
-Der Artikelvektor stellt die \textit{technischen Artikeleigenschaften} in numerischer Form dar und fasst sie zu einem Vektor zusammen. 
+Der Artikelvektor fasst die \textit{technischen Artikeleigenschaften} zu einem Vektor zusammen. 
 Dabei wurden unter anderem folgende \textit{technische Artikeleigenschaften} aus den vorhandenen Artikeldaten unter Beachtung der vorherigen Datenaufbereitung (Vergleiche Kapitel \ref{sec:datenaufbereitung}) extrahiert: 
  
 \begin{itemize} 
@@ -491,7 +486,7 @@ Dabei wurden unter anderem folgende \textit{technische Artikeleigenschaften} aus
     \item Makrobezeichnung
 \end{itemize} 
 
-Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Artikelvektors anhand des Motorbeispiels, die nummerischen Werte des Artikelvektors werden dabei zur leichteren Verständlichkeit exemplarisch als Text dargestellt:
+Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Artikelvektors anhand des Motorbeispiels:
 
 \begin{figure}[H] 
     \centering 
@@ -540,9 +535,10 @@ Die Abbildung \ref{fig:artikelvektor} zeigt die Struktur und den Aufbau des Arti
     \label{fig:artikelvektor} 
 \end{figure}
         
-\subsection{Makrovektor} 
+\subsection{Makrovektor}
+\label{sec:makrovektor} 
 
-Der Makrovektor stellt analog zum Artikelvektor folgende \textit{technische Makroeigenschaften} in numerischer Form in einem gemeinsamen Vektor zusammengeführt dar: 
+Der Makrovektor stellt analog zum Artikelvektor folgende \textit{technische Makroeigenschaften} in einem gemeinsamen Vektor zusammengeführt dar: 
 
 \begin{itemize} 
     \item Anschlüsse, 
@@ -552,7 +548,7 @@ Der Makrovektor stellt analog zum Artikelvektor folgende \textit{technische Makr
 
 \end{itemize} 
 
-Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} den Aufbau des Makrovektors, die numerischen Werte des Makrovektors werden auch hier zur leichteren Verständlichkeit exemplarisch als Text dargestellt:
+Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} den Aufbau des Makrovektors:
 
 \begin{figure}[H] 
     \centering 
@@ -597,10 +593,10 @@ Im Bezug auf das Motorbeispiel zeigt folgende Abbildung \ref{fig:makrovektor} de
 
 \subsection{Lexikalvektor} 
 
-Nicht alle \textit{technischen Artikel- und Makroeigenschaften} liegen in Form von konkreten Werten wie zum Beispiel 24 V in den vorhandenen Artikel- und Makrodaten vor. Technische Hinweise in einem Artikel oder Makro liegen in Textform vor. 
-Diese \textit{technischen Hinweise} stellen aufgrund der Textform eine andere Art von \textit{technischen Artikel- und Makroeigenschaften} dar als solche mit konkreten Werten \cite{baltrusaitis2019multimodal}.
+Nicht alle \textit{technischen Artikel- und Makroeigenschaften} liegen in Form von konkreten Werten wie zum Beispiel 24 V in den vorhandenen Artikeldaten vor. Technische Hinweise in einem Artikelliegen in Textform vor. 
+Diese \textit{technischen Hinweise} stellen aufgrund der Textform eine andere Art von \textit{technischen Artikeleigenschaften} dar als solche mit konkreten Werten \cite{baltrusaitis2019multimodal}.
 Hierdurch können Informationen genutzt werden, die in Zahlen nicht abbildbar sind, wie zum Beispiel die wasserdichte Ausführung eines Motors.
-Diese textbasierten \textit{technischen Artikel- und Makroeigenschaften} stellen somit eine weitere Information dar, welche Gemeinsamkeiten und Unterschiede zwischen Artikeln aufzeigen.
+Diese textbasierten \textit{technischen Artikeleigenschaften} stellen somit eine weitere Information dar, welche Gemeinsamkeiten und Unterschiede zwischen Artikeln aufzeigen.
 Die folgende Abbildung \ref{fig:lexikalische_information_empfehlung} zeigt, welchen Einfluss \textit{technischen Hinweise} auf die Unterscheidung von Artikeln haben: 
 
 \begin{figure}[H] 
@@ -652,7 +648,8 @@ Die folgende Abbildung \ref{fig:lexikalische_information_empfehlung} zeigt, welc
     \caption{Einfluss einer textbasierten technischen Information auf die Makroempfehlung. Artikel A und B sind bis auf die Anmerkung „Wasserdichte Ausführung“ identisch. Dadurch wird Artikel A bevorzugt, sodass das zugeordnete Makro M1\_F1\_V1 empfohlen wird. } 
     \label{fig:lexikalische_information_empfehlung} 
 \end{figure}
-Aus den vorhandenen Artikel- und Makrodaten lassen sich folgende textbasierten \textit{technischen Artikel- und Makroeigenschaften} extrahieren: 
+
+Aus den vorhandenen Artikeldaten lassen sich folgende textbasierten \textit{technischen Artikeleigenschaften} extrahieren: 
 
 \begin{itemize} 
     \item Typbezeichnungen, 
@@ -674,19 +671,18 @@ Abbildung \ref{fig:lexikalvektor} stellt den Aufbau des Lexikalvektors für das 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[source] (article) at (-7,1.5) {XML-Artikel\\Motor}; 
-        \node[source] (macro) at (-7,-1.5) {.ema-Makro\\Motor}; 
+        \node[source] (article) at (-7,0.5) {XML-Artikel\\Motor};  
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalische Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
         \node[feature] (type) at (-1,2.5) {Typbezeichnung\\DRN112M4}; 
         \node[feature] (series) at (-1,0.5) {Produktserie\\DRN}; 
-        \node[feature] (description) at (-1,-1.5) {Beschreibung\\Wasserdichte Ausführung}; 
+        \node[feature] (description) at (-1,-1.0) {Beschreibung\\Wasserdichte Ausführung}; 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelle -> Merkmale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
         \draw[->] (article.east) -- (type.west); 
         \draw[->] (article.east) -- (series.west); 
-        \draw[->] (macro.east) -- (description.west); 
+        \draw[->] (article.east) -- (description.west); 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Lexikalvektor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         

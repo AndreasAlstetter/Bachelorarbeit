@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  20 NOV 2026 11:54
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  20 NOV 2026 15:19
  restricted system commands enabled.
  file:line:error style messages enabled.
 **"c:/Users/alstetter/OneDrive - GROBGroup/Documents/Sys_Engineering/Bachelorar
@@ -1307,4 +1307,1770 @@ Package scrkbase Info: You've told me to redefine the font selection of the
 (scrkbase)             element `sectioning' that is an alias of element
 (scrkbase)             `disposition' on input line 84.
 
-(C:
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/babel/babel.sty
+Package: babel 2025/12/11 v25.17 The multilingual framework for LuaLaTeX, pdfLa
+TeX and XeLaTeX
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/babel/luababel.de
+f
+\bbl@readstream=\read4
+\l@afrikaans=\language2
+Package babel Info: Non-standard hyphenation setup on input line 118.
+\l@ancientgreek=\language3
+\l@armenian=\language4
+\l@assamese=\language5
+\l@basque=\language6
+\l@belarusian=\language7
+\l@bengali=\language8
+\l@bokmal=\language9
+\l@bulgarian=\language10
+\l@catalan=\language11
+\l@churchslavonic=\language12
+\l@classiclatin=\language13
+\l@coptic=\language14
+\l@croatian=\language15
+\l@czech=\language16
+\l@danish=\language17
+\l@dutch=\language18
+\l@esperanto=\language19
+\l@estonian=\language20
+\l@ethiopic=\language21
+\l@finnish=\language22
+\l@french=\language23
+\l@friulan=\language24
+\l@galician=\language25
+\l@georgian=\language26
+\l@german=\language27
+\l@greek=\language28
+\l@gujarati=\language29
+\l@hindi=\language30
+\l@hungarian=\language31
+\l@icelandic=\language32
+\l@indonesian=\language33
+\l@interlingua=\language34
+\l@irish=\language35
+\l@italian=\language36
+\l@kannada=\language37
+\l@kurmanji=\language38
+\l@latin=\language39
+\l@latvian=\language40
+\l@lithuanian=\language41
+\l@liturgicallatin=\language42
+\l@macedonian=\language43
+\l@malayalam=\language44
+\l@marathi=\language45
+\l@mongolian=\language46
+\l@mongolianlmc=\language47
+\l@monogreek=\language48
+\l@ngerman=\language49
+\l@nynorsk=\language50
+\l@occitan=\language51
+\l@oriya=\language52
+\l@pali=\language53
+\l@panjabi=\language54
+\l@piedmontese=\language55
+\l@polish=\language56
+\l@portuguese=\language57
+\l@romanian=\language58
+\l@romansh=\language59
+\l@russian=\language60
+\l@sanskrit=\language61
+\l@serbian=\language62
+\l@serbianc=\language63
+\l@slovak=\language64
+\l@slovenian=\language65
+\l@spanish=\language66
+\l@swedish=\language67
+\l@swissgerman=\language68
+\l@tamil=\language69
+\l@telugu=\language70
+\l@thai=\language71
+\l@turkish=\language72
+\l@turkmen=\language73
+\l@ukenglish=\language74
+\l@ukrainian=\language75
+\l@uppersorbian=\language76
+\l@usenglishmax=\language77
+\l@welsh=\language78
+\babelcatcodetablenum=\catcodetable17
+\bbl@pattcodes=\catcodetable18
+)
+\babel@savecnt=\count386
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input li
+ne 2068.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input li
+ne 2070.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input lin
+e 2072.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input lin
+e 2073.
+LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) 
+on input line 2074.
+LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) 
+on input line 2076.
+LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) 
+on input line 2101.
+\U@D=\dimen320
+\l@unhyphenated=\language79
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/babel/luababel.de
+f
+\bbl@attr@locale=\attribute4
+)
+Package babel Info: Configuration files are deprecated, as
+(babel)             they can break document portability.
+(babel)             Reported on input line 4196.
+
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/arabi/bblopts.cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/babel/locale/en/b
+abel-english.tex)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/babel/locale/inva
+lid/babel-ngerman.tex)
+Package babel Info: Importing font and identification data for english
+(babel)             from babel-en.ini. Reported on input line 4320.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/babel-english/engli
+sh.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: Hyphen rules for 'canadian' set to \l@english
+(babel)             (\language0). Reported on input line 102.
+Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
+(babel)             (\language74). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
+(babel)             (\language74). Reported on input line 108.
+)
+Package babel Info: Importing font and identification data for ngerman
+(babel)             from babel-de.ini. Reported on input line 4320.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/babel-german/ngerma
+n.ldf
+Language: ngerman 
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/babel-german/babel-
+german.def
+Package babel Info: Making " an active character on input line 500.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/hyph-utf8/loadhyp
+h/loadhyph-de-1996.tex
+UTF-8 German hyphenation patterns (reformed orthography)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/hyph-utf8/pattern
+s/tex/hyph-de-1996.tex
+German Hyphenation Patterns (Reformed Orthography, 2006) `dehyphn-x' 2024-02-28
+ (WL))))))
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/csquotes/csquotes.s
+ty
+Package: csquotes 2026-05-19 v5.2p context-sensitive quotations (JAW)
+\csq@reset=\count387
+\csq@gtype=\count388
+\csq@glevel=\count389
+\csq@qlevel=\count390
+\csq@maxlvl=\count391
+\csq@tshold=\count392
+\csq@ltx@everypar=\toks52
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/csquotes/csquotes.d
+ef
+File: csquotes.def 2026-05-19 v5.2p csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/csquotes/csquotes.c
+fg
+File: csquotes.cfg 
+)
+Package csquotes Info: Option 'babel' depreciated.
+(csquotes)             Using 'autostyle'.
+Package csquotes Info: Enabling multilingual quotes.
+Package csquotes Info: Enabling multilingual quotes.
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/biblatex.s
+ty
+Package: biblatex 2025/07/10 v3.21 programmable bibliographies (PK/MW)
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count393
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+\c@tabx@nest=\count394
+\c@listtotal=\count395
+\c@listcount=\count396
+\c@liststart=\count397
+\c@liststop=\count398
+\c@citecount=\count399
+\c@citetotal=\count400
+\c@multicitecount=\count401
+\c@multicitetotal=\count402
+\c@instcount=\count403
+\c@maxnames=\count404
+\c@minnames=\count405
+\c@maxitems=\count406
+\c@minitems=\count407
+\c@citecounter=\count408
+\c@maxcitecounter=\count409
+\c@savedcitecounter=\count410
+\c@uniquelist=\count411
+\c@uniquename=\count412
+\c@refsection=\count413
+\c@refsegment=\count414
+\c@maxextratitle=\count415
+\c@maxextratitleyear=\count416
+\c@maxextraname=\count417
+\c@maxextradate=\count418
+\c@maxextraalpha=\count419
+\c@abbrvpenalty=\count420
+\c@highnamepenalty=\count421
+\c@lownamepenalty=\count422
+\c@maxparens=\count423
+\c@parenlevel=\count424
+\blx@tempcnta=\count425
+\blx@tempcntb=\count426
+\blx@tempcntc=\count427
+\c@blx@maxsection=\count428
+\blx@maxsegment@0=\count429
+\blx@notetype=\count430
+\blx@parenlevel@text=\count431
+\blx@parenlevel@foot=\count432
+\blx@sectionciteorder@0=\count433
+\blx@sectionciteorderinternal@0=\count434
+\blx@entrysetcounter=\count435
+\blx@biblioinstance=\count436
+\labelnumberwidth=\skip82
+\labelalphawidth=\skip83
+\biblabelsep=\skip84
+\bibitemsep=\skip85
+\bibnamesep=\skip86
+\bibinitsep=\skip87
+\bibparsep=\skip88
+\bibhang=\skip89
+\blx@bcfin=\read5
+\blx@bcfout=\write4
+\blx@langwohyphens=\language80
+\c@mincomprange=\count437
+\c@maxcomprange=\count438
+\c@mincompwidth=\count439
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/blx-dm.def
+File: blx-dm.def 2025/07/10 v3.21 biblatex datamodel (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'authoryear.dbx' not found.
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count440
+\c@savedafterword=\count441
+\c@annotator=\count442
+\c@savedannotator=\count443
+\c@author=\count444
+\c@savedauthor=\count445
+\c@bookauthor=\count446
+\c@savedbookauthor=\count447
+\c@commentator=\count448
+\c@savedcommentator=\count449
+\c@editor=\count450
+\c@savededitor=\count451
+\c@editora=\count452
+\c@savededitora=\count453
+\c@editorb=\count454
+\c@savededitorb=\count455
+\c@editorc=\count456
+\c@savededitorc=\count457
+\c@foreword=\count458
+\c@savedforeword=\count459
+\c@holder=\count460
+\c@savedholder=\count461
+\c@introduction=\count462
+\c@savedintroduction=\count463
+\c@namea=\count464
+\c@savednamea=\count465
+\c@nameb=\count466
+\c@savednameb=\count467
+\c@namec=\count468
+\c@savednamec=\count469
+\c@translator=\count470
+\c@savedtranslator=\count471
+\c@shortauthor=\count472
+\c@savedshortauthor=\count473
+\c@shorteditor=\count474
+\c@savedshorteditor=\count475
+\c@labelname=\count476
+\c@savedlabelname=\count477
+\c@institution=\count478
+\c@savedinstitution=\count479
+\c@lista=\count480
+\c@savedlista=\count481
+\c@listb=\count482
+\c@savedlistb=\count483
+\c@listc=\count484
+\c@savedlistc=\count485
+\c@listd=\count486
+\c@savedlistd=\count487
+\c@liste=\count488
+\c@savedliste=\count489
+\c@listf=\count490
+\c@savedlistf=\count491
+\c@location=\count492
+\c@savedlocation=\count493
+\c@organization=\count494
+\c@savedorganization=\count495
+\c@origlocation=\count496
+\c@savedoriglocation=\count497
+\c@origpublisher=\count498
+\c@savedorigpublisher=\count499
+\c@publisher=\count500
+\c@savedpublisher=\count501
+\c@language=\count502
+\c@savedlanguage=\count503
+\c@origlanguage=\count504
+\c@savedoriglanguage=\count505
+\c@pageref=\count506
+\c@savedpageref=\count507
+\shorthandwidth=\skip90
+\shortjournalwidth=\skip91
+\shortserieswidth=\skip92
+\shorttitlewidth=\skip93
+\shortauthorwidth=\skip94
+\shorteditorwidth=\skip95
+\locallabelnumberwidth=\skip96
+\locallabelalphawidth=\skip97
+\localshorthandwidth=\skip98
+\localshortjournalwidth=\skip99
+\localshortserieswidth=\skip100
+\localshorttitlewidth=\skip101
+\localshortauthorwidth=\skip102
+\localshorteditorwidth=\skip103
+Package biblatex Info: Trying to load enhanced support for Unicode engines...
+Package biblatex Info: ... file 'blx-unicode.def' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/blx-unicod
+e.def)
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/blx-compat
+.def
+File: blx-compat.def 2025/07/10 v3.21 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/biblatex.d
+ef
+File: biblatex.def 2025/07/10 v3.21 biblatex compatibility (PK/MW)
+\c@textcitecount=\count508
+\c@textcitetotal=\count509
+\c@textcitemaxnames=\count510
+\c@biburlbigbreakpenalty=\count511
+\c@biburlbreakpenalty=\count512
+\c@biburlnumpenalty=\count513
+\c@biburlucpenalty=\count514
+\c@biburllcpenalty=\count515
+\biburlbigskip=\muskip19
+\biburlnumskip=\muskip20
+\biburlucskip=\muskip21
+\biburllcskip=\muskip22
+\c@smartand=\count516
+)
+Package biblatex Info: Trying to load natbib compatibility...
+Package biblatex Info: ... file 'blx-natbib.def' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/blx-natbib
+.def
+File: blx-natbib.def 2025/07/10 v3.21 biblatex compatibility (PK/MW)
+Package biblatex Info: Delimiter 'nameyeardelim' in context '' already defined,
+ overwriting.
+)
+Package biblatex Info: Trying to load bibliography style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.bbx' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/bbx/author
+year.bbx
+File: authoryear.bbx 2025/07/10 v3.21 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/bbx/standa
+rd.bbx
+File: standard.bbx 2025/07/10 v3.21 biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count517
+\c@bbx:relatedtotal=\count518
+))
+Package biblatex Info: Trying to load citation style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.cbx' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/cbx/author
+year.cbx
+File: authoryear.cbx 2025/07/10 v3.21 biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/biblatex.c
+fg
+File: biblatex.cfg 
+)
+Package biblatex Info: LuaTeX detected.
+(biblatex)             Assuming input encoding 'utf8'.
+Package biblatex Info: Document encoding is UTF8 ....
+Package biblatex Info: ... and expl3
+(biblatex)             2025-12-24 L3 programming layer (loader) 
+(biblatex)             is new enough (at least 2020/04/06),
+(biblatex)             setting 'casechanger=expl3'.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/blx-case-e
+xpl3.sty
+Package: blx-case-expl3 2025/07/10 v3.21 expl3 case changing code for biblatex
+))
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/base/fontenc.sty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/base/makeidx.sty
+Package: makeidx 2021/10/04 v1.0m Standard LaTeX package
+)
+\@indexfile=\write5
+
+\openout5 = Bachelorarbeit.idx
+
+Writing index file Bachelorarbeit.idx
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/idxlayout/idxlayout
+.sty
+Package: idxlayout 2012/03/30 v0.4d Configurable index layout
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/tools/multicol.sty
+Package: multicol 2025/10/21 v2.0b multicolumn formatting (FMi)
+\c@tracingmulticols=\count519
+\mult@box=\box74
+\multicol@leftmargin=\dimen321
+\c@unbalance=\count520
+\c@collectmore=\count521
+\doublecol@number=\count522
+\multicoltolerance=\count523
+\multicolpretolerance=\count524
+\full@width=\dimen322
+\page@free=\dimen323
+\premulticols=\dimen324
+\postmulticols=\dimen325
+\multicolsep=\skip104
+\multicolbaselineskip=\skip105
+\partial@page=\box75
+\last@line=\box76
+\mc@boxedresult=\box77
+\maxbalancingoverflow=\dimen326
+\mult@rightbox=\box78
+\mult@grightbox=\box79
+\mult@firstbox=\box80
+\mult@gfirstbox=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\@tempa=\box96
+\@tempa=\box97
+\@tempa=\box98
+\@tempa=\box99
+\@tempa=\box100
+\@tempa=\box101
+\@tempa=\box102
+\@tempa=\box103
+\@tempa=\box104
+\@tempa=\box105
+\@tempa=\box106
+\@tempa=\box107
+\@tempa=\box108
+\@tempa=\box109
+\@tempa=\box110
+\@tempa=\box111
+\@tempa=\box112
+\@tempa=\box113
+\@tempa=\box114
+\@tempa=\box115
+\@tempa=\box116
+\@tempa=\box117
+\c@minrows=\count525
+\c@columnbadness=\count526
+\c@finalcolumnbadness=\count527
+\last@try=\dimen327
+\multicolovershoot=\dimen328
+\multicolundershoot=\dimen329
+\mult@nat@firstbox=\box118
+\colbreak@box=\box119
+\mc@col@check@num=\count528
+\g__mc_curr_col_int=\count529
+)
+\c@idxcols=\count530
+\indexcolsep=\skip106
+\indexrule=\skip107
+\ila@indentunit=\skip108
+\ila@initsep=\skip109
+) (C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/index/index.sty
+Package: index 2025/02/06 v4.04 Improved index support (dmj)
+\@indexbox=\insert252
+\indexproofstyle=\toks53
+
+
+LaTeX Warning: Command \addtocontents  has changed.
+               Check if current package is valid.
+
+)
+\idxtitle@default=\toks54
+\tf@default=\write6
+
+\openout6 = Bachelorarbeit.idx
+Package index Info: Writing index file Bachelorarbeit.idx on input line 240.
+\idxtitle@R=\toks55
+\tf@R=\write7
+
+\openout7 = Bachelorarbeit.Ridx
+Package index Info: Writing index file Bachelorarbeit.Ridx on input line 242.
+
+\openout6 = Bachelorarbeit.idx
+Package index Info: Writing index file Bachelorarbeit.idx on input line 243.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/listings/listings.s
+ty
+\lst@mode=\count531
+\lst@gtempboxa=\box120
+\lst@token=\toks56
+\lst@length=\count532
+\lst@currlwidth=\dimen330
+\lst@column=\count533
+\lst@pos=\count534
+\lst@lostspace=\dimen331
+\lst@width=\dimen332
+\lst@newlines=\count535
+\lst@lineno=\count536
+\lst@maxwidth=\dimen333
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/listings/lstpatch.s
+ty
+File: lstpatch.sty 2025/11/14 1.11b (Carsten Heinz)
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/listings/lstmisc.st
+y
+File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
+\c@lstnumber=\count537
+\lst@skipnumbers=\count538
+\lst@framebox=\box121
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/listings/listings.c
+fg
+File: listings.cfg 2025/11/14 1.11b listings configuration
+))
+Package: listings 2025/11/14 1.11b (Carsten Heinz)
+
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/listings/lstlang1.s
+ty
+File: lstlang1.sty 2025/11/14 1.11b listings language file
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/listings/lstmisc.st
+y
+File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
+))
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/cleveref/cleveref.s
+ty
+Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
+Package cleveref Info: `hyperref' support loaded on input line 2370.
+LaTeX Info: Redefining \cref on input line 2370.
+LaTeX Info: Redefining \Cref on input line 2370.
+LaTeX Info: Redefining \crefrange on input line 2370.
+LaTeX Info: Redefining \Crefrange on input line 2370.
+LaTeX Info: Redefining \cpageref on input line 2370.
+LaTeX Info: Redefining \Cpageref on input line 2370.
+LaTeX Info: Redefining \cpagerefrange on input line 2370.
+LaTeX Info: Redefining \Cpagerefrange on input line 2370.
+LaTeX Info: Redefining \labelcref on input line 2370.
+LaTeX Info: Redefining \labelcpageref on input line 2370.
+Package cleveref Info: `listings' support loaded on input line 3131.
+Package cleveref Info: always capitalise cross-reference names on input line 78
+30.
+Package cleveref Info: include cross-reference names in hyperlinks on input lin
+e 7836.
+Package cleveref Info: include cross-reference names in hyperlinks on input lin
+e 7852.
+Package cleveref Info: always capitalise cross-reference names on input line 78
+52.
+)
+==> First Aid for cleveref.sty applied!
+Package hyperref Info: Option `colorlinks' set `true' on input line 49.
+Package hyperref Info: Option `linktocpage' set `true' on input line 49.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+Package tocbasic Info: Loading of class-dependent code for package caption3
+(tocbasic)             prevented on line 50.
+
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/caption/caption3.st
+y
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen334
+\captionmargin=\dimen335
+\caption@leftmargin=\dimen336
+\caption@rightmargin=\dimen337
+\caption@width=\dimen338
+\caption@indent=\dimen339
+\caption@parindent=\dimen340
+\caption@hangindent=\dimen341
+)
+\c@caption@flags=\count539
+\c@continuedfloat=\count540
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/makecell/makecell.s
+ty
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+\rotheadsize=\dimen342
+\c@nlinenum=\count541
+\TeXr@lab=\toks57
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer
+/tikz/libraries/tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/pgf/libraries/pgf
+libraryarrows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowinset=\dimen343
+\pgfarrowlength=\dimen344
+\pgfarrowwidth=\dimen345
+\pgfarrowlinewidth=\dimen346
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer
+/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer
+/tikz/libraries/tikzlibrarydecorations.code.tex
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/pgf/modules/pgfmo
+duledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen347
+\pgfdecoratedremainingdistance=\dimen348
+\pgfdecoratedinputsegmentcompleteddistance=\dimen349
+\pgfdecoratedinputsegmentremainingdistance=\dimen350
+\pgf@decorate@distancetomove=\dimen351
+\pgf@decorate@repeatstate=\count542
+\pgfdecorationsegmentamplitude=\dimen352
+\pgfdecorationsegmentlength=\dimen353
+)
+\tikz@lib@dec@box=\box122
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/pgf/libraries/dec
+orations/pgflibrarydecorations.pathreplacing.code.tex))
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer
+/tikz/libraries/tikzlibraryfit.code.tex
+File: tikzlibraryfit.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer
+/tikz/libraries/tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/generic/pgf/libraries/sha
+pes/pgflibraryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))
+Class scrreprt Info: loading recommended package `bookmark'.
+(scrreprt)           Using `bookmark' together with `hyperref' is recommended,
+(scrreprt)           because of handling of possible bookmark level gaps.
+(scrreprt)           You can avoid loading `bookmark' with KOMA-Script option
+(scrreprt)           `bookmarkpackage=false' before \begin{document} and
+(scrreprt)           you can avoid this message adding:
+(scrreprt)             \usepackage{bookmark}
+(scrreprt)           before \begin{document} on input line 71.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/bookmark/bookmark.s
+ty
+Package: bookmark 2026-05-21 v1.32 PDF bookmarks (HO)
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/bookmark/bkm-luatex
+.def
+File: bkm-luatex.def 2026-05-21 v1.32 bookmark driver for luaTeX (HO)
+\BKM@id=\count543
+))
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/newtx/TeXGyreTermes
+X.fontspec)
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-Regular scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-Regular scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-Regular scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-Bold scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-Bold scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-Italic scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-Italic scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-Slanted scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-Slanted scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-BoldItalic scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-BoldItalic scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-BoldSlanted scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             TeXGyreTermesX-BoldSlanted scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'TeXGyreTermesX(0)' created for font
+(fontspec)             'TeXGyreTermesX' with options [Ligatures = TeX,Scale =
+(fontspec)             1,Extension = .otf,SmallCapsFeatures={RawFeature =
+(fontspec)             +pcap},Renderer=Basic,RawFeature=-ss05,Ligatures=TeX,Ext
+ension
+(fontspec)             = .otf,UprightFont = TeXGyreTermesX-Regular,BoldFont =
+(fontspec)             TeXGyreTermesX-Bold,ItalicFont =
+(fontspec)             TeXGyreTermesX-Italic,BoldItalicFont =
+(fontspec)             TeXGyreTermesX-BoldItalic,SlantedFont =
+(fontspec)             *-Slanted,BoldSlantedFont= *-BoldSlanted,Numbers =
+(fontspec)             {Monospaced,Lining}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-Regular.otf]:mode=base;script=l
+atn;language=dflt;-ss05;+tlig;+tnum;+lnum;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-Regular.otf]:mode=base;script=l
+atn;language=dflt;-ss05;+tlig;+tnum;+lnum;+smcp;+pcap;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-Bold.otf]:mode=base;script=latn
+;language=dflt;-ss05;+tlig;+tnum;+lnum;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-Bold.otf]:mode=base;script=latn
+;language=dflt;-ss05;+tlig;+tnum;+lnum;+smcp;+pcap;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-Italic.otf]:mode=base;script=la
+tn;language=dflt;-ss05;+tlig;+tnum;+lnum;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-Italic.otf]:mode=base;script=la
+tn;language=dflt;-ss05;+tlig;+tnum;+lnum;+smcp;+pcap;"
+(fontspec)             - 'slanted' (m/sl) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-Slanted.otf]:mode=base;script=l
+atn;language=dflt;-ss05;+tlig;+tnum;+lnum;"
+(fontspec)             - 'slanted small caps'  (m/scsl) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-Slanted.otf]:mode=base;script=l
+atn;language=dflt;-ss05;+tlig;+tnum;+lnum;+smcp;+pcap;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-BoldItalic.otf]:mode=base;scrip
+t=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-BoldItalic.otf]:mode=base;scrip
+t=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;+smcp;+pcap;"
+(fontspec)             - 'bold slanted' (b/sl) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-BoldSlanted.otf]:mode=base;scri
+pt=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;"
+(fontspec)             - 'bold slanted small caps'  (b/scsl) with NFSS spec.:
+(fontspec)             <->s*[1]"[TeXGyreTermesX-BoldSlanted.otf]:mode=base;scri
+pt=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;+smcp;+pcap;"
+
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 12.0pt on input line 71.
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... found 'babel' package.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/ragged2e/ragged2e.s
+ty
+Package: ragged2e 2023/06/22 v3.6 ragged2e Package
+\CenteringLeftskip=\skip110
+\RaggedLeftLeftskip=\skip111
+\RaggedRightLeftskip=\skip112
+\CenteringRightskip=\skip113
+\RaggedLeftRightskip=\skip114
+\RaggedRightRightskip=\skip115
+\CenteringParfillskip=\skip116
+\RaggedLeftParfillskip=\skip117
+\RaggedRightParfillskip=\skip118
+\JustifyingParfillskip=\skip119
+\CenteringParindent=\skip120
+\RaggedLeftParindent=\skip121
+\RaggedRightParindent=\skip122
+\JustifyingParindent=\skip123
+) (./Bachelorarbeit.aux
+Package babel Info: 'ngerman' activates 'german' shorthands.
+(babel)             Reported on input line 11.
+)
+\openout1 = Bachelorarbeit.aux
+
+LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 71.
+LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line
+ 71.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/newtx/omlntxmi.fd
+File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
+)
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 71.
+LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 
+71.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/newtx/untxexa.fd
+File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
+)
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 71.
+LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line
+ 71.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/newtx/lmsntxsy.fd
+File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
+)
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 71.
+LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input lin
+e 71.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/newtx/lmxntxexx.fd
+File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
+)
+LaTeX Font Info:    ... okay on input line 71.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pd
+f.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count544
+\scratchdimen=\dimen354
+\scratchbox=\box123
+\nofMPsegments=\count545
+\nofMParguments=\count546
+\everyMPshowfont=\toks58
+\MPscratchCnt=\count547
+\MPscratchDim=\dimen355
+\MPnumerator=\count548
+\makeMPintoPDFobject=\count549
+\everyMPtoPDFconversion=\toks59
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/epstopdf-pkg/epstop
+df-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/00miktex/epstopdf-s
+ys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+Package hyperref Info: Link coloring ON on input line 71.
+LaTeX Info: Command `\dddot' is already robust on input line 71.
+LaTeX Info: Command `\ddddot' is already robust on input line 71.
+LaTeX Info: Redefining \microtypecontext on input line 71.
+Package microtype Info: Applying patch `item' on input line 71.
+Package microtype Info: Applying patch `toc' on input line 71.
+Package microtype Info: Applying patch `eqnum' on input line 71.
+
+
+Package microtype Warning: Unable to apply patch `footnote' on input line 71.
+
+Package microtype Info: Applying patch `verbatim' on input line 71.
+LaTeX Info: Redefining \microtypesetup on input line 71.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+Package microtype Info: Patching command `\showhyphens'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of spacing.
+Package microtype Info: No adjustment of kerning.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `TeXGyreTermesX' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+*geometry* driver: auto-detecting
+*geometry* detected driver: luatex
+*geometry* verbose mode - [ preamble ] result:
+* pass: disregarded the geometry package!
+* \paperwidth=597.50793pt
+* \paperheight=845.04694pt
+* \textwidth=459.6215pt
+* \textheight=621.0pt
+* \oddsidemargin=-3.32678pt
+* \evensidemargin=-3.32678pt
+* \topmargin=-7.26639pt
+* \headheight=18.125pt
+* \headsep=21.75pt
+* \topskip=12.0pt
+* \footskip=50.75pt
+* \marginparwidth=45.96214pt
+* \marginparsep=12.8401pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package biblatex Info: Trying to load language 'ngerman'...
+Package biblatex Info: ... file 'ngerman.lbx' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/lbx/ngerma
+n.lbx
+File: ngerman.lbx 2025/07/10 v3.21 biblatex localization (PK/MW)
+Package biblatex Info: Trying to load language 'german'...
+Package biblatex Info: ... file 'german.lbx' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/lbx/german
+.lbx
+File: german.lbx 2025/07/10 v3.21 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load language 'german'...
+Package biblatex Info: ... file 'german.lbx' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/lbx/german
+.lbx
+File: german.lbx 2025/07/10 v3.21 biblatex localization (PK/MW)
+))
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/lbx/englis
+h.lbx
+File: english.lbx 2025/07/10 v3.21 biblatex localization (PK/MW)
+)
+Package biblatex Info: LuaTeX detected.
+(biblatex)             Assuming input encoding 'utf8'.
+Package biblatex Info: Data encoding 'utf8' specified.
+(biblatex)             No need to reencode data.
+Package biblatex Info: Input encoding 'ascii' forced by
+(biblatex)             'safeinputenc' option.
+
+\openout4 = Bachelorarbeit.bcf
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'Bachelorarbeit.bbl' found.
+ (./Bachelorarbeit.bbl
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 49.
+)
+Package biblatex Info: Reference section=0 on input line 71.
+Package biblatex Info: Reference segment=0 on input line 71.
+\c@lstlisting=\count550
+Package tocbasic Info: setting babel extension for `lol' on input line 71.
+\scr@dte@lstlisting@maxnumwidth=\skip124
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+\g__cctab_next_cctab=\catcodetable19
+Package cleveref Info: loaded `ngerman' language definitions on input line 73.
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: luatex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(76.82243pt, 478.00638pt, 42.67912pt)
+* v-part:(T,H,B)=(56.9055pt, 785.29605pt, 2.84538pt)
+* \paperwidth=597.50793pt
+* \paperheight=845.04694pt
+* \textwidth=478.00638pt
+* \textheight=785.29605pt
+* \oddsidemargin=4.55244pt
+* \evensidemargin=4.55244pt
+* \topmargin=-37.11449pt
+* \headheight=0.0pt
+* \headsep=21.75pt
+* \topskip=12.0pt
+* \footskip=50.75pt
+* \marginparwidth=45.96214pt
+* \marginparsep=12.8401pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Font Info:    Trying to load font information for TU+phv on input line 77
+.
+LaTeX Font Info:    No file TUphv.fd. on input line 77.
+
+
+LaTeX Font Warning: Font shape `TU/phv/m/n' undefined
+(Font)              using `TU/lmr/m/n' instead on input line 77.
+
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/microtype/mt-cmr.cf
+g
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
+(RS)
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmr' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+warning  (file 03_abbildungen/01_tha/Logo.pdf) (pdf inclusion): PDF inclusion: f
+ound PDF version '1.6', but at most version '1.5' allowed
+<03_abbildungen/01_tha/Logo.pdf, id=6, 680.0153pt x 151.00485pt>
+File: 03_abbildungen/01_tha/Logo.pdf Graphic file (type pdf)
+<use 03_abbildungen/01_tha/Logo.pdf>
+Package luatex.def Info: 03_abbildungen/01_tha/Logo.pdf  used on input line 77.
+
+(luatex.def)             Requested size: 170.71652pt x 37.9101pt.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `phv' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+LaTeX Font Warning: Font shape `TU/phv/b/n' undefined
+(Font)              using `TU/phv/m/n' instead on input line 77.
+
+
+Overfull \hbox (30.07208pt too wide) in paragraph at lines 77--77
+[][]  [] 
+ []
+
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/newtx/ot1minntx.fd) (C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/umsa.fd)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/microtype/mt-msa.cf
+g) (C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/umsb.fd
+)
+(C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/microtype/mt-msb.cf
+g) (C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/newtx/untxmia.fd
+) (C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/newtx/untxsym.fd) (C:/Users/alstetter/AppData/Local/Programs/MiKTeX/tex/latex/newtx/untxsyc.fd)
+Underfull \hbox (badness 10000) in alignment at lines 77--77
+[][]
+ []
+
+
+Overfull \hbox (30.07208pt too wide) in paragraph at lines 77--77
+[][]  [] 
+ []
+
+[1
+
+
+
+
+{C:/Users/alstetter/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}<./03_abbil
+dungen/01_tha/Logo.pdf>]
+Package biblatex Info: Reference segment=1 on input line 78.
+Package biblatex Info: Setting label 'refsegment:01' on input line 78.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmss' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+Package tocbasic Info: character protrusion at toc deactivated on input line 78
+.
+ (./Bachelorarbeit.toc
+Package cleveref Info: loaded `ngerman' language definitions on input line 1.
+Package cleveref Info: loaded `ngerman' language definitions on input line 2.
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 12.0pt on input line 4.
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 8.8pt on input line 4.
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 6.6pt on input line 4.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 12.0pt on input line 4.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 8.8pt on input line 4.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 6.6pt on input line 4.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 12.0pt on input line 4.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 8.8pt on input line 4.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 6.6pt on input line 4.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 12.0pt on input line 4.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 8.8pt on input line 4.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 6.6pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 12.0pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 8.8pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 6.6pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 12.0pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 8.8pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 6.6pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 12.0pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 8.8pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 6.6pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 12.0pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 8.8pt on input line 4.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 6.6pt on input line 4.
+ [2
+
+
+] [3])
+\tf@toc=\write8
+
+\openout8 = Bachelorarbeit.toc
+ [4]
+(./01_kapitel/01_motivation.tex
+chapter 1.
+Package biblatex Info: Reference segment=2 on input line 1.
+Package biblatex Info: Setting label 'refsegment:02' on input line 1.
+[1
+
+
+
+]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
+(Font)              scaled to size 10.95pt on input line 41.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 14.4pt on input line 41.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
+(Font)              scaled to size 12.0pt on input line 45.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 53.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
+(Font)              scaled to size 14.4pt on input line 92.
+ [2] [3] [4]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
+(Font)              scaled to size 10.0pt on input line 282.
+ [5]) (./01_kapitel/02_stand_der_technik.tex [6]
+chapter 2.
+Package biblatex Info: Reference segment=3 on input line 1.
+Package biblatex Info: Setting label 'refsegment:03' on input line 1.
+[7
+
+]
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 12.0pt on input line 86.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 8.8pt on input line 86.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 6.6pt on input line 86.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 8.8pt on input line 86.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 6.6pt on input line 86.
+ [8] [9] [10]
+
+LaTeX Warning: Reference `vom_vektor_zum_embedding' on page 11 undefined on inp
+ut line 227.
+
+[11]
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 10.95pt on input line 268.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 8.0pt on input line 268.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 6.1pt on input line 268.
+
+Overfull \hbox (9.93742pt too wide) in paragraph at lines 288--289
+ [][] 
+ []
+
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
+(Font)              scaled to size 12.0pt on input line 298.
+[12]
+Overfull \hbox (18.7847pt too wide) in paragraph at lines 384--385
+ [][] 
+ []
+
+[13] [14] [15] [16]
+Overfull \vbox (15.8601pt too high) has occurred while \output is active []
+
+
+[17]
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 14.4pt on input line 626.
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 10.5pt on input line 626.
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 7.9pt on input line 626.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 14.4pt on input line 626.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 10.5pt on input line 626.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 7.9pt on input line 626.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 14.4pt on input line 626.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 10.5pt on input line 626.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 7.9pt on input line 626.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 14.4pt on input line 626.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 10.5pt on input line 626.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 7.9pt on input line 626.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 14.4pt on input line 626.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 10.5pt on input line 626.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 7.9pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 14.4pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 10.5pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 7.9pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 14.4pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 10.5pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 7.9pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 14.4pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 10.5pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 7.9pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 14.4pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 10.5pt on input line 626.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 7.9pt on input line 626.
+ [18] [19] [20] [21]) (./01_kapitel/03_vorgehensweise.tex [22]
+chapter 3.
+Package biblatex Info: Reference segment=4 on input line 1.
+Package biblatex Info: Setting label 'refsegment:04' on input line 1.
+[23
+
+]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 99.
+ [24]
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+[]|\TU/TeXGyreTermesX(0)/m/n/12 De-sign & Ent-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--118
+[]|\TU/TeXGyreTermesX(0)/m/n/12 De-sign & Ent-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--119
+[]|\TU/TeXGyreTermesX(0)/m/n/12 De-sign & Ent-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\TU/TeXGyreTermesX(0)/m/n/12 De-sign & Ent-
+ []
+
+
+Underfull \hbox (badness 6944) in paragraph at lines 121--122
+[]|\TU/TeXGyreTermesX(0)/m/n/12 A5: Eva-lua-ti-ons-er-geb-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--123
+[]|\TU/TeXGyreTermesX(0)/m/n/12 A6: Nutzen- und
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--123
+\TU/TeXGyreTermesX(0)/m/n/12 Wirt-schaft-lich-keits-be-
+ []
+
+
+LaTeX Warning: Reference `modellansätze' on page 25 undefined on input line 13
+5.
+
+
+LaTeX Warning: Reference `sec:validierungsansätze' on page 25 undefined on inp
+ut line 144.
+
+[25]) (./01_kapitel/04_datengrundlage_und_trainingsvorbereitung.tex [26]
+chapter 4.
+Package biblatex Info: Reference segment=5 on input line 1.
+Package biblatex Info: Setting label 'refsegment:05' on input line 1.
+
+Overfull \hbox (33.01103pt too wide) in paragraph at lines 66--67
+ [][] 
+ []
+
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
+(Font)              scaled to size 10.95pt on input line 67.
+[27
+
+]
+Overfull \hbox (22.34416pt too wide) in paragraph at lines 132--133
+ [][] 
+ []
+
+[28]
+LaTeX Font Info:    Trying to load font information for TU+newtxtt on input lin
+e 140.
+LaTeX Font Info:    No file TUnewtxtt.fd. on input line 140.
+
+
+LaTeX Font Warning: Font shape `TU/newtxtt/m/n' undefined
+(Font)              using `TU/lmr/m/n' instead on input line 140.
+
+
+Overfull \hbox (2.09944pt too wide) in paragraph at lines 166--167
+ [][] 
+ []
+
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `newtxtt' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+[29] [30] [31]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/it' will be
+(Font)              scaled to size 12.0pt on input line 295.
+ [32]
+Overfull \hbox (32.12457pt too wide) in paragraph at lines 365--366
+ [][] 
+ []
+
+[33]
+Overfull \hbox (10.24878pt too wide) in paragraph at lines 437--439
+ [][] 
+ []
+
+[34]
+
+LaTeX Warning: Reference `sec:entfernen_unvollständiger_artikel' on page 35 un
+defined on input line 448.
+
+
+LaTeX Warning: Reference `sec:entfernen_unvollständiger_artikel' on page 35 un
+defined on input line 449.
+
+[35]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 6.1pt on input line 524.
+ [36] [37]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/it' will be
+(Font)              scaled to size 10.95pt on input line 641.
+ [38] [39
+Missing character: There is no n (U+006E) in font nullfont!
+Missing character: There is no o (U+006F) in font nullfont!
+Missing character: There is no d (U+0064) in font nullfont!
+Missing character: There is no e (U+0065) in font nullfont!
+Missing character: There is no [ (U+005B) in font nullfont!
+Missing character: There is no f (U+0066) in font nullfont!
+Missing character: There is no o (U+006F) in font nullfont!
+Missing character: There is no n (U+006E) in font nullfont!
+Missing character: There is no t (U+0074) in font nullfont!
+Missing character: There is no = (U+003D) in font nullfont!
+Missing character: There is no ] (U+005D) in font nullfont!
+Missing character: There is no a (U+0061) in font nullfont!
+Missing character: There is no t (U+0074) in font nullfont!
+Missing character: There is no ( (U+0028) in font nullfont!
+Missing character: There is no 0 (U+0030) in font nullfont!
+Missing character: There is no , (U+002C) in font nullfont!
+Missing character: There is no 1 (U+0031) in font nullfont!
+Missing character: There is no 1 (U+0031) in font nullfont!
+Missing character: There is no ) (U+0029) in font nullfont!
+Missing character: There is no E (U+0045) in font nullfont!
+Missing character: There is no i (U+0069) in font nullfont!
+Missing character: There is no n (U+006E) in font nullfont!
+Missing character: There is no f (U+0066) in font nullfont!
+Missing character: There is no l (U+006C) in font nullfont!
+Missing character: There is no u (U+0075) in font nullfont!
+Missing character: There is no s (U+0073) in font nullfont!
+Missing character: There is no s (U+0073) in font nullfont!
+Missing character: There is no t (U+0074) in font nullfont!
+Missing character: There is no e (U+0065) in font nullfont!
+Missing character: There is no x (U+0078) in font nullfont!
+Missing character: There is no t (U+0074) in font nullfont!
+Missing character: There is no b (U+0062) in font nullfont!
+Missing character: There is no a (U+0061) in font nullfont!
+Missing character: There is no s (U+0073) in font nullfont!
+Missing character: There is no i (U+0069) in font nullfont!
+Missing character: There is no e (U+0065) in font nullfont!
+Missing character: There is no r (U+0072) in font nullfont!
+Missing character: There is no t (U+0074) in font nullfont!
+Missing character: There is no e (U+0065) in font nullfont!
+Missing character: There is no r (U+0072) in font nullfont!
+Missing character: There is no I (U+0049) in font nullfont!
+Missing character: There is no n (U+006E) in font nullfont!
+Missing character: There is no f (U+0066) in font nullfont!
+Missing character: There is no o (U+006F) in font nullfont!
+Missing character: There is no r (U+0072) in font nullfont!
+Missing character: There is no m (U+006D) in font nullfont!
+Missing character: There is no a (U+0061) in font nullfont!
+Missing character: There is no t (U+0074) in font nullfont!
+Missing character: There is no i (U+0069) in font nullfont!
+Missing character: There is no o (U+006F) in font nullfont!
+Missing character: There is no n (U+006E) in font nullfont!
+Missing character: There is no e (U+0065) in font nullfont!
+Missing character: There is no n (U+006E) in font nullfont!
+Missing character: There is no a (U+0061) in font nullfont!
+Missing character: There is no u (U+0075) in font nullfont!
+Missing character: There is no f (U+0066) in font nullfont!
+Missing character: There is no d (U+0064) in font nullfont!
+Missing character: There is no i (U+0069) in font nullfont!
+Missing character: There is no e (U+0065) in font nullfont!
+Missing character: There is no M (U+004D) in font nullfont!
+Missing character: There is no a (U+0061) in font nullfont!
+Missing character: There is no k (U+006B) in font nullfont!
+Missing character: There is no r (U+0072) in font nullfont!
+Missing character: There is no o (U+006F) in font nullfont!
+Missing character: There is no e (U+0065) in font nullfont!
+Missing character: There is no m (U+006D) in font nullfont!
+Missing character: There is no p (U+0070) in font nullfont!
+Missing character: There is no f (U+0066) in font nullfont!
+Missing character: There is no e (U+0065) in font nullfont!
+Missing character: There is no h (U+0068) in font nullfont!
+Missing character: There is no l (U+006C) in font nullfont!
+Missing character: There is no u (U+0075) in font nullfont!
+Missing character: There is no n (U+006E) in font nullfont!
+Missing character: There is no g (U+0067) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+]
+Overfull \hbox (14.24837pt too wide) in paragraph at lines 695--697
+ [][] 
+ []
+
+[40] [41] [42]) (./01_kapitel/05_auswahl_des_modellansatzes.tex [43]
+chapter 5.
+Package biblatex Info: Reference segment=6 on input line 1.
+Package biblatex Info: Setting label 'refsegment:06' on input line 1.
+
+LaTeX Warning: Reference `sec:validierungsansätze' on page 44 undefined on inp
+ut line 31.
+
+[44
+
+] [45] [46]
+
+LaTeX Warning: Reference `sec:sentence_transformer' on page 47 undefined on inp
+ut line 97.
+
+[47] [48]
+Underfull \hbox (badness 10000) in paragraph at lines 175--175
+[]|\TU/TeXGyreTermesX(0)/m/n/12 Embedding-Modell
+ []
+
+[49]) (./01_kapitel/06_konzeption_des_empfehlungssystems.tex [50]
+chapter 6.
+Package biblatex Info: Reference segment=7 on input line 1.
+Package biblatex Info: Setting label 'refsegment:07' on input line 1.
+[51
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 67--67
+[]|\TU/TeXGyreTermesX(0)/b/n/12 Pro-zess-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 71--72
+[]|\TU/TeXGyreTermesX(0)/m/n/12 Auf-tei-lung der Da-ten in Trainings-,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 72--72
+[]|\TU/TeXGyreTermesX(0)/m/n/12 Trai-nings-vor-be-rei-
+ []
+
+[52] [53] [54] [55] [56] [57] [58]
+Overfull \hbox (7.40332pt too wide) in paragraph at lines 385--386
+ [][] 
+ []
+
+[59] [60]) (./01_kapitel/07_implementierung_des_modells.tex [61]
+chapter 7.
+Package biblatex Info: Reference segment=8 on input line 3.
+Package biblatex Info: Setting label 'refsegment:08' on input line 3.
+
+LaTeX Warning: Reference `chap:analyse_der_datenstrukturen' on page 62 undefine
+d on input line 19.
+
+[62
+
+]
+
+LaTeX Font Warning: Font shape `TU/newtxtt/b/n' undefined
+(Font)              using `TU/newtxtt/m/n' instead on input line 85.
+
+[63]
+
+LaTeX Warning: Reference `chap:analyse_der_datenstrukturen' on page 64 undefine
+d on input line 122.
+
+[64]
+
+LaTeX Warning: Reference `chap:analyse_der_datenstrukturen' on page 65 undefine
+d on input line 134.
+
+) (./01_kapitel/08_evaluierung.tex [65]
+chapter 8.
+Package biblatex Info: Reference segment=9 on input line 1.
+Package biblatex Info: Setting label 'refsegment:09' on input line 1.
+[66
+
+] [67]
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
+[]|\TU/TeXGyreTermesX(0)/m/n/12 L1-Regularisierung auf 0,1 und L2-
+ []
+
+[68] [69] [70]) (./01_kapitel/09_diskussion.tex [71]
+chapter 9.
+Package biblatex Info: Reference segment=10 on input line 3.
+Package biblatex Info: Setting label 'refsegment:010' on input line 3.
+[72
+
+]
+chapter 10.
+Package biblatex Info: Reference segment=11 on input line 17.
+Package biblatex Info: Setting label 'refsegment:011' on input line 17.
+[73
+
+] [74] [75]) (./01_kapitel/10_fazit_und_ausblick.tex [76]
+chapter 11.
+Package biblatex Info: Reference segment=12 on input line 2.
+Package biblatex Info: Setting label 'refsegment:012' on input line 2.
+) [77
+
+]
+Package biblatex Info: Reference segment=13 on input line 97.
+Package biblatex Info: Setting label 'refsegment:013' on input line 97.
+Package tocbasic Info: character protrusion at lof deactivated on input line 97
+.
+ (./Bachelorarbeit.lof
+Package cleveref Info: loaded `ngerman' language definitions on input line 1.
+Package cleveref Info: loaded `ngerman' language definitions on input line 2.
+ [78
+
+] [79])
+\tf@lof=\write9
+
+\openout9 = Bachelorarbeit.lof
+ [80]
+Package biblatex Info: Reference segment=14 on input line 98.
+Package biblatex Info: Setting label 'refsegment:014' on input line 98.
+Package tocbasic Info: character protrusion at lot deactivated on input line 98
+.
+ (./Bachelorarbeit.lot
+Package cleveref Info: loaded `ngerman' language definitions on input line 1.
+Package cleveref Info: loaded `ngerman' language definitions on input line 2.
+)
+\tf@lot=\write10
+
+\openout10 = Bachelorarbeit.lot
+ [81
+
+]
+chapter without number
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
+(Font)              scaled to size 10.0pt on input line 101.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sc' will be
+(Font)              scaled to size 10.0pt on input line 101.
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 10.0pt on input line 101.
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 7.3pt on input line 101.
+LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
+(Font)              scaled to size 5.5pt on input line 101.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 10.0pt on input line 101.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 7.3pt on input line 101.
+LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
+(Font)              scaled to size 5.5pt on input line 101.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 10.0pt on input line 101.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 7.3pt on input line 101.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 5.5pt on input line 101.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 10.0pt on input line 101.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 7.3pt on input line 101.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 5.5pt on input line 101.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 10.0pt on input line 101.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 7.3pt on input line 101.
+LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
+(Font)              scaled to size 5.5pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 10.0pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 7.3pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 5.5pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 10.0pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 7.3pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 5.5pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 10.0pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 7.3pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 5.5pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 10.0pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 7.3pt on input line 101.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 5.5pt on input line 101.
+[82
+
+] [83] (./Bachelorarbeit.ind)
+
+Package caption Warning: Unused \captionsetup[lstlisting] on input line 69.
+See the caption package documentation for explanation.
+
+[84] (./Bachelorarbeit.aux
+Package cleveref Info: loaded `ngerman' language definitions on input line 11.
+Package cleveref Info: loaded `ngerman' language definitions on input line 12.
+)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2020/03/25>
+ ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
+
+Package logreq Info: Writing requests to 'Bachelorarbeit.run.xml'.
+
+\openout1 = Bachelorarbeit.run.xml
+)
+
+Here is how much of LuaTeX's memory you used:
+ 58208 strings out of 476081
+ 156261,2373549 words of node,token memory allocated
+ 41448 words of node memory still in use:
+   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 6941 kern, 1 penalty, 3 glyph,
+ 1993 attribute, 102 glue_spec, 998 attribute_list, 2 write, 1 pdf_action nodes
+   avail lists: 1:11,2:2928,3:1545,4:302,5:665,6:289,7:9227,8:55,9:969,10:35,11:
+1075,12:1
+ 78732 multiletter control sequences out of 65536+600000
+ 332 fonts using 28213343 bytes
+ 110i,20n,115p,11311b,3583s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/opentype/public/newtx/Te
+XGyreTermesX-Regular.otf><c:/users/alstetter/appdata/local/programs/miktex/fonts
+/opentype/public/lm/lmsans10-bold.otf><C:/Users/alstetter/AppData/Local/Programs
+/MiKTeX/fonts/opentype/public/newtx/TeXGyreTermesX-BoldItalic.otf><C:/Users/alst
+etter/AppData/Local/Programs/MiKTeX/fonts/opentype/public/newtx/TeXGyreTermesX-I
+talic.otf>{C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/newt
+x/ntx-ot1-tlf.enc}<C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/openty
+pe/public/newtx/TeXGyreTermesX-Bold.otf><C:/Users/alstetter/AppData/Local/Progra
+ms/MiKTeX/fonts/opentype/public/newtx/TeXGyreTermesX-Regular.otf><c:/users/alste
+tter/appdata/local/programs/miktex/fonts/opentype/public/lm/lmsans12-regular.otf
+><c:/users/alstetter/appdata/local/programs/miktex/fonts/opentype/public/lm/lmsa
+ns17-regular.otf><c:/users/alstetter/appdata/local/programs/miktex/fonts/opentyp
+e/public/lm/lmroman7-regular.otf><c:/users/alstetter/appdata/local/programs/mikt
+ex/fonts/opentype/public/lm/lmroman10-regular.otf><c:/users/alstetter/appdata/lo
+cal/programs/miktex/fonts/opentype/public/lm/lmroman17-regular.otf><c:/users/als
+tetter/appdata/local/programs/miktex/fonts/opentype/public/lm/lmroman12-regular.
+otf><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/N
+ewTXMI.pfb><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+newtx/txexs.pfb><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/newtx/txmiaX.pfb><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/newtx/txsys.pfb><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/newtx/ztmb.pfb><C:/Users/alstetter/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/newtx/ztmr.pfb>
+Output written on Bachelorarbeit.pdf (88 pages, 659198 bytes).
+
+PDF statistics: 1547 PDF objects out of 1728 (max. 8388607)
+ 325 named destinations out of 1000 (max. 1048576)
+ 856 words of extra memory for PDF output out of 10000 (max. 100000000)
+
