@@ -9,23 +9,22 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {5.1}{\ignorespaces Eignungsbewertung der betrachteten Modellansätze}}{49}{table.caption.33}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Gemeinsamkeiten und Unterschiede zwischen Training, Validierung, Test und Anwendung}}{55}{table.caption.34}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Verarbeitungsstufen des Empfehlungssystems}}{59}{table.caption.36}%
-\contentsline {table}{\numberline {6.3}{\ignorespaces Beispielhafte Vergleichsmerkmale zwischen Anfrage und Makrokandidat}}{65}{table.caption.43}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces Gemeinsamkeiten und Unterschiede zwischen Training, Validierung, Test und Anwendung}}{59}{table.caption.36}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {7.1}{\ignorespaces Dimensionen der erzeugten Rankingmatrizen}}{67}{table.caption.45}%
-\contentsline {table}{\numberline {7.2}{\ignorespaces Variierte Hyperparameter der Grid-Search \blx@tocontentsinit {0}\parencite {srcStep931}}}{68}{table.caption.46}%
+\contentsline {table}{\numberline {7.1}{\ignorespaces Beispielhafte Bildung von Vergleichsmerkmalen zwischen Anfrageprofil und Makroprofil}}{65}{table.caption.37}%
+\contentsline {table}{\numberline {7.2}{\ignorespaces Dimensionen der erzeugten Rankingmatrizen}}{66}{table.caption.38}%
+\contentsline {table}{\numberline {7.3}{\ignorespaces Variierte Hyperparameter der Grid-Search \blx@tocontentsinit {0}\parencite {srcStep931}}}{67}{table.caption.39}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {8.1}{\ignorespaces Untersuchte Konfigurationsparameter}}{72}{table.caption.47}%
-\contentsline {table}{\numberline {8.2}{\ignorespaces Referenzkonfiguration A01}}{73}{table.caption.48}%
-\contentsline {table}{\numberline {8.3}{\ignorespaces Abweichungen der Konfigurationen gegenüber der Referenz A01}}{73}{table.caption.49}%
-\contentsline {table}{\numberline {8.4}{\ignorespaces Ergebnisse der A01--A09-Konfigurationen auf dem Testdatensatz}}{74}{table.caption.50}%
-\contentsline {table}{\numberline {8.5}{\ignorespaces Ergebnisse der besten Konfiguration A08}}{76}{table.caption.51}%
+\contentsline {table}{\numberline {8.1}{\ignorespaces Untersuchte Konfigurationsparameter}}{71}{table.caption.40}%
+\contentsline {table}{\numberline {8.2}{\ignorespaces Referenzkonfiguration A01}}{72}{table.caption.41}%
+\contentsline {table}{\numberline {8.3}{\ignorespaces Abweichungen der Konfigurationen gegenüber der Referenz A01}}{72}{table.caption.42}%
+\contentsline {table}{\numberline {8.4}{\ignorespaces Ergebnisse der A01--A09-Konfigurationen auf dem Testdatensatz}}{73}{table.caption.43}%
+\contentsline {table}{\numberline {8.5}{\ignorespaces Ergebnisse der besten Konfiguration A08}}{75}{table.caption.44}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {10.1}{\ignorespaces Übersicht der zentralen Grenzen und Ansatzpunkte}}{78}{table.caption.52}%
-\contentsline {table}{\numberline {10.2}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Testsplit}}{80}{table.caption.53}%
-\contentsline {table}{\numberline {10.3}{\ignorespaces Top-1-Analyse der Vorhersagen auf dem Testdatensatz}}{80}{table.caption.54}%
+\contentsline {table}{\numberline {10.1}{\ignorespaces Übersicht der zentralen Grenzen und Ansatzpunkte}}{77}{table.caption.45}%
+\contentsline {table}{\numberline {10.2}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Testsplit}}{79}{table.caption.46}%
+\contentsline {table}{\numberline {10.3}{\ignorespaces Top-1-Analyse der Vorhersagen auf dem Testdatensatz}}{79}{table.caption.47}%
 \addvspace {10\p@ }
 \def \@chapapp {\appendixname }
 \addvspace {10\p@ }

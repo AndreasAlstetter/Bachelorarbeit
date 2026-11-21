@@ -22,7 +22,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Beispielhafte Struktur eines XML-Artikels für einen Elektromotor. Die hierarchische Organisation ermöglicht die strukturierte Speicherung von \textit {technischen Artikeleigenschaften} eines Motors nach einem vorgegebenen Schema.}}{28}{figure.caption.20}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Beispielhafte Struktur eines Motor-Makros im .ema-Format. Das Makro beschreibt die technische Umsetzung eines Elektromotors im Schaltplan und enthält Informationen zu Anschlussstrukturen, Bezeichnungen und Makrovarianten.}}{29}{figure.caption.21}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Beispiel einer n:1-Beziehung zwischen Artikeln und Makros. Mehrere Artikel verweisen über die Eigenschaft \texttt {P\_ARTICLE\_MACRO} auf dasselbe Makro.}}{29}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Beispiel einer n:1-Beziehung zwischen Artikeln und Makros. Mehrere Artikel verweisen über die Eigenschaft \texttt {P\_ARTICLE\_MACRO} auf dasselbe Makro.}}{30}{figure.caption.22}%
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Beispiel für vollständige und unvollständige Artikel- und Makrodaten. Fehlende \textit {technischen Artikeleigenschaften} sorgen für Informationslücken im späteren Lernprozess und werden daher aus den Artikel- und Makrodaten entfernt.}}{31}{figure.caption.23}%
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Auswirkung redundanter Artikel. Mehrfach vorhandene Daten erhöhen künstlich deren Gewichtung. Durch die Entfernung redundanter Daten wird diese Übergewichtung verhindert.}}{32}{figure.caption.24}%
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Nicht relevanten Metadaten. \textit {Technische Artikeleigenschaften} bleiben erhalten, während Metadaten ohne relevanten Informationsgehalt entfernt werden.}}{33}{figure.caption.25}%
@@ -35,7 +35,8 @@
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Technische Funktion der Trainings-, Validierungs- und Testdaten. Während die Trainingsdaten für das Erlernen technischer Zusammenhänge genutzt werden, dienen die Validierungsdaten der Überwachung und Anpassung des Modells. Die Testdaten werden ausschließlich zur abschließenden Bewertung der Leistungsfähigkeit auf unbekannten Daten verwendet.}}{41}{figure.caption.32}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Gesamtarchitektur und Datenfluss des Empfehlungssystems während Training, Validierung, Test und Anwendung}}{57}{figure.caption.35}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Fachliches Datenmodell des Empfehlungssystems. Artikel-, Makro- und Lexikalvektoren dienen sowohl der Bildung von Anfrageprofilen als auch von Makroprofilen. Aus dem Anfrageprofil werden makroidentifizierende Informationen entfernt. Die Gesamtheit der Makroprofile bildet den Suchraum der Makrokandidaten. Aus dem Vergleich eines Anfrageprofils mit dem Suchraum entstehen Vergleichsmerkmale, welche zu Anfrage-Kandidat-Paaren zusammengeführt und anschließend durch LambdaMART bewertet werden. }}{54}{figure.caption.34}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Prozessarchitektur des Empfehlungssystems. Der Trainingsprozess erzeugt Makroprofile und das trainierte LambdaMART-Modell. Beide Artefakte werden anschließend für Validierung, Test und Anwendung wiederverwendet. }}{56}{figure.caption.35}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
