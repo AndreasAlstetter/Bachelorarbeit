@@ -12,59 +12,220 @@ Das Ziel dieses Kapitels besteht daher in der Entwicklung einer fachlichen Archi
 \subsection{Makroprofil}
 \label{sec:makroprofil}
 
-Ein \textit{Makroprofil} wird aus den Artikel-, Makro- und Lexikalvektoren aller einem Makro zugeordneten Trainingsartikel erstellt. Der Artikelvektor liefert hierbei die \textit{technischen Artikeleigenschaften}, 
-der Makrovektor die \textit{technischen Makroeigenschaften} und der Lexikalvektor die \textit{technischen Hinweise} aus den Trainingsartikeln.
+Ein \textit{Makroprofil} wird aus einem Makro und dessen zugeordneten Trainingsartikel erstellt (vergleiche Kapitel \ref{sec:artikel_macro_zuordnungen}). 
+Ein Artikel liefert dabei die \textit{technischen Artikeleigenschaften} und das Makro die \textit{technischen Makroeigenschaften}.
+Die \textit{technischen Makroeigenschaften} sind somit Informationen, die für alle Artikel eines Makros gelten. 
+Beispielsweise hat ein Makro eines Elektormotors ein Plus-Anschluss und einen Minus-Anschluss. Folglich benötigen alle diesem Makro zugeordneten Artikel auch diese Anschlüsse.
+Weicht ein Artikel von den \textit{technischen Makroeigenschaften} des Makros ab, dann ist dieser einem anderem Makro und dessen Makroprofil zugeordnet.
 Enthalten die einem Makro zugeordneten Artikel beispielsweise die Spannungswerte \[ \{380V,\;400V,\;420V\}, \] dann wird jeder Wert ins \textit{Makroprofil} übernommen. 
-Dadurch können unterschiedliche Ausprägungen eines Makros berücksichtigt werden, ohne Informationen durch eine Verdichtung auf einen Einzelwert zu verlieren. 
-Ein \textit{Makroprofil} beschreibt somit die Menge aller Eigenschaften und Hinweise, die innerhalb eines Makros und dessen zugeordneten Artikeln beobachtet werden können. 
+Dadurch können unterschiedliche Ausprägungen eines Makros berücksichtigt werden.
+Ein \textit{Makroprofil} beschreibt somit die Menge aller Eigenschaften, die innerhalb eines Makros und dessen zugeordneten Artikeln beobachtet werden können.
+Alle erstellten \textit{Makroprofile} werden als "Suchraum\_Makroprofile" für das Learning-to-Rank-Modell gespeichert.
+Abbildung \ref{fig:makroprofil} zeigt die Bildung eines Makroprofils am Beispiel des Elektromotors:
 
-%  Bild 6.1: Aufbau eines Makroprofils
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        macro/.style={ draw=orange!70!black, rounded corners, fill=yellow!15, text width=5.2cm, minimum height=1.2cm, align=center, inner sep=7pt }, 
+        article/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=3.8cm, minimum height=3.1cm, align=left, inner sep=7pt }, 
+        source/.style={ draw, rounded corners, fill=gray!8, text width=6.0cm, minimum height=1.4cm, align=center, inner sep=7pt }, 
+        macroproperties/.style={ draw=orange!70!black, rounded corners, fill=yellow!10, text width=5.2cm, minimum height=2.4cm, align=left, inner sep=7pt }, 
+        note/.style={ draw=red!60!black, dashed, rounded corners, fill=red!5, text width=5.2cm, minimum height=1.2cm, align=center, inner sep=6pt, font=\footnotesize }, 
+        profile/.style={ draw=orange!70!black, rounded corners, fill=orange!15, text width=9.5cm, minimum height=6.2cm, align=left, inner sep=9pt }, 
+        storage/.style={ draw=green!50!black, rounded corners, fill=green!15, text width=6.5cm, minimum height=1.0cm, align=center, inner sep=7pt }, 
+        flow/.style={ ->, thick } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ font=\bfseries\large ] at (0,13.0) {Bildung eines Makroprofils am Beispiel eines Elektromotors}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Übergeordnetes Makro %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[macro] (macro) at (0,10.3) { \textbf{Übergeordnetes Motor-Makro}\\[1mm] M1\_F1\_V1 }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Gemeinsame technische Makroeigenschaften %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[macroproperties] (macroProperties) at (6.2,10.3) 
+        { \textbf{Technische Makroeigenschaften}\\[1mm] Anschlüsse: Plus, Minus\\ Makrotyp: Elektromotor\\ Familie: F1\\ Variante: V1 }; 
+        \draw[flow,orange!70!black] (macro.east) -- (macroProperties.west); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikel-Makro-Zuordnung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \coordinate (articleBranch) at (0,8.5); 
+        
+        % Stamm ohne Pfeilspitze 
+        
+        \draw[ thick, blue!60!black ] (macro.south) -- (articleBranch); 
+        \node[ fill=white, font=\footnotesize, inner sep=2pt ] at (0,9.0) {Artikel-Makro-Zuordnung}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Zugeordnete Trainingsartikel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[article] (articleA) at (-6.0,6.2) 
+        { \centering \textbf{Motorartikel A}\\[1mm] \raggedright Spannung: 380 V\\ Strom: 10 A\\ Leistung: 5 kW\\ Hinweis: Wasserdicht }; 
+        \node[article] (articleB) at (0,6.2) 
+        { \centering \textbf{Motorartikel B}\\[1mm] \raggedright Spannung: 400 V\\ Strom: 12 A\\ Leistung: 5 kW\\ Hinweis: Mit Kühlung }; 
+        \node[article] (articleC) at (6.0,6.2) 
+        { \centering \textbf{Motorartikel C}\\[1mm] \raggedright Spannung: 420 V\\ Strom: 15 A\\ Leistung: 7 kW\\ Hinweis: Wasserdicht }; 
+        
+        % Rechtwinklige Verteilung des gemeinsamen Makros 
+        
+        \draw[flow,blue!60!black] (articleBranch) -| (articleA.north); \draw[flow,blue!60!black] (articleBranch) -- (articleB.north); 
+        \draw[flow,blue!60!black] (articleBranch) -| (articleC.north); 
+        
+        % Sammelpunkte unter den Artikeln 
+
+        \coordinate (collectorA) at (-6.0,4.0); 
+        \coordinate (collectorB) at (0,4.0); 
+        \coordinate (collectorC) at (6.0,4.0); 
+        \coordinate (collectorEntry) at (0,4.0);
+        
+        % Senkrechte Linien ohne einzelne Pfeilspitzen 
+        
+        \draw[thick] (articleA.south) -- (collectorA); 
+        \draw[thick] (articleB.south) -- (collectorB); 
+        \draw[thick] (articleC.south) -- (collectorC); 
+        
+        % Gemeinsame Sammellinie 
+        
+        \draw[thick] (collectorA) -- (collectorC); 
+        
+
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Makroprofil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[profile] (profile) at (0,0.0) 
+        { \textbf{Makroprofil M1\_F1\_V1}\\[2mm] \textbf{technische Artikeleigenschaften}\\ Spannung: $\{380\,\mathrm{V},\;400\,\mathrm{V},\;420\,\mathrm{V}\}$\\ Strom: $\{10\,\mathrm{A},\;12\,\mathrm{A},\;15\,\mathrm{A}\}$\\ Leistung: $\{5\,\mathrm{kW},\;7\,\mathrm{kW}\}$\\[2mm] \textbf{Gemeinsame technische Makroeigenschaften}\\ Anschlüsse: $\{\text{Plus},\;\text{Minus}\}$\\ Makrotyp: Elektromotor\\ Familie: F1\\ Variante: V1\\[2mm] \textbf{Beobachtete technische Hinweise}\\ $\{\text{Wasserdicht},\;\text{Mit Kühlung}\}$}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikelinformationen -> Makroprofil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+        
+        \draw[ ->, thick ] (collectorEntry) -- (profile.north);
+   
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Makroeigenschaften -> Makroprofil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        % Oberer rechter Eckpunkt
+        \coordinate (macroRouteTop) at (9.3,10.3); 
+        % Unterer rechter Eckpunkt auf Höhe der Mitte des Makroprofil-Kastens 
+        \coordinate (macroRouteEntry) at (9.3,0.0); 
+        % Waagerecht vom Eigenschaftskasten nach rechts 
+        \draw[ thick, orange!70!black ] (macroProperties.east) -- (macroRouteTop); 
+        % Senkrecht am rechten Rand nach unten 
+        \draw[ thick, orange!70!black ] (macroRouteTop) -- (macroRouteEntry); 
+        % Waagerechter Pfeil von rechts nach links in die Mitte der rechten Profilkante 
+        \draw[ ->, thick, orange!70!black ] (macroRouteEntry) -- (profile.east);
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Speicherung im Suchraum %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[storage] (storage) at (0,-5.0) { Speicherung des Makroprofils in\\ \texttt{Suchraum\_Makroprofile} }; 
+        \draw[ ->, very thick, green!50!black ] (profile.south) -- (storage.north); \end{tikzpicture} 
+        \caption{ Bildung eines Makroprofils am Beispiel des übergeordneten Motor-Makros M1\_F1\_V1. Die Trainingsartikel liefern die \textit{technische Artikeleigenschaften}. Das Motor-Makro stellt die gemeinsamen \textit{technischen Makroeigenschaften} bereit, die für alle Artikel der Artikelgruppe gelten. Das erzeugte Makroprofil wird anschließend im \texttt{Suchraum\_Makroprofile} gespeichert. } 
+        \label{fig:makroprofil_motor} 
+    \end{figure}
+
 
 \subsection{Anfrageprofil} 
 \label{sec:anfrageprofil} 
 
-Das Anfrageprofil besteht wie das Makroprofil aus den Artikel-, Makro- und Lexikalvektoren, mit dem Unterschied, dass nur ein einzelner Artikel für die Anfrage betrachtet wird. 
-In das Anfrageprofil werden die verfügbaren \textit{technischen Artikeleigenschaften}, \textit{technischen Makroeigenschaften} und \textit{technischen Hinweise} der 3 Vektoren übernommen. 
-Informationen, welche unmittelbar die Identität des zu empfehlenden Makros zusammenhängen, werden aus dem Anfrageprofil ausgeschlossen. Hierzu zählen die Artikel-Makro-Zuordnung aus dem Artikelvektor sowie 
-die Bezeichnung des Makros aus dem Makrovektor. Dadurch wird bei einer Anfrage sichergestellt, dass das Learning-to-Rank-Modell keine direkten Hinweise auf das Zielmakro erhält. 
-Anschlussstrukturen und Makrovarianten werden im Anfrageprofil beibehalten, das sie nützliche Informationen für die Unterscheidung von einzelner liefern können.
-Die Anfrageprofile werden für alle Teile des Datensplits erstellt, also für Training, Validierung und Test. % WEITER HIER !!
+Das \textit{Anfrageprofil} besteht wie das \textit{Makroprofil} aus einem Makro und dessen zugeordneten Artikel, mit dem Unterschied, dass nur ein einzelner Artikel für die Anfrage betrachtet wird. 
+In das \textit{Anfrageprofil} werden die \textit{technischen Artikeleigenschaften} und die \textit{technischen Makroeigenschaften} übernommen. 
+Informationen, welche unmittelbar mit der Identität des zu empfehlenden Makros zusammenhängen, werden aus dem \textit{Anfrageprofil} ausgeschlossen. Hierzu zählen die Artikel-Makro-Zuordnung des Artikels sowie 
+die eigene Bezeichnung aus einem Makro. Dadurch wird bei einer Anfrage sichergestellt, dass das Learning-to-Rank-Modell keine direkten Hinweise auf das zu empfehlende Makro erhält. 
+Die Anfrageprofile werden für die Trainings-, Validierungs- und Testdaten erstellt und jeweils als Datensatz "Anfrageprofile\_Training", "Anfrageprofile\_Validierung" und "Anfrageprofile\_Test" gespeichert. 
+Abbildung \ref{fig:anfrageprofil} zeigt die Bildung eines Anfrageprofils am Beispiel des Elektromotors.
 
-%  Bild 6.2: Aufbau eines Anfrageprofils
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        macro/.style={ draw=orange!70!black, rounded corners, fill=yellow!15, text width=5.2cm, minimum height=1.4cm, align=center, inner sep=7pt },
+        article/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=4.8cm, minimum height=3.4cm, align=left, inner sep=8pt }, 
+        properties/.style={ draw=orange!70!black, rounded corners, fill=yellow!10, text width=5.2cm, minimum height=2.4cm, align=left, inner sep=7pt }, 
+        filter/.style={ draw=red!60!black, dashed, rounded corners, fill=red!5, text width=5.7cm, minimum height=1.5cm, align=center, inner sep=7pt }, 
+        profile/.style={ draw=orange!70!black, rounded corners, fill=orange!15, text width=9.5cm, minimum height=5.8cm, align=left, inner sep=9pt }, 
+        storage/.style={ draw=green!50!black, rounded corners, fill=green!15, text width=5.0cm, minimum height=1.2cm, align=center, inner sep=7pt }, 
+        flow/.style={ ->, thick } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,11.5) {Bildung eines Anfrageprofils am Beispiel eines Elektromotors}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Einzelner Anfrageartikel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[article] (article) at (-4.3,8.6) 
+        { \centering \textbf{Motorartikel der Anfrage}\\[1mm] \raggedright Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 12 A\\ Leistung: 5 kW\\ Hinweis: Mit Kühlung\\ Makrozuordnung: M1\_F1\_V1 }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Zugeordnetes Makro %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[macro] (macro) at (4.3,10.0) { \textbf{Zugeordnetes Motor-Makro}\\[1mm] M1\_F1\_V1 }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Technische Eigenschaften des Makros %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[properties] (macroProperties) at (4.3,7.5) { \textbf{technische Makroeigenschaften}\\[1mm] Anschlüsse: Plus, Minus\\ Makrotyp: Elektromotor \\ Variante: Mit Kühlung}; 
+        \draw[flow,orange!70!black] (macro.south) -- (macroProperties.north); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Identitätsinformationen entfernen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[filter] (identityFilter) at (0,3.5) { \textbf{Ausschluss makroidentifizierender Informationen}\\[1mm] Artikel-Makro-Zuordnung: \texttt{P\_ARTICLE\_MACRO}\\ Eigene Makrobezeichnung: \texttt{M1\_F1\_V1} }; 
+        
+        % Rechtwinklige Zusammenführung in den Filter 
+        
+        \coordinate (articleRoute) at (-4.3,6.0); 
+        \coordinate (macroRoute) at (4.3,6.0); 
+        \coordinate (mergePoint) at (0,6.0); 
+        
+        % Artikelinformationen 
+        
+        \draw[ thick, blue!60!black ] (article.south) -- (articleRoute); 
+        
+        % Makroinformationen 
+        \draw[ thick, orange!70!black ] (macroProperties.south) -- (macroRoute); 
+        % Zusammenführung beider Informationsquellen 
+        \draw[ thick ] (articleRoute) -- (macroRoute); 
+        % Gemeinsamer Pfeil zum Filter 
+        \draw[ ->, thick ] (mergePoint) -- (identityFilter.north);
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Anfrageprofil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[profile] (queryProfile) at (0,-1.8) { \textbf{Anfrageprofil des Motorartikels}\\[2mm] \textbf{Technische Artikeleigenschaften}\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 12 A\\ Leistung: 5 kW\\[2mm] \textbf{Technische Makroeigenschaften}\\ Anschlüsse: $\{\text{Plus},\;\text{Minus}\}$\\ Makrotyp: Elektromotor\\ Variante: Mit Kühlung }; 
+        \draw[flow,very thick] (identityFilter.south) -- (queryProfile.north); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Speicherung nach Datensplit %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \coordinate (storageBranch) at (0,-5.7); 
+        \draw[ thick, green!50!black ] (queryProfile.south) -- (storageBranch); 
+        \node[storage] (training) at (-6.0,-7.3) { \texttt{Anfrageprofile\_}\\ \texttt{Training} }; 
+        \node[storage] (validation) at (0,-7.3) { \texttt{Anfrageprofile\_}\\ \texttt{Validierung} }; 
+        \node[storage] (test) at (6.0,-7.3) { \texttt{Anfrageprofile\_}\\ \texttt{Test} }; 
+        \draw[flow,green!50!black] (storageBranch) -| (training.north); 
+        \draw[flow,green!50!black] (storageBranch) -- (validation.north); 
+        \draw[flow,green!50!black] (storageBranch) -| (test.north); \end{tikzpicture} 
+        \caption{ Bildung eines Anfrageprofils am Beispiel eines Motorartikels. Im Unterschied zum Makroprofil beschreibt das Anfrageprofil nur einen einzelnen Artikel. Die verfügbaren technischen Artikel- und Makroeigenschaften werden übernommen, während die Artikel-Makro-Zuordnung und die eigene Makrobezeichnung als makroidentifizierende Informationen ausgeschlossen werden. 
+        Die erzeugten Anfrageprofile werden abhängig vom Datensplit in den Datensätzen \texttt{Anfrageprofile\_Training}, \texttt{Anfrageprofile\_Validierung} und \texttt{Anfrageprofile\_Test} gespeichert. } 
+        \label{fig:anfrageprofil_motor} 
+    \end{figure}
 
 \subsection{Anfrage-Kandidat-Paar} 
 \label{sec:anfrage_kandidat_paar} 
 
-Ein Anfrage-Kandidat-Paar stellt die Verbindung eines Anfrageprofil mit einem Makroprofil dar. Diese Verbindung ist notwendig, um für das Learning-to-Rank-Modell Lernbeispiele zu erzeugen.
-Hierzu wird für jedes vorhanden Makroprofil aus den Trainingsdaten ein Anfrage-Kandidat-Paar mit einem erstelleten Anfrageprofil gebildet.
-Stattdessen werden für jedes Anfrage-Kandidat-Paar die in Abschnitt \ref{sec:vergleichsmerkmale} definierten Vergleichsmerkmale berechnet und in einer festen Reihenfolge zu einem Merkmalsvektor zusammengeführt. 
-Jede Position dieses Merkmalsvektors besitzt bei allen Anfrage-Kandidat-Paaren dieselbe Bedeutung. 
-Besteht der Suchraum beispielsweise aus den Makrokandidaten \(M_1\), \(M_2\) und \(M_3\), werden für eine Anfrage \(q\) die folgenden Paare gebildet: \[ (q,M_1), \qquad (q,M_2), \qquad (q,M_3). \] 
-Für jedes Paar entsteht ein eigener Merkmalsvektor: \[ \mathbf{x}_{q,M_1}, \qquad \mathbf{x}_{q,M_2}, \qquad \mathbf{x}_{q,M_3}. \] 
-Während des Trainings wird jedem Anfrage-Kandidat-Paar zusätzlich ein Relevanzwert zugeordnet. Dieser wird aus der bekannten Artikel-Makro-Zuordnung abgeleitet und stellt die Zielinformation für LambdaMART dar. 
-Bei Validierung, Test und Anwendung berechnet das trainierte Modell für jedes Anfrage-Kandidat-Paar einen Relevanzscore. 
-Die Makrokandidaten werden anschließend anhand dieser Relevanzscores in absteigender Reihenfolge sortiert.
+Ein Anfrage-Kandidat-Paar stellt die Verbindung eines \textit{Anfrageprofil} aus den Anfrageprofile\_Training mit einem \textit{Makroprofil} aus den Suchraum\_Makroprofile dar. 
+Diese Verbindung ist notwendig, um für das Learning-to-Rank-Modell Lernbeispiele zu erzeugen. Hierbei wird für jedes Anfrageprofil aus den Anfrageprofile\_Training ein Anfrage-Kandidat-Paar mit jedem Makroprofil aus den Suchraum\_Makroprofile gebildet.
+Besteht der Suchraum\_Makroprofile beispielsweise aus den Makroprofilen \(M_1\), \(M_2\) und \(M_3\) und aus die Anfrageprofile\_Training aus dem Anfrageprofil \(q\), werden die folgenden Paare gebildet: \[ (q,M_1), \qquad (q,M_2), \qquad (q,M_3). \] 
+Während des Trainings wird jedem Anfrage-Kandidat-Paar zusätzlich ein Relevanzwert (siehe Kapitel \ref{sec:eignung_learning_to_rank}) zugeordnet.
 
+%  Bild 6.3: Anfrage-Kandidat-Paar
 
 \subsection{Vergleichsmerkmale und Merkmalsvektor} 
 \label{sec:vergleichsmerkmale} 
 
-Die Makro- und Anfrageprofile können nicht direkt durch das Learning-to-Rank-Modell verarbeitet werden. 
-Stattdessen werden aus dem Vergleich dieser Profile numerische Vergleichsmerkmale erzeugt. 
-Diese beschreiben die technische Beziehung zwischen einem Anfrageprofil und einem Makroprofil und bilden die Schnittstelle zwischen den Vektoren aus Artefakt A1 und 
-dem in Artefakt A2 ausgewählten LambdaMART-Modell. Diese Transformation ist erforderlich, da LambdaMART nur numerische Eingabemerkmale verarbeiten kann. 
+Die Anfrage-Kandidat-Paare können nicht direkt durch das Learning-to-Rank-Modell verarbeitet werden. 
+Stattdessen werden aus dem Vergleich von \textit{Anfrageprofil} und \textit{Makroprofil} Zahlenwerte erzeugt, welche im weiteren Verlauf als Vergleichsmerkmale bezeichnet werden. 
+Diese Transformation ist notwendig, da LambdaMART nur Zahlenwerte verarbeiten kann. 
 Die \textit{technischen Artikel- und Makroeigenschaften} sowie die \textit{technischen Hinweise} müssen deshalb miteinander verglichen werden, 
-sodass jede Beziehung zwischen einem Anfrageprofil und einem Makrokandidaten durch einen Zahlenwert beschrieben wird. 
+sodass jeder einzelne Vergleich innerhalb eines Anfrage-Kandidat-Paar durch einen Zahlenwert beschrieben werden kann. 
 Diese Beziehungen werden anschließend zu einem Merkmalsvektor zusammengeführt, der als Eingabe für das Learning-to-Rank-Modell dient.
-Der Merkmalsvektor besitzt dabei immer den gleichen Aufbau. Jede Position im Vektor entspricht einem bestimmten Vergleichsmerkmal, sodass diese später direkt miteinander verglichen werden können.
+Für jedes Paar entsteht ein eigener Merkmalsvektor: \[ \mathbf{x}_{q,M_1}, \qquad \mathbf{x}_{q,M_2}, \qquad \mathbf{x}_{q,M_3}. \] 
 
-%  Bild 6.3: Vergleichsmerkmale und Merkmalsvektor
-
-
-
-
-
-
+%  Bild 6.4: Vergleichsmerkmale und Merkmalsvektor
 
 
 

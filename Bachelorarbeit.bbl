@@ -83,52 +83,6 @@
       \verb https://www.altium.com/documentation/altium-designer/tutorial/searching-acquiring-components
       \endverb
     \endentry
-    \entry{baltrusaitis2019multimodal}{article}{}{}
-      \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=66df84f9a5b3fb42b542824373ee39f5}{%
-           family={Baltru\v{s}aitis},
-           familyi={B\bibinitperiod},
-           given={Tadas},
-           giveni={T\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=93a92cb2f2018320f5fe203d00ae1cc3}{%
-           family={Ahuja},
-           familyi={A\bibinitperiod},
-           given={Chaitanya},
-           giveni={C\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=2b23af9d24a98a5912d3b7c941b08ed7}{%
-           family={Morency},
-           familyi={M\bibinitperiod},
-           given={Louis-Philippe},
-           giveni={L\bibinithyphendelim P\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{7145eaea20703c0e78765d167e909706}
-      \strng{fullhash}{061e120b3a83987b6b5ae04e43009d83}
-      \strng{fullhashraw}{061e120b3a83987b6b5ae04e43009d83}
-      \strng{bibnamehash}{061e120b3a83987b6b5ae04e43009d83}
-      \strng{authorbibnamehash}{061e120b3a83987b6b5ae04e43009d83}
-      \strng{authornamehash}{7145eaea20703c0e78765d167e909706}
-      \strng{authorfullhash}{061e120b3a83987b6b5ae04e43009d83}
-      \strng{authorfullhashraw}{061e120b3a83987b6b5ae04e43009d83}
-      \field{sortinit}{B}
-      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{IEEE Transactions on Pattern Analysis and Machine Intelligence}
-      \field{number}{2}
-      \field{title}{Multimodal Machine Learning: A Survey and Taxonomy}
-      \field{volume}{41}
-      \field{year}{2019}
-      \field{pages}{423\bibrangedash 443}
-      \range{pages}{21}
-      \verb{doi}
-      \verb 10.1109/TPAMI.2018.2798607
-      \endverb
-    \endentry
     \entry{bray2008xml}{misc}{}{}
       \name{author}{5}{}{%
         {{un=0,uniquepart=base,hash=3e2f0f38495aebf8b91a698c2ccbfae3}{%
