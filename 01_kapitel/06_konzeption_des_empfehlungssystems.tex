@@ -130,7 +130,7 @@ Das \textit{Anfrageprofil} besteht wie das \textit{Makroprofil} aus einem Makro 
 In das \textit{Anfrageprofil} werden die \textit{technischen Artikeleigenschaften} und die \textit{technischen Makroeigenschaften} übernommen. 
 Informationen, welche unmittelbar mit der Identität des zu empfehlenden Makros zusammenhängen, werden aus dem \textit{Anfrageprofil} ausgeschlossen. Hierzu zählen die Artikel-Makro-Zuordnung des Artikels sowie 
 die eigene Bezeichnung aus einem Makro. Dadurch wird bei einer Anfrage sichergestellt, dass das LambdaMART-Modell keine direkten Hinweise auf das zu empfehlende Makro erhält. 
-Die Anfrageprofile werden für die Trainings-, Validierungs- und Testdaten erstellt und jeweils als Datensatz "Anfrageprofile\_Training", "Anfrageprofile\_Validierung" und "Anfrageprofile\_Test" gespeichert. 
+Die Anfrageprofile werden für die Trainings-, Validierungs- und Testdaten erstellt und jeweils als Trainingsanfragen in "Anfrageprofile\_Training", als Validierungsanfragen in "Anfrageprofile\_Validierung" und als Testanfragen in "Anfrageprofile\_Test" gespeichert. 
 Abbildung \ref{fig:anfrageprofil_motor} zeigt die Bildung eines Anfrageprofils am Beispiel des Elektromotors.
 
 \begin{figure}[H] 
@@ -192,9 +192,9 @@ Abbildung \ref{fig:anfrageprofil_motor} zeigt die Bildung eines Anfrageprofils a
         
         \coordinate (storageBranch) at (0,-5.7); 
         \draw[ thick, green!50!black ] (queryProfile.south) -- (storageBranch); 
-        \node[storage] (training) at (-6.0,-7.3) { \texttt{Anfrageprofile\_}\\ \texttt{Training} }; 
-        \node[storage] (validation) at (0,-7.3) { \texttt{Anfrageprofile\_}\\ \texttt{Validierung} }; 
-        \node[storage] (test) at (6.0,-7.3) { \texttt{Anfrageprofile\_}\\ \texttt{Test} }; 
+        \node[storage] (training) at (-6.0,-7.3) { \textbf{Trainingsanfragen}\\ \texttt{Anfrageprofile\_Training} }; 
+        \node[storage] (validation) at (0,-7.3) { \textbf{Validierungsanfragen}\\ \texttt{Anfrageprofile\_Validierung} }; 
+        \node[storage] (test) at (6.0,-7.3) { \textbf{Testanfragen}\\ \texttt{Anfrageprofile\_Test} }; 
         \draw[flow,green!50!black] (storageBranch) -| (training.north); 
         \draw[flow,green!50!black] (storageBranch) -- (validation.north); 
         \draw[flow,green!50!black] (storageBranch) -| (test.north); \end{tikzpicture} 
@@ -206,18 +206,18 @@ Abbildung \ref{fig:anfrageprofil_motor} zeigt die Bildung eines Anfrageprofils a
 \subsection{Anfrage-Kandidat-Paare, Vergleichsmerkmale und Merkmalsvektor} 
 \label{sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektor} 
 
-Ein Anfrage-Kandidat-Paar stellt die Verbindung eines \textit{Anfrageprofil} aus den Anfrageprofile\_Training mit einem \textit{Makroprofil} aus den Suchraum\_Makroprofile dar. 
-Hierbei wird für jedes Anfrageprofil aus den Anfrageprofile\_Training ein Anfrage-Kandidat-Paar mit jedem Makroprofil aus den Suchraum\_Makroprofile gebildet.
+Ein Anfrage-Kandidat-Paar stellt die Verbindung einer Trainingsanfrage mit einem \textit{Makroprofil} aus den Suchraum\_Makroprofile dar. 
+Hierbei wird für jede Trainingsanfrage ein Anfrage-Kandidat-Paar mit jedem Makroprofil aus den Suchraum\_Makroprofile gebildet.
 Im folgenden Beispiel werden sechs Anfrage-Kandidat-Paare gebildet, welche vom LambdaMART-Modell benötigt werden, um die Relevanz der Makroprofile für die jeweiligen Anfrageprofile zu berechnen:
-Besteht der Suchraum\_Makroprofile aus den Makroprofilen \(M_1\), \(M_2\) und \(M_3\) und im Datensatze Anfrageprofile\_Training gibt es 2 Anfrageprofile \(q_1\) und \(q_2\), 
-werden die folgenden 6 Anfrage-Kandidat-Paare gebildet: \[ (q_1,M_1), \qquad (q_1,M_2), \qquad (q_1,M_3), \qquad (q_2,M_1), \qquad (q_2,M_2), \qquad (q_2,M_3). \] 
+Besteht der Suchraum\_Makroprofile aus den Makroprofilen \(M_1\), \(M_2\) und \(M_3\) und im Datensatze Anfrageprofile\_Training gibt es 2 Trainingsanfragen \(ta_1\) und \(ta_2\), 
+werden die folgenden 6 Anfrage-Kandidat-Paare gebildet: \[ (ta_1,M_1), \qquad (ta_1,M_2), \qquad (ta_1,M_3), \qquad (ta_2,M_1), \qquad (ta_2,M_2), \qquad (ta_2,M_3). \] 
 
 Für jedes Anfrage-Kandidat-Paar wird während der Erstellung ein Vergleich anhand von Vergleichsmerkmalen wie Übereinstimmung von Spannung, Strom oder Hinweisen durchgeführt. 
 Diese Vergleichsmerkmale werden in Form von Zahlenwerten zu einem Merkmalsvektor zusammengeführt, der die Ähnlichkeit zwischen dem Anfrageprofil und dem Makroprofil beschreibt.
 Die Zahlenwerte aus dem Merkmalsvektor werden dann an das LambdaMART-Modell übergeben. 
 LambdaMART errechnet auf Basis der Vergleichsmerkmale der Merkmalsvektoren die Relevanz jedes Makroprofils für das jeweilige Anfrageprofil und erzeugt daraus eine Liste an Makros. 
 Diese Liste an Makros wird ab sofort als Rangliste bezeichnet, um damit an die Begrifflichkeit aus dem Learning-to-Rank-Ansatz anzuknüpfen (siehe Kapitel \ref{sec:learning_to_rank}).
-Für das obige Beispiel ergeben sich aus den Anfrage-Kandidat-Paaren die folgenden Merkmalsvektoren: \[ \mathbf{x}_{q1,M_1}, \qquad \mathbf{x}_{q1,M_2}, \qquad \mathbf{x}_{q1,M_3}, \qquad \mathbf{x}_{q2,M_1}, \qquad \mathbf{x}_{q2,M_2}, \qquad \mathbf{x}_{q2,M_3}. \] 
+Für das obige Beispiel ergeben sich aus den Anfrage-Kandidat-Paaren die folgenden Merkmalsvektoren: \[ \mathbf{x}_{ta_1,M_1}, \qquad \mathbf{x}_{ta_1,M_2}, \qquad \mathbf{x}_{ta_1,M_3}, \qquad \mathbf{x}_{ta_2,M_1}, \qquad \mathbf{x}_{ta_2,M_2}, \qquad \mathbf{x}_{ta_2,M_3}. \] 
 Die folgende Abbildung \ref{fig:anfrage_kandidat_paare_motor} veranschaulicht die Bildung von Anfrage-Kandidat-Paaren, die Berechnung der Vergleichsmerkmale und die Zusammenführung zu einem Merkmalsvektor.
 
 \begin{figure}[H] 
@@ -237,8 +237,8 @@ Die folgende Abbildung \ref{fig:anfrage_kandidat_paare_motor} veranschaulicht di
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \node[font=\bfseries\large] at (0,15.2) {Bildung von Anfrage-Kandidat-Paaren und Vergleichsmerkmalen}; 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelldatensätze %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \node[dataset] (queryDataset) at (-6.0,13.4) { \textbf{\texttt{Anfrageprofile\_Training}}\\ Anfrageprofile \(q_1\) und \(q_2\) }; 
-        \node[process] (combination) at (0,13.4) { \textbf{Bildung aller Kombinationen}\\ \(2\) Anfrageprofile \(\times\) \(3\) Makroprofile \(=\) \(6\) Paare }; 
+        \node[dataset] (queryDataset) at (-6.0,13.4) { \textbf{\texttt{Anfrageprofile\_Training}}\\ Trainingsanfragen \(ta_1\) und \(ta_2\) }; 
+        \node[process] (combination) at (0,13.4) { \textbf{Bildung aller Kombinationen}\\ \(2\) Trainingsanfragen \(\times\) \(3\) Makroprofile \(=\) \(6\) Paare }; 
         \node[dataset] (macroDataset) at (6.0,13.4) { \textbf{\texttt{Suchraum\_Makroprofile}}\\ Makroprofile \(M_1\), \(M_2\) und \(M_3\) }; 
         % Quelle links -> Kombinationsprozess 
         \draw[ flow, blue!60!black ] (queryDataset.east) -- (combination.west); 
@@ -253,19 +253,19 @@ Die folgende Abbildung \ref{fig:anfrage_kandidat_paare_motor} veranschaulicht di
         \node[macroprofile] (m3) at (3.6,9.4) { \textbf{Makroprofil \(M_3\)}\\ Hersteller: Siemens\\ Spannung: 230 V\\ Strom: 5 A\\ Hinweis: Mit Kühlung}; 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Beschriftung der Matrixachsen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \node[ font=\footnotesize\bfseries, text=green!40!black ] at (0,11.2) {Makroprofile aus \texttt{Suchraum\_Makroprofile}}; 
-        \node[ font=\footnotesize\bfseries, text=blue!60!black, rotate=90 ] at (-9.7,5) {Anfrageprofile aus \texttt{Anfrageprofile\_Training}}; 
+        \node[ font=\footnotesize\bfseries, text=blue!60!black, rotate=90 ] at (-9.7,5) {Trainingsanfragen aus \texttt{Anfrageprofile\_Training}}; 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Erste Matrixzeile: Anfrageprofil q1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \node[query] (q1) at (-7.4,6.4) { \textbf{Anfrageprofil \(q_1\)}\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\ Hinweis: Mit Kühlung }; 
-        \node[pair] (q1m1) at (-3.6,6.4) { \textbf{\((q_1,M_1)\)}\\[1mm] \(\mathbf{x}_{q_1,M_1} = \begin{bmatrix} 1\\ 1\\ 1 \end{bmatrix}\) }; 
-        \node[pair] (q1m2) at (0,6.4) { \textbf{\((q_1,M_2)\)}\\[1mm] \(\mathbf{x}_{q_1,M_2} = \begin{bmatrix} 0\\ 1\\ 0 \end{bmatrix}\) }; 
-        \node[pair] (q1m3) at (3.6,6.4) { \textbf{\((q_1,M_3)\)}\\[1mm] \(\mathbf{x}_{q_1,M_3} = \begin{bmatrix} 0\\ 1\\ 1 \end{bmatrix}\) }; 
+        \node[query] (q1) at (-7.4,6.4) { \textbf{Trainingsanfrage \(ta_1\)}\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\ Hinweis: Mit Kühlung }; 
+        \node[pair] (q1m1) at (-3.6,6.4) { \textbf{\((ta_1,M_1)\)}\\[1mm] \(\mathbf{x}_{ta_1,M_1} = \begin{bmatrix} 1\\ 1\\ 1 \end{bmatrix}\) }; 
+        \node[pair] (q1m2) at (0,6.4) { \textbf{\((ta_1,M_2)\)}\\[1mm] \(\mathbf{x}_{ta_1,M_2} = \begin{bmatrix} 0\\ 1\\ 0 \end{bmatrix}\) }; 
+        \node[pair] (q1m3) at (3.6,6.4) { \textbf{\((ta_1,M_3)\)}\\[1mm] \(\mathbf{x}_{ta_1,M_3} = \begin{bmatrix} 0\\ 1\\ 1 \end{bmatrix}\) }; 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         % Zweite Matrixzeile: Anfrageprofil q2 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \node[query] (q2) at (-7.4,3.4) { \textbf{Anfrageprofil \(q_2\)}\\ Hersteller: SEW\\ Spannung: 420 V\\ Strom: 5 A\\ Hinweis: Wasserdicht }; 
-        \node[pair] (q2m1) at (-3.6,3.4) { \textbf{\((q_2,M_1)\)}\\[1mm] \(\mathbf{x}_{q_2,M_1} = \begin{bmatrix} 0\\ 0\\ 0 \end{bmatrix}\) }; 
-        \node[pair] (q2m2) at (0,3.4) { \textbf{\((q_2,M_2)\)}\\[1mm] \(\mathbf{x}_{q_2,M_2} = \begin{bmatrix} 1\\ 1\\ 1 \end{bmatrix}\) }; 
-        \node[pair] (q2m3) at (3.6,3.4) { \textbf{\((q_2,M_3)\)}\\[1mm] \(\mathbf{x}_{q_2,M_3} = \begin{bmatrix} 0\\ 1\\ 0 \end{bmatrix}\) }; 
+        \node[query] (q2) at (-7.4,3.4) { \textbf{Trainingsanfrage \(ta_2\)}\\ Hersteller: SEW\\ Spannung: 420 V\\ Strom: 5 A\\ Hinweis: Wasserdicht }; 
+        \node[pair] (q2m1) at (-3.6,3.4) { \textbf{\((ta_2,M_1)\)}\\[1mm] \(\mathbf{x}_{ta_2,M_1} = \begin{bmatrix} 0\\ 0\\ 0 \end{bmatrix}\) }; 
+        \node[pair] (q2m2) at (0,3.4) { \textbf{\((ta_2,M_2)\)}\\[1mm] \(\mathbf{x}_{ta_2,M_2} = \begin{bmatrix} 1\\ 1\\ 1 \end{bmatrix}\) }; 
+        \node[pair] (q2m3) at (3.6,3.4) { \textbf{\((ta_2,M_3)\)}\\[1mm] \(\mathbf{x}_{ta_2,M_3} = \begin{bmatrix} 0\\ 1\\ 0 \end{bmatrix}\) }; 
     
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Legende der Merkmalsvektoren %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -279,7 +279,7 @@ Die folgende Abbildung \ref{fig:anfrage_kandidat_paare_motor} veranschaulicht di
         % Zusammenfassung aller Matrixergebnisse 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         \draw[ decorate, decoration={ brace, mirror, amplitude=9pt }, thick ] (-5.4,1.75) -- (5.4,1.75);
-        \node[collection] (pairs) at (0,-0.6) { \textbf{Trainingsmenge mit sechs Anfrage-Kandidat-Paaren}\\[1mm] \(\{ \mathbf{x}_{q_1,M_1}, \mathbf{x}_{q_1,M_2}, \mathbf{x}_{q_1,M_3}, \mathbf{x}_{q_2,M_1}, \mathbf{x}_{q_2,M_2}, \mathbf{x}_{q_2,M_3} \}\) }; 
+        \node[collection] (pairs) at (0,-0.6) { \textbf{Trainingsmenge mit sechs Anfrage-Kandidat-Paaren}\\[1mm] \(\{ \mathbf{x}_{ta_1,M_1}, \mathbf{x}_{ta_1,M_2}, \mathbf{x}_{ta_1,M_3}, \mathbf{x}_{ta_2,M_1}, \mathbf{x}_{ta_2,M_2}, \mathbf{x}_{ta_2,M_3} \}\) }; 
         \draw[ flow, very thick ] (0,1.4) -- (pairs.north); 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         % LambdaMART 
@@ -289,7 +289,7 @@ Die folgende Abbildung \ref{fig:anfrage_kandidat_paare_motor} veranschaulicht di
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         % Ergebnis 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        \node[result] (ranking) at (0,-5.5) { \textbf{Beispielhafte Ranglisten}\\[1mm] Anfrage \(q_1\): \(M_1 > M_3 > M_2\)\\ Anfrage \(q_2\): \(M_2 > M_3 > M_1\) }; 
+        \node[result] (ranking) at (0,-5.5) { \textbf{Beispielhafte Ranglisten}\\[1mm] Anfrage \(ta_1\): \(M_1 > M_3 > M_2\)\\ Anfrage \(ta_2\): \(M_2 > M_3 > M_1\) }; 
         \draw[ flow, very thick, green!50!black ] (lambdaMART.south) -- (ranking.north); 
     \end{tikzpicture} 
     \caption{ Bildung von Anfrage-Kandidat-Paaren und Vergleichsmerkmalen am Beispiel zweier Anfrageprofile und dreier Makroprofile. 
@@ -405,143 +405,182 @@ Die folgende Abbildung \ref{fig:anfrage_kandidat_paare_motor} veranschaulicht di
 %     \label{fig:datenmodell_empfehlungssystem} 
 % \end{figure}
 
-\section{Gesamtarchitektur und Datenfluss} 
-\label{sec:gesamtarchitektur_und_datenfluss} 
+\section{Gesamtarchitektur und Teilprozesse} 
+\label{sec:gesamtarchitektur_und_teilprozesse} 
 
-Die Architektur des Empfehlungssystems lässt sich aus der Vision in Abschnitt \ref{sec:vision} ableiten. Ziel des Empfehlungssystems ist es, 
-für eine Anfrage geeignete Makros zu identifizieren und diese entsprechend ihrer Relevanz in Form einer Rangliste auszugeben. 
-Die Gesamtarchitektur umfasst sowohl den Trainingsprozess als auch den späteren Anwendungsprozess. Beide Prozesse verwenden dieselben Datenstrukturen und dieselbe Berechnung der Vergleichsmerkmale. 
-Sie unterscheiden sich jedoch hinsichtlich der Verfügbarkeit der bekannten Artikel-Makro-Zuordnungen und des Zwecks, für den die erzeugten Makro- und Anfrageprofile verwendet werden. 
+\subsection{Gesamtarchitektur}
 
-\subsection{Überblick über die Gesamtarchitektur}
+Abbildung \ref{fig:prozessarchitektur_empfehlungssystem} zeigt die Gesamtarchitektur des Empfehlungssystems. 
+Zunächst werden aus der Datenbasis die \textit{technischen Artikel- und Makroeigenschaften} extrahiert und in aufbereiteter Form gespeichert.
+Im Anschluss folgt der Datensplitt anhand definierten Split-Regelen (siehe Kapitel \ref{sec:splitregeln}). Aus dem Datensplitt werden dann in der Trainingsvorbereitung die Datenobjekte für Training, Validierung und Test gebildet.
+Dabei findet die Berechnung der Vergleichsmerkmale der Merkmalsvektoren der Anfrage-Kandidat-Paare statt. 
+Im nächsten Schritt werden die Anfrage-Kandidat-Paare im Traingsprozess durch das LambdaMART-Modell anhand der Vergleichsmerkmale bewertet und dabei die Relevanzen der einzelnen Makroprofile ermittelt.
+Parallell dazu wird im Validierungsprozess die Modellkonfiguration des LambdaMART-Modells anhand der Ergebnisse der Validierungsanfragen optimiert.
+Die Übergabeartefakte nach Traingsprozess ergeben die Gemeinsame Grundlage für die anschließenden Test-, und Anwendungsprozesse. 
+Dabei werden die Datenobjekte der Trainingsvorbereitung, die Merkmalsvektoren der Anfrage-Kandidat-Paare sowie das trainierte LambdaMART-Modell übergeben.
+Anschließende wird im Testprozess die Leistungsfähigkeit des trainierten LambdaMART-Modells anhand der Testanfragen überprüft und bewertet.
+Nach dem Testprozess steht dann dem Anwendungsprozess ein trainiertes und validiertes LambdaMART-Modell zur Verfügung, welches zur Bewertung von neuen unbekannten Anfragen genutzt werden kann.
+Das Ergebniss des Anwendungsprozesses ist eine Rangliste, welche die Ergebnisse einer Anfrage an das trainierte und validierte LambdaMART-Modell in absteigender Relevanz darstellt.
 
-Abbildung \ref{fig:prozessarchitektur_empfehlungssystem} stellt den Datenfluss des Empfehlungssystems während Training, Validierung, Test und Anwendung dar. 
-Die gemeinsame fachliche Grundlage bilden die in Abschnitt \ref{sec:datenobjekte} definierten Makroprofile, Anfrageprofile, Anfrage-Kandidaten-Paare, Merkmalsvektoren und Vergleichsmerkmale. 
-Der Trainingsprozess erzeugt aus den bekannten Artikel-Makro-Zuordnungen ein LambdaMART-Modell und die Makroprofile des Suchraums. Validierung und Test verwenden diese Ergebnisse zur Bewertung des Modells. 
-Im Anwendungsprozess werden das trainierte Modell und die gespeicherten Makroprofile verwendet, um für eine neue Anfrage eine Rangliste zu erzeugen.
 
 \begin{figure}[H] \centering \begin{tikzpicture}[ scale=0.78, transform shape, >=stealth, font=\small, 
     data/.style={ draw=gray!70!black, rounded corners, fill=gray!10, text width=7.2cm, minimum height=1.0cm, align=center, inner sep=6pt }, 
-    process/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=7.0cm, minimum height=1.35cm, align=center, inner sep=7pt }, 
-    artifact/.style={ draw=yellow!60!black, rounded corners, fill=yellow!15, text width=4.3cm, minimum height=1.5cm, align=center, inner sep=6pt }, 
+    process/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=5.5cm, minimum height=1.35cm, align=center, inner sep=6pt }, 
+    preparation/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=6.4cm, minimum height=1.35cm, align=center, inner sep=6pt },
+    artifact/.style={ draw=yellow!60!black, rounded corners, fill=yellow!15, text width=4.8cm, minimum height=1.5cm, align=center, inner sep=6pt }, 
     bundle/.style={ draw=green!50!black, rounded corners, fill=green!12, text width=11.5cm, minimum height=1.3cm, align=center, inner sep=7pt }, 
     usage/.style={ draw=green!50!black, rounded corners, fill=green!8, text width=4.4cm, minimum height=1.4cm, align=center, inner sep=6pt }, 
     result/.style={ draw=orange!70!black, rounded corners, fill=orange!15, text width=4.4cm, minimum height=1.6cm, align=center, inner sep=6pt }, 
     note/.style={ draw=red!60!black, dashed, rounded corners, fill=red!5, text width=4.4cm, minimum height=1.0cm, align=center, inner sep=5pt, font=\footnotesize }, 
-    level/.style={ font=\bfseries, anchor=east, align=right, text width=3.2cm }, flow/.style={ ->, thick } ] 
+    level/.style={ font=\bfseries, anchor=east, align=right, text width=3.2cm }, flow/.style={ ->, thick },
+    validationprocess/.style={ draw=green!50!black, rounded corners, fill=green!8, text width=5.2cm, minimum height=1.5cm, align=center, inner sep=6pt } ] 
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-    \node[font=\bfseries\large] at (0,15.8) {Gesamtarchitektur und Datenfluss des Empfehlungssystems}; 
+    \node[font=\bfseries\large] at (-2.0,16.5) {Gesamtarchitektur des Empfehlungssystems}; 
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 1: Datenbasis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-    \node[level] at (-8.1,14.4) {1. Datenbasis}; \node[data] (data) at (0,14.2) { \textbf{Aufbereitete Artikel- und Makrodaten}\\ technische Eigenschaften und bekannte Artikel-Makro-Zuordnungen }; 
-    \node[data] (split) at (0,12.2) { \textbf{Datensplit}\\ Trainings-, Validierungs- und Testdaten }; 
+    \node[level] at (-8.1,15.0) {1. Datenbasis}; \node[data] (data) at (0,14.8) { \textbf{Aufbereitete Artikel- und Makrodaten}};%\\ \textit{technische Artikel- und Makroeigenschaften} }; 
+    \node[data] (split) at (0,12.8) { \textbf{Datensplit}};%\\ Trainings-, Validierungs- und Testdaten }; 
     \draw[flow] (data.south) -- (split.north); 
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 2: Training %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-    \node[level] at (-8.1,10.5) {2. Training}; 
-    \node[process] (training) at (0,9.5) { \textbf{Trainingsprozess}\\[1mm] Bildung von Makroprofilen und Trainingsanfragen, Berechnung der Anfrage-Kandidat-Paare und Training des LambdaMART-Modells }; 
-    \draw[flow] (split.south) -- (training.north); 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 2: Trainingsvorbereitung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \node[level] at (-8.1,11.0) {2. Datenobjekte}; 
+    \node[preparation] (trainingsvorbereitung) at (0,10.0) { \textbf{Vorbereitungsprozess des Trainings}};%\\[1mm] Bildung der Makro- und Anfrageprofilen\\Berechnung der Vergleichsmerkmale der Merkmalsverktoren der Anfrage-Kandidat-Paare}; 
+    \draw[flow] (split.south) -- (trainingsvorbereitung.north); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 3: Training und parallele Validierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[level] at (-8.1,7.3) {3. Training und\\Validierung}; 
+    \node[process] (training) at (-3.3,6.3) { \textbf{Trainigsprozess}};%\\[1mm] Training des LambdaMART-Modells aus den Anfrage-Kandidat-Paaren, Merkmalsvektoren und Relevanzwerten }; 
+    \node[ draw=green!50!black, rounded corners, fill=green!8, text width=5.8cm, minimum height=1.5cm, align=center, inner sep=7pt ] (modelValidation) at 
+    (3.3,6.3) { \textbf{paralleler Validierungsprozess}};%\\[1mm] Bewertung der aktuellen Modellkonfiguration anhand der Validierungsanfragen }; 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsvorbereitung speist beide Prozesse %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \coordinate (trainingValidationBranch) at (0,8.0); 
+    
+    % Stamm ohne Pfeilspitze 
+    \draw[ thick ] (trainingsvorbereitung.south) -- (trainingValidationBranch); 
+    % Eingang in das Training 
+    \draw[ ->, thick, blue!60!black ] (trainingValidationBranch) -| (training.north); 
+    % Eingang in die Validierung 
+    \draw[ ->, thick, green!50!black ] (trainingValidationBranch) -| (modelValidation.north);
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Iterative Verbindung zwischen Training % und paralleler Validierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    % Oberer Pfeil: Training -> Validierung 
+    \draw[ ->, thick, blue!60!black ] ([yshift=3mm]training.east) -- ([yshift=3mm]modelValidation.west); 
+    % Unterer Pfeil: Validierung -> Training 
+    \draw[ ->, thick, green!50!black ] ([yshift=-3mm]modelValidation.west) -- ([yshift=-3mm]training.east);
 
-    % Relevanzwerte als separater Eingang 
-    \node[note] (labels) at (6.8,9.5) { Bekannte Artikel-Makro-Zuordnungen\\ dienen ausschließlich zur Bildung der Relevanzwerte }; \draw[ ->, thick, red!60!black ] (labels.west) -- (training.east); 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Validierungsergebnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \node[ draw=green!50!black, rounded corners, fill=green!12, text width=5.8cm, minimum height=1.0cm, align=center, inner sep=6pt ] (validationResult) at (3.3,3.7) { \textbf{Validierungsergebnis}};%\\ ausgewählte Modellkonfiguration }; 
+    \draw[ ->, thick, green!50!black ] (modelValidation.south) -- (validationResult.north); 
+  
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 4: Übergabeartefakte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[level] at (-8.1,0.9) {4. Übergabe-\\artefakte}; 
+    \node[artifact] (profiles) at (-3.3,0.0) { \textbf{Datenobjekte}};%\\[1mm] Makro- und Anfrageprofile sowie\\ Anfrage-Kandidat-Paare }; 
+    \node[artifact] (model) at (3.3,0.0) { \textbf{Trainiertes LambdaMART-Modell}};%\\[1mm] Bewertungsfunktion zur Erstellung der Rangliste \\ der Anfragen-Kandidat-Paare }; 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsvorbereitung -> Datenobjekte % Gerader Außenpfad links am Training vorbei %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    % Senkrechte Spur links neben dem LambdaMART-Training 
+    
+    \coordinate (dataRouteTop) at (-6.6,10.0); 
+    
+    % Unteres Ende der senkrechten Spur 
+    
+    \coordinate (dataRouteBottom) at (-6.6,1.8); 
+    
+    % Punkt senkrecht oberhalb des Datenobjektkastens 
+    
+    \coordinate (dataRouteAboveProfile) at (-3.3,1.8); 
+    
+    % 1. Waagerecht aus der Trainingsvorbereitung 
+    
+    \draw[ thick, blue!60!black ] (trainingsvorbereitung.west) -- (dataRouteTop); 
+    % 2. Senkrecht links am LambdaMART-Training vorbei 
+    \draw[ thick, blue!60!black ] (dataRouteTop) -- (dataRouteBottom); 
+    % 3. Waagerecht über den Datenobjektkasten 
+    \draw[ thick, blue!60!black ] (dataRouteBottom) -- (dataRouteAboveProfile); 
+    % 4. Senkrechter Eintritt von oben in die Datenobjekte 
+    \draw[ ->, thick, blue!60!black, shorten >=2pt ] (dataRouteAboveProfile) -- (profiles.north);
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 3: Trainingsartefakte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % LambdaMART-Training -> trainiertes Modell %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \coordinate (trainingModelRoute) at (-3.3,2.7); 
+    \draw[ thick, blue!60!black ] (training.south) -- (trainingModelRoute); 
+    \draw[ ->, thick, blue!60!black ] (trainingModelRoute) -| ([xshift=-1.0cm]model.north);
 
-    \node[level] at (-8.1,6.5) {3. Trainingsartefakte}; 
-    \node[artifact] (profiles) at (-5.5,5.5) { \textbf{\texttt{Suchraum\_Makroprofile}}\\[1mm] enthält alle bewertbaren Makrokandidaten }; 
-    \node[artifact] (features) at (0,5.5) { \textbf{Vergleichsmerkmalstruktur}\\[1mm] feste Bedeutung und Reihenfolge der Merkmalswerte }; 
-    \node[artifact] (model) at (5.5,5.5) { \textbf{Trainiertes LambdaMART-Modell}\\[1mm] Bewertungsfunktion für Anfrage-Kandidat-Paare }; 
-
-    % Gemeinsamer Verzweigungspunkt 
-    \coordinate (artifactBranch) at (0,7.5); 
-    \draw[thick] (training.south) -- (artifactBranch); 
-    \draw[flow] (artifactBranch) -| (profiles.north); 
-    \draw[flow] (artifactBranch) -- (features.north); 
-    \draw[flow] (artifactBranch) -| (model.north); 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Validierungsergebnis -> trainiertes Modell %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \coordinate (validationModelRoute) at (3.3,2.7); \draw[ thick, green!50!black ] (validationResult.south) -- (validationModelRoute); 
+    \draw[ ->, thick, green!50!black ] (validationModelRoute) -| ([xshift=1.0cm]model.north);
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Gemeinsame Bewertungsgrundlage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-    \node[bundle] (runtimeBundle) at (0,2.3) { \textbf{Gemeinsame Bewertungsgrundlage}\\[1mm] \texttt{Suchraum\_Makroprofile} \(\;+\;\) Vergleichsmerkmalstruktur \(\;+\;\) trainiertes LambdaMART-Modell }; 
+    \node[bundle] (runtimeBundle) at (0,-2.8) { \textbf{Gemeinsame Bewertungsgrundlage};\\[1mm] Datenobjekte \(\;+\;\) trainiertes LambdaMART-Modell }; 
 
-    % Getrennte senkrechte Ausgänge 
-    \coordinate (profileCollect) at (-5.5,3.8); 
-    \coordinate (featureCollect) at (0,3.8); 
-    \coordinate (modelCollect) at (5.5,3.8); 
-    \draw[thick] (profiles.south) -- (profileCollect); 
-    \draw[thick] (features.south) -- (featureCollect); 
-    \draw[thick] (model.south) -- (modelCollect); 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Übergabeartefakte zur Bewertungsgrundlage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    % Jeder Kasten erhält einen eigenen Anschlusspunkt % an der Oberkante der Bewertungsgrundlage. 
+    
+    \draw[flow] (profiles.south) -- ([xshift=-2.5cm]runtimeBundle.north); 
+    % \draw[flow] (features.south) -- (runtimeBundle.north); 
+    \draw[flow] (model.south) -- ([xshift=2.5cm]runtimeBundle.north); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 5: Nutzung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[level] at (-8.1,-4.5) {5. Nutzung}; 
+    % \node[usage] (validation) at (-5.5,-4.0) { \textbf{Validierungsprozess}\\[1mm] Abstimmung der Modellkonfiguration\\ anhand der Validierungsanfragen }; 
+    \node[usage] (test) at (-3.2,-5.8) { \textbf{Testprozess}};%\\[1mm] Bewertung des trainierten Modells\\ anhand der Testanfragen }; 
+    \node[usage] (application) at (3.2,-5.8) { \textbf{Anwendungsprozess}};%\\[1mm] Rangliste für eine neue Anfrage\\ auf Grundlage der trainierten Anfrage-Kandidat-Paare }; 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Bewertungsgrundlage -> Test und Anwendung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-    % Horizontale Sammellinie 
-    \draw[thick] (profileCollect) -- (modelCollect); 
+    \coordinate (usageBranch) at (0,-4.0); 
+    \draw[ thick ] (runtimeBundle.south) -- (usageBranch); 
+    \draw[flow] (usageBranch) -| (test.north); \draw[flow] (usageBranch) -| (application.north);
 
-    % Ein einziger Pfeil in die Bewertungsgrundlage 
-    \draw[flow] (featureCollect) -- (runtimeBundle.north); 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 6: Ergebnisse %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 4: Nutzung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-    \node[level] at (-8.1,0.0) {4. Nutzung}; 
-    \node[usage] (validation) at (-5.5,-1.0) { \textbf{Validierung}\\[1mm] Anfrageprofile aus\\ \texttt{Anfrageprofile\_Validierung} }; 
-    \node[usage] (test) at (0,-1.0) { \textbf{Test}\\[1mm] Anfrageprofile aus\\ \texttt{Anfrageprofile\_Test} }; 
-    \node[usage] (application) at (5.5,-1.0) { \textbf{Anwendung}\\[1mm] Anfrageprofil einer neuen Anfrage }; 
-
-    % Gemeinsamer Verzweigungspunkt 
-    \coordinate (usageBranch) at (0,0.9); 
-    \draw[thick] (runtimeBundle.south) -- (usageBranch); 
-    \draw[flow] (usageBranch) -| (validation.north); 
-    \draw[flow] (usageBranch) -- (test.north); 
-    \draw[flow] (usageBranch) -| (application.north); 
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 5: Ergebnisse %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-    \node[level] at (-8.1,-3.5) {5. Ergebnisse}; 
-    \node[result] (validationResult) at (-5.5,-4.5) { \textbf{Validierungsergebnis}\\[1mm] Recall@k, MRR und nDCG\\ Auswahl der Modellkonfiguration }; 
-    \node[result] (testResult) at (0,-4.5) { \textbf{Testergebnis}\\[1mm] Recall@k, MRR und nDCG\\ abschließende Modellbewertung }; 
-    \node[result] (applicationResult) at (5.5,-4.5) { \textbf{Anwendungsergebnis}\\[1mm] nach Relevanz sortierte Makro-Rangliste }; 
-    \draw[flow] (validation.south) -- (validationResult.north); \draw[flow] (test.south) -- (testResult.north); 
+    \node[level] at (-8.1,-7.5) {6. Ergebnisse}; 
+    % \node[result] (validationResult) at (-5.5,-7.5) { \textbf{Validierungsergebnis}\\[1mm] Ausgewählte Modellkonfiguration\\ Bewertung anhand Recall@k, MRR und nDCG }; 
+    \node[result] (testResult) at (-3.2,-8.5) { \textbf{Testergebnis}};%\\[1mm] Leistung des Modells \\ Bewertung anhand Recall@k, MRR und nDCG  }; 
+    \node[result] (applicationResult) at (3.2,-8.5) { \textbf{Anwendungsergebnis}};%\\[1mm] nach Relevanz sortierte Makro-Rangliste }; 
+    % \draw[flow] (validation.south) -- (validationResult.north); 
+    \draw[flow] (test.south) -- (testResult.north); 
     \draw[flow] (application.south) -- (applicationResult.north); 
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Hinweise unter den Ergebnissen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Hinweise unter den Ergebnissen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-    \node[note] (validationNote) at (-5.5,-7.5) { Bekannte Artikel-Makro-Zuordnung\\ wird ausschließlich zur Berechnung der Evaluationsmetriken verwendet }; 
-    \node[note] (testNote) at (0,-7.5) { Testergebnisse dürfen keine weitere Auswahl oder Anpassung des Modells beeinflussen }; 
-    \node[note] (applicationNote) at (5.5,-7.5) { Keine bekannte Artikel-Makro-Zuordnung\\ und daher keine unmittelbare automatische Evaluation }; 
-    \draw[ ->, thick, red!60!black ] (validationResult.south) -- (validationNote.north); 
-    \draw[ ->, thick, red!60!black ] (testResult.south) -- (testNote.north); 
-    \draw[ ->, thick, red!60!black ] (applicationResult.south) -- (applicationNote.north); 
+    % \node[note] (validationNote) at (-5.5,-7.5) { Bekannte Artikel-Makro-Zuordnung\\ wird ausschließlich zur Berechnung der Evaluationsmetriken verwendet }; 
+    % \node[note] (testNote) at (0,-7.5) { Testergebnisse dürfen keine weitere Auswahl oder Anpassung des Modells beeinflussen }; 
+    % \node[note] (applicationNote) at (5.5,-7.5) { Keine bekannte Artikel-Makro-Zuordnung\\ und daher keine unmittelbare automatische Evaluation }; 
+    % \draw[ ->, thick, red!60!black ] (validationResult.south) -- (validationNote.north); 
+    % \draw[ ->, thick, red!60!black ] (testResult.south) -- (testNote.north); 
+    % \draw[ ->, thick, red!60!black ] (applicationResult.south) -- (applicationNote.north); 
 \end{tikzpicture} 
 \caption{ Gesamtarchitektur des Empfehlungssystems. Die aufbereiteten Artikel- und Makrodaten werden in Trainings-, Validierungs- und Testdaten aufgeteilt. 
-Der Trainingsprozess erzeugt den \texttt{Suchraum\_Makroprofile}, die festgelegte Struktur der Vergleichsmerkmale und das trainierte LambdaMART-Modell. 
+Der Trainingsprozess erzeugt die Datenobjekte, die Vergleichsmerkmale der Merkmalsvektoren und das trainierte LambdaMART-Modell. 
 Diese Artefakte bilden die gemeinsame Bewertungsgrundlage für Validierung, Test und Anwendung.} 
 \label{fig:prozessarchitektur_empfehlungssystem} 
 \end{figure}
-    
-Abbildung \ref{fig:prozessarchitektur_empfehlungssystem} stellt den Datenfluss des Empfehlungssystems während Training, Validierung, Test und Anwendung dar. 
-Die aufbereiteten Artikel- und Makrodaten werden zunächst in Trainings-, Validierungs- und Testdaten aufgeteilt. 
-Ausschließlich aus den Trainingsdaten werden die Makroprofile und damit der \texttt{Suchraum\_Makroprofile} erzeugt. 
-Zusätzlich werden die Trainingsartikel in Anfrageprofile überführt und im Datensatz \texttt{Anfrageprofile\_Training} gespeichert. 
-Jedes Anfrageprofil wird mit jedem Makroprofil des Suchraums kombiniert. Für jedes daraus entstehende Anfrage-Kandidat-Paar werden numerische Vergleichsmerkmale berechnet und in einem Merkmalsvektor zusammengeführt. 
-Die bekannten Artikel-Makro-Zuordnungen werden nicht als Vergleichsmerkmale verwendet. Sie dienen während des Trainings ausschließlich zur Festlegung der Relevanzwerte der Anfrage-Kandidat-Paare. 
-Das Training erzeugt drei wiederverwendete Artefakte: den \texttt{Suchraum\_Makroprofile}, die festgelegte Struktur und Reihenfolge der Vergleichsmerkmale sowie das trainierte LambdaMART-Modell. 
-Validierung, Test und Anwendung verwenden anschließend dieselbe Bewertungskette. Sie unterscheiden sich lediglich durch die Herkunft der Anfrageprofile und die Verwendung einer bekannten Artikel-Makro-Zuordnung.
-
-\subsection{Trainingsprozess} 
-
-Der Trainingsprozess dient dazu, aus den bekannten Artikel-Makro-Zuordnungen ein LambdaMART-Modell zu erzeugen. Hierzu werden die aufbereiteten und bereinigten Daten zunächst in Trainings-, 
-Validierungs- und Testdaten aufgeteilt. Der Datensplit erfolgt vor dem Aufbau der Makroprofile, sodass keine Informationen aus den Validierungs- oder Testdaten in deren Bildung einfließen. 
-Die Makroprofile werden ausschließlich aus den Daten des Trainingssplits nach der in Abschnitt \ref{sec:makroprofil} beschriebenen Vorgehensweise gebildet. 
-Zusätzlich wird jeder Trainingsartikel als Trainingsanfrage betrachtet und in ein Anfrageprofil überführt. Für jedes Anfrageprofil wird mit jedem verfügbaren Makrokandidaten ein Anfrage-Kandidat-Paar gebildet. 
-Hierzu werden die in Abschnitt \ref{sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektor} definierten Vergleichsmerkmale berechnet und in einer festen Reihenfolge zu einem Merkmalsvektor zusammengeführt. 
-Die bekannte Artikel-Makro-Zuordnung wird dabei nicht als Vergleichsmerkmal verwendet. Sie dient ausschließlich zur Festlegung des Relevanzwertes, der die Zielinformation des jeweiligen Anfrage-Kandidat-Paares darstellt. 
-Die Merkmalsvektoren und die zugehörigen Relevanzwerte bilden gemeinsam die Trainingsgrundlage von LambdaMART. 
-Das Modell lernt daraus, welche Vergleichsmerkmale und Merkmalskombinationen für die Rangfolge der Makrokandidaten relevant sind. 
-Das Ergebnis des Trainingsprozesses besteht aus dem trainierten LambdaMART-Modell, der festgelegten Struktur der Vergleichsmerkmale und den aus dem Trainingssplit erzeugten Makroprofilen. 
-Diese Ergebnisse werden in Validierung, Test und Anwendung wiederverwendet.
 
 
-\subsection{Validierungs- und Testprozess} 
+  
+\subsection{Teilprozesse}
+
+\subsection{Vorbereitungsprozess des Trainings}
+
+Im Vorbereitungsprozess des Trainings werden die in im Kapitel \ref{sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektor} beschriebenen Datenobjekte erstellt. 
+Durch diese Datenobjekte liegt eine Lernbasis für das 
+
+\subsubsection{Trainingsprozess} 
+
+Im Trainingsprozess werden die in im Kapitel \ref{sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektor} beschriebenen Merkmalsvektoren der Anfrage-Kandidat-Paare verwendet 
+um das LambdaMART-Modell durch die berechneten Vergleichsmerkmale zu trainieren. Dabei 
+
+
+\subsubsection{Validierungs- und Testprozess} 
 
 Für jeden Validierungs- und Testartikel wird ein Anfrageprofil nach Abschnitt \ref{sec:anfrageprofil} erzeugt. 
 Die bekannte Artikel-Makro-Zuordnung bleibt außerhalb des Anfrageprofils erhalten und wird nicht als Eingabe des Modells verwendet. 
@@ -555,7 +594,7 @@ Hierzu wird die erzeugte Rangliste mit der außerhalb des Anfrageprofils gespeic
 Die Bewertung erfolgt anhand der in Abschnitt \ref{sec:evaluationsmetriken} beschriebenen Metriken Recall@k, MRR und nDCG.
 
 
-\subsection{Anwendungsprozess} 
+\subsubsection{Anwendungsprozess} 
 
 Der Anwendungsprozess beginnt mit einer neuen Anfrage, für die keine Artikel-Makro-Zuordnung bekannt ist. Aus den verfügbaren Informationen wird das in Abschnitt \ref{sec:anfrageprofil} definierte Anfrageprofil erzeugt. 
 Das Anfrageprofil wird mit den gespeicherten Makroprofilen aller verfügbaren Makrokandidaten verglichen. 
@@ -565,7 +604,7 @@ Das Ergebnis ist eine Makro-Liste, in der die nach Bewertung des Modells am best
 Da keine bekannte Artikel-Makro-Zuordnung vorliegt, kann die Rangliste im regulären Anwendungsprozess nicht unmittelbar bewertet werden. 
 Eine Berechnung der Evaluationsmetriken ist erst möglich, wenn nachträglich eine fachlich geprüfte Artikel-Makro-Zuordnung oder eine fachliche Relevanzbewertung der empfohlenen Makros vorliegt.
 
-\subsection{Gemeinsamkeiten, Unterschiede und Grenzen} 
+\subsubsection{Gemeinsamkeiten, Unterschiede und Grenzen} 
 
 Training, Validierung, Test und Anwendung verwenden dieselben Makroprofile sowie dieselbe Struktur und Reihenfolge der Vergleichsmerkmale. 
 Dadurch entspricht die Eingabestruktur bei der späteren Anwendung der Struktur, auf deren Grundlage LambdaMART trainiert wurde. 
