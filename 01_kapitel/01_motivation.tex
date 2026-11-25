@@ -192,9 +192,9 @@ Die Vision \ref{fig:vision} besteht darin, ein KI-basiertes Empfehlungssystem zu
 um geeignete Makros für eine konkrete Elektrokonstruktionsaufgabe vorzuschlagen.
 Hierbei dienen die Artikelstammdaten wie Hersteller, Spannung, Strom und Leistung als Eingabedaten,
 während die zu empfehlende Makros als Ausgabedaten, für das Empfehlungssystem dienen. 
-Die Eingabedaten sollen dabei aus einem Artikel extrahiert, und für die Suchanfrage an das Empfehlungssystem verwendet werden.
+Die Eingabedaten sollen dabei aus einem Datenblatt als PDF (Portable Document Format) extrahiert, und für die Suchanfrage an das Empfehlungssystem verwendet werden.
 Die Ausgabedaten des Empfehlungssystem stellen die am besten zu den Eingabedaten passenden Makros dar. 
-Diese Makros sollen dann entsprechend ihrer Eignung für die konkrete Elektrokonstruktionsaufgabe in absteigender Relevanz in einer Liste sortiert werden.
+Diese Makros sollen dann entsprechend ihrer Eignung für die konkrete Elektrokonstruktionsaufgabe in einer Makro-Rangliste sortiert werden.
 
 
 \begin{figure}[H] 
@@ -254,14 +254,13 @@ Diese Makros sollen dann entsprechend ihrer Eignung für die konkrete Elektrokon
         
         \node[phase] at (0,2.0) {2. Anwendung des Empfehlungssystems}; 
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-        % Anfrageartikel 
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Datenblatt als Eingabe %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         
-        \node[article] (query) at (-6.6,-1.2) {}; 
-        \node[ font=\bfseries, text=blue!60!black ] at (-6.6,0.75) {Anfrage: Elektromotor}; 
-        \node[property] at (-6.6,-0.05) {\textbf{Hersteller:} Siemens}; \node[property] at (-6.6,-0.85) {\textbf{Spannung:} 400 V}; \node[property] at (-6.6,-1.65) {\textbf{Strom:} 10 A}; 
-        \node[property] at (-6.6,-2.45) {\textbf{Leistung:} 4000 W}; 
+        \node[ article, fill=blue!5, minimum height=5.0cm ] (query) at (-6.6,-1.2) {}; 
+        \node[ font=\bfseries, text=blue!60!black ] at (-6.6,0.85) {Datenblatt: Elektromotor}; 
+        \node[ draw=blue!60!black, rounded corners, fill=blue!15, minimum width=1.2cm, minimum height=0.5cm, align=center, font=\bfseries\footnotesize ] at (-6.6,0.25) {PDF}; 
+        \node[property] at (-6.6,-0.45) { \textbf{Hersteller:} Siemens }; \node[property] at (-6.6,-1.20) { \textbf{Spannung:} 400 V }; \node[property] at (-6.6,-1.95) { \textbf{Strom:} 10 A }; 
+        \node[property] at (-6.6,-2.70) { \textbf{Leistung:} 4000 W };
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
         % KI-Empfehlungssystem 
@@ -296,17 +295,9 @@ Diese Makros sollen dann entsprechend ihrer Eignung für die konkrete Elektrokon
         \draw[ ->, thick, orange!70!black ] (output.east) -- (ranking.west);
 
         \end{tikzpicture} 
-        \caption{ Vision des KI-basierten Empfehlungssystems. Die Artikel-Makro-Zuordnungen bilden die Wissensbasis für das Training. Bei der späteren Anwendung wird bei einer Anfrage ein Artikel an das Empfehlungssystem übergeben. Das System ermittelt passende Makros und gibt diese nach ihrer Eignung absteigend in einer Liste aus. } 
+        \caption{ Vision des KI-basierten Empfehlungssystems. Die Artikel-Makro-Zuordnungen bilden die Wissensbasis für das Training. Bei der späteren Anwendung wird bei einer Anfrage ein Artikel an das Empfehlungssystem übergeben. Das System ermittelt passende Makros und gibt diese nach ihrer Eignung absteigend in einer Makro-Rangliste aus. } 
         \label{fig:vision} 
         \end{figure}
-
-% \begin{figure}[H] 
-%     \centering 
-%     \includegraphics[width=\textwidth] 
-%     {03_abbildungen/02_schemas/pdf/Vision.pdf} 
-%     \caption{Vision des Empfehlungssystems} 
-%     \label{fig:vision} 
-% \end{figure}
 
 
 Durch die Nutzung eines solchen Empfehlungssystems soll es möglich werden, den Suchaufwand für geeignete Makros aus einem bestehenden Makrobestand zu reduzieren,

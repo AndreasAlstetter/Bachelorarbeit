@@ -1,12 +1,14 @@
-\chapter{Datenangrundlage und Trainingsvorbereitung} 
-\label{chap:datenangrundlage_und_trainingsvorbereitung} 
+\chapter{Datenaufbereitung und Datensplit} 
+\label{chap:datenaufbereitung_und_datensplit} 
 
 \section{Datenbasis} 
 
 \subsection{Artikeldaten}
 \label{sec:artikeldaten} 
 
-Die Artikeldaten liegen in XML-Dateien vor. 
+Die Artikeldaten haben im Empfehlungssystem 2 Funktionen. Die erste Funktion besteht darin, die Wissensbasis für ein späteres Modell bereitzustellen. 
+Die zweite Funktion besteht darin, Eingabedaten für das Empfehlungssystem bereitzustellen, da diese dieselben Artikelstammdaten wie ein Datenblatt enthalten.
+Dabei liegen die Artikeldaten in XML-Dateien vor. 
 XML (\textit{Extensible Markup Language}) ist ein standardisiertes Format zur hierarchischen Speicherung und Beschreibung von Informationen, die einem wiederkehrenden Schema folgen \cite{bray2008xml}.
 Durch die hierarchische Organisation von XML-Dokumenten können sowohl einfache Stammdaten wie Herstellerinformationen als auch komplexe technische Informationen wie Spannungen, 
 Ströme oder Leistungen strukturiert abgebildet werden \cite{bray2008xml}.
@@ -186,8 +188,10 @@ Das Ziel der \textit{Datenaufbereitung} besteht daher darin, die Qualität der D
 \label{sec:entfernen_unvollständiger_artikel_und_makrodaten}
 
 In diesem Schritt werden alle Artikel entfernt, die unvollständige Informationen enthalten. 
-Fehlende \textit{technischen Artikeleigenschaften} sind Informationslücken, welche die Vollständigkeit der Daten beeinträchtigen. Dies kann zu einer Verschlechterung der Modellleistung führen und muss daher bereits während der \textit{Datenaufbereitung} behandelt werden \cite{emmanuel2021missing}.
-Angenommen, ein unvollständiger Motor-Artikel enthält keine Angaben zur Spannung, dann wird bei einem späteren Lernprozess diese Informationslücke vom Modell übernommen. Wenn dann eine Anfrage an das Modell gestellt wird, welche diesem "spannungslosen" Motor-Artikel entspricht, kann das Modell diesen Artikel nicht korrekt zuordnen, 
+Fehlende \textit{technischen Artikeleigenschaften} sind Informationslücken, welche die Vollständigkeit der Daten beeinträchtigen. 
+Dies kann zu einer Verschlechterung der Modellleistung führen und muss daher bereits während der \textit{Datenaufbereitung} behandelt werden \cite{emmanuel2021missing}.
+Angenommen, ein unvollständiger Motor-Artikel enthält keine Angaben zur Spannung, dann wird bei einem späteren Lernprozess diese Informationslücke vom Modell übernommen. 
+Wenn dann eine Anfrage an das Modell gestellt wird, welche diesem "spannungslosen" Motor-Artikel entspricht, kann das Modell diesen Artikel nicht korrekt zuordnen, 
 da die notwendigen Informationen "Spannung" zum Erkennen dieses Artikels fehlt.
 
 Abbildung \ref{fig:unvollstaendige_daten} verdeutlicht die Unterscheidung zwischen vollständigen und unvollständigen Artikeldaten:

@@ -2294,3 +2294,495 @@ Aus der Analyse der verschiedenen Modellansätze ergibt sich folgendes Artefakt 
     \item ausgewähltes Modellverfahren: LambdaMART,  
 \end{itemize} 
 
+\chapter{Konzeption des Empfehlungssystems} 
+\label{chap:konzeption_des_empfehlungssystems} 
+
+In Kapitel \ref{chap:datenangrundlage_und_trainingsvorbereitung} wurde mit Artefakt A1 eine Trainings- und Evaluationsbasis aus Artikeln und Makros erstellt. 
+Anschließend wurde in Kapitel \ref{chap:auswahl_des_modellansatzes} mit LambdaMART ein geeigneter Modellansatz für das Empfehlungssystem ausgewählt. 
+Für die Entwicklung des Empfehlungssystems müssen die in Artefakt A1 bereitgestellte Trainings- und Evaluationsbasis und der in Artefakt A2 ausgewählte Modellansatz in eine gemeinsame Architektur überführt werden. 
+Das Ziel dieses Kapitels besteht daher in der Entwicklung einer Architektur des Empfehlungssystems. Das Ergebnis bildet Artefakt A3. 
+
+\section{Datenobjekte}
+\label{sec:datenobjekte}
+
+\subsection{Makroprofil}
+\label{sec:makroprofil}
+
+Die Bestandteile eines \textit{Makroprofils} werden aus einem Makro und dessen zugeordneten Artikeln der Trainingsdaten, den sogenannten Trainingsartikeln, gewonnen  (vergleiche Kapitel \ref{sec:erstellung_des_datensplits}), gebildet. 
+Ein Trainingsartikel liefert dabei die \textit{technischen Artikeleigenschaften} und das Makro die \textit{technischen Makroeigenschaften}.
+Die \textit{technischen Makroeigenschaften} sind Informationen, die für alle Trainingsartikel eines Makros gelten. 
+Beispielsweise hat ein Makro eines Elektromotors ein Plus-Anschluss und einen Minus-Anschluss. Folglich benötigen alle diesem Makro zugeordneten Trainingsartikel auch diese Anschlüsse.
+Weicht ein Trainingsartikel von den \textit{technischen Makroeigenschaften} des Makros ab, dann ist dieser einem anderem Makro und dessen Makroprofil zugeordnet.
+
+Desweiteren enthalten die einem Makro zugeordneten Artikel unterschiedliche Ausprägungen der \textit{technischen Artikeleigenschaften}. Jede Ausprägung wird dabei ins \textit{Makroprofil} übernommen. 
+Enthalten die einem Makro zugeordneten Artikel beispielsweise die Spannungswerte \[ \{380V,\;400V,\;420V\}, \] dann wird jeder einzelne Wert ins \textit{Makroprofil} übernommen. 
+Ein \textit{Makroprofil} beschreibt somit die Menge aller Eigenschaften, die innerhalb eines Makros und dessen zugeordneten Artikeln beobachtet werden können.
+Alle erstellten \textit{Makroprofile} werden im "Suchraum\_Makroprofile" gespeichert.
+
+Abbildung \ref{fig:makroprofil} zeigt die Bildung eines Makroprofils am Beispiel des Elektromotors:
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        macro/.style={ draw=orange!70!black, rounded corners, fill=yellow!15, text width=5.2cm, minimum height=1.2cm, align=center, inner sep=7pt }, 
+        article/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=3.8cm, minimum height=3.1cm, align=left, inner sep=7pt }, 
+        source/.style={ draw, rounded corners, fill=gray!8, text width=6.0cm, minimum height=1.4cm, align=center, inner sep=7pt }, 
+        macroproperties/.style={ draw=orange!70!black, rounded corners, fill=yellow!10, text width=5.2cm, minimum height=2.4cm, align=left, inner sep=7pt }, 
+        note/.style={ draw=red!60!black, dashed, rounded corners, fill=red!5, text width=5.2cm, minimum height=1.2cm, align=center, inner sep=6pt, font=\footnotesize }, 
+        profile/.style={ draw=orange!70!black, rounded corners, fill=orange!15, text width=9.5cm, minimum height=6.2cm, align=left, inner sep=9pt }, 
+        storage/.style={ draw=green!50!black, rounded corners, fill=green!15, text width=6.5cm, minimum height=1.0cm, align=center, inner sep=7pt }, 
+        flow/.style={ ->, thick } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[ font=\bfseries\large ] at (0,13.0) {Bildung eines Makroprofils am Beispiel eines Elektromotors}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Übergeordnetes Makro %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[macro] (macro) at (0,10.3) { \textbf{Übergeordnetes Motor-Makro}\\[1mm] M1\_F1\_V1 }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Gemeinsame technische Makroeigenschaften %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[macroproperties] (macroProperties) at (6.2,10.3) 
+        { \textbf{Technische Makroeigenschaften}\\[1mm] Anschlüsse: Plus, Minus\\ Makrotyp: Elektromotor\\ Familie: F1\\ Variante: V1 }; 
+        \draw[flow,orange!70!black] (macro.east) -- (macroProperties.west); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikel-Makro-Zuordnung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \coordinate (articleBranch) at (0,8.5); 
+        
+        % Stamm ohne Pfeilspitze 
+        
+        \draw[ thick, blue!60!black ] (macro.south) -- (articleBranch); 
+        \node[ fill=white, font=\footnotesize, inner sep=2pt ] at (0,9.0) {Artikel-Makro-Zuordnung}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Zugeordnete Trainingsartikel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[article] (articleA) at (-6.0,6.2) 
+        { \centering \textbf{Motorartikel A}\\[1mm] \raggedright Spannung: 380 V\\ Strom: 10 A\\ Leistung: 5 kW\\ Hinweis: Wasserdicht }; 
+        \node[article] (articleB) at (0,6.2) 
+        { \centering \textbf{Motorartikel B}\\[1mm] \raggedright Spannung: 400 V\\ Strom: 12 A\\ Leistung: 5 kW\\ Hinweis: Mit Kühlung }; 
+        \node[article] (articleC) at (6.0,6.2) 
+        { \centering \textbf{Motorartikel C}\\[1mm] \raggedright Spannung: 420 V\\ Strom: 15 A\\ Leistung: 7 kW\\ Hinweis: Wasserdicht }; 
+        
+        % Rechtwinklige Verteilung des gemeinsamen Makros 
+        
+        \draw[flow,blue!60!black] (articleBranch) -| (articleA.north); \draw[flow,blue!60!black] (articleBranch) -- (articleB.north); 
+        \draw[flow,blue!60!black] (articleBranch) -| (articleC.north); 
+        
+        % Sammelpunkte unter den Artikeln 
+
+        \coordinate (collectorA) at (-6.0,4.0); 
+        \coordinate (collectorB) at (0,4.0); 
+        \coordinate (collectorC) at (6.0,4.0); 
+        \coordinate (collectorEntry) at (0,4.0);
+        
+        % Senkrechte Linien ohne einzelne Pfeilspitzen 
+        
+        \draw[thick] (articleA.south) -- (collectorA); 
+        \draw[thick] (articleB.south) -- (collectorB); 
+        \draw[thick] (articleC.south) -- (collectorC); 
+        
+        % Gemeinsame Sammellinie 
+        
+        \draw[thick] (collectorA) -- (collectorC); 
+        
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Makroprofil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[profile] (profile) at (0,0.0) 
+        { \textbf{Makroprofil M1\_F1\_V1}\\[2mm] \textbf{technische Artikeleigenschaften}\\ Spannung: $\{380\,\mathrm{V},\;400\,\mathrm{V},\;420\,\mathrm{V}\}$\\ Strom: $\{10\,\mathrm{A},\;12\,\mathrm{A},\;15\,\mathrm{A}\}$\\ Leistung: $\{5\,\mathrm{kW},\;7\,\mathrm{kW}\}$\\[2mm] \textbf{Gemeinsame technische Makroeigenschaften}\\ Anschlüsse: $\{\text{Plus},\;\text{Minus}\}$\\ Makrotyp: Elektromotor\\ Familie: F1\\ Variante: V1\\[2mm] \textbf{Beobachtete technische Hinweise}\\ $\{\text{Wasserdicht},\;\text{Mit Kühlung}\}$}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Artikelinformationen -> Makroprofil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+        
+        \draw[ ->, thick ] (collectorEntry) -- (profile.north);
+   
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Makroeigenschaften -> Makroprofil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        % Oberer rechter Eckpunkt
+        \coordinate (macroRouteTop) at (9.3,10.3); 
+        % Unterer rechter Eckpunkt auf Höhe der Mitte des Makroprofil-Kastens 
+        \coordinate (macroRouteEntry) at (9.3,0.0); 
+        % Waagerecht vom Eigenschaftskasten nach rechts 
+        \draw[ thick, orange!70!black ] (macroProperties.east) -- (macroRouteTop); 
+        % Senkrecht am rechten Rand nach unten 
+        \draw[ thick, orange!70!black ] (macroRouteTop) -- (macroRouteEntry); 
+        % Waagerechter Pfeil von rechts nach links in die Mitte der rechten Profilkante 
+        \draw[ ->, thick, orange!70!black ] (macroRouteEntry) -- (profile.east);
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Speicherung im Suchraum %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[storage] (storage) at (0,-5.0) { Speicherung des Makroprofils in\\ \texttt{Suchraum\_Makroprofile} }; 
+        \draw[ ->, very thick, green!50!black ] (profile.south) -- (storage.north); \end{tikzpicture} 
+        \caption{ Bildung eines Makroprofils am Beispiel des übergeordneten Motor-Makros M1\_F1\_V1. Die Trainingsartikel liefern die \textit{technische Artikeleigenschaften}. Das Motor-Makro stellt die gemeinsamen \textit{technischen Makroeigenschaften} bereit, die für alle Artikel der Artikelgruppe gelten. Das erzeugte Makroprofil wird anschließend im \texttt{Suchraum\_Makroprofile} gespeichert. } 
+        \label{fig:makroprofil_motor} 
+    \end{figure}
+
+
+\subsection{Anfrageprofil} 
+\label{sec:anfrageprofil} 
+
+Das \textit{Anfrageprofil} besteht wie das \textit{Makroprofil} aus einem Makro und dessen zugeordneten Artikel, mit dem Unterschied, dass nur ein einzelner Artikel für die Anfrage betrachtet wird. 
+In das \textit{Anfrageprofil} werden die \textit{technischen Artikeleigenschaften} und die \textit{technischen Makroeigenschaften} übernommen. 
+Informationen, welche unmittelbar mit der Identität des zu empfehlenden Makros zusammenhängen, werden aus dem \textit{Anfrageprofil} ausgeschlossen. Hierzu zählen die Artikel-Makro-Zuordnung des Artikels sowie 
+die eigene Bezeichnung aus einem Makro. Dadurch wird bei einer Anfrage sichergestellt, dass das LambdaMART-Modell keine direkten Hinweise auf das zu empfehlende Makro erhält. 
+Die Anfrageprofile werden für die Trainings-, Validierungs- und Testdaten erstellt und jeweils als Trainingsanfragen in "Anfrageprofile\_Training", als Validierungsanfragen in "Anfrageprofile\_Validierung" und als Testanfragen in "Anfrageprofile\_Test" gespeichert. 
+Abbildung \ref{fig:anfrageprofil_motor} zeigt die Bildung eines Anfrageprofils am Beispiel des Elektromotors.
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ >=stealth, font=\small, 
+        macro/.style={ draw=orange!70!black, rounded corners, fill=yellow!15, text width=5.2cm, minimum height=1.4cm, align=center, inner sep=7pt },
+        article/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=4.8cm, minimum height=3.4cm, align=left, inner sep=8pt }, 
+        properties/.style={ draw=orange!70!black, rounded corners, fill=yellow!10, text width=5.2cm, minimum height=2.4cm, align=left, inner sep=7pt }, 
+        filter/.style={ draw=red!60!black, dashed, rounded corners, fill=red!5, text width=5.7cm, minimum height=1.5cm, align=center, inner sep=7pt }, 
+        profile/.style={ draw=orange!70!black, rounded corners, fill=orange!15, text width=9.5cm, minimum height=5.8cm, align=left, inner sep=9pt }, 
+        storage/.style={ draw=green!50!black, rounded corners, fill=green!15, text width=5.0cm, minimum height=1.2cm, align=center, inner sep=7pt }, 
+        flow/.style={ ->, thick } ] 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[font=\bfseries\large] at (0,11.5) {Bildung eines Anfrageprofils am Beispiel eines Elektromotors}; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Einzelner Anfrageartikel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[article] (article) at (-4.3,8.6) 
+        { \centering \textbf{Motorartikel der Anfrage}\\[1mm] \raggedright Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 12 A\\ Leistung: 5 kW\\ Hinweis: Mit Kühlung\\ Makrozuordnung: M1\_F1\_V1 }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Zugeordnetes Makro %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[macro] (macro) at (4.3,10.0) { \textbf{Zugeordnetes Motor-Makro}\\[1mm] M1\_F1\_V1 }; 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Technische Eigenschaften des Makros %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[properties] (macroProperties) at (4.3,7.5) { \textbf{technische Makroeigenschaften}\\[1mm] Anschlüsse: Plus, Minus\\ Makrotyp: Elektromotor \\ Variante: Mit Kühlung}; 
+        \draw[flow,orange!70!black] (macro.south) -- (macroProperties.north); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Identitätsinformationen entfernen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[filter] (identityFilter) at (0,3.5) { \textbf{Ausschluss makroidentifizierender Informationen}\\[1mm] Artikel-Makro-Zuordnung: \texttt{P\_ARTICLE\_MACRO}\\ Eigene Makrobezeichnung: \texttt{M1\_F1\_V1} }; 
+        
+        % Rechtwinklige Zusammenführung in den Filter 
+        
+        \coordinate (articleRoute) at (-4.3,6.0); 
+        \coordinate (macroRoute) at (4.3,6.0); 
+        \coordinate (mergePoint) at (0,6.0); 
+        
+        % Artikelinformationen 
+        
+        \draw[ thick, blue!60!black ] (article.south) -- (articleRoute); 
+        
+        % Makroinformationen 
+        \draw[ thick, orange!70!black ] (macroProperties.south) -- (macroRoute); 
+        % Zusammenführung beider Informationsquellen 
+        \draw[ thick ] (articleRoute) -- (macroRoute); 
+        % Gemeinsamer Pfeil zum Filter 
+        \draw[ ->, thick ] (mergePoint) -- (identityFilter.north);
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Anfrageprofil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \node[profile] (queryProfile) at (0,-1.8) { \textbf{Anfrageprofil des Motorartikels}\\[2mm] \textbf{Technische Artikeleigenschaften}\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 12 A\\ Leistung: 5 kW\\[2mm] \textbf{Technische Makroeigenschaften}\\ Anschlüsse: $\{\text{Plus},\;\text{Minus}\}$\\ Makrotyp: Elektromotor\\ Variante: Mit Kühlung }; 
+        \draw[flow,very thick] (identityFilter.south) -- (queryProfile.north); 
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Speicherung nach Datensplit %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        
+        \coordinate (storageBranch) at (0,-5.7); 
+        \draw[ thick, green!50!black ] (queryProfile.south) -- (storageBranch); 
+        \node[storage] (training) at (-6.0,-7.3) { \textbf{Trainingsanfragen}\\ \texttt{Anfrageprofile\_Training} }; 
+        \node[storage] (validation) at (0,-7.3) { \textbf{Validierungsanfragen}\\ \texttt{Anfrageprofile\_Validierung} }; 
+        \node[storage] (test) at (6.0,-7.3) { \textbf{Testanfragen}\\ \texttt{Anfrageprofile\_Test} }; 
+        \draw[flow,green!50!black] (storageBranch) -| (training.north); 
+        \draw[flow,green!50!black] (storageBranch) -- (validation.north); 
+        \draw[flow,green!50!black] (storageBranch) -| (test.north); \end{tikzpicture} 
+        \caption{ Bildung eines Anfrageprofils am Beispiel eines Motorartikels. Im Unterschied zum Makroprofil beschreibt das Anfrageprofil nur einen einzelnen Artikel. Die verfügbaren technischen Artikel- und Makroeigenschaften werden übernommen, während die Artikel-Makro-Zuordnung und die eigene Makrobezeichnung als makroidentifizierende Informationen ausgeschlossen werden. 
+        Die erzeugten Anfrageprofile werden abhängig vom Datensplit in den Datensätzen \texttt{Anfrageprofile\_Training}, \texttt{Anfrageprofile\_Validierung} und \texttt{Anfrageprofile\_Test} gespeichert. } 
+        \label{fig:anfrageprofil_motor} 
+    \end{figure}
+
+\subsection{Anfrage-Kandidat-Paare, Vergleichsmerkmale und Merkmalsvektor} 
+\label{sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektor} 
+
+Die Anfrage Kandidat-Paare stellen die Trainingsbeispiele für das LambdaMART-Modell dar, anhand derer das Modell lernt, die Relevanz von Makroprofilen für eine gegebene Anfrage zu bewerten.
+Die Bildung der Anfrage-Kandidat-Paare erfolgt durch die Kombination jeder Trainingsanfrage mit den Makroprofilen aus dem Suchraum\_Makroprofile.
+
+Diese Bildung der Anfrage-Kandidat-Paare soll an folgendem Beispiel gezeigt werden:
+Besteht der Suchraum\_Makroprofile\_Training aus den Makroprofilen \(M_1\), \(M_2\) und \(M_3\) und im Datensatze Anfrageprofile\_Training gibt es 2 Trainingsanfragen \(ta_1\) und \(ta_2\), 
+werden die folgenden 6 Anfrage-Kandidat-Paare gebildet: \[ (ta_1,M_1), \qquad (ta_1,M_2), \qquad (ta_1,M_3), \qquad (ta_2,M_1), \qquad (ta_2,M_2), \qquad (ta_2,M_3). \] 
+
+Für jedes Anfrage-Kandidat-Paar wird während der Erstellung ein Vergleich anhand von Vergleichsmerkmalen wie Übereinstimmung von Spannung, Strom oder Hinweisen durchgeführt. 
+Diese Vergleichsmerkmale werden in Form von Zahlenwerten zu einem Merkmalsvektor zusammengeführt, der die Ähnlichkeit zwischen dem Anfrageprofil und dem Makroprofil beschreibt.
+Dieser Merkmalsvektor wird anschließend als Eingabe für das LambdaMART-Modell verwendet.
+Da LambdaMART keine Informationen wie Spannung = 400V oder Strom = 10A oder Hinweise wie "Mit Kühlung" direkt verarbeiten kann, 
+müssen diese Informationen in Form von Zahlenwerten im Merkmalsvektor vorliegen, die die Ähnlichkeit zwischen Anfrageprofil und Makroprofil ausdrücken.
+
+Die folgende Abbildung \ref{fig:anfrage_kandidat_paare_motor} veranschaulicht die Bildung von Anfrage-Kandidat-Paaren, die Berechnung der Vergleichsmerkmale und die Zusammenführung zu einem Merkmalsvektor.
+
+\begin{figure}[H] 
+    \centering 
+    \begin{tikzpicture}[ scale=0.76, transform shape, >=stealth, 
+        font=\small, dataset/.style={ draw, rounded corners, fill=gray!10, text width=4.3cm, align=center, inner sep=4pt }, 
+        process/.style={ draw=blue!60!black, rounded corners, fill=blue!5, text width=4.8cm, align=center, inner sep=5pt }, 
+        query/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=3.5cm, align=center, inner sep=4pt }, 
+        macroprofile/.style={ draw=green!50!black, rounded corners, fill=green!10, text width=3.0cm, align=center, inner sep=4pt }, 
+        pair/.style={ draw=orange!70!black, rounded corners, fill=orange!12, text width=3.0cm, minimum height=1.7cm, align=center, inner sep=4pt }, 
+        explanation/.style={ draw=yellow!60!black, rounded corners, fill=yellow!10, text width=8.8cm, align=center, inner sep=5pt }, 
+        collection/.style={ draw, rounded corners, fill=gray!10, text width=9.5cm, align=center, inner sep=5pt }, 
+        model/.style={ draw=red!60!black, rounded corners, fill=red!10, text width=6.2cm, align=center, inner sep=5pt }, 
+        result/.style={ draw=green!50!black, rounded corners, fill=green!12, text width=7.4cm, align=center, inner sep=5pt }, flow/.style={ ->, thick },
+        legend/.style={ draw=yellow!60!black, rounded corners, fill=yellow!10, text width=4.6cm, align=left, inner sep=6pt }, ]
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[font=\bfseries\large] at (0,15.2) {Bildung von Anfrage-Kandidat-Paaren und Vergleichsmerkmalen}; 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Quelldatensätze %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[dataset] (queryDataset) at (-6.0,13.4) { \textbf{\texttt{Anfrageprofile\_Training}}\\ Trainingsanfragen \(ta_1\) und \(ta_2\) }; 
+        \node[process] (combination) at (0,13.4) { \textbf{Bildung aller Kombinationen}\\ \(2\) Trainingsanfragen \(\times\) \(3\) Makroprofile \(=\) \(6\) Paare }; 
+        \node[dataset] (macroDataset) at (6.0,13.4) { \textbf{\texttt{Suchraum\_Makroprofile}}\\ Makroprofile \(M_1\), \(M_2\) und \(M_3\) }; 
+        % Quelle links -> Kombinationsprozess 
+        \draw[ flow, blue!60!black ] (queryDataset.east) -- (combination.west); 
+        % Quelle rechts -> Kombinationsprozess 
+        \draw[ flow, green!50!black ] (macroDataset.west) -- (combination.east);
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Überschrift der Kombinationsmatrix %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[ font=\bfseries ] (matrixTitle) at (0,11.7) {Kombinationsmatrix der Anfrage-Kandidat-Paare}; 
+        \draw[flow] (combination.south) -- (matrixTitle.north);
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Spaltenüberschriften: Makroprofile %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[macroprofile] (m1) at (-3.6,9.4) { \textbf{Makroprofil \(M_1\)}\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\ Hinweis: Mit Kühlung }; 
+        \node[macroprofile] (m2) at (0,9.4) { \textbf{Makroprofil \(M_2\)}\\ Hersteller: SEW\\ Spannung: 420 V\\ Strom: 5 A\\ Hinweis: Wasserdicht }; 
+        \node[macroprofile] (m3) at (3.6,9.4) { \textbf{Makroprofil \(M_3\)}\\ Hersteller: Siemens\\ Spannung: 230 V\\ Strom: 5 A\\ Hinweis: Mit Kühlung}; 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Beschriftung der Matrixachsen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[ font=\footnotesize\bfseries, text=green!40!black ] at (0,11.2) {Makroprofile aus \texttt{Suchraum\_Makroprofile}}; 
+        \node[ font=\footnotesize\bfseries, text=blue!60!black, rotate=90 ] at (-9.7,5) {Trainingsanfragen aus \texttt{Anfrageprofile\_Training}}; 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Erste Matrixzeile: Anfrageprofil q1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[query] (q1) at (-7.4,6.4) { \textbf{Trainingsanfrage \(ta_1\)}\\ Hersteller: Siemens\\ Spannung: 400 V\\ Strom: 10 A\\ Hinweis: Mit Kühlung }; 
+        \node[pair] (q1m1) at (-3.6,6.4) { \textbf{\((ta_1,M_1)\)}\\[1mm] \(\mathbf{x}_{ta_1,M_1} = \begin{bmatrix} 1\\ 1\\ 1 \end{bmatrix}\) }; 
+        \node[pair] (q1m2) at (0,6.4) { \textbf{\((ta_1,M_2)\)}\\[1mm] \(\mathbf{x}_{ta_1,M_2} = \begin{bmatrix} 0\\ 1\\ 0 \end{bmatrix}\) }; 
+        \node[pair] (q1m3) at (3.6,6.4) { \textbf{\((ta_1,M_3)\)}\\[1mm] \(\mathbf{x}_{ta_1,M_3} = \begin{bmatrix} 0\\ 1\\ 1 \end{bmatrix}\) }; 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Zweite Matrixzeile: Anfrageprofil q2 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[query] (q2) at (-7.4,3.4) { \textbf{Trainingsanfrage \(ta_2\)}\\ Hersteller: SEW\\ Spannung: 420 V\\ Strom: 5 A\\ Hinweis: Wasserdicht }; 
+        \node[pair] (q2m1) at (-3.6,3.4) { \textbf{\((ta_2,M_1)\)}\\[1mm] \(\mathbf{x}_{ta_2,M_1} = \begin{bmatrix} 0\\ 0\\ 0 \end{bmatrix}\) }; 
+        \node[pair] (q2m2) at (0,3.4) { \textbf{\((ta_2,M_2)\)}\\[1mm] \(\mathbf{x}_{ta_2,M_2} = \begin{bmatrix} 1\\ 1\\ 1 \end{bmatrix}\) }; 
+        \node[pair] (q2m3) at (3.6,3.4) { \textbf{\((ta_2,M_3)\)}\\[1mm] \(\mathbf{x}_{ta_2,M_3} = \begin{bmatrix} 0\\ 1\\ 0 \end{bmatrix}\) }; 
+    
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Legende der Merkmalsvektoren %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[legend] (vectorLegend) at (8.5,6.7) 
+        { \centering \textbf{Legende der Merkmalsvektoren}\\[2mm] \raggedright \(\displaystyle \mathbf{x}_{q,M} = 
+        \begin{bmatrix} x_1\\ x_2\\ x_3 \end{bmatrix} \)\\\textbf{\\Vergleichsmerkmale}:\\[2mm] \(x_1\):Spannungs-\\Übereinstimmung\\[1mm] \(x_2\):Strom-\\Übereinstimmung\\[1mm] \(x_3\):Hinweis-\\Übereinstimmung\\[2mm] 
+        \(1\): Eigenschaft stimmt überein\\ \(0\): Eigenschaft stimmt\\nicht überein };
+        
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Zusammenfassung aller Matrixergebnisse 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \draw[ decorate, decoration={ brace, mirror, amplitude=9pt }, thick ] (-5.4,1.75) -- (5.4,1.75);
+        \node[collection] (pairs) at (0,-0.6) { \textbf{Trainingsmenge mit sechs Anfrage-Kandidat-Paaren}\\[1mm] \(\{ \mathbf{x}_{ta_1,M_1}, \mathbf{x}_{ta_1,M_2}, \mathbf{x}_{ta_1,M_3}, \mathbf{x}_{ta_2,M_1}, \mathbf{x}_{ta_2,M_2}, \mathbf{x}_{ta_2,M_3} \}\) }; 
+        \draw[ flow, very thick ] (0,1.4) -- (pairs.north); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % LambdaMART 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[model] (lambdaMART) at (0,-3.0) { \textbf{LambdaMART-Modell}\\[1mm] verarbeitet die numerischen Merkmalsvektoren. }; 
+        \draw[ flow, very thick ] (pairs.south) -- (lambdaMART.north); 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Ergebnis 
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \node[result] (ranking) at (0,-5.5) { \textbf{Beispielhafte Makro-Ranglisten}\\[1mm] Anfrage \(ta_1\): \(M_1 > M_3 > M_2\)\\ Anfrage \(ta_2\): \(M_2 > M_3 > M_1\) }; 
+        \draw[ flow, very thick, green!50!black ] (lambdaMART.south) -- (ranking.north); 
+    \end{tikzpicture} 
+    \caption{ Bildung von Anfrage-Kandidat-Paaren und Vergleichsmerkmalen am Beispiel zweier Anfrageprofile und dreier Makroprofile. 
+    Jedes Anfrageprofil wird mit jedem Makroprofil kombiniert. Dabei werden numerische Vergleichsmerkmale berechnet und in Merkmalsvektore zusammengeführt. 
+    Die Merkmalsvektoren bilden die Eingabe des LambdaMART-Modells, das daraus eine Makro-Rangliste erzeugt. } 
+    \label{fig:anfrage_kandidat_paare_motor} 
+\end{figure}
+
+\section{Gesamtarchitektur und Teilprozesse} 
+\label{sec:gesamtarchitektur_und_teilprozesse} 
+
+\subsection{Gesamtarchitektur}
+
+Abbildung \ref{fig:prozessarchitektur_empfehlungssystem} zeigt die Gesamtarchitektur des Empfehlungssystems. 
+Zunächst werden aus der Datenbasis die \textit{technischen Artikel- und Makroeigenschaften} extrahiert und in aufbereiteter Form gespeichert.
+Im Anschluss folgt der Datensplitt anhand definierten Split-Regelen (siehe Kapitel \ref{sec:splitregeln}). 
+Aus dem Datensplitt werden dann im Vorbereitungsprozess die Datenobjekte (siehe Kapitel \ref{sec:datenobjekte})gebildet, wo auch
+die Berechnung der Vergleichsmerkmale der Merkmalsvektoren der Anfrage-Kandidat-Paare stattfindet. 
+
+Im nächsten Schritt findet der Trainings- und Validierungsprozess statt.
+Der Trainings- und Validierungsprozess besteht aus einzelnen Sequenzen. Eine Sequenz läuft dabei wie folgt ab: 
+
+Zunächst wird aus einer Liste von Modellkonfigurationen, dem sogenannten Grid, die erste Modellkonfiguration ausgewählt und anschließend die Anfrage-Kandidat-Paare durch das LambdaMART-Modell gelernt.
+Im nächsten Schritt wird der Validierungsprozess gestartet, in dem das trainierte LambdaMART-Modell anhand der Validierungsanfragen überprüft, mit Recall@K, MRR und NDCG bewertet (siehe Kapitel \ref{sec:evaluationsmetriken}) und die ausgewählt Modellkonfiguration gespeichert.
+Dannach wird die Sequenz abgeschlossen und eine neue Sequenz mit der nächsten Modellkonfiguration aus dem Grid gestartet. 
+Diese Sequenz wiederholt sich, bis alle Modellkonfigurationen des Grids bearbeitet wurden. 
+Im Anschluss wird das trainierte LambdaMART-Modell mit der besten Bewertung ausgewählt und als Ergebnis des Validierungsprozesses festgelegt.
+Das trainierte LambdaMART-Modell wird zusammen mit den Testanfragen der Trainingsvorbereitung als Übergabeartefakte für den anschließenden Test- und Anwendungsprozess bereitgestellt.
+Anschließend wird im Testprozess die Leistungsfähigkeit des trainierten LambdaMART-Modells anhand der Testanfragen überprüft und mit Recall@K, MRR und NDCG bewertet (siehe Kapitel \ref{sec:evaluationsmetriken}).
+Das Ergebnis des Testprozesses ist die endgültige Bewertung der Leistungsfähigkeit des trainierten LambdaMART-Modells  und wird im Testergebnis festgehalten. 
+Nach dem Testprozess steht dann dem Anwendungsprozess ein trainiertes und validiertes LambdaMART-Modell zur Verfügung, welches zur Bewertung von neuen unbekannten Anfragen genutzt werden kann.
+Dazu werden für neue unbekannte Anfragen Anfrageprofile aus technischen Dokumentationen oder Datenblättern erstellt und dem trainierten LambdaMART-Modell zur Bewertung übergeben.
+Das Ergebnis des Anwendungsprozesses ist eine sortierte Makro-Rangliste, die die bewerteten Kandidaten in absteigender Relevanz für die jeweilige Anfrage darstellt.
+
+
+\begin{figure}[H] \centering \begin{tikzpicture}[ scale=0.78, transform shape, >=stealth, font=\small, 
+    data/.style={ draw=gray!70!black, rounded corners, fill=gray!10, text width=7.2cm, minimum height=1.0cm, align=center, inner sep=6pt }, 
+    process/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=5.5cm, minimum height=1.35cm, align=center, inner sep=6pt }, 
+    preparation/.style={ draw=blue!60!black, rounded corners, fill=blue!10, text width=6.4cm, minimum height=1.35cm, align=center, inner sep=6pt },
+    artifact/.style={ draw=yellow!60!black, rounded corners, fill=yellow!15, text width=4.8cm, minimum height=1.5cm, align=center, inner sep=6pt }, 
+    bundle/.style={ draw=green!50!black, rounded corners, fill=green!12, text width=11.5cm, minimum height=1.3cm, align=center, inner sep=7pt }, 
+    usage/.style={ draw=green!50!black, rounded corners, fill=green!8, text width=10.5cm, minimum height=1.35cm, align=center, inner sep=7pt }, 
+    result/.style={ draw=orange!70!black, rounded corners, fill=orange!15, text width=10.5cm, minimum height=1.35cm, align=center, inner sep=7pt },
+    note/.style={ draw=red!60!black, dashed, rounded corners, fill=red!5, text width=4.4cm, minimum height=1.0cm, align=center, inner sep=5pt, font=\footnotesize }, 
+    level/.style={ font=\bfseries, anchor=east, align=right, text width=3.2cm }, flow/.style={ ->, thick },
+    validationprocess/.style={ draw=green!50!black, rounded corners, fill=green!8, text width=5.2cm, minimum height=1.5cm, align=center, inner sep=6pt } ] 
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+    \node[font=\bfseries\large] at (-2.0,16.5) {Gesamtarchitektur des Empfehlungssystems}; 
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 1: Datenbasis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+    \node[level] at (-8.1,15.0) {1. Datenbasis}; \node[data] (data) at (0,14.8) { \textbf{Aufbereitete Artikel- und Makrodaten}\\ \textit{technische Artikel- und Makroeigenschaften} }; 
+    \node[data] (split) at (0,12.8) { \textbf{Datensplit}\\ Trainings-, Validierungs- und Testdaten }; 
+    \draw[flow] (data.south) -- (split.north); 
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 2: Trainingsvorbereitung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \node[level] at (-8.1,11.0) {2. Datenobjekte}; 
+    \node[preparation] (trainingsvorbereitung) at (0,10.0) { \textbf{Vorbereitungsprozess}\\[1mm] Bildung der Makro- und Anfrageprofilen\\Berechnung der Vergleichsmerkmale der Merkmalsverktoren der Anfrage-Kandidat-Paare}; 
+    \draw[flow] (split.south) -- (trainingsvorbereitung.north); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 3: Training und iterative Validierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[level] at (-8.1,7.2) {3. Training und\\Validierung}; 
+    \node[process] (training) at (-3.3,6.3) { \textbf{Trainingsprozess}\\[1mm] sequenziellesTraining mehrerer LambdaMART-Modelle aus den Anfrage-Kandidat-Paaren, Merkmalsvektoren und Relevanzwerten }; 
+    \node[ draw=green!50!black, rounded corners, fill=green!8, text width=5.8cm, minimum height=1.5cm, align=center, inner sep=7pt ] (modelValidation) at 
+    (3.3,6.3) { \textbf{iterativer Validierungsprozess}\\[1mm] Bewertung jedes LambdaMART-Modells nach einer Sequenz anhand der Validierungsanfragen }; 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsvorbereitung speist beide Prozesse %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \coordinate (trainingValidationBranch) at (0,8.0); 
+    
+    % Stamm ohne Pfeilspitze 
+    \draw[ thick ] (trainingsvorbereitung.south) -- (trainingValidationBranch); 
+    % Eingang in das Training 
+    \draw[ ->, thick, blue!60!black ] (trainingValidationBranch) -| (training.north); 
+    % Eingang in die Validierung 
+    \draw[ ->, thick, green!50!black ] (trainingValidationBranch) -| (modelValidation.north);
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Iterative Verbindung zwischen Training % und paralleler Validierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    % Oberer Pfeil: Training -> Validierung 
+    \draw[ ->, thick, blue!60!black ] ([yshift=3mm]training.east) -- ([yshift=3mm]modelValidation.west); 
+    % Unterer Pfeil: Validierung -> Training 
+    \draw[ ->, thick, green!50!black ] ([yshift=-3mm]modelValidation.west) -- ([yshift=-3mm]training.east);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Validierungsergebnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \node[ draw=orange!70!black, rounded corners, fill=green!12, text width=5.8cm, minimum height=1.0cm, align=center, inner sep=6pt ] (validationResult) at (3.3,3.7) { \textbf{Ergebniss des Validierungsprozesses}\\ ausgewählte Modellkonfiguration }; 
+    \draw[ ->, thick, green!50!black ] (modelValidation.south) -- (validationResult.north); 
+  
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 4: Übergabeartefakte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[level] at (-8.1,1.3) {4. Übergabe-\\artefakte}; 
+    \node[artifact] (profiles) at (-3.3,1.0) { \textbf{Testanfragen}}; 
+    \node[artifact] (model) at (3.3,1.0) { \textbf{Trainiertes LambdaMART-Modell}}; 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsvorbereitung -> Datenobjekte % Gerader Außenpfad links am Training vorbei %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    % Senkrechte Spur links neben dem LambdaMART-Training 
+    
+    \coordinate (dataRouteTop) at (-6.6,10.0); 
+    
+    % Unteres Ende der senkrechten Spur 
+    
+    \coordinate (dataRouteBottom) at (-6.6,2.5); 
+    
+    % Punkt senkrecht oberhalb des Datenobjektkastens 
+    
+    \coordinate (dataRouteAboveProfile) at (-3.3,2.5); 
+    
+    % 1. Waagerecht aus der Trainingsvorbereitung 
+    
+    \draw[ thick, blue!60!black ] (trainingsvorbereitung.west) -- (dataRouteTop); 
+    % 2. Senkrecht links am LambdaMART-Training vorbei 
+    \draw[ thick, blue!60!black ] (dataRouteTop) -- (dataRouteBottom); 
+    % 3. Waagerecht über den Datenobjektkasten 
+    \draw[ thick, blue!60!black ] (dataRouteBottom) -- (dataRouteAboveProfile); 
+    % 4. Senkrechter Eintritt von oben in die Datenobjekte 
+    \draw[ ->, thick, blue!60!black, shorten >=2pt ] (dataRouteAboveProfile) -- (profiles.north);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % LambdaMART-Training -> trainiertes Modell %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \coordinate (trainingModelRoute) at (-3.3,2.7); 
+    \draw[ thick, blue!60!black ] (training.south) -- (trainingModelRoute); 
+    \draw[ ->, thick, blue!60!black ] (trainingModelRoute) -| ([xshift=-1.0cm]model.north);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Validierungsergebnis -> trainiertes Modell %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \coordinate (validationModelRoute) at (3.3,2.7); \draw[ thick, green!50!black ] (validationResult.south) -- (validationModelRoute); 
+    \draw[ ->, thick, green!50!black ] (validationModelRoute) -| ([xshift=1.0cm]model.north);
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 5: Testprozess %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[level] at (-8.1,-0.5) {5. Test}; 
+    \node[usage] (test) at (0,-1.0) { \textbf{Testprozess}\\[1mm]Bewertung des trainierten Modells anhand der Testanfragen }; 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Übergabeartefakte -> Testprozess %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    % Linker Eintrittspunkt für die Datenobjekte 
+    \coordinate (testDataEntry) at ([xshift=-3.0cm]test.north); 
+    
+    % Rechter Eintrittspunkt für das Modell 
+    \coordinate (testModelEntry) at ([xshift=3.0cm]test.north); 
+    
+    % Datenobjekte -> Testprozess 
+    \draw[ ->, thick, blue!60!black, shorten >=2pt ] (profiles.south) -- (testDataEntry); 
+    
+    % Trainiertes Modell -> Testprozess 
+    \draw[ ->, thick, green!50!black, shorten >=2pt ] (model.south) -- (testModelEntry); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 6: Testergebnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    % \node[level] at (-8.1,-4.7) {6. Testergebnis}; 
+    \node[result] (testResult) at (0,-3.0) { \textbf{Testergebnis}\\[1mm] Leistung des Modells anhand Recall@k, MRR und nDCG }; 
+    \draw[ ->, very thick ] (test.south) -- (testResult.north); 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 7: Anwendungsprozess %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \node[level] at (-8.1,-4.5) {6. Anwendung}; 
+    \node[usage] (application) at (0,-5.1) { \textbf{Anwendungsprozess}\\[1mm] Bildung eines Anfrageprofils für eine neue Anfrage mit anschließender Bewertung durch das trainierte LambdaMART-Modell };
+    
+    % Übergang nach abgeschlossenem Test 
+    \draw[ ->, very thick ] (testResult.south) -- (application.north); %node[ midway, right, font=\footnotesize, text=green!40!black, align=left ] {nach Abschluss\\des Tests}; 
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 8: Anwendungsergebnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    % \node[level] at (-8.1,-11.5) {8. Anwendungsergebnis}; 
+    \node[result] (applicationResult) at (0,-7.5) { \textbf{Anwendungsergebnis}\\[1mm] Absteigend nach Relevanz sortierte Makro-Rangliste für die neue Anfrage.}; 
+    \draw[ ->, very thick ] (application.south) -- (applicationResult.north);
+ 
+\end{tikzpicture} 
+\caption{Gesamtarchitektur des Empfehlungssystems von der Datenbasis bis zur Makroempfehlung. Nach dem Datensplit werden die erforderlichen Datenobjekte erzeugt. 
+Training und iterative Validierung bestimmen die finale Konfiguration des LambdaMART-Modells. 
+Das ausgewählte Modell wird anschließend getestet und danach zur Bewertung neuer Anfragen sowie zur Erzeugung einer nach Relevanz sortierten Makro-Rangliste verwendet.
+} 
+\label{fig:prozessarchitektur_empfehlungssystem} 
+\end{figure}
+
+
+\section{Kapitelergebnis} 
+
+Ziel dieses Kapitels war die Entwicklung einer Architektur für das Empfehlungssystem auf Grundlage der in Artefakt A1 bereitgestellten Trainingsbasis und des in Artefakt A2 ausgewählten LambdaMART-Verfahrens. 
+Hierzu wurden die Datenobjekte sowie deren Zusammenhänge im Systems erläutert. Dabei wurde insbesondere die Trennung von Anfrageprofilen, Makroprofilen und den daraus gebildeten Vergleichsmerkmalen hervorgehoben, 
+welche die eigentliche Eingabe des Rankingmodells darstellen. 
+
+Aus diesem Kapitel ergibt sich folgendes Artefakt A3, das als Ergebnis an die nächsten Kapitel übergeben wird: 
+
+\begin{quote} 
+    \textbf{Artefakt A3: Architektur des Empfehlungssystems} 
+\end{quote} 
+
+\begin{itemize} 
+    \item Makroprofile als Repräsentation eines Makros und seiner zugeordneten Trainingsartikel, 
+    \item Anfrageprofile als Repräsentation eines einzelnen Anfrageartikels ohne makroidentifizierende Informationen, 
+    \item Anfrage-Kandidat-Paare zur Kombination eines Anfrageprofils mit einem Makroprofil, 
+    \item Vergleichsmerkmale zur Beschreibung der technischen Übereinstimmung zwischen Anfrageprofil und Makroprofil, 
+    \item Merkmalsvektoren als numerische Repräsentation der Vergleichsmerkmale, 
+    \item eine Gesamtarchitektur des Empfehlungssystems bestehend aus Datenaufbereitung, Datenobjekten, Training, Validierung, Test und Anwendung, 
+\end{itemize}
+

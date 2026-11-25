@@ -830,42 +830,6 @@
       \field{title}{Introduction to Information Retrieval}
       \field{year}{2008}
     \endentry
-    \entry{LightGBM}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=b9a8b868588ad4bc6b36c29936e26423}{%
-           family={{Microsoft Corporation}},
-           familyi={M\bibinitperiod}}}%
-      }
-      \list{organization}{1}{%
-        {Microsoft Corporation}%
-      }
-      \strng{namehash}{b9a8b868588ad4bc6b36c29936e26423}
-      \strng{fullhash}{b9a8b868588ad4bc6b36c29936e26423}
-      \strng{fullhashraw}{b9a8b868588ad4bc6b36c29936e26423}
-      \strng{bibnamehash}{b9a8b868588ad4bc6b36c29936e26423}
-      \strng{authorbibnamehash}{b9a8b868588ad4bc6b36c29936e26423}
-      \strng{authornamehash}{b9a8b868588ad4bc6b36c29936e26423}
-      \strng{authorfullhash}{b9a8b868588ad4bc6b36c29936e26423}
-      \strng{authorfullhashraw}{b9a8b868588ad4bc6b36c29936e26423}
-      \field{sortinit}{M}
-      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{LightGBM}
-      \field{urlday}{31}
-      \field{urlmonth}{8}
-      \field{urlyear}{2026}
-      \field{year}{2026}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://lightgbm.readthedocs.io/
-      \endverb
-      \verb{url}
-      \verb https://lightgbm.readthedocs.io/
-      \endverb
-    \endentry
     \entry{Mikolov2013}{inproceedings}{}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=a2d359b12ca2fadf0b40136a73f021bb}{%
@@ -1027,30 +991,6 @@
       \verb{doi}
       \verb 10.2753/MIS0742-1222240302
       \endverb
-    \endentry
-    \entry{srcStep931}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=ea91dcc0388ea8a1b4032b360041dffd}{%
-           family={{Pipeline step 931}},
-           familyi={P\bibinitperiod}}}%
-      }
-      \strng{namehash}{ea91dcc0388ea8a1b4032b360041dffd}
-      \strng{fullhash}{ea91dcc0388ea8a1b4032b360041dffd}
-      \strng{fullhashraw}{ea91dcc0388ea8a1b4032b360041dffd}
-      \strng{bibnamehash}{ea91dcc0388ea8a1b4032b360041dffd}
-      \strng{authorbibnamehash}{ea91dcc0388ea8a1b4032b360041dffd}
-      \strng{authornamehash}{ea91dcc0388ea8a1b4032b360041dffd}
-      \strng{authorfullhash}{ea91dcc0388ea8a1b4032b360041dffd}
-      \strng{authorfullhashraw}{ea91dcc0388ea8a1b4032b360041dffd}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Interner Projektquellcode}
-      \field{title}{Pipeline step 931: Learning-to-Rank macro ranker training}
-      \field{year}{2026}
     \endentry
     \entry{Reimers2019SBERT}{inproceedings}{}{}
       \name{author}{2}{}{%
