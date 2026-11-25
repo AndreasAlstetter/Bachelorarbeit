@@ -1,21 +1,21 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'Bachelorarbeit.blg'
-[121] biber-MSWIN64:342> INFO - === 
-[176] Biber.pm:421> INFO - Reading 'Bachelorarbeit.bcf'
-[292] Biber.pm:1002> INFO - Found 43 citekeys in bib section 0
-[306] Biber.pm:4487> INFO - Processing section 0
-[315] Biber.pm:4678> INFO - Looking for bibtex file '02_literatur/01_quellen.bib' for section 0
-[407] bibtex.pm:1713> INFO - LaTeX decoding ...
-[489] bibtex.pm:1519> INFO - Found BibTeX data source '02_literatur/01_quellen.bib'
-[785] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[785] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[785] Biber.pm:4307> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'de_DE'
-[786] Biber.pm:4313> INFO - No sort tailoring available for locale 'de_DE'
-[840] bbl.pm:676> INFO - Writing 'Bachelorarbeit.bbl' with encoding 'ascii'
-[840] bbl.pm:677> INFO - Converting UTF-8 to TeX macros on output to .bbl
-[888] bbl.pm:779> INFO - Output to Bachelorarbeit.bbl
-[888] Biber.pm:132> WARN - Possible typo (case mismatch) between datasource keys: 'reimers2019sbert' and 'Reimers2019SBERT' in file '02_literatur/01_quellen.bib'
-[889] Biber.pm:132> WARN - Duplicate entry key: 'burges2010lambdamart' in file '02_literatur/01_quellen.bib', skipping ...
-[889] Biber.pm:132> WARN - Possible typo (case mismatch) between datasource keys: 'burges2006lambdarank' and 'Burges2006LambdaRank' in file '02_literatur/01_quellen.bib'
-[889] Biber.pm:132> WARN - Duplicate entry key: 'liu2009learning' in file '02_literatur/01_quellen.bib', skipping ...
-[889] Biber.pm:134> INFO - WARNINGS: 4
+[355] biber-MSWIN64:342> INFO - === 
+[530] Biber.pm:421> INFO - Reading 'Bachelorarbeit.bcf'
+[660] Biber.pm:1002> INFO - Found 43 citekeys in bib section 0
+[673] Biber.pm:4487> INFO - Processing section 0
+[706] Biber.pm:4678> INFO - Looking for bibtex file '02_literatur/01_quellen.bib' for section 0
+[823] bibtex.pm:1713> INFO - LaTeX decoding ...
+[899] bibtex.pm:1519> INFO - Found BibTeX data source '02_literatur/01_quellen.bib'
+[1359] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1359] UCollate.pm:68> INFO - Overriding locale 'de_DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1359] Biber.pm:4307> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'de_DE'
+[1359] Biber.pm:4313> INFO - No sort tailoring available for locale 'de_DE'
+[1517] bbl.pm:676> INFO - Writing 'Bachelorarbeit.bbl' with encoding 'ascii'
+[1517] bbl.pm:677> INFO - Converting UTF-8 to TeX macros on output to .bbl
+[1567] bbl.pm:779> INFO - Output to Bachelorarbeit.bbl
+[1568] Biber.pm:132> WARN - Possible typo (case mismatch) between datasource keys: 'reimers2019sbert' and 'Reimers2019SBERT' in file '02_literatur/01_quellen.bib'
+[1568] Biber.pm:132> WARN - Duplicate entry key: 'burges2010lambdamart' in file '02_literatur/01_quellen.bib', skipping ...
+[1568] Biber.pm:132> WARN - Possible typo (case mismatch) between datasource keys: 'burges2006lambdarank' and 'Burges2006LambdaRank' in file '02_literatur/01_quellen.bib'
+[1568] Biber.pm:132> WARN - Duplicate entry key: 'liu2009learning' in file '02_literatur/01_quellen.bib', skipping ...
+[1568] Biber.pm:134> INFO - WARNINGS: 4

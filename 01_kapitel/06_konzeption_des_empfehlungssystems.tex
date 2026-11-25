@@ -12,15 +12,16 @@ Das Ziel dieses Kapitels besteht daher in der Entwicklung einer fachlichen Archi
 \subsection{Makroprofil}
 \label{sec:makroprofil}
 
-Ein \textit{Makroprofil} wird aus einem Makro und dessen zugeordneten Trainingsartikel erstellt (vergleiche Kapitel \ref{sec:artikel_macro_zuordnungen}). 
+Die Bestandteile eines \textit{Makroprofils} werden aus einem Makro und dessen zugeordneten Artikeln des jeweiligen Splits gewonnen (vergleiche Kapitel \ref{sec:erstellung_des_datensplits}). 
 Ein Artikel liefert dabei die \textit{technischen Artikeleigenschaften} und das Makro die \textit{technischen Makroeigenschaften}.
-Die \textit{technischen Makroeigenschaften} sind somit Informationen, die für alle Artikel eines Makros gelten. 
-Beispielsweise hat ein Makro eines Elektormotors ein Plus-Anschluss und einen Minus-Anschluss. Folglich benötigen alle diesem Makro zugeordneten Artikel auch diese Anschlüsse.
-Weicht ein Artikel von den \textit{technischen Makroeigenschaften} des Makros ab, dann ist dieser einem anderem Makro und dessen Makroprofil zugeordnet.
-Enthalten die einem Makro zugeordneten Artikel beispielsweise die Spannungswerte \[ \{380V,\;400V,\;420V\}, \] dann wird jeder Wert ins \textit{Makroprofil} übernommen. 
-Dadurch können unterschiedliche Ausprägungen eines Makros berücksichtigt werden.
+Die \textit{technischen Makroeigenschaften} sind Informationen, die für alle Artikel eines Makros gelten. 
+Beispielsweise hat ein Makro eines Elektromotors ein Plus-Anschluss und einen Minus-Anschluss. Folglich benötigen alle diesem Makro zugeordneten Trainingsartikel auch diese Anschlüsse.
+Weicht ein Trainingsartikel von den \textit{technischen Makroeigenschaften} des Makros ab, dann ist dieser einem anderem Makro und dessen Makroprofil zugeordnet.
+
+Desweiteren enthalten die einem Makro zugeordneten Artikel unterschiedliche Ausprägungen der \textit{technischen Artikeleigenschaften}. Jede Ausprägung wird dabei ins \textit{Makroprofil} übernommen. 
+Enthalten die einem Makro zugeordneten Artikel beispielsweise die Spannungswerte \[ \{380V,\;400V,\;420V\}, \] dann wird jeder einzelne Wert ins \textit{Makroprofil} übernommen. 
 Ein \textit{Makroprofil} beschreibt somit die Menge aller Eigenschaften, die innerhalb eines Makros und dessen zugeordneten Artikeln beobachtet werden können.
-Alle erstellten \textit{Makroprofile} werden als "Suchraum\_Makroprofile" für das LambdaMART-Modell gespeichert.
+Alle erstellten \textit{Makroprofile} werden entsprechend ihrer Herkunft aus dem Split im "Suchraum\_Makroprofile\_Training", "Suchraum\_Makroprofile\_Validierung" und "Suchraum\_Makroprofile\_Test" gespeichert.
 Abbildung \ref{fig:makroprofil} zeigt die Bildung eines Makroprofils am Beispiel des Elektromotors:
 
 \begin{figure}[H] 
@@ -206,18 +207,20 @@ Abbildung \ref{fig:anfrageprofil_motor} zeigt die Bildung eines Anfrageprofils a
 \subsection{Anfrage-Kandidat-Paare, Vergleichsmerkmale und Merkmalsvektor} 
 \label{sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektor} 
 
-Ein Anfrage-Kandidat-Paar stellt die Verbindung einer Trainingsanfrage mit einem \textit{Makroprofil} aus den Suchraum\_Makroprofile dar. 
-Hierbei wird für jede Trainingsanfrage ein Anfrage-Kandidat-Paar mit jedem Makroprofil aus den Suchraum\_Makroprofile gebildet.
-Im folgenden Beispiel werden sechs Anfrage-Kandidat-Paare gebildet, welche vom LambdaMART-Modell benötigt werden, um die Relevanz der Makroprofile für die jeweiligen Anfrageprofile zu berechnen:
-Besteht der Suchraum\_Makroprofile aus den Makroprofilen \(M_1\), \(M_2\) und \(M_3\) und im Datensatze Anfrageprofile\_Training gibt es 2 Trainingsanfragen \(ta_1\) und \(ta_2\), 
+Die Anfrage Kandidat-Paare werden entsprechend dem Datensplit gebildet. 
+Für Trainingsanfragen werden die Paare mit Makroprofilen aus dem Suchraum\_Makroprofile\_Training gebildet, 
+für Validierungsanfragen mit Makroprofilen aus dem Suchraum\_Makroprofile\_Validierung und für Testanfragen mit Makroprofilen aus dem Suchraum\_Makroprofile\_Test.
+Die Speicherung der Anfrage-Kandidat-Paare erfolgt entsprechend ihrer Bildung in den jeweiligen Datensätzen \texttt{Anfrage-Kandidat-Paare\_Training}, \texttt{Anfrage-Kandidat-Paare\_Validierung} und \texttt{Anfrage-Kandidat-Paare\_Test}.
+Im folgenden Beispiel werden sechs Anfrage-Kandidat-Paare für Trainingsanfragen gebildet. Diese Bildung ist analog auf Validierungs- und Testanfragen übertragbar:
+Besteht der Suchraum\_Makroprofile\_Training aus den Makroprofilen \(M_1\), \(M_2\) und \(M_3\) und im Datensatze Anfrageprofile\_Training gibt es 2 Trainingsanfragen \(ta_1\) und \(ta_2\), 
 werden die folgenden 6 Anfrage-Kandidat-Paare gebildet: \[ (ta_1,M_1), \qquad (ta_1,M_2), \qquad (ta_1,M_3), \qquad (ta_2,M_1), \qquad (ta_2,M_2), \qquad (ta_2,M_3). \] 
 
 Für jedes Anfrage-Kandidat-Paar wird während der Erstellung ein Vergleich anhand von Vergleichsmerkmalen wie Übereinstimmung von Spannung, Strom oder Hinweisen durchgeführt. 
 Diese Vergleichsmerkmale werden in Form von Zahlenwerten zu einem Merkmalsvektor zusammengeführt, der die Ähnlichkeit zwischen dem Anfrageprofil und dem Makroprofil beschreibt.
-Die Zahlenwerte aus dem Merkmalsvektor werden dann an das LambdaMART-Modell übergeben. 
-LambdaMART errechnet auf Basis der Vergleichsmerkmale der Merkmalsvektoren die Relevanz jedes Makroprofils für das jeweilige Anfrageprofil und erzeugt daraus eine Liste an Makros. 
-Diese Liste an Makros wird ab sofort als Rangliste bezeichnet, um damit an die Begrifflichkeit aus dem Learning-to-Rank-Ansatz anzuknüpfen (siehe Kapitel \ref{sec:learning_to_rank}).
-Für das obige Beispiel ergeben sich aus den Anfrage-Kandidat-Paaren die folgenden Merkmalsvektoren: \[ \mathbf{x}_{ta_1,M_1}, \qquad \mathbf{x}_{ta_1,M_2}, \qquad \mathbf{x}_{ta_1,M_3}, \qquad \mathbf{x}_{ta_2,M_1}, \qquad \mathbf{x}_{ta_2,M_2}, \qquad \mathbf{x}_{ta_2,M_3}. \] 
+Dieser Merkmalsvektor wird anschließend als Eingabe für das LambdaMART-Modell verwendet.
+LambdaMART kann keine Informationen wie Spannung = 400V oder Strom = 10A oder Hinweise wie "Mit Kühlung"direkt verarbeiten, 
+sondern benötigt diese Informationen in Form von numerischen Werten, die die Ähnlichkeit zwischen Anfrageprofil und Makroprofil ausdrücken.
+
 Die folgende Abbildung \ref{fig:anfrage_kandidat_paare_motor} veranschaulicht die Bildung von Anfrage-Kandidat-Paaren, die Berechnung der Vergleichsmerkmale und die Zusammenführung zu einem Merkmalsvektor.
 
 \begin{figure}[H] 
@@ -412,15 +415,27 @@ Die folgende Abbildung \ref{fig:anfrage_kandidat_paare_motor} veranschaulicht di
 
 Abbildung \ref{fig:prozessarchitektur_empfehlungssystem} zeigt die Gesamtarchitektur des Empfehlungssystems. 
 Zunächst werden aus der Datenbasis die \textit{technischen Artikel- und Makroeigenschaften} extrahiert und in aufbereiteter Form gespeichert.
-Im Anschluss folgt der Datensplitt anhand definierten Split-Regelen (siehe Kapitel \ref{sec:splitregeln}). Aus dem Datensplitt werden dann in der Trainingsvorbereitung die Datenobjekte für Training, Validierung und Test gebildet.
+Im Anschluss folgt der Datensplitt anhand definierten Split-Regelen (siehe Kapitel \ref{sec:splitregeln}). 
+Aus dem Datensplitt werden dann in der Trainingsvorbereitung die Datenobjekte (siehe Kapitel \ref{sec:datenobjekte}) für Training, Validierung und Test gebildet.
 Dabei findet die Berechnung der Vergleichsmerkmale der Merkmalsvektoren der Anfrage-Kandidat-Paare statt. 
-Im nächsten Schritt werden die Anfrage-Kandidat-Paare im Traingsprozess durch das LambdaMART-Modell anhand der Vergleichsmerkmale bewertet und dabei die Relevanzen der einzelnen Makroprofile ermittelt.
-Parallell dazu wird im Validierungsprozess die Modellkonfiguration des LambdaMART-Modells anhand der Ergebnisse der Validierungsanfragen optimiert.
-Die Übergabeartefakte nach Traingsprozess ergeben die Gemeinsame Grundlage für die anschließenden Test-, und Anwendungsprozesse. 
-Dabei werden die Datenobjekte der Trainingsvorbereitung, die Merkmalsvektoren der Anfrage-Kandidat-Paare sowie das trainierte LambdaMART-Modell übergeben.
+
+Der Traings- und Validierungsprozess läuft in einzelnen Sequenzen ab. Eine Sequenz läuft dabei wie folgt ab: 
+
+Zunächst wird aus einer Liste von Modellkonfigurationen die erste Modellkonfiguration ausgewählt und anschließend die Anfrage-Kandidat-Paare\_Training durch das LambdaMART-Modell gelernt.
+Im nächsten Schritt wird der Validierungsprozess gestartet, in dem das trainierte LambdaMART-Modell anhand der Anfrage-Kandidat-Paare\_Validierung bewertet und die ausgewählt Modellkonfiguration gespeichert wird.
+Dannach wird die Sequenz abgeschlossen und eine neue Sequenz mit der nächsten Modellkonfiguration aus der Liste gestartet. 
+Diese Sequenz wiederholt sich, bis alle Modellkonfigurationen aus der Liste bearbeitet wurden. 
+Im Anschluss wird das trainierte LambdaMART-Modell mit der besten Bewertung anhand der Anfrage-Kandidat-Paare\_Validierung ausgewählt und als Ergebnis des Validierungsprozesses festgelegt.
+
+Das trainierte LambdaMART-Modell wird zusammen mit den Anfrage-Kandidat-Paare\_Training der Trainingsvorbereitung als Übergabeartefakte für den anschließenden Test- und Anwendungsprozess bereitgestellt.
+
+
+
+
+
 Anschließende wird im Testprozess die Leistungsfähigkeit des trainierten LambdaMART-Modells anhand der Testanfragen überprüft und bewertet.
 Nach dem Testprozess steht dann dem Anwendungsprozess ein trainiertes und validiertes LambdaMART-Modell zur Verfügung, welches zur Bewertung von neuen unbekannten Anfragen genutzt werden kann.
-Das Ergebniss des Anwendungsprozesses ist eine Rangliste, welche die Ergebnisse einer Anfrage an das trainierte und validierte LambdaMART-Modell in absteigender Relevanz darstellt.
+Das Ergebniss des Anwendungsprozesses ist eine Rangliste <-- An dieser Stelle erklären !!!!, welche die Ergebnisse einer Anfrage an das trainierte und validierte LambdaMART-Modell in absteigender Relevanz darstellt.
 
 
 \begin{figure}[H] \centering \begin{tikzpicture}[ scale=0.78, transform shape, >=stealth, font=\small, 
@@ -441,21 +456,21 @@ Das Ergebniss des Anwendungsprozesses ist eine Rangliste, welche die Ergebnisse 
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 1: Datenbasis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-    \node[level] at (-8.1,15.0) {1. Datenbasis}; \node[data] (data) at (0,14.8) { \textbf{Aufbereitete Artikel- und Makrodaten}};%\\ \textit{technische Artikel- und Makroeigenschaften} }; 
+    \node[level] at (-8.1,15.0) {1. Datenbasis}; \node[data] (data) at (0,14.8) { \textbf{Aufbereitete Artikel- und Makrodaten}\\ \textit{technische Artikel- und Makroeigenschaften} }; 
     \node[data] (split) at (0,12.8) { \textbf{Datensplit}};%\\ Trainings-, Validierungs- und Testdaten }; 
     \draw[flow] (data.south) -- (split.north); 
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 2: Trainingsvorbereitung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     \node[level] at (-8.1,11.0) {2. Datenobjekte}; 
-    \node[preparation] (trainingsvorbereitung) at (0,10.0) { \textbf{Vorbereitungsprozess des Trainings}};%\\[1mm] Bildung der Makro- und Anfrageprofilen\\Berechnung der Vergleichsmerkmale der Merkmalsverktoren der Anfrage-Kandidat-Paare}; 
+    \node[preparation] (trainingsvorbereitung) at (0,10.0) { \textbf{Vorbereitungsprozess des Trainings}\\[1mm] Bildung der Makro- und Anfrageprofilen\\Berechnung der Vergleichsmerkmale der Merkmalsverktoren der Anfrage-Kandidat-Paare}; 
     \draw[flow] (split.south) -- (trainingsvorbereitung.north); 
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 3: Training und parallele Validierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     
     \node[level] at (-8.1,7.3) {3. Training und\\Validierung}; 
-    \node[process] (training) at (-3.3,6.3) { \textbf{Trainigsprozess}};%\\[1mm] Training des LambdaMART-Modells aus den Anfrage-Kandidat-Paaren, Merkmalsvektoren und Relevanzwerten }; 
+    \node[process] (training) at (-3.3,6.3) { \textbf{Trainingsprozess}\\[1mm] sequenziellesTraining mehrerer LambdaMART-Modelle aus den Anfrage-Kandidat-Paaren, Merkmalsvektoren und Relevanzwerten }; 
     \node[ draw=green!50!black, rounded corners, fill=green!8, text width=5.8cm, minimum height=1.5cm, align=center, inner sep=7pt ] (modelValidation) at 
-    (3.3,6.3) { \textbf{paralleler Validierungsprozess}};%\\[1mm] Bewertung der aktuellen Modellkonfiguration anhand der Validierungsanfragen }; 
+    (3.3,6.3) { \textbf{iterativer Validierungsprozess}\\[1mm] Bewertung jedes LambdaMART-Modells nach einer Sequenz anhand der Validierungsanfragen }; 
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsvorbereitung speist beide Prozesse %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     
@@ -475,14 +490,14 @@ Das Ergebniss des Anwendungsprozesses ist eine Rangliste, welche die Ergebnisse 
     \draw[ ->, thick, green!50!black ] ([yshift=-3mm]modelValidation.west) -- ([yshift=-3mm]training.east);
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Validierungsergebnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-    \node[ draw=green!50!black, rounded corners, fill=green!12, text width=5.8cm, minimum height=1.0cm, align=center, inner sep=6pt ] (validationResult) at (3.3,3.7) { \textbf{Validierungsergebnis}};%\\ ausgewählte Modellkonfiguration }; 
+    \node[ draw=green!50!black, rounded corners, fill=green!12, text width=5.8cm, minimum height=1.0cm, align=center, inner sep=6pt ] (validationResult) at (3.3,3.7) { \textbf{Ergebniss des Validierungsprozesses}\\ ausgewählte Modellkonfiguration }; 
     \draw[ ->, thick, green!50!black ] (modelValidation.south) -- (validationResult.north); 
   
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 4: Übergabeartefakte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     
     \node[level] at (-8.1,0.9) {4. Übergabe-\\artefakte}; 
-    \node[artifact] (profiles) at (-3.3,0.0) { \textbf{Datenobjekte}};%\\[1mm] Makro- und Anfrageprofile sowie\\ Anfrage-Kandidat-Paare }; 
-    \node[artifact] (model) at (3.3,0.0) { \textbf{Trainiertes LambdaMART-Modell}};%\\[1mm] Bewertungsfunktion zur Erstellung der Rangliste \\ der Anfragen-Kandidat-Paare }; 
+    \node[artifact] (profiles) at (-3.3,0.0) { \textbf{Datenobjekte}\\[1mm] Makro- und Anfrageprofile sowie\\ Anfrage-Kandidat-Paare }; 
+    \node[artifact] (model) at (3.3,0.0) { \textbf{Trainiertes LambdaMART-Modell}\\[1mm] Bewertungsfunktion zur Erstellung der Rangliste}; 
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsvorbereitung -> Datenobjekte % Gerader Außenpfad links am Training vorbei %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     % Senkrechte Spur links neben dem LambdaMART-Training 
@@ -531,8 +546,8 @@ Das Ergebniss des Anwendungsprozesses ist eine Rangliste, welche die Ergebnisse 
     
     \node[level] at (-8.1,-4.5) {5. Nutzung}; 
     % \node[usage] (validation) at (-5.5,-4.0) { \textbf{Validierungsprozess}\\[1mm] Abstimmung der Modellkonfiguration\\ anhand der Validierungsanfragen }; 
-    \node[usage] (test) at (-3.2,-5.8) { \textbf{Testprozess}};%\\[1mm] Bewertung des trainierten Modells\\ anhand der Testanfragen }; 
-    \node[usage] (application) at (3.2,-5.8) { \textbf{Anwendungsprozess}};%\\[1mm] Rangliste für eine neue Anfrage\\ auf Grundlage der trainierten Anfrage-Kandidat-Paare }; 
+    \node[usage] (test) at (-3.2,-5.8) { \textbf{Testprozess}\\[1mm] Bewertung des trainierten Modells\\ anhand der Testanfragen }; 
+    \node[usage] (application) at (3.2,-5.8) { \textbf{Anwendungsprozess}\\[1mm] Rangliste für eine neue Anfrage\\ auf Grundlage des trainierten LambdaMART-Modells }; 
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Bewertungsgrundlage -> Test und Anwendung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
@@ -544,8 +559,8 @@ Das Ergebniss des Anwendungsprozesses ist eine Rangliste, welche die Ergebnisse 
 
     \node[level] at (-8.1,-7.5) {6. Ergebnisse}; 
     % \node[result] (validationResult) at (-5.5,-7.5) { \textbf{Validierungsergebnis}\\[1mm] Ausgewählte Modellkonfiguration\\ Bewertung anhand Recall@k, MRR und nDCG }; 
-    \node[result] (testResult) at (-3.2,-8.5) { \textbf{Testergebnis}};%\\[1mm] Leistung des Modells \\ Bewertung anhand Recall@k, MRR und nDCG  }; 
-    \node[result] (applicationResult) at (3.2,-8.5) { \textbf{Anwendungsergebnis}};%\\[1mm] nach Relevanz sortierte Makro-Rangliste }; 
+    \node[result] (testResult) at (-3.2,-8.5) { \textbf{Testergebnis}\\[1mm] Leistung des Modells \\ Bewertung anhand Recall@k, MRR und nDCG  }; 
+    \node[result] (applicationResult) at (3.2,-8.5) { \textbf{Anwendungsergebnis}\\[1mm] nach Relevanz sortierte Makro-Rangliste }; 
     % \draw[flow] (validation.south) -- (validationResult.north); 
     \draw[flow] (test.south) -- (testResult.north); 
     \draw[flow] (application.south) -- (applicationResult.north); 
