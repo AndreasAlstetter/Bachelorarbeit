@@ -2786,3 +2786,140 @@ Aus diesem Kapitel ergibt sich folgendes Artefakt A3, das als Ergebnis an die n�
     \item eine Gesamtarchitektur des Empfehlungssystems bestehend aus Datenaufbereitung, Datenobjekten, Training, Validierung, Test und Anwendung, 
 \end{itemize}
 
+
+
+
+
+
+
+
+
+
+
+\chapter{Technische Umsetzung}
+\label{chap:technische_umsetzung}
+
+
+\section{Implementierung der Datenobjekte} 
+
+Die fachlichen Grundlagen der Makroprofile, Anfrageprofile und Anfrage-Kandidat-Paare wurden bereits in Kapitel \ref{chap:konzeption_des_empfehlungssystems} beschrieben. 
+Ziel dieses Abschnitts ist daher die technische Umsetzung dieser Datenobjekte auf Basis der Trainings- und Evaluationsbasis aus Artefakt A1. Hierzu werden zunächst die aufbereiteten Artikel-, 
+Makro- und Zuordnungsdaten eingelesen und entsprechend ihrer Datensplit-Zuordnung den Trainings-, Validierungs- und Testdaten zugeordnet. 
+Anschließend werden die Makroprofile aus den Artikeln der Trainingsdaten erzeugt und als Suchraum der Makrokandidaten bereitgestellt. 
+Parallel dazu erfolgt die Bildung der Anfrageprofile aus den Artikeln der jeweiligen Datenbestände. Makroidentifizierende Informationen werden dabei entfernt, 
+sodass ausschließlich die für eine spätere Anfrage verfügbaren technischen Eigenschaften erhalten bleiben. Im letzten Schritt werden die Anfrageprofile mit den Makroprofilen kombiniert und daraus Anfrage-Kandidat-Paare erzeugt. 
+Für jedes Anfrage-Kandidat-Paar werden die in Abschnitt \ref{sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektor} beschriebenen Vergleichsmerkmale berechnet und zu Merkmalsvektoren zusammengeführt. 
+Das Ergebnis dieses Verarbeitungsschrittes sind die für Training, Validierung und Test benötigten Anfrage-Kandidat-Paare einschließlich der zugehörigen Merkmalsvektoren und Relevanzinformationen. 
+Diese bilden die Eingabe des nachfolgenden Trainingsprozesses des LambdaMART-Modells.
+
+
+\section{Training des LambdaMART-Modells} 
+
+Nach der Erzeugung der Anfrage-Kandidat-Paare und der zugehörigen Merkmalsvektoren liegen für jede Anfrage die Eingabedaten für das Learning-to-Rank-Verfahren vor. Ziel des Trainingsprozesses besteht darin, 
+die Zusammenhänge zwischen den Vergleichsmerkmalen eines Anfrage-Kandidat-Paares und dessen Relevanz für die Anfrage zu erlernen. Hierzu wird das in Kapitel \ref{chap:auswahl_des_modellansatzes} ausgewählte LambdaMART-Verfahren verwendet. 
+Die fachlichen Grundlagen von Learning-to-Rank, LambdaRank und LambdaMART wurden bereits in den Abschnitten \ref{sec:learning_to_rank}, \ref{sec:lambdarank} und \ref{sec:lambdamart} erläutert. 
+Die Eingabe des Trainingsprozesses besteht aus den Merkmalsvektoren der Anfrage-Kandidat-Paare. Jeder Merkmalsvektor beschreibt dabei die technische Übereinstimmung zwischen einem Anfrageprofil und einem Makroprofil. 
+Zusätzlich besitzt jedes Anfrage-Kandidat-Paar ein Relevanzlabel, das aus der bekannten Artikel-Makro-Zuordnung der Trainingsdaten abgeleitet wird. Während des Trainings werden die Anfrage-Kandidat-Paare anfrageweise zu Rankinggruppen zusammengefasst. 
+Innerhalb einer Rankinggruppe lernt das Modell, relevante Makros höher zu bewerten als nicht relevante Makros. Hierzu erzeugt LambdaMART für jedes Anfrage-Kandidat-Paar einen numerischen Relevanzscore. 
+Die Berechnung dieser Relevanzscores erfolgt durch mehrere aufeinanderfolgende Entscheidungsbäume. Jeder neu erzeugte Baum versucht dabei, die Fehler der bereits trainierten Bäume zu verringern. 
+Die Ergebnisse aller Bäume werden anschließend zu einem gemeinsamen Relevanzscore zusammengeführt. Dadurch entsteht ein Modell, das technische Muster innerhalb der Vergleichsmerkmale erkennen und zur Bewertung neuer Anfragen verwenden kann. 
+Das Ergebnis des Trainingsprozesses ist ein trainiertes LambdaMART-Modell, welches für jedes Anfrage-Kandidat-Paar einen Relevanzscore berechnen kann. Die endgültige Auswahl der Modellkonfiguration erfolgt anschließend anhand des Validierungsprozesses.
+
+\section{Hyperparameteroptimierung}
+
+Die Leistungsfähigkeit eines LambdaMART-Modells wird wesentlich durch dessen Hyperparameter beeinflusst. Hyperparameter beschreiben dabei Eigenschaften des Lernprozesses und werden vor dem eigentlichen Training festgelegt. 
+Im Gegensatz zu den Modellparametern werden sie nicht aus den Trainingsdaten gelernt, sondern müssen geeignet gewählt werden. Um eine geeignete Modellkonfiguration zu bestimmen, wird eine Grid Search durchgeführt. 
+Hierbei werden mehrere Kombinationen von Hyperparametern systematisch erzeugt und nacheinander trainiert. Jede Modellkonfiguration durchläuft anschließend den in Abschnitt 7.4 beschriebenen Validierungsprozess. 
+Die untersuchten Modellkonfigurationen unterscheiden sich unter anderem in der Anzahl der Entscheidungsbäume, der Lernrate sowie der Komplexität der einzelnen Entscheidungsbäume. 
+Dadurch können sowohl einfachere als auch komplexere Modelle untersucht werden. Für jede Modellkonfiguration wird ein separates LambdaMART-Modell trainiert. Nach Abschluss des Trainings erfolgt die Bewertung anhand der Validierungsdaten. 
+Die erzielten Ergebnisse werden gespeichert und mit den Ergebnissen der übrigen Modellkonfigurationen verglichen. Die Grid Search verfolgt das Ziel, eine Modellkonfiguration zu finden, 
+die die Ranglistenqualität maximiert und gleichzeitig eine ausreichende Generalisierungsfähigkeit auf unbekannte Daten besitzt. 
+Dadurch soll verhindert werden, dass das Modell die Trainingsdaten zu stark auswendig lernt und auf neuen Anfragen schlechtere Ergebnisse liefert. 
+Das Ergebnis der Hyperparameteroptimierung besteht aus einer ausgewählten Modellkonfiguration, welche als Grundlage für die anschließende Validierung und den späteren Testprozess dient.
+
+
+\section{Validierungsprozess} 
+
+Ziel des Validierungsprozesses ist die Bewertung der während der Hyperparameteroptimierung erzeugten Modellkonfigurationen. Während die Trainingsdaten zum Erlernen der Zusammenhänge zwischen den Vergleichsmerkmalen und den Relevanzwerten verwendet werden, 
+dienen die Validierungsdaten zur unabhängigen Beurteilung der Leistungsfähigkeit des Modells auf bisher nicht verwendeten Anfrageprofilen (vergleiche Abschnitt \ref{sec:splitregeln}). 
+Hierzu wird jede während der Grid Search erzeugte Modellkonfiguration nach Abschluss des Trainings mit den Validierungsanfragen bewertet. 
+Für jede Anfrage wird eine Rangliste aus Makrokandidaten erzeugt und anschließend mit den bekannten Artikel-Makro-Zuordnungen der Validierungsdaten verglichen. 
+Die Bewertung erfolgt anhand der in Abschnitt \ref{sec:validierungsansätze} eingeführten Metriken Recall@k, Mean Reciprocal Rank (MRR) und Normalized Discounted Cumulative Gain (nDCG). Recall@k bewertet dabei die Wahrscheinlichkeit, 
+innerhalb der ersten \(k\) Positionen mindestens ein relevantes Makro zu finden. Der MRR berücksichtigt zusätzlich die Position des ersten relevanten Makros innerhalb der Rangliste. 
+nDCG bewertet die Qualität der gesamten Rangliste und berücksichtigt dabei die Position der relevanten Makros. Für jede Modellkonfiguration werden die erzielten Kennzahlen gespeichert und mit den Ergebnissen der übrigen Modellkonfigurationen verglichen. 
+Dadurch entsteht für jede Konfiguration ein Qualitätsprofil, welches die Empfehlungsqualität des Modells auf den Validierungsdaten beschreibt. Der Validierungsprozess dient gleichzeitig der Erkennung von Overfitting. 
+Erzielt ein Modell sehr gute Ergebnisse auf den Trainingsdaten, jedoch deutlich schlechtere Ergebnisse auf den Validierungsdaten, 
+deutet dies darauf hin, dass das Modell Trainingsdaten auswendig gelernt hat und die erlernten Zusammenhänge nur eingeschränkt auf neue Anfragen übertragen kann. Das Ergebnis des Validierungsprozesses ist die Auswahl derjenigen Modellkonfiguration, 
+die die höchste Empfehlungsqualität auf den Validierungsdaten erzielt. Diese Modellkonfiguration wird anschließend als Grundlage für den Testprozess verwendet.
+
+\section{Modellauswahl} 
+
+Nach Abschluss der Hyperparameteroptimierung und des Validierungsprozesses liegen mehrere bewertete Modellkonfigurationen vor. Ziel der Modellauswahl besteht darin, aus diesen Konfigurationen das Modell mit der höchsten Empfehlungsqualität auszuwählen. 
+Hierzu werden die im Validierungsprozess ermittelten Kennzahlen Recall@k, MRR und nDCG gemeinsam betrachtet. Die Auswahl erfolgt dabei nicht ausschließlich anhand einer einzelnen Kennzahl, sondern anhand der Gesamtqualität der erzeugten Ranglisten. 
+Besondere Bedeutung kommt den Kennzahlen Recall@k und nDCG zu. Während Recall@k bewertet, ob das relevante Makro innerhalb der vorderen Rangpositionen gefunden wird, 
+bewertet nDCG zusätzlich die Qualität der gesamten Rangfolge der Makrokandidaten (vergleiche Abschnitt \ref{sec:validierungsansätze}). 
+Die Modellkonfiguration mit den besten Ergebnissen auf den Validierungsdaten wird als finale Modellkonfiguration ausgewählt. Anschließend erfolgt ein erneutes Training dieser Konfiguration auf Grundlage der vorgesehenen Trainingsdaten. 
+Dadurch wird sichergestellt, dass für den nachfolgenden Testprozess die leistungsfähigste Modellvariante verwendet wird. 
+Das Ergebnis der Modellauswahl ist ein trainiertes LambdaMART-Modell mit festgelegten Hyperparametern und einer validierten Rankingfunktion. 
+Dieses Modell bildet die Grundlage für den anschließenden Testprozess und die spätere Anwendung des Empfehlungssystems.
+
+
+\section{Testprozess} 
+
+Nach der Auswahl der finalen Modellkonfiguration erfolgt die abschließende Bewertung des trainierten LambdaMART-Modells auf den Testdaten. 
+Die Testdaten wurden bereits während der Erstellung des Datensplits von den Trainings- und Validierungsdaten getrennt und wurden bisher weder für das Training noch für die Modellauswahl verwendet (vergleiche Abschnitt \ref{sec:splitregeln}). 
+Ziel des Testprozesses ist die Untersuchung der Generalisierungsfähigkeit des Modells. Hierbei wird überprüft, inwieweit die während des Trainings erlernten Zusammenhänge auf bisher unbekannte Anfrageprofile übertragen werden können. 
+Für jede Testanfrage wird analog zum Validierungsprozess eine Makro-Rangliste erzeugt. Die Bewertung dieser Ranglisten erfolgt anhand der in Abschnitt \ref{sec:validierungsansätze} beschriebenen Kennzahlen Recall@k, MRR und nDCG. 
+Im Gegensatz zum Validierungsprozess werden während des Testprozesses keine Hyperparameter mehr angepasst und keine Modellentscheidungen mehr getroffen. Das bereits ausgewählte LambdaMART-Modell wird unverändert auf den Testdaten angewendet. 
+Dadurch wird sichergestellt, dass die erzielten Ergebnisse eine unverzerrte Einschätzung der zu erwartenden Leistungsfähigkeit des Empfehlungssystems darstellen. 
+Die Ergebnisse des Testprozesses bilden die Grundlage für die spätere Bewertung der Empfehlungsqualität. 
+Gleichzeitig liefern sie die Kennzahlen für den Vergleich mit alternativen Konfigurationen und dienen als Nachweis der Leistungsfähigkeit des entwickelten Empfehlungssystems. 
+Das Ergebnis des Testprozesses ist somit die finale Bewertung des trainierten LambdaMART-Modells auf bisher unbekannten Anfragen und bildet die Grundlage für die anschließende Anwendung des Empfehlungssystems.
+
+
+\section{Anwendungsprozess} 
+
+Nach Abschluss des Testprozesses steht ein trainiertes und validiertes LambdaMART-Modell für die Verarbeitung neuer Anfragen zur Verfügung. 
+Der Anwendungsprozess entspricht dabei dem in Kapitel \ref{chap:konzeption_des_empfehlungssystems} beschriebenen Datenfluss, wird jedoch auf bisher unbekannte Artikel angewendet. 
+Ausgangspunkt des Anwendungsprozesses ist ein neuer Artikel beziehungsweise ein neues Datenblatt. 
+Aus den verfügbaren technischen Eigenschaften werden zunächst die für das Empfehlungssystem erforderlichen Informationen extrahiert und in ein Anfrageprofil überführt. 
+Analog zum Trainingsprozess werden dabei ausschließlich solche Informationen verwendet, die zum Zeitpunkt der Anfrage bekannt sind. Anschließend wird das Anfrageprofil mit allen Makroprofilen des \texttt{Suchraum\_Makroprofile} kombiniert. 
+Für jedes Anfrage-Kandidat-Paar werden die Vergleichsmerkmale berechnet und zu einem Merkmalsvektor zusammengeführt. Diese Merkmalsvektoren bilden die Eingabe des trainierten LambdaMART-Modells. 
+Das Modell berechnet anschließend für jeden Makrokandidaten einen Relevanzscore. Je höher dieser Relevanzscore ist, desto besser passt das jeweilige Makro zum Anfrageprofil. 
+Die Makrokandidaten werden daraufhin entsprechend ihrer Relevanzscores in absteigender Reihenfolge sortiert. Das Ergebnis des Anwendungsprozesses ist eine Makro-Rangliste, 
+welche die bewerteten Makrokandidaten entsprechend ihrer geschätzten Relevanz für die Anfrage enthält. Die vorderen Positionen dieser Rangliste stellen die vom Empfehlungssystem empfohlenen Makros dar. Durch die Trennung von Anfrageprofil, 
+Makroprofil und Vergleichsmerkmalen bleibt die Architektur des Anwendungspfads identisch zur Architektur des Trainings- und Testprozesses. 
+Dadurch können die während des Trainings erlernten Zusammenhänge unmittelbar auf neue und bisher unbekannte Anfragen übertragen werden.
+
+\section{Kapitelergebnis} 
+Ziel dieses Kapitels war die technische Umsetzung der in Kapitel \ref{chap:konzeption_des_empfehlungssystems} entwickelten Architektur des Empfehlungssystems. 
+Hierzu wurden die einzelnen Verarbeitungsschritte von der Erzeugung der Datenobjekte bis zur Bereitstellung eines trainierten LambdaMART-Modells beschrieben. Zunächst wurden Makroprofile, Anfrageprofile sowie die Anfrage-Kandidat-Paare technisch erzeugt. 
+Anschließend wurden für jedes Anfrage-Kandidat-Paar die Vergleichsmerkmale berechnet und zu Merkmalsvektoren zusammengeführt, welche die Eingabe des LambdaMART-Modells bilden. Darauf aufbauend erfolgte das Training des Modells. 
+Durch die Hyperparameteroptimierung und den Validierungsprozess wurde eine geeignete Modellkonfiguration bestimmt. 
+Die ausgewählte Konfiguration wurde anschließend im Testprozess auf bisher unbekannten Anfragen bewertet und für die spätere Anwendung bereitgestellt. Der abschließende Anwendungsprozess zeigt, 
+wie neue Anfrageprofile durch das trainierte Modell bewertet und in eine nach Relevanz sortierte Makro-Rangliste überführt werden können. 
+
+Das Ergebnis dieses Kapitels bildet das folgende Artefakt: 
+
+\begin{quote} \textbf{Artefakt A4: Trainiertes Empfehlungssystem} 
+\end{quote} 
+\begin{itemize} 
+    \item erzeugte Makroprofile, 
+    \item erzeugte Anfrageprofile, 
+    \item Anfrage-Kandidat-Paare mit den zugehörigen Vergleichsmerkmalen, 
+    \item Merkmalsvektoren für Training, Validierung, Test und Anwendung, 
+    \item trainiertes LambdaMART-Modell, 
+    \item ausgewählte Modellkonfiguration, 
+    \item validiertes und getestetes Empfehlungssystem, 
+    \item Anwendungsprozess zur Erzeugung einer nach Relevanz sortierten Makro-Rangliste. 
+\end{itemize} 
+
+Artefakt A4 bildet die Grundlage für die anschließende Evaluation der Empfehlungsqualität. 
+Im folgenden Kapitel werden die erzeugten Makro-Ranglisten anhand der in Abschnitt \ref{sec:validierungsansätze} eingeführten Metriken Recall@k, MRR und nDCG bewertet.
+
+
+
+
+
+
+

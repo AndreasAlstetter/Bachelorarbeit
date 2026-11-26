@@ -56,122 +56,54 @@
 \contentsline {chapter}{\numberline {6}Konzeption des Empfehlungssystems}{47}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Datenobjekte}{47}{section.6.1}%
 \contentsline {subsection}{\numberline {6.1.1}Makroprofil}{47}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Anfrageprofil}{49}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}Anfrage-Kandidat-Paare, Vergleichsmerkmale und Merkmalsvektor}{51}{subsection.6.1.3}%
-\contentsline {section}{\numberline {6.2}Gesamtarchitektur und Teilprozesse}{53}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Gesamtarchitektur}{53}{subsection.6.2.1}%
-\contentsline {section}{\numberline {6.3}Kapitelergebnis}{55}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Implementierung des Modells}{56}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Überführung der Artefakte in die Implementierung}{56}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Technische Schwerpunkte}{56}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Technische Umsetzung}{56}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Abgleich zwischen bisheriger Arbeit und Code}{57}{subsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.1.4}Zusammenhang mit der bisherigen Arbeit}{58}{subsection.7.1.4}%
-\contentsline {subsection}{\numberline {7.1.5}Darstellung der Artefaktüberführung}{58}{subsection.7.1.5}%
-\contentsline {section}{\numberline {7.2}Implementierungsumgebung und Softwarestruktur}{59}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}Technische Schwerpunkte}{59}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}Technische Umsetzung}{60}{subsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.2.3}Abgleich zwischen bisheriger Arbeit und Code}{61}{subsection.7.2.3}%
-\contentsline {subsection}{\numberline {7.2.4}Zusammenhang mit der bisherigen Arbeit}{62}{subsection.7.2.4}%
-\contentsline {subsection}{\numberline {7.2.5}Darstellung der Softwarestruktur}{62}{subsection.7.2.5}%
-\contentsline {section}{\numberline {7.3}Technische Umsetzung der Datenrepräsentationen}{63}{section.7.3}%
-\contentsline {subsection}{\numberline {7.3.1}Technische Schwerpunkte}{63}{subsection.7.3.1}%
-\contentsline {subsection}{\numberline {7.3.2}Technische Umsetzung}{64}{subsection.7.3.2}%
-\contentsline {subsection}{\numberline {7.3.3}Abgleich zwischen bisheriger Arbeit und Code}{65}{subsection.7.3.3}%
-\contentsline {subsection}{\numberline {7.3.4}Zusammenhang mit der bisherigen Arbeit}{66}{subsection.7.3.4}%
-\contentsline {subsection}{\numberline {7.3.5}Darstellung der Datenrepräsentationen}{66}{subsection.7.3.5}%
-\contentsline {section}{\numberline {7.4}Technische Bildung der Kandidatenprofile}{67}{section.7.4}%
-\contentsline {subsection}{\numberline {7.4.1}Technische Schwerpunkte}{67}{subsection.7.4.1}%
-\contentsline {subsection}{\numberline {7.4.2}Technische Umsetzung}{68}{subsection.7.4.2}%
-\contentsline {subsection}{\numberline {7.4.3}Abgleich zwischen bisheriger Arbeit und Code}{69}{subsection.7.4.3}%
-\contentsline {subsection}{\numberline {7.4.4}Zusammenhang mit der bisherigen Arbeit}{71}{subsection.7.4.4}%
-\contentsline {subsection}{\numberline {7.4.5}Darstellung der Kandidatenprofilbildung}{71}{subsection.7.4.5}%
-\contentsline {section}{\numberline {7.5}Technische Erzeugung der Anfrage-Kandidat-Matrix}{72}{section.7.5}%
-\contentsline {subsection}{\numberline {7.5.1}Technische Schwerpunkte}{72}{subsection.7.5.1}%
-\contentsline {subsection}{\numberline {7.5.2}Technische Umsetzung}{73}{subsection.7.5.2}%
-\contentsline {subsection}{\numberline {7.5.3}Abgleich zwischen bisheriger Arbeit und Code}{75}{subsection.7.5.3}%
-\contentsline {subsection}{\numberline {7.5.4}Zusammenhang mit der bisherigen Arbeit}{76}{subsection.7.5.4}%
-\contentsline {subsection}{\numberline {7.5.5}Darstellung der Anfrage-Kandidat-Matrix}{77}{subsection.7.5.5}%
-\contentsline {section}{\numberline {7.6}Implementierung der Relevanzlabels und Leakage-Sicherung}{77}{section.7.6}%
-\contentsline {subsection}{\numberline {7.6.1}Technische Schwerpunkte}{78}{subsection.7.6.1}%
-\contentsline {subsection}{\numberline {7.6.2}Technische Umsetzung}{78}{subsection.7.6.2}%
-\contentsline {subsubsection}{\nonumberline Ausschluss unzulässiger Merkmale}{79}{subsubsection*.39}%
-\contentsline {subsubsection}{\nonumberline Rollen- und Redundanzbereinigung}{80}{subsubsection*.40}%
-\contentsline {subsubsection}{\nonumberline Leave-one-out-Prüfung}{80}{subsubsection*.41}%
-\contentsline {subsubsection}{\nonumberline Technische Leakage-Prüfung}{80}{subsubsection*.42}%
-\contentsline {subsection}{\numberline {7.6.3}Abgleich zwischen bisheriger Arbeit und Code}{81}{subsection.7.6.3}%
-\contentsline {subsection}{\numberline {7.6.4}Zusammenhang mit der bisherigen Arbeit}{82}{subsection.7.6.4}%
-\contentsline {subsection}{\numberline {7.6.5}Darstellung der Labelbildung und Leakage-Sicherung}{82}{subsection.7.6.5}%
-\contentsline {section}{\numberline {7.7}Implementierung des LambdaMART-Trainings}{83}{section.7.7}%
-\contentsline {subsection}{\numberline {7.7.1}Technische Schwerpunkte}{84}{subsection.7.7.1}%
-\contentsline {subsection}{\numberline {7.7.2}Technische Umsetzung}{84}{subsection.7.7.2}%
-\contentsline {subsubsection}{\nonumberline Initialisierung des Rankingmodells}{84}{subsubsection*.44}%
-\contentsline {subsubsection}{\nonumberline Hyperparameterkonfiguration}{85}{subsubsection*.45}%
-\contentsline {subsubsection}{\nonumberline Training und Validierung}{85}{subsubsection*.46}%
-\contentsline {subsubsection}{\nonumberline Abschließende Testbewertung}{86}{subsubsection*.47}%
-\contentsline {subsubsection}{\nonumberline Speicherung des Trainingsergebnisses}{86}{subsubsection*.48}%
-\contentsline {subsection}{\numberline {7.7.3}Abgleich zwischen bisheriger Arbeit und Code}{86}{subsection.7.7.3}%
-\contentsline {subsection}{\numberline {7.7.4}Zusammenhang mit der bisherigen Arbeit}{88}{subsection.7.7.4}%
-\contentsline {subsection}{\numberline {7.7.5}Darstellung des LambdaMART-Trainings}{88}{subsection.7.7.5}%
-\contentsline {section}{\numberline {7.8}Erzeugung des Artefakts A4}{89}{section.7.8}%
-\contentsline {subsection}{\numberline {7.8.1}Technische Schwerpunkte}{89}{subsection.7.8.1}%
-\contentsline {subsection}{\numberline {7.8.2}Technische Umsetzung}{90}{subsection.7.8.2}%
-\contentsline {subsubsection}{\nonumberline Runtime-Bundle}{90}{subsubsection*.50}%
-\contentsline {subsubsection}{\nonumberline Nachweispaket}{91}{subsubsection*.51}%
-\contentsline {subsubsection}{\nonumberline Konsistenzprüfung der Artefakte}{91}{subsubsection*.52}%
-\contentsline {subsubsection}{\nonumberline Laufzeitverwendung}{92}{subsubsection*.53}%
-\contentsline {subsection}{\numberline {7.8.3}Abgleich zwischen bisheriger Arbeit und Code}{92}{subsection.7.8.3}%
-\contentsline {subsection}{\numberline {7.8.4}Zusammenhang mit der bisherigen Arbeit}{94}{subsection.7.8.4}%
-\contentsline {subsection}{\numberline {7.8.5}Darstellung des Artefakts A4}{94}{subsection.7.8.5}%
-\contentsline {section}{\numberline {7.9}Technische Sicherstellung der Reproduzierbarkeit}{95}{section.7.9}%
-\contentsline {subsection}{\numberline {7.9.1}Technische Schwerpunkte}{96}{subsection.7.9.1}%
-\contentsline {subsection}{\numberline {7.9.2}Technische Umsetzung}{96}{subsection.7.9.2}%
-\contentsline {subsubsection}{\nonumberline Status- und Fehlerprotokollierung}{97}{subsubsection*.55}%
-\contentsline {subsubsection}{\nonumberline Ressourcenmonitoring}{97}{subsubsection*.56}%
-\contentsline {subsubsection}{\nonumberline Checkpoints und Wiederanlauf}{98}{subsubsection*.57}%
-\contentsline {subsubsection}{\nonumberline Integration neuer Artikel und Makros}{98}{subsubsection*.58}%
-\contentsline {subsubsection}{\nonumberline Freigabe eines neuen Runtime-Bundles}{99}{subsubsection*.59}%
-\contentsline {subsection}{\numberline {7.9.3}Abgleich zwischen bisheriger Arbeit und Code}{99}{subsection.7.9.3}%
-\contentsline {subsection}{\numberline {7.9.4}Zusammenhang mit der bisherigen Arbeit}{101}{subsection.7.9.4}%
-\contentsline {subsection}{\numberline {7.9.5}Darstellung der reproduzierbaren Pipelineausführung}{101}{subsection.7.9.5}%
-\contentsline {section}{\numberline {7.10}Zusammenfassung}{102}{section.7.10}%
-\contentsline {subsection}{\numberline {7.10.1}Technische Schwerpunkte}{103}{subsection.7.10.1}%
-\contentsline {subsection}{\numberline {7.10.2}Ergebnis der Implementierung}{103}{subsection.7.10.2}%
-\contentsline {subsection}{\numberline {7.10.3}Abgleich zwischen bisheriger Arbeit und Code}{104}{subsection.7.10.3}%
-\contentsline {subsection}{\numberline {7.10.4}Zusammenhang mit der bisherigen Arbeit}{106}{subsection.7.10.4}%
-\contentsline {subsection}{\numberline {7.10.5}Darstellung der Gesamtimplementierung}{107}{subsection.7.10.5}%
-\contentsline {chapter}{\numberline {8}Evaluierung}{108}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Evaluierungskonzept}{108}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Versuchsaufbau}{108}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Versuchsergebnisse}{108}{section.8.3}%
-\contentsline {subsection}{\numberline {8.3.1}Untersuchte Konfigurationsparameter}{108}{subsection.8.3.1}%
-\contentsline {subsection}{\numberline {8.3.2}Referenzkonfiguration A01}{110}{subsection.8.3.2}%
-\contentsline {subsection}{\numberline {8.3.3}Ergebnisse}{110}{subsection.8.3.3}%
-\contentsline {section}{\numberline {8.4}Analyse}{111}{section.8.4}%
-\contentsline {subsection}{\numberline {8.4.1}Same-Family-Gewicht}{111}{subsection.8.4.1}%
-\contentsline {subsection}{\numberline {8.4.2}Hierarchische Labeldefinition}{111}{subsection.8.4.2}%
-\contentsline {subsection}{\numberline {8.4.3}Profilbreite}{112}{subsection.8.4.3}%
-\contentsline {subsection}{\numberline {8.4.4}Regularisierung}{112}{subsection.8.4.4}%
-\contentsline {subsection}{\numberline {8.4.5}Top-Konfiguration}{112}{subsection.8.4.5}%
-\contentsline {section}{\numberline {8.5}Kapitelergebnis}{113}{section.8.5}%
-\contentsline {chapter}{\numberline {9}Diskussion}{114}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Nutzenbewertung}{114}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Wirtschaftliche Betrachtung}{114}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Grenzen}{114}{section.9.3}%
-\contentsline {chapter}{\numberline {10}Grenzen und Ausblick}{115}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Grenzen des aktuellen Systems}{115}{section.10.1}%
-\contentsline {subsection}{\numberline {10.1.1}Geringer Support von Ziel-Makros}{115}{subsection.10.1.1}%
-\contentsline {subsection}{\numberline {10.1.2}Variantenauflösung innerhalb einer Makrofamilie}{116}{subsection.10.1.2}%
-\contentsline {subsection}{\numberline {10.1.3}Support-Bias häufiger Ziel-Makros}{116}{subsection.10.1.3}%
-\contentsline {section}{\numberline {10.2}Kritische Reflexion}{116}{section.10.2}%
-\contentsline {section}{\numberline {10.3}Interpretation der Ergebnisse}{116}{section.10.3}%
-\contentsline {section}{\numberline {10.4}Ursachenanalyse der Rankingfehler}{117}{section.10.4}%
-\contentsline {chapter}{\numberline {11}Fazit und Ausblick}{119}{chapter.11}%
-\contentsline {section}{\numberline {11.1}RQ1 beantworten}{119}{section.11.1}%
-\contentsline {section}{\numberline {11.2}RQ2 beantworten}{119}{section.11.2}%
-\contentsline {section}{\numberline {11.3}RQ3 beantworten}{119}{section.11.3}%
-\contentsline {section}{\numberline {11.4}RQ4 beantworten}{119}{section.11.4}%
-\contentsline {section}{\numberline {11.5}RQ0 beantworten}{119}{section.11.5}%
+\contentsline {subsection}{\numberline {6.1.2}Anfrageprofil}{50}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Anfrage-Kandidat-Paare, Vergleichsmerkmale und Merkmalsvektor}{52}{subsection.6.1.3}%
+\contentsline {section}{\numberline {6.2}Gesamtarchitektur und Teilprozesse}{54}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Gesamtarchitektur}{54}{subsection.6.2.1}%
+\contentsline {section}{\numberline {6.3}Kapitelergebnis}{56}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Technische Umsetzung}{57}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Implementierung des LambdaMART-Modells}{57}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Merkmalsmatrix und Labelvektoren}{57}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Anfrage an das LambdaMART-Modell}{58}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Training des LambdaMART-Modells}{59}{subsection.7.1.3}%
+\contentsline {section}{\numberline {7.2}Hyperparameteroptimierung}{60}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Validierungsprozess}{62}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Modellauswahl}{64}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Testprozess}{65}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Anwendungsprozess}{66}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Kapitelergebnis}{67}{section.7.7}%
+\contentsline {chapter}{\numberline {8}Evaluierung}{68}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Evaluierungskonzept}{68}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Versuchsaufbau}{68}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Versuchsergebnisse}{68}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Untersuchte Konfigurationsparameter}{68}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Referenzkonfiguration A01}{70}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}Ergebnisse}{70}{subsection.8.3.3}%
+\contentsline {section}{\numberline {8.4}Analyse}{71}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}Same-Family-Gewicht}{71}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}Hierarchische Labeldefinition}{71}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {8.4.3}Profilbreite}{72}{subsection.8.4.3}%
+\contentsline {subsection}{\numberline {8.4.4}Regularisierung}{72}{subsection.8.4.4}%
+\contentsline {subsection}{\numberline {8.4.5}Top-Konfiguration}{72}{subsection.8.4.5}%
+\contentsline {section}{\numberline {8.5}Kapitelergebnis}{73}{section.8.5}%
+\contentsline {chapter}{\numberline {9}Diskussion}{74}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Nutzenbewertung}{74}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Wirtschaftliche Betrachtung}{74}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Grenzen}{74}{section.9.3}%
+\contentsline {chapter}{\numberline {10}Grenzen und Ausblick}{75}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Grenzen des aktuellen Systems}{75}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}Geringer Support von Ziel-Makros}{75}{subsection.10.1.1}%
+\contentsline {subsection}{\numberline {10.1.2}Variantenauflösung innerhalb einer Makrofamilie}{76}{subsection.10.1.2}%
+\contentsline {subsection}{\numberline {10.1.3}Support-Bias häufiger Ziel-Makros}{76}{subsection.10.1.3}%
+\contentsline {section}{\numberline {10.2}Kritische Reflexion}{76}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Interpretation der Ergebnisse}{76}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Ursachenanalyse der Rankingfehler}{77}{section.10.4}%
+\contentsline {chapter}{\numberline {11}Fazit und Ausblick}{79}{chapter.11}%
+\contentsline {section}{\numberline {11.1}RQ1 beantworten}{79}{section.11.1}%
+\contentsline {section}{\numberline {11.2}RQ2 beantworten}{79}{section.11.2}%
+\contentsline {section}{\numberline {11.3}RQ3 beantworten}{79}{section.11.3}%
+\contentsline {section}{\numberline {11.4}RQ4 beantworten}{79}{section.11.4}%
+\contentsline {section}{\numberline {11.5}RQ0 beantworten}{79}{section.11.5}%
 \def \@chapapp {\appendixname }
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{125}{chapter*.72}%
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{84}{chapter*.44}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

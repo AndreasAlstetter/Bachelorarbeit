@@ -9,6 +9,10 @@ Das Ziel dieses Kapitels besteht daher in der Entwicklung einer Architektur des 
 \section{Datenobjekte}
 \label{sec:datenobjekte}
 
+Ein Datenobjekt ist im Empfehlungssystem eine geordnete Zusammenstellung der Informationen, die für einen Verarbeitungsschritt benötigt werden. 
+Es kann vereinfacht mit einer beschrifteten Ablage verglichen werden: In jeder Ablage liegen nur die Angaben, die für ihre spätere Aufgabe erforderlich sind. Dadurch werden technische Artikeleigenschaften und
+technische Makroeigenschaften nicht miteinander vermischt.
+
 \subsection{Makroprofil}
 \label{sec:makroprofil}
 
@@ -128,6 +132,7 @@ Abbildung \ref{fig:makroprofil} zeigt die Bildung eines Makroprofils am Beispiel
 \subsection{Anfrageprofil} 
 \label{sec:anfrageprofil} 
 
+Das Anfrageprofil stellt die relevanten Informationen einer Anfrage dar, welche für die spätere Suche nach passenden Makroprofilen erforderlich sind.
 Das \textit{Anfrageprofil} besteht wie das \textit{Makroprofil} aus einem Makro und dessen zugeordneten Artikel, mit dem Unterschied, dass nur ein einzelner Artikel für die Anfrage betrachtet wird. 
 In das \textit{Anfrageprofil} werden die \textit{technischen Artikeleigenschaften} und die \textit{technischen Makroeigenschaften} übernommen. 
 Informationen, welche unmittelbar mit der Identität des zu empfehlenden Makros zusammenhängen, werden aus dem \textit{Anfrageprofil} ausgeschlossen. Hierzu zählen die Artikel-Makro-Zuordnung des Artikels sowie 
@@ -208,11 +213,12 @@ Abbildung \ref{fig:anfrageprofil_motor} zeigt die Bildung eines Anfrageprofils a
 \subsection{Anfrage-Kandidat-Paare, Vergleichsmerkmale und Merkmalsvektor} 
 \label{sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektor} 
 
-Die Anfrage Kandidat-Paare stellen die Trainingsbeispiele für das LambdaMART-Modell dar, anhand derer das Modell lernt, die Relevanz von Makroprofilen für eine gegebene Anfrage zu bewerten.
-Die Bildung der Anfrage-Kandidat-Paare erfolgt durch die Kombination jeder Trainingsanfrage mit den Makroprofilen aus dem Suchraum\_Makroprofile.
+Die Anfrage Kandidat-Paare stellen die Zusammenhänge zwischen Anfrageprofilen und Makroprofilen für das LambdaMART-Modell dar, anhand derer das Modell lernt und bewertet werden kann.
+Die Bildung der Anfrage-Kandidat-Paare erfolgt durch die Kombination jedes Anfrageprofils der einzelnen Splits mit den Makroprofilen aus dem Suchraum\_Makroprofile. 
+Die Anfrage-Kandidat-Paare werden dann in Anfrage-Kandidat-Paar-\_Training, Anfrage-Kandidat-Paar-\_Validierung und Anfrage-Kandidat-Paar-\_Test gespeichert.
 
 Diese Bildung der Anfrage-Kandidat-Paare soll an folgendem Beispiel gezeigt werden:
-Besteht der Suchraum\_Makroprofile\_Training aus den Makroprofilen \(M_1\), \(M_2\) und \(M_3\) und im Datensatze Anfrageprofile\_Training gibt es 2 Trainingsanfragen \(ta_1\) und \(ta_2\), 
+Besteht der Suchraum\_Makroprofile aus den Makroprofilen \(M_1\), \(M_2\) und \(M_3\) und im Datensatze Anfrageprofile\_Training gibt es 2 Trainingsanfragen \(ta_1\) und \(ta_2\), 
 werden die folgenden 6 Anfrage-Kandidat-Paare gebildet: \[ (ta_1,M_1), \qquad (ta_1,M_2), \qquad (ta_1,M_3), \qquad (ta_2,M_1), \qquad (ta_2,M_2), \qquad (ta_2,M_3). \] 
 
 Für jedes Anfrage-Kandidat-Paar wird während der Erstellung ein Vergleich anhand von Vergleichsmerkmalen wie Übereinstimmung von Spannung, Strom oder Hinweisen durchgeführt. 
@@ -358,9 +364,9 @@ Das Ergebnis des Anwendungsprozesses ist eine sortierte Makro-Rangliste, die die
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 3: Training und iterative Validierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     
     \node[level] at (-8.1,7.2) {3. Training und\\Validierung}; 
-    \node[process] (training) at (-3.3,6.3) { \textbf{Trainingsprozess}\\[1mm] sequenziellesTraining mehrerer LambdaMART-Modelle aus den Anfrage-Kandidat-Paaren, Merkmalsvektoren und Relevanzwerten }; 
+    \node[process] (training) at (-3.3,6.3) { \textbf{Trainingsprozess}\\[1mm] sequenzielles Training mehrerer LambdaMART-Modelle aus den Anfrage-Kandidat-Paaren\_Training}; 
     \node[ draw=green!50!black, rounded corners, fill=green!8, text width=5.8cm, minimum height=1.5cm, align=center, inner sep=7pt ] (modelValidation) at 
-    (3.3,6.3) { \textbf{iterativer Validierungsprozess}\\[1mm] Bewertung jedes LambdaMART-Modells nach einer Sequenz anhand der Validierungsanfragen }; 
+    (3.3,6.3) { \textbf{iterativer Validierungsprozess}\\[1mm] Bewertung jedes LambdaMART-Modells nach einer Sequenz anhand der Anfrage-Kandidat-Paaren\_Validierung }; 
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Trainingsvorbereitung speist beide Prozesse %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     
@@ -424,7 +430,7 @@ Das Ergebnis des Anwendungsprozesses ist eine sortierte Makro-Rangliste, die die
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Ebene 5: Testprozess %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     
     \node[level] at (-8.1,-0.5) {5. Test}; 
-    \node[usage] (test) at (0,-1.0) { \textbf{Testprozess}\\[1mm]Bewertung des trainierten Modells anhand der Testanfragen }; 
+    \node[usage] (test) at (0,-1.0) { \textbf{Testprozess}\\[1mm]Bewertung des trainierten Modells anhand der Anfrage-Kandidat-Paaren\_Test }; 
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % Übergabeartefakte -> Testprozess %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     
