@@ -52,11 +52,11 @@ Die Grundlagen der Datenaufbereitung und des Datensplits wurden im Kapitel~\ref{
 \subsection{Merkmalsmatrix und Labelvektoren}
 \label{sec:merkmalsmatrix_und_labelvektoren}
 
-Die in Abschnitt~\ref{sec:sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektoren} erklärten Anfrage-Kandidat-Paare lassen sich aus Abbildung\ref{fig:anfrage_kandidat_paare_motor} in Form einer so genannten Merkmalsmatrix darstellen.
+Die in Abschnitt~\ref{sec:sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektoren} erklärten Anfrage-Kandidat-Paare lassen sich in Form einer so genannten Merkmalsmatrix darstellen.
 Diese Merkmalsmatrix wird für das Training, die Validierung und den Test des LambdaMART-Modells verwendet und jeweils als Trainingsmatrix \(X_{Train}\), Validierungsmatrix \(X_{Val}\) und Testmatrix \(X_{Test}\) bezeichnet.
 Die Trainingsmatrix dient dem Aufbau des Modells. Die Validierungsmatrix dient der Auswahl der Modellkonfiguration. Die Testmatrix dient ausschließlich der abschließenden Bewertung.
-Eine Merkmalsmatrix wird in Zeilen und Spalten organisiert. Jede Zeile entspricht dabei dem Merkmalsvektoreines Anfrage-Kandidat-Paares. In jeder Spalte stehen die berechneten Vergleichsmerkmale. 
-Die Trainingsmatrix enthält die Merkmalsvektoren der Trainingsanfragen. Entsprechend enthalten die Validierungsmatrix und die Testmatrix die Merkmalsvektoren der Validierungs- und Testanfragen. 
+Eine Merkmalsmatrix wird in Zeilen und Spalten organisiert. Jede Zeile entspricht dabei dem Merkmalsvektor eines Anfrage-Kandidat-Paares. In jeder Spalte stehen die berechneten Vergleichsmerkmale. 
+Die Trainingsmatrix enthält die Merkmalsvektoren der Anfrage-Kandidaten-Paare der Trainingsanfragen. Entsprechend enthalten die Validierungsmatrix und die Testmatrix die Merkmalsvektoren der Anfrage-Kandidaten-Paare der Validierungs- und Testanfragen. 
 Dadurch können beliebig viele Merkmalsvektoren mit gleichem Aufbau der Vergleichsmerkmale der Merkmalsmatrix hinzugefügt werden, und das LambdaMART-Modell verarbeitet die Vergleichsmerkmale in allen Datensplits mit derselben Bedeutung. 
 Eine Matrixzeile lässt sich damit wie folgt darstellen: \[ \text{Anfrageprofil} + \text{Makroprofil} \rightarrow \text{Anfrage-Kandidat-Paar} \rightarrow \text{Vergleichsmerkmale} \rightarrow \text{Merkmalsvektor}. \] 
 Für das Training werden jeder Matrixzeile zusätzlich ein Labelvektor zugeordnet, welcher die Relevanz des Anfrage-Kandidat-Paares dieser Zeile beschreibt.
@@ -97,20 +97,222 @@ Welche Variante für den vorhandenen Datenbestand geeigneter ist, wird im Validi
 \subsection{Anfrage an das LambdaMART-Modell}
 \label{sec:anfrage_an_das_lambdamart_modell}
 
-Um eine Anfrage \(q\) an das LambdaMART-Modell zu übergeben zu können, wird das Anfrageprofil von \(q\) mit allen Makroprofilen aus dem Suchraum\_Makroprofile kombiniert, 
-um dadurch für jedes Anfrage-Kandidat-Paar von \(q\) einen Merkmalsvektor für die Merkmalsmatrix zu berechnen.
-Somit entsteht für \(q\) eine Menge von Anfrage-Kandidat-Paaren, welche die die Übereinstimmung aller Makroprofile mit dem Anfrageprofil von \(q\) beschreibt.
-Damit die Makroprofile durch das LambdaMART-Modell der Anfrage \(q\) zugeordnet werden können, werden alle Anfrage-Kandidat-Paare von \(q\) in einer sogenannten \textit{Rankinggruppe} zusammengefasst.
-Damit weiß das LambdaMART-Modell später welche Anfrage-Kandidat-Paare für das Ranking innerhalb von \(q\) berücksichtigt werden müssen. Daraus ergibt sich eine eindeutige Zuordnung einer Matrixzeile zu der Anfrage \(q\). 
+Um eine Anfrage \(q\) an das LambdaMART-Modell übergeben zu können, müssen alle Anfragen-Kandidat-Paare von \(q\) gebildet werden. 
+Hierzu wird das Anfrageprofil von \(q\) mit allen Makroprofilen aus dem Suchraum\_Makroprofile kombiniert. 
+Dadurch entsteht für jedes Anfrage-Kandidat-Paar von \(q\) ein Merkmalsvektor für die Merkmalsmatrix.
+Damit die Merkmalsvektoren von \(q\) durch das LambdaMART-Modell der Anfrage \(q\) zugeordnet werden können, werden alle Merkmalsvektoren von \(q\) in einer sogenannten \textit{Rankinggruppe} zusammengefasst.
+Damit weiß das LambdaMART-Modell später welche Merkmalsvektoren für das Ranking innerhalb von \(q\) berücksichtigt werden müssen. Daraus ergibt sich eine eindeutige Zuordnung einer Matrixzeile zu der Anfrage \(q\). 
 
 % Bild
 
 
 
-
-
 \subsection{Training des LambdaMART-Modells} 
 \label{sec:training_lambdamart_modells} 
+
+
+VERWENDUNG VON XGBOOST:
+
+
+Hier ist eine zusammengefasste Dokumentation des Chats als strukturiertes Dokument. Das Dokument enthält alle wichtigen Informationen, Code-Beispiele, Vergleiche und Empfehlungen aus dem Gespräch.
+
+Zusammenfassung: LambdaMART und Implementierung mit XGBoost/LightGBM
+Datum: 26.11.2026
+Thema: Learning-to-Rank mit LambdaMART, Unterschiede zwischen Modellen und Frameworks
+Ziel: Praktische Anleitung zur Implementierung von LambdaMART mit XGBoost und LightGBM
+
+1. Einleitung
+Dieses Dokument fasst die wichtigsten Erkenntnisse aus dem Gespräch zusammen:
+
+LambdaMART ist ein Learning-to-Rank (LTR)-Algorithmus, der auf RankNet und LambdaRank aufbaut.
+Es wird häufig für Suchmaschinen-Ranking, Empfehlungssysteme und Relevanzoptimierung eingesetzt.
+Die Implementierung erfolgt meist mit Gradient Boosted Decision Trees (GBDT) wie XGBoost, LightGBM oder CatBoost.
+Der Fokus liegt auf der konkreten Umsetzung von LambdaMART mit XGBoost sowie einem Vergleich der Frameworks.
+2. Grundlagen: LambdaMART und seine Vorgänger
+2.1 RankNet
+Grundidee: Paarweise Vergleiche von Dokumenten, um die Wahrscheinlichkeit zu maximieren, dass ein relevanteres Dokument höher gerankt wird.
+Optimierung: Cross-Entropy-Verlustfunktion basierend auf paarweisen Vergleichen.
+Einsatz: Basis für alle folgenden Modelle.
+2.2 LambdaRank
+Erweiterung von RankNet:
+Nutzt die Lambda-Transformation, um Gradienten basierend auf der Position im Ranking zu gewichten.
+Optimiert direkt metrikbasierte Ziele wie NDCG (Normalized Discounted Cumulative Gain).
+Vorteile: Effizienter als RankNet, da es sich auf die wichtigsten Vergleiche konzentriert.
+2.3 LambdaMART
+Kombination aus LambdaRank und Gradient Boosted Trees (MART):
+Nutzt XGBoost, LightGBM oder CatBoost als Basis.
+Optimiert die Lambda-optimierte Verlustfunktion mit Boosted Trees.
+Vorteile:
+Sehr effektiv für große Datensätze.
+Unterstützt metrikbasierte Optimierung (z. B. NDCG, MAP).
+Implementierungen:
+XGBRanker (XGBoost)
+LGBMRanker (LightGBM)
+CatBoostRanker (CatBoost)
+2.4 ILMART (Interpretable LambdaMART)
+Ziel: Interpretierbare Variante von LambdaMART.
+Methode: Einführung von Constraints, um die Nachvollziehbarkeit zu erhöhen.
+Einsatz: Regulierte Branchen (z. B. Medizin, Recht).
+3. Unterschiede zwischen LambdaMART-Modellen
+Modell	Grundidee	Optimierungsansatz	Besonderheiten	Einsatzgebiet
+RankNet	Paarweise Vergleiche zwischen Dokumenten.	Optimiert Cross-Entropy-Verlustfunktion.	Einfach, aber rechenintensiv.	Basis für alle folgenden Modelle.
+LambdaRank	Gewichtet Gradienten basierend auf der Position im Ranking.	Optimiert direkt Metriken wie NDCG.	Effizienter als RankNet.	Wird in neuronalen Netzen oder als Basis für LambdaMART verwendet.
+LambdaMART	Kombiniert LambdaRank mit Gradient Boosted Trees.	Nutzt Boosted Trees für die Lambda-optimierte Verlustfunktion.	Sehr effektiv für große Datensätze.	Standardmodell für industrielle Ranking-Systeme.
+ILMART	Interpretable Variante von LambdaMART mit Constraints.	Erhält die Ranking-Qualität, erhöht aber die Interpretierbarkeit.	Modelle sind nachvollziehbar.	Einsatz in regulierten Branchen.
+4. Vergleich der Frameworks: XGBoost, LightGBM, CatBoost und HistGradientBoosting
+4.1 Übersichtstabelle
+Framework	Wachstumsstrategie	Kategorische Features	GPU-Unterstützung	Regularisierung	Speed	Speicherbedarf	Robustheit
+LightGBM	Leaf-wise (best-first)	✅ (nativ)	✅	✅	⚡⚡⚡⚡⚡	⚡⚡	⚡⚡
+XGBoost	Level-wise	❌ (manuell)	✅	✅	⚡⚡⚡	⚡⚡⚡	⚡⚡⚡⚡
+CatBoost	Symmetrisches Level-wise	✅ (nativ)	❌	✅ (automatisch)	⚡⚡	⚡⚡⚡	⚡⚡⚡⚡⚡
+HistGradientBoosting	Level-wise	❌	❌	✅	⚡⚡⚡	⚡⚡	⚡⚡
+4.2 Empfehlungen für LambdaMART
+Use Case	Empfohlenes Framework	Begründung
+Große Datensätze	LightGBM (LGBMRanker)	Schnellstes Training, geringerer Speicherbedarf, native Unterstützung für kategoriale Features.
+Kleine oder unausgeglichene Datensätze	XGBoost	Robustheit, bessere Regularisierung, mehr Kontrolle über Hyperparameter.
+Einfache Integration	HistGradientBoosting	Nahtlose Integration in scikit-learn-Pipelines.
+Kategorische Features	CatBoost	Native Unterstützung für kategoriale Features, einfache Handhabung.
+5. Konkrete Implementierung: XGBoost als LambdaMART
+5.1 Voraussetzungen
+Python-Bibliotheken:
+bash
+
+pip install xgboost scikit-learn numpy pandas
+5.2 Beispiel-Datensatz
+Ein Datensatz für Learning-to-Rank benötigt:
+
+Features: Numerische oder kategoriale Merkmale der Dokumente.
+Query-IDs: Eindeutige Kennung für jede Suchanfrage.
+Relevanzwerte: Skalierte Relevanzbewertungen (z. B. 0–3).
+Beispiel (CSV):
+
+csv
+
+query_id,feature1,feature2,relevance
+1,0.5,0.2,3
+1,0.1,0.8,1
+2,0.3,0.9,2
+2,0.7,0.4,0
+5.3 Python-Code: Training und Evaluation
+python
+
+import xgboost as xgb
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import ndcg_score, average_precision_score
+
+# 1. Daten laden
+data = pd.DataFrame({
+    'query_id': [1, 1, 2, 2],
+    'feature1': [0.5, 0.1, 0.3, 0.7],
+    'feature2': [0.2, 0.8, 0.9, 0.4],
+    'relevance': [3, 1, 2, 0]
+})
+
+# 2. Daten in XGBoost-Format umwandeln
+X = data[['feature1', 'feature2']].values
+y = data['relevance'].values
+qid = data['query_id'].values
+
+# 3. Train-Test-Split
+X_train, X_test, y_train, y_test, qid_train, qid_test = train_test_split(
+    X, y, qid, test_size=0.2, random_state=42
+)
+
+# 4. XGBoost-DMatrix erstellen
+dtrain = xgb.DMatrix(X_train, label=y_train, qid=qid_train)
+dtest = xgb.DMatrix(X_test, label=y_test, qid=qid_test)
+
+# 5. Parameter für LambdaMART (pairwise Ranking)
+params = {
+    'objective': 'rank:pairwise',  # LambdaMART-Objektiv
+    'eval_metric': ['ndcg@5', 'map@5'],  # Metriken
+    'learning_rate': 0.1,
+    'gamma': 1.0,
+    'min_child_weight': 0.1,
+    'max_depth': 6,
+    'lambda': 1.0,  # L2-Regularisierung
+    'alpha': 0.0,   # L1-Regularisierung
+    'tree_method': 'hist',  # Effiziente Baum-Methode
+}
+
+# 6. Modell trainieren
+model = xgb.train(
+    params,
+    dtrain,
+    num_boost_round=100,
+    evals=[(dtrain, 'train'), (dtest, 'test')],
+    early_stopping_rounds=10,
+    verbose_eval=True
+)
+
+# 7. Vorhersagen machen
+y_pred = model.predict(dtest)
+
+# 8. Evaluation
+ndcg = ndcg_score([y_test], [y_pred], k=5)
+map_score = average_precision_score(y_test, y_pred)
+print(f"NDCG@5: {ndcg:.4f}")
+print(f"MAP: {map_score:.4f}")
+
+# 9. Modell speichern
+model.save_model("xgb_lambdamart.model")
+5.4 Wichtige Parameter für LambdaMART in XGBoost
+Parameter	Beschreibung	Empfohlener Wert
+objective	Muss rank:pairwise sein.	rank:pairwise
+eval_metric	Metriken zur Evaluation (z. B. ndcg@k, map@k).	ndcg@5, map@5
+learning_rate	Schrittweite für die Gradientenabstiegsoptimierung.	0.05–0.3
+gamma	Minimale Verlustreduktion für eine Aufteilung.	0.1–1.0
+min_child_weight	Minimales Gewicht der Kindknoten (reguliert Overfitting).	0.1–10
+max_depth	Maximale Tiefe der Bäume.	3–10
+lambda	L2-Regularisierung.	0.1–1.0
+alpha	L1-Regularisierung.	0.0–0.5
+5.5 Evaluation: Metriken für Learning-to-Rank
+NDCG (Normalized Discounted Cumulative Gain): Misst die Qualität der Ranking-Reihenfolge.
+MAP (Mean Average Precision): Durchschnittliche Präzision über alle Dokumente.
+MRR (Mean Reciprocal Rank): Reziproker Rang des ersten relevanten Dokuments.
+6. Praktische Tipps
+6.1 Datenvorbereitung
+Query-IDs: Muss korrekt zugewiesen sein, damit XGBoost die Dokumente pro Query gruppieren kann.
+Relevanzwerte: Skaliere die Werte (z. B. auf 0–3 oder 0–4), um die Modellperformance zu verbessern.
+6.2 Hyperparameter-Tuning
+Nutze xgb.cv für Cross-Validation oder Tools wie Optuna oder Hyperopt.
+6.3 Feature-Engineering
+Wichtige Features für Ranking:
+TF-IDF
+Wortanzahl
+Dokumentlänge
+Klickraten
+Benutzerinteraktionen
+6.4 Speichern und Laden des Modells
+python
+
+model.save_model("xgb_lambdamart.model")
+loaded_model = xgb.Booster()
+loaded_model.load_model("xgb_lambdamart.model")
+7. Vergleich: XGBoost vs. LightGBM für LambdaMART
+Aspekt	XGBoost (LambdaMART)	LightGBM (LGBMRanker)
+Objective	rank:pairwise	lambdarank
+Wachstumsstrategie	Level-wise	Leaf-wise (best-first)
+Speed	Langsamer	Schneller
+Speicherbedarf	Höher	Geringer
+Kategorische Features	Nicht nativ unterstützt	Nativ unterstützt
+GPU-Unterstützung	✅	✅ (vollständig optimiert)
+8. Wann welches Framework verwenden?
+Use Case	Empfohlenes Framework
+Große Datensätze	LightGBM (LGBMRanker)
+Kleine oder unausgeglichene Daten	XGBoost
+Einfache Integration	HistGradientBoosting
+Kategorische Features	CatBoost
+Interpretierbarkeit	ILMART
+9. Fazit
+LambdaMART ist ein leistungsstarker Algorithmus für Learning-to-Rank-Aufgaben.
+XGBoost und LightGBM sind die beliebtesten Frameworks für die Implementierung.
+LightGBM ist die beste Wahl für große Datensätze, während XGBoost bei kleinen oder unausgeglichenen Daten robustere Ergebnisse liefert.
+ILMART bietet eine interpretable Alternative für regulierte Branchen.
+Die konkrete Implementierung erfordert eine sorgfältige Datenvorbereitung und Hyperparameter-Optimierung.
+
 
 Der \texttt{LGBMRanker} lernt anhand der Trainingsmatrix, welche Vergleichsmerkmale für die Reihenfolge der Makrokandidaten relevant sind. Hierzu verwendet das LambdaMART-Modell mehrere aufeinanderfolgende Entscheidungsbäume. 
 Ein \textit{Entscheidungsbaum} prüft die Werte eines Merkmalsvektors schrittweise anhand einfacher Bedingungen. Für den Beispielmotor kann dabei zunächst geprüft werden, ob die Spannungsübereinstimmung einen festgelegten Wert überschreitet. 
