@@ -12,10 +12,10 @@ Die Grundlagen der Datenaufbereitung und des Datensplits wurden im Kapitel~\ref{
 \label{sec:merkmalsmatrix_und_labelvektoren}
 
 Die in Abschnitt~\ref{sec:sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektoren} erklärten Anfrage-Kandidat-Paare lassen sich in Form einer so genannten Merkmalsmatrix darstellen.
-Diese Merkmalsmatrix wird für das Training, die Validierung und den Test des LambdaMART-Modells verwendet und jeweils als Trainingsmatrix \(X_{Train}\), Validierungsmatrix \(X_{Val}\) und Testmatrix \(X_{Test}\) bezeichnet.
-Die Trainingsmatrix dient dem Aufbau des Modells. Die Validierungsmatrix dient der Auswahl der Modellkonfiguration. Die Testmatrix dient ausschließlich der abschließenden Bewertung.
+Diese Merkmalsmatrix wird für das Training, die Validierung und den Test des LambdaMART-Modells, sowie für die spätere Anwendung verwendet und jeweils als Trainingsmatrix \(X_{Train}\), Validierungsmatrix \(X_{Val}\) und Testmatrix \(X_{Test}\) sowie Anwendungsmatrix \(X_{Appl}\) bezeichnet.
+Die Trainingsmatrix dient dem Aufbau des Modells. Die Validierungsmatrix dient der Auswahl der Modellkonfiguration. Die Testmatrix dient ausschließlich der abschließenden Bewertung. Die Anwendungsmatrix wird für die spätere Anwendung des trainierten Modells auf neue Anfragen verwendet.
 Eine Merkmalsmatrix wird in Zeilen und Spalten organisiert. Jede Zeile entspricht dabei dem Merkmalsvektor eines Anfrage-Kandidat-Paares. In jeder Spalte stehen die berechneten Vergleichsmerkmale. 
-Die Trainingsmatrix enthält die Merkmalsvektoren der Anfrage-Kandidaten-Paare der Trainingsanfragen. Entsprechend enthalten die Validierungsmatrix und die Testmatrix die Merkmalsvektoren der Anfrage-Kandidaten-Paare der Validierungs- und Testanfragen. 
+Die Trainingsmatrix enthält die Merkmalsvektoren der Anfrage-Kandidaten-Paare der Trainingsanfragen. Entsprechend enthalten die Validierungsmatrix, die Testmatrix und die Anwendungsmatrix die Merkmalsvektoren der Anfrage-Kandidaten-Paare der Validierungs-, Test- und Anwendungsanfragen. 
 Dadurch können beliebig viele Merkmalsvektoren mit gleichem Aufbau der Vergleichsmerkmale der Merkmalsmatrix hinzugefügt werden, und das LambdaMART-Modell verarbeitet die Vergleichsmerkmale in allen Datensplits mit derselben Bedeutung. 
 Eine Matrixzeile lässt sich damit wie folgt darstellen: \[ \text{Anfrageprofil} + \text{Makroprofil} \rightarrow \text{Anfrage-Kandidat-Paar} \rightarrow \text{Vergleichsmerkmale} \rightarrow \text{Merkmalsvektor}. \] 
 Für das Training werden jeder Matrixzeile zusätzlich ein Labelvektor zugeordnet, welcher die Relevanz des Anfrage-Kandidat-Paares dieser Zeile beschreibt.
@@ -152,19 +152,19 @@ Eine Modellkonfiguration umfasst eine festgelegte Kombination der zuvor beschrie
 
 Zunächst werden für eine Rankinggruppe durch die Vergleichsmerkmale aus der Trainingsmatrix \(X_{Train}\) die Unterschiede in den Artikel- und Makroeigenschaften in Entscheidungsregeln für den Entscheidungsbaum überführt.
 Als Nächstens werden durch die Entscheidungszweige sowie den Kandidatenrelevanzen aus dem Trainingslabelvektor \(y_{Train}\) eine absteigend sortierte Rangliste an Anfrage-Kandidat-Paaren erstellt. 
-Diese Rangliste wird im weiteren Verlauf als Kandidatenrangliste bezeichnet.
-Desweitern werden durch das Lernziel \texttt{rank:ndcg} die Kandidatenrelevanzen innerhalb der Kandidatenrangliste verglichen. 
+Diese Rangliste wird im weiteren Verlauf als Kandidatenrangliste\_Training bezeichnet.
+Desweitern werden durch das Lernziel \texttt{rank:ndcg} die Kandidatenrelevanzen innerhalb der Kandidatenrangliste\_Training verglichen. 
 Befindet sich ein weniger relevantes Anfrage-Kandidat-Paar vor einem relevanteren Anfrage-Kandidat-Paar, liegt eine Fehlplatzierung vor. 
-Das Lernziel bewertet dann, wie stark sich diese Fehlplatzierung auf die Qualität der Kandidatenrangliste auswirkt. 
+Das Lernziel bewertet dann, wie stark sich diese Fehlplatzierung auf die Qualität der Kandidatenrangliste\_Training auswirkt. 
 Fehlplatzierungen an den vorderen Positionen werden dabei stärker berücksichtigt als Fehlplatzierungen an den hinteren Positionen (siehe Kapitel \ref{sec:ndcg}).
-Aus diesen Fehlplatzierungen werden die $\lambda$-Gradienten berechnet, die die Richtung und Stärke der Anpassung der Anfrage-Kandidat-Paare innerhalb der Kandidatenrangliste bestimmen (vergleiche Kapitel \ref{sec:lambdarank}). 
-Die $\lambda$-Gradienten werden anschließend verwendet, um durch Gradient-Boosting die Entscheidungsbäume im XGBRanker anzupassen und die Fehlplatzierungen in den Kandidatenranglisten zu korrigieren.
+Aus diesen Fehlplatzierungen werden die $\lambda$-Gradienten berechnet, die die Richtung und Stärke der Anpassung der Anfrage-Kandidat-Paare innerhalb der Kandidatenrangliste\_Training bestimmen (vergleiche Kapitel \ref{sec:lambdarank}). 
+Die $\lambda$-Gradienten werden anschließend verwendet, um durch Gradient-Boosting die Entscheidungsbäume im XGBRanker anzupassen und die Fehlplatzierungen in der Kandidatenrangliste\_Training zu korrigieren.
 Für den Beispielmotor kann ein Entscheidungsbaum erkennen, dass eine hohe Spannungsübereinstimmung mit einer Anfrage \(q\) für ein Anfrage-Kandidat-Paar spricht. 
 Ein weiterer Entscheidungsbaum kann diese Bewertung korrigieren, wenn zwar die Spannung übereinstimmt, Strom und Leistung jedoch deutlich abweichen. 
 Weitere Entscheidungsbäume können zusätzlich die technischen Hinweise berücksichtigen.
-Die Beiträge aller Entscheidungsbäume werden zu einem Relevanzscore zusammengeführt. Für jede Matrixzeile entsteht damit ein Relevanzscore für das zugehörige Anfrage-Kandidat-Paar.
-Die Relevanzscores aller Anfrage-Kandidat-Paare innerhalb einer Rankinggruppe werden anschließend verwendet, um die endgültige Kandidatenrangliste für diese Rankinggruppe zu erstellen.
-Dieser Prozess wird für alle Rankinggruppen wiederholt, sodass für jede Anfrage (\(q\)) eine Kandidatenrangliste erstellt wird.
+Die Beiträge aller Entscheidungsbäume werden zu einem Relevanzscore_Training zusammengeführt. Für jede Matrixzeile entsteht damit ein Relevanzscore_Training für das zugehörige Anfrage-Kandidat-Paar.
+Die Relevanzscore_Training-Werte aller Anfrage-Kandidat-Paare innerhalb einer Rankinggruppe werden anschließend verwendet, um die endgültige Kandidatenrangliste\_Training für diese Rankinggruppe zu erstellen.
+Dieser Prozess wird für alle Rankinggruppen wiederholt, sodass für jede Anfrage (\(q\)) eine Kandidatenrangliste\_Training erstellt wird.
 
 Der \texttt{XGBRanker} lernt somit nicht die Artikel- oder Makrodateien unmittelbar. Er lernt den Zusammenhang zwischen den Vergleichsmerkmalen der Anfrage-Kandidat-Paare und deren Kandidatenrelevanz.
 
@@ -258,179 +258,101 @@ Nach jedem Durchlauf des Grid Search wird die erzeugte Modellkonfiguration im Va
 % Beim Motor soll beispielsweise die gemeinsame Bedeutung von 400~V, 10~A und 4000~W gelernt werden können; eine nur einmal vorkommende Schreibweise soll dagegen keine eigene, stark verzweigte Regel erzeugen.
 
 \subsubsection{Validierungsprozess} 
-
-Nach jedem Trainingsprozess wird die Modellkonfiguration anhand der Validierungsmatirx bewertet. Hierzu berechnet der trainierte \texttt{XGBRanker} für jede Zeile der Validierungsmatrix \(X_{Val}\) einen Relevanzscore. 
-Die Anfragekennungen \(qid_{Val}\) ordnen die Matrixzeilen den jeweiligen Validierungsanfragen zu. 
-Innerhalb jeder Rankinggruppe werden die Makrokandidaten absteigend nach ihren Relevanzscores sortiert. 
-
-Der Validierungslabelvektor \(y_{Val}\) wird nicht zur Berechnung der Relevanzscores verwendet. 
-Er enthält die  Kandidatenrelevanz der Anfrage-Kandidat-Paare und dient ausschließlich zur Bewertung der erzeugten Makro-Ranglisten. 
-Hierzu wird für jede Validierungsanfrage ermittelt, auf welchem Rang sich das Zielmakro befindet und wie die weiteren relevanten Makrokandidaten angeordnet sind. 
-Aus den Ergebnissen aller Validierungsanfragen werden anschließend Recall@1, Recall@3, Recall@5, Recall@10, MRR und nDCG@10 berechnet. 
-Diese Metriken bilden die Grundlage für den Vergleich der Modellkonfigurationen.
-
-Hierzu berechnet das Modell für jedes Anfrage-Kandidat-Paar der Validierungsmatrix eine Kandidatenrelevanz. 
-Die Makroprofile einer Rankinggruppe werden anschließend nach dieser Kandidatenrelevanz absteigend in einer sogenannten Makroprofilliste sortiert. 
-Die erzeugten Makroprofillisten werden mit den Artikel-Makro-Zuordnungen aus dem Validierungslabelvektor verglichen. 
-
-Die Bewertung erfolgt anhand von Recall@1, Recall@3, Recall@5, Recall@10, MRR und nDCG@10. Für die Auswahl wird zunächst der gemeinsame Recall-Wert berechnet: \[ S_{Recall} = \frac{ Recall@1+Recall@3+Recall@5+Recall@10 }{4}. \] Anschließend werden Recall, MRR und nDCG gleichmäßig zum Validierungsscore zusammengeführt: \[ S_{Validierung} = \frac{ S_{Recall}+MRR+nDCG@10 }{3}. \] Durch diese Berechnung erhalten die Trefferwahrscheinlichkeit, die Position des Zielmakros und die Qualität der gesamten Makro-Rangliste jeweils dasselbe Gewicht. Eine Modellkonfiguration wird nur berücksichtigt, wenn sie zusätzlich die Mindestwerte \[ Recall@10 \geq 0{,}50 \] und \[ nDCG@10 \geq 0{,}70 \] erfüllt. \subsubsection{Iterativer Ablauf} Der Trainings- und Validierungsprozess wird für alle Modellkonfigurationen des Grids wiederholt: \begin{enumerate} \item Auswahl einer Modellkonfiguration aus dem Grid, \item Training des \texttt{XGBRanker} mit \(X_{Train}\), \(y_{Train}\) und \(qid_{Train}\), \item Erzeugung der Makro-Ranglisten für die Validierungsanfragen, \item Berechnung von Recall@k, MRR und nDCG@10, \item Berechnung des Validierungsscores, \item Speicherung der Modellkonfiguration und ihrer Ergebnisse, \item Fortsetzung mit der nächsten Modellkonfiguration. \end{enumerate} Nach Abschluss aller Sequenzen wird die Modellkonfiguration mit dem höchsten gültigen Validierungsscore ausgewählt. Die Testdaten werden dabei nicht verwendet. Dadurch bleibt der Testprozess von der Hyperparameteroptimierung und der Modellauswahl getrennt. \subsubsection{Ergebnis des Trainings} Das Ergebnis des Trainings- und Validierungsprozesses ist ein trainiertes LambdaMART-Modell mit festgelegten Hyperparametern und einer validierten Rankingfunktion. Zusätzlich werden die verwendete Merkmalsreihenfolge, die Label-Policy und die Ergebnisse der Hyperparameteroptimierung gespeichert. Das Modell berechnet für jedes Anfrage-Kandidat-Paar einen Relevanzscore. Die Makro-Rangliste entsteht durch die absteigende Sortierung dieser Scores innerhalb der jeweiligen Rankinggruppe. Eine nachträgliche regelbasierte Veränderung der Rangfolge findet nicht statt.
-
-% 
-\section{Validierungsprozess}
 \label{sec:validierungsprozess}
 
-Jede Modellkonfiguration erzeugt für jeden Validierungsartikel eine Makro-Rangliste. Die Validierungsdaten wurden während des Trainings nicht zum Lernen der Entscheidungsbäume verwendet. 
-Sie entsprechen damit einer Zwischenprüfung: Das Modell bearbeitet neue Aufgaben, während verschiedene Modellkonfigurationen noch miteinander verglichen werden dürfen.
+Im Validierungsprozess werden die Entscheidungsbäume nicht weiter angepasst, sondern die erzeugte Modellkonfiguration der Hyperparmeteroptimierung anhand der Validierungsmatrix \(X_{Val}\) bewertet.
+Die Validierungsmatrix enthält dabei die Anfrage-Kandidat-Paar-\_Validierung, welche im Trainingsprozess vom Aufbau der Entscheidungsbäume getrennt sind.
+Durch diese Trennung wird geprüft, ob der trainierte XBGRanker die erlernten Zusammenhänge zwischen den Traingsanfragen und den Anfrage-Kandidat-Paar-\_Training auf unbekannte Anfragen übertragen kann.
 
-Für eine Motoranfrage wird geprüft, auf welchem Rang sich das bekannte Zielmakro \texttt{M1\_F1\_V1} befindet und wie die fachlich verwandten Motor-Makros angeordnet sind. 
-Hierzu werden Recall@1, Recall@3, Recall@5, Recall@10, MRR und hierarchisches nDCG@10 berechnet.
+Der trainierte \texttt{XGBRanker} berechnet zunächst für jede Zeile der Validierungsmatrix einen \textit{Relevanzscore\_Validierung}.
+Anhand dieses Relevanzscore_Validierung wird dann die absteigende Reihenfolge der Anfrage-Kandidat-Paare\_Validierung innerhalb jeder Kandidatenrangliste\_Validierung bestimmt.
+Hier entsteht der entscheidene Unterschied zum Trainingsprozess: Im Validierungsprozess wird die Kandidatenrangliste nicht durch den Validierungslabelvektor \(y_{Val}\) beeinflusst, 
+sondern ausschließlich durch die Relevanzscores des trainierten Modells bestimmt. Die Rangfolge in der Kandidatenrangliste\_Validierung spiegelt somit die vom XGBRanker erlernte Relevanz der Anfrage-Kandidat-Paare\_Validierung wieder.
+Erst jetzt wird der Validierungslabelvektor \(y_{Val}\) herangezogen, um die erzeugte Rangfolge der Kandidatenrangliste\_Validierung zu bewerten. 
+Der Trainingsprozess vermittelt dem Modell somit Wissen über die technischen Zusammenhänge, während der Validierungsprozess prüft, wie gut sich dieses Wissen auf unbekannte Anfragen übertragen lässt.
 
-Recall@k beantwortet die Frage, ob das Zielmakro innerhalb der ersten \(k\) Positionen vorkommt. Bildlich wird nur ein Sichtfenster über die ersten Plätze der Rangliste gelegt. Bei Recall@3 werden die ersten drei Plätze betrachtet. 
-Steht \texttt{M1\_F1\_V1} auf Rang 2, ist die Anfrage für Recall@3 erfolgreich. Ob das Makro auf Rang 1, 2 oder 3 steht, wird innerhalb dieser Metrik nicht weiter unterschieden.
+Die Bewertung erfolgt anhand von Recall@1, Recall@10, MRR und nDCG@10 (siehe Kapitel\ref{sec:evaluationsmetriken}). 
 
-Der Mean Reciprocal Rank (MRR) berücksichtigt dagegen die genaue Rangposition des ersten relevanten Makros. Hierzu wird der Kehrwert des Rangs verwendet. Steht \texttt{M1\_F1\_V1} auf Rang 1, beträgt der Wert 1. Steht es auf Rang 2, 
-beträgt er \(1/2\). Auf Rang 5 beträgt er \(1/5\). Frühere Treffer erhalten dadurch einen höheren Wert.
+Die gemeinsame Verwendung von Recall@k, MRR und nDCG@10 ergibt sich aus dem Ziel des Empfehlungssystems. 
+Das Empfehlungssystem soll das exakt zugeordnete Makro möglichst früh finden und gleichzeitig weitere Makros entsprechend ihrer Relevanz für die konkrete Elektrokonstruktionsaufgabe anordnen (vergleiche Kapitel \ref{sec:vision}). 
+Eine einzelne Metrik kann beide Anforderungen nicht vollständig abbilden. Recall@1 und Recall@10 prüfen, ob sich das exakte Zielmakro innerhalb unterschiedlich großer Auswahlbereiche befindet. 
+Recall@1 bewertet die direkte Empfehlung. Recall@10 bewertet, ob das Zielmakro zumindest innerhalb des für die Anwendung vorgesehenen Top-10-Bereichs gefunden wird.
+MRR berücksichtigt zusätzlich die genaue Rangposition des Zielmakros. Dadurch wird ein Zielmakro auf Rang 2 höher bewertet als ein Zielmakro auf Rang 9, obwohl beide von Recall@10 als Treffer bewertet werden. 
+nDCG@10 bewertet dagegen die Reihenfolge aller Makros innerhalb der ersten zehn Positionen. Anhand der hierarchischen Kandidatenrelevanz wird dabei berücksichtigt, 
+ob neben dem exakten Makro auch Makros derselben Makro-Familie und Makro-Klasse vor nicht verwandten Makros angeordnet werden (siehe Kapitel \ref{sec:merkmalsmatrix_und_labelvektoren}).
 
-Der Normalized Discounted Cumulative Gain (nDCG) bewertet die Reihenfolge mehrerer Kandidaten. Vereinfacht prüft nDCG, ob die wichtigen Makros weit oben und die weniger wichtigen Makros weiter unten stehen. 
-Im Motorbeispiel ist eine Rangliste günstiger, wenn nach dem exakten Zielmakro zunächst Makros derselben Familie folgen und erst danach fachlich nicht verwandte Makros erscheinen. Der Zusatz \textit{normalized} bedeutet, 
-dass die erzeugte Rangliste mit der bestmöglichen Reihenfolge verglichen wird. Ein Wert von 1 entspricht der idealen Reihenfolge.
+Für die Auswahl der Modellkonfiguration werden die drei Bewertungsbereiche gleichmäßig zum Validierungsscore zusammengeführt: \[ S_{Validierung} = \frac{ S_{Recall}+MRR+nDCG@10 }{3}. \]
+Die beiden Recall-Werte werden dabei zum gemeinsamen Recall-Wert \[ S_{Recall} = \frac{ Recall@1+Recall@10 }{2} \] zusammengeführt, da sie dieselbe Eigenschaft der Makro-Rangliste mit unterschiedlich großen Auswahlbereichen bewerten. 
+Würden die beiden Recall-Werte unmittelbar mit MRR und nDCG@10 gemittelt, würde Recall mit zwei Einzelwerten stärker gewichtet als die beiden anderen Metriken. Die Zusammenfassung verhindert diese Übergewichtung.
 
-Recall@k, MRR und nDCG betrachten somit unterschiedliche Seiten derselben Makro-Rangliste. Recall@k prüft, ob das Ziel gefunden wird. MRR prüft, wie früh es gefunden wird. nDCG prüft, ob die gesamte Reihenfolge fachlich sinnvoll aufgebaut ist.
+Die Zusammenführung zu einer Gesamtmetrik ermöglicht einen direkten Vergleich verschiedener Modellkonfigurationen, da am Ende nur ein Wert für die Auswahl der besten Konfiguration herangezogen wird. 
+Außerdem wird durch die Zusammenführung verhindert, dass eine Modellkonfiguration aufgrund eines besonders guten Einzelwertes bevorzugt wird.
 
-Für die Auswahl wird zunächst der Recall-Teilscore gebildet:
 
-\[
-S_{Recall}=\frac{Recall@1+Recall@3+Recall@5+Recall@10}{4}.
-\]
+\section{Testprozess} 
+\label{sec:testprozess} 
 
-Die vier Recall-Werte werden zuerst zusammengefasst, damit die Recall-Gruppe insgesamt nicht stärker gewichtet wird als MRR oder nDCG. Der Validierungsscore ergibt sich anschließend zu
+Nach Abschluss der Hyperparameteroptimierung wird die im Validierungsprozess ausgewählte Modellkonfiguration im Testprozess abschließend bewertet. 
+Die Grundlagen zur Testmatrix \(X_{Test}\), zum Testlabelvektor \(y_{Test}\) und zu den Anfragekennungen \(qid_{Test}\) wurden bereits in Kapitel \ref{sec:merkmalsmatrix_und_labelvektoren} 
+und Kapitel \ref{sec:anfrage_an_das_lambdamart_modell} erläutert. Der technische Ablauf entspricht dem Validierungsprozess aus Kapitel \ref{sec:validierungsprozess}. 
 
-\[
-S_{Validierung}=\frac{S_{Recall}+nDCG@10+MRR}{3}.
-\]
+Das ausgewählte LambdaMART-Modell berechnet für die Anfrage-Kandidat-Paare\_Test jeweils einen Relevanzscore_Test. 
+Anschließend werden für jede Rankinggruppe eine Kandidatenrangliste_Test erzeugt und entsprechend der Relevanzscore_Test-Werte sortiert. 
+Der Testlabelvektor \(y_{Test}\) wird dann zur Bewertung der erzeugten Kandidatenranglisten verwendet. Die Bewertung erfolgt mit Recall@1, Recall@10, MRR und nDCG@10. 
+Die Bedeutung dieser Metriken ist in Kapitel \ref{sec:evaluationsmetriken} beschrieben. Ihre Zusammenführung zum gemeinsamen Testscore erfolgt analog zum Validierungsscore aus Kapitel \ref{sec:validierungsprozess}. 
+Dadurch sind Validierungs- und Testergebnis nach derselben Bewertungsgrundlage vergleichbar. Der wesentliche Unterschied zum Validierungsprozess liegt im Verwendungszweck der Ergebnisse. 
+Die Validierungsdaten werden zum Vergleich der Modellkonfigurationen und zur Auswahl der Hyperparameter verwendet. Im Testprozess wird dagegen ausschließlich die bereits ausgewählte Modellkonfiguration unverändert angewendet. 
+Der Testprozess wird einmalig nach Abschluss der Modellauswahl durchgeführt. Dadurch bleiben die Testanfragen von Training, Hyperparameteroptimierung und Modellauswahl getrennt. 
+Das Ergebnis beschreibt somit, wie gut sich die erlernten Zusammenhänge zwischen den Vergleichsmerkmalen und den Kandidatenrelevanzen auf bisher unbekannte Anfragen übertragen lassen. 
+Ein deutlich schlechteres Testergebnis gegenüber dem Validierungsergebnis kann auf ein Overfitting an die Trainings- und Validierungsdaten hinweisen. 
+Die Ergebnisse der Evaluationsmetriken des Testprozesses bilden die abschließende Bewertung der Generalisierungsfähigkeit des trainierten Empfehlungssystems.
 
-Damit besitzen Recall, nDCG und MRR jeweils ein Gewicht von einem Drittel. Bildlich erhält jede Metrikgruppe eine gleich große Stimme. Eine Modellkonfiguration kann daher nicht allein deshalb ausgewählt werden, weil sie bei Recall@1 besonders gut ist, 
-während die übrige Rangliste ungeeignet sortiert wird.
+\section{Anwendungsprozess} 
+\label{sec:anwendungsprozess_technische_umsetzung} 
 
-Die vier Recall-Werte werden innerhalb ihrer Gruppe gemittelt, weil sie dieselbe Frage mit unterschiedlich großem Sichtfenster beantworten. Würden Recall@1, Recall@3, Recall@5 und Recall@10 jeweils einzeln neben MRR und nDCG gewichtet, 
-würde Recall vier Stimmen erhalten. Die zweistufige Berechnung stellt deshalb sicher, dass Finden, frühe Platzierung und fachliche Reihenfolge gleichberechtigt bleiben. 
-Diese Auswahlregel wird sowohl innerhalb der LightGBM-Grid-Search als auch beim Vergleich der vollständigen Modellkonfigurationen verwendet. Dadurch erfolgt die Auswahl auf beiden Ebenen nach derselben fachlichen Zielsetzung.
-
-Eine Modellkonfiguration wird nur bevorzugt, wenn sie die Mindestwerte \(Recall@10 \geq 0{,}50\) und \(nDCG@10 \geq 0{,}70\) erfüllt. Recall@10 von 0,50 bedeutet, 
-dass sich das Zielmakro bei mindestens der Hälfte der Validierungsanfragen unter den ersten zehn Positionen befindet. nDCG@10 von 0,70 fordert zusätzlich eine ausreichende Qualität der Reihenfolge. 
-Diese Grenzen verhindern die Auswahl einer Konfiguration mit einem guten Einzelwert, aber einer insgesamt unzureichenden Makro-Rangliste.
-
-Die Schwellen wurden als Mindestanforderungen und nicht als Zielwerte festgelegt. Recall@10 von 0,50 verhindert, dass eine Konfiguration ausgewählt wird, 
-die das korrekte Makro bei mehr als der Hälfte der Anfragen vollständig außerhalb des vorgesehenen Auswahlbereichs einordnet. nDCG@10 von 0,70 verhindert gleichzeitig eine Rangliste, in der zwar gelegentlich das Zielmakro enthalten ist, 
-fachlich verwandte Kandidaten jedoch unsystematisch verteilt sind. Erst unter den Konfigurationen, die beide Anforderungen erfüllen, entscheidet der gleichgewichtete Validierungsscore.
-
-Der Vergleich zwischen Trainings- und Validierungsergebnis dient zusätzlich der Erkennung von Overfitting. Erzielt eine Modellkonfiguration für die bekannten Motorartikel nahezu perfekte Werte, 
-ordnet das Zielmakro bei den Validierungsartikeln jedoch deutlich schlechter ein, hat sie wahrscheinlich Besonderheiten der Trainingsdaten gelernt, die sich nicht auf neue Motorartikel übertragen lassen.
-
-\section{Modellauswahl}
-\label{sec:modellauswahl_technische_umsetzung}
-
-Die Modellauswahl erfolgt ausschließlich anhand des Validierungsscores. Der Validierungsscore kann mit einer Gesamtnote verglichen werden, die aus drei gleichberechtigten Teilnoten besteht: Finden des Zielmakros, 
-frühe Platzierung und sinnvolle Reihenfolge der gesamten Makro-Rangliste.
-
-Angenommen eine Modellkonfiguration erreicht für die Motor- und übrigen Validierungsanfragen \(Recall@1=0{,}60\), \(Recall@3=0{,}70\), \(Recall@5=0{,}80\), \(Recall@10=0{,}90\), \(nDCG@10=0{,}80\) und \(MRR=0{,}70\). Zunächst ergibt sich
-
-\[
-S_{Recall}=\frac{0{,}60+0{,}70+0{,}80+0{,}90}{4}=0{,}75.
-\]
-
-Anschließend werden die drei Metrikgruppen gleichmäßig zusammengeführt:
-
-\[
-S_{Validierung}=\frac{0{,}75+0{,}80+0{,}70}{3}=0{,}75.
-\]
-
-Der Wert 0,75 beschreibt die gemeinsame Qualität der Konfiguration. Er ist keine zusätzliche Metrik für eine einzelne Rangliste, sondern eine festgelegte Auswahlregel für den Vergleich der Modellkonfigurationen.
-
-Die Konfiguration mit dem höchsten gültigen Validierungsscore wird ausgewählt. Bei gleichen Scores dienen Recall@1, nDCG@10, MRR und Recall@10 ausschließlich als deterministische Tie-Breaker. 
-Ein \textit{Tie-Breaker} ist eine feste Entscheidungsregel für einen Gleichstand. Er kommt nur zum Einsatz, wenn zwei Konfigurationen denselben Validierungsscore besitzen.
-
-Die optionale Leave-one-out-Auswertung ist standardmäßig deaktiviert und beeinflusst weder Training noch Modellauswahl. 
-Bei einer \textit{Leave-one-out-Auswertung} wird für die Diagnose ein Trainingsartikel vorübergehend aus seinem eigenen Makroprofil entfernt. Anschließend wird geprüft, ob das Modell das Zielmakro weiterhin findet. 
-Bildlich wird beim Motorprofil kurzzeitig die Karte des gerade geprüften Motors aus dem gemeinsamen Stapel genommen. Dadurch kann untersucht werden, wie stark der Artikel von seinen eigenen Angaben im Makroprofil profitiert. 
-Für das reguläre Training wird jedoch das vollständige Profil von \texttt{M1\_F1\_V1} verwendet.
-
-Die Standardkonfiguration lautet daher \texttt{KI\_ENABLE\_TRAIN\_LEAVE\_ONE\_OUT\_EVALUATION = 0}. Nur der gesonderte Diagnoselauf aktiviert den Wert 1. Diese Trennung wurde gewählt, 
-weil alle Makros im Trainingsanteil vorkommen müssen und Makros mit nur einem Artikel oder einer unteilbaren Zusammenhangskomponente dem Training zugeordnet werden. Würde Leave-one-out als reguläres Trainingsverfahren eingesetzt, 
-könnte bei einem solchen Motor-Makro kein vollständiges Zielprofil mehr verbleiben. Als Diagnose zeigt die Auswertung dagegen den Eigenbeitrag eines Artikels, ohne das trainierte Modell oder die Modellauswahl zu verändern.
-
-\section{Testprozess}
-\label{sec:testprozess_technische_umsetzung}
-
-Nach der Modellauswahl wird genau diese Konfiguration unverändert auf den Testdaten bewertet. Die Testdaten entsprechen der Abschlussprüfung. Sie wurden weder zum Training noch zur Auswahl der Hyperparameter verwendet. 
-Dadurch zeigen sie, wie gut sich die erlernten Zusammenhänge auf bisher unbekannte Artikel übertragen lassen.
-
-Für einen unbekannten Motorartikel wird erneut eine Makro-Rangliste erzeugt. Befindet sich \texttt{M1\_F1\_V1} auf Rang 2, ergibt sich folgendes Bild: Recall@1 ist nicht erfolgreich, weil nur der erste Platz betrachtet wird. 
-Recall@3, Recall@5 und Recall@10 sind erfolgreich, weil Rang 2 innerhalb dieser Bereiche liegt. Der reziproke Rang beträgt \(1/2\). nDCG@10 bewertet zusätzlich, ob die übrigen Motor-Makros sinnvoll angeordnet sind.
-
-Die Testmetriken werden nicht zur Änderung der Label-Policy, der Hyperparameter oder der verwendeten technischen Eigenschaften eingesetzt. Andernfalls würde die Abschlussprüfung nachträglich zur Übungsaufgabe werden. 
-Die Testwerte dienen deshalb ausschließlich der abschließenden Bewertung des bereits anhand der Validierungsdaten ausgewählten Modells.
-
-Diese Festlegung ist besonders für die Konfigurationsserie relevant. Binäre und hierarchische Labels sowie Referenz-, moderate und starke Regularisierung werden ausschließlich anhand der Validierungsdaten verglichen. 
-Der optionale Leave-one-out-Lauf nimmt nicht an der Modellauswahl teil. Erst nachdem eine Konfiguration feststeht, werden ihre Testwerte betrachtet. 
-Dadurch bleibt der Testanteil ein unabhängiger Nachweis für die Übertragbarkeit auf unbekannte Motorartikel.
-
-\section{Anwendungsprozess}
-\label{sec:anwendungsprozess_technische_umsetzung}
-
-Im Anwendungsprozess bildet ein neues Motordatenblatt den Ausgangspunkt. Auf diesem Datenblatt stehen beispielsweise Hersteller SEW, 400~V, 10~A, 4000~W, 50~Hz und der Hinweis \textit{Mit Kühlung}. 
-Diese Angaben werden mit derselben Normalisierungs- und Extraktionslogik verarbeitet, die bereits für die Trainings-, Validierungs- und Testdaten verwendet wurde.
-
-Die Normalisierung sorgt dafür, dass unterschiedliche Schreibweisen derselben technischen Eigenschaft gemeinsam verglichen werden können. Steht auf einem Datenblatt beispielsweise 4~kW und in den Trainingsdaten 4000~W, 
-werden beide Angaben auf eine gemeinsame Darstellung überführt. Dadurch erkennt das System, dass kein technischer Unterschied vorliegt.
-
-Aus den technischen Eigenschaften wird ein Anfrageprofil erzeugt. Dieses Anfrageprofil kann wie ein ausgefüllter Motorsteckbrief betrachtet werden, der an alle vorhandenen Makroprofile gehalten wird. 
-Für jedes Anfrage-Kandidat-Paar werden dieselben Vergleichsmerkmale wie während des Trainings berechnet. Das LambdaMART-Modell erzeugt anschließend für jeden Kandidaten einen Relevanzscore.
-
-Angenommen \texttt{M1\_F1\_V1} stimmt bei Spannung, Strom, Leistung, Frequenz und dem Hinweis \textit{Mit Kühlung} weitgehend mit der Anfrage überein. \texttt{M1\_F1\_V2} besitzt ebenfalls passende elektrische Werte, 
-beschreibt jedoch eine andere Ausführung. \texttt{M1\_F2\_V1} gehört zwar zur Klasse der Motor-Makros, weist jedoch eine weniger passende Familie auf. Das Modell kann daraus beispielsweise folgende Makro-Rangliste erzeugen:
-
-\begin{enumerate}
-    \item \texttt{M1\_F1\_V1},
-    \item \texttt{M1\_F1\_V2},
-    \item \texttt{M1\_F2\_V1}.
+Nach dem Testprozess wird das trainierte Empfehlungssystem für neue Anfragen bereitgestellt. Ausgangspunkt des Anwendungsprozesses ist ein technisches Datenblatt, dessen zugehöriges Makro noch nicht bekannt ist. 
+Die technischen Eigenschaften des Datenblatts werden mit der in Kapitel~\ref{chap:datenaufbereitung_und_datensplit} beschriebenen Normalisierungslogik verarbeitet. 
+Dadurch erhalten inhaltlich gleiche Angaben eine gemeinsame Darstellung. Beispielsweise werden 4kW und 4000W als dieselbe Leistung behandelt. 
+Aus den extrahierten Eigenschaften wird das in Kapitel \ref{chap:konzeption_des_empfehlungssystems} beschriebene Anfrageprofil erzeugt. Dieses enthält ausschließlich Informationen, die aus der neuen Anfrage verfügbar sind. 
+Eine Artikel-Makro-Zuordnung und ein Relevanzlabel liegen im Anwendungsprozess nicht vor, da das passende Makro erst ermittelt werden soll.
+Das Anfrageprofil wird mit allen Makroprofilen aus dem \texttt{Suchraum\_Makroprofile} kombiniert. Dadurch entsteht für jedes Makroprofil ein Anfrage-Kandidat-Paar.
+Die zugehörigen Vergleichsmerkmale werden in derselben Reihenfolge wie in den restlichen Matrizen (vergleiche Kapitel \ref{sec:merkmalsmatrix_und_labelvektoren}) gebildet und zu den Merkmalsvektoren der Anwendungsmatrix zusammengeführt. 
+Alle Merkmalsvektoren der neuen Anfrage bilden eine Rankinggruppe mit der Anfragekennung \(qid_{new}\). Das trainierte LambdaMART-Modell berechnet für jedes Anfrage-Kandidat-Paar einen Relevanzscore\_Anwendung. 
+Die Makrokandidaten werden innerhalb der Rankinggruppe absteigend nach den Werten der Relevanzscore\_Anwendung sortiert. Dadurch entsteht die Kandidatenrangliste der neuen Anfrage. 
+Für ein Motordatenblatt mit dem Hersteller SEW, einer Spannung von 400V, einem Strom von 10A, einer Leistung von 4000W, 
+und dem technischen Hinweis \textit{Mit Kühlung} kann beispielsweise folgende Makro-Rangliste entstehen: 
+\begin{enumerate} 
+    \item \texttt{M1\_F1\_V1}
+    \item \texttt{M1\_F1\_V2}
+    \item \texttt{M1\_F2\_V1}
 \end{enumerate}
 
-Die Kandidaten werden ausschließlich nach ihrem unveränderten LambdaMART-Relevanzscore absteigend sortiert. Es wird keine nachträgliche Motorregel angewendet. 
-Die Platzierung von \texttt{M1\_F1\_V1} entsteht somit aus den während des Trainings gelernten technischen Zusammenhängen.
+Die Platzierung ergibt sich aus den im Trainingsprozess erlernten Zusammenhängen zwischen den Vergleichsmerkmalen und der Kandidatenrelevanz.
+Die erzeugte Makro-Rangliste des Anwendungsprozesses kann nicht automatisch mit einer bekannten Artikel-Makro-Zuordnung verglichen werden, da diese Information im Anwendungsprozess nicht vorliegt.
+Die Makro-Rangliste bildet stattdessen das Ergebnis des Empfehlungssystems und stellt die nach der geschätzten Kandidatenrelevanz geordneten Makrokandidaten für die weitere Verwendung bereit.
 
-Die gleiche Normalisierung, Merkmalsreihenfolge und Featuredefinition wird in Training und Anwendung verwendet, weil bereits eine abweichende Einheitenumrechnung oder eine anders angeordnete Zahlenreihe die Modellbewertung verändern würde. 
-Die für das Modell gespeicherten Feature-Namen und Normalisierungsparameter werden deshalb gemeinsam mit dem Modell bereitgestellt. So wird beispielsweise 4~kW auch im Anwendungsprozess in derselben Form wie 4000~W verarbeitet.
+\section{Kapitelergebnis} 
+\label{sec:kapitelergebnis_technische_umsetzung} 
 
-\section{Kapitelergebnis}
-\label{sec:kapitelergebnis_technische_umsetzung}
+In diesem Kapitel wurde das Empfehlungssystem technisch umgesetzt. Die Anfrage-Kandidat-Paare wurden in Merkmalsmatrizen überführt und durch Labelvektoren sowie Anfragekennungen ergänzt. 
+Auf dieser Grundlage wurde das LambdaMART-Modell mit dem \texttt{XGBRanker} trainiert. Die Hyperparameteroptimierung erfolgte durch eine Grid Search. 
+Die Modellkonfigurationen wurden im Validierungsprozess anhand des Validierungsscores aus Recall@1, Recall@10, MRR und nDCG@10 verglichen. 
+Die ausgewählte Modellkonfiguration wurde anschließend einmalig im Testprozess auf bisher unbekannten Anfragen bewertet.
 
-Die technische Umsetzung erzeugt aus den aufbereiteten Artikel- und Makrodaten vollständige Makroprofile, datenblattkompatible Anfrageprofile sowie Anfrage-Kandidat-Paare mit numerischen Merkmalsvektoren. 
-Am Motorbeispiel lässt sich dieser Ablauf wie eine schrittweise Prüfung darstellen: Zunächst werden die technischen Eigenschaften des Motors geordnet. Anschließend wird der Motorsteckbrief mit jedem Makroprofil verglichen. 
-Das LambdaMART-Modell bewertet die entstehenden Vergleiche und sortiert die Makros nach ihrer geschätzten Relevanz.
+Aus diesem Kapitel ergibt sich folgendes Artefakt A4, das als Ergebnis an die nächsten Kapitel übergeben wird:
 
-Das Modell wird ohne manuelle Beispielgewichtung und ohne regelbasierte Nachsortierung trainiert. Die Hyperparameter und die Label-Policy werden anhand eines gleichgewichteten Validierungsscores aus Recall@k, nDCG@10 und MRR ausgewählt. 
-Die Validierungsdaten dienen der Auswahl der Modellkonfiguration. Die Testdaten dienen ausschließlich der abschließenden Bewertung.
-
-Das Ergebnis dieses Kapitels bildet das folgende Artefakt:
-
-\begin{quote}
-\textbf{Artefakt A4: Trainiertes Empfehlungssystem}
-\end{quote}
-
-\begin{itemize}
-    \item erzeugte Makroprofile mit allen beobachteten Trainingswerten,
-    \item erzeugte Anfrageprofile mit datenblattkompatiblen technischen Eigenschaften,
-    \item Anfrage-Kandidat-Paare mit den zugehörigen Vergleichsmerkmalen,
-    \item Merkmalsvektoren für Training, Validierung, Test und Anwendung,
-    \item trainiertes LambdaMART-Modell,
-    \item anhand der Validierungsdaten ausgewählte Modellkonfiguration,
-    \item validiertes und getestetes Empfehlungssystem,
-    \item Anwendungsprozess zur Erzeugung einer nach Relevanz sortierten Makro-Rangliste.
+\begin{quote} 
+    \textbf{Artefakt A4: Trainiertes Empfehlungssystem} 
+\end{quote} 
+\begin{itemize} 
+    \item Trainings-, Validierungs-, Test- und Anwendungsmatrix, 
+    \item zugehörige Labelvektoren und Anfragekennungen, 
+    \item trainiertes LambdaMART-Modell auf Grundlage des \texttt{XGBRanker}, 
+    \item Ergebnisse der Hyperparameteroptimierung, 
+    \item anhand der Validierungsdaten ausgewählte Modellkonfiguration, 
+    \item abschließende Bewertung anhand der Testdaten, 
+    \item Anwendungsprozess zur Erzeugung einer Makro-Rangliste. 
 \end{itemize}
-
-Artefakt A4 bildet die Grundlage für die anschließende Evaluation der Empfehlungsqualität. Im folgenden Kapitel werden die erzeugten Makro-Ranglisten anhand der in Abschnitt~\ref{sec:validierungsansätze} eingeführten Metriken Recall@k, MRR und nDCG bewertet.
-
 
 % \chapter{Technische Umsetzung}
 % \label{chap:technische_umsetzung}

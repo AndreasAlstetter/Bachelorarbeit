@@ -216,6 +216,7 @@ Abbildung \ref{fig:anfrageprofil_motor} zeigt die Bildung eines Anfrageprofils a
 Die Anfrage Kandidat-Paare stellen die Zusammenhänge zwischen Anfrageprofilen und Makroprofilen für das LambdaMART-Modell dar, anhand derer das Modell lernt und bewertet werden kann.
 Die Bildung der Anfrage-Kandidat-Paare erfolgt durch die Kombination jedes Anfrageprofils der einzelnen Splits mit den Makroprofilen aus dem Suchraum\_Makroprofile. 
 Die Anfrage-Kandidat-Paare werden dann in Anfrage-Kandidat-Paar-\_Training, Anfrage-Kandidat-Paar-\_Validierung und Anfrage-Kandidat-Paar-\_Test gespeichert.
+Für die Anwendung auf neue Anfragen werden die Anfrage-Kandidat-Paare analog gebildet und in Anfrage-Kandidat-Paar-\_Anwendung gespeichert, mit dem Unterschied, das die Bildung erst bei Eintreffen der neuen Anfragen erfolgt.
 
 Diese Bildung der Anfrage-Kandidat-Paare soll an folgendem Beispiel gezeigt werden:
 Besteht der Suchraum\_Makroprofile aus den Makroprofilen \(M_1\), \(M_2\) und \(M_3\) und im Datensatze Anfrageprofile\_Training gibt es 2 Trainingsanfragen \(ta_1\) und \(ta_2\), 
