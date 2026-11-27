@@ -11,16 +11,16 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {8.1}{\ignorespaces Untersuchte Konfigurationsparameter}}{69}{table.caption.34}%
-\contentsline {table}{\numberline {8.2}{\ignorespaces Referenzkonfiguration A01}}{70}{table.caption.35}%
-\contentsline {table}{\numberline {8.3}{\ignorespaces Abweichungen der Konfigurationen gegenüber der Referenz A01}}{70}{table.caption.36}%
-\contentsline {table}{\numberline {8.4}{\ignorespaces Ergebnisse der A01--A09-Konfigurationen auf dem Testdatensatz}}{71}{table.caption.37}%
-\contentsline {table}{\numberline {8.5}{\ignorespaces Ergebnisse der besten Konfiguration A08}}{73}{table.caption.38}%
+\contentsline {table}{\numberline {8.1}{\ignorespaces Untersuchte Konfigurationsparameter}}{72}{table.caption.34}%
+\contentsline {table}{\numberline {8.2}{\ignorespaces Referenzkonfiguration A01}}{73}{table.caption.35}%
+\contentsline {table}{\numberline {8.3}{\ignorespaces Abweichungen der Konfigurationen gegenüber der Referenz A01}}{73}{table.caption.36}%
+\contentsline {table}{\numberline {8.4}{\ignorespaces Ergebnisse der A01--A09-Konfigurationen auf dem Testdatensatz}}{74}{table.caption.37}%
+\contentsline {table}{\numberline {8.5}{\ignorespaces Ergebnisse der besten Konfiguration A08}}{76}{table.caption.38}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {10.1}{\ignorespaces Übersicht der zentralen Grenzen und Ansatzpunkte}}{75}{table.caption.39}%
-\contentsline {table}{\numberline {10.2}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Testsplit}}{77}{table.caption.40}%
-\contentsline {table}{\numberline {10.3}{\ignorespaces Top-1-Analyse der Vorhersagen auf dem Testdatensatz}}{77}{table.caption.41}%
+\contentsline {table}{\numberline {10.1}{\ignorespaces Übersicht der zentralen Grenzen und Ansatzpunkte}}{78}{table.caption.39}%
+\contentsline {table}{\numberline {10.2}{\ignorespaces Ergebnisse des Referenzlaufs A08 auf dem Testsplit}}{80}{table.caption.40}%
+\contentsline {table}{\numberline {10.3}{\ignorespaces Top-1-Analyse der Vorhersagen auf dem Testdatensatz}}{80}{table.caption.41}%
 \addvspace {10\p@ }
 \def \@chapapp {\appendixname }
 \addvspace {10\p@ }

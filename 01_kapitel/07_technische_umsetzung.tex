@@ -4,50 +4,9 @@
 Die Grundlagen und Erklärungen dieses Kapitels wurden in den vorherigen Kapiteln bereits behandelt. 
 Dabei wurden die Datenobjekte Makroprofile, Anfrageprofile, Anfrage-Kandidat-Paare sowie die Vergleichsmerkmale und die Merkmalsvektoren in Kapitel~\ref{chap:konzeption_des_empfehlungssystems} erläutert.
 Die Grundlagen der Datenaufbereitung und des Datensplits wurden im Kapitel~\ref{chap:datenaufbereitung_und_datensplit} behandelt.
-% \section{Implementierung der Datenobjekte}
-% \label{sec:implementierung_datenobjekte}
 
-% Die fachlichen Grundlagen der Datenobjekte: Makroprofile, Anfrageprofile und Anfrage-Kandidat-Paare wurden bereits in Kapitel~\ref{chap:konzeption_des_empfehlungssystems} beschrieben. 
-% In der technischen Umsetzung werden diese Datenobjekte aus den aufbereiteten Artikeln des jeweiligen Datensplits und den zugeordneten Makros erzeugt.
-% Es werden ausschließlich die technischen Artikel-und Makroeigenschaften verwendet, die aus einem technischen Datenblatt gewonnen werden können. Hierzu gehören beispielsweise Hersteller, Spannung, Strom, Leistung, Anschlüsse, und technische Hinweise. 
-% EPLAN-interne Pfade, Bearbeiterangaben und Änderungszeitpunkte werden ausgeschlossen. Diese Informationen beschreiben die Ablage oder Bearbeitung der Daten, nicht jedoch  selbst. Würden sie verwendet, 
-% könnte das Modell das passende Makro an einem Dateipfad oder einer internen Kennung erkennen, obwohl diese Angaben bei einer späteren Datenblattanfrage nicht vorhanden sind.
-
-% Für das Motor-Makro \texttt{M1\_F1\_V1} werden alle in den zugeordneten Trainingsartikeln beobachteten Werte in das Makroprofil übernommen. 
-% Besitzen die Motorartikel beispielsweise die Spannungen \(\{380,400,420\}\,\mathrm{V}\), die Ströme \(\{10,12,15\}\,\mathrm{A}\) und die Leistungen \(\{5,7\}\,\mathrm{kW}\), bleiben alle Ausprägungen erhalten. 
-% Das Makroprofil kann damit wie ein gemeinsames technisches Sammelblatt des Motor-Makros betrachtet werden. Es zeigt nicht nur einen einzelnen Motor, sondern den gesamten Wertebereich der Motorartikel, die mit diesem Makro dargestellt werden können.
-
-% Hierfür wird die Konfiguration \texttt{all\_observed\_train\_values} verwendet. Sie bedeutet, dass jeder in den Trainingsdaten beobachtete Wert übernommen wird. Eine Top-N-Begrenzung findet nicht statt. Dies ist notwendig, 
-% weil ein selten vorkommender Wert wie 420~V trotzdem eine gültige Motorvariante darstellen kann. Würden nur die häufigsten Werte gespeichert, 
-% könnte diese Variante aus dem Makroprofil verschwinden und bei einer späteren Anfrage nicht mehr vollständig verglichen werden.
-
-% Die Konfiguration wurde außerdem gewählt, weil die vorhandenen Makros unterschiedlich viele Trainingsartikel besitzen. Eine feste Grenze von beispielsweise 8 oder 16 Werten würde große Makroprofile stärker beschneiden als kleine Makroprofile. 
-% Beim Motor-Makro könnte dadurch ein selten beobachteter Spannungs- oder Leistungswert entfallen, obwohl er fachlich gültig ist. Die vollständige Übernahme vermeidet diese ungleiche Behandlung. Die Häufigkeit eines Wertes bleibt für Auswertungen erhalten, 
-% entscheidet jedoch nicht darüber, ob der Wert Teil des Makroprofils wird. Die Werte werden deterministisch sortiert. Das bedeutet, dass dieselben Eingangsdaten immer dieselbe Reihenfolge im gespeicherten Makroprofil erzeugen. 
-% Dies erleichtert den Vergleich versionierter Artefakte und den reproduzierbaren nächtlichen Pipeline-Lauf.
-
-% Das Anfrageprofil beschreibt dagegen nur den Motorartikel der jeweiligen Anfrage. Es enthält dessen technische Artikeleigenschaften sowie solche technischen Makroeigenschaften, die ebenfalls in einem Datenblatt vorkommen können. 
-% Für den Beispielmotor verbleiben damit unter anderem SEW, 400~V, 10~A, 4000~W, 50~Hz und der technische Hinweis \textit{Mit Kühlung}. Die Makrokennung \texttt{M1\_F1\_V1} und die Artikel-Makro-Zuordnung werden entfernt. 
-% Das Anfrageprofil kann somit wie ein Motorsteckbrief ohne aufgedruckte Lösung verstanden werden: Es beschreibt, welcher Motor vorliegt, verrät dem Modell jedoch nicht, welches Makro gesucht wird.
-
-% Die datenblattkompatiblen Informationen aus dem zugeordneten Makro werden auch im Anfrageprofil verwendet, weil sie fachliche Angaben ergänzen können, die im Artikelbestand uneinheitlich verteilt sind. Übernommen werden jedoch nur Angaben, 
-% die mit derselben Extraktionslogik auch aus einem Datenblatt gebildet werden können. Beim Motor betrifft dies beispielsweise eine technische Beschreibung zur Kühlung, zur Anschlussart oder zur elektrischen Ausführung. 
-% Nicht übernommen werden die Anzahl der EPLAN-Hauptobjekte, Projektschritte, Varianten, Symbolbibliotheken oder Ablagepfade. Diese Angaben beschreiben den Aufbau der Makrodatei und nicht den Motor. Die Trennung stellt sicher, 
-% dass Training und spätere Datenblattanfrage dieselbe fachliche Informationsgrundlage verwenden.
-
-% Anschließend wird das Anfrageprofil mit jedem Makroprofil kombiniert. Für das Motorbeispiel entstehen unter anderem die Anfrage-Kandidat-Paare \((q_{Motor},M1\_F1\_V1)\), \((q_{Motor},M1\_F1\_V2)\) und \((q_{Motor},M1\_F2\_V1)\). 
-% Ein \textit{Anfrage-Kandidat-Paar} ist damit ein einzelner Vergleich zwischen dem Motorsteckbrief und einem möglichen Motor-Makro.
-
-% Für jedes Paar werden Vergleichsmerkmale berechnet. Ein \textit{Vergleichsmerkmal} beschreibt eine einzelne Gemeinsamkeit oder Abweichung. 
-% Stimmen in Anfrage und Makroprofil beispielsweise 400~V überein, entsteht eine hohe Spannungsübereinstimmung. Enthält ein anderes Makroprofil dagegen nur 230~V, entsteht ein größerer numerischer Abstand. 
-% Entsprechend werden auch Hersteller, Strom, Leistung, Frequenz und technische Hinweise verglichen.
-
-% Die Vergleichsergebnisse werden zu einem Merkmalsvektor zusammengeführt. Ein \textit{Merkmalsvektor} ist in diesem Zusammenhang eine geordnete Zahlenreihe. Jede Stelle beschreibt ein festgelegtes Vergleichsmerkmal. 
-% Bildlich entspricht der Merkmalsvektor einer ausgefüllten Prüfliste: Ein Zahlenwert beschreibt die Spannungsübereinstimmung, ein weiterer die Stromübereinstimmung und ein weiterer die Übereinstimmung des technischen Hinweises. 
-% Diese Zahlenreihe bildet die Eingabe des LambdaMART-Modells.
-
-\section{Implementierung des LambdaMART-Modells}
-\label{sec:implementierung_des_lambdamart_modells}
+\section{Grundlagen der Implementierung}
+\label{sec:grundlagen_der_implementierung}
 
 \subsection{Merkmalsmatrix und Labelvektoren}
 \label{sec:merkmalsmatrix_und_labelvektoren}
@@ -60,10 +19,12 @@ Die Trainingsmatrix enthält die Merkmalsvektoren der Anfrage-Kandidaten-Paare d
 Dadurch können beliebig viele Merkmalsvektoren mit gleichem Aufbau der Vergleichsmerkmale der Merkmalsmatrix hinzugefügt werden, und das LambdaMART-Modell verarbeitet die Vergleichsmerkmale in allen Datensplits mit derselben Bedeutung. 
 Eine Matrixzeile lässt sich damit wie folgt darstellen: \[ \text{Anfrageprofil} + \text{Makroprofil} \rightarrow \text{Anfrage-Kandidat-Paar} \rightarrow \text{Vergleichsmerkmale} \rightarrow \text{Merkmalsvektor}. \] 
 Für das Training werden jeder Matrixzeile zusätzlich ein Labelvektor zugeordnet, welcher die Relevanz des Anfrage-Kandidat-Paares dieser Zeile beschreibt.
+Diese Relevanz wird im weiteren als Kandidatenrelevanz bezeichnet.
 Die Labelvektoren werden entsprechend ihres Verwendungszwecks als Trainingslabelvektor \(y_{Train}\), 
 Validierungslabelvektor \(y_{Val}\) sowie Testlabelvektor \(y_{Test}\) bezeichnet. 
 
-Die Relevanz eines Anfrage-Kandidat-Paares im Labelvektor wird dabei durch eine numerische Bewertung ausgedrückt. Diese Bewertung erfolgt in 2 Varianten: binär und hierarchisch.
+
+Die Kandidatenrelevanz im Labelvektor wird dabei durch eine numerische Bewertung in hierarchischer Form ausgedrückt.
 Diese Bewertung ergibt sich aus der Makrobezeichnung und soll anahnd des Beispiels M1\_F1\_V1 erläutert werden. Sie wird in folgender Skala dargestellt: 
 
 Beispiel: M1\_F1\_V1
@@ -73,12 +34,12 @@ Beispiel: M1\_F1\_V1
     \item V1: Makro-Variante
 \end{itemize}
 
-Binäre Bewertung:
+% Binäre Bewertung:
 
-\begin{itemize}
-    \item 0: keine Übereinstimmung
-    \item 1: exakte Übereinstimmung zwischen Makroprofil und Makrobezeichnung
-\end{itemize}
+% \begin{itemize}
+%     \item 0: keine Übereinstimmung
+%     \item 1: exakte Übereinstimmung zwischen Makroprofil und Makrobezeichnung
+% \end{itemize}
 
 Hierarchische Bewertung:
 
@@ -89,8 +50,8 @@ Hierarchische Bewertung:
     \item 4: exakte Übereinstimmung zwischen Makroprofil und Makrobezeichnung
 \end{itemize}
  
-Im Gegensatz zur binären Bewertung wird bei der hierarchischen Bewertung berücksichtigt, dass ein Motor-Makro derselben Familie fachlich näher am Makroprofil liegt als ein nicht verwandtes Makro.
-Welche Variante für den vorhandenen Datenbestand geeigneter ist, wird im Validierungsprozess bestimmt.
+Bei der hierarchischen Bewertung wird berücksichtigt, dass ein Motor-Makro derselben Familie fachlich näher am Makroprofil liegt als ein nicht verwandtes Makro.
+% Welche Variante für den vorhandenen Datenbestand geeigneter ist, wird im Validierungsprozess bestimmt.
 
 % Bild
 
@@ -100,305 +61,221 @@ Welche Variante für den vorhandenen Datenbestand geeigneter ist, wird im Validi
 Um eine Anfrage \(q\) an das LambdaMART-Modell übergeben zu können, müssen alle Anfragen-Kandidat-Paare von \(q\) gebildet werden. 
 Hierzu wird das Anfrageprofil von \(q\) mit allen Makroprofilen aus dem Suchraum\_Makroprofile kombiniert. 
 Dadurch entsteht für jedes Anfrage-Kandidat-Paar von \(q\) ein Merkmalsvektor für die Merkmalsmatrix.
-Damit die Merkmalsvektoren von \(q\) durch das LambdaMART-Modell der Anfrage \(q\) zugeordnet werden können, werden alle Merkmalsvektoren von \(q\) in einer sogenannten \textit{Rankinggruppe} zusammengefasst.
-Damit weiß das LambdaMART-Modell später welche Merkmalsvektoren für das Ranking innerhalb von \(q\) berücksichtigt werden müssen. Daraus ergibt sich eine eindeutige Zuordnung einer Matrixzeile zu der Anfrage \(q\). 
+Damit die Merkmalsvektoren einer Anfrage \(q\) durch das LambdaMART-Modell dieser Anfrage \(q\) zugeordnet werden können, erhält jede Matrixzeile eine Anfragekennung \(qid\).
+Diese Anfragekennung wird für Training \(qid_{Train}\), Validierung \(qid_{Val}\) und Test \(qid_{Test}\) verwendet 
+Alle Matrixzeilen mit derselben Anfragekennung bilden eine \textit{Rankinggruppe}. 
+Damit weiß das LambdaMART-Modell später, welche Merkmalsvektoren einer Rankinggruppe für das Ranking innerhalb von \(q\) berücksichtigt werden müssen.
 
 % Bild
 
 
+\subsection{Hyperparameter des XGBRanker} 
+\label{sec:hyperparameter_xgbranker} 
 
-\subsection{Training des LambdaMART-Modells} 
-\label{sec:training_lambdamart_modells} 
+Die konkrete Umsetzung von LambdaMART erfolgt über den \texttt{XGBRanker} der Bibliothek XGBoost. 
+Die Auswahl dieses Verfahrens erfolgt aufgrund der integrierten Regularisierungsmechanismen, sogenannte Hyperparameter, welche eine Überanpassung bei begrenzten Datensätzen reduzieren können.
+Ein weiterer Vorteil des XGBRankers ist die integrierte Unterstützung des Ziels eine Makro-Rangliste zu optimieren. Hierfür wird das sogenannte \texttt{rank:ndcg} Lernziel verwendet \cite{chen2016xgboost}.
+Die Hyperparameter des XGBRanker stellen für die Anpassung an den Datensatz mehrere Einstellmöglichkeiten bereit:
 
+\begin{itemize}
+ 
 
-VERWENDUNG VON XGBOOST:
+\item \texttt{ndcg@k}: Die interne Evaluationsmetrik \texttt{ndcg@k} stellt einen Parameter für einen Optimierungsfokus bereit, sodass die Optimierung der vorderen Positionen der Makro-Rangliste in den Vordergrund gestellt werden kann.
+Es ist nicht wichtig, welches Makro auf Platz 120 oder 150 steht, sondern ob dieses in den ersten 10 Beispielen vorkommt.
 
+\item \texttt{n\_estimators}: Mit dem Parameter \texttt{n\_estimators} kann die Anzahl der aufeinanderfolgenden Entscheidungsbäume im Gradient-Boosting (vergleiche Kapitel \ref{sec:lambdamart}) angepasst werden,
+um die Anpassung des XGBRankers auf den Datensatz zu steuern. 
+Durch ein auswendig lernen einens Datensatzes, dem sogenannten Overfitting, würde die Fähigeit des Rankers das erlente Wissen auf neue und unbekannte Anfragen zu übertagen abnehmen, da zu wenig "Wissenslücken" vorhanden sind.
+Diese "Wissenslücken" werden benötig um ein Maß an Entscheidungsfreiheit dem Ranker zu überlassen, sodass zwischen Makro A oder B oder C das passende Makro gewählt werden kann, ohne dass dabei nur das best bekannte Makro aus dem Datensatz gewählt wird.
+Bei zu großen "Wissenlücken" hätter der Ranker zuwenig Wissen um ein passendes Makro für eine neue Anfrage zu finden.
 
-Hier ist eine zusammengefasste Dokumentation des Chats als strukturiertes Dokument. Das Dokument enthält alle wichtigen Informationen, Code-Beispiele, Vergleiche und Empfehlungen aus dem Gespräch.
+\item \texttt{learning\_rate}: Mit dem Parameter \texttt{learning\_rate} kann die Lernrate des XGBRankers gesteuert werden, wodurch die Geschwindigkeit der Anpassung an den Datensatz beeinflusst wird.
+Bei einer großen Lernrate würde bei jedem neuen Entscheidnungsbaum im Gradient-Boosting ein hoher Wissenszuwachs erfolgen. Dadurch können detailiertere Unterscheidungsmerkmale zwischen Makros wie Spannung 380V versus Spannung 400V übersehen werden.
+Eine zu kleinere Lernrate verlängernt den Lernprozess. Ist diese zu klein würde der Lernprozess unnötig lange dauern, was wiederum die Kosten für die Entwicklung erhöt.
 
-Zusammenfassung: LambdaMART und Implementierung mit XGBoost/LightGBM
-Datum: 26.11.2026
-Thema: Learning-to-Rank mit LambdaMART, Unterschiede zwischen Modellen und Frameworks
-Ziel: Praktische Anleitung zur Implementierung von LambdaMART mit XGBoost und LightGBM
+\item \texttt{max_depth}: Mit dem Parameter \texttt{max_depth} kann die maximale Tiefe eines Entscheidungsbaums begrenzt werden. Je nach Tiefe können dadurch mehrer oder weniger technische Artikel- und Makroeigenschaften gelernt werden.
+Dadurch kann das Overfitting-Risiko ein Makro mit nur einem Artikel als Wissensgrundlage verringert werden, da dieses Makro weniger Schritte im Gradient-Bosting benötig um den Artikel zu erlenen als ein Makro mit 10 Artikeln als Wissensgrundlage.
 
-1. Einleitung
-Dieses Dokument fasst die wichtigsten Erkenntnisse aus dem Gespräch zusammen:
+\item \texttt{subsample}: Der Parameter \texttt{subsample} bestimmt den Anteil der Matrixzeilen eines Anfrage-Kandidat-Paars die für einen Entscheidungsbaum verwendet werden können.
+Hierdurch lässt sich die Abhängigkeit von einzelen Anfrage-Kandidat-Paaren einstellen. Auch hier lässt sich durch die Variation dieses Parameters ein Overfitting auf einzelne Paare verhindern.
 
-LambdaMART ist ein Learning-to-Rank (LTR)-Algorithmus, der auf RankNet und LambdaRank aufbaut.
-Es wird häufig für Suchmaschinen-Ranking, Empfehlungssysteme und Relevanzoptimierung eingesetzt.
-Die Implementierung erfolgt meist mit Gradient Boosted Decision Trees (GBDT) wie XGBoost, LightGBM oder CatBoost.
-Der Fokus liegt auf der konkreten Umsetzung von LambdaMART mit XGBoost sowie einem Vergleich der Frameworks.
-2. Grundlagen: LambdaMART und seine Vorgänger
-2.1 RankNet
-Grundidee: Paarweise Vergleiche von Dokumenten, um die Wahrscheinlichkeit zu maximieren, dass ein relevanteres Dokument höher gerankt wird.
-Optimierung: Cross-Entropy-Verlustfunktion basierend auf paarweisen Vergleichen.
-Einsatz: Basis für alle folgenden Modelle.
-2.2 LambdaRank
-Erweiterung von RankNet:
-Nutzt die Lambda-Transformation, um Gradienten basierend auf der Position im Ranking zu gewichten.
-Optimiert direkt metrikbasierte Ziele wie NDCG (Normalized Discounted Cumulative Gain).
-Vorteile: Effizienter als RankNet, da es sich auf die wichtigsten Vergleiche konzentriert.
-2.3 LambdaMART
-Kombination aus LambdaRank und Gradient Boosted Trees (MART):
-Nutzt XGBoost, LightGBM oder CatBoost als Basis.
-Optimiert die Lambda-optimierte Verlustfunktion mit Boosted Trees.
-Vorteile:
-Sehr effektiv für große Datensätze.
-Unterstützt metrikbasierte Optimierung (z. B. NDCG, MAP).
-Implementierungen:
-XGBRanker (XGBoost)
-LGBMRanker (LightGBM)
-CatBoostRanker (CatBoost)
-2.4 ILMART (Interpretable LambdaMART)
-Ziel: Interpretierbare Variante von LambdaMART.
-Methode: Einführung von Constraints, um die Nachvollziehbarkeit zu erhöhen.
-Einsatz: Regulierte Branchen (z. B. Medizin, Recht).
-3. Unterschiede zwischen LambdaMART-Modellen
-Modell	Grundidee	Optimierungsansatz	Besonderheiten	Einsatzgebiet
-RankNet	Paarweise Vergleiche zwischen Dokumenten.	Optimiert Cross-Entropy-Verlustfunktion.	Einfach, aber rechenintensiv.	Basis für alle folgenden Modelle.
-LambdaRank	Gewichtet Gradienten basierend auf der Position im Ranking.	Optimiert direkt Metriken wie NDCG.	Effizienter als RankNet.	Wird in neuronalen Netzen oder als Basis für LambdaMART verwendet.
-LambdaMART	Kombiniert LambdaRank mit Gradient Boosted Trees.	Nutzt Boosted Trees für die Lambda-optimierte Verlustfunktion.	Sehr effektiv für große Datensätze.	Standardmodell für industrielle Ranking-Systeme.
-ILMART	Interpretable Variante von LambdaMART mit Constraints.	Erhält die Ranking-Qualität, erhöht aber die Interpretierbarkeit.	Modelle sind nachvollziehbar.	Einsatz in regulierten Branchen.
-4. Vergleich der Frameworks: XGBoost, LightGBM, CatBoost und HistGradientBoosting
-4.1 Übersichtstabelle
-Framework	Wachstumsstrategie	Kategorische Features	GPU-Unterstützung	Regularisierung	Speed	Speicherbedarf	Robustheit
-LightGBM	Leaf-wise (best-first)	✅ (nativ)	✅	✅	⚡⚡⚡⚡⚡	⚡⚡	⚡⚡
-XGBoost	Level-wise	❌ (manuell)	✅	✅	⚡⚡⚡	⚡⚡⚡	⚡⚡⚡⚡
-CatBoost	Symmetrisches Level-wise	✅ (nativ)	❌	✅ (automatisch)	⚡⚡	⚡⚡⚡	⚡⚡⚡⚡⚡
-HistGradientBoosting	Level-wise	❌	❌	✅	⚡⚡⚡	⚡⚡	⚡⚡
-4.2 Empfehlungen für LambdaMART
-Use Case	Empfohlenes Framework	Begründung
-Große Datensätze	LightGBM (LGBMRanker)	Schnellstes Training, geringerer Speicherbedarf, native Unterstützung für kategoriale Features.
-Kleine oder unausgeglichene Datensätze	XGBoost	Robustheit, bessere Regularisierung, mehr Kontrolle über Hyperparameter.
-Einfache Integration	HistGradientBoosting	Nahtlose Integration in scikit-learn-Pipelines.
-Kategorische Features	CatBoost	Native Unterstützung für kategoriale Features, einfache Handhabung.
-5. Konkrete Implementierung: XGBoost als LambdaMART
-5.1 Voraussetzungen
-Python-Bibliotheken:
-bash
+\item \texttt{colsample_bytree}: Der Parameter \texttt{colsample\_bytree} bestimmt den Anteil der Vergleichsmerkmale der Matrixspalten, die für einen Entscheidungsbaum verwendet werden können. 
+Dadurch lässt sich die Abhängigkeit von einzelnen Vergleichsmerkmalen einstellen. Die Variation dieses Parameters ermöglicht es, ein Overfitting auf bestimmte Vergleichsmerkmale zu verhindern.
 
-pip install xgboost scikit-learn numpy pandas
-5.2 Beispiel-Datensatz
-Ein Datensatz für Learning-to-Rank benötigt:
+\item \texttt{reg\_alpha}: Der Parameter \texttt{reg\_alpha} steuert die L1-Regularisierung der einzelnen Blätter eines Entscheidungsbaums. 
+Die L1-Regularisierung kann unerwünschte Gewichtungen von kleinen Unterscheidungen zwischen Anfrage und Makroprofil verhindern und somit das Overfitting auf diese kleinen Unterschiede reduzieren.
+Zum Beispiel kann die Spannung von 400V übermäßig gewichtet werden, wenn mehrere Artikel mit 399V oder 401V vorhanden sind.
 
-Features: Numerische oder kategoriale Merkmale der Dokumente.
-Query-IDs: Eindeutige Kennung für jede Suchanfrage.
-Relevanzwerte: Skalierte Relevanzbewertungen (z. B. 0–3).
-Beispiel (CSV):
+\item \texttt{reg\_lambda}: Der Parameter \texttt{reg\_lambda} steuert die L2-Regularisierung der einzelnen Blätter eines Entscheidungsbaums.
+Die L2-Regularisierung kann unerwünschte Gewichtungen von einzelnen exakten Übereinstimmungen zwischen Anfrage und Makroprofil verhindern um eine Übergewichtung der Vergleichsmerkmale zu vermeiden.
+Beispielsweise enthält ein Makroprofil folgende Werte: Spannung 400V, Strom 10A, Leistung 4000W. Wenn eine Anfrage ebenfalls den Wert Spannung 400V enthält, aber für Strom 20A und für die Leistung 8000W,
+dann würde durch die L2-Regularisierung verhindert werden, dass dieses Makroprofil aufgrund der exakten Übereinstimmung der Spannung bevorzugt wird, ohne die Abweichungen bei Strom und Leistung zu berücksichtigen.
 
-csv
+\item \texttt{random_state}: Dieser Parameter legt den Startwert für den Zufallszahlengenerator während des Trainings fest. 
+Durch die Festlegung eines festen Wertes kann das Training reproduzierbar gemacht werden, da dann das zufällige Auswählen von Lernbeispielen wie bei den Parametern \texttt{subsample} und \texttt{colsample\_bytree} immer gleich ablaufen.
 
-query_id,feature1,feature2,relevance
-1,0.5,0.2,3
-1,0.1,0.8,1
-2,0.3,0.9,2
-2,0.7,0.4,0
-5.3 Python-Code: Training und Evaluation
-python
+\item \texttt{min_child_weight}: Der Parameter \texttt{min_child_weight} legt fest, wie viele Trainingsinformationen in einem Blatt eines Entscheidungsbaums enthalten sein müssen, bevor eine weitere Aufteilung erfolgt.
+Da viele Makros nur wenige zugeordnete Artikel besitzen, verhindert dieser Parameter, dass ein Blatt zu stark auf einzelne Trainingsbeispiele reagiert. Dadurch wird das Overfitting auf einzelne Artikel reduziert.
 
-import xgboost as xgb
-import numpy as np
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import ndcg_score, average_precision_score
+\item \texttt{tree_method}: Der Parameter \texttt{tree_method} legt die Methode fest, mit der die Entscheidungsbäume während des Trainings aufgebaut werden. 
+Verschiedene Methoden stehen zur Verfügung, wie zum Beispiel \texttt{auto}, \texttt{exact}, \texttt{hist} und \texttt{gpu\_hist}. 
+Die Wahl der Methode hat dabei Einfluss auf die Trainingsgeschwindigkeit und den Speicherverbrauch. Beispielsweise ist \texttt{exact} sehr genau, aber speicherintensiv, während \texttt{hist} und \texttt{gpu\_hist} effizienter arbeiten, jedoch ungenauer sind.
+Die Methode \texttt{auto} wählt automatisch die am besten geeignete Methode basierend auf der verfügbaren Hardware und den Daten aus.
 
-# 1. Daten laden
-data = pd.DataFrame({
-    'query_id': [1, 1, 2, 2],
-    'feature1': [0.5, 0.1, 0.3, 0.7],
-    'feature2': [0.2, 0.8, 0.9, 0.4],
-    'relevance': [3, 1, 2, 0]
-})
+\item \texttt{verbose}: Der Parameter \texttt{verbose} steuert die Ausgabedetaillierung während des Trainings. 
+Dadurch kann festgelegt werden, wie viele Informationen über den Trainingsfortschritt angezeigt werden, zum Beispiel die Bewertung der Validierungsmatrix nach jeder Iteration.
 
-# 2. Daten in XGBoost-Format umwandeln
-X = data[['feature1', 'feature2']].values
-y = data['relevance'].values
-qid = data['query_id'].values
-
-# 3. Train-Test-Split
-X_train, X_test, y_train, y_test, qid_train, qid_test = train_test_split(
-    X, y, qid, test_size=0.2, random_state=42
-)
-
-# 4. XGBoost-DMatrix erstellen
-dtrain = xgb.DMatrix(X_train, label=y_train, qid=qid_train)
-dtest = xgb.DMatrix(X_test, label=y_test, qid=qid_test)
-
-# 5. Parameter für LambdaMART (pairwise Ranking)
-params = {
-    'objective': 'rank:pairwise',  # LambdaMART-Objektiv
-    'eval_metric': ['ndcg@5', 'map@5'],  # Metriken
-    'learning_rate': 0.1,
-    'gamma': 1.0,
-    'min_child_weight': 0.1,
-    'max_depth': 6,
-    'lambda': 1.0,  # L2-Regularisierung
-    'alpha': 0.0,   # L1-Regularisierung
-    'tree_method': 'hist',  # Effiziente Baum-Methode
-}
-
-# 6. Modell trainieren
-model = xgb.train(
-    params,
-    dtrain,
-    num_boost_round=100,
-    evals=[(dtrain, 'train'), (dtest, 'test')],
-    early_stopping_rounds=10,
-    verbose_eval=True
-)
-
-# 7. Vorhersagen machen
-y_pred = model.predict(dtest)
-
-# 8. Evaluation
-ndcg = ndcg_score([y_test], [y_pred], k=5)
-map_score = average_precision_score(y_test, y_pred)
-print(f"NDCG@5: {ndcg:.4f}")
-print(f"MAP: {map_score:.4f}")
-
-# 9. Modell speichern
-model.save_model("xgb_lambdamart.model")
-5.4 Wichtige Parameter für LambdaMART in XGBoost
-Parameter	Beschreibung	Empfohlener Wert
-objective	Muss rank:pairwise sein.	rank:pairwise
-eval_metric	Metriken zur Evaluation (z. B. ndcg@k, map@k).	ndcg@5, map@5
-learning_rate	Schrittweite für die Gradientenabstiegsoptimierung.	0.05–0.3
-gamma	Minimale Verlustreduktion für eine Aufteilung.	0.1–1.0
-min_child_weight	Minimales Gewicht der Kindknoten (reguliert Overfitting).	0.1–10
-max_depth	Maximale Tiefe der Bäume.	3–10
-lambda	L2-Regularisierung.	0.1–1.0
-alpha	L1-Regularisierung.	0.0–0.5
-5.5 Evaluation: Metriken für Learning-to-Rank
-NDCG (Normalized Discounted Cumulative Gain): Misst die Qualität der Ranking-Reihenfolge.
-MAP (Mean Average Precision): Durchschnittliche Präzision über alle Dokumente.
-MRR (Mean Reciprocal Rank): Reziproker Rang des ersten relevanten Dokuments.
-6. Praktische Tipps
-6.1 Datenvorbereitung
-Query-IDs: Muss korrekt zugewiesen sein, damit XGBoost die Dokumente pro Query gruppieren kann.
-Relevanzwerte: Skaliere die Werte (z. B. auf 0–3 oder 0–4), um die Modellperformance zu verbessern.
-6.2 Hyperparameter-Tuning
-Nutze xgb.cv für Cross-Validation oder Tools wie Optuna oder Hyperopt.
-6.3 Feature-Engineering
-Wichtige Features für Ranking:
-TF-IDF
-Wortanzahl
-Dokumentlänge
-Klickraten
-Benutzerinteraktionen
-6.4 Speichern und Laden des Modells
-python
-
-model.save_model("xgb_lambdamart.model")
-loaded_model = xgb.Booster()
-loaded_model.load_model("xgb_lambdamart.model")
-7. Vergleich: XGBoost vs. LightGBM für LambdaMART
-Aspekt	XGBoost (LambdaMART)	LightGBM (LGBMRanker)
-Objective	rank:pairwise	lambdarank
-Wachstumsstrategie	Level-wise	Leaf-wise (best-first)
-Speed	Langsamer	Schneller
-Speicherbedarf	Höher	Geringer
-Kategorische Features	Nicht nativ unterstützt	Nativ unterstützt
-GPU-Unterstützung	✅	✅ (vollständig optimiert)
-8. Wann welches Framework verwenden?
-Use Case	Empfohlenes Framework
-Große Datensätze	LightGBM (LGBMRanker)
-Kleine oder unausgeglichene Daten	XGBoost
-Einfache Integration	HistGradientBoosting
-Kategorische Features	CatBoost
-Interpretierbarkeit	ILMART
-9. Fazit
-LambdaMART ist ein leistungsstarker Algorithmus für Learning-to-Rank-Aufgaben.
-XGBoost und LightGBM sind die beliebtesten Frameworks für die Implementierung.
-LightGBM ist die beste Wahl für große Datensätze, während XGBoost bei kleinen oder unausgeglichenen Daten robustere Ergebnisse liefert.
-ILMART bietet eine interpretable Alternative für regulierte Branchen.
-Die konkrete Implementierung erfordert eine sorgfältige Datenvorbereitung und Hyperparameter-Optimierung.
+\end{itemize}
 
 
-Der \texttt{LGBMRanker} lernt anhand der Trainingsmatrix, welche Vergleichsmerkmale für die Reihenfolge der Makrokandidaten relevant sind. Hierzu verwendet das LambdaMART-Modell mehrere aufeinanderfolgende Entscheidungsbäume. 
-Ein \textit{Entscheidungsbaum} prüft die Werte eines Merkmalsvektors schrittweise anhand einfacher Bedingungen. Für den Beispielmotor kann dabei zunächst geprüft werden, ob die Spannungsübereinstimmung einen festgelegten Wert überschreitet. 
-Anschließend kann eine weitere Bedingung die Übereinstimmung der Leistung oder des technischen Hinweises berücksichtigen. Am Ende des Entscheidungsweges entsteht ein Zahlenwert für das zugehörige Anfrage-Kandidat-Paar. 
-Beim \textit{Gradient-Boosting} werden mehrere Entscheidungsbäume nacheinander aufgebaut. Der erste Baum erzeugt eine erste Bewertung der Makrokandidaten. 
-Die folgenden Bäume berücksichtigen die noch vorhandenen Fehlplatzierungen und ergänzen schrittweise Korrekturen. Bildlich erstellt der erste Baum einen ersten Entwurf der Makro-Rangliste. 
-Jeder weitere Baum prüft diesen Entwurf und verbessert die Reihenfolge an den Stellen, an denen relevante Kandidaten noch zu niedrig eingeordnet sind. Die Beiträge aller Entscheidungsbäume werden zu einem Relevanzscore zusammengeführt. 
-Der \textit{Relevanzscore} ist der vom Modell berechnete Zahlenwert eines Anfrage-Kandidat-Paares. Für jede Zeile der Trainings-, Validierungs-, Test- oder Anwendungsmatrix entsteht genau ein Relevanzscore. Er besitzt keine technische Einheit, 
-sondern dient ausschließlich dem Vergleich der Makrokandidaten innerhalb derselben Rankinggruppe. Für den Beispielmotor kann \texttt{M1\_F1\_V1} einen höheren Relevanzscore als \texttt{M1\_F1\_V2} erhalten, 
-weil dessen Makroprofil stärker mit der Spannung, dem Strom, der Leistung, der Frequenz und dem technischen Hinweis des Anfrageprofils übereinstimmt. 
-Die Makro-Rangliste entsteht anschließend durch die absteigende Sortierung der Relevanzscores innerhalb der Rankinggruppe. Der Kandidat mit dem höchsten Relevanzscore steht auf Rang 1. Eine nachträgliche regelbasierte Sortierung findet nicht statt. 
-Insbesondere werden Kandidaten innerhalb der bestbewerteten Makrofamilie nicht zusätzlich anhand einzelner Typ-, Suffix- oder Beschreibungstreffer verschoben. Eine solche Feinordnung würde die vom Modell erzeugte Rangfolge verändern. 
-Recall@k, MRR und nDCG würden dann nicht mehr ausschließlich die Leistung des LambdaMART-Modells bewerten. Die unveränderten Relevanzscores ermöglichen dagegen einen eindeutigen Vergleich der Modellkonfigurationen. 
-Bei identischen Relevanzscores wird lediglich stabil sortiert. Eine \textit{stabile Sortierung} behält bei gleichen Werten die bereits vorhandene Reihenfolge der Kandidaten bei. Sie verändert weder den Relevanzscore noch die fachliche Bewertung, 
-sorgt jedoch dafür, dass ein wiederholter Pipeline-Lauf dieselbe Makro-Rangliste erzeugt.
 
-Der vollständige Trainingseingang besteht damit aus: \[ X_{Train} = \text{Merkmalsvektoren der Anfrage-Kandidat-Paare}, \] \[ y_{Train} = \text{zugehörige Relevanzlabels}, \] \[ group_{Train} = \text{Anzahl der Makrokandidaten je Anfrage}. \] 
-Für Validation und Test wird dieselbe Struktur mit \((X_{Val},y_{Val},group_{Val})\) und \((X_{Test},y_{Test},group_{Test})\) verwendet.  
+\section{Trainings- und Validierungsprozess} 
+\label{sec:trainings_und_validierungsprozess} 
 
-\section{Hyperparameteroptimierung}
-\label{sec:hyperparameteroptimierung}
 
-Die Leistungsfähigkeit des LambdaMART-Modells wird durch Hyperparameter beeinflusst. \textit{Hyperparameter} sind Einstellungen, die den Lernprozess steuern und vor dem Training festgelegt werden. 
-Sie können mit den Einstellmöglichkeiten einer Maschine verglichen werden: Das Werkstück bleibt gleich, aber Geschwindigkeit, Anzahl der Arbeitsschritte und Genauigkeit der Bearbeitung können unterschiedlich eingestellt werden.
+Nach der Erstellung der Merkmalsmatrizen, Labelvektoren und Rankinggruppen wird das LambdaMART-Modell in einem kombinierten Trainings- und Validierungsprozess erzeugt. 
+Dieser Prozess wird für mehrere Modellkonfigurationen wiederholt, um die für den vorhandenen Datenbestand am besten geeignete Konfiguration zu bestimmen. 
 
-Zur Bestimmung einer geeigneten Modellkonfiguration wird eine Grid Search verwendet. Eine \textit{Grid Search} ist die systematische Erprobung mehrerer festgelegter Kombinationen von Hyperparametern. 
-Bildlich entspricht sie einer Reihe gleich aufgebauter Versuche. In jedem Versuch werden dieselben Trainings- und Validierungsdaten verwendet, jedoch andere Einstellungen des LambdaMART-Modells.
+\subsubsection{Eingaben des XGBRankers} 
 
-Das Grid enthält beispielsweise folgende Konfiguration:
+Die Eingaben des \texttt{XGBRankers} bestehen aus der Trainingsmatrix \(X_{Train}\), dem Trainingslabelvektor \(y_{Train}\) und den Anfragekennungen \(qid_{Train}\), sowie der Validierungsmatrix \(X_{Val}\) und den Anfragekennungen \(qid_{Val}\). 
+Durch die Anfragekennung \(qid_{Train}\) erkennt der \texttt{XGBRanker}, welche Merkmalsvektoren innerhalb derselben Anfrage im Training miteinander verglichen werden müssen. 
 
-Die Werte des Grids wurden als begrenzter Suchraum gewählt, weil der vorhandene Datenbestand aus einer vergleichsweise kleinen Zahl von Artikel-Makro-Zuordnungen und zahlreichen unterschiedlich großen Makrogruppen besteht. 
-Ein sehr großer Suchraum würde viele nahezu gleichartige Versuche erzeugen, die Rechenzeit erhöhen und die Gefahr einer zufälligen Anpassung an die Validierungsdaten vergrößern. Die gewählten Stufen vergleichen deshalb bewusst kleinere, 
-mittlere und komplexere Modelle.
+Um den XGBRanker nach dem Training im Validationsprozess zu optimieren werden unbekannte Anfrage-Kandidat-Paare benötigt, mit denen die Gerneralisierungsfähigkeit des Rankers während des Traingsprozesses beurteilt werden kann.
+Diese unbekannten Anfrage-Kandidat-Paare werden in der Validierungsmatrix \(X_{Val}\) bereitgestellt. Dies geschieht durch die Kombination aus Validierungsanfragen mit den Makroprofile aus dem Suchraum\_Makroprofile.
 
-\begin{quote}
-\texttt{n\_estimators = 300}, \texttt{learning\_rate = 0.05},
-\texttt{num\_leaves = 31}, \texttt{min\_child\_samples = 20} und
-\texttt{lambdarank\_truncation\_level = 10}.
-\end{quote}
+\subsubsection{Trainingsprozess} 
 
-\texttt{n\_estimators} gibt die Anzahl der nacheinander erzeugten Entscheidungsbäume an. Bei 300 werden somit 300 einzelne Bäume zu einem gemeinsamen Modell verbunden. Mehr Bäume ermöglichen weitere Korrekturschritte, 
-erhöhen jedoch auch den Trainingsaufwand und das Risiko, Besonderheiten der Trainingsdaten auswendig zu lernen.
+Der Trainingsprozess beginnt mit der Auswahl einer Modellkonfiguration aus dem Grid.
+Diese Modellkonfiguration wird anschließend den \texttt{XGBRanker} übergeben. 
+Eine Modellkonfiguration umfasst eine festgelegte Kombination der zuvor beschriebenen Hyperparameter (vergleiche Kapitel \ref{sec:hyperparameter_xgbranker}).
 
-Die Konfigurationen mit 300, 500, 700 und 900 Bäumen decken dabei schrittweise unterschiedliche Modellgrößen ab. 300 Bäume bilden die kompakte Ausgangskonfiguration. 
-500 und 700 Bäume prüfen, ob zusätzliche Korrekturschritte die Abgrenzung ähnlicher Motor-Makros verbessern. 900 Bäume bilden die obere Grenze des untersuchten Bereichs. Eine weitere Erhöhung wurde nicht vorgesehen, 
-weil der zusätzliche Rechen- und Speicherbedarf steigt, während bei begrenzten Trainingsdaten das Overfitting-Risiko zunimmt.
+Zunächst werden für eine Rankinggruppe durch die Vergleichsmerkmale aus der Trainingsmatrix \(X_{Train}\) die Unterschiede in den Artikel- und Makroeigenschaften in Entscheidungsregeln für den Entscheidungsbaum überführt.
+Als Nächstens werden durch die Entscheidungszweige sowie den Kandidatenrelevanzen aus dem Trainingslabelvektor \(y_{Train}\) eine absteigend sortierte Rangliste an Anfrage-Kandidat-Paaren erstellt. 
+Diese Rangliste wird im weiteren Verlauf als Kandidatenrangliste bezeichnet.
+Desweitern werden durch das Lernziel \texttt{rank:ndcg} die Kandidatenrelevanzen innerhalb der Kandidatenrangliste verglichen. 
+Befindet sich ein weniger relevantes Anfrage-Kandidat-Paar vor einem relevanteren Anfrage-Kandidat-Paar, liegt eine Fehlplatzierung vor. 
+Das Lernziel bewertet dann, wie stark sich diese Fehlplatzierung auf die Qualität der Kandidatenrangliste auswirkt. 
+Fehlplatzierungen an den vorderen Positionen werden dabei stärker berücksichtigt als Fehlplatzierungen an den hinteren Positionen (siehe Kapitel \ref{sec:ndcg}).
+Aus diesen Fehlplatzierungen werden die $\lambda$-Gradienten berechnet, die die Richtung und Stärke der Anpassung der Anfrage-Kandidat-Paare innerhalb der Kandidatenrangliste bestimmen (vergleiche Kapitel \ref{sec:lambdarank}). 
+Die $\lambda$-Gradienten werden anschließend verwendet, um durch Gradient-Boosting die Entscheidungsbäume im XGBRanker anzupassen und die Fehlplatzierungen in den Kandidatenranglisten zu korrigieren.
+Für den Beispielmotor kann ein Entscheidungsbaum erkennen, dass eine hohe Spannungsübereinstimmung mit einer Anfrage \(q\) für ein Anfrage-Kandidat-Paar spricht. 
+Ein weiterer Entscheidungsbaum kann diese Bewertung korrigieren, wenn zwar die Spannung übereinstimmt, Strom und Leistung jedoch deutlich abweichen. 
+Weitere Entscheidungsbäume können zusätzlich die technischen Hinweise berücksichtigen.
+Die Beiträge aller Entscheidungsbäume werden zu einem Relevanzscore zusammengeführt. Für jede Matrixzeile entsteht damit ein Relevanzscore für das zugehörige Anfrage-Kandidat-Paar.
+Die Relevanzscores aller Anfrage-Kandidat-Paare innerhalb einer Rankinggruppe werden anschließend verwendet, um die endgültige Kandidatenrangliste für diese Rankinggruppe zu erstellen.
+Dieser Prozess wird für alle Rankinggruppen wiederholt, sodass für jede Anfrage (\(q\)) eine Kandidatenrangliste erstellt wird.
 
-Die \texttt{learning\_rate} ist die Lernrate. Sie bestimmt, wie stark jeder neue Baum den bisherigen Relevanzscore verändern darf. Eine Lernrate von 0,05 bedeutet, dass jeder einzelne Korrekturbeitrag nur in begrenzter Stärke übernommen wird. 
-Eine zweite Konfiguration verwendet beispielsweise 500 Bäume bei einer Lernrate von 0,04. Bildlich werden damit mehr kleinere Korrekturen durchgeführt, anstatt weniger große Änderungen vorzunehmen. Dies kann stabilere Zusammenhänge zwischen Spannung, 
-Strom, Leistung und technischen Hinweisen erzeugen.
+Der \texttt{XGBRanker} lernt somit nicht die Artikel- oder Makrodateien unmittelbar. Er lernt den Zusammenhang zwischen den Vergleichsmerkmalen der Anfrage-Kandidat-Paare und deren Kandidatenrelevanz.
 
-Im Grid werden die Lernraten 0,05, 0,04, 0,03 und 0,025 mit einer steigenden Anzahl von Bäumen verbunden. Diese Abstufung hält die gesamte Veränderung des Modells in einem vergleichbaren Bereich: Wenige Bäume dürfen etwas größere Schritte ausführen, 
-während viele Bäume kleinere Schritte verwenden. Für den Motor bedeutet dies, dass eine einzelne Spannungseigenschaft das Ranking nicht sofort stark verändert, sondern gemeinsam mit Strom, Leistung, 
-Frequenz und technischen Hinweisen über mehrere Korrekturschritte bewertet wird.
 
-\texttt{num\_leaves} bezeichnet die maximale Anzahl der Blätter eines Entscheidungsbaums. Ein Blatt ist das Ende eines Entscheidungsweges. Mehr Blätter ermöglichen feinere Unterscheidungen. 
-Mit 63 Blättern kann das Modell beispielsweise mehr Kombinationen aus Spannung, Leistung und Kühlung abbilden als mit 31 Blättern. Bei dem begrenzten Datenbestand steigt dadurch jedoch das Risiko des Overfittings.
+% Merkmalsmatrix mit Labelvektoren des aktuellen Datenbestandes einfügen 1300 x 375 = 487.500 Zeilen für alle Anfrage-Kandidat-Paare
 
-Die verwendeten Werte 15, 31 und 63 verdoppeln die mögliche Baumkomplexität annähernd von Stufe zu Stufe. 15 Blätter prüfen, ob wenige robuste Regeln ausreichen. 31 Blätter bilden die mittlere Konfiguration. 
-63 Blätter erlauben feinere Abgrenzungen zwischen ähnlichen Motorvarianten. Größere Werte werden nicht verwendet, weil kleine Makrogruppen dann durch sehr spezifische Pfade getrennt werden könnten, die sich nicht auf neue Datenblätter übertragen lassen.
+% Bild 
 
-\textit{Overfitting} bedeutet, dass das Modell die Trainingsbeispiele zu genau auswendig lernt. Es verhält sich dann wie ein Prüfer, der nur die bereits bekannten Motoren wiedererkennt, 
-aber bei einem neuen Motor mit leicht abweichenden Werten unsicher wird. Deshalb werden sowohl einfachere als auch komplexere Konfigurationen untersucht.
+\subsubsection{Hyperparameteroptimierung} 
 
-\texttt{min\_child\_samples} legt fest, wie viele Trainingsbeispiele mindestens in einem Blatt enthalten sein müssen. Ein höherer Wert verhindert Entscheidungen, die nur auf sehr wenigen Motorartikeln beruhen. 
-Dies ist für den vorhandenen Datenbestand besonders wichtig, da viele Makros nur wenige zugeordnete Artikel besitzen.
 
-Die Stufen 10, 20 und 30 prüfen, wie stark solche Einzelentscheidungen begrenzt werden müssen. Der Wert 10 lässt auch Regeln für kleinere Gruppen zu. Der Wert 20 bildet die ausgeglichene Ausgangseinstellung. 
-Der Wert 30 fordert eine breitere Datengrundlage je Blatt und wirkt dadurch stärker gegen Overfitting. Die Werte wurden so gewählt, dass seltene Motorvarianten nicht grundsätzlich ausgeschlossen werden, 
-einzelne Artikel aber möglichst keine eigene Entscheidungsregel bilden.
+Bei der Hyperparameteroptimierung werden zunächst mehrere Konfigurationen von Hyperparametern festgelegt. Die Hyperparameteroptimierung erfolgt in einzelnen Durchläufen dem sogenannten \textit{Grid Search}-Verfahren.
+Beim \textit{Grid Search}-Verfahren wird jede festgelegte Konfiguration von Hyperparametern in einem einzelnen Durchlauf nacheinander ausprobiert.
+Mit jeder einzelnen Konfiguration wird dann ein kompletter Trainingsprozess durchgeführt. Die Trainingsmatrix \(X_{Train}\), der Trainingslabelvektor \(y_{Train}\), die Anfragekennungen \(qid_{Train}\) bleiben dabei unverändert, 
+nur die Hyperparameter unterscheiden sich. Hierdurch entstehen unterschiedliche XGBRanker-Modelle, die sich ausschließlich durch die gewählten Hyperparameter unterscheiden.
+Die Hyperparameteroptimierung dient dazu, ein Verhältnis zwischen Lernfähigkeit und Generalisierungsfähigkeit zu bestimmen. Eine zu einfache Konfiguration kann Unterschiede zwischen ähnlichen Makros nicht ausreichend erkennen. 
+Eine zu komplexe Konfiguration kann dagegen einzelne Trainingsartikel auswendig lernen und zum Overfitting führen. 
+Nach jedem Durchlauf des Grid Search wird die erzeugte Modellkonfiguration im Validierungsprozess bewertet. Anschließend wird die nächste Modellkonfiguration ausprobiert.
 
-\texttt{lambdarank\_truncation\_level} bestimmt, bis zu welcher Rangposition Fehlplatzierungen während des Trainings besonders berücksichtigt werden. Der Wert 10 richtet den Lernprozess auf den betrachteten Top-10-Bereich aus. 
-Dies entspricht dem Ziel, geeignete Makros möglichst innerhalb der ersten zehn Positionen bereitzustellen, und stimmt mit Recall@10 und nDCG@10 überein.
+%%%%%%%%%%%%%%%%%%% Verwendente Hyperparameter Konfiguration mit Begründung %%%%%%%%%%%%%%%%%%
 
-Zusätzlich werden die Werte 5 und 20 untersucht. Der Wert 5 konzentriert das Lernen stärker auf die ersten Plätze, die für eine direkte Empfehlung besonders wichtig sind. 
-Der Wert 20 berücksichtigt einen breiteren Ausschnitt der Rangliste und kann dadurch die Reihenfolge fachlich verwandter Makros stabilisieren. 
-Der Wert 10 bildet die fachliche Mitte und entspricht unmittelbar dem in der Arbeit ausgewerteten Top-10-Bereich.
 
-Zusätzlich werden binäre und hierarchische Labels sowie moderate und starke Regularisierung verglichen. Eine \textit{Regularisierung} begrenzt unnötig komplexe Entscheidungen des Modells. Sie kann mit einer Vorgabe verglichen werden, 
-nur solche Regeln zu verwenden, die sich bei mehreren Motorartikeln wiederholen. Die moderat regularisierte Konfiguration verwendet beispielsweise \texttt{reg\_alpha = 0.10} und \texttt{reg\_lambda = 0.50}. 
-Die starke Regularisierung verwendet \texttt{reg\_alpha = 0.50}, \texttt{reg\_lambda = 1.00} und \texttt{min\_split\_gain = 0.01}. Dadurch soll verhindert werden, dass einzelne Ausnahmen zu einer unnötig komplizierten Entscheidungsstruktur führen.
 
-Als Referenz werden zunächst \texttt{reg\_alpha = 0.05}, \texttt{reg\_lambda = 0.20} und \texttt{min\_split\_gain = 0.0} verwendet. Diese Werte wirken bereits leicht begrenzend, ohne mögliche technische Zusammenhänge früh zu unterdrücken. 
-Die moderate und die starke Stufe erhöhen die Begrenzung anschließend gezielt. Dadurch lässt sich prüfen, ob ein Leistungsgewinn aus wiederkehrenden Zusammenhängen oder nur aus sehr speziellen Kombinationen einzelner Artikel entsteht. 
-Beim Motor soll beispielsweise die gemeinsame Bedeutung von 400~V, 10~A und 4000~W gelernt werden können; eine nur einmal vorkommende Schreibweise soll dagegen keine eigene, stark verzweigte Regel erzeugen.
+%%%%%% Beispielvorlage: %%%%%%%
 
+% \section{Hyperparameteroptimierung}
+% \label{sec:hyperparameteroptimierung}
+
+% Die Leistungsfähigkeit des LambdaMART-Modells wird durch Hyperparameter beeinflusst. \textit{Hyperparameter} sind Einstellungen, die den Lernprozess steuern und vor dem Training festgelegt werden. 
+% Sie können mit den Einstellmöglichkeiten einer Maschine verglichen werden: Das Werkstück bleibt gleich, aber Geschwindigkeit, Anzahl der Arbeitsschritte und Genauigkeit der Bearbeitung können unterschiedlich eingestellt werden.
+
+% Zur Bestimmung einer geeigneten Modellkonfiguration wird eine Grid Search verwendet. Eine \textit{Grid Search} ist die systematische Erprobung mehrerer festgelegter Kombinationen von Hyperparametern. 
+% Bildlich entspricht sie einer Reihe gleich aufgebauter Versuche. In jedem Versuch werden dieselben Trainings- und Validierungsdaten verwendet, jedoch andere Einstellungen des LambdaMART-Modells.
+
+% Das Grid enthält beispielsweise folgende Konfiguration:
+
+% Die Werte des Grids wurden als begrenzter Suchraum gewählt, weil der vorhandene Datenbestand aus einer vergleichsweise kleinen Zahl von Artikel-Makro-Zuordnungen und zahlreichen unterschiedlich großen Makrogruppen besteht. 
+% Ein sehr großer Suchraum würde viele nahezu gleichartige Versuche erzeugen, die Rechenzeit erhöhen und die Gefahr einer zufälligen Anpassung an die Validierungsdaten vergrößern. Die gewählten Stufen vergleichen deshalb bewusst kleinere, 
+% mittlere und komplexere Modelle.
+
+% \begin{quote}
+% \texttt{n\_estimators = 300}, \texttt{learning\_rate = 0.05},
+% \texttt{num\_leaves = 31}, \texttt{min\_child\_samples = 20} und
+% \texttt{lambdarank\_truncation\_level = 10}.
+% \end{quote}
+
+% \texttt{n\_estimators} gibt die Anzahl der nacheinander erzeugten Entscheidungsbäume an. Bei 300 werden somit 300 einzelne Bäume zu einem gemeinsamen Modell verbunden. Mehr Bäume ermöglichen weitere Korrekturschritte, 
+% erhöhen jedoch auch den Trainingsaufwand und das Risiko, Besonderheiten der Trainingsdaten auswendig zu lernen.
+
+% Die Konfigurationen mit 300, 500, 700 und 900 Bäumen decken dabei schrittweise unterschiedliche Modellgrößen ab. 300 Bäume bilden die kompakte Ausgangskonfiguration. 
+% 500 und 700 Bäume prüfen, ob zusätzliche Korrekturschritte die Abgrenzung ähnlicher Motor-Makros verbessern. 900 Bäume bilden die obere Grenze des untersuchten Bereichs. Eine weitere Erhöhung wurde nicht vorgesehen, 
+% weil der zusätzliche Rechen- und Speicherbedarf steigt, während bei begrenzten Trainingsdaten das Overfitting-Risiko zunimmt.
+
+% Die \texttt{learning\_rate} ist die Lernrate. Sie bestimmt, wie stark jeder neue Baum den bisherigen Relevanzscore verändern darf. Eine Lernrate von 0,05 bedeutet, dass jeder einzelne Korrekturbeitrag nur in begrenzter Stärke übernommen wird. 
+% Eine zweite Konfiguration verwendet beispielsweise 500 Bäume bei einer Lernrate von 0,04. Bildlich werden damit mehr kleinere Korrekturen durchgeführt, anstatt weniger große Änderungen vorzunehmen. Dies kann stabilere Zusammenhänge zwischen Spannung, 
+% Strom, Leistung und technischen Hinweisen erzeugen.
+
+% Im Grid werden die Lernraten 0,05, 0,04, 0,03 und 0,025 mit einer steigenden Anzahl von Bäumen verbunden. Diese Abstufung hält die gesamte Veränderung des Modells in einem vergleichbaren Bereich: Wenige Bäume dürfen etwas größere Schritte ausführen, 
+% während viele Bäume kleinere Schritte verwenden. Für den Motor bedeutet dies, dass eine einzelne Spannungseigenschaft das Ranking nicht sofort stark verändert, sondern gemeinsam mit Strom, Leistung, 
+% Frequenz und technischen Hinweisen über mehrere Korrekturschritte bewertet wird.
+
+% \texttt{num\_leaves} bezeichnet die maximale Anzahl der Blätter eines Entscheidungsbaums. Ein Blatt ist das Ende eines Entscheidungsweges. Mehr Blätter ermöglichen feinere Unterscheidungen. 
+% Mit 63 Blättern kann das Modell beispielsweise mehr Kombinationen aus Spannung, Leistung und Kühlung abbilden als mit 31 Blättern. Bei dem begrenzten Datenbestand steigt dadurch jedoch das Risiko des Overfittings.
+
+% Die verwendeten Werte 15, 31 und 63 verdoppeln die mögliche Baumkomplexität annähernd von Stufe zu Stufe. 15 Blätter prüfen, ob wenige robuste Regeln ausreichen. 31 Blätter bilden die mittlere Konfiguration. 
+% 63 Blätter erlauben feinere Abgrenzungen zwischen ähnlichen Motorvarianten. Größere Werte werden nicht verwendet, weil kleine Makrogruppen dann durch sehr spezifische Pfade getrennt werden könnten, die sich nicht auf neue Datenblätter übertragen lassen.
+
+% \textit{Overfitting} bedeutet, dass das Modell die Trainingsbeispiele zu genau auswendig lernt. Es verhält sich dann wie ein Prüfer, der nur die bereits bekannten Motoren wiedererkennt, 
+% aber bei einem neuen Motor mit leicht abweichenden Werten unsicher wird. Deshalb werden sowohl einfachere als auch komplexere Konfigurationen untersucht.
+
+% \texttt{min\_child\_samples} legt fest, wie viele Trainingsbeispiele mindestens in einem Blatt enthalten sein müssen. Ein höherer Wert verhindert Entscheidungen, die nur auf sehr wenigen Motorartikeln beruhen. 
+% Dies ist für den vorhandenen Datenbestand besonders wichtig, da viele Makros nur wenige zugeordnete Artikel besitzen.
+
+% Die Stufen 10, 20 und 30 prüfen, wie stark solche Einzelentscheidungen begrenzt werden müssen. Der Wert 10 lässt auch Regeln für kleinere Gruppen zu. Der Wert 20 bildet die ausgeglichene Ausgangseinstellung. 
+% Der Wert 30 fordert eine breitere Datengrundlage je Blatt und wirkt dadurch stärker gegen Overfitting. Die Werte wurden so gewählt, dass seltene Motorvarianten nicht grundsätzlich ausgeschlossen werden, 
+% einzelne Artikel aber möglichst keine eigene Entscheidungsregel bilden.
+
+% \texttt{lambdarank\_truncation\_level} bestimmt, bis zu welcher Rangposition Fehlplatzierungen während des Trainings besonders berücksichtigt werden. Der Wert 10 richtet den Lernprozess auf den betrachteten Top-10-Bereich aus. 
+% Dies entspricht dem Ziel, geeignete Makros möglichst innerhalb der ersten zehn Positionen bereitzustellen, und stimmt mit Recall@10 und nDCG@10 überein.
+
+% Zusätzlich werden die Werte 5 und 20 untersucht. Der Wert 5 konzentriert das Lernen stärker auf die ersten Plätze, die für eine direkte Empfehlung besonders wichtig sind. 
+% Der Wert 20 berücksichtigt einen breiteren Ausschnitt der Rangliste und kann dadurch die Reihenfolge fachlich verwandter Makros stabilisieren. 
+% Der Wert 10 bildet die fachliche Mitte und entspricht unmittelbar dem in der Arbeit ausgewerteten Top-10-Bereich.
+
+% Zusätzlich werden binäre und hierarchische Labels sowie moderate und starke Regularisierung verglichen. Eine \textit{Regularisierung} begrenzt unnötig komplexe Entscheidungen des Modells. Sie kann mit einer Vorgabe verglichen werden, 
+% nur solche Regeln zu verwenden, die sich bei mehreren Motorartikeln wiederholen. Die moderat regularisierte Konfiguration verwendet beispielsweise \texttt{reg\_alpha = 0.10} und \texttt{reg\_lambda = 0.50}. 
+% Die starke Regularisierung verwendet \texttt{reg\_alpha = 0.50}, \texttt{reg\_lambda = 1.00} und \texttt{min\_split\_gain = 0.01}. Dadurch soll verhindert werden, dass einzelne Ausnahmen zu einer unnötig komplizierten Entscheidungsstruktur führen.
+
+% Als Referenz werden zunächst \texttt{reg\_alpha = 0.05}, \texttt{reg\_lambda = 0.20} und \texttt{min\_split\_gain = 0.0} verwendet. Diese Werte wirken bereits leicht begrenzend, ohne mögliche technische Zusammenhänge früh zu unterdrücken. 
+% Die moderate und die starke Stufe erhöhen die Begrenzung anschließend gezielt. Dadurch lässt sich prüfen, ob ein Leistungsgewinn aus wiederkehrenden Zusammenhängen oder nur aus sehr speziellen Kombinationen einzelner Artikel entsteht. 
+% Beim Motor soll beispielsweise die gemeinsame Bedeutung von 400~V, 10~A und 4000~W gelernt werden können; eine nur einmal vorkommende Schreibweise soll dagegen keine eigene, stark verzweigte Regel erzeugen.
+
+\subsubsection{Validierungsprozess} 
+
+Nach jedem Trainingsprozess wird die Modellkonfiguration anhand der Validierungsmatirx bewertet. Hierzu berechnet der trainierte \texttt{XGBRanker} für jede Zeile der Validierungsmatrix \(X_{Val}\) einen Relevanzscore. 
+Die Anfragekennungen \(qid_{Val}\) ordnen die Matrixzeilen den jeweiligen Validierungsanfragen zu. 
+Innerhalb jeder Rankinggruppe werden die Makrokandidaten absteigend nach ihren Relevanzscores sortiert. 
+
+Der Validierungslabelvektor \(y_{Val}\) wird nicht zur Berechnung der Relevanzscores verwendet. 
+Er enthält die  Kandidatenrelevanz der Anfrage-Kandidat-Paare und dient ausschließlich zur Bewertung der erzeugten Makro-Ranglisten. 
+Hierzu wird für jede Validierungsanfrage ermittelt, auf welchem Rang sich das Zielmakro befindet und wie die weiteren relevanten Makrokandidaten angeordnet sind. 
+Aus den Ergebnissen aller Validierungsanfragen werden anschließend Recall@1, Recall@3, Recall@5, Recall@10, MRR und nDCG@10 berechnet. 
+Diese Metriken bilden die Grundlage für den Vergleich der Modellkonfigurationen.
+
+Hierzu berechnet das Modell für jedes Anfrage-Kandidat-Paar der Validierungsmatrix eine Kandidatenrelevanz. 
+Die Makroprofile einer Rankinggruppe werden anschließend nach dieser Kandidatenrelevanz absteigend in einer sogenannten Makroprofilliste sortiert. 
+Die erzeugten Makroprofillisten werden mit den Artikel-Makro-Zuordnungen aus dem Validierungslabelvektor verglichen. 
+
+Die Bewertung erfolgt anhand von Recall@1, Recall@3, Recall@5, Recall@10, MRR und nDCG@10. Für die Auswahl wird zunächst der gemeinsame Recall-Wert berechnet: \[ S_{Recall} = \frac{ Recall@1+Recall@3+Recall@5+Recall@10 }{4}. \] Anschließend werden Recall, MRR und nDCG gleichmäßig zum Validierungsscore zusammengeführt: \[ S_{Validierung} = \frac{ S_{Recall}+MRR+nDCG@10 }{3}. \] Durch diese Berechnung erhalten die Trefferwahrscheinlichkeit, die Position des Zielmakros und die Qualität der gesamten Makro-Rangliste jeweils dasselbe Gewicht. Eine Modellkonfiguration wird nur berücksichtigt, wenn sie zusätzlich die Mindestwerte \[ Recall@10 \geq 0{,}50 \] und \[ nDCG@10 \geq 0{,}70 \] erfüllt. \subsubsection{Iterativer Ablauf} Der Trainings- und Validierungsprozess wird für alle Modellkonfigurationen des Grids wiederholt: \begin{enumerate} \item Auswahl einer Modellkonfiguration aus dem Grid, \item Training des \texttt{XGBRanker} mit \(X_{Train}\), \(y_{Train}\) und \(qid_{Train}\), \item Erzeugung der Makro-Ranglisten für die Validierungsanfragen, \item Berechnung von Recall@k, MRR und nDCG@10, \item Berechnung des Validierungsscores, \item Speicherung der Modellkonfiguration und ihrer Ergebnisse, \item Fortsetzung mit der nächsten Modellkonfiguration. \end{enumerate} Nach Abschluss aller Sequenzen wird die Modellkonfiguration mit dem höchsten gültigen Validierungsscore ausgewählt. Die Testdaten werden dabei nicht verwendet. Dadurch bleibt der Testprozess von der Hyperparameteroptimierung und der Modellauswahl getrennt. \subsubsection{Ergebnis des Trainings} Das Ergebnis des Trainings- und Validierungsprozesses ist ein trainiertes LambdaMART-Modell mit festgelegten Hyperparametern und einer validierten Rankingfunktion. Zusätzlich werden die verwendete Merkmalsreihenfolge, die Label-Policy und die Ergebnisse der Hyperparameteroptimierung gespeichert. Das Modell berechnet für jedes Anfrage-Kandidat-Paar einen Relevanzscore. Die Makro-Rangliste entsteht durch die absteigende Sortierung dieser Scores innerhalb der jeweiligen Rankinggruppe. Eine nachträgliche regelbasierte Veränderung der Rangfolge findet nicht statt.
+
+% 
 \section{Validierungsprozess}
 \label{sec:validierungsprozess}
 

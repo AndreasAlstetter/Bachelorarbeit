@@ -322,12 +322,13 @@ Im nächsten Schritt findet der Trainings- und Validierungsprozess statt.
 Der Trainings- und Validierungsprozess besteht aus einzelnen Sequenzen. Eine Sequenz läuft dabei wie folgt ab: 
 
 Zunächst wird aus einer Liste von Modellkonfigurationen, dem sogenannten Grid, die erste Modellkonfiguration ausgewählt und anschließend die Anfrage-Kandidat-Paare durch das LambdaMART-Modell gelernt.
-Im nächsten Schritt wird der Validierungsprozess gestartet, in dem das trainierte LambdaMART-Modell anhand der Validierungsanfragen überprüft, mit Recall@K, MRR und NDCG bewertet (siehe Kapitel \ref{sec:evaluationsmetriken}) und die ausgewählt Modellkonfiguration gespeichert.
+Im nächsten Schritt wird der Validierungsprozess gestartet, in dem das trainierte LambdaMART-Modell anhand der Anfrage-Kandidat-Paare_Validation überprüft, mit Recall@K, 
+MRR und NDCG bewertet (siehe Kapitel \ref{sec:evaluationsmetriken}) und die ausgewählt Modellkonfiguration gespeichert.
 Dannach wird die Sequenz abgeschlossen und eine neue Sequenz mit der nächsten Modellkonfiguration aus dem Grid gestartet. 
 Diese Sequenz wiederholt sich, bis alle Modellkonfigurationen des Grids bearbeitet wurden. 
 Im Anschluss wird das trainierte LambdaMART-Modell mit der besten Bewertung ausgewählt und als Ergebnis des Validierungsprozesses festgelegt.
 Das trainierte LambdaMART-Modell wird zusammen mit den Testanfragen der Trainingsvorbereitung als Übergabeartefakte für den anschließenden Test- und Anwendungsprozess bereitgestellt.
-Anschließend wird im Testprozess die Leistungsfähigkeit des trainierten LambdaMART-Modells anhand der Testanfragen überprüft und mit Recall@K, MRR und NDCG bewertet (siehe Kapitel \ref{sec:evaluationsmetriken}).
+Anschließend wird im Testprozess die Leistungsfähigkeit des trainierten LambdaMART-Modells anhand der Anfrage_Kandidat-Paare_Test überprüft und mit Recall@K, MRR und NDCG bewertet (siehe Kapitel \ref{sec:evaluationsmetriken}).
 Das Ergebnis des Testprozesses ist die endgültige Bewertung der Leistungsfähigkeit des trainierten LambdaMART-Modells  und wird im Testergebnis festgehalten. 
 Nach dem Testprozess steht dann dem Anwendungsprozess ein trainiertes und validiertes LambdaMART-Modell zur Verfügung, welches zur Bewertung von neuen unbekannten Anfragen genutzt werden kann.
 Dazu werden für neue unbekannte Anfragen Anfrageprofile aus technischen Dokumentationen oder Datenblättern erstellt und dem trainierten LambdaMART-Modell zur Bewertung übergeben.

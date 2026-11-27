@@ -7,8 +7,8 @@
 \label{sec:modell}
 
 Ein Modell ist das Ergebnis eines Lernprozesses, bei dem aus einer großen Menge von Beispieldaten Muster und Zusammenhänge gelernt, und dabei die Parameter des Modells angepasst werden. 
-Das dabei erlernte Wissen wird im Modell gespeichert und kann anschließend genutzt werden, um neue Eingaben zu verarbeiten und passende Vorhersagen zu erzeugen. 
-Ein Modell bildet somit die Grundlage dafür, bereits gelernte Zusammenhänge auf bisher unbekannte Daten anzuwenden \parencite{LeCun2015}.
+Das dabei erlernte Wissen wird im Modell gespeichert was als Lernfägikeit bezeichnet wird. Dieses Wissen kann anschließend genutzt werden, um neue Eingaben zu verarbeiten und passende Vorhersagen zu erzeugen. 
+Ein Modell bildet somit die Grundlage dafür, bereits gelernte Zusammenhänge auf bisher unbekannte Daten anzuwenden, was als Generalisierungsfähigkeit des Modells bezeichnet wird \parencite{LeCun2015}.
 
 \subsection{Neuronale Netze}
 \label{neuronale_netze}
@@ -386,6 +386,7 @@ Die folgende Abbildung \ref{fig:ltr_ansaetze} veranschaulicht die Unterschiede z
 \end{figure}
 
 \subsection{LambdaRank}
+\label{sec:lambdarank}
 
 
 LambdaRank ist eine Weiterentwicklung des zuvor beschriebenen Pairwise-Ansatzes des Learning-to-Rank-Verfahrens.
@@ -425,9 +426,10 @@ Dadurch lernt das Modell insbesondere Fehler auf den oberen Rangpositionen zu ko
 \end{figure}
 
 \subsection{LambdaMART}
+\label{sec:lambdamart}
 
 LambdaMART (vergleiche Abbildung \ref{fig:lambdamart_prinzip}) baut auf dem zuvor beschriebenen LambdaRank-Verfahren auf und kombiniert dessen $\lambda$-Gradienten mit dem Verfahren der Gradient-Boosting-Entscheidungsbäume. 
-Ein Entscheidungsbaum wie er in Abbildung \ref{fig:entscheidungsbaum} dargestellt ist, ist ein Modell, das Entscheidungen anhand von Verästelungen trifft. An jeder Verästelung wird eine Bedingung überprüft, die den weiteren Pfad im Baum bestimmt. 
+Ein Entscheidungsbaum wie er in Abbildung \ref{fig:entscheidungsbaum} dargestellt ist, ist ein Modell, das Entscheidungen anhand von Verästelungen trifft. An jeder Verästelung wird eine Entscheidungsregel überprüft, die den weiteren Pfad im Baum bestimmt. 
 Die Blätter des Baums liefern anhand von Blattwerten die endgültigen Vorhersagen.
 
 \begin{figure}[H] 
@@ -714,7 +716,8 @@ Ein relevantes Ergebnis auf Rang 1 oder 2 würde in diesem Beispiel besser bewer
 
 Der Wertebereich liegt auch hier zwischen 0 und 1. Ein hoher Wert zeigt an, dass ein relevantes Ergebnis bereits an einer der vorderen Positionen einer Rangliste erscheint. 
 
-\subsection{Normalized Discounted Cumulative Gain} 
+\subsection{Normalized Discounted Cumulative Gain}
+\label{sec:ndcg} 
 
 Der Normalized Discounted Cumulative Gain (nDCG) bewertet die Qualität einer gesamten Rangliste. Im Gegensatz zu Recall@k und MRR wird hierbei nicht nur betrachtet, 
 ob relevante Ergebnisse gefunden werden oder wie früh das erste relevante Ergebnis erscheint. 
