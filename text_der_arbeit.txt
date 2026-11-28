@@ -2789,137 +2789,339 @@ Aus diesem Kapitel ergibt sich folgendes Artefakt A3, das als Ergebnis an die n�
 
 
 
-
-
-
-
-
-
-
 \chapter{Technische Umsetzung}
 \label{chap:technische_umsetzung}
 
+Die Grundlagen und Erklärungen dieses Kapitels wurden in den vorherigen Kapiteln bereits behandelt. 
+Dabei wurden die Datenobjekte Makroprofile, Anfrageprofile, Anfrage-Kandidat-Paare sowie die Vergleichsmerkmale und die Merkmalsvektoren in Kapitel~\ref{chap:konzeption_des_empfehlungssystems} erläutert.
+Die Grundlagen der Datenaufbereitung und des Datensplits wurden im Kapitel~\ref{chap:datenaufbereitung_und_datensplit} behandelt.
 
-\section{Implementierung der Datenobjekte} 
+\section{Grundlagen der Implementierung}
+\label{sec:grundlagen_der_implementierung}
 
-Die fachlichen Grundlagen der Makroprofile, Anfrageprofile und Anfrage-Kandidat-Paare wurden bereits in Kapitel \ref{chap:konzeption_des_empfehlungssystems} beschrieben. 
-Ziel dieses Abschnitts ist daher die technische Umsetzung dieser Datenobjekte auf Basis der Trainings- und Evaluationsbasis aus Artefakt A1. Hierzu werden zunächst die aufbereiteten Artikel-, 
-Makro- und Zuordnungsdaten eingelesen und entsprechend ihrer Datensplit-Zuordnung den Trainings-, Validierungs- und Testdaten zugeordnet. 
-Anschließend werden die Makroprofile aus den Artikeln der Trainingsdaten erzeugt und als Suchraum der Makrokandidaten bereitgestellt. 
-Parallel dazu erfolgt die Bildung der Anfrageprofile aus den Artikeln der jeweiligen Datenbestände. Makroidentifizierende Informationen werden dabei entfernt, 
-sodass ausschließlich die für eine spätere Anfrage verfügbaren technischen Eigenschaften erhalten bleiben. Im letzten Schritt werden die Anfrageprofile mit den Makroprofilen kombiniert und daraus Anfrage-Kandidat-Paare erzeugt. 
-Für jedes Anfrage-Kandidat-Paar werden die in Abschnitt \ref{sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektor} beschriebenen Vergleichsmerkmale berechnet und zu Merkmalsvektoren zusammengeführt. 
-Das Ergebnis dieses Verarbeitungsschrittes sind die für Training, Validierung und Test benötigten Anfrage-Kandidat-Paare einschließlich der zugehörigen Merkmalsvektoren und Relevanzinformationen. 
-Diese bilden die Eingabe des nachfolgenden Trainingsprozesses des LambdaMART-Modells.
+\subsection{Merkmalsmatrix und Labelvektoren}
+\label{sec:merkmalsmatrix_und_labelvektoren}
+
+Die in Abschnitt~\ref{sec:sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektoren} erklärten Anfrage-Kandidat-Paare lassen sich in eine so genannte Merkmalsmatrix überführen.
+Diese Merkmalsmatrix wird für das Training, die Validierung und den Test des LambdaMART-Modells, sowie für die spätere Anwendung verwendet und jeweils als Trainingsmatrix \(X_{Train}\), Validierungsmatrix \(X_{Val}\) und Testmatrix \(X_{Test}\) sowie Anwendungsmatrix \(X_{Appl}\) bezeichnet.
+Die Trainingsmatrix dient dem Aufbau des Modells. Die Validierungsmatrix dient der Auswahl der Modellkonfiguration. Die Testmatrix dient ausschließlich der abschließenden Bewertung. Die Anwendungsmatrix wird für die spätere Anwendung des trainierten Modells auf neue Anfragen verwendet.
+Eine Merkmalsmatrix wird in Zeilen und Spalten organisiert. Jede Zeile entspricht dabei dem Merkmalsvektor eines Anfrage-Kandidat-Paares. In jeder Spalte stehen die berechneten Vergleichsmerkmale. 
+Die Trainingsmatrix enthält die Merkmalsvektoren der Anfrage-Kandidaten-Paare\_Training. Entsprechend enthalten die Validierungsmatrix, die Testmatrix und die Anwendungsmatrix die Merkmalsvektoren der Anfrage-Kandidaten-Paare\_Validation, Anfrage-Kandidaten-Paare\_Test und Anfrage-Kandidat-Paare\_Anwendung.
+Dieser Aufbau in Matrixform stellt sicher, dass die Vergleichsmerkmale konsistent in gleicher Form angeordnet sind. Dadurch können belibig viele Merkmalsvektoren mit gleichem Aufbau der Vergleichsmerkmale der Merkmalsmatrix hinzugefügt werden. 
+Das LambdaMART-Modell kann dann das Wissen aus den Vergleichsmerkmalen Zeile für Zeile lernen und auf neue Anfrage-Kandidat-Paare anwenden.
+Für das Training, die Validierung und den Test werden jeder Matrixzeile zusätzlich ein Labelvektor zugeordnet, welcher die Relevanz des Anfrage-Kandidat-Paares dieser Zeile beschreibt.
+Diese Relevanz wird im weiteren als Kandidatenrelevanz bezeichnet.
+Die Labelvektoren werden entsprechend ihres Verwendungszwecks als Trainingslabelvektor \(y_{Train}\), 
+Validierungslabelvektor \(y_{Val}\) sowie Testlabelvektor \(y_{Test}\) bezeichnet. 
+
+Die Kandidatenrelevanz im Labelvektor wird dabei durch eine numerische Bewertung in hierarchischer Form ausgedrückt.
+Bei der hierarchischen Bewertung wird berücksichtigt, dass ein Motor-Makro derselben Familie fachlich näher am Makroprofil liegt als ein nicht verwandtes Makro.
+Diese Bewertung ergibt sich aus der Makrobezeichnung und soll anahnd des Beispiels M1\_F1\_V1 erläutert werden. Sie wird in folgender Skala dargestellt: 
+
+Beispiel: M1\_F1\_V1
+\begin{itemize}
+    \item M1: Makro-Klasse
+    \item F1: Makro-Familie
+    \item V1: Makro-Variante
+\end{itemize}
+
+Hierarchische Bewertung:
+
+\begin{itemize}
+    \item 0: keine Übereinstimmung
+    \item 1: Übereinstimmung der Makro-Klasse zwischen Makroprofil und Makrobezeichnung
+    \item 2: Übereinstimmung der Makro-Familie zwischen Makroprofil und Makrobezeichnung
+    \item 4: exakte Übereinstimmung zwischen Makroprofil und Makrobezeichnung
+\end{itemize}
+ 
+
+% Bild
+
+\subsection{Anfrage an das LambdaMART-Modell}
+\label{sec:anfrage_an_das_lambdamart_modell}
+
+Um eine Anfrage \(q\) an das LambdaMART-Modell übergeben zu können, wird das Anfrageprofil von \(q\) mit allen Makroprofilen aus dem Suchraum\_Makroprofile kombiniert. 
+Dadurch werden für eine Anfrage \(q\) alle möglichen Kombinationen der Anfrage-Kandidat-Paare für \(q\) gebildet. 
+Für jedes Anfrage-Kandidat-Paar von \(q\) wird anschließend ein Merkmalsvektor für die Merkmalsmatrix erstellt.
+Damit das LambdaMART-Modell die Merkmalsvektoren der Anfrage \(q\) korrekt zuordnen kann, erhält jede Matrixzeile eine Anfragekennung \(qid\).
+Diese Anfragekennung wird für Training \(qid_{Train}\), Validierung \(qid_{Val}\) und Test \(qid_{Test}\) verwendet 
+Alle Matrixzeilen mit derselben Anfragekennung bilden eine \textit{Rankinggruppe}. 
+Damit weiß das LambdaMART-Modell später, welche Merkmalsvektoren zu welcher Anfrage \(q\) gehören und somit für das Ranking innerhalb von \(q\) berücksichtigt werden müssen.
+Die Rankinggruppe bildet zugleich die Begrenzung für die paarweisen Vergleiche des LambdaMART-Modells. 
+Dabei werden nur Anfrage-Kandidat-Paare miteinander verglichen, die zu derselben Anfrage \(q\) gehören. Anfrage-Kandidat-Paare unterschiedlicher Anfragen werden nicht paarweise miteinander verglichen.
+
+% Bild
+
+\subsection{Overfitting}
+\label{sec:overfitting}
+
+Overfitting bezeichnet das auswendig lernen einens Datensatzes durch ein Modell, wodurch die Fähigeit des Modells, das erlernte Wissen auf neue und unbekannte Anfragen zu übertagen abnehmen würde, da zu wenig "Wissenslücken" im Modell vorhanden sind.
+Diese "Wissenslücken" werden benötigt, um ein Maß an Entscheidungsfreiheit dem Modell zu überlassen, sodass zwischen Makro A oder B oder C das passende Makro gewählt werden kann, ohne dass dabei nur das best bekannte Makro aus dem Datensatz gewählt wird.
+Bei zu großen "Wissenlücken" hätte das Modell zuwenig Wissen um ein passendes Makro für eine neue Anfrage zu finden \cite{hastie2009elements}.
 
 
-\section{Training des LambdaMART-Modells} 
 
-Nach der Erzeugung der Anfrage-Kandidat-Paare und der zugehörigen Merkmalsvektoren liegen für jede Anfrage die Eingabedaten für das Learning-to-Rank-Verfahren vor. Ziel des Trainingsprozesses besteht darin, 
-die Zusammenhänge zwischen den Vergleichsmerkmalen eines Anfrage-Kandidat-Paares und dessen Relevanz für die Anfrage zu erlernen. Hierzu wird das in Kapitel \ref{chap:auswahl_des_modellansatzes} ausgewählte LambdaMART-Verfahren verwendet. 
-Die fachlichen Grundlagen von Learning-to-Rank, LambdaRank und LambdaMART wurden bereits in den Abschnitten \ref{sec:learning_to_rank}, \ref{sec:lambdarank} und \ref{sec:lambdamart} erläutert. 
-Die Eingabe des Trainingsprozesses besteht aus den Merkmalsvektoren der Anfrage-Kandidat-Paare. Jeder Merkmalsvektor beschreibt dabei die technische Übereinstimmung zwischen einem Anfrageprofil und einem Makroprofil. 
-Zusätzlich besitzt jedes Anfrage-Kandidat-Paar ein Relevanzlabel, das aus der bekannten Artikel-Makro-Zuordnung der Trainingsdaten abgeleitet wird. Während des Trainings werden die Anfrage-Kandidat-Paare anfrageweise zu Rankinggruppen zusammengefasst. 
-Innerhalb einer Rankinggruppe lernt das Modell, relevante Makros höher zu bewerten als nicht relevante Makros. Hierzu erzeugt LambdaMART für jedes Anfrage-Kandidat-Paar einen numerischen Relevanzscore. 
-Die Berechnung dieser Relevanzscores erfolgt durch mehrere aufeinanderfolgende Entscheidungsbäume. Jeder neu erzeugte Baum versucht dabei, die Fehler der bereits trainierten Bäume zu verringern. 
-Die Ergebnisse aller Bäume werden anschließend zu einem gemeinsamen Relevanzscore zusammengeführt. Dadurch entsteht ein Modell, das technische Muster innerhalb der Vergleichsmerkmale erkennen und zur Bewertung neuer Anfragen verwenden kann. 
-Das Ergebnis des Trainingsprozesses ist ein trainiertes LambdaMART-Modell, welches für jedes Anfrage-Kandidat-Paar einen Relevanzscore berechnen kann. Die endgültige Auswahl der Modellkonfiguration erfolgt anschließend anhand des Validierungsprozesses.
+\subsection{Hyperparameter des XGBRanker} 
+\label{sec:hyperparameter_xgbranker} 
 
-\section{Hyperparameteroptimierung}
+Die konkrete Umsetzung von LambdaMART erfolgt über den \texttt{XGBRanker} der Bibliothek XGBoost. 
+Die Auswahl dieses Verfahrens erfolgt aufgrund der integrierten Regularisierungsmechanismen, sogenannte Hyperparameter, welche ein Overfitting bei begrenzten Datensätzen reduzieren können.
+Ein weiterer Vorteil des XGBRankers ist die integrierte Unterstützung des Ziels eine Makro-Rangliste zu optimieren. Hierfür wird das sogenannte \texttt{rank:ndcg} Lernziel verwendet \cite{chen2016xgboost}.
+Die Hyperparameter des XGBRanker stellen für die Anpassung an den Datensatz mehrere Einstellmöglichkeiten bereit:
 
-Die Leistungsfähigkeit eines LambdaMART-Modells wird wesentlich durch dessen Hyperparameter beeinflusst. Hyperparameter beschreiben dabei Eigenschaften des Lernprozesses und werden vor dem eigentlichen Training festgelegt. 
-Im Gegensatz zu den Modellparametern werden sie nicht aus den Trainingsdaten gelernt, sondern müssen geeignet gewählt werden. Um eine geeignete Modellkonfiguration zu bestimmen, wird eine Grid Search durchgeführt. 
-Hierbei werden mehrere Kombinationen von Hyperparametern systematisch erzeugt und nacheinander trainiert. Jede Modellkonfiguration durchläuft anschließend den in Abschnitt 7.4 beschriebenen Validierungsprozess. 
-Die untersuchten Modellkonfigurationen unterscheiden sich unter anderem in der Anzahl der Entscheidungsbäume, der Lernrate sowie der Komplexität der einzelnen Entscheidungsbäume. 
-Dadurch können sowohl einfachere als auch komplexere Modelle untersucht werden. Für jede Modellkonfiguration wird ein separates LambdaMART-Modell trainiert. Nach Abschluss des Trainings erfolgt die Bewertung anhand der Validierungsdaten. 
-Die erzielten Ergebnisse werden gespeichert und mit den Ergebnissen der übrigen Modellkonfigurationen verglichen. Die Grid Search verfolgt das Ziel, eine Modellkonfiguration zu finden, 
-die die Ranglistenqualität maximiert und gleichzeitig eine ausreichende Generalisierungsfähigkeit auf unbekannte Daten besitzt. 
-Dadurch soll verhindert werden, dass das Modell die Trainingsdaten zu stark auswendig lernt und auf neuen Anfragen schlechtere Ergebnisse liefert. 
-Das Ergebnis der Hyperparameteroptimierung besteht aus einer ausgewählten Modellkonfiguration, welche als Grundlage für die anschließende Validierung und den späteren Testprozess dient.
+\begin{itemize}
+ 
+\item \texttt{ndcg@k}: Die interne Evaluationsmetrik \texttt{ndcg@k} stellt einen Parameter bereit, mit dem die Optimierung der vorderen Positionen der Makro-Rangliste in den Vordergrund gestellt werden kann.
+Es ist nicht wichtig, welches Makro auf Platz 120 oder 150 steht, sondern ob das richtige Makro in den ersten 10 Beispielen vorkommt.
+
+\item \texttt{n\_estimators}: Mit dem Parameter \texttt{n\_estimators} kann die Anzahl der aufeinanderfolgenden Entscheidungsbäume im Gradient-Boosting (vergleiche Kapitel \ref{sec:lambdamart}) angepasst werden,
+um die Anpassung des XGBRankers auf den Datensatz zu steuern. Je mehr Entscheidungsbäume verwendet werden, desto stärker passt sich das Modell dem Datensatz an. Wird die Anzahl der Entscheidungsbäume zu hoch gewählt, steigt das Risiko des Overfittings.
+Bei Zu wenigen Entscheidungsbäumen könnte das Modell hingegen das Wissen aus dem Datensatz nicht ausreichend nutzen und somit Vergleichsmerkmale übersehen, die für die korrekte Rangordnung der Makros relevant sind.
+
+\item \texttt{learning\_rate}: Mit dem Parameter \texttt{learning\_rate} kann die Lernrate des XGBRankers gesteuert werden, wodurch die Geschwindigkeit der Anpassung an den Datensatz beeinflusst wird.
+Bei einer großen Lernrate würde bei jedem neuen Entscheidnungsbaum im Gradient-Boosting ein hoher Wissenszuwachs erfolgen. Dadurch können detailiertere Unterscheidungsmerkmale zwischen Makros wie Spannung 380V versus Spannung 400V übersehen werden.
+Eine zu kleinere Lernrate verlängernt den Lernprozess. Ist diese zu klein würde der Lernprozess unnötig lange dauern, was wiederum die Kosten für die Entwicklung erhöt.
+
+\item \texttt{max\_depth}: Mit dem Parameter \texttt{max\_depth} kann die maximale Tiefe eines Entscheidungsbaums begrenzt werden. Je nach Tiefe können dadurch mehrer oder weniger technische Artikel- und Makroeigenschaften gelernt werden.
+Dadurch kann das Overfitting-Risiko an ein Makro mit nur einem Artikel als Wissensgrundlage verringert werden, da dieses Makro weniger Schritte im Gradient-Boosting benötig um den Artikel zu erlenen als ein Makro mit 10 Artikeln als Wissensgrundlage.
+
+\item \texttt{subsample}: Der Parameter \texttt{subsample} bestimmt den Anteil der Matrixzeilen einer Rankinggruppe die für einen Entscheidungsbaum verwendet werden können.
+Hierdurch lässt sich die Abhängigkeit einer Anfrage \(q\) von den Makroprofilen innerhalb der Rankinggruppe einstellen. Dadurch kann das Overfitting-Risiko auf auf die Rankinggruppe reduziert werden.
+
+\item \texttt{colsample\_bytree}: Der Parameter \texttt{colsample\_bytree} bestimmt den Anteil der Vergleichsmerkmale der Matrixspalten, die für einen Entscheidungsbaum verwendet werden. 
+Dadurch lässt sich die Abhängigkeit einer Anfrage \(q\) von einzelnen Vergleichsmerkmalen einer Rankinggruppe einstellen. Damit kann ein Overfitting auf bestimmte Vergleichsmerkmale verhindert werden.
+
+\item \texttt{reg\_alpha}: Der Parameter \texttt{reg\_alpha} steuert die L1-Regularisierung der einzelnen Blätter eines Entscheidungsbaums. 
+Die L1-Regularisierung kann unerwünschte Gewichtungen von kleinen Unterscheidungen zwischen Anfrageprofil und Makroprofil verhindern und somit das Overfitting auf diese kleinen Unterschiede reduzieren.
+Zum Beispiel kann die Spannung von 400V übermäßig gewichtet werden, wenn zusätzlich Artikel mit 399V oder 401V zu dieser Spannung von 400V gezählt werden.
+Die Auswahl der entsprechenden Lernbeispiele aus der Traingsmatrix erfolgt dabei zufällig. Beträgt der Parameter beispielsweise 0.9, dann werden nur 90\% der Zeilen einer Trainingsmatrix für eine Entscheidungsbaum verwendet.
+Für den nächsten Entscheidungsbaum würde erneut eine zufällige Auswahl von 90\% aus den Zeilen der Trainingsmatrix getroffen werden. Hierdurch entsteht eine Variation bei der Verwendung der Zeilen der Trainingsmatrix.
+
+\item \texttt{reg\_lambda}: Der Parameter \texttt{reg\_lambda} steuert die L2-Regularisierung der einzelnen Blätter eines Entscheidungsbaums.
+Die L2-Regularisierung kann unerwünschte Gewichtungen von einzelnen Übereinstimmungen zwischen Anfrageprofil und Makroprofil verhindern.
+Beispielsweise enthält ein Makroprofil M1 folgende Werte: Spannung 400V, Strom 10A, Leistung 4000W. Ein Makroprofil M2 enthält die Werte: Spannung 200V, Strom 20A, Leistung 4000W. 
+Eine Anfrage enthält die Werte: Spannung 400V, Strom 20A, Leistung 8000W. 
+Die L2-Regularisierung kann verhindern, dass das Makroprofil M1 aufgrund der exakten Übereinstimmung von 400V mit der Anfrage dem Makroprofil M2 bevorzugt wird ohne dabei den Strom und die Leistung für den Vergleich zu berücksichtigen.
+Die zufällige Auswahl der entsprechenden Lernbeispiele aus der Traingsmatrix erfolgt analog zu \texttt{reg\_alpha}.
+
+\item \texttt{random\_state}: Dieser Parameter legt den Startwert für den Zufallszahlengenerator während des Trainings fest. 
+Durch die Festlegung eines festen Wertes kann das Training reproduzierbar gemacht werden, da dann das zufällige Auswählen von Lernbeispielen wie es bei den Parametern \texttt{subsample} und \texttt{colsample\_bytree} passiert immer gleich ablaufen.
+
+\item \texttt{min\_child\_weight}: Der Parameter \texttt{min\_child\_weight} legt fest, wie viele Trainingsinformationen in einem Blatt eines Entscheidungsbaums enthalten sein müssen, bevor eine weitere Aufteilung erfolgt.
+Da viele Makros nur wenige zugeordnete Artikel besitzen, verhindert dieser Parameter, dass ein Blatt zu stark auf einzelne Trainingsbeispiele reagiert. Dadurch wird das Overfitting auf einzelne Artikel reduziert.
+
+\item \texttt{tree\_method}: Der Parameter \texttt{tree\_method} legt die Methode fest, mit der die Entscheidungsbäume während des Trainings aufgebaut werden. 
+Verschiedene Methoden stehen zur Verfügung, wie zum Beispiel \texttt{auto}, \texttt{exact}, \texttt{hist} und \texttt{gpu\_hist}. 
+Die Wahl der Methode hat dabei Einfluss auf die Trainingsgeschwindigkeit und den Speicherverbrauch. Beispielsweise ist \texttt{exact} sehr genau, aber speicherintensiv, 
+während \texttt{hist} und \texttt{gpu\_hist} effizienter arbeiten, jedoch ungenauer sind.
+Die Methode \texttt{auto} wählt automatisch die am besten geeignete Methode basierend auf der verfügbaren Hardware und den Daten aus.
+
+\item \texttt{verbose}: Der Parameter \texttt{verbose} steuert die Ausgabedetaillierung während des Trainings. 
+Dadurch kann festgelegt werden, wie viele Informationen über den Trainingsfortschritt angezeigt werden, zum Beispiel die Bewertung der Validierungsmatrix nach jeder Iteration.
+
+\end{itemize}
 
 
-\section{Validierungsprozess} 
+\section{Trainings- und Validierungsprozess} 
+\label{sec:trainings_und_validierungsprozess} 
 
-Ziel des Validierungsprozesses ist die Bewertung der während der Hyperparameteroptimierung erzeugten Modellkonfigurationen. Während die Trainingsdaten zum Erlernen der Zusammenhänge zwischen den Vergleichsmerkmalen und den Relevanzwerten verwendet werden, 
-dienen die Validierungsdaten zur unabhängigen Beurteilung der Leistungsfähigkeit des Modells auf bisher nicht verwendeten Anfrageprofilen (vergleiche Abschnitt \ref{sec:splitregeln}). 
-Hierzu wird jede während der Grid Search erzeugte Modellkonfiguration nach Abschluss des Trainings mit den Validierungsanfragen bewertet. 
-Für jede Anfrage wird eine Rangliste aus Makrokandidaten erzeugt und anschließend mit den bekannten Artikel-Makro-Zuordnungen der Validierungsdaten verglichen. 
-Die Bewertung erfolgt anhand der in Abschnitt \ref{sec:validierungsansätze} eingeführten Metriken Recall@k, Mean Reciprocal Rank (MRR) und Normalized Discounted Cumulative Gain (nDCG). Recall@k bewertet dabei die Wahrscheinlichkeit, 
-innerhalb der ersten \(k\) Positionen mindestens ein relevantes Makro zu finden. Der MRR berücksichtigt zusätzlich die Position des ersten relevanten Makros innerhalb der Rangliste. 
-nDCG bewertet die Qualität der gesamten Rangliste und berücksichtigt dabei die Position der relevanten Makros. Für jede Modellkonfiguration werden die erzielten Kennzahlen gespeichert und mit den Ergebnissen der übrigen Modellkonfigurationen verglichen. 
-Dadurch entsteht für jede Konfiguration ein Qualitätsprofil, welches die Empfehlungsqualität des Modells auf den Validierungsdaten beschreibt. Der Validierungsprozess dient gleichzeitig der Erkennung von Overfitting. 
-Erzielt ein Modell sehr gute Ergebnisse auf den Trainingsdaten, jedoch deutlich schlechtere Ergebnisse auf den Validierungsdaten, 
-deutet dies darauf hin, dass das Modell Trainingsdaten auswendig gelernt hat und die erlernten Zusammenhänge nur eingeschränkt auf neue Anfragen übertragen kann. Das Ergebnis des Validierungsprozesses ist die Auswahl derjenigen Modellkonfiguration, 
-die die höchste Empfehlungsqualität auf den Validierungsdaten erzielt. Diese Modellkonfiguration wird anschließend als Grundlage für den Testprozess verwendet.
 
-\section{Modellauswahl} 
+Nach der Erstellung der Merkmalsmatrizen, Labelvektoren und Rankinggruppen wird das LambdaMART-Modell in einem kombinierten Trainings- und Validierungsprozess erzeugt. 
+Dieser Prozess wird für mehrere Modellkonfigurationen wiederholt, um die für den vorhandenen Datenbestand am besten geeignete Konfiguration zu bestimmen. 
 
-Nach Abschluss der Hyperparameteroptimierung und des Validierungsprozesses liegen mehrere bewertete Modellkonfigurationen vor. Ziel der Modellauswahl besteht darin, aus diesen Konfigurationen das Modell mit der höchsten Empfehlungsqualität auszuwählen. 
-Hierzu werden die im Validierungsprozess ermittelten Kennzahlen Recall@k, MRR und nDCG gemeinsam betrachtet. Die Auswahl erfolgt dabei nicht ausschließlich anhand einer einzelnen Kennzahl, sondern anhand der Gesamtqualität der erzeugten Ranglisten. 
-Besondere Bedeutung kommt den Kennzahlen Recall@k und nDCG zu. Während Recall@k bewertet, ob das relevante Makro innerhalb der vorderen Rangpositionen gefunden wird, 
-bewertet nDCG zusätzlich die Qualität der gesamten Rangfolge der Makrokandidaten (vergleiche Abschnitt \ref{sec:validierungsansätze}). 
-Die Modellkonfiguration mit den besten Ergebnissen auf den Validierungsdaten wird als finale Modellkonfiguration ausgewählt. Anschließend erfolgt ein erneutes Training dieser Konfiguration auf Grundlage der vorgesehenen Trainingsdaten. 
-Dadurch wird sichergestellt, dass für den nachfolgenden Testprozess die leistungsfähigste Modellvariante verwendet wird. 
-Das Ergebnis der Modellauswahl ist ein trainiertes LambdaMART-Modell mit festgelegten Hyperparametern und einer validierten Rankingfunktion. 
-Dieses Modell bildet die Grundlage für den anschließenden Testprozess und die spätere Anwendung des Empfehlungssystems.
+\subsubsection{Eingaben des XGBRankers} 
+
+Die Eingaben des \texttt{XGBRankers} bestehen aus der Trainingsmatrix \(X_{Train}\), dem Trainingslabelvektor \(y_{Train}\) und den Anfragekennungen \(qid_{Train}\), sowie der Validierungsmatrix \(X_{Val}\) und den Anfragekennungen \(qid_{Val}\). 
+Durch die Anfragekennung \(qid_{Train}\) erkennt der \texttt{XGBRanker}, welche Merkmalsvektoren innerhalb derselben Anfrage im Training miteinander verglichen werden müssen. 
+
+Um die Modellparameter des XGBRanker nach dem Training im Validationsprozess zu optimieren werden unbekannte Anfrage-Kandidat-Paare benötigt, mit denen die Gerneralisierungsfähigkeit des Rankers beurteilt werden kann.
+Diese unbekannten Anfrage-Kandidat-Paare werden in der Validierungsmatrix \(X_{Val}\) bereitgestellt. Die Validierungsmatrix wird durch die Kombination aus Validierungsanfragen mit den Makroprofile aus dem Suchraum\_Makroprofile erstellt.
+
+\subsubsection{Trainingsprozess} 
+
+Der Trainingsprozess beginnt mit der Auswahl einer Modellkonfiguration aus dem Grid.
+Diese Modellkonfiguration wird anschließend an den \texttt{XGBRanker} übergeben. 
+Eine Modellkonfiguration umfasst eine festgelegte Kombination der zuvor beschriebenen Hyperparameter (vergleiche Kapitel \ref{sec:hyperparameter_xgbranker}).
+
+Zunächst werden für eine Rankinggruppe einer Anfrage \(q\) die Vergleichsmerkmale aus der Trainingsmatrix \(X_{Train}\) in Entscheidungsregeln für einen Entscheidungsbaum überführt.
+Eine Entscheidungsregel kann dabei beispielsweise festlegen, dass die Spannung 400V für ein Anfrage-Kandidat-Paar der Rankinggruppe erforderlich ist. Dies geschieht für alle Vergeleichsmerkmale der Anfrage-Kandidat-Paare innerhalb der Rankinggruppe.
+Als Nächstens werden alle Entscheidungsregelen sowie die Kandidatenrelevanzen aus dem Trainingslabelvektor \(y_{Train}\) verwendet, um die Anfrage-Kandidat-Paare innerhalb der Rankinggruppe zu bewerten und in eine absteigend sortierte Rangliste zu Überführen.
+Diese Rangliste wird im weiteren Verlauf als Kandidatenrangliste\_Training bezeichnet.
+Angenommen in der Rankinggruppe einer Trainingsanfrage \(q_{Train}\) gibt es drei Anfrage-Kandidat-Paare. Paar 1 besitzt die Kandidatenrelevanz 4 mit dem Makroprofil A, Paar 2 die Kandidatenrelevanz 2 mit dem Makroprofil B und Paar 3 die Kandidatenrelevanz 1 mit dem Makroprofil C.
+In der Trainingsanfrage \(q_{Train}\) sind die Werte 400V, 5A und 2000W enthalten. Makroprofil A enthält die Werte 230V, 5A und 1150W. Makroprofil B enthält die Werte 400V, 3A und 1500W. Makroprofil C enthält die Werte 400V, 5A und 2000W.
+Zunächst werden die Kandidatenrelevanzen sortiert. Der XGBRanker verwendet hierfür das Pairwise-Prinzip (vergleiche Kapitel \ref{sec:pairwise_prinzip}).
+Aus der Sortierung der Kandidatenrelevanzen ergibt sich zunächst die Reihenfolge: 
+
+\begin{enumerate} 
+    \item Makroprofil A mit der Kandidatenrelevanz 4, 
+    \item Makroprofil B mit der Kandidatenrelevanz 2, 
+    \item Makroprofil C mit der Kandidatenrelevanz 1. 
+\end{enumerate} 
+
+
+Die Vergleichsmerkmale zeigen jedoch eine andere technische Übereinstimmung. Makroprofil C stimmt bei Spannung, Strom und Leistung vollständig mit der Anfrage überein. Makroprofil B stimmt nur bei der Spannung überein. 
+Makroprofil A stimmt nur beim Strom überein. Auf Grundlage der bisher gelernten Entscheidungsregeln kann der \texttt{XGBRanker} deshalb folgende Relevanzscores berechnen: 
+
+\begin{enumerate} 
+    \item Makroprofil C mit dem Relevanzscore 2,5, 
+    \item Makroprofil B mit dem Relevanzscore 1,4, 
+    \item Makroprofil A mit dem Relevanzscore 0,8. 
+\end{enumerate}
+
+Die daraus entstehende Kandidatenrangliste stimmt nicht mit der durch den Trainingslabelvektor vorgegebenen Reihenfolge überein. 
+Makroprofil A besitzt die höchste Kandidatenrelevanz, wird durch das Modell jedoch auf Rang 3 eingeordnet. Makroprofil C besitzt die niedrigste Kandidatenrelevanz, steht aber auf Rang 1. Damit liegen Fehlplatzierungen vor.
+
+Das Lernziel \texttt{rank:ndcg} bewertet, wie stark sich diese Fehlplatzierungen auf die Qualität der Kandidatenrangliste auswirken. Aus dem Vergleich der berechneten Relevanzscores mit den Kandidatenrelevanzen werden die $\lambda$-Gradienten gebildet. 
+Diese geben vor, dass der Relevanzscore von Makroprofil A erhöht und der Relevanzscore von Makroprofil C verringert werden soll. 
+
+Die $\lambda$-Gradienten werden anschließend beim Gradient-Boosting verwendet, um weitere Entscheidungsbäume aufzubauen. 
+Diese Entscheidungsbäume sollen die Relevanzscores so korrigieren, dass Makroprofil A innerhalb der Rankinggruppe nach oben und Makroprofil C nach unten verschoben wird. 
+Hierzu prüft der \texttt{XGBRanker}, welche Vergleichsmerkmale die gewünschte Reihenfolge auch in den weiteren Traingsanfragen erklären. 
+Die dargestellten Werte für Spannung, Strom und Leistung reichen im vorliegenden Beispiel hierfür allein nicht aus. 
+Makroprofil C stimmt bei diesen Eigenschaften vollständig mit der Trainingsanfrage \(q_{Train}\) überein, besitzt jedoch nur die Kandidatenrelevanz 1. Makroprofil A stimmt dagegen nur beim Strom überein, besitzt aber die Kandidatenrelevanz 4. 
+Die Kandidatenrelevanz muss deshalb durch weitere Vergleichsmerkmale begründet werden können. Ein weiterer Entscheidungsbaum kann einen technischen Hinweis "mit Kühlung"berücksichtigen, der zwischen den Makroprofilen unterscheidet. 
+Stimmt dieser Hinweis zwischen der Trainingsanfrage \(q_{Train}\) und Makroprofil A überein, kann dessen Relevanzscore erhöht werden. Ein nachfolgender Entscheidungsbaum kann gleichzeitig erkennen, 
+dass Makroprofil C trotz der übereinstimmenden elektrischen Werte einer anderen Makro-Familie zugeordnet ist, und dessen Relevanzscore entsprechend verringern. 
+Die Beiträge der aufeinanderfolgenden Entscheidungsbäume werden zu einem gemeinsamen Relevanzscore\_Training je Anfrage-Kandidat-Paar zusammengeführt.
+Nach mehreren Korrekturen können sich im Beispiel folgende Relevanzscores ergeben: 
+\begin{enumerate} 
+    \item Makroprofil A mit dem Relevanzscore\_Training 2,8, 
+    \item Makroprofil B mit dem Relevanzscore\_Training 1,7, 
+    \item Makroprofil C mit dem Relevanzscore\_Training 0,9. 
+\end{enumerate} 
+
+Die daraus gebildete Kandidatenrangliste\_Training entspricht nun der durch den Trainingslabelvektor \(y_{Train}\) vorgegebenen Reihenfolge. 
+Die Fehlplatzierungen dieser Rankinggruppe wurden damit verringert. 
+Dieser Ablauf wird während des Gradient-Boostings mit weiteren Entscheidungsbäumen und für alle Rankinggruppen wiederholt. 
+Ein Entscheidungsbaum wird dabei nicht für eine einzelne Trainingsanfrage \(q_{Train}\) erzeugt. Er lernt aus den Fehlplatzierungen und Vergleichsmerkmalen aller Rankinggruppen die sich aus dem Anfrage-Kandidat-Paaren der Trainingsmatrix ergeben. 
+Dadurch können die erlernten Entscheidungsregeln später auch auf unbekannte Anfragen übertragen werden. Die endgültigen Relevanzscore\_Training-Werte werden innerhalb jeder Rankinggruppe absteigend sortiert. 
+Dadurch entsteht für jede Trainingsanfrage eine Kandidatenrangliste\_Training. 
+Der \texttt{XGBRanker} lernt somit nicht die Artikel- oder Makrodateien unmittelbar. Er lernt den Zusammenhang zwischen den Vergleichsmerkmalen der Anfrage-Kandidat-Paare und den durch den Trainingslabelvektor vorgegebenen Kandidatenrelevanzen. 
+
+
+
+% Bild 
+
+\subsubsection{Hyperparameteroptimierung} 
+
+Bei der Hyperparameteroptimierung werden zunächst mehrere Konfigurationen von Hyperparametern festgelegt. Die Hyperparameteroptimierung erfolgt in einzelnen Durchläufen dem sogenannten \textit{Grid Search}-Verfahren.
+Beim \textit{Grid Search}-Verfahren wird jede festgelegte Konfiguration von Hyperparametern in einem einzelnen Durchlauf nacheinander ausprobiert.
+Mit jeder einzelnen Konfiguration wird dann ein kompletter Trainingsprozess durchgeführt. Die Trainingsmatrix \(X_{Train}\), der Trainingslabelvektor \(y_{Train}\), die Anfragekennungen \(qid_{Train}\) bleiben dabei unverändert, 
+nur die Hyperparameter unterscheiden sich. Hierdurch entstehen unterschiedliche XGBRanker-Modelle, die sich ausschließlich durch die gewählten Hyperparameter unterscheiden.
+Die Hyperparameteroptimierung dient dazu, ein Verhältnis zwischen Lernfähigkeit und Generalisierungsfähigkeit zu bestimmen. Eine zu einfache Konfiguration kann Unterschiede zwischen ähnlichen Makros nicht ausreichend erkennen. 
+Eine zu komplexe Konfiguration kann dagegen einzelne Trainingsartikel auswendig lernen und zum Overfitting führen. 
+Nach jedem Durchlauf des Grid Search wird die erzeugte Modellkonfiguration im Validierungsprozess bewertet. Anschließend wird die nächste Modellkonfiguration ausprobiert.
+
+\subsubsection{Validierungsprozess} 
+\label{sec:validierungsprozess}
+
+Im Validierungsprozess werden die Entscheidungsbäume nicht weiter angepasst, sondern die erzeugte Modellkonfiguration der Hyperparmeteroptimierung anhand der Validierungsmatrix \(X_{Val}\) bewertet.
+Die Validierungsmatrix enthält dabei die Anfrage-Kandidat-Paar-\_Validierung, welche im Trainingsprozess vom Aufbau der Entscheidungsbäume getrennt sind.
+Durch diese Trennung wird geprüft, ob der trainierte XBGRanker die erlernten Zusammenhänge zwischen den Traingsanfragen und den Anfrage-Kandidat-Paar-\_Training auf unbekannte Anfragen übertragen kann.
+
+Der trainierte \texttt{XGBRanker} berechnet zunächst für jede Zeile der Validierungsmatrix einen \textit{Relevanzscore\_Validierung}.
+Anhand dieses Relevanzscore\_Validierung wird dann die absteigende Reihenfolge der Anfrage-Kandidat-Paare\_Validierung innerhalb jeder Kandidatenrangliste\_Validierung bestimmt.
+Hier entsteht der entscheidene Unterschied zum Trainingsprozess: Im Validierungsprozess wird die Kandidatenrangliste nicht durch den Validierungslabelvektor \(y_{Val}\) beeinflusst, 
+sondern ausschließlich durch die Relevanzscores des trainierten Modells bestimmt. Die Rangfolge in der Kandidatenrangliste\_Validierung spiegelt somit die vom XGBRanker erlernte Relevanz der Anfrage-Kandidat-Paare\_Training wieder.
+
+Die folgenden Bewertung erfolgen anhand von Recall@1, Recall@10, MRR und nDCG@10 (siehe Kapitel\ref{sec:evaluationsmetriken}). 
+Für die Bewertung des XGBRankers wird jeder berechnete Relevanzscore\_Validierung mit der Kandidatenrelevanz aus derselben Zeile des Validierungslabelvektors \(y_{Val}\) verbunden.
+Anschließend werden die Anfrage-Kandidat-Paare innerhalb ihrer Rankinggruppe absteigend nach den Relevanzscore\_Validierung-Werten sortiert. 
+Die Kandidatenrelevanzen werden dabei mit den zugehörigen Anfrage-Kandidat-Paaren mitgeführt, verändern die erzeugte Rangfolge jedoch nicht. 
+Für eine Validierungsanfrage kann sich beispielsweise folgende Kandidatenrangliste\_Validierung ergeben: 
+
+\begin{enumerate} 
+    \item Makroprofil B mit der Kandidatenrelevanz 2, 
+    \item Makroprofil A mit der Kandidatenrelevanz 4, 
+    \item Makroprofil D mit der Kandidatenrelevanz 0, 
+    \item Makroprofil C mit der Kandidatenrelevanz 1. 
+\end{enumerate} 
+
+Die Kandidatenrelevanz 4 kennzeichnet das exakt zugeordnete Makro. Da sich dieses im Beispiel auf Rang 2 befindet, ist Recall@1 gleich 0 und Recall@10 gleich 1.
+Für den MRR wird der Kehrwert des Rangs des exakten Makros verwendet. Im Beispiel beträgt dieser Wert daher \[ \frac{1}{2}=0{,}5. \] nDCG@10 verwendet dagegen alle Kandidatenrelevanzen innerhalb der ersten zehn Positionen. 
+Die erzeugte Reihenfolge \(2,4,0,1\) wird hierzu mit der idealen Reihenfolge \(4,2,1,0\) verglichen. Frühe Positionen werden dabei stärker gewichtet als hintere Positionen. Dadurch bewertet nDCG@10 nicht nur die Position des exakten Makros, 
+sondern auch, ob Makros derselben Makro-Familie und Makro-Klasse vor nicht verwandten Makros angeordnet sind. Dieser Ablauf wird für alle Rankinggruppen der Validierungsmatrix \(X_{Val}\) wiederholt. 
+
+Die gemeinsame Verwendung von Recall@k, MRR und nDCG@10 ergibt sich aus dem Ziel des Empfehlungssystems. 
+Das Empfehlungssystem soll das exakt zugeordnete Makro möglichst früh finden und gleichzeitig weitere Makros entsprechend ihrer Relevanz für die konkrete Elektrokonstruktionsaufgabe anordnen (vergleiche Kapitel \ref{sec:vision}). 
+Eine einzelne Metrik kann beide Anforderungen nicht vollständig abbilden. Recall@1 und Recall@10 prüfen, ob sich das exakte Makro zu einer Anfrage innerhalb unterschiedlich großer Auswahlbereiche befindet. 
+Das exakte Makro zu einer Anfrage wird im Folgenden als Zielmakro bezeichnet.
+Recall@1 bewertet die direkte Empfehlung. Recall@10 bewertet, ob das Zielmakro zumindest innerhalb des für die Anwendung vorgesehenen Top-10-Bereichs gefunden wird.
+MRR berücksichtigt zusätzlich die genaue Rangposition des Zielmakros. Dadurch wird ein Zielmakro auf Rang 2 höher bewertet als ein Zielmakro auf Rang 9, obwohl beide von Recall@10 als Treffer bewertet werden. 
+nDCG@10 bewertet dagegen die Reihenfolge aller Makros innerhalb der ersten zehn Positionen. Anhand der hierarchischen Kandidatenrelevanz wird dabei berücksichtigt, 
+ob neben dem Zielmakro auch Makros derselben Makro-Familie und derselben Makro-Klasse vor nicht verwandten Makros angeordnet werden (siehe Kapitel \ref{sec:merkmalsmatrix_und_labelvektoren}).
+
+Für die Auswahl der Modellkonfiguration werden die drei Bewertungsbereiche gleichmäßig zum Validierungsscore zusammengeführt: \[ S_{Validierung} = \frac{ S_{Recall}+MRR+nDCG@10 }{3}. \]
+Die beiden Recall-Werte werden dabei zum gemeinsamen Recall-Wert \[ S_{Recall} = \frac{ Recall@1+Recall@10 }{2} \] zusammengeführt, da sie dieselbe Eigenschaft der Makro-Rangliste mit unterschiedlich großen Auswahlbereichen bewerten. 
+Würden die beiden Recall-Werte unmittelbar mit MRR und nDCG@10 gemittelt, würde Recall mit zwei Einzelwerten stärker gewichtet als die beiden anderen Metriken. Die Zusammenfassung verhindert diese Übergewichtung.
+
+Die Zusammenführung zu einer Gesamtmetrik ermöglicht einen direkten Vergleich verschiedener Modellkonfigurationen, da am Ende nur ein Wert für die Auswahl der besten Konfiguration herangezogen wird. 
+Außerdem wird durch die Zusammenführung verhindert, dass eine Modellkonfiguration aufgrund eines besonders guten Einzelwertes bevorzugt wird. 
+Die beste Modellkonfiguration des XGBRankers wird als Ergebnis der Hyperparameteroptimierung ausgewählt und an den Testprozess übergeben.
 
 
 \section{Testprozess} 
+\label{sec:testprozess} 
 
-Nach der Auswahl der finalen Modellkonfiguration erfolgt die abschließende Bewertung des trainierten LambdaMART-Modells auf den Testdaten. 
-Die Testdaten wurden bereits während der Erstellung des Datensplits von den Trainings- und Validierungsdaten getrennt und wurden bisher weder für das Training noch für die Modellauswahl verwendet (vergleiche Abschnitt \ref{sec:splitregeln}). 
-Ziel des Testprozesses ist die Untersuchung der Generalisierungsfähigkeit des Modells. Hierbei wird überprüft, inwieweit die während des Trainings erlernten Zusammenhänge auf bisher unbekannte Anfrageprofile übertragen werden können. 
-Für jede Testanfrage wird analog zum Validierungsprozess eine Makro-Rangliste erzeugt. Die Bewertung dieser Ranglisten erfolgt anhand der in Abschnitt \ref{sec:validierungsansätze} beschriebenen Kennzahlen Recall@k, MRR und nDCG. 
-Im Gegensatz zum Validierungsprozess werden während des Testprozesses keine Hyperparameter mehr angepasst und keine Modellentscheidungen mehr getroffen. Das bereits ausgewählte LambdaMART-Modell wird unverändert auf den Testdaten angewendet. 
-Dadurch wird sichergestellt, dass die erzielten Ergebnisse eine unverzerrte Einschätzung der zu erwartenden Leistungsfähigkeit des Empfehlungssystems darstellen. 
-Die Ergebnisse des Testprozesses bilden die Grundlage für die spätere Bewertung der Empfehlungsqualität. 
-Gleichzeitig liefern sie die Kennzahlen für den Vergleich mit alternativen Konfigurationen und dienen als Nachweis der Leistungsfähigkeit des entwickelten Empfehlungssystems. 
-Das Ergebnis des Testprozesses ist somit die finale Bewertung des trainierten LambdaMART-Modells auf bisher unbekannten Anfragen und bildet die Grundlage für die anschließende Anwendung des Empfehlungssystems.
+Nach Abschluss der Hyperparameteroptimierung wird die im Validierungsprozess ausgewählte Modellkonfiguration im Testprozess abschließend bewertet. 
+Die Grundlagen zur Testmatrix \(X_{Test}\), zum Testlabelvektor \(y_{Test}\) und zu den Anfragekennungen \(qid_{Test}\) wurden bereits in Kapitel \ref{sec:merkmalsmatrix_und_labelvektoren} 
+und Kapitel \ref{sec:anfrage_an_das_lambdamart_modell} erläutert. 
 
+Der Ablauf verläuft analog zum Validierungsprozess aus Kapitel \ref{sec:validierungsprozess}. Im folgenden werden nur die Unterschiede zum Validierungsprozess verdeutlicht. 
+Der ausgewählte XGBRanker berechnet für die Anfrage-Kandidat-Paare\_Test jeweils einen Relevanzscore\_Test. 
+Anschließend werden für jede Rankinggruppe eine Kandidatenrangliste\_Test erzeugt und entsprechend der Relevanzscore\_Test-Werte sortiert. 
+Der Testlabelvektor \(y_{Test}\) wird dann zur Bewertung der erzeugten Kandidatenranglisten\_Test verwendet. Die Bewertung erfolgt mit Recall@1, Recall@10, MRR und nDCG@10. 
+Ihre Zusammenführung zum gemeinsamen Testscore erfolgt analog zum Validierungsscore aus Kapitel \ref{sec:validierungsprozess}. 
+Dadurch sind Validierungs- und Testergebnis nach derselben Bewertungsgrundlage vergleichbar. Der wesentliche Unterschied zum Validierungsprozess liegt im Verwendungszweck der Ergebnisse. 
+Die Validierungsdaten werden zum Vergleich der Modellkonfigurationen und zur Auswahl der Hyperparameter verwendet. Im Testprozess wird dagegen ausschließlich die bereits ausgewählte Modellkonfiguration unverändert angewendet. 
+Der Testprozess wird einmalig nach Abschluss der Modellauswahl durchgeführt. Dadurch bleiben die Testanfragen von Training, Hyperparameteroptimierung und Modellauswahl getrennt. 
+Das Ergebnis beschreibt somit, wie gut sich die erlernten Zusammenhänge zwischen den Vergleichsmerkmalen und den Kandidatenrelevanzen auf bisher unbekannte Anfragen übertragen lassen. 
+Ein deutlich schlechteres Testergebnis gegenüber dem Validierungsergebnis kann auf ein Overfitting an die Trainings- und Validierungsdaten hinweisen. 
+Die Ergebnisse der Evaluationsmetriken des Testprozesses bilden die abschließende Bewertung der Generalisierungsfähigkeit des trainierten Empfehlungssystems.
 
 \section{Anwendungsprozess} 
+\label{sec:anwendungsprozess_technische_umsetzung} 
 
-Nach Abschluss des Testprozesses steht ein trainiertes und validiertes LambdaMART-Modell für die Verarbeitung neuer Anfragen zur Verfügung. 
-Der Anwendungsprozess entspricht dabei dem in Kapitel \ref{chap:konzeption_des_empfehlungssystems} beschriebenen Datenfluss, wird jedoch auf bisher unbekannte Artikel angewendet. 
-Ausgangspunkt des Anwendungsprozesses ist ein neuer Artikel beziehungsweise ein neues Datenblatt. 
-Aus den verfügbaren technischen Eigenschaften werden zunächst die für das Empfehlungssystem erforderlichen Informationen extrahiert und in ein Anfrageprofil überführt. 
-Analog zum Trainingsprozess werden dabei ausschließlich solche Informationen verwendet, die zum Zeitpunkt der Anfrage bekannt sind. Anschließend wird das Anfrageprofil mit allen Makroprofilen des \texttt{Suchraum\_Makroprofile} kombiniert. 
-Für jedes Anfrage-Kandidat-Paar werden die Vergleichsmerkmale berechnet und zu einem Merkmalsvektor zusammengeführt. Diese Merkmalsvektoren bilden die Eingabe des trainierten LambdaMART-Modells. 
-Das Modell berechnet anschließend für jeden Makrokandidaten einen Relevanzscore. Je höher dieser Relevanzscore ist, desto besser passt das jeweilige Makro zum Anfrageprofil. 
-Die Makrokandidaten werden daraufhin entsprechend ihrer Relevanzscores in absteigender Reihenfolge sortiert. Das Ergebnis des Anwendungsprozesses ist eine Makro-Rangliste, 
-welche die bewerteten Makrokandidaten entsprechend ihrer geschätzten Relevanz für die Anfrage enthält. Die vorderen Positionen dieser Rangliste stellen die vom Empfehlungssystem empfohlenen Makros dar. Durch die Trennung von Anfrageprofil, 
-Makroprofil und Vergleichsmerkmalen bleibt die Architektur des Anwendungspfads identisch zur Architektur des Trainings- und Testprozesses. 
-Dadurch können die während des Trainings erlernten Zusammenhänge unmittelbar auf neue und bisher unbekannte Anfragen übertragen werden.
+Nach dem Testprozess wird das trainierte Empfehlungssystem für neue Anfragen bereitgestellt. Ausgangspunkt des Anwendungsprozesses ist ein technisches Datenblatt, dessen zugehöriges Makro noch nicht bekannt ist. 
+Die technischen Eigenschaften des Datenblatts werden mit der in Kapitel~\ref{chap:datenaufbereitung_und_datensplit} beschriebenen Normalisierungslogik verarbeitet. 
+Dadurch erhalten inhaltlich gleiche Angaben eine gemeinsame Darstellung. Beispielsweise werden 4kW und 4000W als dieselbe Leistung behandelt. 
+Aus den extrahierten Eigenschaften wird das in Kapitel \ref{chap:konzeption_des_empfehlungssystems} beschriebene Anfrageprofil erzeugt. Dieses enthält ausschließlich Informationen, die aus der neuen Anfrage verfügbar sind. 
+Eine Artikel-Makro-Zuordnung und ein Relevanzlabel liegen im Anwendungsprozess nicht vor, da das passende Makro erst ermittelt werden soll.
+Das Anfrageprofil wird mit allen Makroprofilen aus dem \texttt{Suchraum\_Makroprofile} kombiniert. Dadurch entsteht für jedes Makroprofil ein Anfrage-Kandidat-Paar.
+Die zugehörigen Vergleichsmerkmale werden analog zu Kapitel \ref{sec:anfrage_kandidat_paar_vergleichsmerkmale_und_merkmalsvektor} gebildet und zu den Merkmalsvektoren der Anwendungsmatrix zusammengeführt. 
+Alle Merkmalsvektoren der neuen Anfrage bilden eine Rankinggruppe mit der Anfragekennung \(qid_{new}\). Der trainierte XGBRanker berechnet für jedes Anfrage-Kandidat-Paar einen Relevanzscore\_Anwendung. 
+Die Makrokandidaten werden innerhalb der Rankinggruppe absteigend nach den Werten der Relevanzscore\_Anwendung sortiert. Dadurch entsteht die Kandidatenrangliste\_Anwendung.
+Diese Kandidatenrangliste\_Anwendung stellt die Makro-Rangliste aus dem Kapitel \ref{sec:vision} dar. 
+Für ein Motordatenblatt mit dem Hersteller SEW, einer Spannung von 400V, einem Strom von 10A, einer Leistung von 4000W, 
+und dem technischen Hinweis \textit{Mit Kühlung} kann beispielsweise folgende Makro-Rangliste entstehen: 
+\begin{enumerate} 
+    \item \texttt{M1\_F1\_V1}
+    \item \texttt{M1\_F1\_V2}
+    \item \texttt{M1\_F2\_V1}
+\end{enumerate}
+
+Die Platzierung ergibt sich aus den im Trainingsprozess erlernten Zusammenhängen zwischen den Vergleichsmerkmalen und der Kandidatenrelevanz.
+Die Makro-Rangliste bildet das Ergebnis des Empfehlungssystems und stellt die nach der geschätzten Kandidatenrelevanz geordneten Makros für die weitere Verwendung bereit.
 
 \section{Kapitelergebnis} 
-Ziel dieses Kapitels war die technische Umsetzung der in Kapitel \ref{chap:konzeption_des_empfehlungssystems} entwickelten Architektur des Empfehlungssystems. 
-Hierzu wurden die einzelnen Verarbeitungsschritte von der Erzeugung der Datenobjekte bis zur Bereitstellung eines trainierten LambdaMART-Modells beschrieben. Zunächst wurden Makroprofile, Anfrageprofile sowie die Anfrage-Kandidat-Paare technisch erzeugt. 
-Anschließend wurden für jedes Anfrage-Kandidat-Paar die Vergleichsmerkmale berechnet und zu Merkmalsvektoren zusammengeführt, welche die Eingabe des LambdaMART-Modells bilden. Darauf aufbauend erfolgte das Training des Modells. 
-Durch die Hyperparameteroptimierung und den Validierungsprozess wurde eine geeignete Modellkonfiguration bestimmt. 
-Die ausgewählte Konfiguration wurde anschließend im Testprozess auf bisher unbekannten Anfragen bewertet und für die spätere Anwendung bereitgestellt. Der abschließende Anwendungsprozess zeigt, 
-wie neue Anfrageprofile durch das trainierte Modell bewertet und in eine nach Relevanz sortierte Makro-Rangliste überführt werden können. 
+\label{sec:kapitelergebnis_technische_umsetzung} 
 
-Das Ergebnis dieses Kapitels bildet das folgende Artefakt: 
+In diesem Kapitel wurde das Empfehlungssystem technisch umgesetzt. Die Anfrage-Kandidat-Paare wurden in Merkmalsmatrizen überführt und durch Labelvektoren sowie Anfragekennungen ergänzt. 
+Auf dieser Grundlage wurde das LambdaMART-Modell mit dem \texttt{XGBRanker} trainiert. Die Hyperparameteroptimierung erfolgte durch eine Grid Search. 
+Die Modellkonfigurationen wurden im Validierungsprozess anhand des Validierungsscores aus Recall@1, Recall@10, MRR und nDCG@10 verglichen. 
+Die ausgewählte Modellkonfiguration wurde anschließend einmalig im Testprozess auf bisher unbekannten Anfragen bewertet.
 
-\begin{quote} \textbf{Artefakt A4: Trainiertes Empfehlungssystem} 
+Aus diesem Kapitel ergibt sich folgendes Artefakt A4, das als Ergebnis an die nächsten Kapitel übergeben wird:
+
+\begin{quote} 
+    \textbf{Artefakt A4: Trainiertes Empfehlungssystem} 
 \end{quote} 
 \begin{itemize} 
-    \item erzeugte Makroprofile, 
-    \item erzeugte Anfrageprofile, 
-    \item Anfrage-Kandidat-Paare mit den zugehörigen Vergleichsmerkmalen, 
-    \item Merkmalsvektoren für Training, Validierung, Test und Anwendung, 
-    \item trainiertes LambdaMART-Modell, 
-    \item ausgewählte Modellkonfiguration, 
-    \item validiertes und getestetes Empfehlungssystem, 
-    \item Anwendungsprozess zur Erzeugung einer nach Relevanz sortierten Makro-Rangliste. 
-\end{itemize} 
-
-Artefakt A4 bildet die Grundlage für die anschließende Evaluation der Empfehlungsqualität. 
-Im folgenden Kapitel werden die erzeugten Makro-Ranglisten anhand der in Abschnitt \ref{sec:validierungsansätze} eingeführten Metriken Recall@k, MRR und nDCG bewertet.
-
-
-
-
-
-
-
+    \item Trainings-, Validierungs-, Test- und Anwendungsmatrix, 
+    \item zugehörige Labelvektoren und Anfragekennungen, 
+    \item trainiertes LambdaMART-Modell auf Grundlage des \texttt{XGBRanker}, 
+    \item Ergebnisse der Hyperparameteroptimierung, 
+    \item anhand der Validierungsdaten ausgewählte Modellkonfiguration, 
+    \item abschließende Bewertung anhand der Testdaten, 
+    \item Anwendungsprozess zur Erzeugung einer Makro-Rangliste. 
+\end{itemize}

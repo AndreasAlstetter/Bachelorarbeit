@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  26 NOV 2026 18:55
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.27)  28 NOV 2026 11:24
  restricted system commands enabled.
  file:line:error style messages enabled.
 **"c:/Users/alstetter/OneDrive - GROBGroup/Documents/Sys_Engineering/Bachelorar
@@ -2527,7 +2527,7 @@ LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
 (Font)              scaled to size 14.4pt on input line 92.
  [2] [3] [4]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 261.
+(Font)              scaled to size 10.0pt on input line 262.
  [5]) (./01_kapitel/02_stand_der_technik.tex [6]
 chapter 2.
 Package biblatex Info: Reference segment=3 on input line 1.
@@ -2575,59 +2575,59 @@ Overfull \vbox (15.8601pt too high) has occurred while \output is active []
 
 [17]
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 14.4pt on input line 627.
+(Font)              scaled to size 14.4pt on input line 629.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 10.5pt on input line 627.
+(Font)              scaled to size 10.5pt on input line 629.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 7.9pt on input line 627.
+(Font)              scaled to size 7.9pt on input line 629.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 14.4pt on input line 627.
+(Font)              scaled to size 14.4pt on input line 629.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 10.5pt on input line 627.
+(Font)              scaled to size 10.5pt on input line 629.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 7.9pt on input line 627.
+(Font)              scaled to size 7.9pt on input line 629.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 14.4pt on input line 627.
+(Font)              scaled to size 14.4pt on input line 629.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 10.5pt on input line 627.
+(Font)              scaled to size 10.5pt on input line 629.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 7.9pt on input line 627.
+(Font)              scaled to size 7.9pt on input line 629.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 14.4pt on input line 627.
+(Font)              scaled to size 14.4pt on input line 629.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 10.5pt on input line 627.
+(Font)              scaled to size 10.5pt on input line 629.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 7.9pt on input line 627.
+(Font)              scaled to size 7.9pt on input line 629.
 LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
-(Font)              scaled to size 14.4pt on input line 627.
+(Font)              scaled to size 14.4pt on input line 629.
 LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
-(Font)              scaled to size 10.5pt on input line 627.
+(Font)              scaled to size 10.5pt on input line 629.
 LaTeX Font Info:    Font shape `OT1/minntx/b/n' will be
-(Font)              scaled to size 7.9pt on input line 627.
+(Font)              scaled to size 7.9pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 14.4pt on input line 627.
+(Font)              scaled to size 14.4pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 10.5pt on input line 627.
+(Font)              scaled to size 10.5pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 7.9pt on input line 627.
+(Font)              scaled to size 7.9pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 14.4pt on input line 627.
+(Font)              scaled to size 14.4pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 10.5pt on input line 627.
+(Font)              scaled to size 10.5pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 7.9pt on input line 627.
+(Font)              scaled to size 7.9pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 14.4pt on input line 627.
+(Font)              scaled to size 14.4pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 10.5pt on input line 627.
+(Font)              scaled to size 10.5pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 7.9pt on input line 627.
+(Font)              scaled to size 7.9pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 14.4pt on input line 627.
+(Font)              scaled to size 14.4pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 10.5pt on input line 627.
+(Font)              scaled to size 10.5pt on input line 629.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 7.9pt on input line 627.
+(Font)              scaled to size 7.9pt on input line 629.
  [18] [19] [20] [21]) (./01_kapitel/03_vorgehensweise.tex [22]
 chapter 3.
 Package biblatex Info: Reference segment=4 on input line 1.
@@ -2788,10 +2788,10 @@ Overfull \vbox (42.48071pt too high) has occurred while \output is active []
 [51]
 
 LaTeX Font Warning: Font shape `TU/newtxtt/b/n' undefined
-(Font)              using `TU/newtxtt/m/n' instead on input line 249.
+(Font)              using `TU/newtxtt/m/n' instead on input line 250.
 
 [52] [53]
-Underfull \hbox (badness 1297) in paragraph at lines 432--432
+Underfull \hbox (badness 1297) in paragraph at lines 434--434
  [][]\TU/TeXGyreTermesX(0)/b/n/12 5. Test
  []
 
@@ -2805,1088 +2805,49 @@ Package biblatex Info: Reference segment=8 on input line 1.
 Package biblatex Info: Setting label 'refsegment:08' on input line 1.
 
 LaTeX Warning: Reference `sec:sec:anfrage_kandidat_paar_vergleichsmerkmale_und_
-merkmalsvektoren' on page 57 undefined on input line 55.
-
-
-Overfull \hbox (20.85422pt too wide) detected at line 61
-[] \LMS/ntxsy/m/n/12 Ï [] ! [] ! [] ! []\OML/ntxmi/m/it/12 :
- []
+merkmalsvektoren' on page 57 undefined on input line 14.
 
 [57
 
-] [58]
-Overfull \hbox (20.18152pt too wide) in paragraph at lines 119--123
-[]\TU/TeXGyreTermesX(0)/m/n/12 Zu-sam-men-fas-sung: Lamb-daMART und Im-ple-men-t
-ie-rung mit XG-Boost/LightGBM Da-tum: 26.11.2026
- []
-
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-[59
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-]
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-./01_kapitel/07_technische_umsetzung.tex:191: Missing $ inserted.
-<inserted text> 
-                $
-l.191 query_
-            id,feature1,feature2,relevance
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:198: Missing $ inserted.
-<inserted text> 
-                $
-l.198 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (33.37234pt too wide) in paragraph at lines 191--198
-[]\TU/TeXGyreTermesX(0)/m/n/12 query$[][]\OML/ntxmi/m/it/12 d; feature\OT1/minn
-tx/m/n/12 1\OML/ntxmi/m/it/12 ; feature\OT1/minntx/m/n/12 2\OML/ntxmi/m/it/12 ; relevance\OT1/minntx/m/n/12 1\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 5\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 2\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 31\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 1\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 8\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 12\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 3\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 9\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 22\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 7\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 4\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 05\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 3\OML/ntxmi/m/it/12 Python \LMS/ntxsy/m/n/12 ^^@
- []
-
-./01_kapitel/07_technische_umsetzung.tex:202: Missing $ inserted.
-<inserted text> 
-                $
-l.202 from sklearn.model_
-                         selection import train_test_split
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:204: Missing $ inserted.
-<inserted text> 
-                $
-l.204 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (409.50316pt too wide) in paragraph at lines 199--204
-[]\TU/TeXGyreTermesX(0)/m/n/12 im-port xg-boost as xgb im-port num-py as np im-p
-ort pan-das as pd from sklearn.model$[][]\OML/ntxmi/m/it/12 electionimporttrain[]est[]plitfromsklearn:metricsimportndcg[]core; average[]recision[]core$ 
- []
-
-./01_kapitel/07_technische_umsetzung.tex:205: You can't use `macro parameter cha
-racter #' in vertical mode.
-l.205 #
-        1. Daten laden
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:207: Missing $ inserted.
-<inserted text> 
-                $
-l.207     'query_
-                 id': [1, 1, 2, 2],
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:211: Extra }, or forgotten $.
-l.211 }
-       )
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-./01_kapitel/07_technische_umsetzung.tex:212: Missing $ inserted.
-<inserted text> 
-                $
-l.212 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (34.59267pt too wide) in paragraph at lines 205--212
-[]\TU/TeXGyreTermesX(0)/m/n/12 1. Da-ten la-den da-ta = pd.Da-ta-Frame( 'query$
-[][]\OML/ntxmi/m/it/12 d[] \OT1/minntx/m/n/12 : \LMS/ntxsy/m/n/12 »\OT1/minntx
-/m/n/12 1\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 1\OML/ntxmi/m/it/12 ; \OT1/min
-ntx/m/n/12 2\OML/ntxmi/m/it/12 ; \OT1/minntx/m/n/12 2\LMS/ntxsy/m/n/12 ¼\OML/n
-txmi/m/it/12 ;[] feature\OT1/minntx/m/n/12 1[] : \LMS/ntxsy/m/n/12 »\OT1/minnt
-x/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 5\OML/ntxmi/m/it/12 ; \OT1/min
-ntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 1\OML/ntxmi/m/it/12 ; \OT1/m
-inntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 3\OML/ntxmi/m/it/12 ; \OT1
-/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 7\LMS/ntxsy/m/n/12 ¼\OM
-L/ntxmi/m/it/12 ;[] feature\OT1/minntx/m/n/12 2[] :
- []
-
-./01_kapitel/07_technische_umsetzung.tex:213: You can't use `macro parameter cha
-racter #' in vertical mode.
-l.213 #
-        2. Daten in XGBoost-Format umwandeln
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:216: Missing $ inserted.
-<inserted text> 
-                $
-l.216 qid = data['query_
-                        id'].values
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:217: Missing $ inserted.
-<inserted text> 
-                $
-l.217 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:218: You can't use `macro parameter cha
-racter #' in vertical mode.
-l.218 #
-        3. Train-Test-Split
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:219: Missing $ inserted.
-<inserted text> 
-                $
-l.219 X_
-        train, X_test, y_train, y_test, qid_train, qid_test = train_test_split(
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:222: Missing $ inserted.
-<inserted text> 
-                $
-l.222 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (29.29674pt too wide) in paragraph at lines 218--222
-[]\TU/TeXGyreTermesX(0)/m/n/12 3. Train-Test-Split X$[][]\OML/ntxmi/m/it/12 rain
-; X[]est; y[]rain; y[]est; qid[]rain; qid[]est \U/ntxmia/m/it/12 = \OML/ntxmi/m
-/it/12 train[]est[]plit\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 X; y; qid; test[]
-ize \U/ntxmia/m/it/12 =
- []
-
-./01_kapitel/07_technische_umsetzung.tex:223: You can't use `macro parameter cha
-racter #' in vertical mode.
-l.223 #
-        4. XGBoost-DMatrix erstellen
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:224: Missing $ inserted.
-<inserted text> 
-                $
-l.224 dtrain = xgb.DMatrix(X_
-                             train, label=y_train, qid=qid_train)
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:226: Missing $ inserted.
-<inserted text> 
-                $
-l.226 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (18.98427pt too wide) in paragraph at lines 223--226
-[]\TU/TeXGyreTermesX(0)/m/n/12 4. XGBoost-DMatrix er-stel-len dtrain = xgb.DMatr
-ix(X$[][]\OML/ntxmi/m/it/12 rain; label \U/ntxmia/m/it/12 = \OML/ntxmi/m/it/12 
-y[]rain; qid \U/ntxmia/m/it/12 = \OML/ntxmi/m/it/12 qid[]rain\LMS/ntxsy/m/n/12 
-º\OML/ntxmi/m/it/12 dtest \U/ntxmia/m/it/12 =
- []
-
-./01_kapitel/07_technische_umsetzung.tex:227: You can't use `macro parameter cha
-racter #' in vertical mode.
-l.227 #
-        5. Parameter für LambdaMART (pairwise Ranking)
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:229: You can't use `macro parameter cha
-racter #' in horizontal mode.
-l.229     'objective': 'rank:pairwise',  #
-                                           LambdaMART-Objektiv
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:230: Missing $ inserted.
-<inserted text> 
-                $
-l.230     'eval_
-                metric': ['ndcg@5', 'map@5'],  # Metriken
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:230: You can't use `macro parameter cha
-racter #' in math mode.
-l.230     'eval_metric': ['ndcg@5', 'map@5'],  #
-                                                 Metriken
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:235: You can't use `macro parameter cha
-racter #' in math mode.
-l.235     'lambda': 1.0,  #
-                            L2-Regularisierung
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:236: You can't use `macro parameter cha
-racter #' in math mode.
-l.236     'alpha': 0.0,   #
-                            L1-Regularisierung
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:237: You can't use `macro parameter cha
-racter #' in math mode.
-l.237     'tree_method': 'hist',  #
-                                    Effiziente Baum-Methode
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:238: Extra }, or forgotten $.
-l.238 }
-       
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-./01_kapitel/07_technische_umsetzung.tex:239: Missing $ inserted.
-<inserted text> 
-                $
-l.239 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (42.85791pt too wide) in paragraph at lines 227--239
-\TU/TeXGyreTermesX(0)/m/n/12 LambdaMART-Objektiv 'eval$[][]\OML/ntxmi/m/it/12 et
-ric[] \OT1/minntx/m/n/12 : \LMS/ntxsy/m/n/12 »[]\OML/ntxmi/m/it/12 ndcg\OT1/mi
-nntx/m/n/12 @5[]\OML/ntxmi/m/it/12 ;[] map\OT1/minntx/m/n/12 @5[]\LMS/ntxsy/m/n
-/12 ¼\OML/ntxmi/m/it/12 ; Metriken[]learning[]ate[] \OT1/minntx/m/n/12 : 0\OML
-/ntxmi/m/it/12 :\OT1/minntx/m/n/12 1\OML/ntxmi/m/it/12 ;[] gamma[] \OT1/minntx/
-m/n/12 :
- []
-
-./01_kapitel/07_technische_umsetzung.tex:240: You can't use `macro parameter cha
-racter #' in vertical mode.
-l.240 #
-        6. Modell trainieren
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:244: Missing $ inserted.
-<inserted text> 
-                $
-l.244     num_
-              boost_round=100,
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:249: Missing $ inserted.
-<inserted text> 
-                $
-l.249 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (237.69592pt too wide) in paragraph at lines 240--249
-[]\TU/TeXGyreTermesX(0)/m/n/12 6. Mo-dell trai-nie-ren mo-del = xgb.train( pa-ra
-ms, dtrain, num$[][]\OML/ntxmi/m/it/12 oost[]ound \U/ntxmia/m/it/12 = \OT1/minn
-tx/m/n/12 100\OML/ntxmi/m/it/12 ; evals \U/ntxmia/m/it/12 = \LMS/ntxsy/m/n/12 
-»¹\OML/ntxmi/m/it/12 dtrain;[] train[]\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 
-; \LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 dtest;[] test[]\LMS/ntxsy/m/n/12 º¼\
-OML/ntxmi/m/it/12 ; early[]topping[]ounds \U/ntxmia/m/it/12 =
- []
-
-./01_kapitel/07_technische_umsetzung.tex:250: You can't use `macro parameter cha
-racter #' in vertical mode.
-l.250 #
-        7. Vorhersagen machen
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:251: Missing $ inserted.
-<inserted text> 
-                $
-l.251 y_
-        pred = model.predict(dtest)
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:252: Missing $ inserted.
-<inserted text> 
-                $
-l.252 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:253: You can't use `macro parameter cha
-racter #' in vertical mode.
-l.253 #
-        8. Evaluation
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:254: Missing $ inserted.
-<inserted text> 
-                $
-l.254 ndcg = ndcg_
-                  score([y_test], [y_pred], k=5)
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:258: Missing $ inserted.
-<inserted text> 
-                $
-l.258 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (172.46806pt too wide) in paragraph at lines 253--258
-[]\TU/TeXGyreTermesX(0)/m/n/12 8. Eva-lua-ti-on nd-cg = ndcg$[][]\OML/ntxmi/m/i
-t/12 core\LMS/ntxsy/m/n/12 ¹»\OML/ntxmi/m/it/12 y[]est\LMS/ntxsy/m/n/12 ¼\OM
-L/ntxmi/m/it/12 ; \LMS/ntxsy/m/n/12 »\OML/ntxmi/m/it/12 y[]red\LMS/ntxsy/m/n/1
-2 ¼\OML/ntxmi/m/it/12 ; k \U/ntxmia/m/it/12 = \OT1/minntx/m/n/12 5\LMS/ntxsy/m
-/n/12 º\OML/ntxmi/m/it/12 map[]core \U/ntxmia/m/it/12 = \OML/ntxmi/m/it/12 aver
-age[]recision[]core\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 y[]est; y[]red\LMS/nt
-xsy/m/n/12 º\OML/ntxmi/m/it/12 print\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 fNND
-CG\OT1/minntx/m/n/12 @5 :
- []
-
-[60
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ❌ (U+274C) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ✅ (U+2705) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no ⚡ (U+26A1) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-Missing character: There is no   (U+202F) in font [TeXGyreTermesX-Regular.otf]
-:mode=base;script=latn;language=dflt;-ss05;+tlig;+tnum;+lnum;!
-]
-./01_kapitel/07_technische_umsetzung.tex:259: You can't use `macro parameter cha
-racter #' in vertical mode.
-l.259 #
-        9. Modell speichern
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-./01_kapitel/07_technische_umsetzung.tex:260: Missing $ inserted.
-<inserted text> 
-                $
-l.260 model.save_
-                 model("xgb_lambdamart.model")
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:290: Missing $ inserted.
-<inserted text> 
-                $
-l.290 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no   (U+202F) in font ntx-Regular-tlf-ot1!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no   (U+202F) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no – (U+2013) in font ntx-Regular-tlf-ot1!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-
-Overfull \hbox (457.14583pt too wide) in paragraph at lines 259--290
-[]\TU/TeXGyreTermesX(0)/m/n/12 9. Mo-dell spei-chern model.save$[][]\OML/ntxmi/
-m/it/12 odel\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 gb[]ambdamart:model\OT1/min
-ntx/m/n/12 "\LMS/ntxsy/m/n/12 º\OT1/minntx/m/n/12 5\OML/ntxmi/m/it/12 :\OT1/mi
-nntx/m/n/12 4\OML/ntxmi/m/it/12 WichtigeParameterfrLambdaMARTinXGBoostParameterB
-eschreibungEmpfohlenerWertobjectiveMussrank \OT1/minntx/m/n/12 :
+] [58] [59]
+Overfull \hbox (29.68488pt too wide) in paragraph at lines 137--139
+\TU/TeXGyreTermesX(0)/m/n/12 Nach der Er-stel-lung der Merk-mals-ma-tri-zen, La-
+bel-vek-to-ren und Ran-king-grup-pen wird das LambdaMART-
  []
 
 
-Overfull \hbox (1432.76068pt too wide) in paragraph at lines 259--290
-\OML/ntxmi/m/it/12 pairwisesein:rank \OT1/minntx/m/n/12 : \OML/ntxmi/m/it/12 pai
-rwiseeval[]etricMetrikenzurEvaluation\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 z:B:
-ndcg\OT1/minntx/m/n/12 @\OML/ntxmi/m/it/12 k; map\OT1/minntx/m/n/12 @\OML/ntxmi
-/m/it/12 k\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 :ndcg\OT1/minntx/m/n/12 @5\OML
-/ntxmi/m/it/12 ; map\OT1/minntx/m/n/12 @5\OML/ntxmi/m/it/12 learning[]ateSchritt
-weitefrdieGradientenabstiegsoptimierung:\OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 
-:\OT1/minntx/m/n/12 050\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 3\OML/ntxmi/m/it/
-12 gammaMinimaleVerlustreduktionfreineAufteilung:\OT1/minntx/m/n/12 0\OML/ntxmi
-/m/it/12 :\OT1/minntx/m/n/12 11\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 0\OML/ntx
-mi/m/it/12 min[]hild[]eightMinimalesGewichtderKindknoten\LMS/ntxsy/m/n/12 ¹\OM
-L/ntxmi/m/it/12 reguliertOverfitting\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 :\OT
-1/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 110\OML/ntxmi/m/it/12 ma
-x[]epthMaximaleTiefederBäume:\OT1/minntx/m/n/12 310\OML/ntxmi/m/it/12 lambdaL\
-OT1/minntx/m/n/12 2 \LMS/ntxsy/m/n/12 ^^@
- []
+LaTeX Warning: Reference `sec:pairwise_prinzip' on page 60 undefined on input l
+ine 160.
 
-
-Overfull \hbox (34.95837pt too wide) in paragraph at lines 259--290
-\OML/ntxmi/m/it/12 Regularisierung:\OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1
-/minntx/m/n/12 11\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 alph
-aL\OT1/minntx/m/n/12 1 \LMS/ntxsy/m/n/12 ^^@ \OML/ntxmi/m/it/12 Regularisierung:
-\OT1/minntx/m/n/12 0\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 00\OML/ntxmi/m/it/12
- :\OT1/minntx/m/n/12 55\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 5\OML/ntxmi/m/it/
-12 Evaluation \OT1/minntx/m/n/12 : \OML/ntxmi/m/it/12 MetrikenfrLearning \LMS/n
-txsy/m/n/12 ^^@
- []
-
-
-Overfull \hbox (11.66034pt too wide) in paragraph at lines 259--290
-\OML/ntxmi/m/it/12 to \LMS/ntxsy/m/n/12 ^^@ \OML/ntxmi/m/it/12 RankNDCG\LMS/ntx
-sy/m/n/12 ¹\OML/ntxmi/m/it/12 NormalizedDiscountedCumulativeGain\LMS/ntxsy/m/n
-/12 º \OT1/minntx/m/n/12 : \OML/ntxmi/m/it/12 MisstdieQualitätderRanking \LMS
-/ntxsy/m/n/12 ^^@
- []
-
-
-Overfull \hbox (192.75539pt too wide) in paragraph at lines 259--290
-\OML/ntxmi/m/it/12 Reihenfolge:MAP\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 MeanAve
-ragePrecision\LMS/ntxsy/m/n/12 º \OT1/minntx/m/n/12 : \OML/ntxmi/m/it/12 Durchs
-chnittlichePräzisionberalleDokumente:MRR\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12
- MeanReciprocalRank\LMS/ntxsy/m/n/12 º \OT1/minntx/m/n/12 :
- []
-
-
-Overfull \hbox (53.33578pt too wide) in paragraph at lines 259--290
-\OML/ntxmi/m/it/12 ReziprokerRangdeserstenrelevantenDokuments:\OT1/minntx/m/n/1
-2 6\OML/ntxmi/m/it/12 :PraktischeTipps\OT1/minntx/m/n/12 6\OML/ntxmi/m/it/12 :\
-OT1/minntx/m/n/12 1\OML/ntxmi/m/it/12 DatenvorbereitungQuery \LMS/ntxsy/m/n/12 
-^^@
- []
-
-
-Overfull \hbox (105.79352pt too wide) in paragraph at lines 259--290
-\OML/ntxmi/m/it/12 IDs \OT1/minntx/m/n/12 : \OML/ntxmi/m/it/12 Musskorrektzugewi
-esensein; damitXGBoostdieDokumenteproQuerygruppierenkann:Relevanzwerte \OT1/min
-ntx/m/n/12 :
- []
-
-
-Overfull \hbox (66.41176pt too wide) in paragraph at lines 259--290
-\OML/ntxmi/m/it/12 SkalieredieWerte\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 z:B:au
-f\OT1/minntx/m/n/12 03\OML/ntxmi/m/it/12 oder\OT1/minntx/m/n/12 04\LMS/ntxsy/m/
-n/12 º\OML/ntxmi/m/it/12 ; umdieModellperformancezuverbessern:\OT1/minntx/m/n/
-12 6\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 2\OML/ntxmi/m/it/12 Hyperparameter \
-LMS/ntxsy/m/n/12 ^^@
- []
-
-
-Overfull \hbox (5.98976pt too wide) in paragraph at lines 259--290
-\OML/ntxmi/m/it/12 TuningNutzexgb:cvfrCross \LMS/ntxsy/m/n/12 ^^@ \OML/ntxmi/m/
-it/12 ValidationoderToolswieOptunaoderHyperopt:\OT1/minntx/m/n/12 6\OML/ntxmi/m
-/it/12 :\OT1/minntx/m/n/12 3\OML/ntxmi/m/it/12 Feature \LMS/ntxsy/m/n/12 ^^@
- []
-
-
-Overfull \hbox (365.90582pt too wide) in paragraph at lines 259--290
-\OML/ntxmi/m/it/12 EngineeringWichtigeFeaturesfrRanking \OT1/minntx/m/n/12 : \O
-ML/ntxmi/m/it/12 TF \LMS/ntxsy/m/n/12 ^^@ \OML/ntxmi/m/it/12 IDFWortanzahlDokume
-ntlängeKlickratenBenutzerinteraktionen\OT1/minntx/m/n/12 6\OML/ntxmi/m/it/12 :\OT1/minntx/m/n/12 4\OML/ntxmi/m/it/12 SpeichernundLadendesModellspython$ 
- []
-
-./01_kapitel/07_technische_umsetzung.tex:291: Missing $ inserted.
-<inserted text> 
-                $
-l.291 model.save_
-                 model("xgb_lambdamart.model")
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./01_kapitel/07_technische_umsetzung.tex:315: Missing $ inserted.
-<inserted text> 
-                $
-l.315 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ✅ (U+2705) in font ntx-Regular-tlf-ot1!
-Missing character: There is no ✅ (U+2705) in font ntx-Regular-tlf-ot1!
-Missing character: There is no ✅ (U+2705) in font ntx-Regular-tlf-ot1!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-Missing character: There is no ü (U+00FC) in font ntxmi!
-
-Overfull \hbox (233.11508pt too wide) in paragraph at lines 291--315
-[]\TU/TeXGyreTermesX(0)/m/n/12 model.save$[][]\OML/ntxmi/m/it/12 odel\LMS/ntxsy
-/m/n/12 ¹\OML/ntxmi/m/it/12 gb[]ambdamart:model\OT1/minntx/m/n/12 "\LMS/ntxsy
-/m/n/12 º\OML/ntxmi/m/it/12 loaded[]odel \U/ntxmia/m/it/12 = \OML/ntxmi/m/it/1
-2 xgb:Booster\LMS/ntxsy/m/n/12 ¹º\OML/ntxmi/m/it/12 loaded[]odel:load[]odel\L
-MS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 gb[]ambdamart:model\OT1/minntx/m/n/12 "\L
-MS/ntxsy/m/n/12 º\OT1/minntx/m/n/12 7\OML/ntxmi/m/it/12 :Vergleich \OT1/minntx
-/m/n/12 :
- []
-
-
-Overfull \hbox (153.76674pt too wide) in paragraph at lines 291--315
-\OML/ntxmi/m/it/12 XGBoostvs:LightGBMfrLambdaMARTAspektXGBoost\LMS/ntxsy/m/n/12
- ¹\OML/ntxmi/m/it/12 LambdaMART\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 LightGBM\LMS/ntxsy/m/n/12 
-¹\OML/ntxmi/m/it/12 LGBMRanker\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 Objectiver
-ank \OT1/minntx/m/n/12 :
- []
-
-
-Overfull \hbox (592.99889pt too wide) in paragraph at lines 291--315
-\OML/ntxmi/m/it/12 pairwiselambdarankWachstumsstrategieLevel \LMS/ntxsy/m/n/12 
-^^@ \OML/ntxmi/m/it/12 wiseLeaf \LMS/ntxsy/m/n/12 ^^@ \OML/ntxmi/m/it/12 wise\L
-MS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 best \LMS/ntxsy/m/n/12 ^^@ \OML/ntxmi/m/it
-/12 first\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 SpeedLangsamerSchnellerSpeicherb
-edarfHöherGeringerKategorischeFeaturesNichtnativuntersttztNativuntersttztGPU \
-LMS/ntxsy/m/n/12 ^^@
- []
-
-
-Overfull \hbox (1496.98141pt too wide) in paragraph at lines 291--315
-\OML/ntxmi/m/it/12 Untersttzung\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 vollständ
-igoptimiert\LMS/ntxsy/m/n/12 º\OT1/minntx/m/n/12 8\OML/ntxmi/m/it/12 :Wannwelch
-esFrameworkverwenden\OT1/minntx/m/n/12 ?\OML/ntxmi/m/it/12 UseCaseEmpfohlenesFra
-meworkGroßeDatensätzeLightGBM\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 LGBMRanker
-\LMS/ntxsy/m/n/12 º\OML/ntxmi/m/it/12 KleineoderunausgeglicheneDatenXGBoostEinf
-acheIntegrationHistGradientBoostingKategorischeFeaturesCatBoostInterpretierbarke
-itILMART\OT1/minntx/m/n/12 9\OML/ntxmi/m/it/12 :FazitLambdaMARTisteinleistungsst
-arkerAlgorithmusfrLearning \LMS/ntxsy/m/n/12 ^^@
- []
-
-
-Overfull \hbox (1637.34146pt too wide) in paragraph at lines 291--315
-\OML/ntxmi/m/it/12 to \LMS/ntxsy/m/n/12 ^^@ \OML/ntxmi/m/it/12 Rank \LMS/ntxsy/
-m/n/12 ^^@ \OML/ntxmi/m/it/12 Aufgaben:XGBoostundLightGBMsinddiebeliebtestenFram
-eworksfrdieImplementierung:LightGBMistdiebesteWahlfrgroßeDatensätze; währendX
-GBoostbeikleinenoderunausgeglichenenDatenrobustereErgebnisseliefert:ILMARTbietet
-eineinterpretableAlternativefrregulierteBranchen:DiekonkreteImplementierungerfor
-derteinesorgfältigeDatenvorbereitungundHyperparameter \LMS/ntxsy/m/n/12 ^^@
- []
-
-[61]
-Overfull \hbox (20.19946pt too wide) in paragraph at lines 332--334
-\TU/TeXGyreTermesX(0)/m/n/12 Für Va-li-da-ti-on und Test wird die-sel-be Struk-
-tur mit $\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/12 X[]; y[]; group[]\LMS/ntxsy/m/n
-/12 º$ \TU/TeXGyreTermesX(0)/m/n/12 und $\LMS/ntxsy/m/n/12 ¹\OML/ntxmi/m/it/1
-2 X[]; y[]; group[]\LMS/ntxsy/m/n/12 º$
- []
-
-
-Overfull \hbox (9.85773pt too wide) in paragraph at lines 351--354
-[]\TU/newtxtt/m/n/12 n_esti-ma-tors = 300\TU/TeXGyreTermesX(0)/m/n/12 , \TU/new
-txtt/m/n/12 lear-ning_ra-te = 0.05\TU/TeXGyreTermesX(0)/m/n/12 , \TU/newtxtt/m/
-n/12 num_lea-ves = 31\TU/TeXGyreTermesX(0)/m/n/12 , \TU/newtxtt/m/n/12 min_child
-_samples
- []
-
-[62] [63] [64] [65] [66] [67] [68]
-
-LaTeX Warning: Reference `sec:validierungsansätze' on page 69 undefined on inp
-ut line 555.
-
-[69]) (./01_kapitel/08_evaluierung.tex [70]
+[60] [61] [62] [63] [64] [65] [66]) (./01_kapitel/08_modell_anwendung.tex
+[67]
 chapter 8.
 Package biblatex Info: Reference segment=9 on input line 1.
 Package biblatex Info: Setting label 'refsegment:09' on input line 1.
-[71
+[68
 
-] [72]
-Underfull \hbox (badness 10000) in paragraph at lines 99--100
+] [69]
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
 []|\TU/TeXGyreTermesX(0)/m/n/12 L1-Regularisierung auf 0,1 und L2-
  []
 
-[73] [74] [75]) (./01_kapitel/09_diskussion.tex [76]
+[70] [71] [72]) (./01_kapitel/09_diskussion.tex [73]
 chapter 9.
 Package biblatex Info: Reference segment=10 on input line 3.
 Package biblatex Info: Setting label 'refsegment:010' on input line 3.
-[77
+[74
 
 ]
 chapter 10.
-Package biblatex Info: Reference segment=11 on input line 17.
-Package biblatex Info: Setting label 'refsegment:011' on input line 17.
-[78
+Package biblatex Info: Reference segment=11 on input line 20.
+Package biblatex Info: Setting label 'refsegment:011' on input line 20.
+[75
 
-] [79] [80]) (./01_kapitel/10_fazit_und_ausblick.tex [81]
+] [76] [77]) (./01_kapitel/10_fazit_und_ausblick.tex [78]
 chapter 11.
 Package biblatex Info: Reference segment=12 on input line 2.
 Package biblatex Info: Setting label 'refsegment:012' on input line 2.
-) [82
+) [79
 
 ]
 Package biblatex Info: Reference segment=13 on input line 98.
@@ -3896,9 +2857,9 @@ Package tocbasic Info: character protrusion at lof deactivated on input line 98
  (./Bachelorarbeit.lof
 Package cleveref Info: loaded `ngerman' language definitions on input line 1.
 Package cleveref Info: loaded `ngerman' language definitions on input line 2.
- [83
+ [80
 
-] [84]
+] [81]
 Overfull \hbox (24.38264pt too wide) in paragraph at lines 34--34
  [][] []\TU/TeXGyreTermesX(0)/m/n/12 Bil-dung ei-nes Ma-kro-pro-fils am Bei-spie
 l des über-ge-ord-ne-ten Motor-Makros M1_F1_V1. 
@@ -3908,7 +2869,7 @@ l des über-ge-ord-ne-ten Motor-Makros M1_F1_V1.
 \tf@lof=\write9
 
 \openout9 = Bachelorarbeit.lof
- [85]
+ [82]
 Package biblatex Info: Reference segment=14 on input line 99.
 Package biblatex Info: Setting label 'refsegment:014' on input line 99.
 Package tocbasic Info: character protrusion at lot deactivated on input line 99
@@ -3920,7 +2881,7 @@ Package cleveref Info: loaded `ngerman' language definitions on input line 2.
 \tf@lot=\write10
 
 \openout10 = Bachelorarbeit.lot
- [86
+ [83
 
 ]
 chapter without number
@@ -3982,14 +2943,14 @@ LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 (Font)              scaled to size 7.3pt on input line 102.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 (Font)              scaled to size 5.5pt on input line 102.
-[87
+[84
 
-] [88] (./Bachelorarbeit.ind)
+] [85] (./Bachelorarbeit.ind)
 
 Package caption Warning: Unused \captionsetup[lstlisting] on input line 70.
 See the caption package documentation for explanation.
 
-[89] (./Bachelorarbeit.aux
+[86] (./Bachelorarbeit.aux
 Package cleveref Info: loaded `ngerman' language definitions on input line 11.
 Package cleveref Info: loaded `ngerman' language definitions on input line 12.
 )
@@ -4008,24 +2969,18 @@ Package logreq Info: Writing requests to 'Bachelorarbeit.run.xml'.
 
 \openout1 = Bachelorarbeit.run.xml
 )
-(\end occurred inside a group at level 2)
-
-### simple group (level 2) entered at line 228 ({)
-### simple group (level 1) entered at line 206 ({)
-### bottom level
 
 Here is how much of LuaTeX's memory you used:
- 58465 strings out of 476081
- 195336,2373549 words of node,token memory allocated
- 44660 words of node memory still in use:
-   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 7559 kern, 1 penalty, 3 glyph,
- 2027 attribute, 106 glue_spec, 1015 attribute_list, 2 write, 1 pdf_action nodes
-
-   avail lists: 1:11,2:3310,3:1586,4:309,5:849,6:281,7:11286,8:1192,9:1514,10:44
-,11:1075,12:1
- 79005 multiletter control sequences out of 65536+600000
+ 58507 strings out of 476081
+ 156263,2373549 words of node,token memory allocated
+ 43032 words of node memory still in use:
+   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 7277 kern, 1 penalty, 3 glyph,
+ 1961 attribute, 102 glue_spec, 982 attribute_list, 2 write, 1 pdf_action nodes
+   avail lists: 1:10,2:3411,3:1588,4:314,5:720,6:283,7:9489,8:54,9:1514,10:35,11
+:1186,12:1
+ 79033 multiletter control sequences out of 65536+600000
  331 fonts using 27961815 bytes
- 110i,20n,115p,14977b,3820s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 110i,20n,115p,11311b,3583s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/opentype/public/newtx/Te
 XGyreTermesX-Regular.otf><c:/users/alstetter/appdata/local/programs/miktex/fonts
 /opentype/public/lm/lmsans10-bold.otf><C:/Users/alstetter/AppData/Local/Programs
@@ -4045,15 +3000,14 @@ tetter/appdata/local/programs/miktex/fonts/opentype/public/lm/lmroman12-regular.
 otf><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/N
 ewTXMI.pfb><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1/public/
 newtx/NewTXMI7.pfb><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/newtx/stxscr.pfb><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/newtx/txexs.pfb><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/newtx/txmiaX.pfb><C:/Users/alstetter/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/newtx/txsys.pfb><C:/Users/alstetter/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/newtx/ztmb.pfb><C:/Users/alstetter/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/newtx/ztmr.pfb>
-Output written on Bachelorarbeit.pdf (93 pages, 710724 bytes).
+/public/newtx/txexs.pfb><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/newtx/txmiaX.pfb><C:/Users/alstetter/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/newtx/txsys.pfb><C:/Users/alstetter/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/newtx/ztmb.pfb><C:/Users/alstetter/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/newtx/ztmr.pfb>
+Output written on Bachelorarbeit.pdf (90 pages, 677924 bytes).
 
-PDF statistics: 1509 PDF objects out of 1728 (max. 8388607)
- 302 named destinations out of 1000 (max. 1048576)
- 856 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1527 PDF objects out of 1728 (max. 8388607)
+ 316 named destinations out of 1000 (max. 1048576)
+ 848 words of extra memory for PDF output out of 10000 (max. 100000000)
 
